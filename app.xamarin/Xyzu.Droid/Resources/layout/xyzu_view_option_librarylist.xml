@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+        
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Space
+        android:id="@+id/xyzu_view_option_librarylist_options_paddingtop_space"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp8" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        style="@style/Xyzu.View.Option.LibraryList.CheckBox"
+        android:id="@+id/xyzu_view_option_librarylist_options_isreversed_appcompatcheckbox"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginStart="@dimen/dp8"
+        android:text="@string/reverse"
+        android:button="@drawable/xyzu_view_option_button_checkbox_drawable"
+        
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_weight="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_goneMarginBottom="@dimen/dp8"
+        
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_option_librarylist_options_paddingtop_space"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_option_librarylist_options_simplehorizontalrecyclerview"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_option_librarylist_options_sortkey_appcompattextview"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Option.LibraryList.Button"
+        android:id="@+id/xyzu_view_option_librarylist_options_sortkey_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginHorizontal="@dimen/dp8"
+        
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_weight="0"
+        app:layout_goneMarginBottom="@dimen/dp8"
+        
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_option_librarylist_options_paddingtop_space"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_option_librarylist_options_layouttype_appcompattextview"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_option_librarylist_options_isreversed_appcompatcheckbox"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_option_librarylist_options_simplehorizontalrecyclerview"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Option.LibraryList.Button"
+        android:id="@+id/xyzu_view_option_librarylist_options_layouttype_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginEnd="@dimen/dp8"
+        
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_weight="0"
+        app:layout_goneMarginBottom="@dimen/dp8"
+        
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_option_librarylist_options_paddingtop_space"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_option_librarylist_options_sortkey_appcompattextview"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_option_librarylist_options_simplehorizontalrecyclerview"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/xyzu_view_option_librarylist_options_optionsbuttonbarrier_bottom"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="
+            xyzu_view_option_librarylist_options_isreversed_appcompatcheckbox,
+            xyzu_view_option_librarylist_options_sortkey_appcompattextview,
+            xyzu_view_option_librarylist_options_layouttype_appcompattextview"/>
+
+    <xyzu.widgets.recyclerviews.SimpleHorizontalRecyclerView
+        style="@style/Xyzu.View.Option.LibraryList.RecyclerView"
+        android:id="@+id/xyzu_view_option_librarylist_options_simplehorizontalrecyclerview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginTop="@dimen/dp8"
+        android:visibility="gone"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_option_librarylist_options_optionsbuttonbarrier_bottom" />
+
+</merge>

@@ -1,0 +1,115 @@
+<resources>
+
+  <string name="add">Add</string>
+  <string name="added">Added</string>
+  <string name="all">All</string>
+  <string name="back">Back</string>
+  <string name="cancel">Cancel</string>
+  <string name="clear">Clear</string>
+  <string name="close">Close</string>
+  <string name="confirm">Confirm</string>
+  <string name="create">Create</string>
+  <string name="created">Created</string>
+  <string name="delete">Delete</string>
+  <string name="deleted">Deleted</string>
+  <string name="disabled">Disabled</string>
+  <string name="done">Done</string>
+  <string name="edit">Edit</string>
+  <string name="edited">Edited</string>
+  <string name="ellipsis">...</string>
+  <string name="enabled">Enabled</string>
+  <string name="expanded">Expanded</string>
+  <string name="lyrics">Lyrics</string>
+  <string name="move">Move</string>
+  <string name="moved">Moved</string>
+  <string name="open">Open</string>
+  <string name="options">Options</string>
+  <string name="removed">Removed</string>  
+  <string name="reverse">Reverse</string>  
+  <string name="save">Save</string>  
+  <string name="saved">Saved</string>  
+  <string name="select">Select</string>  
+  <string name="selected">Selected</string>  
+  <string name="sort">Sort</string>  
+
+  <string name="already_exists">Already Exists</string>  
+  
+  <string name="add_to_playlist">Add to playlist</string>  
+  <string name="add_to_playlist_albums">Add selected albums to playlist</string>  
+  <string name="add_to_playlist_artists">Add selected artists to playlist</string>  
+  <string name="add_to_playlist_genres">Add selected genres to playlist</string>  
+  <string name="add_to_playlist_songs">Add selected songs to playlist</string>
+
+  <string name="create_playlist">Create playlist</string>  
+  
+  <string name="delete_selected">Delete Selected</string>  
+  <string name="delete_selected_album">Delete Selected Album</string>  
+  <string name="delete_selected_artist">Delete Selected Artist</string>  
+  <string name="delete_selected_genre">Delete Selected Gerne</string>  
+  <string name="delete_selected_item">Delete Selected Item</string>  
+  <string name="delete_selected_playlist">Delete Selected Playlist</string>  
+  <string name="delete_selected_song">Delete Selected Song</string>  
+  <string name="delete_selected_albums">Delete Selected Albums</string>  
+  <string name="delete_selected_artists">Delete Selected Artists</string>  
+  <string name="delete_selected_genres">Delete Selected Gernes</string>  
+  <string name="delete_selected_items">Delete Selected Items</string>  
+  <string name="delete_selected_playlists">Delete Selected Playlists</string>  
+  <string name="delete_selected_songs">Delete Selected Songs</string>  
+  <string name="delete_warning_action_cant_be_undone">This action cannot be undone</string>  
+  
+  <string name="extra_microwavetime_zero">00:00</string>  
+  
+	<string name="intentchooser_view_errorlog">View Error Log</string>
+	<string name="intentchooser_share_files">Share Files</string>
+  
+	<string name="intentchooser_select_all">Select all</string>
+	<string name="intentchooser_select_application">Select application file</string>
+	<string name="intentchooser_select_application_pdf">Select application file of type \'.pdf\'</string>
+	<string name="intentchooser_select_audio">Select audio file</string>
+	<string name="intentchooser_select_audio_flac">Select audio file of type \'.flac\'</string>
+	<string name="intentchooser_select_audio_m4a">Select audio file of type \'.m4a\'</string>
+	<string name="intentchooser_select_audio_mp3">Select audio file of type \'.mp3\'</string>
+	<string name="intentchooser_select_audio_wav">Select audio file of type \'.wav\'</string>
+	<string name="intentchooser_select_image">Select image</string>
+	<string name="intentchooser_select_image_gif">Select image of type \'.gif\'</string>
+	<string name="intentchooser_select_image_jpg">Select image of type \'.jpg\'</string>
+	<string name="intentchooser_select_image_jpeg">Select image of type \'.jpeg\'</string>
+	<string name="intentchooser_select_image_png">Select image of type \'.png\'</string>
+	<string name="intentchooser_select_text">Select text file</string>
+	<string name="intentchooser_select_text_html">Select text file of type \'.html\'</string>
+	<string name="intentchooser_select_text_json">Select text file of type \'.json\'</string>
+	<string name="intentchooser_select_text_plain">Select text file of type \'.txt\'</string>
+	<string name="intentchooser_select_text_rtf">Select text file of type \'.rtf\'</string>
+	<string name="intentchooser_select_video">Select video</string>
+	<string name="intentchooser_select_video_mp4">Select video file of type \'.mp4\'</string>
+	<string name="intentchooser_select_video_3gp">Select video file of type \'.3gp\'</string>
+
+  <string name="scannerservice_currently_scanning">Scanner is currently scanning files</string>
+  <string name="scannerservice_notification_contenttext_preparing">Preparing xyzu file scanner...</string>
+  <string name="scannerservice_notification_contenttext_preparing_albums">Preparing to scan albums...</string>
+  <string name="scannerservice_notification_contenttext_preparing_artists">Preparing to scan artists...</string>
+  <string name="scannerservice_notification_contenttext_preparing_genres">Preparing to scan genres...</string>
+  <string name="scannerservice_notification_contenttext_preparing_playlists">Preparing to scan playlists...</string>
+  <string name="scannerservice_notification_contenttext_preparing_songs">Preparing to scan songs...</string>
+  <string name="scannerservice_notification_contenttext_reading_albums">Reading albums...</string>
+  <string name="scannerservice_notification_contenttext_reading_artists">Reading artists...</string>
+  <string name="scannerservice_notification_contenttext_reading_genres">Reading genres...</string>
+  <string name="scannerservice_notification_contenttext_reading_playlists">Reading playlists...</string>
+  <string name="scannerservice_notification_contenttext_reading_songs">Reading songs...</string>
+  <string name="scannerservice_notification_contenttext_removing_albums">Removing albums...</string>
+  <string name="scannerservice_notification_contenttext_removing_artists">Removing artists...</string>
+  <string name="scannerservice_notification_contenttext_removing_genres">Removing genres...</string>
+  <string name="scannerservice_notification_contenttext_removing_playlists">Removing playlists...</string>
+  <string name="scannerservice_notification_contenttext_removing_songs">Removing songs...</string>
+  <string name="scannerservice_notification_contenttext_saving_albums">Saving scanned albums...</string>
+  <string name="scannerservice_notification_contenttext_saving_artists">Saving scanned artists...</string>
+  <string name="scannerservice_notification_contenttext_saving_genres">Saving scanned genres...</string>
+  <string name="scannerservice_notification_contenttext_saving_playlists">Saving scanned playlists...</string>
+  <string name="scannerservice_notification_contenttext_saving_songs">Saving scanned songs...</string>
+  <string name="scannerservice_notification_contenttext_scanning_albums">Scanning albums...</string>
+  <string name="scannerservice_notification_contenttext_scanning_artists">Scanning artists...</string>
+  <string name="scannerservice_notification_contenttext_scanning_genres">Scanning genres...</string>
+  <string name="scannerservice_notification_contenttext_scanning_playlists">Scanning playlists...</string>
+  <string name="scannerservice_notification_contenttext_scanning_songs">Scanning songs...</string>
+
+</resources>

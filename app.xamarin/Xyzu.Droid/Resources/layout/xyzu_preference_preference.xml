@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.ContentFrameLayout
+        android:id="@android:id/icon_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@android:id/title">
+
+        <androidx.preference.internal.PreferenceImageView
+            android:id="@android:id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp24"
+            android:layout_marginBottom="@dimen/dp16"
+            android:layout_marginHorizontal="@dimen/dp16"
+            android:maxWidth="@dimen/dp48"
+            android:maxHeight="@dimen/dp48" 
+            android:tint="@color/ColorPrimary"/>
+
+    </androidx.appcompat.widget.ContentFrameLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.Preference.TitleText"
+        android:id="@android:id/title"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginTop="@dimen/dp16"
+        android:layout_marginHorizontal="@dimen/dp16"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@android:id/icon_frame"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_preference_preference_additionalitem_contentframelayout"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_preference_preference_valuesummary"/>
+
+    <androidx.appcompat.widget.ContentFrameLayout
+        android:id="@+id/xyzu_preference_preference_additionalitem_contentframelayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp24"
+        android:layout_marginBottom="@dimen/dp16"
+        android:layout_marginHorizontal="@dimen/dp16"
+        
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@android:id/title" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.Preference.ValueSummaryText"
+        android:id="@+id/xyzu_preference_preference_valuesummary"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0" 
+        android:layout_marginBottom="@dimen/dp8"
+        android:layout_marginHorizontal="@dimen/dp16"
+        android:visibility="gone"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_preference_preference_additionalitem_contentframelayout"
+        app:layout_constraintStart_toEndOf="@android:id/icon_frame"
+        app:layout_constraintBottom_toTopOf="@android:id/summary"
+        app:layout_constraintTop_toBottomOf="@android:id/title"/>
+    
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.Preference.SummaryText"
+        android:id="@android:id/summary"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0" 
+        android:layout_marginHorizontal="@dimen/dp16"
+        android:layout_marginBottom="@dimen/dp16"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_preference_preference_additionalitem_contentframelayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@android:id/icon_frame"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_preference_preference_valuesummary"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

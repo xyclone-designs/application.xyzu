@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    
+    style="@style/Xyzu.SlidingUpPanelLayout"
+    
+    android:id="@+id/xyzu_layout_library_tablayout_root_slidinguppanellayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    
+    app:umanoDragView="@id/xyzu_layout_library_tablayout_nowplayingview"
+    app:umanoScrollableView="@id/xyzu_layout_library_tablayout_coordinatorlayout">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/xyzu_layout_library_tablayout_coordinatorlayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/xyzu_layout_library_tablayout_viewpager2"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            <androidx.appcompat.widget.ContentFrameLayout
+                android:id="@+id/xyzu_layout_library_tablayout_contentframelayout"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/ColorBackground" 
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+            <com.google.android.material.appbar.AppBarLayout
+                style="@style/Xyzu.Material.AppBarLayout"
+                android:id="@+id/xyzu_layout_library_tablayout_appbarlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            
+                <xyzu.views.toolbar.ToolbarTabLayoutView
+                    android:id="@+id/xyzu_layout_library_tablayout_toolbartablayoutview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            
+                <xyzu.views.toolbar.ToolbarSearchView
+                    android:id="@+id/xyzu_layout_library_tablayout_toolbarsearchview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            
+            </com.google.android.material.appbar.AppBarLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <xyzu.views.insets.StatusBarInsetView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xyzu_view_inset_fadetopdown_colorsurface"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            style="@style/Xyzu.Material.FloatingActionButton"
+            android:id="@+id/xyzu_layout_library_tablayout_floatingactionbutton"
+            android:layout_height="@dimen/dp0"
+            android:layout_width="@dimen/dp0"
+            android:layout_marginEnd="@dimen/dp16"
+            
+            app:srcCompat="@drawable/icon_general_plus"
+            app:layout_constraintWidth="wrap_content"
+            app:layout_constraintHeight="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Xyzu.View.NowPlayling.Container"
+        android:id="@+id/xyzu_layout_library_tablayout_nowplayingview_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Xyzu.Views.NowPlaying.NowPlayingView
+            android:id="@+id/xyzu_layout_library_tablayout_nowplayingview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutDescription="@xml/motionscene_nowplayingview"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

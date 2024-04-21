@@ -1,0 +1,46 @@
+<resources>
+
+  <dimen name="dp0">0dp</dimen>
+  <dimen name="dp1">1dp</dimen>
+  <dimen name="dp2">2dp</dimen>
+  <dimen name="dp4">4dp</dimen>
+  <dimen name="dp8">8dp</dimen>
+  <dimen name="dp12">12dp</dimen>
+  <dimen name="dp16">16dp</dimen>
+  <dimen name="dp24">24dp</dimen>
+  <dimen name="dp32">32dp</dimen>
+  <dimen name="dp40">40dp</dimen>
+  <dimen name="dp48">48dp</dimen>
+  <dimen name="dp64">64dp</dimen>
+  <dimen name="dp80">80dp</dimen>
+  <dimen name="dp96">96dp</dimen>
+  <dimen name="dp112">112dp</dimen>
+  <dimen name="dp128">128dp</dimen>
+  <dimen name="dp160">160dp</dimen>
+  <dimen name="dp192">192dp</dimen>
+  <dimen name="dp256">256dp</dimen>
+  <dimen name="dp280">280dp</dimen>
+  <dimen name="dp630">360dp</dimen>
+  
+  <dimen name="percent10">10%</dimen>
+  <dimen name="percent20">20%</dimen>
+  <dimen name="percent30">30%</dimen>
+  <dimen name="percent40">40%</dimen>
+  <dimen name="percent50">50%</dimen>
+  <dimen name="percent60">60%</dimen>
+  <dimen name="percent70">70%</dimen>
+  <dimen name="percent80">80%</dimen>
+  <dimen name="percent90">90%</dimen>
+  <dimen name="percent100">100%</dimen>
+  <dimen name="percent110">110%</dimen>
+  <dimen name="percent120">120%</dimen>
+  <dimen name="percent130">130%</dimen>
+  <dimen name="percent140">140%</dimen>
+  <dimen name="percent150">150%</dimen>
+  <dimen name="percent160">160%</dimen>
+  <dimen name="percent170">170%</dimen>
+  <dimen name="percent180">180%</dimen>
+  <dimen name="percent190">190%</dimen>
+  <dimen name="percent200">200%</dimen>
+
+</resources>

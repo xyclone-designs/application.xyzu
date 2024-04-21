@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Xyzu.Preference"
+    
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Setting.AudioBand.Text.Title"
+        android:id="@+id/xyzu_view_setting_audioband_title_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constrainedWidth="true"
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_setting_audioband_max_appcompattextview" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Setting.AudioBand.Text.Max"
+        android:id="@+id/xyzu_view_setting_audioband_max_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constrainedWidth="true"
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_setting_audioband_title_appcompattextview"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_setting_audioband_value_frame_contentframelayout"  />
+
+    <androidx.appcompat.widget.ContentFrameLayout
+        android:id="@+id/xyzu_view_setting_audioband_value_frame_contentframelayout"
+        android:layout_width="@dimen/dp64"
+        android:layout_height="@dimen/dp280" 
+
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_setting_audioband_min_appcompattextview"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_setting_audioband_max_appcompattextview">
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            style="@style/Xyzu.View.Setting.AudioBand.Value"
+            android:id="@+id/xyzu_view_setting_audioband_value_appcompatseekbar"
+            android:layout_width="@dimen/dp280"
+            android:layout_height="wrap_content" 
+            android:layout_gravity="center"
+            android:rotation="270" />
+
+    </androidx.appcompat.widget.ContentFrameLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Setting.AudioBand.Text.Min"
+        android:id="@+id/xyzu_view_setting_audioband_min_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constrainedWidth="true"
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_setting_audioband_footer_appcompattextview"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_setting_audioband_value_frame_contentframelayout" />
+    
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Setting.AudioBand.Text.Footer"
+        android:id="@+id/xyzu_view_setting_audioband_footer_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constrainedWidth="true"
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_setting_audioband_min_appcompattextview" />
+
+</merge>

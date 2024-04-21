@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <xyzu.views.insets.StatusBarInsetView
+        android:id="@+id/xyzu_view_misc_dialog_statusbarinsetview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:visibility="gone"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_misc_dialog_title_appcompattextview"/>
+
+    <!---->
+    
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Misc.Dialog.Text.Title"
+        android:id="@+id/xyzu_view_misc_dialog_title_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:visibility="gone"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_misc_dialog_statusbarinsetview"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_misc_dialog_description_appcompattextview"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Misc.Dialog.Text.Description"
+        android:id="@+id/xyzu_view_misc_dialog_description_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:visibility="gone"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_misc_dialog_title_appcompattextview"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_misc_dialog_contentview_linearlayoutcompat"/>
+
+    <!---->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/xyzu_view_misc_dialog_contentview_linearlayoutcompat"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintHeight_max="@dimen/material_time_picker_minimum_screen_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" 
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_misc_dialog_buttons_barrier_top"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_misc_dialog_description_appcompattextview">
+    
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/xyzu_view_misc_dialog_contentview_nestedscrollview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!---->
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/xyzu_view_misc_dialog_buttons_barrier_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="
+            xyzu_view_misc_dialog_buttons_neutral_appcompatbutton,
+            xyzu_view_misc_dialog_buttons_positive_appcompatbutton,
+            xyzu_view_misc_dialog_buttons_negative_appcompatbutton"/>
+
+    <!---->
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/Xyzu.View.Misc.Dialog.Button.Negative"
+        android:id="@+id/xyzu_view_misc_dialog_buttons_negative_appcompatbutton"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginStart="@dimen/dp8"
+        android:layout_marginVertical="@dimen/dp8"
+        android:visibility="gone"
+        
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_weight="0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_misc_dialog_navigationbarinsetview"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_misc_dialog_buttons_space"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_misc_dialog_contentview_linearlayoutcompat"/>
+
+    <Space
+        android:id="@+id/xyzu_view_misc_dialog_buttons_space"
+        android:layout_height="@dimen/dp0"
+        android:layout_width="@dimen/dp0"
+        
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_misc_dialog_buttons_negative_appcompatbutton"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_misc_dialog_buttons_neutral_appcompatbutton" />
+    
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/Xyzu.View.Misc.Dialog.Button.Neutral"
+        android:id="@+id/xyzu_view_misc_dialog_buttons_neutral_appcompatbutton"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginVertical="@dimen/dp8"
+        android:layout_marginHorizontal="@dimen/dp8"
+        android:visibility="gone"
+            
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHorizontal_weight="0"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_misc_dialog_navigationbarinsetview"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_misc_dialog_buttons_space"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_misc_dialog_contentview_linearlayoutcompat"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_misc_dialog_buttons_positive_appcompatbutton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/Xyzu.View.Misc.Dialog.Button.Positive"
+        android:id="@+id/xyzu_view_misc_dialog_buttons_positive_appcompatbutton"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginEnd="@dimen/dp8"
+        android:layout_marginVertical="@dimen/dp8"
+        android:visibility="gone"
+
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHorizontal_weight="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_misc_dialog_navigationbarinsetview"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_misc_dialog_contentview_linearlayoutcompat"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_misc_dialog_buttons_neutral_appcompatbutton"/>
+
+    <!---->
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/xyzu_view_misc_dialog_buttons_barrier_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="
+            xyzu_view_misc_dialog_buttons_neutral_appcompatbutton,
+            xyzu_view_misc_dialog_buttons_positive_appcompatbutton,
+            xyzu_view_misc_dialog_buttons_negative_appcompatbutton"/>
+
+    <!---->
+
+    <xyzu.views.insets.NavigationBarInsetView
+        android:id="@+id/xyzu_view_misc_dialog_navigationbarinsetview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:visibility="gone"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_misc_dialog_buttons_barrier_bottom" />
+  
+</merge>

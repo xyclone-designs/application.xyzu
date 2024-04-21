@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <xyzu.preference.SwitchPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_userinterface_library_genre_songs_isreversed_switchpreference_key"
+      app:title="@string/settings_userinterface_library_genre_songs_isreversed_title"
+      app:summary="@string/settings_userinterface_library_genre_songs_isreversed_description"
+      app:summaryOn="@string/settings_userinterface_library_genre_songs_isreversed_description_on"
+      app:summaryOff="@string/settings_userinterface_library_genre_songs_isreversed_description_off"/>
+
+  <xyzu.preference.ListPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_userinterface_library_genre_songs_layouttype_listpreference_key"
+      app:title="@string/settings_userinterface_library_genre_songs_layouttype_title"
+      app:summary="@string/settings_userinterface_library_genre_songs_layouttype_description"
+      app:dialogTitle="@string/settings_userinterface_library_genre_songs_layouttype_dialog_title"
+      app:negativeButtonText="@string/settings_userinterface_library_genre_songs_layouttype_dialog_negativebutton"
+      app:positiveButtonText="@string/settings_userinterface_library_genre_songs_layouttype_dialog_positivebutton"/>
+
+  <xyzu.preference.ListPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_userinterface_library_genre_songs_sortkey_listpreference_key"
+      app:title="@string/settings_userinterface_library_genre_songs_sortkey_title"
+      app:summary="@string/settings_userinterface_library_genre_songs_sortkey_description"
+      app:dialogTitle="@string/settings_userinterface_library_genre_songs_sortkey_dialog_title"
+      app:negativeButtonText="@string/settings_userinterface_library_genre_songs_sortkey_dialog_negativebutton"
+      app:positiveButtonText="@string/settings_userinterface_library_genre_songs_sortkey_dialog_positivebutton"/>
+
+  <xyzu.preference.NavigationBarInsetPreference />
+
+</androidx.preference.PreferenceScreen>

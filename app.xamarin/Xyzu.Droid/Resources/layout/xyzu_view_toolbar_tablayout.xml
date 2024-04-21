@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <xyzu.views.insets.StatusBarInsetView
+        style="@style/Xyzu.View.Toolbar.StatusBarInset"
+        android:id="@+id/xyzu_view_toolbar_tablayout_statusbarinsetview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_toolbar_tablayout_toolbar"/>
+
+    <androidx.appcompat.widget.Toolbar
+        style="@style/Xyzu.View.Toolbar.Toolbar"
+        android:id="@+id/xyzu_view_toolbar_tablayout_toolbar"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_toolbar_tablayout_tablayout"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_toolbar_tablayout_statusbarinsetview"/>
+  
+    <com.google.android.material.tabs.TabLayout
+        style="@style/Xyzu.View.Toolbar.TabLayout"
+        android:id="@+id/xyzu_view_toolbar_tablayout_tablayout"
+        android:layout_height="@dimen/dp0"
+        android:layout_width="@dimen/dp0"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_toolbar_tablayout_toolbar"/>
+
+</merge>

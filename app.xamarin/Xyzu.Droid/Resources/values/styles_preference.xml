@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="Xyzu.Preference" parent="Xyzu">
+    <item name="android:background">?android:attr/selectableItemBackground</item>
+  </style>
+  <style name="Xyzu.Preference.AlertDialog" parent="Xyzu.Material.Dialog.Alert"></style>
+  <style name="Xyzu.Preference.CheckBox" parent="Xyzu.AppCompat.CheckBox"></style>
+  <style name="Xyzu.Preference.ColorPreferenceCompat" parent="Xyzu.Preference"></style>
+  <style name="Xyzu.Preference.DialogPreference" parent="Xyzu.Preference"></style>
+  <style name="Xyzu.Preference.DropDownPreference" parent="Xyzu.Preference"></style>
+  <style name="Xyzu.Preference.EditTextPreference" parent="Xyzu.Preference"></style>
+  <style name="Xyzu.Preference.ListPreference" parent="Xyzu.Preference"></style>
+  <style name="Xyzu.Preference.MultiSelectListPreference" parent="Xyzu.Preference"></style>
+  <style name="Xyzu.Preference.PreferenceScreen" parent="Xyzu.Preference"></style>
+  <style name="Xyzu.Preference.SeekBar" parent="Xyzu.AppCompat.SeekBar"></style>
+  <style name="Xyzu.Preference.Spinner" parent="Xyzu.AppCompat.Spinner"></style>
+  <style name="Xyzu.Preference.SummaryText" parent="Xyzu.AppCompat.Text">
+    <item name="android:ellipsize">middle</item>
+    <item name="android:maxLines">4</item>
+  </style>
+  <style name="Xyzu.Preference.SwitchCompat" parent="Xyzu.AppCompat.SwitchCompat"></style>
+  <style name="Xyzu.Preference.Theme" parent=""></style>
+  <style name="Xyzu.Preference.TitleText" parent="Xyzu.AppCompat.Text">
+    <item name="android:ellipsize">middle</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textSize">@dimen/abc_text_size_menu_material</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="Xyzu.Preference.ValueSummaryText" parent="Xyzu.AppCompat.Text">
+    <item name="android:ellipsize">middle</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textColor">@color/ColorPrimary</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+
+</resources>

@@ -1,0 +1,34 @@
+<resources>
+
+  <string name="library_album">Album</string>
+  <string name="library_albums">Albums</string>
+  <string name="library_artist">Artist</string>
+  <string name="library_artists">Artists</string>
+  <string name="library_genre">Genre</string>
+  <string name="library_genres">Genres</string>
+  <string name="library_item">Item</string>
+  <string name="library_items">Items</string>
+  <string name="library_playlist">Playlist</string>
+  <string name="library_playlists">Playlists</string>
+  <string name="library_queue">Queue</string>
+  <string name="library_search">Search</string>
+  <string name="library_songs">Songs</string>
+  
+  <string name="library_list_options">List Options</string>
+  
+  <string name="library_no_lyrics">No lyrics found...</string>
+
+  <string name="library_search_albums">Search Albums</string>
+  <string name="library_search_artists">Search Artists</string>
+  <string name="library_search_genres">Search Genres</string>
+  <string name="library_search_playlists">Search Playlists</string>
+  <string name="library_search_songs">Search Songs</string>
+  
+  <string name="library_unknown_album">Unknown Album</string>
+  <string name="library_unknown_albumartist">Unknown Album Artist</string>
+  <string name="library_unknown_artist">Unknown Artist</string>
+  <string name="library_unknown_genre">Unknown Genre</string>
+  <string name="library_unknown_playlist">Unknown Playlist</string>
+  <string name="library_unknown_title">Unknown Title</string>
+
+</resources>

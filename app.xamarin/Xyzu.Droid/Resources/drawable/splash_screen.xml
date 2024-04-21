@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item>
+    <color android:color="@color/Color_SplashScreenBackground" />
+  </item>
+
+  <item android:gravity="center">
+    <shape>
+      <gradient 
+        android:type="radial"
+        android:gradientRadius="@dimen/percent30"
+        android:startColor="@color/Color_SplashScreenIconBackground"
+        android:centerColor="@color/Color_SplashScreenIconBackground"
+        android:endColor="@android:color/transparent"/>
+    </shape>
+  </item>
+
+  <item android:gravity="center">
+    <shape>
+      <gradient 
+        android:type="radial"
+        android:gradientRadius="@dimen/percent70"
+        android:startColor="@color/Color_SplashScreenIconBackground"
+        android:centerColor="@android:color/transparent"
+        android:endColor="@android:color/transparent"/>
+    </shape>
+  </item>
+
+  <item 
+    android:drawable="@drawable/splash_screen_icon"
+    android:width="@dimen/dp64"
+    android:height="@dimen/dp64"
+    android:gravity="center" />
+
+</layer-list>

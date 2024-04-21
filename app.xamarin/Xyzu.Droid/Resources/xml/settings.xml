@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen 
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_audio_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.Audio.AudioPreferenceFragment"
+      app:icon="@drawable/icon_settings_audio"
+      app:title="@string/settings_audio_title"
+      app:summary="@string/settings_audio_description"/>            
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_files_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.Files.FilesPreferenceFragment"
+      app:icon="@drawable/icon_settings_files"
+      app:title="@string/settings_files_title"
+      app:summary="@string/settings_files_description" />
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_notification_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.Notification.NotificationPreferenceFragment"
+      app:icon="@drawable/icon_settings_notification"
+      app:title="@string/settings_notification_title"
+      app:summary="@string/settings_notification_description"/>
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_userinterface_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.UserInterface.UserInterfacePreferenceFragment"
+      app:icon="@drawable/icon_settings_userinterface"
+      app:title="@string/settings_userinterface_title"
+      app:summary="@string/settings_userinterface_description" />
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_lockscreen_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.LockScreen.LockScreenPreferenceFragment"
+      app:icon="@drawable/icon_settings_lockscreen"
+      app:title="@string/settings_lockscreen_title"
+      app:summary="@string/settings_lockscreen_description"/>
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_system_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.System.SystemPreferenceFragment"
+      app:icon="@drawable/icon_settings_system"
+      app:title="@string/settings_system_title"
+      app:summary="@string/settings_system_description"/>
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_about_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.About.AboutPreferenceFragment"
+      app:icon="@drawable/icon_settings_about"
+      app:title="@string/settings_about_title"
+      app:summary="@string/settings_about_description"/>
+
+  <xyzu.preference.NavigationBarInsetPreference />
+                                                                                
+</androidx.preference.PreferenceScreen>

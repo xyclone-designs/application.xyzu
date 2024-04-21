@@ -1,0 +1,87 @@
+<resources>
+
+  <string name="snackbars_albums_none_selected">No albums selected</string>
+  <string name="snackbars_albums_could_not_be_added">Album/s could not be added</string>
+  <string name="snackbars_albums_could_not_be_created">Album/s could not be created</string>
+  <string name="snackbars_albums_could_not_be_deleted">Album/s could not be deleted</string>
+  <string name="snackbars_albums_could_not_be_edited">Album/s could not be edited</string>
+  <string name="snackbars_albums_could_not_be_moved">Album/s could not be moved</string>
+  <string name="snackbars_albums_could_not_be_removed">Album/s could not be removed</string>
+  <string name="snackbars_albums_added">Album/s added</string>
+  <string name="snackbars_albums_created">Album/s created</string>
+  <string name="snackbars_albums_deleted">Album/s deleted</string>
+  <string name="snackbars_albums_edited">Album/s edited</string>
+  <string name="snackbars_albums_moved">Album/s moved</string>
+  <string name="snackbars_albums_removed">Album/s removed</string>
+
+  <string name="snackbars_artists_none_selected">No artists selected</string>
+  <string name="snackbars_artists_could_not_be_added">Artists/s could not be added</string>
+  <string name="snackbars_artists_could_not_be_created">Artists/s could not be created</string>
+  <string name="snackbars_artists_could_not_be_deleted">Artists/s could not be deleted</string>
+  <string name="snackbars_artists_could_not_be_edited">Artists/s could not be edited</string>
+  <string name="snackbars_artists_could_not_be_moved">Artists/s could not be moved</string>
+  <string name="snackbars_artists_could_not_be_removed">Artists/s could not be removed</string>
+  <string name="snackbars_artists_added">Artists/s added</string>
+  <string name="snackbars_artists_created">Artists/s created</string>
+  <string name="snackbars_artists_deleted">Artists/s deleted</string>
+  <string name="snackbars_artists_edited">Artists/s edited</string>
+  <string name="snackbars_artists_moved">Artists/s moved</string>
+  <string name="snackbars_artists_removed">Artists/s removed</string>
+
+  <string name="snackbars_genres_none_selected">No genres selected</string>
+  <string name="snackbars_genres_could_not_be_added">Genre/s could not be added</string>
+  <string name="snackbars_genres_could_not_be_created">Genre/s could not be created</string>
+  <string name="snackbars_genres_could_not_be_deleted">Genre/s could not be deleted</string>
+  <string name="snackbars_genres_could_not_be_edited">Genre/s could not be edited</string>
+  <string name="snackbars_genres_could_not_be_moved">Genre/s could not be moved</string>
+  <string name="snackbars_genres_could_not_be_removed">Genre/s could not be removed</string>
+  <string name="snackbars_genres_added">Genre/s added</string>
+  <string name="snackbars_genres_created">Genre/s created</string>
+  <string name="snackbars_genres_deleted">Genre/s deleted</string>
+  <string name="snackbars_genres_edited">Genre/s edited</string>
+  <string name="snackbars_genres_moved">Genre/s moved</string>
+  <string name="snackbars_genres_removed">Genre/s removed</string>
+
+  <string name="snackbars_items_none_selected">No items selected</string>
+  <string name="snackbars_items_could_not_be_added">Item/s could not be added</string>
+  <string name="snackbars_items_could_not_be_created">Item/s could not be created</string>
+  <string name="snackbars_items_could_not_be_deleted">Item/s could not be deleted</string>
+  <string name="snackbars_items_could_not_be_edited">Item/s could not be edited</string>
+  <string name="snackbars_items_could_not_be_moved">Item/s could not be moved</string>
+  <string name="snackbars_items_could_not_be_removed">Item/s could not be removed</string>
+  <string name="snackbars_items_added">Item/s added</string>
+  <string name="snackbars_items_created">Item/s created</string>
+  <string name="snackbars_items_deleted">Item/s deleted</string>
+  <string name="snackbars_items_edited">Item/s edited</string>
+  <string name="snackbars_items_moved">Item/s moved</string>
+  <string name="snackbars_items_removed">Item/s removed</string>
+
+  <string name="snackbars_playlists_none_selected">No playlists selected</string>
+  <string name="snackbars_playlists_could_not_be_added">Playlist/s could not be added</string>
+  <string name="snackbars_playlists_could_not_be_created">Playlist/s could not be created</string>
+  <string name="snackbars_playlists_could_not_be_deleted">Playlist/s could not be deleted</string>
+  <string name="snackbars_playlists_could_not_be_edited">Playlist/s could not be edited</string>
+  <string name="snackbars_playlists_could_not_be_moved">Playlist/s could not be moved</string>
+  <string name="snackbars_playlists_could_not_be_removed">Playlist/s could not be removed</string>
+  <string name="snackbars_playlists_added">Playlist/s added</string>
+  <string name="snackbars_playlists_created">Playlist/s created</string>
+  <string name="snackbars_playlists_deleted">Playlist/s deleted</string>
+  <string name="snackbars_playlists_edited">Playlist/s edited</string>
+  <string name="snackbars_playlists_moved">Playlist/s moved</string>
+  <string name="snackbars_playlists_removed">Playlist/s removed</string>
+
+  <string name="snackbars_songs_none_selected">No songs selected</string>
+  <string name="snackbars_songs_could_not_be_added">Song/s could not be added</string>
+  <string name="snackbars_songs_could_not_be_created">Song/s could not be created</string>
+  <string name="snackbars_songs_could_not_be_deleted">Song/s could not be deleted</string>
+  <string name="snackbars_songs_could_not_be_edited">Song/s could not be edited</string>
+  <string name="snackbars_songs_could_not_be_moved">Song/s could not be moved</string>
+  <string name="snackbars_songs_could_not_be_removed">Song/s could not be removed</string>
+  <string name="snackbars_songs_added">Song/s added</string>
+  <string name="snackbars_songs_created">Song/s created</string>
+  <string name="snackbars_songs_deleted">Song/s deleted</string>
+  <string name="snackbars_songs_edited">Song/s edited</string>
+  <string name="snackbars_songs_moved">Song/s moved</string>
+  <string name="snackbars_songs_removed">Song/s removed</string>
+
+</resources>

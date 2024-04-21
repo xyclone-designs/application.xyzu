@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    
+    style="@style/Xyzu.View.NowPlayling"
+    android:id="@+id/xyzu_view_nowplaying"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!---->
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/xyzu_view_nowplaying_backgroundblur_appcompatimageview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_navigationbarinsetview"/>
+    
+    <!---->
+
+    <xyzu.widgets.recyclerviews.SimpleHorizontalRecyclerView
+        android:id="@id/xyzu_view_nowplaying_artwork_simplehorizontalrecyclerview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.NowPlayling.Text"
+        android:id="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp16"
+          
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_nowplaying_artwork_simplehorizontalrecyclerview"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_nowplaying_buttons_player_playpause_appcompatimagebutton"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.NowPlayling.Text"
+        android:id="@id/xyzu_view_nowplaying_detail_two_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp8"
+        
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_navigationbarinsetview"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintEnd_toEndOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Player"
+        android:id="@id/xyzu_view_nowplaying_buttons_player_playpause_appcompatimagebutton"
+        android:src="@drawable/icon_player_play"
+        android:layout_width="@dimen/dp32"
+        android:layout_height="@dimen/dp32"
+        android:layout_marginStart="@dimen/dp8"
+          
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_nowplaying_buttons_menu_options_appcompatimagebutton" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Menu"
+        android:id="@id/xyzu_view_nowplaying_buttons_menu_options_appcompatimagebutton"
+        android:src="@drawable/icon_general_dots_vertical"
+        android:layout_width="@dimen/dp32"
+        android:layout_height="@dimen/dp32"
+        android:layout_marginEnd="@dimen/dp8"
+        android:layout_marginStart="@dimen/dp8"
+        
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview" 
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_nowplaying_buttons_player_playpause_appcompatimagebutton"/>
+    
+    <!---->
+
+    <xyzu.views.insets.NavigationBarInsetView
+        android:id="@id/xyzu_view_nowplaying_navigationbarinsetview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constrainedHeight="true"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview"/>
+
+    <!---->
+
+    <xyzu.views.insets.StatusBarInsetView
+        android:id="@id/xyzu_view_nowplaying_statusbarinsetview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+    
+    <Space
+        android:id="@id/xyzu_view_nowplaying_artworkdetails_space"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.NowPlayling.Text"
+        android:id="@+id/xyzu_view_nowplaying_positiontext_appcompattextview" 
+        android:visibility="gone" />
+
+    <com.oze.music.musicbar.FixedMusicBar
+	    android:id="@id/xyzu_view_nowplaying_position_fixedmusicbar"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:visibility="gone"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Player"
+        android:id="@+id/xyzu_view_nowplaying_buttons_player_previous_appcompatimagebutton"
+        android:src="@drawable/icon_player_skip_backward"  
+        android:visibility="gone"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Player"
+        android:id="@+id/xyzu_view_nowplaying_buttons_player_next_appcompatimagebutton"
+        android:src="@drawable/icon_player_skip_foward" 
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Menu"
+        android:id="@+id/xyzu_view_nowplaying_buttons_menu_queue_appcompatimagebutton"
+        android:src="@drawable/icon_menuoptions_gotoqueue" 
+        android:visibility="gone"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Menu"
+        android:id="@+id/xyzu_view_nowplaying_buttons_menu_audioeffects_appcompatimagebutton"
+        android:src="@drawable/icon_menuoptions_audioeffects" 
+        android:visibility="gone"/>
+    
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Menu"
+        android:id="@+id/xyzu_view_nowplaying_buttons_menu_playersettings_appcompatimagebutton"
+        android:src="@drawable/icon_menuoptions_viewinfo"
+        android:visibility="gone" />
+
+</merge>

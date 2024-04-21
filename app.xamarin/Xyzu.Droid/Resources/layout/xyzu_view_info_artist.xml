@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!---->
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Info.Text.Title"
+        android:id="@+id/xyzu_view_info_artist_title_appcompattextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/xyzu_view_info_artist_header"
+            
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/Xyzu.View.Info.Image"
+        android:id="@+id/xyzu_view_info_artist_artistimage_appcompatimageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/xyzu_view_info_song_title_barrier_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        app:barrierMargin="@dimen/dp32"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="
+        xyzu_view_info_artist_title_appcompattextview,
+        xyzu_view_info_artist_artistimage_appcompatimageview"/>  
+    <!---->
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/xyzu_view_info_artist_barrier_rowoneend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+                
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="
+        xyzu_view_info_artist_artistname_title_appcompattextview,
+        xyzu_view_info_artist_artistbiography_title_appcompattextview,
+        xyzu_view_info_artist_artistsongcount_title_appcompattextview,
+        xyzu_view_info_artist_artistalbumcount_title_appcompattextview"/>
+
+    <!---->
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Info.Text.Key"
+        android:id="@+id/xyzu_view_info_artist_artistname_title_appcompattextview"
+        android:text="@string/models_artist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            
+        app:layout_constrainedWidth="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_info_song_title_barrier_bottom"/>
+                  
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Info.Text.Value"                                 
+        android:id="@+id/xyzu_view_info_artist_artistname_value_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_info_artist_barrier_rowoneend"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_info_artist_artistname_title_appcompattextview"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/xyzu_view_info_artist_artistname_barrier_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="
+        xyzu_view_info_artist_artistname_title_appcompattextview,
+        xyzu_view_info_artist_artistname_value_appcompattextview"/>   
+    <!---->
+
+    <!---->
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Info.Text.Key"
+        android:id="@+id/xyzu_view_info_artist_artistsongcount_title_appcompattextview"
+        android:text="@string/models_artist_songs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            
+        app:layout_constrainedWidth="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_info_artist_artistname_barrier_bottom"/>
+                  
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Info.Text.Value"                                 
+        android:id="@+id/xyzu_view_info_artist_artistsongcount_value_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_info_artist_barrier_rowoneend"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_info_artist_artistsongcount_title_appcompattextview"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/xyzu_view_info_artist_artistsongcount_barrier_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="
+        xyzu_view_info_artist_artistsongcount_title_appcompattextview,
+        xyzu_view_info_artist_artistsongcount_value_appcompattextview"/>   
+    <!---->
+
+    <!---->
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Info.Text.Key"
+        android:id="@+id/xyzu_view_info_artist_artistalbumcount_title_appcompattextview"
+        android:text="@string/models_artist_albums"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            
+        app:layout_constrainedWidth="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_info_artist_artistsongcount_barrier_bottom"/>
+                  
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Info.Text.Value"                                 
+        android:id="@+id/xyzu_view_info_artist_artistalbumcount_value_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_info_artist_barrier_rowoneend"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_info_artist_artistalbumcount_title_appcompattextview"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/xyzu_view_info_artist_artistalbumcount_barrier_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="
+        xyzu_view_info_artist_artistalbumcount_title_appcompattextview,
+        xyzu_view_info_artist_artistalbumcount_value_appcompattextview"/>   
+    <!---->
+
+</merge>
+
+
+

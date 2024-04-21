@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item android:state_pressed="true">
+    <ripple android:color="@color/ColorPrimary">
+      <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+
+          <corners
+            android:topRightRadius="@dimen/dp16"
+            android:topLeftRadius="@dimen/dp16"
+            android:bottomRightRadius="@dimen/dp32"
+            android:bottomLeftRadius="@dimen/dp32"/>
+          
+          <solid android:color="@color/ColorPrimary" />
+          
+        </shape>
+      </item>
+    <item>
+      <shape android:shape="rectangle">
+        
+        <corners
+          android:topRightRadius="@dimen/dp16"
+          android:topLeftRadius="@dimen/dp16"
+          android:bottomRightRadius="@dimen/dp32"
+          android:bottomLeftRadius="@dimen/dp32"/>
+      
+        <solid android:color="@android:color/transparent" />
+
+      </shape>
+    </item>
+    </ripple>
+  </item>
+  
+  <item android:state_active="true">
+    <shape android:shape="rectangle">
+          
+      <corners
+        android:topRightRadius="@dimen/dp16"
+        android:topLeftRadius="@dimen/dp16"
+        android:bottomRightRadius="@dimen/dp32"
+        android:bottomLeftRadius="@dimen/dp32"/>
+          
+      <solid android:color="@color/ColorPrimary" />
+          
+    </shape>
+  </item>
+  
+  <item android:state_selected="true">
+    <shape android:shape="rectangle">
+
+      <corners
+        android:topRightRadius="@dimen/dp16"
+        android:topLeftRadius="@dimen/dp16"
+        android:bottomRightRadius="@dimen/dp32"
+        android:bottomLeftRadius="@dimen/dp32"/>
+          
+      <solid android:color="@color/ColorPrimaryActive" />
+          
+    </shape>
+  </item>
+
+  <item>
+    <shape android:shape="rectangle">
+
+      <corners
+        android:topRightRadius="@dimen/dp16"
+        android:topLeftRadius="@dimen/dp16"
+        android:bottomRightRadius="@dimen/dp32"
+        android:bottomLeftRadius="@dimen/dp32"/>
+
+      <solid android:color="@android:color/transparent" />
+
+    </shape>
+  </item>
+
+</selector>

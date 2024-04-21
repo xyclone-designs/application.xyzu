@@ -1,0 +1,13 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48px"
+    android:height="48px"
+    android:autoMirrored="true"
+    android:viewportWidth="48.0"
+    android:viewportHeight="48.0">
+  
+    <path 
+      android:fillColor="@color/ColorOnSurface"
+      android:strokeColor="@color/ColorOnSurface"    
+      android:pathData="M20 40h8V8h-8v32zM8 40h8V24H8v16zm24-22v22h8V18h-8z"/>
+
+</vector>

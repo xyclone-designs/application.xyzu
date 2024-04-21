@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <xyzu.preference.SwitchPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_audio_environmentalreverb_isenabled_switchpreference_key"
+      app:title="@string/settings_audio_environmentalreverb_isenabled_title"
+      app:summary="@string/settings_audio_environmentalreverb_isenabled_description"
+      app:summaryOn="@string/settings_audio_environmentalreverb_isenabled_description_on"
+      app:summaryOff="@string/settings_audio_environmentalreverb_isenabled_description_off"/>
+
+  <xyzu.preference.ListPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_audio_environmentalreverb_currentpreset_listpreference_key"
+      app:title="@string/settings_audio_environmentalreverb_currentpreset_title"
+      app:summary="@string/settings_audio_environmentalreverb_currentpreset_description"
+      app:dialogTitle="@string/settings_audio_environmentalreverb_currentpreset_dialog_title"
+      app:negativeButtonText="@string/settings_audio_environmentalreverb_currentpreset_dialog_negativebutton"
+      app:positiveButtonText="@string/settings_audio_environmentalreverb_currentpreset_dialog_positivebutton"/>
+
+  <xyzu.preference.SeekBarPreference
+      app:adjustable="true"
+      app:showSeekBarValue="true"
+      app:iconSpaceReserved="false"
+      app:updatesContinuously="true"
+      app:key="settings_audio_environmentalreverb_decayhfratio_seekbarpreference_key" 
+      app:title="@string/settings_audio_environmentalreverb_decayhfratio_title"
+      app:summary="@string/settings_audio_environmentalreverb_decayhfratio_description"/>
+
+  <xyzu.preference.SeekBarPreference
+      app:adjustable="true"
+      app:showSeekBarValue="true"
+      app:iconSpaceReserved="false"
+      app:updatesContinuously="true"
+      app:key="settings_audio_environmentalreverb_decaytime_seekbarpreference_key"
+      app:title="@string/settings_audio_environmentalreverb_decaytime_title"
+      app:summary="@string/settings_audio_environmentalreverb_decaytime_description"/>
+
+  <xyzu.preference.SeekBarPreference
+      app:adjustable="true"
+      app:showSeekBarValue="true"
+      app:iconSpaceReserved="false"
+      app:updatesContinuously="true"
+      app:key="settings_audio_environmentalreverb_density_seekbarpreference_key" 
+      app:title="@string/settings_audio_environmentalreverb_density_title"
+      app:summary="@string/settings_audio_environmentalreverb_density_description"/>
+
+  <xyzu.preference.SeekBarPreference
+      app:adjustable="true"
+      app:showSeekBarValue="true"
+      app:iconSpaceReserved="false"
+      app:updatesContinuously="true"
+      app:key="settings_audio_environmentalreverb_diffusion_seekbarpreference_key" 
+      app:title="@string/settings_audio_environmentalreverb_diffusion_title"
+      app:summary="@string/settings_audio_environmentalreverb_diffusion_description"/>
+
+  <xyzu.preference.SeekBarPreference
+      app:adjustable="true"
+      app:showSeekBarValue="true"
+      app:iconSpaceReserved="false"
+      app:updatesContinuously="true"
+      app:key="settings_audio_environmentalreverb_reflectionsdelay_seekbarpreference_key" 
+      app:title="@string/settings_audio_environmentalreverb_reflectionsdelay_title"
+      app:summary="@string/settings_audio_environmentalreverb_reflectionsdelay_description"/>
+
+  <xyzu.preference.SeekBarPreference
+      app:adjustable="true"
+      app:showSeekBarValue="true"
+      app:iconSpaceReserved="false"
+      app:updatesContinuously="true"
+      app:key="settings_audio_environmentalreverb_reflectionslevel_seekbarpreference_key" 
+      app:title="@string/settings_audio_environmentalreverb_reflectionslevel_title"
+      app:summary="@string/settings_audio_environmentalreverb_reflectionslevel_description"/>
+
+  <xyzu.preference.SeekBarPreference
+      app:adjustable="true"
+      app:showSeekBarValue="true"
+      app:iconSpaceReserved="false"
+      app:updatesContinuously="true"
+      app:key="settings_audio_environmentalreverb_reverbdelay_seekbarpreference_key" 
+      app:title="@string/settings_audio_environmentalreverb_reverbdelay_title"
+      app:summary="@string/settings_audio_environmentalreverb_reverbdelay_description"/>
+
+  <xyzu.preference.SeekBarPreference
+      app:adjustable="true"
+      app:showSeekBarValue="true"
+      app:iconSpaceReserved="false"
+      app:updatesContinuously="true"
+      app:key="settings_audio_environmentalreverb_reverblevel_seekbarpreference_key" 
+      app:title="@string/settings_audio_environmentalreverb_reverblevel_title"
+      app:summary="@string/settings_audio_environmentalreverb_reverblevel_description"/>
+
+  <xyzu.preference.SeekBarPreference
+      app:adjustable="true"
+      app:showSeekBarValue="true"
+      app:iconSpaceReserved="false"
+      app:updatesContinuously="true"
+      app:key="settings_audio_environmentalreverb_roomhflevel_seekbarpreference_key" 
+      app:title="@string/settings_audio_environmentalreverb_roomhflevel_title"
+      app:summary="@string/settings_audio_environmentalreverb_roomhflevel_description"/>
+
+  <xyzu.preference.SeekBarPreference
+      app:adjustable="true"
+      app:showSeekBarValue="true"
+      app:iconSpaceReserved="false"
+      app:updatesContinuously="true"
+      app:key="settings_audio_environmentalreverb_roomlevel_seekbarpreference_key" 
+      app:title="@string/settings_audio_environmentalreverb_roomlevel_title"
+      app:summary="@string/settings_audio_environmentalreverb_roomlevel_description"/>
+
+  <xyzu.preference.NavigationBarInsetPreference />
+
+</androidx.preference.PreferenceScreen>

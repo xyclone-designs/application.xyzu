@@ -1,0 +1,8 @@
+<resources>
+
+  <declare-styleable name="AppCompatEditDate">
+    <attr name="dateFormat" format="string" />
+    <attr name="dateDefaultText" format="string" />
+  </declare-styleable>
+
+</resources>

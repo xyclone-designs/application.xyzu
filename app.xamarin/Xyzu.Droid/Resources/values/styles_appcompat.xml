@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="Xyzu.AppCompat" parent="">
+    <item name="android:clipChildren">false</item>
+    <item name="android:clipToPadding">false</item>
+    <item name="android:textAppearance">@style/Xyzu.TextAppearance</item>
+  </style>
+  <style name="Xyzu.AppCompat.Button" parent="Xyzu.AppCompat">
+    <item name="android:background">@color/ColorSurface</item>
+    <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    <item name="android:clickable">true</item>
+    <item name="android:outlineProvider">none</item>
+    <item name="android:outlineAmbientShadowColor">@android:color/transparent</item>
+    <item name="android:outlineSpotShadowColor">@android:color/transparent</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textColor">@color/ColorOnSurface</item>
+    <item name="android:colorAccent">@color/ColorOnSurfaceVarient</item>
+
+    <item name="app:rippleColor">@color/ColorSurfaceActive</item>
+  </style>
+  <style name="Xyzu.AppCompat.Card" parent="Xyzu.AppCompat">
+    <item name="android:elevation">@dimen/dp0</item>
+    
+    <item name="app:cardBackgroundColor">@android:color/transparent</item>
+    <item name="app:cardCornerRadius">@dimen/dp24</item>
+    <item name="app:cardElevation">@dimen/dp0</item>
+    <item name="app:cardMaxElevation">@dimen/dp0</item>
+    <item name="app:cardPreventCornerOverlap">false</item>
+    <item name="app:cardUseCompatPadding">false</item>
+    <item name="app:contentPadding">@dimen/dp0</item>
+  </style>
+  <style name="Xyzu.AppCompat.CheckBox" parent="Xyzu.AppCompat">
+    <item name="android:backgroundTint">@android:color/transparent</item>
+    <item name="android:buttonTint">@color/ColorPrimary</item>
+    <item name="android:drawableTint">@color/ColorPrimary</item>
+    <item name="android:foregroundTint">@color/ColorSurface</item>
+    <item name="android:gravity">center_vertical|right</item>
+  </style>
+  <style name="Xyzu.AppCompat.CheckedText" parent="Xyzu.AppCompat">
+    <item name="android:background">@color/selector_list_itembackground</item>
+    <item name="android:checkMarkTint">@color/selector_list_item</item>
+    <item name="android:checkMarkTintMode">src_in</item>
+    <item name="android:ellipsize">marquee</item>
+    <item name="android:gravity">left|center_vertical</item>
+    <item name="android:textColor">@color/selector_list_item</item>
+    <item name="android:textAppearance">@style/Xyzu.TextAppearance</item>
+  </style>
+  <style name="Xyzu.AppCompat.EditDate" parent="Xyzu.AppCompat.EditText">
+    <item name="android:background">@drawable/xyzu_appcompat_editdate_background</item>
+    <item name="android:backgroundTint">@color/ColorBackground</item>
+    <item name="android:drawableTop">@drawable/empty_02dp_height</item>
+    <item name="android:drawableEnd">@drawable/empty_16dp_width</item>
+    <item name="android:drawableStart">@drawable/empty_16dp_width</item>
+    <item name="android:drawableBottom">@drawable/empty_02dp_height</item>
+    <item name="android:editable">false</item>
+    <item name="app:dateFormat">"dd MMMM yyyy"</item>
+  </style>
+  <style name="Xyzu.AppCompat.EditText" parent="Xyzu.AppCompat">
+    <item name="android:background">@drawable/xyzu_appcompat_edittext_background</item>
+    <item name="android:backgroundTint">@color/ColorBackground</item>
+    <item name="android:drawableEnd">@drawable/empty_16dp_width</item>
+    <item name="android:drawableTop">@drawable/empty_02dp_height</item>
+    <item name="android:drawableStart">@drawable/empty_16dp_width</item>
+    <item name="android:drawableBottom">@drawable/empty_02dp_height</item>
+    <item name="android:textColor">@color/ColorOnSurface</item>
+    <item name="android:textSize">@dimen/abc_text_size_medium_material</item>
+  </style>
+  <style name="Xyzu.AppCompat.ImageButton" parent="Xyzu.AppCompat">
+    <item name="android:background">@android:color/transparent</item>
+  </style>
+  <style name="Xyzu.AppCompat.Image" parent="Xyzu.AppCompat">
+    <item name="android:adjustViewBounds">true</item>
+    <item name="android:background">@drawable/icon_xyzu</item>
+    <item name="android:backgroundTint">@color/ColorPrimarySurface</item>
+    <item name="android:scaleType">fitCenter</item>
+  </style>
+  <style name="Xyzu.AppCompat.RadioButton" parent="Xyzu.AppCompat">
+  </style>
+  <style name="Xyzu.AppCompat.SeekBar" parent="Xyzu.AppCompat">
+    <item name="android:progressBackgroundTint">@android:color/transparent</item>
+    <item name="android:progressBackgroundTintMode">src_over</item>
+    <item name="android:progressTint">@color/ColorPrimary</item>
+    <item name="android:progressTintMode">src_in</item>
+    <item name="android:secondaryProgressTint">@android:color/transparent</item>
+    <item name="android:secondaryProgressTintMode">src_over</item>
+    <item name="android:thumbTint">@color/ColorPrimary</item>
+    <item name="android:thumbTintMode">src_in</item>
+  </style>
+  <style name="Xyzu.AppCompat.Spinner" parent="Xyzu.AppCompat">
+  </style>
+  <style name="Xyzu.AppCompat.Text" parent="Xyzu.AppCompat">
+    <item name="android:backgroundTint">@android:color/transparent</item>
+    <item name="android:textAlignment">viewStart</item>
+  </style>
+
+  <style name="Xyzu.AppCompat.DatePicker" parent="Xyzu.AppCompat">
+    <item name="android:textColor">@color/ColorOnSurface</item>
+  </style>
+
+  <style name="Xyzu.AppCompat.Search" parent="Xyzu.AppCompat">
+    <item name="android:background">@drawable/shape_cornered_all</item>
+    <item name="android:backgroundTint">@color/ColorSurface</item>
+
+    <item name="app:iconifiedByDefault">false</item>
+    <item name="app:queryHint">...</item>
+    <item name="app:queryBackground">@null</item>
+  </style>
+
+  <style name="Xyzu.AppCompat.SwitchCompat" parent="Xyzu.AppCompat">
+    <item name="android:foregroundTint">@android:color/transparent</item>
+    <item name="android:foregroundTintMode">src_in</item>
+    
+    <item name="app:showText">false</item>
+    <item name="app:splitTrack">false</item>
+    <item name="app:switchPadding">@dimen/dp0</item>
+    <item name="app:switchTextAppearance">@style/Xyzu.TextAppearance</item>
+    <item name="app:thumbTextPadding">@dimen/dp0</item>
+    <item name="app:thumbTint">@color/selector_switch_thumbtint</item>
+    <item name="app:thumbTintMode">src_in</item>
+    <item name="app:trackTint">@color/selector_switch_tracktint</item>
+    <item name="app:trackTintMode">src_in</item>
+  </style>
+
+</resources>

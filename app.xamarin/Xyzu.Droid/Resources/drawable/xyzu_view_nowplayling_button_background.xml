@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item android:state_pressed="true">
+    <ripple android:color="@color/ColorPrimary">
+      <item android:id="@android:id/mask">
+        <shape android:shape="oval">
+          <gradient 
+            android:type="radial" 
+            android:gradientRadius="@dimen/percent100" 
+            android:startColor="@color/ColorPrimary"  
+            android:centerColor="@android:color/transparent" 
+            android:endColor="@android:color/transparent" />
+        </shape>
+      </item>
+    <item>
+      <shape android:shape="oval">
+        <gradient 
+          android:type="radial" 
+          android:gradientRadius="@dimen/percent100" 
+          android:startColor="@color/ColorSurfaceTransparent"  
+          android:centerColor="@android:color/transparent" 
+          android:endColor="@android:color/transparent" />
+      </shape>
+    </item>
+    </ripple>
+  </item>
+  
+  <item android:state_active="true">
+    <shape android:shape="oval">
+      <gradient 
+        android:type="radial" 
+        android:gradientRadius="@dimen/percent100" 
+        android:startColor="@color/ColorPrimary"  
+        android:centerColor="@android:color/transparent" 
+        android:endColor="@android:color/transparent" />
+    </shape>
+  </item>
+
+  <item>
+    <shape android:shape="oval">
+      <gradient 
+        android:type="radial" 
+        android:gradientRadius="@dimen/percent100" 
+        android:startColor="@color/ColorSurfaceTransparent"  
+        android:centerColor="@android:color/transparent" 
+        android:endColor="@android:color/transparent" />
+    </shape>
+  </item>
+
+</selector>

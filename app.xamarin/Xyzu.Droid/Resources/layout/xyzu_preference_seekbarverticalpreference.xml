@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Xyzu.Preference"
+    
+    android:layout_width="@dimen/dp64"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.Preference.TitleText"
+        android:id="@id/seekbar_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/seekbar_min" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.Preference.SummaryText"
+        android:id="@+id/seekbar_min"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        
+        app:layout_constraintBottom_toTopOf="@id/seekbar_frame" 
+        app:layout_constraintTop_toBottomOf="@id/seekbar_value" />
+
+    <androidx.appcompat.widget.ContentFrameLayout
+        android:id="@+id/seekbar_frame"
+        android:layout_width="@dimen/dp64"
+        android:layout_height="@dimen/dp280" 
+        
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@id/seekbar_max"
+        app:layout_constraintTop_toBottomOf="@id/seekbar_min">
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            style="@style/Xyzu.Preference.SeekBar"
+            android:id="@id/seekbar"
+            android:layout_width="@dimen/dp280"
+            android:layout_height="wrap_content" 
+            android:layout_gravity="center"
+            android:rotation="270" />
+
+    </androidx.appcompat.widget.ContentFrameLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.Preference.SummaryText"
+        android:id="@+id/seekbar_max"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seekbar_frame" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

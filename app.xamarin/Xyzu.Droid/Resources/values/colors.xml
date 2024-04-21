@@ -1,0 +1,43 @@
+<!--- Light -->
+<resources>
+
+  <color name="ColorBackground">#f5f5f5</color>
+  <color name="ColorOnBackground">#000000</color>
+  
+  <color name="ColorPrimary">#e4006e</color>
+  <color name="ColorPrimaryActive">@color/ColorPrimaryLight</color>
+  <color name="ColorPrimaryDark">#65002e</color>
+  <color name="ColorPrimaryLight">#ff6597</color>
+  <color name="ColorPrimarySurface">#ffd9e0</color>
+  <color name="ColorOnPrimary">@color/ColorSurface</color>
+  <color name="ColorOnPrimarySurface">@color/ColorPrimaryDark</color>
+  
+  <color name="ColorSecondary">#006497</color>
+  <color name="ColorOnSecondary">#00363d</color>
+  
+  <color name="ColorError">#d80003</color>
+  <color name="ColorOnError">#410000</color>
+  
+  <color name="ColorInfo">#f4e640</color>
+  <color name="ColorOnInfo">#1f1c00</color>
+  
+  <color name="ColorSuccess">#00a451</color>
+  <color name="ColorOnSuccess">#00210b</color>
+  
+  <color name="ColorWarning">#b75b00</color>
+  <color name="ColorOnWarning">#311300</color>
+  
+  <color name="ColorSurface">#ffffff</color>
+  <color name="ColorSurfaceActive">#edfcff</color>
+  <color name="ColorSurfaceSelected">#dbf6fa</color>
+  <color name="ColorSurfaceDisabled">#cde7ec</color>
+  <color name="ColorSurfaceTransparent">#A0ffffff</color>
+  <color name="ColorSurfaceVarient">#dbe4e6</color>
+  <color name="ColorOnSurface">#000000</color>
+  <color name="ColorOnSurfaceVarient">#191c1d</color>
+  
+  <color name="Color_SplashScreenBackground">@color/ColorPrimary</color>
+  <color name="Color_SplashScreenIcon">@color/ColorOnSurface</color>
+  <color name="Color_SplashScreenIconBackground">@color/ColorSurface</color>
+
+</resources>

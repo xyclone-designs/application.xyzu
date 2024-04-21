@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  
+  <style name="Xyzu.Material.AppBarLayout" parent="Xyzu">
+    <item name="android:background">@color/ColorSurface</item>
+    <item name="android:clipChildren">false</item>
+    <item name="android:clipToPadding">false</item>
+    <item name="android:elevation">@dimen/dp16</item>
+
+    <item name="app:expanded">true</item>
+    <item name="app:liftOnScroll">false</item>
+  </style>
+
+  <style name="Xyzu.Material.Dialog.ShapeAppearanceOverlay" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+    <item name="app:cornerFamily">rounded</item>
+    <item name="app:cornerSizeTopRight">@dimen/dp32</item>
+    <item name="app:cornerSizeTopLeft">@dimen/dp32</item>
+    <item name="app:cornerSizeBottomRight">@dimen/dp32</item>
+    <item name="app:cornerSizeBottomLeft">@dimen/dp32</item>
+  </style>
+    
+  <style name="Xyzu.Material.Dialog.Alert" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+    <item name="android:paddingStart">@dimen/dp16</item>
+    <item name="android:background">@color/ColorSurface</item>
+    <item name="android:checkedTextViewStyle">@style/Xyzu.Material.Dialog.CheckedTextView</item>
+    <item name="android:colorAccent">@color/ColorPrimary</item>
+    <item name="android:colorControlActivated">@color/ColorPrimary</item>
+    <item name="android:colorControlHighlight">@color/ColorPrimary</item>
+    <item name="android:colorControlNormal">@color/ColorOnSurface</item>
+
+    <item name="alertDialogStyle">@style/Xyzu.Material.Dialog.AlertDialog</item>
+
+    <item name="buttonBarStyle">@style/Xyzu.Material.Dialog.ButtonBar</item>
+    <item name="buttonBarNegativeButtonStyle">@style/Xyzu.Material.Dialog.ButtonBar.Button</item>
+    <item name="buttonBarNeutralButtonStyle">@style/Xyzu.Material.Dialog.ButtonBar.Button</item>
+    <item name="buttonBarPositiveButtonStyle">@style/Xyzu.Material.Dialog.ButtonBar.Button</item>
+
+    <item name="colorPrimary">@color/ColorPrimary</item>
+    <item name="colorSecondary">@color/ColorSecondary</item>
+    <item name="colorSurface">@color/ColorSurface</item>
+    <item name="colorOnSurface">@color/ColorOnSurface</item>
+
+    <item name="dialogPreferredPadding">@dimen/dp16</item>
+
+    <item name="materialAlertDialogBodyTextStyle">@style/Xyzu.Material.Dialog.Body.Text</item>
+    <item name="materialAlertDialogTitleIconStyle">@style/Xyzu.Material.Dialog.Title.Icon</item>
+    <item name="materialAlertDialogTitlePanelStyle">@style/Xyzu.Material.Dialog.Title.Panel</item>
+    <item name="materialAlertDialogTitleTextStyle">@style/Xyzu.Material.Dialog.Title.Text</item>
+
+    <item name="shapeAppearanceOverlay">@style/Xyzu.Material.Dialog.ShapeAppearance</item>
+  </style>
+
+  <style name="Xyzu.Material.Dialog.AlertDialog" parent="MaterialAlertDialog.MaterialComponents">
+    <item name="android:textAppearance">@style/Xyzu.TextAppearance</item>
+    <item name="android:textColor">@color/ColorOnSurface</item>
+  </style>
+  <style name="Xyzu.Material.Dialog.Body.Text" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+    <item name="android:layout_marginEnd">@dimen/dp16</item>
+    <item name="android:layout_marginStart">@dimen/dp16</item>
+    <item name="android:textAppearance">@style/Xyzu.TextAppearance</item>
+    <item name="android:textColor">@color/ColorOnSurface</item>
+    <item name="android:textSize">@dimen/abc_text_size_subhead_material</item>
+  </style>
+  <style name="Xyzu.Material.Dialog.ButtonBar" parent="Widget.AppCompat.ButtonBar">
+    <item name="android:paddingTop">@dimen/dp16</item>
+    <item name="android:paddingEnd">@dimen/dp0</item>
+    <item name="android:paddingStart">@dimen/dp0</item>
+    <item name="android:paddingBottom">@dimen/dp16</item>
+  </style>
+  <style name="Xyzu.Material.Dialog.ButtonBar.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+    <item name="android:layout_marginEnd">@dimen/dp16</item>
+    <item name="android:layout_marginStart">@dimen/dp16</item>
+    <item name="android:padding">@dimen/dp16</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textAppearance">@style/Xyzu.TextAppearance</item>
+    <item name="android:textColor">@color/ColorOnSurface</item>
+    <item name="android:textSize">@dimen/abc_text_size_subhead_material</item>
+    <item name="android:textStyle">bold</item>
+    
+    <item name="shapeAppearance">@style/Xyzu.Material.Dialog.ShapeAppearance</item>
+  </style>
+  <style name="Xyzu.Material.Dialog.ButtonBar.Button.Negative" parent="Xyzu.Material.Dialog.ButtonBar.Button">
+    <item name="android:textColor">@color/ColorError</item>
+  </style>
+  <style name="Xyzu.Material.Dialog.ButtonBar.Button.Neutral" parent="Xyzu.Material.Dialog.ButtonBar.Button"></style>
+  <style name="Xyzu.Material.Dialog.ButtonBar.Button.Positive" parent="Xyzu.Material.Dialog.ButtonBar.Button">
+    <item name="android:textColor">@color/ColorPrimary</item>
+  </style>
+  <style name="Xyzu.Material.Dialog.CheckedTextView" parent="Xyzu.AppCompat.CheckedText">
+    <item name="android:background">@color/ColorSurface</item>
+    <item name="android:drawablePadding">@dimen/dp8</item>
+    <item name="android:ellipsize">marquee</item>
+    <item name="android:minHeight">?attr/listPreferredItemHeightSmall</item>
+    <item name="android:textAppearance">@style/Xyzu.TextAppearance</item>
+    <item name="android:textColor">@color/ColorOnSurface</item>
+  </style>
+  <style name="Xyzu.Material.Dialog.Title.Icon" parent="MaterialAlertDialog.MaterialComponents.Title.Icon">
+    <item name="android:backgroundTint">@color/ColorPrimary</item>
+    <item name="android:backgroundTintMode">src_in</item>
+    <item name="android:foregroundTint">@color/ColorPrimary</item>
+    <item name="android:foregroundTintMode">src_in</item>
+  </style>
+  <style name="Xyzu.Material.Dialog.Title.Panel" parent="Base.MaterialAlertDialog.MaterialComponents.Title.Panel">
+    <item name="android:layout_marginTop">@dimen/dp16</item>
+    <item name="android:layout_marginEnd">@dimen/dp16</item>
+    <item name="android:layout_marginStart">@dimen/dp16</item>
+    <item name="android:layout_marginBottom">@dimen/dp0</item>
+  </style>
+  <style name="Xyzu.Material.Dialog.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+    <item name="android:textAppearance">@style/Xyzu.TextAppearance</item>
+    <item name="android:textColor">@color/ColorPrimary</item>
+    <item name="android:textSize">@dimen/abc_text_size_headline_material</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="Xyzu.Material.Dialog.ShapeAppearance" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSize">@dimen/dp16</item>
+  </style>
+
+  <!-- Xyzu.Material.TabLayout -->
+  <style name="Xyzu.Material.Dialog.Sheet" parent="">
+    <item name="android:background">@android:color/transparent</item>
+    <item name="android:backgroundDimAmount">0.5</item>
+    <item name="android:backgroundDimEnabled">true</item>
+    <item name="android:clipChildren">false</item>
+    <item name="android:clipToPadding">false</item>
+    <item name="android:colorBackground">@android:color/transparent</item>
+    <item name="android:elevation">@dimen/dp16</item>
+    <item name="android:fitsSystemWindows">false</item>
+    <item name="android:outlineAmbientShadowColor">@color/ColorSurface</item>
+    <item name="android:outlineSpotShadowColor">@color/ColorSurface</item>
+    <item name="android:navigationBarColor">@color/ColorSurface</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:windowCloseOnTouchOutside">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowElevation">@dimen/dp16</item>
+    <item name="android:windowFrame">@null</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowNoTitle">true</item>
+    
+    <item name="app:behavior_draggable">true</item>
+    <!--<item name="app:behavior_expandedOffset"></item>-->
+    <item name="app:behavior_fitToContents">true</item>
+    <item name="app:behavior_hideable">true</item>
+    <!--<item name="app:behavior_halfExpandedRatio"></item>-->
+    <item name="app:behavior_peekHeight">auto</item>
+    <!--<item name="app:behavior_saveFlags"></item>-->
+    <item name="app:behavior_skipCollapsed">true</item>
+    <item name="app:enableEdgeToEdge">true</item>
+    <item name="app:gestureInsetBottomIgnored">false</item>
+  </style>
+  
+  <style name="Xyzu.Material.Dialog.Sheet.Bottom" parent="Xyzu.Material.Dialog.Sheet">
+    <item name="app:background">@drawable/shape_cornered_top</item>
+    <item name="app:shapeAppearance">@style/Xyzu.Material.Dialog.Sheet.Bottom.ShapeAppearanceOverlay</item>
+  </style>
+  <style name="Xyzu.Material.Dialog.Sheet.Bottom.ShapeAppearanceOverlay" parent="Xyzu.Material.Dialog.ShapeAppearanceOverlay">
+    <item name="app:cornerSizeBottomRight">@dimen/dp0</item>
+    <item name="app:cornerSizeBottomLeft">@dimen/dp0</item>
+  </style>
+  
+  <style name="Xyzu.Material.Dialog.Sheet.Top" parent="Xyzu.Material.Dialog.Sheet">
+    <item name="app:background">@drawable/shape_cornered_bottom</item>
+    <item name="app:shapeAppearance">@style/Xyzu.Material.Dialog.Sheet.Top.ShapeAppearanceOverlay</item>
+  </style>
+  <style name="Xyzu.Material.Dialog.Sheet.Top.ShapeAppearanceOverlay" parent="Xyzu.Material.Dialog.ShapeAppearanceOverlay">
+    <item name="app:cornerSizeTopRight">@dimen/dp0</item>
+    <item name="app:cornerSizeTopLeft">@dimen/dp0</item>
+  </style>
+  <!-- Xyzu.Material.TabLayout -->
+  
+  
+  <!-- Xyzu.Material.FloatingActionButton -->
+  <style name="Xyzu.Material.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+    <item name="app:backgroundTint">@color/ColorOnSurface</item>
+    <item name="app:borderWidth">@dimen/dp0</item>
+    <item name="app:elevation">@dimen/dp16</item>
+    <item name="app:ensureMinTouchTargetSize">true</item>
+    <item name="app:fabSize">auto</item>
+    <item name="app:pressedTranslationZ">@dimen/dp16</item>
+    <item name="app:rippleColor">@color/ColorPrimary</item>
+    <item name="app:strokeColor">@color/ColorOnSurface</item>
+    <item name="app:tint">@color/ColorSurface</item>
+    <item name="app:useCompatPadding">false</item>
+  </style>
+  <!-- Xyzu.Material.FloatingActionButton -->
+
+  
+  <!-- Xyzu.Material.NavigationView -->
+  <style name="Xyzu.Material.NavigationView" parent="Widget.MaterialComponents.NavigationView">
+    <item name="android:background">@drawable/shape_cornered_right</item>
+    <item name="android:backgroundTint">@color/ColorSurface</item>
+    <item name="android:choiceMode">singleChoice</item>
+    <item name="android:clipChildren">false</item>
+    <item name="android:clipToPadding">false</item>
+    <item name="android:fitsSystemWindows">true</item>
+    <item name="android:maxWidth">@dimen/design_navigation_max_width</item>
+    <item name="android:theme">@style/Xyzu.Material.NavigationView.Theme</item>
+
+    <item name="app:elevation">@dimen/dp16</item>
+    <item name="app:itemBackground">@null</item>
+    <item name="app:itemIconPadding">@dimen/dp16</item>
+    <item name="app:itemHorizontalPadding">@dimen/dp16</item>
+    <item name="app:itemIconSize">@dimen/dp32</item>
+    <item name="app:itemIconTint">@color/selector_list_item</item>
+    <item name="app:itemMaxLines">1</item>
+    <item name="app:itemShapeAppearance">@style/Xyzu.Material.NavigationView.ItemShapeAppearance</item>
+    <item name="app:itemShapeAppearanceOverlay">@style/Xyzu.Material.NavigationView.ItemShapeAppearanceOverlay</item>
+    <item name="app:itemShapeFillColor">@color/selector_list_itembackground</item>
+    <item name="app:itemShapeInsetBottom">@dimen/dp0</item>
+    <item name="app:itemShapeInsetEnd">@dimen/dp8</item>
+    <item name="app:itemShapeInsetStart">@dimen/dp8</item>
+    <item name="app:itemShapeInsetTop">@dimen/dp0</item>
+    <item name="app:itemTextColor">@color/selector_list_item</item>
+    <item name="app:itemTextAppearance">@style/Xyzu.TextAppearance</item>
+    <item name="app:shapeAppearance">@style/Xyzu.Material.NavigationView.ShapeAppearance</item>
+    <item name="app:shapeAppearanceOverlay">@style/Xyzu.Material.NavigationView.ShapeAppearanceOverlay</item>
+  </style>
+  <style name="Xyzu.Material.NavigationView.ItemShapeAppearance" parent=""> 
+    <item name="android:layout_marginEnd">@dimen/dp16</item>
+    <item name="android:layout_marginStart">@dimen/dp16</item>
+  </style>
+  <style name="Xyzu.Material.NavigationView.ItemShapeAppearanceOverlay" parent="">    
+    <item name="app:cornerFamily">rounded</item>
+    <item name="app:cornerSize">@dimen/dp8</item>
+  </style>
+  <style name="Xyzu.Material.NavigationView.TextAppearance" parent="Xyzu.TextAppearance">
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="Xyzu.Material.NavigationView.Theme" parent="">
+    <item name="android:colorControlHighlight">@android:color/transparent</item>
+  </style>
+  <style name="Xyzu.Material.NavigationView.ShapeAppearance" parent="">
+  </style>
+  <style name="Xyzu.Material.NavigationView.ShapeAppearanceOverlay" parent="">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSizeTopRight">@dimen/dp32</item>
+    <item name="cornerSizeTopLeft">@dimen/dp0</item>
+    <item name="cornerSizeBottomRight">@dimen/dp32</item>
+    <item name="cornerSizeBottomLeft">@dimen/dp0</item>
+  </style>
+  <!-- Xyzu.Material.NavigationView -->
+  
+
+  <!-- Xyzu.Material.TabLayout -->
+  <style name="Xyzu.Material.TabLayout" parent="">
+    <item name="android:clipChildren">false</item>
+    <item name="android:clipToPadding">false</item>
+    
+    <item name="app:tabBackground">@color/ColorSurface</item>
+    <item name="app:tabGravity">center</item>
+    <item name="app:tabIconTint">@color/ColorPrimary</item>
+    <item name="app:tabIndicatorColor">@color/ColorPrimary</item>
+    <item name="app:tabIndicatorFullWidth">true</item>
+    <item name="app:tabIndicatorGravity">bottom</item>
+    <item name="app:tabIndicatorHeight">@dimen/dp1</item>
+    <item name="app:tabInlineLabel">false</item>
+    <item name="app:tabMode">scrollable</item>
+    <item name="app:tabPaddingEnd">@dimen/dp16</item>
+    <item name="app:tabPaddingStart">@dimen/dp16</item>
+    <item name="app:tabRippleColor">@color/ColorSurfaceSelected</item>
+    <item name="app:tabSelectedTextColor">@color/ColorPrimary</item>
+    <item name="app:tabTextAppearance">@style/Xyzu.TextAppearance</item>
+    <item name="app:tabTextColor">@color/ColorOnSurface</item>
+    <item name="app:tabUnboundedRipple">true</item>
+  </style>
+  <!-- Xyzu.Material.TabLayout -->
+
+</resources>

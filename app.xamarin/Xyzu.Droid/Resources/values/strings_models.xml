@@ -1,0 +1,55 @@
+<resources>
+
+  <string name="models_album_artist">Album Artist</string>
+  <string name="models_album_disccount">Disc Count</string>
+  <string name="models_album_duration">Duration</string>
+  <string name="models_album_rating">Rating</string>
+  <string name="models_album_releasedate">Release Date</string>
+  <string name="models_album_songcount">Album Song Count</string>
+  <string name="models_album_songs">Album Songs</string>
+  <string name="models_album_title">Title</string>
+
+  <string name="models_artist_albumcount">Artist Album Count</string>
+  <string name="models_artist_albums">Artist Albums</string>
+  <string name="models_artist_biography">Biography</string>
+  <string name="models_artist_name">Name</string>
+  <string name="models_artist_rating">Rating</string>
+  <string name="models_artist_songs">Artist Songs</string>
+  <string name="models_artist_songcount">Artist Song Count</string>
+
+  <string name="models_genre_duration">Duration</string>
+  <string name="models_genre_name">Name</string>
+  <string name="models_genre_rating">Rating</string>
+  <string name="models_genre_songs">Genre Songs</string>
+  <string name="models_genre_songcount">Genre Song Count</string>
+
+  <string name="models_playlist_datecreated">Date Created</string>
+  <string name="models_playlist_datemodified">Date Modified</string>
+  <string name="models_playlist_duration">Duration</string>
+  <string name="models_playlist_name">Name</string>
+  <string name="models_playlist_rating">Rating</string>
+  <string name="models_playlist_songs">Playlist Songs</string>
+  <string name="models_playlist_songcount">Playlist Song Count</string>
+  
+  <string name="models_song_album">Album</string>
+  <string name="models_song_albumartist">Album Artist</string>
+  <string name="models_song_artist">Artist</string>
+  <string name="models_song_bitrate">Bitrate</string>
+  <string name="models_song_channels">Channels</string>
+  <string name="models_song_copyright">Copyright</string>
+  <string name="models_song_dateadded">Date Added</string>
+  <string name="models_song_datemodified">Date Modified</string>
+  <string name="models_song_discnumber">Disc Number</string>
+  <string name="models_song_duration">Duration</string>
+  <string name="models_song_filepath">Filepath</string>
+  <string name="models_song_genre">Genre</string>
+  <string name="models_song_lyrics">Lyrics</string>
+  <string name="models_song_mimetype">Mime Type</string>
+  <string name="models_song_rating">Rating</string>
+  <string name="models_song_releasedate">Release Date</string>
+  <string name="models_song_size">Size</string>
+  <string name="models_song_title">Title</string>
+  <string name="models_song_tracknumber">Track Number</string>
+  <string name="models_song_uri">Uri</string>
+
+</resources>

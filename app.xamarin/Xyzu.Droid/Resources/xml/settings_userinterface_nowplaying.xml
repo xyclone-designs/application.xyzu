@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <xyzu.preference.SwitchPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_userinterface_nowplaying_forceshownowplaying_switchpreference_key"
+      app:title="@string/settings_userinterface_nowplaying_forceshownowplaying_title"
+      app:summary="@string/settings_userinterface_nowplaying_forceshownowplaying_description"
+      app:summaryOn="@string/settings_userinterface_nowplaying_forceshownowplaying_description_on"
+      app:summaryOff="@string/settings_userinterface_nowplaying_forceshownowplaying_description_off"/>
+
+  <xyzu.preference.NavigationBarInsetPreference />
+
+</androidx.preference.PreferenceScreen>

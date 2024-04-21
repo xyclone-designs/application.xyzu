@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item android:state_checked="true">
+    <layer-list>
+      <item
+        android:width="22dp"
+        android:height="22dp" 
+        android:drawable="@drawable/btn_checkbox_checked_mtrl"/>
+    </layer-list>
+  </item>
+  
+  <item android:state_selected="true">
+    <layer-list>
+      <item
+        android:width="22dp"
+        android:height="22dp" 
+        android:drawable="@drawable/btn_checkbox_checked_mtrl"/>
+    </layer-list>
+  </item>
+  
+  <item >
+    <layer-list>
+      <item
+        android:width="22dp"
+        android:height="22dp" 
+        android:drawable="@drawable/btn_checkbox_unchecked_mtrl"/>
+    </layer-list>
+  </item>
+
+</selector>

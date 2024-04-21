@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="Xyzu.View" parent="">
+    <item name="android:clipChildren">false</item>
+    <item name="android:clipToPadding">false</item>
+    <item name="android:background">@android:color/transparent</item>
+  </style>
+  
+  
+  <!-- Xyzu.View.Info -->
+  <style name="Xyzu.View.Info" parent="Xyzu.View">
+    <item name="android:background">@color/ColorSurface</item>
+  </style>
+  <style name="Xyzu.View.Info.Image" parent="Xyzu.AppCompat.Image">
+    <item name="android:layout_margin">@dimen/dp16</item>
+    <item name="android:maxWidth">@dimen/dp128</item>
+    <item name="android:maxHeight">@dimen/dp128</item>
+    <item name="android:minWidth">@dimen/dp128</item>
+    <item name="android:minHeight">@dimen/dp128</item>
+  </style>
+  <style name="Xyzu.View.Info.Text" parent="Xyzu.AppCompat.Text">
+    <item name="android:textColor">@color/ColorPrimary</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="Xyzu.View.Info.Text.Key" parent="Xyzu.View.Info.Text">
+    <item name="android:layout_marginStart">@dimen/dp32</item>
+    <item name="android:maxWidth">@dimen/dp128</item>
+    <item name="android:textAlignment">viewStart</item>
+  </style>
+  <style name="Xyzu.View.Info.Text.Title" parent="Xyzu.View.Info.Text">
+    <item name="android:layout_margin">@dimen/dp32</item>
+    <item name="android:textSize">@dimen/abc_text_size_headline_material</item>
+  </style>
+  <style name="Xyzu.View.Info.Text.Value" parent="Xyzu.View.Info.Text">
+    <item name="android:layout_marginStart">@dimen/dp16</item>
+    <item name="android:layout_marginEnd">@dimen/dp32</item>
+    <item name="android:textColor">@color/ColorOnSurface</item>
+  </style>
+  <!-- Xyzu.View.Info -->
+  
+
+  <!-- Xyzu.View.InfoEdit -->
+  <style name="Xyzu.View.InfoEdit" parent="Xyzu.View">
+    <item name="android:background">@color/ColorSurface</item>
+  </style>
+  <style name="Xyzu.View.InfoEdit.EditDate" parent="Xyzu.AppCompat.EditDate">
+    <item name="android:layout_marginHorizontal">@dimen/dp16</item>
+    <item name="android:textColor">@color/ColorOnBackground</item>
+  </style>
+  <style name="Xyzu.View.InfoEdit.EditText" parent="Xyzu.AppCompat.EditText">
+    <item name="android:gravity">left|start</item>
+    <item name="android:layout_marginHorizontal">@dimen/dp16</item>
+    <item name="android:textColor">@color/ColorOnBackground</item>
+  </style>
+  <style name="Xyzu.View.InfoEdit.Image" parent="Xyzu.AppCompat.Image">
+    <item name="android:layout_margin">@dimen/dp16</item>
+    <item name="android:maxWidth">@dimen/dp128</item>
+    <item name="android:maxHeight">@dimen/dp128</item>
+    <item name="android:minWidth">@dimen/dp128</item>
+    <item name="android:minHeight">@dimen/dp128</item>
+  </style>
+  <style name="Xyzu.View.InfoEdit.Text" parent="Xyzu.AppCompat.Text">
+    <item name="android:textColor">@color/ColorPrimary</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="Xyzu.View.InfoEdit.Text.Key" parent="Xyzu.View.InfoEdit.Text">
+    <item name="android:layout_marginHorizontal">@dimen/dp32</item>
+  </style>
+  <style name="Xyzu.View.InfoEdit.Text.Title" parent="Xyzu.View.InfoEdit.Text">
+    <item name="android:layout_margin">@dimen/dp32</item>
+    <item name="android:textSize">@dimen/abc_text_size_headline_material</item>
+  </style>
+  <!-- Xyzu.View.InfoEdit -->
+  
+  
+  <!-- Xyzu.View.Library -->
+  <style name="Xyzu.View.Library.FloatingActionButton" parent="Xyzu.Material.FloatingActionButton" />
+  <style name="Xyzu.View.Library.Image" parent="Xyzu.AppCompat.Image">
+    <item name="android:layout_marginBottom">@dimen/dp32</item>
+    <item name="android:maxWidth">@dimen/dp128</item>
+    <item name="android:maxHeight">@dimen/dp128</item>
+    <item name="android:minWidth">@dimen/dp128</item>
+    <item name="android:minHeight">@dimen/dp128</item>
+  </style>
+  <style name="Xyzu.View.Library.ImageButton" parent="Xyzu.AppCompat.ImageButton">
+    <item name="android:layout_width">@dimen/dp40</item>
+    <item name="android:layout_height">@dimen/dp40</item>
+  </style>
+  <style name="Xyzu.View.Library.RecyclerView" parent="Xyzu.Widget.RecyclerView.LibraryItems" />
+  <style name="Xyzu.View.Library.Text" parent="Xyzu.AppCompat.Text">
+    <item name="android:layout_marginVertical">@dimen/dp4</item>
+    <item name="android:layout_marginHorizontal">@dimen/dp8</item>
+    <item name="android:textSize">@dimen/abc_text_size_menu_material</item>
+  </style>
+  <style name="Xyzu.View.Library.Text.Title" parent="Xyzu.View.Library.Text">
+    <item name="android:textSize">@dimen/abc_text_size_headline_material</item>
+  </style>
+  <!-- Xyzu.View.Library -->
+ 
+  
+  <!-- Xyzu.View.LibraryItem -->
+  <style name="Xyzu.View.LibraryItem" parent="Xyzu.View">
+    <item name="android:clipToPadding">false</item>
+    <item name="android:clickable">true</item>
+    <item name="android:focusable">true</item>
+    <item name="android:longClickable">true</item>
+  </style>
+  <style name="Xyzu.View.LibraryItem.Image" parent="Xyzu.AppCompat.Image"/>
+  <style name="Xyzu.View.LibraryItem.Text" parent="Xyzu.AppCompat.Text">
+    <item name="android:maxLines">1</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textColor">@color/ColorOnBackground</item>
+  </style>
+
+  <!-- Xyzu.View.LibraryItem.Header -->
+  <style name="Xyzu.View.LibraryItem.Header" parent="Xyzu.View.LibraryItem" />
+  <style name="Xyzu.View.LibraryItem.Header.CheckBox" parent="Xyzu.AppCompat.CheckBox">
+    <item name="android:backgroundTint">@color/ColorSurface</item>
+    <item name="android:buttonTint">@color/ColorOnSurface</item>
+    <item name="android:drawableTint">@color/ColorOnSurface</item>
+    <item name="android:foregroundTint">@color/ColorSurface</item>
+    <item name="android:layout_marginHorizontal">@dimen/dp16</item>
+    <item name="android:textColor">@color/ColorOnSurface</item>
+  </style>
+  <style name="Xyzu.View.LibraryItem.Header.EditText" parent="Xyzu.AppCompat.EditText">
+    <item name="android:textColor">@color/ColorOnBackground</item>
+  </style>
+  <style name="Xyzu.View.LibraryItem.Header.Image" parent="Xyzu.View.Library.Image">
+    <item name="android:background">@drawable/icon_xyzu</item>
+    <item name="android:backgroundTint">@color/ColorSurfaceVarient</item>
+  </style>
+  <style name="Xyzu.View.LibraryItem.Header.ImageButton" parent="Xyzu.View.Library.ImageButton">
+    <item name="android:background">@drawable/xyzu_view_libraryheader_imagebutton_background</item>
+    <item name="android:backgroundTint">@color/ColorSurface</item>
+  </style>
+  <style name="Xyzu.View.LibraryItem.Header.LibraryItems" parent="Xyzu.View.LibraryItem.Header" />
+  <style name="Xyzu.View.LibraryItem.Header.Text" parent="Xyzu.View.Library.Text">
+    <item name="android:background">@drawable/xyzu_view_libraryheader_text_background</item>
+    <item name="android:backgroundTint">@color/ColorSurface</item>
+    <item name="android:ellipsize">marquee</item>
+    <item name="android:paddingVertical">@dimen/dp8</item>
+    <item name="android:paddingHorizontal">@dimen/dp16</item>
+    <item name="android:singleLine">true</item>
+  </style>
+  <style name="Xyzu.View.LibraryItem.Header.Text.Title" parent="Xyzu.View.Library.Text.Title">
+    <item name="android:background">@drawable/xyzu_view_libraryheader_text_background</item>
+    <item name="android:backgroundTint">@color/ColorSurface</item>
+    <item name="android:ellipsize">marquee</item>
+    <item name="android:paddingVertical">@dimen/dp8</item>
+    <item name="android:paddingHorizontal">@dimen/dp16</item>
+    <item name="android:singleLine">true</item>
+  </style>
+  <style name="Xyzu.View.LibraryItem.Header.RecyclerView" parent="Xyzu.Widget.RecyclerView.Simple.Horizontal" />
+  <style name="Xyzu.View.LibraryItem.Header.RecyclerView.ItemView" parent="Xyzu.View.LibraryItem.Header.CheckBox" />
+  <!-- Xyzu.View.LibraryItem.Header -->
+
+  <!-- Xyzu.View.LibraryItem.Grid -->
+  <style name="Xyzu.View.LibraryItem.Grid" parent="Xyzu.View.LibraryItem">
+    <item name="android:background">@drawable/xyzu_view_libraryitem_grid_background</item>
+  </style>
+  <style name="Xyzu.View.LibraryItem.Grid.Image" parent="Xyzu.View.LibraryItem.Image" />
+  <style name="Xyzu.View.LibraryItem.Grid.Text" parent="Xyzu.View.LibraryItem.Text">
+    <item name="android:ellipsize">marquee</item>
+    <item name="android:textAlignment">center</item>
+  </style>
+  <!-- Xyzu.View.LibraryItem.Grid -->
+
+  <!-- Xyzu.View.LibraryItem.List -->
+  <style name="Xyzu.View.LibraryItem.List" parent="Xyzu.View.LibraryItem">
+    <item name="android:background">@drawable/xyzu_view_libraryitem_list_background</item>
+  </style>
+  <style name="Xyzu.View.LibraryItem.List.Image" parent="Xyzu.View.LibraryItem.Image" />
+  <style name="Xyzu.View.LibraryItem.List.Text" parent="Xyzu.View.LibraryItem.Text">
+    <item name="android:ellipsize">end</item>
+    <item name="android:textAlignment">viewStart</item>
+  </style>
+  <!-- Xyzu.View.LibraryItem.List -->
+  
+  <!-- Xyzu.View.LibraryItem -->
+  
+  
+  <!-- Xyzu.View.NowPlayling -->
+  <style name="Xyzu.View.NowPlayling" parent="Xyzu.View" />
+  <style name="Xyzu.View.NowPlayling.Container" parent="Xyzu">
+    <item name="android:background">@color/ColorSurface</item>
+    <item name="android:backgroundTint">@color/ColorSurface</item>
+    <item name="android:clickable">false</item>
+    <item name="android:outlineProvider">background</item>
+    <item name="android:outlineAmbientShadowColor">@color/ColorSurface</item>
+    <item name="android:outlineSpotShadowColor">@color/ColorSurface</item>
+    
+    <item name="app:cardElevation">@dimen/dp16</item>
+    <item name="app:cardBackgroundColor">@color/ColorSurface</item>
+    <item name="app:cardCornerRadius">@dimen/dp16</item>
+    <item name="app:cardPreventCornerOverlap">true</item>
+    <item name="app:cardUseCompatPadding">false</item>
+    <item name="app:contentPadding">@dimen/dp0</item>
+  </style>
+  <style name="Xyzu.View.NowPlayling.Image" parent="Xyzu.AppCompat.Image">
+    <item name="android:elevation">@dimen/dp16</item>
+    <item name="android:gravity">center</item>
+    <item name="android:layout_margin">@dimen/dp32</item>
+    <item name="android:outlineProvider">background</item>
+    <item name="android:outlineAmbientShadowColor">@color/ColorSurface</item>
+    <item name="android:outlineSpotShadowColor">@color/ColorSurface</item>
+  </style>
+  <style name="Xyzu.View.NowPlayling.Text" parent="Xyzu.AppCompat.Text">
+    <item name="android:clipToPadding">false</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:padding">@dimen/dp4</item>
+    <item name="android:shadowColor">@color/ColorSurface</item>
+    <item name="android:shadowDx">0</item>
+    <item name="android:shadowDy">0</item>
+    <item name="android:shadowRadius">8</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textAlignment">viewStart</item>
+    <item name="android:textColor">@color/ColorOnSurface</item>
+    <item name="android:textSize">@dimen/abc_text_size_subhead_material</item>
+  </style>
+  <style name="Xyzu.View.NowPlayling.Button" parent="Xyzu.AppCompat.ImageButton">
+    <item name="android:background">@drawable/xyzu_view_nowplayling_button_background</item>
+  </style>
+  <style name="Xyzu.View.NowPlayling.Button.Menu" parent="Xyzu.View.NowPlayling.Button">
+    <item name="android:padding">@dimen/dp8</item>
+    <item name="android:layout_width">@dimen/dp48</item>
+    <item name="android:layout_height">@dimen/dp48</item>
+  </style>
+  <style name="Xyzu.View.NowPlayling.Button.Player" parent="Xyzu.View.NowPlayling.Button">
+    <item name="android:padding">@dimen/dp16</item>
+    <item name="android:layout_width">@dimen/dp80</item>
+    <item name="android:layout_height">@dimen/dp80</item>
+  </style>
+  <!-- Xyzu.View.NowPlayling -->
+  
+
+  <!-- Xyzu.View.Misc -->
+  <style name="Xyzu.View.Misc" parent="Xyzu.View" />
+  <style name="Xyzu.View.Misc.Dialog" parent="Xyzu.View.Misc">
+    <item name="android:backgroundTint">@color/ColorSurface</item>  
+  </style>
+  <style name="Xyzu.View.Misc.Dialog.Button" parent="Xyzu.AppCompat.Button">
+    <item name="android:background">@drawable/xyzu_view_option_button_background</item>
+    <item name="android:backgroundTint">@color/ColorSurface</item>
+    <item name="android:foreground">@null</item>
+    <item name="android:textAlignment">center</item>
+    <item name="android:textColor">@color/ColorPrimary</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="Xyzu.View.Misc.Dialog.Button.Neutral" parent="Xyzu.View.Misc.Dialog.Button" />
+  <style name="Xyzu.View.Misc.Dialog.Button.Negative" parent="Xyzu.View.Misc.Dialog.Button" />
+  <style name="Xyzu.View.Misc.Dialog.Button.Positive" parent="Xyzu.View.Misc.Dialog.Button" />
+  <style name="Xyzu.View.Misc.Dialog.Text" parent="Xyzu.AppCompat.Text">
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textAlignment">viewStart</item>
+    <item name="android:textColor">@color/ColorPrimary</item>
+  </style>
+  <style name="Xyzu.View.Misc.Dialog.Text.Title" parent="Xyzu.View.Misc.Dialog.Text">
+    <item name="android:layout_marginHorizontal">@dimen/dp16</item>
+    <item name="android:textSize">@dimen/abc_text_size_medium_material</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="Xyzu.View.Misc.Dialog.Text.Description" parent="Xyzu.View.Misc.Dialog.Text">
+    <item name="android:layout_marginHorizontal">@dimen/dp16</item>
+    <item name="android:textSize">@dimen/abc_text_size_small_material</item>
+  </style>
+
+  <style name="Xyzu.View.Misc.NavigationView" parent="Xyzu.View">
+    <item name="android:background">@drawable/shape_cornered_topright</item>
+    <item name="android:backgroundTint">@color/ColorPrimary</item>
+    <item name="android:layout_marginBottom">@dimen/dp16</item>
+  </style>
+  <style name="Xyzu.View.Misc.NavigationView.Icon" parent="Xyzu.View">
+    <item name="android:foreground">@drawable/icon_xyzu</item>
+    <item name="android:foregroundTint">@color/ColorOnPrimary</item>
+    <item name="android:layout_marginVertical">@dimen/dp64</item>
+  </style>
+  <!-- Xyzu.View.Misc -->
+
+  
+  <!-- Xyzu.View.Option -->
+  <style name="Xyzu.View.Option" parent="Xyzu.View">
+    <item name="android:background">@drawable/shape_cornered_top</item>
+    <item name="android:backgroundTint">@color/ColorSurface</item>
+  </style>
+  <style name="Xyzu.View.Option.Button" parent="Xyzu.AppCompat.Button">
+    <item name="android:background">@drawable/xyzu_view_option_button_background</item>
+    <item name="android:backgroundTint">@color/ColorSurface</item>
+    <item name="android:foreground">@null</item>
+    <item name="android:paddingVertical">@dimen/dp8</item>
+    <item name="android:paddingHorizontal">@dimen/dp16</item>
+    <item name="android:textAlignment">center</item>
+  </style>
+  <style name="Xyzu.View.Option.CheckBox" parent="Xyzu.AppCompat.CheckBox">
+    <item name="android:background">@drawable/xyzu_view_option_button_background</item>
+    <item name="android:backgroundTint">@color/ColorSurface</item>
+    <item name="android:foreground">@null</item>
+    <item name="android:buttonTint">@color/ColorOnSurface</item>
+    <item name="android:textColor">@color/ColorOnSurface</item>
+  </style>
+  <style name="Xyzu.View.Option.EditText" parent="Xyzu.AppCompat.EditText">
+    <item name="android:gravity">left|start</item>
+    <item name="android:imeOptions">actionDone</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textColor">@color/ColorOnBackground</item>
+  </style>
+  <style name="Xyzu.View.Option.ImageButton" parent="Xyzu.AppCompat.ImageButton">
+    <item name="android:background">@drawable/xyzu_view_option_imagebutton_background</item>
+  </style>
+  <style name="Xyzu.View.Option.Text" parent="Xyzu.AppCompat.Text">
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:padding">@dimen/dp8</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textAlignment">viewStart</item>
+    <item name="android:textColor">@color/ColorPrimary</item>
+  </style>
+  <style name="Xyzu.View.Option.Text.Title" parent="Xyzu.View.Option.Text">
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="Xyzu.View.Option.Text.Subtitle" parent="Xyzu.View.Option.Text">
+    <item name="android:textStyle">normal</item>
+  </style>
+
+  <!-- Xyzu.View.Option.CreateAndView -->
+  <style name="Xyzu.View.Option.CreateAndView" parent="Xyzu.View.Option" />
+  <style name="Xyzu.View.Option.CreateAndView.Button" parent="Xyzu.View.Option.Button" />
+  <style name="Xyzu.View.Option.CreateAndView.EditText" parent="Xyzu.View.Option.EditText" />
+  <style name="Xyzu.View.Option.CreateAndView.RecyclerView" parent="Xyzu.Widget.RecyclerView.Simple.Vertical" />
+  <style name="Xyzu.View.Option.CreateAndView.RecyclerView.ItemView" parent="Xyzu.View.Option.Button">
+    <item name="android:textAlignment">viewStart</item>
+    <item name="android:textSize">@dimen/abc_text_size_medium_material</item>
+  </style>
+  <style name="Xyzu.View.Option.CreateAndView.Text" parent="Xyzu.View.Option.Text">
+    <item name="android:background">@color/ColorOnSurface</item>  
+  </style>
+  <!-- Xyzu.View.Option.CreateAndView -->
+
+  <!-- Xyzu.View.Option.LibraryList -->
+  <style name="Xyzu.View.Option.LibraryList" parent="Xyzu.View.Option" />
+  <style name="Xyzu.View.Option.LibraryList.Button" parent="Xyzu.View.Option.Button">
+    <item name="android:padding">@dimen/dp8</item>
+  </style>
+  <style name="Xyzu.View.Option.LibraryList.CheckBox" parent="Xyzu.View.Option.CheckBox">
+    <item name="android:minWidth">@dimen/dp0</item>
+    <item name="android:minHeight">@dimen/dp0</item>
+    <item name="android:paddingVertical">@dimen/dp8</item>
+    <item name="android:paddingHorizontal">@dimen/dp16</item>
+  </style>
+  <style name="Xyzu.View.Option.LibraryList.RecyclerView" parent="Xyzu.Widget.RecyclerView.Simple.Horizontal" />
+  <style name="Xyzu.View.Option.LibraryList.RecyclerView.ItemView" parent="Xyzu.View.Option.LibraryList.CheckBox">
+    <item name="android:layout_margin">@dimen/dp0</item>
+  </style>
+  <!-- Xyzu.View.Option.LibraryList -->
+
+  <!-- Xyzu.View.Option.Menu -->
+  <style name="Xyzu.View.Option.Menu" parent="Xyzu.View.Option" />
+  <style name="Xyzu.View.Option.Menu.ImageButton" parent="Xyzu.View.Option.ImageButton">
+    <item name="android:layout_marginTop">@dimen/dp8</item>
+    <item name="android:layout_marginHorizontal">@dimen/dp16</item>
+  </style>
+  <style name="Xyzu.View.Option.Menu.CheckBox" parent="Xyzu.View.Option.CheckBox">
+    <item name="android:layout_marginTop">@dimen/dp8</item>
+    <item name="android:layout_marginHorizontal">@dimen/dp16</item>
+  </style>
+  <style name="Xyzu.View.Option.Menu.RecyclerView" parent="Xyzu.Widget.RecyclerView.Simple.Horizontal">
+    <item name="android:layout_marginVertical">@dimen/dp16</item>
+  </style>
+  <style name="Xyzu.View.Option.Menu.RecyclerView.ItemView" parent="Xyzu.View.Option.Button">
+    <item name="android:clipChildren">false</item>
+    <item name="android:clipToPadding">false</item>
+    <item name="android:drawablePadding">@dimen/dp8</item>
+    <item name="android:foreground">@null</item>
+    <item name="android:layout_marginHorizontal">@dimen/dp0</item>
+    <item name="android:maxWidth">@dimen/dp96</item>
+    <item name="android:minWidth">@dimen/dp96</item>
+  </style>
+  <style name="Xyzu.View.Option.Menu.Text" parent="Xyzu.View.Option.Text.Title">
+    <item name="android:layout_marginTop">@dimen/dp8</item>
+    <item name="android:textSize">@dimen/abc_text_size_medium_material</item>
+  </style>
+  <!-- Xyzu.View.Option.Menu -->
+  
+  <!-- Xyzu.View.Option -->
+  
+  
+  <!-- Xyzu.View.Setting -->
+  <style name="Xyzu.View.Setting" parent="Xyzu.View" />
+  <style name="Xyzu.View.Setting.AudioBand" parent="Xyzu.View.Setting" />
+  <style name="Xyzu.View.Setting.AudioBand.Value" parent="Xyzu.AppCompat.SeekBar" />
+  <style name="Xyzu.View.Setting.AudioBand.Text" parent="Xyzu.AppCompat.Text">
+    <item name="android:textAlignment">center</item>
+  </style>
+  <style name="Xyzu.View.Setting.AudioBand.Text.Title" parent="Xyzu.View.Setting.AudioBand.Text">
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="Xyzu.View.Setting.AudioBand.Text.Max" parent="Xyzu.View.Setting.AudioBand.Text" />
+  <style name="Xyzu.View.Setting.AudioBand.Text.Min" parent="Xyzu.View.Setting.AudioBand.Text" />
+  <style name="Xyzu.View.Setting.AudioBand.Text.Footer" parent="Xyzu.View.Setting.AudioBand.Text" />
+  
+  <style name="Xyzu.View.Setting.DirectoryItem" parent="Xyzu.View.Setting" />
+  <style name="Xyzu.View.Setting.DirectoryItem.CheckBox" parent="Xyzu.AppCompat.CheckBox">
+    <item name="android:layout_marginStart">@dimen/dp8</item>
+  </style>
+  <style name="Xyzu.View.Setting.DirectoryItem.RecyclerView" parent="Xyzu.Widget.RecyclerView.RecursiveItems" />
+  <style name="Xyzu.View.Setting.DirectoryItem.Button" parent="Xyzu.AppCompat.Button">
+    <item name="android:drawablePadding">@dimen/dp8</item>
+    <item name="android:ellipsize">middle</item>
+    <item name="android:lines">1</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textAlignment">viewStart</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <!-- Xyzu.View.Setting -->
+  
+  
+  <!-- Xyzu.View.Toolbar -->
+  <style name="Xyzu.View.Toolbar" parent="Xyzu.View" />
+  <style name="Xyzu.View.Toolbar.Search" parent="Xyzu.AppCompat.Search">
+    <item name="android:backgroundTint">@color/ColorBackground</item>
+  </style>
+  <style name="Xyzu.View.Toolbar.Button" parent="Xyzu.AppCompat.ImageButton">
+    <item name="android:background">@drawable/xyzu_view_toolbar_imagebutton_background</item>
+
+    <item name="app:rippleColor">@android:color/transparent</item>
+  </style>
+  <style name="Xyzu.View.Toolbar.StatusBarInset" parent="Xyzu.View" />
+  <style name="Xyzu.View.Toolbar.OptionsLibraryList" parent="Xyzu.View.Option.LibraryList" />
+  <style name="Xyzu.View.Toolbar.TabLayout" parent="Xyzu.Material.TabLayout" />
+  <style name="Xyzu.View.Toolbar.Toolbar" parent="Xyzu.Toolbar" />
+  <!-- Xyzu.View.Toolbar -->
+  
+</resources>

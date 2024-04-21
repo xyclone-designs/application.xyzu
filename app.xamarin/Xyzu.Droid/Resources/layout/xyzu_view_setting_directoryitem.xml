@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <androidx.appcompat.widget.AppCompatCheckBox
+        style="@style/Xyzu.View.Setting.DirectoryItem.CheckBox"
+        android:id="@+id/xyzu_view_setting_directoryitem_directoryisselected_appcompatcheckbox"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_setting_directoryitem_directorytitle_appcompatbutton"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_setting_directoryitem_directorychildren_recursiveitemsrecyclerview"/>
+    
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/Xyzu.View.Setting.DirectoryItem.Button"
+        android:id="@+id/xyzu_view_setting_directoryitem_directorytitle_appcompatbutton"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_setting_directoryitem_directoryisselected_appcompatcheckbox"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_setting_directoryitem_directorychildren_recursiveitemsrecyclerview"/>
+
+    <xyzu.widgets.recyclerviews.RecursiveItemsRecyclerView
+        style="@style/Xyzu.View.Setting.DirectoryItem.RecyclerView"
+        android:id="@+id/xyzu_view_setting_directoryitem_directorychildren_recursiveitemsrecyclerview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:visibility="gone"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_setting_directoryitem_directorytitle_appcompatbutton"/>
+
+</merge>

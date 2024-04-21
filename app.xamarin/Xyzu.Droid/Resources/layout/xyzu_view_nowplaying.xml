@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+            
+    style="@style/Xyzu.View.NowPlayling"
+    android:id="@+id/xyzu_view_nowplaying"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/xyzu_view_nowplaying_backgroundblur_appcompatimageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/xyzu_view_nowplaying_background"/>
+
+    <xyzu.views.insets.StatusBarInsetView
+        android:id="@+id/xyzu_view_nowplaying_statusbarinsetview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/xyzu_view_inset_fadetopdown_colorsurface"/>
+
+    <!---->
+
+    <xyzu.widgets.recyclerviews.SimpleHorizontalRecyclerView
+        android:id="@+id/xyzu_view_nowplaying_artwork_simplehorizontalrecyclerview"
+        android:fadingEdge="none"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"/>
+  
+    <Space
+        android:id="@+id/xyzu_view_nowplaying_artworkdetails_space"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.NowPlayling.Text"
+        android:id="@+id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        android:text="@string/player_default_detail_one"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.NowPlayling.Text"
+        android:id="@+id/xyzu_view_nowplaying_detail_two_appcompattextview"
+        android:text="@string/player_default_detail_two"/>
+
+    <!---->
+    
+    <com.oze.music.musicbar.FixedMusicBar
+	    android:id="@+id/xyzu_view_nowplaying_position_fixedmusicbar"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.NowPlayling.Text"
+        android:id="@+id/xyzu_view_nowplaying_positiontext_appcompattextview"
+        android:text="@string/player_default_positiontext"/>
+
+    <!---->
+  
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Player"
+        android:id="@+id/xyzu_view_nowplaying_buttons_player_previous_appcompatimagebutton"
+        android:src="@drawable/icon_player_skip_backward" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Player"
+        android:id="@+id/xyzu_view_nowplaying_buttons_player_playpause_appcompatimagebutton"
+        android:src="@drawable/icon_player_play"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Player"
+        android:id="@+id/xyzu_view_nowplaying_buttons_player_next_appcompatimagebutton"
+        android:src="@drawable/icon_player_skip_foward" />
+  
+    <!---->
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Menu"
+        android:id="@+id/xyzu_view_nowplaying_buttons_menu_queue_appcompatimagebutton"
+        android:src="@drawable/icon_menuoptions_gotoqueue"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Menu"
+        android:id="@+id/xyzu_view_nowplaying_buttons_menu_audioeffects_appcompatimagebutton"
+        android:src="@drawable/icon_menuoptions_audioeffects"/>
+    
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Menu"
+        android:id="@+id/xyzu_view_nowplaying_buttons_menu_playersettings_appcompatimagebutton"
+        android:src="@drawable/icon_settings_userinterface_nowplaying"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.NowPlayling.Button.Menu"
+        android:id="@+id/xyzu_view_nowplaying_buttons_menu_options_appcompatimagebutton"
+        android:src="@drawable/icon_general_dots_vertical" />
+
+    <!---->
+
+    <xyzu.views.insets.NavigationBarInsetView
+        android:id="@+id/xyzu_view_nowplaying_navigationbarinsetview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</merge>

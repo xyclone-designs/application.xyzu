@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:defaultDuration="300">
+
+  <StateSet app:defaultState="@layout/xyzu_view_nowplaying_expanded" />
+
+  <Transition
+      android:id="@+id/motionscene_nowplayingview_transition_expand"
+      app:constraintSetEnd="@layout/xyzu_view_nowplaying_expanded" 
+      app:constraintSetStart="@layout/xyzu_view_nowplaying_collapsed" />
+  <Transition
+      android:id="@+id/motionscene_nowplayingview_transition_collapse"
+      app:constraintSetEnd="@layout/xyzu_view_nowplaying_collapsed"
+      app:constraintSetStart="@layout/xyzu_view_nowplaying_expanded" />
+  
+  <Transition
+      android:id="@+id/motionscene_nowplayingview_transition_collapsed_outright"
+      app:constraintSetStart="@layout/xyzu_view_nowplaying_collapsed"
+      app:constraintSetEnd="@id/motionscene_nowplayingview_constraintset_collapsed_outright">
+
+      <OnSwipe
+          app:touchAnchorSide="left"
+          app:dragDirection="dragRight"/>
+
+  </Transition>
+  <Transition
+      android:id="@+id/motionscene_nowplayingview_transition_collapsed_outleft"
+      app:constraintSetStart="@layout/xyzu_view_nowplaying_collapsed"
+      app:constraintSetEnd="@id/motionscene_nowplayingview_constraintset_collapsed_outleft">
+
+      <OnSwipe
+          app:touchAnchorSide="right"
+          app:dragDirection="dragLeft"/>
+
+  </Transition>
+    
+  <ConstraintSet 
+    android:id="@+id/motionscene_nowplayingview_constraintset_collapsed_outleft"
+    app:deriveConstraintsFrom="@layout/xyzu_view_nowplaying_collapsed">
+    
+  <Constraint
+        android:id="@id/xyzu_view_nowplaying_artwork_simplehorizontalrecyclerview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+          
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview"/>
+
+    <Constraint
+        android:id="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp16"
+          
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview"/>
+
+    <Constraint
+        android:id="@id/xyzu_view_nowplaying_detail_two_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp8"
+        
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_navigationbarinsetview"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"/>
+
+    <Constraint
+        android:id="@id/xyzu_view_nowplaying_buttons_player_playpause_appcompatimagebutton"
+        android:src="@drawable/icon_player_play"
+        android:layout_width="@dimen/dp32"
+        android:layout_height="@dimen/dp32"
+        android:layout_marginStart="@dimen/dp8"
+          
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview" />
+
+    <Constraint
+        android:id="@id/xyzu_view_nowplaying_buttons_menu_options_appcompatimagebutton"
+        android:src="@drawable/icon_general_dots_vertical"
+        android:layout_width="@dimen/dp32"
+        android:layout_height="@dimen/dp32"
+        android:layout_marginEnd="@dimen/dp8"
+        android:layout_marginStart="@dimen/dp8"
+        
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview" />
+    
+  </ConstraintSet>
+  <ConstraintSet 
+    android:id="@+id/motionscene_nowplayingview_constraintset_collapsed_outright"
+    app:deriveConstraintsFrom="@layout/xyzu_view_nowplaying_collapsed">
+  
+    <Constraint
+        android:id="@id/xyzu_view_nowplaying_artwork_simplehorizontalrecyclerview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+          
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview"/>
+
+    <Constraint
+        android:id="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp16"
+          
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview"/>
+
+    <Constraint
+        android:id="@id/xyzu_view_nowplaying_detail_two_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp8"
+        
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_navigationbarinsetview"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"/>
+
+    <Constraint
+        android:id="@id/xyzu_view_nowplaying_buttons_player_playpause_appcompatimagebutton"
+        android:src="@drawable/icon_player_play"
+        android:layout_width="@dimen/dp32"
+        android:layout_height="@dimen/dp32"
+        android:layout_marginStart="@dimen/dp8"
+          
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview" />
+
+    <Constraint
+        android:id="@id/xyzu_view_nowplaying_buttons_menu_options_appcompatimagebutton"
+        android:src="@drawable/icon_general_dots_vertical"
+        android:layout_width="@dimen/dp32"
+        android:layout_height="@dimen/dp32"
+        android:layout_marginEnd="@dimen/dp8"
+        android:layout_marginStart="@dimen/dp8"
+        
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview" />
+
+  </ConstraintSet>
+  
+</MotionScene>

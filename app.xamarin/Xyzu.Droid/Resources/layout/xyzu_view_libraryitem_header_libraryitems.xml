@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+        
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.LibraryItem.Header.Text"
+        android:id="@+id/xyzu_view_libraryitem_header_libraryitems_text_appcompattextview"
+        android:layout_height="@dimen/dp0"
+        android:layout_width="@dimen/dp0"       
+        android:drawablePadding="@dimen/dp8"
+        
+        app:layout_goneMarginBottom="@dimen/dp8"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_weight="0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_libraryitem_header_libraryitems_space"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_libraryitems_libraryitemsoptions_optionslibrarylistview"/>
+
+    <Space
+        android:id="@+id/xyzu_view_libraryitem_header_libraryitems_space"
+        android:layout_height="@dimen/dp0"
+        android:layout_width="@dimen/dp0"
+        
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_libraryitem_header_libraryitems_text_appcompattextview"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_libraryitem_header_libraryitems_play_appcompatimagebutton" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.LibraryItem.Header.ImageButton"
+        android:id="@+id/xyzu_view_libraryitem_header_libraryitems_play_appcompatimagebutton"
+        android:src="@drawable/icon_menuoptions_play"
+        android:layout_height="@dimen/dp40"
+        android:layout_width="@dimen/dp40"
+        
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_libraryitem_header_libraryitems_space"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_libraryitem_header_libraryitems_text_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_libraryitem_header_libraryitems_text_appcompattextview"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_libraryitem_header_libraryitems_libraryitemsoptionsexpanded_appcompatimagebutton" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.LibraryItem.Header.ImageButton"
+        android:id="@+id/xyzu_view_libraryitem_header_libraryitems_libraryitemsoptionsexpanded_appcompatimagebutton"
+        android:src="@drawable/icon_menuoptions_listoptions"
+        android:layout_height="@dimen/dp40"
+        android:layout_width="@dimen/dp40"
+        android:layout_marginHorizontal="@dimen/dp8"
+        
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_libraryitem_header_libraryitems_text_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_libraryitem_header_libraryitems_text_appcompattextview"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_libraryitem_header_libraryitems_play_appcompatimagebutton"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_libraryitem_header_libraryitems_options_appcompatimagebutton"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.LibraryItem.Header.ImageButton"
+        android:id="@+id/xyzu_view_libraryitem_header_libraryitems_options_appcompatimagebutton"
+        android:src="@drawable/icon_general_dots_vertical"
+        android:layout_height="@dimen/dp40"
+        android:layout_width="@dimen/dp40"    
+        android:layout_marginEnd="@dimen/dp8"
+        
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHorizontal_weight="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_libraryitem_header_libraryitems_text_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_libraryitem_header_libraryitems_text_appcompattextview"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_libraryitem_header_libraryitems_libraryitemsoptionsexpanded_appcompatimagebutton"/>
+
+    <xyzu.views.option.OptionsLibraryListView
+        style="@style/Xyzu.View.LibraryItem.Header.RecyclerView"
+        android:id="@+id/xyzu_view_libraryitem_header_libraryitems_libraryitemsoptions_optionslibrarylistview"
+        android:layout_height="@dimen/dp0"
+        android:layout_width="@dimen/dp0"
+        android:visibility="gone" 
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_libraryitem_header_libraryitems_text_appcompattextview"/>
+
+</merge>

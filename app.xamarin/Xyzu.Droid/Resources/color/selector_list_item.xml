@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!--
+  
+  <item android:state_checked="true" />
+  <item android:state_checkable="true" />
+  <item android:state_enabled="true" />
+  <item android:state_focused="true" />
+  <item android:state_pressed="true" />
+  <item android:state_selected="true" />
+  <item android:state_window_focused="true" />
+  
+  -->
+
+  <item android:state_pressed="true" android:color="@color/ColorPrimaryActive" />
+  <item android:state_checked="true" android:color="@color/ColorOnPrimary" />
+  <item android:state_enabled="false" android:color="@color/ColorOnPrimary" android:alpha="@dimen/material_emphasis_disabled" />
+  <item android:color="@color/ColorPrimary" />
+  
+</selector>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+        
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        style="@style/Xyzu.View.Option.Menu.CheckBox"
+        android:id="@+id/xyzu_view_option_menu_all_appcompatcheckbox"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:text="@string/all"
+        
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_option_menu_text_appcompattextview"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_option_menu_menu_simplehorizontalrecyclerview"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Option.Menu.Text"
+        android:id="@+id/xyzu_view_option_menu_text_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0" 
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_option_menu_all_appcompatcheckbox"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_option_menu_cancel_appcompatimagebutton"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_option_menu_menu_simplehorizontalrecyclerview"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.Option.Menu.ImageButton"
+        android:id="@+id/xyzu_view_option_menu_cancel_appcompatimagebutton"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:src="@drawable/icon_menuoptions_cancel"
+        
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_option_menu_text_appcompattextview"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_option_menu_menu_simplehorizontalrecyclerview"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/xyzu_view_option_menu_menu_simplehorizontalrecyclerview_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="
+        xyzu_view_option_menu_all_appcompatcheckbox,
+        xyzu_view_option_menu_text_appcompattextview,
+        xyzu_view_option_menu_cancel_appcompatimagebutton"/>
+
+    <xyzu.widgets.recyclerviews.SimpleHorizontalRecyclerView
+        style="@style/Xyzu.View.Option.Menu.RecyclerView"
+        android:id="@+id/xyzu_view_option_menu_menu_simplehorizontalrecyclerview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_option_menu_menu_simplehorizontalrecyclerview_barrier"/>
+
+</merge>

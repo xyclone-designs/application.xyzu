@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <xyzu.preference.DialogPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_system_errorlogs_dialogpreference_key"
+      app:title="@string/settings_system_errorlogs_title"
+      app:summary="@string/settings_system_errorlogs_description"
+      app:dialogTitle="@string/settings_system_errorlogs_dialog_title"
+      app:negativeButtonText="@string/settings_system_errorlogs_dialog_negativebutton"
+      app:positiveButtonText="@string/settings_system_errorlogs_dialog_positivebutton"/>
+
+</androidx.preference.PreferenceScreen>

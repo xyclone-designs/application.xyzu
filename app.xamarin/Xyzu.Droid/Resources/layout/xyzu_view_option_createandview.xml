@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+        
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        style="@style/Xyzu.View.Option.CreateAndView.EditText"
+        android:id="@+id/xyzu_view_option_createandview_createname_appcompatedittext"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_margin="@dimen/dp16"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_option_createandview_createbutton_appcompatimagebutton"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_option_createandview_createmessage_appcompattextview"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.Option.CreateAndView.Button"
+        android:id="@+id/xyzu_view_option_createandview_createbutton_appcompatimagebutton"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginEnd="@dimen/dp16"
+        android:src="@drawable/icon_general_plus"
+        
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_option_createandview_createname_appcompatedittext"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_option_createandview_createmessage_appcompattextview"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Option.CreateAndView.Text"
+        android:id="@+id/xyzu_view_option_createandview_createmessage_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginHorizontal="@dimen/dp32"
+        android:visibility="gone"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_option_createandview_createname_appcompatedittext"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_option_createandview_view_simpleverticalrecyclerview"/>
+
+    <xyzu.widgets.recyclerviews.SimpleVerticalRecyclerView
+        style="@style/Xyzu.View.Option.CreateAndView.RecyclerView"
+        android:id="@+id/xyzu_view_option_createandview_view_simpleverticalrecyclerview"
+        android:layout_height="@dimen/dp0"
+        android:layout_width="@dimen/dp0"
+        android:layout_marginVertical="@dimen/dp16"
+        
+        app:layout_constraintHeight_max="@dimen/dp256"
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_option_createandview_createmessage_appcompattextview" />
+
+</merge>

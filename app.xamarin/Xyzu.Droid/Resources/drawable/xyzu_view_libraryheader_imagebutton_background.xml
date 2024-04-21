@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item android:state_pressed="true">
+    <ripple android:color="@color/ColorPrimary">
+      <item android:id="@android:id/mask">
+        <shape android:shape="oval">
+          
+          <padding
+            android:right="@dimen/dp4"
+            android:left="@dimen/dp4"
+            android:top="@dimen/dp4"
+            android:bottom="@dimen/dp4"/>
+          
+          <corners
+            android:topRightRadius="@dimen/dp32"
+            android:topLeftRadius="@dimen/dp32"
+            android:bottomRightRadius="@dimen/dp32"
+            android:bottomLeftRadius="@dimen/dp32"/>
+          
+          <solid android:color="@color/ColorPrimary" />
+          
+        </shape>
+      </item>
+    <item>
+      <shape android:shape="oval">
+        
+        <padding
+            android:right="@dimen/dp4"
+            android:left="@dimen/dp4"
+            android:top="@dimen/dp4"
+            android:bottom="@dimen/dp4"/>
+
+        <corners
+            android:topRightRadius="@dimen/dp32"
+            android:topLeftRadius="@dimen/dp32"
+            android:bottomRightRadius="@dimen/dp32"
+            android:bottomLeftRadius="@dimen/dp32"/>
+      
+        <solid android:color="@color/ColorSurfaceTransparent" />
+
+      </shape>
+    </item>
+    </ripple>
+  </item>
+  
+  <item android:state_active="true">
+    <shape android:shape="oval">
+      
+      <padding
+          android:right="@dimen/dp4"
+          android:left="@dimen/dp4"
+          android:top="@dimen/dp4"
+          android:bottom="@dimen/dp4"/>
+          
+      <corners
+        android:topRightRadius="@dimen/dp32"
+        android:topLeftRadius="@dimen/dp32"
+        android:bottomRightRadius="@dimen/dp32"
+        android:bottomLeftRadius="@dimen/dp32"/>
+          
+      <solid android:color="@color/ColorPrimary" />
+          
+    </shape>
+  </item>
+
+  <item>
+    <shape android:shape="oval">
+
+      <padding
+          android:right="@dimen/dp4"
+          android:left="@dimen/dp4"
+          android:top="@dimen/dp4"
+          android:bottom="@dimen/dp4"/>
+        
+      <corners
+          android:topRightRadius="@dimen/dp32"
+          android:topLeftRadius="@dimen/dp32"
+          android:bottomRightRadius="@dimen/dp32"
+          android:bottomLeftRadius="@dimen/dp32"/>
+      
+      <solid android:color="@color/ColorSurfaceTransparent" />
+
+    </shape>
+  </item>
+
+</selector>

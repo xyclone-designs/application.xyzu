@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="Xyzu"></style>
+  
+  <style name="Xyzu.DatePicker" parent="Xyzu">
+    <item name="android:textColor">@color/ColorOnSurface</item>
+  </style>
+
+  <!-- PopupMenu -->
+  <style name="Xyzu.PopupMenu" parent="Widget.MaterialComponents.PopupMenu">
+    <item name="android:clipToPadding">true</item>
+    <item name="android:colorControlHighlight">@android:color/transparent</item>
+    <item name="android:background">@null</item>
+    <item name="android:backgroundTint">@color/ColorSurface</item>
+    <item name="android:itemBackground">@drawable/xyzu_popupmenu_item_background</item>
+    <item name="android:itemTextAppearance">@style/Xyzu.TextAppearance</item>
+    <item name="android:popupBackground">@null</item>
+    
+    <item name="popupMenuBackground">@drawable/xyzu_popupmenu_background</item>
+  </style>
+  <!-- PopupMenu -->
+
+  <style name="Xyzu.SearchView" parent="Xyzu">
+    <item name="android:background">@color/ColorSurface</item>
+    <item name="android:focusable">true</item>
+    <item name="android:padding">@dimen/dp4</item>
+    <item name="closeIcon">@drawable/icon_general_x</item>
+    <item name="iconifiedByDefault">false</item>
+    <item name="queryBackground">@android:color/transparent</item>
+    <item name="submitBackground">@android:color/transparent</item>
+    <item name="voiceIcon">@drawable/icon_general_microphone</item>
+  </style>
+
+  <style name="Xyzu.ShapeAppearanceOverlay.Cornered" parent="">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSizeTopRight">@dimen/dp16</item>
+    <item name="cornerSizeTopLeft">@dimen/dp16</item>
+    <item name="cornerSizeBottomRight">@dimen/dp16</item>
+    <item name="cornerSizeBottomLeft">@dimen/dp16</item>
+  </style>
+  <style name="Xyzu.ShapeAppearanceOverlay.Cornered.Top" parent="">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSizeTopRight">@dimen/dp16</item>
+    <item name="cornerSizeTopLeft">@dimen/dp16</item>
+  </style>
+  <style name="Xyzu.ShapeAppearanceOverlay.Cornered.Bottom" parent="">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSizeBottomRight">@dimen/dp16</item>
+    <item name="cornerSizeBottomLeft">@dimen/dp16</item>
+  </style>
+  <style name="Xyzu.ShapeAppearanceOverlay.Cornered.Left" parent="">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSizeTopLeft">@dimen/dp16</item>
+    <item name="cornerSizeBottomLeft">@dimen/dp16</item>
+  </style>
+  <style name="Xyzu.ShapeAppearanceOverlay.Cornered.Right" parent="">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSizeTopRight">@dimen/dp16</item>
+    <item name="cornerSizeBottomRight">@dimen/dp16</item>
+  </style>
+  
+  <style name="Xyzu.SlidingUpPanelLayout" parent="Xyzu">
+    <item name="android:background">@android:color/transparent</item>
+    <item name="android:gravity">bottom</item>
+    <item name="android:orientation">vertical</item>
+
+    <item name="app:umanoClipPanel">true</item>
+    <item name="app:umanoFadeColor">@color/ColorSurface</item>
+    <item name="app:umanoInitialState">collapsed</item>
+    <item name="app:umanoOverlay">true</item>
+    <item name="app:umanoShadowHeight">@dimen/dp0</item>
+  </style>
+
+  <style name="Xyzu.TextAppearance" parent="Xyzu">
+    <item name="android:elegantTextHeight">false</item>
+    <item name="android:fallbackLineSpacing">false</item>
+    <item name="android:fontFamily">@font/baloobhai2</item>
+    <!-- <item name="android:fontFeatureSettings"></item> -->
+    <!-- <item name="android:fontVariationSettings"></item> -->
+    <!-- <item name="android:letterSpacing"></item> -->
+    <!-- <item name="android:lineBreakStyle"></item> -->
+    <!-- <item name="android:lineBreakWordStyle"></item> -->
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textColor">@color/ColorOnSurface</item>
+    <item name="android:textColorHighlight">@color/ColorOnSurfaceVarient</item>
+    <item name="android:textColorHint">@color/ColorOnSurfaceVarient</item>
+    <item name="android:textColorLink">@color/ColorOnSurfaceVarient</item>
+    <item name="android:textFontWeight">300</item>
+    <!-- <item name="android:textLocale"></item> -->
+    <item name="android:textSize">@dimen/abc_text_size_small_material</item>
+    <item name="android:textStyle">normal</item>
+    <!-- <item name="android:typeface"></item> -->
+    <item name="android:shadowColor">@android:color/transparent</item>
+    <!-- <item name="android:shadowDx"></item> -->
+    <!-- <item name="android:shadowDy"></item> -->
+    <!-- <item name="android:shadowRadius"></item> -->
+  </style>
+
+  <style name="Xyzu.Toolbar" parent="Widget.AppCompat.Toolbar">
+    <item name="actionMenuTextColor">@color/ColorSurface</item>
+    <item name="actionOverflowButtonStyle">@style/Xyzu.Toolbar.ActionOverFlow</item>
+    <item name="actionOverflowMenuStyle">@style/Xyzu.Toolbar.ActionOverFlow</item>
+    <item name="android:background">@color/ColorSurface</item>
+    <!-- <item name="android:gravity"></item> -->
+    <!-- <item name="android:minHeight"></item> -->
+    <!-- <item name="buttonGravity"></item> -->
+    <!-- <item name="collapseIcon"></item> -->
+    <!-- <item name="collapseContentDescription"></item> -->
+    <!-- <item name="contentInsetStart"></item> -->
+    <!-- <item name="contentInsetEnd"></item> -->
+    <!-- <item name="contentInsetLeft"></item> -->
+    <!-- <item name="contentInsetRight"></item> -->
+    <!-- <item name="contentInsetStartWithNavigation"></item> -->
+    <!-- <item name="contentInsetEndWithActions"></item> -->
+    <!-- <item name="logo"></item> -->
+    <!-- <item name="logoDescription"></item> -->
+    <!-- <item name="maxButtonHeight"></item> -->
+    <!-- <item name="navigationIcon"></item> -->
+    <!-- <item name="navigationContentDescription"></item> -->
+    <item name="popupTheme">@style/Xyzu.PopupMenu</item>
+    <!-- <item name="subtitle"></item> -->
+    <item name="subtitleTextColor">@color/ColorPrimary</item> 
+    <item name="subtitleTextAppearance">@style/Xyzu.Toolbar.SubtitleText</item>
+    <!-- <item name="title"></item> -->
+    <!-- <item name="titleMargin"></item> -->
+    <!-- <item name="titleMarginStart"></item> -->
+    <!-- <item name="titleMarginEnd"></item> -->
+    <!-- <item name="titleMarginTop"></item> -->
+    <!-- <item name="titleMarginBottom"></item> -->
+    <item name="titleTextAppearance">@style/Xyzu.Toolbar.TitleText</item>
+    <item name="titleTextColor">@color/ColorOnSurface</item> 
+  </style>
+  <style name="Xyzu.Toolbar.SubtitleText" parent="Xyzu.TextAppearance">
+    <item name="android:textSize">@dimen/abc_text_size_subhead_material</item>
+  </style>
+  <style name="Xyzu.Toolbar.TitleText" parent="Xyzu.TextAppearance">
+    <item name="android:textSize">@dimen/abc_text_size_title_material</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="Xyzu.Toolbar.ActionOverFlow" parent="Widget.AppCompat.ActionButton.Overflow">
+    <item name="android:background">@color/ColorSurface</item>
+    <item name="android:foregroundTint">@color/ColorOnSurface</item>
+  </style>
+
+</resources>

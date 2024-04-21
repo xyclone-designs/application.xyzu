@@ -1,0 +1,31 @@
+<resources>
+
+  <string name="xyzu_view_info_album_header">Album Info</string>
+  <string name="xyzu_view_info_artist_header">Artist Info</string>
+  <string name="xyzu_view_info_genre_header">Genre Info</string>
+  <string name="xyzu_view_info_playlist_header">Playlist Info</string>
+  <string name="xyzu_view_info_song_header">Song Info</string>
+  <string name="xyzu_view_info_song_lyrics_header">Song Lyrics</string>    
+  <string name="xyzu_view_infoedit_album_header">Edit Album Info</string>
+  <string name="xyzu_view_infoedit_album_releasedate_defaulttext">Select Date</string>
+  <string name="xyzu_view_infoedit_artist_header">Edit Artist Info</string>
+  <string name="xyzu_view_infoedit_genre_header">Edit Genre Info</string>
+  <string name="xyzu_view_infoedit_playlist_header">Edit Playlist Info</string>
+  <string name="xyzu_view_infoedit_song_header">Edit Song Info</string>
+  <string name="xyzu_view_infoedit_song_releasedate_defaulttext">Select Date</string>
+  <string name="xyzu_view_infoedit_song_lyrics_header">Edit Song Lyrics</string>
+
+  <string name="xyzu_view_libraryitem_grid_small_artwork_appcompatimageview_contentdescription">Small Grid Artwork View</string>
+  <string name="xyzu_view_libraryitem_grid_small_options_appcompatimagebutton_contentdescription">Small Grid Options Button</string>
+  <string name="xyzu_view_libraryitem_grid_medium_artwork_appcompatimageview_contentdescription">Medium Grid Artwork View</string>
+  <string name="xyzu_view_libraryitem_grid_medium_options_appcompatimagebutton_contentdescription">Medium Grid Options Button</string>
+  <string name="xyzu_view_libraryitem_grid_large_artwork_appcompatimageview_contentdescription">Large Grid Artwork View</string>
+  <string name="xyzu_view_libraryitem_grid_large_options_appcompatimagebutton_contentdescription">Large Grid Options Button</string>
+  <string name="xyzu_view_libraryitem_list_small_artwork_appcompatimageview_contentdescription">Small List Artwork View</string>
+  <string name="xyzu_view_libraryitem_list_small_options_appcompatimagebutton_contentdescription">Small List Options Button</string>
+  <string name="xyzu_view_libraryitem_list_medium_artwork_appcompatimageview_contentdescription">Medium List Artwork View</string>
+  <string name="xyzu_view_libraryitem_list_medium_options_appcompatimagebutton_contentdescription">Medium List Options Button</string>
+  <string name="xyzu_view_libraryitem_list_large_artwork_appcompatimageview_contentdescription">Large List Artwork View</string>
+  <string name="xyzu_view_libraryitem_list_large_options_appcompatimagebutton_contentdescription">Large List Options Button</string>
+
+</resources>

@@ -1,0 +1,46 @@
+<!-- Dark -->
+<resources>
+
+  <style name="XyzuTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <item name="android:colorAccent">@color/ColorPrimary</item>
+    <item name="android:colorControlActivated">@color/ColorPrimaryActive</item>
+    <item name="android:colorControlHighlight">@color/ColorPrimaryActive</item>
+    <item name="android:colorEdgeEffect">@color/ColorPrimaryActive</item>
+    <item name="android:colorError">@color/ColorError</item>
+    <item name="android:colorPrimary">@color/ColorPrimary</item>
+    <item name="android:enforceNavigationBarContrast">false</item>
+    <item name="android:enforceStatusBarContrast">false</item>
+    <item name="android:fitsSystemWindows">true</item>
+    <item name="android:navigationBarColor">@android:color/transparent</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:windowBackground">@color/ColorBackground</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:windowFullscreen">false</item>
+    <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+    <item name="android:windowLightNavigationBar">false</item>
+    <item name="android:windowLightStatusBar">false</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowOverscan">true</item>
+    <item name="android:windowTranslucentNavigation">true</item>
+    <item name="android:windowTranslucentStatus">true</item>
+
+    <item name="enableEdgeToEdge">true</item>
+    <item name="windowActionBar">false</item>
+  </style>
+
+  <style name="SplashScreenTheme" parent="XyzuTheme">
+    <item name="android:navigationBarColor">@color/Color_SplashScreenBackground</item>
+    <item name="android:statusBarColor">@color/Color_SplashScreenBackground</item>
+    <item name="android:windowBackground">@drawable/splash_screen</item>
+    <item name="android:windowTranslucentNavigation">false</item>
+    <item name="android:windowTranslucentStatus">false</item>
+  </style>
+
+  <style name="LibraryTheme" parent="XyzuTheme"></style>
+  <style name="SettingsTheme" parent="XyzuTheme">
+    <item name="android:navigationBarColor">@color/ColorBackground</item>
+  
+    <item name="preferenceTheme">@style/Xyzu.Preference.Theme</item>
+  </style>
+
+</resources>

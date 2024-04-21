@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="Xyzu.Widget" parent="Xyzu">
+    <item name="android:background">@android:color/transparent</item>
+    <item name="android:clipChildren">false</item>
+    <item name="android:clipToPadding">false</item>
+  </style>
+
+  <!-- Xyzu.View.Widget.RecyclerView -->
+  <style name="Xyzu.Widget.RecyclerView" parent="Xyzu.Widget">
+    <item name="android:fadeScrollbars">true</item>
+    <item name="android:scrollbars">none</item>
+    <item name="android:scrollbarAlwaysDrawHorizontalTrack">false</item>
+    <item name="android:scrollbarAlwaysDrawVerticalTrack">false</item>
+    <item name="android:scrollbarDefaultDelayBeforeFade">@integer/m3_sys_motion_duration_500</item>
+    <item name="android:scrollbarFadeDuration">@integer/m3_sys_motion_duration_500</item>
+    <item name="android:scrollbarSize">@dimen/dp8</item>
+    <item name="android:scrollbarStyle">insideOverlay</item>
+    <item name="android:verticalScrollbarPosition">defaultPosition</item>
+
+    <item name="app:fastScrollEnabled">true</item>
+    <item name="app:fastScrollHorizontalThumbDrawable">@drawable/xyzu_widget_recyclerview_scrollbar_thumb</item>
+    <item name="app:fastScrollHorizontalTrackDrawable">@drawable/xyzu_widget_recyclerview_scrollbar_track</item>
+    <item name="app:fastScrollVerticalThumbDrawable">@drawable/xyzu_widget_recyclerview_scrollbar_thumb</item>
+    <item name="app:fastScrollVerticalTrackDrawable">@drawable/xyzu_widget_recyclerview_scrollbar_track</item>
+  </style>
+  
+  <!-- Xyzu.View.Widget.RecyclerView.DropdownCheckableItems -->
+  <style name="Xyzu.Widget.RecyclerView.DropdownCheckableItems" parent="Xyzu.Widget.RecyclerView.RecursiveItems" />
+  <!-- Xyzu.View.Widget.RecyclerView.DropdownCheckableItems -->
+
+  <!-- Xyzu.View.Widget.RecyclerView.LibraryItems -->
+  <style name="Xyzu.Widget.RecyclerView.LibraryItems" parent="Xyzu.Widget.RecyclerView">
+    <item name="android:orientation">vertical</item>
+  </style>
+  <!-- Xyzu.View.Widget.RecyclerView.LibraryItems -->
+
+  <!-- Xyzu.View.Widget.RecyclerView.RecursiveItems -->
+  <style name="Xyzu.Widget.RecyclerView.RecursiveItems" parent="Xyzu.Widget.RecyclerView">
+    <item name="android:orientation">vertical</item>
+  </style>
+  <!-- Xyzu.View.Widget.RecyclerView.RecursiveItems -->
+
+  <!-- Xyzu.View.Widget.RecyclerView.Simple -->
+  <style name="Xyzu.Widget.RecyclerView.Simple" parent="Xyzu.Widget.RecyclerView">
+    <item name="app:fastScrollEnabled">false</item>
+  </style>
+  <style name="Xyzu.Widget.RecyclerView.Simple.Horizontal" parent="Xyzu.Widget.RecyclerView.Simple">
+    <item name="android:orientation">horizontal</item>
+  </style>
+  <style name="Xyzu.Widget.RecyclerView.Simple.Vertical" parent="Xyzu.Widget.RecyclerView.Simple">
+    <item name="android:orientation">vertical</item>
+  </style>
+  <!-- Xyzu.View.Widget.RecyclerView.Simplw -->
+
+  <!-- Xyzu.View.Widget.RecyclerView -->
+
+</resources>

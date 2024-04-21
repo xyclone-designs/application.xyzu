@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_userinterface_languages_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.UserInterface.LanguagesPreferenceFragment"
+      app:icon="@drawable/icon_settings_userinterface_languages"
+      app:title="@string/settings_userinterface_languages_title"
+      app:summary="@string/settings_userinterface_languages_description" />
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_userinterface_library_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.UserInterface.LibraryPreferenceFragment"
+      app:icon="@drawable/icon_settings_userinterface_library"
+      app:title="@string/settings_userinterface_library_title"
+      app:summary="@string/settings_userinterface_library_description" />
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_userinterface_nowplaying_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.UserInterface.NowPlayingPreferenceFragment"
+      app:icon="@drawable/icon_settings_userinterface_nowplaying"
+      app:title="@string/settings_userinterface_nowplaying_title"
+      app:summary="@string/settings_userinterface_nowplaying_description" />
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"                             
+      app:key="settings_userinterface_themes_preferencescreen_key"         
+      app:fragment="Xyzu.Fragments.Settings.UserInterface.ThemesPreferenceFragment"
+      app:icon="@drawable/icon_settings_userinterface_themes"
+      app:title="@string/settings_userinterface_themes_title"
+      app:summary="@string/settings_userinterface_themes_description" />
+
+  <xyzu.preference.NavigationBarInsetPreference />
+
+</androidx.preference.PreferenceScreen>

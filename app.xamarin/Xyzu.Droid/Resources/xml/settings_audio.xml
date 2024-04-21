@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_audio_bassboost_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.Audio.BassBoostPreferenceFragment"
+      app:icon="@drawable/icon_settings_audio_bassboost"
+      app:title="@string/settings_audio_bassboost_title"
+      app:summary="@string/settings_audio_bassboost_description"/>
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_audio_environmentalreverb_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.Audio.EnvironmentalReverbPreferenceFragment"
+      app:icon="@drawable/icon_settings_audio_environmentalreverb"
+      app:title="@string/settings_audio_environmentalreverb_title"
+      app:summary="@string/settings_audio_environmentalreverb_description"/>
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_audio_equaliser_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.Audio.EqualiserPreferenceFragment"
+      app:icon="@drawable/icon_settings_audio_equaliser"
+      app:title="@string/settings_audio_equaliser_title"
+      app:summary="@string/settings_audio_equaliser_description" />
+
+  <androidx.preference.PreferenceScreen
+      app:iconSpaceReserved="true"
+      app:key="settings_audio_loudnessenhancer_preferencescreen_key"
+      app:fragment="Xyzu.Fragments.Settings.Audio.LoudnessEnhancerPreferenceFragment"
+      app:icon="@drawable/icon_settings_audio_loudnessenhancer"
+      app:title="@string/settings_audio_loudnessenhancer_title"
+      app:summary="@string/settings_audio_loudnessenhancer_description"/>
+
+  <xyzu.preference.NavigationBarInsetPreference />
+
+</androidx.preference.PreferenceScreen>
