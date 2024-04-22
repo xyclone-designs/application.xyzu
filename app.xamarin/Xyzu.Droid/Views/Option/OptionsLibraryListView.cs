@@ -16,7 +16,8 @@ using System.Linq;
 using Xyzu.Droid;
 using Xyzu.Library.Enums;
 using Xyzu.Settings.Enums;
-using Xyzu.Widgets.RecyclerViews;
+using Xyzu.Widgets.RecyclerViews.LibraryItems;
+using Xyzu.Widgets.RecyclerViews.Simple;
 
 namespace Xyzu.Views.Option
 {

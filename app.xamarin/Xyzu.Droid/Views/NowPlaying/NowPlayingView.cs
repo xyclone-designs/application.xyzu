@@ -15,7 +15,8 @@ using System;
 using Xyzu.Droid;
 using Xyzu.Images;
 using Xyzu.Views.Insets;
-using Xyzu.Widgets.RecyclerViews;
+using Xyzu.Widgets.RecyclerViews.LibraryItems;
+using Xyzu.Widgets.RecyclerViews.Simple;
 
 namespace Xyzu.Views.NowPlaying
 {

@@ -18,7 +18,7 @@ using Xyzu.Library.Models;
 using Xyzu.Settings.UserInterface.Library;
 using Xyzu.Views.LibraryItem;
 using Xyzu.Views.Option;
-using Xyzu.Widgets.RecyclerViews;
+using Xyzu.Widgets.RecyclerViews.LibraryItems;
 
 namespace Xyzu.Views.Library
 {

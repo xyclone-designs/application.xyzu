@@ -18,13 +18,14 @@ using Xyzu.Library.Enums;
 using Xyzu.Settings.Enums;
 using Xyzu.Settings.Files;
 using Xyzu.Views.Setting;
-using Xyzu.Widgets.RecyclerViews;
+using Xyzu.Widgets.RecyclerViews.LibraryItems;
 
 using AndroidOSEnvironment = Android.OS.Environment;
 using AndroidXPreference = AndroidX.Preference.Preference;
 using XyzuDialogPreference = Xyzu.Preference.DialogPreference;
 using XyzuSeekBarPreference = Xyzu.Preference.SeekBarPreference;
 using XyzuMultiSelectListPreference = Xyzu.Preference.MultiSelectListPreference;
+using Xyzu.Widgets.RecyclerViews;
 
 namespace Xyzu.Fragments.Settings.Files
 {

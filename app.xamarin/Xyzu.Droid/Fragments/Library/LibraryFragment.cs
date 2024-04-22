@@ -17,7 +17,7 @@ using Xyzu.Activities;
 using Xyzu.Menus;
 using Xyzu.Views.Library;
 using Xyzu.Views.Option;
-using Xyzu.Widgets.RecyclerViews;
+using Xyzu.Widgets.RecyclerViews.LibraryItems;
 
 namespace Xyzu.Fragments.Library
 {

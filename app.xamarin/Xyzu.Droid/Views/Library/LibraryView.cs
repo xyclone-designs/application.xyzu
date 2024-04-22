@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using Xyzu.Droid;
 using Xyzu.Fragments.Library;
 using Xyzu.Library.Models;
-using Xyzu.Widgets.RecyclerViews;
+using Xyzu.Widgets.RecyclerViews.LibraryItems;
 
 using IXyzuImages = Xyzu.Images.IImages;
 using IXyzuPlayer = Xyzu.Player.IPlayer;

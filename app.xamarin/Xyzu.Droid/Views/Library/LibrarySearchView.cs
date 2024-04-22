@@ -17,7 +17,7 @@ using Xyzu.Library.Enums;
 using Xyzu.Library.Models;
 using Xyzu.Settings.UserInterface.Library;
 using Xyzu.Views.LibraryItem;
-using Xyzu.Widgets.RecyclerViews;
+using Xyzu.Widgets.RecyclerViews.LibraryItems;
 
 using IXyzuLibrary = Xyzu.Library.ILibrary;
 

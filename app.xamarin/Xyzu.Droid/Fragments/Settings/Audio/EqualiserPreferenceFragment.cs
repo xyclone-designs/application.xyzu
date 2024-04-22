@@ -14,8 +14,8 @@ using System.Runtime.CompilerServices;
 using Xyzu.Droid;
 using Xyzu.Settings.Audio;
 using Xyzu.Views.Setting;
-using Xyzu.Widgets.RecyclerViews;
-
+using Xyzu.Widgets.RecyclerViews.LibraryItems;
+using Xyzu.Widgets.RecyclerViews.Simple;
 using AndroidXPreference = AndroidX.Preference.Preference;
 using XyzuListPreference = Xyzu.Preference.ListPreference;
 using XyzuSwitchPreference = Xyzu.Preference.SwitchPreference;

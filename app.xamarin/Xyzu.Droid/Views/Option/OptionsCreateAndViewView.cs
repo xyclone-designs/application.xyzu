@@ -14,7 +14,7 @@ using AndroidX.RecyclerView.Widget;
 using System;
 
 using Xyzu.Droid;
-using Xyzu.Widgets.RecyclerViews;
+using Xyzu.Widgets.RecyclerViews.Simple;
 
 namespace Xyzu.Views.Option
 {
@@ -30,14 +30,10 @@ namespace Xyzu.Views.Option
 			public const int View_SimpleVerticalRecyclerView = Resource.Id.xyzu_view_option_createandview_view_simpleverticalrecyclerview;
 		}
 
-		public OptionsCreateAndViewView(Context context) : this(context, null!)
-		{ }
-		public OptionsCreateAndViewView(Context context, IAttributeSet attrs) : this(context, attrs, Resource.Style.Xyzu_View_Option_CreateAndView)
-		{ }
-		public OptionsCreateAndViewView(Context context, IAttributeSet attrs, int defStyleAttr) : this(context, attrs, defStyleAttr, Resource.Style.Xyzu_View_Option_CreateAndView)
-		{ }
-		public OptionsCreateAndViewView(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
-		{ }
+		public OptionsCreateAndViewView(Context context) : this(context, null!) { }
+		public OptionsCreateAndViewView(Context context, IAttributeSet attrs) : this(context, attrs, Resource.Style.Xyzu_View_Option_CreateAndView) { }
+		public OptionsCreateAndViewView(Context context, IAttributeSet attrs, int defStyleAttr) : this(context, attrs, defStyleAttr, Resource.Style.Xyzu_View_Option_CreateAndView) { }
+		public OptionsCreateAndViewView(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes) { }
 
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{

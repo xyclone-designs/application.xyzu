@@ -16,7 +16,7 @@ using Xyzu.Library.Models;
 using Xyzu.Menus;
 using Xyzu.Views.LibraryItem;
 using Xyzu.Views.Option;
-using Xyzu.Widgets.RecyclerViews;
+using Xyzu.Widgets.RecyclerViews.LibraryItems;
 
 using AndroidXAlertDialog = AndroidX.AppCompat.App.AlertDialog;
 

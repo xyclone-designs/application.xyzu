@@ -15,7 +15,7 @@ using Xyzu.Droid;
 using Xyzu.Menus;
 using Xyzu.Library.Models;
 using Xyzu.Settings.UserInterface.Library;
-using Xyzu.Widgets.RecyclerViews;
+using Xyzu.Widgets.RecyclerViews.LibraryItems;
 using Xyzu.Views.LibraryItem;
 
 namespace Xyzu.Views.Library

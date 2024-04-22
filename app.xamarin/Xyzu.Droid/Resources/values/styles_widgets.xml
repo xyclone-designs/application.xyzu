@@ -15,8 +15,8 @@
     <item name="android:scrollbars">none</item>
     <item name="android:scrollbarAlwaysDrawHorizontalTrack">false</item>
     <item name="android:scrollbarAlwaysDrawVerticalTrack">false</item>
-    <item name="android:scrollbarDefaultDelayBeforeFade">@integer/m3_sys_motion_duration_500</item>
-    <item name="android:scrollbarFadeDuration">@integer/m3_sys_motion_duration_500</item>
+    <item name="android:scrollbarDefaultDelayBeforeFade">@integer/m3_sys_motion_duration_long1</item>
+    <item name="android:scrollbarFadeDuration">@integer/m3_sys_motion_duration_long1</item>
     <item name="android:scrollbarSize">@dimen/dp8</item>
     <item name="android:scrollbarStyle">insideOverlay</item>
     <item name="android:verticalScrollbarPosition">defaultPosition</item>

@@ -17,7 +17,8 @@ using Xyzu.Droid;
 using Xyzu.Library.Enums;
 using Xyzu.Menus;
 using Xyzu.Settings.Enums;
-using Xyzu.Widgets.RecyclerViews;
+using Xyzu.Widgets.RecyclerViews.LibraryItems;
+using Xyzu.Widgets.RecyclerViews.Simple;
 
 namespace Xyzu.Views.Option
 {

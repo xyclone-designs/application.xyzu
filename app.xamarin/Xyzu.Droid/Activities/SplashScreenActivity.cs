@@ -1,8 +1,25 @@
 ﻿#nullable enable
 
 using Android.Content;
+using Android;
+using Android.App;
+using Android.Content.PM;
+using Android.OS;
+using Android.Runtime;
 
+using AndroidX.AppCompat.App;
+
+using Java.IO;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+using Xyzu.Images;
+using Xyzu.Library;
 using Xyzu.Library.Models;
+using Xyzu.Player;
 using Xyzu.Settings.Files;
 using Xyzu.Settings.System;
 using Xyzu.Settings.UserInterface.Library;
