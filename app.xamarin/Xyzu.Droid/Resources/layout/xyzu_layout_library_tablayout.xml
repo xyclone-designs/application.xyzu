@@ -82,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Xyzu.Views.NowPlaying.NowPlayingView
+        <xyzu.views.nowplaying.NowPlayingView
             android:id="@+id/xyzu_layout_library_tablayout_nowplayingview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
