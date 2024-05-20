@@ -23,7 +23,7 @@
 
     <!---->
 
-    <xyzu.widgets.recyclerviews.SimpleHorizontalRecyclerView
+    <xyzu.widgets.recyclerviews.simple.SimpleHorizontalRecyclerView
         android:id="@+id/xyzu_view_nowplaying_artwork_simplehorizontalrecyclerview"
         android:fadingEdge="none"
         android:layout_width="@dimen/dp0"

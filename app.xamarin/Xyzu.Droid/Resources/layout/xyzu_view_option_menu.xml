@@ -61,7 +61,7 @@
         xyzu_view_option_menu_text_appcompattextview,
         xyzu_view_option_menu_cancel_appcompatimagebutton"/>
 
-    <xyzu.widgets.recyclerviews.SimpleHorizontalRecyclerView
+    <xyzu.widgets.recyclerviews.simple.SimpleHorizontalRecyclerView
         style="@style/Xyzu.View.Option.Menu.RecyclerView"
         android:id="@+id/xyzu_view_option_menu_menu_simplehorizontalrecyclerview"
         android:layout_width="@dimen/dp0"

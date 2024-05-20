@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@id/xyzu_view_option_createandview_createname_appcompatedittext"
         app:layout_constraintBottom_toTopOf="@id/xyzu_view_option_createandview_view_simpleverticalrecyclerview"/>
 
-    <xyzu.widgets.recyclerviews.SimpleVerticalRecyclerView
+    <xyzu.widgets.recyclerviews.simple.SimpleVerticalRecyclerView
         style="@style/Xyzu.View.Option.CreateAndView.RecyclerView"
         android:id="@+id/xyzu_view_option_createandview_view_simpleverticalrecyclerview"
         android:layout_height="@dimen/dp0"

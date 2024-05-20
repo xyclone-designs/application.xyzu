@@ -354,7 +354,7 @@
       <Version>2.7.7.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.Palette">
-      <Version>1.0.0.15</Version>
+      <Version>1.0.0.23</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.Preference">
       <Version>1.2.0.3</Version>

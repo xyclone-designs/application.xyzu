@@ -81,7 +81,7 @@
             xyzu_view_option_librarylist_options_sortkey_appcompattextview,
             xyzu_view_option_librarylist_options_layouttype_appcompattextview"/>
 
-    <xyzu.widgets.recyclerviews.SimpleHorizontalRecyclerView
+    <xyzu.widgets.recyclerviews.simple.SimpleHorizontalRecyclerView
         style="@style/Xyzu.View.Option.LibraryList.RecyclerView"
         android:id="@+id/xyzu_view_option_librarylist_options_simplehorizontalrecyclerview"
         android:layout_width="@dimen/dp0"
