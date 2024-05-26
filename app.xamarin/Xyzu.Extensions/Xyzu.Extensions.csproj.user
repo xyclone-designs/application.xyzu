@@ -3,5 +3,9 @@
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
     <AndroidDesignerPreferredDevice>Nexus 4</AndroidDesignerPreferredDevice>
+    <SelectedDevice>pixel_2_pie_9_0_-_api_28</SelectedDevice>
+    <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
+    <ActiveDebugProfile>Pixel 2 Pie 9.0 - API 28 %28Android 9.0 - API 28%29</ActiveDebugProfile>
+    <DefaultDevice>pixel_2_pie_9_0_-_api_28</DefaultDevice>
   </PropertyGroup>
 </Project>

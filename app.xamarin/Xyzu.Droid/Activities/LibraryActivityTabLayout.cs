@@ -2,6 +2,7 @@
 
 using Android.Content;
 using Android.Content.PM;
+using Android.Content.Res;
 using Android.OS;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
@@ -74,12 +75,12 @@ namespace Xyzu.Activities
 				OnPropertyChanged(nameof(PreviousTabLayoutable));
 			}
 		}
-		protected ITabLayoutable? PreviousTabLayoutable
+		protected ITabLayoutable? PreviousTabLayoutable 
 		{ 
 			get; set;
 		}
 
-		protected CoordinatorLayout Coordinatorlayout
+		protected CoordinatorLayout Coordinatorlayout 
 		{
 			get => _Coordinatorlayout ??=
 				FindViewById<CoordinatorLayout>(Resource.Id.xyzu_layout_library_tablayout_coordinatorlayout) ??
@@ -99,20 +100,20 @@ namespace Xyzu.Activities
 		{
 			get; set;
 		}
-		protected ContentFrameLayout Contentframelayout
+		protected ContentFrameLayout Contentframelayout 
 		{
 			get => _Contentframelayout ??=
 				FindViewById<ContentFrameLayout>(Resource.Id.xyzu_layout_library_tablayout_contentframelayout) ??
 				throw new InflateException("Could not find view 'xyzu_layout_library_tablayout_contentframelayout' in 'layout_library_tablayout'");
 		}								 
-		protected ToolbarTabLayoutView ToolbarTabLayout
+		protected ToolbarTabLayoutView ToolbarTabLayout 
 		{
 			get => _ToolbarTabLayout ??=
 				FindViewById<ToolbarTabLayoutView>(Resource.Id.xyzu_layout_library_tablayout_toolbartablayoutview) ??
 				throw new InflateException("Could not find view 'xyzu_layout_library_tablayout_toolbartablayoutview' in 'layout_library_tablayout'");
 		}
 
-		protected override int AppbarlayoutResourceId
+		protected override int AppbarlayoutResourceId 
 		{
 			get => Resource.Id.xyzu_layout_library_tablayout_appbarlayout;
 		}
@@ -120,12 +121,12 @@ namespace Xyzu.Activities
 		{
 			get => Resource.Id.xyzu_layout_library_tablayout_toolbarsearchview;
 		}
-		protected override int FloatingactionbuttonResourceId
+		protected override int FloatingactionbuttonResourceId 
 		{
 			get => Resource.Id.xyzu_layout_library_tablayout_floatingactionbutton;
 		}
 		
-		public override void NavigateAlbum(IAlbum? album)
+		public override void NavigateAlbum(IAlbum? album) 
 		{
 			base.NavigateAlbum(album);
 
@@ -135,7 +136,7 @@ namespace Xyzu.Activities
 				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_contentframelayout, GenerateFragmentLibraryAlbum(album))
 				.Commit();
 		}
-		public override void NavigateArtist(IArtist? artist)
+		public override void NavigateArtist(IArtist? artist) 
 		{
 			base.NavigateArtist(artist);
 
@@ -145,7 +146,7 @@ namespace Xyzu.Activities
 				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_contentframelayout, GenerateFragmentLibraryArtist(artist))
 				.Commit();
 		}
-		public override void NavigateGenre(IGenre? genre)
+		public override void NavigateGenre(IGenre? genre) 
 		{
 			base.NavigateGenre(genre);
 
@@ -155,7 +156,7 @@ namespace Xyzu.Activities
 				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_contentframelayout, GenerateFragmentLibraryGenre(genre))
 				.Commit();
 		}
-		public override void NavigatePlaylist(IPlaylist? playlist)
+		public override void NavigatePlaylist(IPlaylist? playlist) 
 		{
 			base.NavigatePlaylist(playlist);
 
@@ -165,14 +166,14 @@ namespace Xyzu.Activities
 				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_contentframelayout, GenerateFragmentLibraryPlaylist(playlist))
 				.Commit();
 		}
-		public override void NavigateQueue()
+		public override void NavigateQueue() 
 		{
 			base.NavigateQueue();
 
 			if (Tablayoutadapter?.TabLayoutables.Index(FragmentLibraryQueue) is int index && ToolbarTabLayout.Tablayout.GetTabAt(index) is TabLayout.Tab tab)
 				ToolbarTabLayout.Tablayout.SelectTab(tab, true);																																																										
 		}
-		public override void NavigateSearch()
+		public override void NavigateSearch() 
 		{
 			base.NavigateSearch();
 
@@ -183,19 +184,19 @@ namespace Xyzu.Activities
 				.Commit();
 		}
 
-		public override void OnBackPressed()
+		public override void OnBackPressed() 
 		{
 			if (_CurrentTabLayoutable != null)
 				OnReconfigure(this, _CurrentTabLayoutable = null, IConfigurable.ReconfigureType_All);
 			else base.OnBackPressed();
 		}
-		public override bool OnCreateOptionsMenu(IMenu? menu)
+		public override bool OnCreateOptionsMenu(IMenu? menu) 
 		{
 			OnReconfigure(this, IConfigurable.ReconfigureType_Menu);
 
 			return base.OnCreateOptionsMenu(menu);
 		}
-		public override bool OnOptionsItemSelected(IMenuItem menuitem)
+		public override bool OnOptionsItemSelected(IMenuItem menuitem) 
 		{
 			bool result = CurrentTabLayoutable?.OnMenuItemClick(menuitem) ?? false;
 
@@ -205,7 +206,7 @@ namespace Xyzu.Activities
 			return result;
 		}
 
-		protected override void OnCreate(Bundle? savedInstanceState)
+		protected override void OnCreate(Bundle? savedInstanceState) 
 		{
 			base.OnCreate(savedInstanceState);
 
@@ -244,7 +245,7 @@ namespace Xyzu.Activities
 			Tablayoutmediator ??= new TabLayoutMediator(ToolbarTabLayout.Tablayout, Viewpager2, true, true, Tablayoutadapter);
 			Tablayoutmediator.Attach();
 		}
-		protected override void OnStart()
+		protected override void OnStart() 
 		{
 			base.OnStart();
 
@@ -266,7 +267,7 @@ namespace Xyzu.Activities
 			} is ITabLayoutable tablayoutable && Tablayoutadapter?.TabLayoutables.Index(tablayoutable) is int index && ToolbarTabLayout.Tablayout.GetTabAt(index) is TabLayout.Tab tab)
 				ToolbarTabLayout.Tablayout.SelectTab(tab, true);
 		}
-		protected override void OnStop()
+		protected override void OnStop() 
 		{
 			base.OnStop();
 

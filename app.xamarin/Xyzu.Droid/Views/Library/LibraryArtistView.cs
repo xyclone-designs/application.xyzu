@@ -4,6 +4,7 @@ using Android.Content;
 using Android.Graphics.Drawables;
 using Android.Util;
 using Android.Views;
+using Android.Widget;
 using AndroidX.RecyclerView.Widget;
 
 using System;
@@ -571,27 +572,31 @@ namespace Xyzu.Views.Library
 				ArtistHeader.Artist = null;
 			else ArtistHeader.Artist ??= artist;
 
-			(Drawable? drawable, string? text) = Showing switch
+			(Drawable? drawablestart, string? text, Drawable? drawableend) = Showing switch
 			{
 				ArtistItemType.Albums => 
 				(
 					Context?.Resources?.GetDrawable(Resource.Drawable.icon_library_albums, Context.Theme),
 					string.Format("{0} ({1})", Context?.Resources?.GetString(Resource.String.library_albums) ?? string.Empty, ArtistItems.LibraryItemsAdapter.LibraryItems.Count)
-						.Trim()
+						.Trim(),
+					Context?.Resources?.GetDrawable(Resource.Drawable.icon_library_songs, Context.Theme)?.Mutate()
 				),							
 
 				ArtistItemType.Songs => 
 				(
 					Context?.Resources?.GetDrawable(Resource.Drawable.icon_library_songs, Context.Theme),
 					string.Format("{0} ({1})", Context?.Resources?.GetString(Resource.String.library_songs) ?? string.Empty, ArtistItems.LibraryItemsAdapter.LibraryItems.Count)
-						.Trim()
+						.Trim(),
+					Context?.Resources?.GetDrawable(Resource.Drawable.icon_library_albums, Context.Theme)?.Mutate()
 				),
 
 				_ => throw new ArgumentException(),
 			};
 
+			drawableend?.SetAlpha(50);
 			ArtistHeader.ArtistItems.Text.SetText(text, null);
-			ArtistHeader.ArtistItems.Text.SetCompoundDrawablesRelativeWithIntrinsicBounds(drawable, null, null, null);
+			ArtistHeader.ArtistItems.Text.SetDrawableStart(drawablestart);
+			ArtistHeader.ArtistItems.Text.SetDrawableEnd(drawableend);
 		}
 		public void SetArtist(IArtist? artist, IEnumerable<IAlbum>? artistalbums, IEnumerable<ISong>? artistsongs)
 		{

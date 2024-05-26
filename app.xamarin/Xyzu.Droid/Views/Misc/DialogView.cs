@@ -179,6 +179,20 @@ namespace Xyzu.Views.Misc
 				Contentnestedscrollview?.AddView(value, 0);
 			}
 		}
+		public int ContentViewMaxWidth
+		{
+			set
+			{
+				MaxWidth = value;
+
+				if (Contentlinearlayoutcompat.LayoutParameters is LayoutParams layoutparams)
+				{
+					layoutparams.MatchConstraintMaxWidth = value;
+
+					Contentlinearlayoutcompat.LayoutParameters = layoutparams;
+				}
+			}
+		}
 		public int ContentViewMaxHeight
 		{
 			set

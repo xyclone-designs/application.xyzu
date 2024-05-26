@@ -83,6 +83,21 @@ namespace Xyzu.Views.Option
 		private SimpleHorizontalRecyclerView? _MenuOptionsRecyclerView;
 		private IEnumerable<MenuOptions> _MenuOptions = Enumerable.Empty<MenuOptions>();
 
+		public override int MaxWidth 
+		{ 
+			get => base.MaxWidth;
+			set
+			{
+				base.MaxWidth = value;
+				if (MenuOptionsRecyclerView.LayoutParameters is LayoutParams layoutparams)
+				{
+					layoutparams.MatchConstraintMaxWidth = value;
+
+					MenuOptionsRecyclerView.LayoutParameters = layoutparams;
+				}
+			}
+		}
+
 		private bool _WithHeaderButtons = true;
 		private bool _WithHeaderText = true;
 		public bool WithHeaderButtons

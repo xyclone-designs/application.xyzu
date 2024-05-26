@@ -88,8 +88,7 @@ namespace Xyzu.Views.LibraryItem.Header
 
 			SetArtwork(artist);
 
-			if (Images != null)
-				Images.SetToViewBackground(IImagesDroid.DefaultOperations.BlurDownsample, this, null, default, artist);
+			Images?.SetToViewBackground(IImagesDroid.DefaultOperations.BlurDownsample, this, null, default, artist);
 		}
 	}
 }

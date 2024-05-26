@@ -45,10 +45,10 @@ namespace Xyzu.Views.Library
 			{
 				_menuoptionsdialog.SetCancelable(true);
 				_menuoptionsdialog.SetCanceledOnTouchOutside(false);
-				_menuoptionsdialog.SetContentView(MenuOptionsView);
 				_menuoptionsdialog.SetDim(false);
 				_menuoptionsdialog.SetOnShowListener(this);
 				_menuoptionsdialog.SetOnDismissListener(this);
+				_menuoptionsdialog.SetContentView(MenuOptionsView, MenuOptionsUtils.DialogLayoutParams(Context!));
 			});
 		}
 		protected OptionsMenuView MenuOptionsView
@@ -56,6 +56,9 @@ namespace Xyzu.Views.Library
 			set => _MenuOptionsView = value;
 			get => _MenuOptionsView ??= new OptionsMenuView(Context!)
 			{
+				MaxWidth = MenuOptionsUtils.DialogWidth(Context!),
+				MaxHeight = MenuOptionsUtils.DialogHeight(Context!),
+
 				Background = Context?.Resources?.GetDrawable(Resource.Drawable.shape_cornered_top, Context.Theme),
 
 				MenuOptions = MenuOptionsViewOptions?.Keys ?? Enumerable.Empty<MenuOptions>(),
@@ -208,7 +211,7 @@ namespace Xyzu.Views.Library
 
 			alertdialog.SetCancelable(true);
 			alertdialog.SetCanceledOnTouchOutside(true);
-			alertdialog.SetView(menuoptionsview);
+			alertdialog.SetContentView(menuoptionsview);
 			alertdialog.SetDim(false);
 			alertdialog.SetOnShowListener(this);
 			alertdialog.SetOnDismissListener(this);
@@ -232,7 +235,6 @@ namespace Xyzu.Views.Library
 
 			MenuOptionsDialog.Dismiss();
 		}
-
 		public virtual void OnShow(IDialogInterface? dialog)
 		{
 			MenuOptionsDialog?.SetAllowTouchOutside(true, motionevent =>
@@ -249,7 +251,6 @@ namespace Xyzu.Views.Library
 			_MenuOptionsDialog = null;
 			_MenuOptionsView = null;
 		}
-
 		public virtual bool OnMenuItemClick(IMenuItem? item)
 		{
 			if ((MenuOptions?)item?.ItemId is MenuOptions menuoption)

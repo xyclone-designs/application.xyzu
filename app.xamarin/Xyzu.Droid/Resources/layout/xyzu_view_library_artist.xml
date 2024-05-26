@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <xyzu.widgets.recyclerviews.ModelsRecyclerView
+    <xyzu.widgets.recyclerviews.libraryitems.ModelsRecyclerView
         style="@style/Xyzu.View.Library.RecyclerView"
         android:id="@+id/xyzu_view_library_artist_artistitems_modelsrecyclerview"
         android:layout_width="match_parent"

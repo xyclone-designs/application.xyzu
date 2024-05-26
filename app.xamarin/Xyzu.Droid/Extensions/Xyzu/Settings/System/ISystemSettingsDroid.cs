@@ -25,6 +25,7 @@ using SystemIOFile = System.IO.File;
 using SystemIOFileStream = System.IO.FileStream;
 using SystemIOPath = System.IO.Path;
 using SystemIOStreamWriter = System.IO.StreamWriter;
+using static Java.Util.Jar.Attributes;
 
 namespace Xyzu.Settings.System
 {
@@ -80,7 +81,7 @@ namespace Xyzu.Settings.System
 		}
 		public static Task AddErrorLog(Context context, IErrorLog errorlog)
 		{
-			File? packagedirectory = AndroidEnvironment.StorageDirectory.GetPackageDirectory(context);
+			File? packagedirectory = context.ExternalCacheDir?.ParentFile;
 
 			if (packagedirectory is null)
 				return Task.CompletedTask;

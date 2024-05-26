@@ -13,10 +13,11 @@ using Google.Android.Material.Snackbar;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.Linq;
 
 using Xyzu.Droid;
-
+using Xyzu.Menus;
 using AndroidUri = Android.Net.Uri;
 using JavaFile = Java.IO.File;
 using JavaURI = Java.Net.URI;
@@ -50,17 +51,21 @@ namespace Xyzu
 			public static BottomSheetDialog BottomSheet(Context context, Action<BottomSheetDialog>? bottomsheetdialogaction)
 			{
 				BottomSheetDialog bottomsheetdialog = new BottomSheetDialog(context, Resource.Style.Xyzu_Material_Dialog_Sheet_Bottom);
-	
-				bottomsheetdialog.Behavior.State = BottomSheetBehavior.StateExpanded;				
+
+				bottomsheetdialog.Behavior.State = BottomSheetBehavior.StateExpanded;
+				bottomsheetdialog.Behavior.MaxWidth = MenuOptionsUtils.DialogWidth(context);
+				bottomsheetdialog.Behavior.MaxHeight = MenuOptionsUtils.DialogHeight(context);
 
 				if (bottomsheetdialog.Window != null)
 				{
 					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-					bottomsheetdialog.Window.ClearFlags(WindowManagerFlags.TranslucentNavigation);
+					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
+					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.TranslucentStatus);
+					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
+					bottomsheetdialog.Window.SetLayout(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+					bottomsheetdialog.Window.SetGravity(GravityFlags.Bottom | GravityFlags.End);
 					bottomsheetdialog.Window.SetSoftInputMode(SoftInput.AdjustResize);
-
-					if (context.Resources?.GetColor(Resource.Color.ColorSurface, context.Theme) is Color color)
-						bottomsheetdialog.Window.SetNavigationBarColor(color);
+					bottomsheetdialog.Window.DecorView.SetBackgroundColor(Color.LightBlue);
 				}
 
 				bottomsheetdialogaction?.Invoke(bottomsheetdialog);

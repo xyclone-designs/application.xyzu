@@ -60,13 +60,21 @@ namespace Xyzu.Settings.System
 					.AppendFormat("{0}{1}", DatePrefix, Date).AppendLine();
 
 				if (Exception is null)
-					stringbuilder.AppendLine("Exception: null");
-				else
+					return stringbuilder.AppendLine("Exception: null").ToString();
+
+				Exception exception = Exception;
+
+				while (exception is not null)
+				{
 					stringbuilder
 						.AppendFormat("Exception.Message: {0}", Exception.Message).AppendLine()
 						.AppendFormat("Exception.Source: {0}", Exception.Source).AppendLine()
 						.AppendFormat("Exception.StackTrace: {0}", Exception.StackTrace).AppendLine()
-						.AppendFormat("Exception.TargetSite: {0}", Exception.TargetSite.Name).AppendLine();
+						.AppendFormat("Exception.TargetSite: {0}", Exception.TargetSite?.Name).AppendLine()
+						.AppendLine("---------------------");
+
+					exception = exception.InnerException;
+				}
 
 				return stringbuilder.ToString();
 			}
@@ -77,7 +85,7 @@ namespace Xyzu.Settings.System
 				public Default(string id, DateTime date)
 				{
 					Id = id;
-					Date = DateTime.Now;
+					Date = date;
 				}
 				
 				public string Id { get; }
@@ -89,7 +97,7 @@ namespace Xyzu.Settings.System
 
 			public static Default FromText(string text)
 			{
-				StringReader stringreader = new StringReader(text);
+				using StringReader stringreader = new (text);
 
 				string id = stringreader.ReadLine() [(IdPrefix.Length - 1) ..];
 				string date = stringreader.ReadLine() [(DatePrefix.Length - 1) ..];

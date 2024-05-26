@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using Android.Content;
+using Android.Content.Res;
 using Android.Views;
 using AndroidX.Activity.Result;
 using AndroidX.AppCompat.Widget;
@@ -17,6 +18,7 @@ using Xyzu.Library;
 using Xyzu.Library.Models;
 using Xyzu.Settings.UserInterface.Library;
 
+using AndroidWidgetFrameLayout = Android.Widget.FrameLayout;
 using ILibraryNavigatable = Xyzu.Views.Library.ILibrary.INavigatable;
 
 namespace Xyzu.Menus
@@ -179,7 +181,6 @@ namespace Xyzu.Menus
 			return CreateDialogInterfaceOnClickListener(dialoginterfaceaction);
 		}
 
-
 		public static PopupMenu CreatePopupMenu(
 			Context? context,
 			View anchor,
@@ -199,9 +200,30 @@ namespace Xyzu.Menus
 			return popupmenu;
 		}
 
-		private static int DialogHeight(Context context)
+		public static int DialogWidth(Context context)
 		{
-			return (int)((context.Resources?.DisplayMetrics?.HeightPixels ?? 0) * 0.70);
+			if (context.Resources?.Configuration?.Orientation is Orientation.Landscape)
+				return (int)((context.Resources?.DisplayMetrics?.WidthPixels ?? 0) * 0.60);
+			else return context.Resources?.DisplayMetrics?.WidthPixels ?? 0;
+		}
+		public static int DialogHeight(Context context)
+		{
+			if (context.Resources?.Configuration?.Orientation is Orientation.Portrait)
+				return (int)((context.Resources?.DisplayMetrics?.HeightPixels ?? 0) * 0.70);
+			else return context.Resources?.DisplayMetrics?.HeightPixels ?? 0;
+		}
+		public static GravityFlags DialogGravityFlags(Context context)
+		{
+			if (context.Resources?.Configuration?.Orientation is Orientation.Landscape)
+				return GravityFlags.End | GravityFlags.Bottom;
+			else return GravityFlags.CenterVertical | GravityFlags.Bottom;
+		}
+		public static AndroidWidgetFrameLayout.LayoutParams DialogLayoutParams(Context context)
+		{
+			return new AndroidWidgetFrameLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent)
+			{
+				Gravity = DialogGravityFlags(context)
+			};
 		}
 	}
 }

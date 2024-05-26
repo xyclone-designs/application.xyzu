@@ -28,6 +28,7 @@ namespace Xyzu.Menus
 
 			DialogView dialogview = new DialogView(variables.Context)
 			{
+				MaxWidth = DialogWidth(variables.Context),
 				ContentViewMaxHeight = DialogHeight(variables.Context),
 
 				ButtonsPositiveText = Resource.String.save,
@@ -123,7 +124,7 @@ namespace Xyzu.Menus
 						dialoginterface?.Dismiss();
 					}));
 
-				}));
+				}), DialogLayoutParams(variables.Context));
 			});
 		}
 		public static BottomSheetDialog? EditInfoArtist(VariableContainer variables)
@@ -239,7 +240,8 @@ namespace Xyzu.Menus
 
 						dialoginterface?.Dismiss();
 					}));
-				}));
+
+				}), DialogLayoutParams(variables.Context));
 			});
 		}
 		public static BottomSheetDialog? EditInfoPlaylist(VariableContainer variables)
@@ -284,7 +286,8 @@ namespace Xyzu.Menus
 
 						dialoginterface?.Dismiss();
 					}));
-				}));
+
+				}), DialogLayoutParams(variables.Context));
 			});
 		}
 		public static BottomSheetDialog? EditInfoSong(VariableContainer variables)
@@ -357,7 +360,8 @@ namespace Xyzu.Menus
 
 						dialoginterface?.Dismiss();
 					}));
-				}));
+
+				}), DialogLayoutParams(variables.Context));
 			});
 		}
 		public static BottomSheetDialog? EditInfoSongLyrics(VariableContainer variables)
@@ -401,7 +405,8 @@ namespace Xyzu.Menus
 
 						dialoginterface?.Dismiss();
 					}));
-				}));
+
+				}), DialogLayoutParams(variables.Context));
 			});
 		}
 	}

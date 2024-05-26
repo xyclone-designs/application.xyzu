@@ -360,20 +360,14 @@
 
   <!-- Xyzu.View.Option.Menu -->
   <style name="Xyzu.View.Option.Menu" parent="Xyzu.View.Option" />
-  <style name="Xyzu.View.Option.Menu.ImageButton" parent="Xyzu.View.Option.ImageButton">
-    <item name="android:layout_marginTop">@dimen/dp8</item>
-    <item name="android:layout_marginHorizontal">@dimen/dp16</item>
-  </style>
+  <style name="Xyzu.View.Option.Menu.ImageButton" parent="Xyzu.View.Option.ImageButton" />
   <style name="Xyzu.View.Option.Menu.CheckBox" parent="Xyzu.View.Option.CheckBox">
-    <item name="android:layout_marginTop">@dimen/dp8</item>
-    <item name="android:layout_marginHorizontal">@dimen/dp16</item>
+    <item name="android:background">@null</item>
   </style>
-  <style name="Xyzu.View.Option.Menu.RecyclerView" parent="Xyzu.Widget.RecyclerView.Simple.Horizontal">
-    <item name="android:layout_marginVertical">@dimen/dp16</item>
-  </style>
+  <style name="Xyzu.View.Option.Menu.RecyclerView" parent="Xyzu.Widget.RecyclerView.Simple.Horizontal" />
   <style name="Xyzu.View.Option.Menu.RecyclerView.ItemView" parent="Xyzu.View.Option.Button">
-    <item name="android:clipChildren">false</item>
-    <item name="android:clipToPadding">false</item>
+    <item name="android:clipChildren">true</item>
+    <item name="android:clipToPadding">true</item>
     <item name="android:drawablePadding">@dimen/dp8</item>
     <item name="android:foreground">@null</item>
     <item name="android:layout_marginHorizontal">@dimen/dp0</item>
@@ -381,7 +375,6 @@
     <item name="android:minWidth">@dimen/dp96</item>
   </style>
   <style name="Xyzu.View.Option.Menu.Text" parent="Xyzu.View.Option.Text.Title">
-    <item name="android:layout_marginTop">@dimen/dp8</item>
     <item name="android:textSize">@dimen/abc_text_size_medium_material</item>
   </style>
   <!-- Xyzu.View.Option.Menu -->
