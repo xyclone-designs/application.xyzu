@@ -191,7 +191,7 @@ namespace Xyzu.Views.NowPlaying
 
 			MenuDialog = XyzuUtils.Dialogs.Alert(Context, alertdialogbuilderaction: null);
 
-			MenuDialog.Window?.SetGravity(GravityFlags.Bottom | GravityFlags.CenterHorizontal);
+			MenuDialog.Window?.SetGravity(GravityFlags.Bottom | GravityFlags.End);
 			MenuDialog.SetView(view);
 			MenuDialog.SetCancelable(true);
 			MenuDialog.SetCanceledOnTouchOutside(true);

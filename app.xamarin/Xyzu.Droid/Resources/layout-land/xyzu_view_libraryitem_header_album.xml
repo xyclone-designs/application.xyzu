@@ -8,14 +8,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Xyzu.Views.Insets.StatusBarInsetView
+        android:id="@+id/xyzu_view_libraryitem_header_album_statusbarinsetview"
+        android:layout_height="@dimen/dp0"
+        android:layout_width="@dimen/dp0"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" 
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_album_artwork_appcompatimageview" />
+
     <androidx.appcompat.widget.AppCompatImageView
         style="@style/Xyzu.View.LibraryItem.Header.Image"
         android:id="@+id/xyzu_view_libraryitem_header_album_artwork_appcompatimageview"
         android:layout_width="@dimen/dp0"
         android:layout_height="@dimen/dp0"
-        android:layout_marginTop="@dimen/dp112"
-        android:layout_marginBottom="@dimen/dp32"
-        android:layout_marginHorizontal="@dimen/dp32"
+        android:layout_marginTop="@dimen/dp32"    
+        android:layout_marginStart="@dimen/dp16"
         android:scaleType="center"
         
         app:layout_constrainedWidth="true"
@@ -23,11 +34,10 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintWidth_max="@dimen/dp630"
         app:layout_constraintWidth_min="@dimen/dp112"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_album_lineone_appcompattextview"/>
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_libraryitem_header_album_statusbarinsetview"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_album_albumsongs_headerlibraryitemsview"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/Xyzu.View.LibraryItem.Header.Text.Title"
@@ -38,11 +48,13 @@
                 
         app:layout_constraintWidth="wrap_content_constrained"
         app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_album_linetwo_appcompattextview"
-        app:layout_constraintTop_toBottomOf="@id/xyzu_view_libraryitem_header_album_artwork_appcompatimageview" />
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_libraryitem_header_album_artwork_appcompatimageview"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_libraryitem_header_album_artwork_appcompatimageview"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_album_linetwo_appcompattextview" />
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/Xyzu.View.LibraryItem.Header.Text"
@@ -53,9 +65,10 @@
                 
         app:layout_constraintWidth="wrap_content_constrained"
         app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_libraryitem_header_album_artwork_appcompatimageview"
         app:layout_constraintTop_toBottomOf="@id/xyzu_view_libraryitem_header_album_lineone_appcompattextview"
         app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_album_linethree_appcompattextview"/>
 
@@ -68,9 +81,10 @@
                 
         app:layout_constraintWidth="wrap_content_constrained"
         app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_libraryitem_header_album_artwork_appcompatimageview"
         app:layout_constraintTop_toBottomOf="@id/xyzu_view_libraryitem_header_album_linetwo_appcompattextview"
         app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_album_linefour_appcompattextview"/>
 
@@ -83,11 +97,22 @@
                 
         app:layout_constraintWidth="wrap_content_constrained"
         app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/xyzu_view_libraryitem_header_album_artwork_appcompatimageview"
         app:layout_constraintTop_toBottomOf="@id/xyzu_view_libraryitem_header_album_linethree_appcompattextview"
         app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_album_albumsongs_headerlibraryitemsview"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/xyzu_view_libraryitem_header_album_albumsongs_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+                
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="
+        xyzu_view_libraryitem_header_album_artwork_appcompatimageview,
+        xyzu_view_libraryitem_header_album_linefour_appcompattextview"/>
 
     <xyzu.views.libraryitem.header.HeaderLibraryItemsView
         style="@style/Xyzu.View.LibraryItem.Header.LibraryItems"
@@ -96,10 +121,11 @@
         android:layout_width="@dimen/dp0"       
         android:layout_marginTop="@dimen/dp32"             
         
+        app:layout_constraintWidth="match_constraint"
         app:layout_constraintHeight="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/xyzu_view_libraryitem_header_album_linefour_appcompattextview"/>
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_libraryitem_header_album_albumsongs_barrier"/>
 
 </merge>

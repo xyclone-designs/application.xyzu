@@ -2,6 +2,7 @@
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
 
@@ -41,14 +42,20 @@ namespace Xyzu.Views.Library
 		protected BottomSheetDialog MenuOptionsDialog
 		{
 			set => _MenuOptionsDialog = value;
-			get	=> _MenuOptionsDialog ??= XyzuUtils.Dialogs.BottomSheet(Context!, _menuoptionsdialog =>
+			get => _MenuOptionsDialog ??= XyzuUtils.Dialogs.BottomSheet(Context ?? throw new Exception(), _menuoptionsdialog =>
 			{
+				MenuOptionsView.SetVisibility(ViewStates.Invisible);
+
 				_menuoptionsdialog.SetCancelable(true);
 				_menuoptionsdialog.SetCanceledOnTouchOutside(false);
 				_menuoptionsdialog.SetDim(false);
 				_menuoptionsdialog.SetOnShowListener(this);
 				_menuoptionsdialog.SetOnDismissListener(this);
 				_menuoptionsdialog.SetContentView(MenuOptionsView, MenuOptionsUtils.DialogLayoutParams(Context!));
+				_menuoptionsdialog.SetAllowTouchOutside(true, motionevent =>
+				{
+					return LibraryFragment?.Activity?.DispatchTouchEvent(motionevent) ?? false;
+				});
 			});
 		}
 		protected OptionsMenuView MenuOptionsView
@@ -56,8 +63,8 @@ namespace Xyzu.Views.Library
 			set => _MenuOptionsView = value;
 			get => _MenuOptionsView ??= new OptionsMenuView(Context!)
 			{
-				MaxWidth = MenuOptionsUtils.DialogWidth(Context!),
-				MaxHeight = MenuOptionsUtils.DialogHeight(Context!),
+				MaxWidth = MenuOptionsUtils.DialogMaxWidth(Context!),
+				MaxHeight = MenuOptionsUtils.DialogMaxHeight(Context!),
 
 				Background = Context?.Resources?.GetDrawable(Resource.Drawable.shape_cornered_top, Context.Theme),
 
@@ -237,10 +244,14 @@ namespace Xyzu.Views.Library
 		}
 		public virtual void OnShow(IDialogInterface? dialog)
 		{
-			MenuOptionsDialog?.SetAllowTouchOutside(true, motionevent =>
-			{
-				return LibraryFragment?.Activity?.DispatchTouchEvent(motionevent) ?? false;
-			});
+			if
+			(
+				Resources?.Configuration?.Orientation is Orientation.Landscape &&
+				MenuOptionsView.Parent is View parent &&
+				parent.Parent is View grandparent
+			) parent.TranslationX = grandparent.Width - MenuOptionsView.Width - ((int)parent.GetX());
+
+			MenuOptionsView.SetVisibility(ViewStates.Visible);
 
 			AddInsets(nameof(MenuOptionsView), null, null, null, MenuOptionsView?.Height);
 		}

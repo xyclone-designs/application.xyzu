@@ -13078,139 +13078,160 @@ namespace Xyzu.Droid
 			public const int xyzu_view_libraryitem_grid_small_linetwo_appcompattextview = 2131362607;
 			
 			// aapt resource value: 0x7F0A0330
-			public const int xyzu_view_libraryitem_header_album_albumsongs_headerlibraryitemsview = 2131362608;
+			public const int xyzu_view_libraryitem_header_album_albumsongs_barrier = 2131362608;
 			
 			// aapt resource value: 0x7F0A0331
-			public const int xyzu_view_libraryitem_header_album_artwork_appcompatimageview = 2131362609;
+			public const int xyzu_view_libraryitem_header_album_albumsongs_headerlibraryitemsview = 2131362609;
 			
 			// aapt resource value: 0x7F0A0332
-			public const int xyzu_view_libraryitem_header_album_linefour_appcompattextview = 2131362610;
+			public const int xyzu_view_libraryitem_header_album_artwork_appcompatimageview = 2131362610;
 			
 			// aapt resource value: 0x7F0A0333
-			public const int xyzu_view_libraryitem_header_album_lineone_appcompattextview = 2131362611;
+			public const int xyzu_view_libraryitem_header_album_linefour_appcompattextview = 2131362611;
 			
 			// aapt resource value: 0x7F0A0334
-			public const int xyzu_view_libraryitem_header_album_linethree_appcompattextview = 2131362612;
+			public const int xyzu_view_libraryitem_header_album_lineone_appcompattextview = 2131362612;
 			
 			// aapt resource value: 0x7F0A0335
-			public const int xyzu_view_libraryitem_header_album_linetwo_appcompattextview = 2131362613;
+			public const int xyzu_view_libraryitem_header_album_linethree_appcompattextview = 2131362613;
 			
 			// aapt resource value: 0x7F0A0336
-			public const int xyzu_view_libraryitem_header_artist_artistitems_headerlibraryitemsview = 2131362614;
+			public const int xyzu_view_libraryitem_header_album_linetwo_appcompattextview = 2131362614;
 			
 			// aapt resource value: 0x7F0A0337
-			public const int xyzu_view_libraryitem_header_artist_artwork_appcompatimageview = 2131362615;
+			public const int xyzu_view_libraryitem_header_album_statusbarinsetview = 2131362615;
 			
 			// aapt resource value: 0x7F0A0338
-			public const int xyzu_view_libraryitem_header_artist_linefour_appcompattextview = 2131362616;
+			public const int xyzu_view_libraryitem_header_artist_artistitems_headerlibraryitemsview = 2131362616;
 			
 			// aapt resource value: 0x7F0A0339
-			public const int xyzu_view_libraryitem_header_artist_lineone_appcompattextview = 2131362617;
+			public const int xyzu_view_libraryitem_header_artist_artistsongs_barrier = 2131362617;
 			
 			// aapt resource value: 0x7F0A033A
-			public const int xyzu_view_libraryitem_header_artist_linethree_appcompattextview = 2131362618;
+			public const int xyzu_view_libraryitem_header_artist_artwork_appcompatimageview = 2131362618;
 			
 			// aapt resource value: 0x7F0A033B
-			public const int xyzu_view_libraryitem_header_artist_linetwo_appcompattextview = 2131362619;
+			public const int xyzu_view_libraryitem_header_artist_linefour_appcompattextview = 2131362619;
 			
 			// aapt resource value: 0x7F0A033C
-			public const int xyzu_view_libraryitem_header_genre_artwork_appcompatimageview = 2131362620;
+			public const int xyzu_view_libraryitem_header_artist_lineone_appcompattextview = 2131362620;
 			
 			// aapt resource value: 0x7F0A033D
-			public const int xyzu_view_libraryitem_header_genre_genresongs_headerlibraryitemsview = 2131362621;
+			public const int xyzu_view_libraryitem_header_artist_linethree_appcompattextview = 2131362621;
 			
 			// aapt resource value: 0x7F0A033E
-			public const int xyzu_view_libraryitem_header_genre_linefour_appcompattextview = 2131362622;
+			public const int xyzu_view_libraryitem_header_artist_linetwo_appcompattextview = 2131362622;
 			
 			// aapt resource value: 0x7F0A033F
-			public const int xyzu_view_libraryitem_header_genre_lineone_appcompattextview = 2131362623;
+			public const int xyzu_view_libraryitem_header_artist_statusbarinsetview = 2131362623;
 			
 			// aapt resource value: 0x7F0A0340
-			public const int xyzu_view_libraryitem_header_genre_linethree_appcompattextview = 2131362624;
+			public const int xyzu_view_libraryitem_header_genre_artwork_appcompatimageview = 2131362624;
 			
 			// aapt resource value: 0x7F0A0341
-			public const int xyzu_view_libraryitem_header_genre_linetwo_appcompattextview = 2131362625;
-			
-			// aapt resource value: 0x7F0A0343
-			public const int xyzu_view_libraryitem_header_libraryitems_libraryitemsoptionsexpanded_appcompatimagebutton = 2131362627;
+			public const int xyzu_view_libraryitem_header_genre_genresongs_barrier = 2131362625;
 			
 			// aapt resource value: 0x7F0A0342
-			public const int xyzu_view_libraryitem_header_libraryitems_libraryitemsoptions_optionslibrarylistview = 2131362626;
+			public const int xyzu_view_libraryitem_header_genre_genresongs_headerlibraryitemsview = 2131362626;
+			
+			// aapt resource value: 0x7F0A0343
+			public const int xyzu_view_libraryitem_header_genre_linefour_appcompattextview = 2131362627;
 			
 			// aapt resource value: 0x7F0A0344
-			public const int xyzu_view_libraryitem_header_libraryitems_options_appcompatimagebutton = 2131362628;
+			public const int xyzu_view_libraryitem_header_genre_lineone_appcompattextview = 2131362628;
 			
 			// aapt resource value: 0x7F0A0345
-			public const int xyzu_view_libraryitem_header_libraryitems_play_appcompatimagebutton = 2131362629;
+			public const int xyzu_view_libraryitem_header_genre_linethree_appcompattextview = 2131362629;
 			
 			// aapt resource value: 0x7F0A0346
-			public const int xyzu_view_libraryitem_header_libraryitems_space = 2131362630;
+			public const int xyzu_view_libraryitem_header_genre_linetwo_appcompattextview = 2131362630;
 			
 			// aapt resource value: 0x7F0A0347
-			public const int xyzu_view_libraryitem_header_libraryitems_text_appcompattextview = 2131362631;
-			
-			// aapt resource value: 0x7F0A0348
-			public const int xyzu_view_libraryitem_header_playlist_artwork_appcompatimageview = 2131362632;
+			public const int xyzu_view_libraryitem_header_genre_statusbarinsetview = 2131362631;
 			
 			// aapt resource value: 0x7F0A0349
-			public const int xyzu_view_libraryitem_header_playlist_linefour_appcompattextview = 2131362633;
+			public const int xyzu_view_libraryitem_header_libraryitems_libraryitemsoptionsexpanded_appcompatimagebutton = 2131362633;
+			
+			// aapt resource value: 0x7F0A0348
+			public const int xyzu_view_libraryitem_header_libraryitems_libraryitemsoptions_optionslibrarylistview = 2131362632;
 			
 			// aapt resource value: 0x7F0A034A
-			public const int xyzu_view_libraryitem_header_playlist_lineone_appcompattextview = 2131362634;
+			public const int xyzu_view_libraryitem_header_libraryitems_options_appcompatimagebutton = 2131362634;
 			
 			// aapt resource value: 0x7F0A034B
-			public const int xyzu_view_libraryitem_header_playlist_linethree_appcompattextview = 2131362635;
+			public const int xyzu_view_libraryitem_header_libraryitems_play_appcompatimagebutton = 2131362635;
 			
 			// aapt resource value: 0x7F0A034C
-			public const int xyzu_view_libraryitem_header_playlist_linetwo_appcompattextview = 2131362636;
+			public const int xyzu_view_libraryitem_header_libraryitems_space = 2131362636;
 			
 			// aapt resource value: 0x7F0A034D
-			public const int xyzu_view_libraryitem_header_playlist_playlistsongs_headerlibraryitemsview = 2131362637;
+			public const int xyzu_view_libraryitem_header_libraryitems_text_appcompattextview = 2131362637;
 			
 			// aapt resource value: 0x7F0A034E
-			public const int xyzu_view_libraryitem_list_large_artwork_appcompatimageview = 2131362638;
+			public const int xyzu_view_libraryitem_header_playlist_artwork_appcompatimageview = 2131362638;
 			
 			// aapt resource value: 0x7F0A034F
-			public const int xyzu_view_libraryitem_list_large_equaliser_appcompatimageview = 2131362639;
+			public const int xyzu_view_libraryitem_header_playlist_linefour_appcompattextview = 2131362639;
 			
 			// aapt resource value: 0x7F0A0350
-			public const int xyzu_view_libraryitem_list_large_linefour_appcompattextview = 2131362640;
+			public const int xyzu_view_libraryitem_header_playlist_lineone_appcompattextview = 2131362640;
 			
 			// aapt resource value: 0x7F0A0351
-			public const int xyzu_view_libraryitem_list_large_lineone_appcompattextview = 2131362641;
+			public const int xyzu_view_libraryitem_header_playlist_linethree_appcompattextview = 2131362641;
 			
 			// aapt resource value: 0x7F0A0352
-			public const int xyzu_view_libraryitem_list_large_linethree_appcompattextview = 2131362642;
+			public const int xyzu_view_libraryitem_header_playlist_linetwo_appcompattextview = 2131362642;
 			
 			// aapt resource value: 0x7F0A0353
-			public const int xyzu_view_libraryitem_list_large_linetwo_appcompattextview = 2131362643;
+			public const int xyzu_view_libraryitem_header_playlist_playlistsongs_headerlibraryitemsview = 2131362643;
 			
 			// aapt resource value: 0x7F0A0354
-			public const int xyzu_view_libraryitem_list_medium_artwork_appcompatimageview = 2131362644;
+			public const int xyzu_view_libraryitem_header_playlist_statusbarinsetview = 2131362644;
 			
 			// aapt resource value: 0x7F0A0355
-			public const int xyzu_view_libraryitem_list_medium_equaliser_appcompatimageview = 2131362645;
+			public const int xyzu_view_libraryitem_list_large_artwork_appcompatimageview = 2131362645;
 			
 			// aapt resource value: 0x7F0A0356
-			public const int xyzu_view_libraryitem_list_medium_lineone_appcompattextview = 2131362646;
+			public const int xyzu_view_libraryitem_list_large_equaliser_appcompatimageview = 2131362646;
 			
 			// aapt resource value: 0x7F0A0357
-			public const int xyzu_view_libraryitem_list_medium_linethree_appcompattextview = 2131362647;
+			public const int xyzu_view_libraryitem_list_large_linefour_appcompattextview = 2131362647;
 			
 			// aapt resource value: 0x7F0A0358
-			public const int xyzu_view_libraryitem_list_medium_linetwo_appcompattextview = 2131362648;
+			public const int xyzu_view_libraryitem_list_large_lineone_appcompattextview = 2131362648;
 			
 			// aapt resource value: 0x7F0A0359
-			public const int xyzu_view_libraryitem_list_small_artwork_appcompatimageview = 2131362649;
+			public const int xyzu_view_libraryitem_list_large_linethree_appcompattextview = 2131362649;
 			
 			// aapt resource value: 0x7F0A035A
-			public const int xyzu_view_libraryitem_list_small_equaliser_appcompatimageview = 2131362650;
+			public const int xyzu_view_libraryitem_list_large_linetwo_appcompattextview = 2131362650;
 			
 			// aapt resource value: 0x7F0A035B
-			public const int xyzu_view_libraryitem_list_small_lineone_appcompattextview = 2131362651;
+			public const int xyzu_view_libraryitem_list_medium_artwork_appcompatimageview = 2131362651;
 			
 			// aapt resource value: 0x7F0A035C
-			public const int xyzu_view_libraryitem_list_small_linetwo_appcompattextview = 2131362652;
+			public const int xyzu_view_libraryitem_list_medium_equaliser_appcompatimageview = 2131362652;
+			
+			// aapt resource value: 0x7F0A035D
+			public const int xyzu_view_libraryitem_list_medium_lineone_appcompattextview = 2131362653;
+			
+			// aapt resource value: 0x7F0A035E
+			public const int xyzu_view_libraryitem_list_medium_linethree_appcompattextview = 2131362654;
+			
+			// aapt resource value: 0x7F0A035F
+			public const int xyzu_view_libraryitem_list_medium_linetwo_appcompattextview = 2131362655;
+			
+			// aapt resource value: 0x7F0A0360
+			public const int xyzu_view_libraryitem_list_small_artwork_appcompatimageview = 2131362656;
+			
+			// aapt resource value: 0x7F0A0361
+			public const int xyzu_view_libraryitem_list_small_equaliser_appcompatimageview = 2131362657;
+			
+			// aapt resource value: 0x7F0A0362
+			public const int xyzu_view_libraryitem_list_small_lineone_appcompattextview = 2131362658;
+			
+			// aapt resource value: 0x7F0A0363
+			public const int xyzu_view_libraryitem_list_small_linetwo_appcompattextview = 2131362659;
 			
 			// aapt resource value: 0x7F0A0317
 			public const int xyzu_view_library_albums_albums_albumsrecyclerview = 2131362583;
@@ -13245,218 +13266,218 @@ namespace Xyzu.Droid
 			// aapt resource value: 0x7F0A0320
 			public const int xyzu_view_library_songs_songs_songsrecyclerview = 2131362592;
 			
-			// aapt resource value: 0x7F0A035D
-			public const int xyzu_view_misc_dialog_buttons_barrier_bottom = 2131362653;
-			
-			// aapt resource value: 0x7F0A035E
-			public const int xyzu_view_misc_dialog_buttons_barrier_top = 2131362654;
-			
-			// aapt resource value: 0x7F0A035F
-			public const int xyzu_view_misc_dialog_buttons_negative_appcompatbutton = 2131362655;
-			
-			// aapt resource value: 0x7F0A0360
-			public const int xyzu_view_misc_dialog_buttons_neutral_appcompatbutton = 2131362656;
-			
-			// aapt resource value: 0x7F0A0361
-			public const int xyzu_view_misc_dialog_buttons_positive_appcompatbutton = 2131362657;
-			
-			// aapt resource value: 0x7F0A0362
-			public const int xyzu_view_misc_dialog_buttons_space = 2131362658;
-			
-			// aapt resource value: 0x7F0A0363
-			public const int xyzu_view_misc_dialog_contentview_linearlayoutcompat = 2131362659;
-			
 			// aapt resource value: 0x7F0A0364
-			public const int xyzu_view_misc_dialog_contentview_nestedscrollview = 2131362660;
+			public const int xyzu_view_misc_dialog_buttons_barrier_bottom = 2131362660;
 			
 			// aapt resource value: 0x7F0A0365
-			public const int xyzu_view_misc_dialog_description_appcompattextview = 2131362661;
+			public const int xyzu_view_misc_dialog_buttons_barrier_top = 2131362661;
 			
 			// aapt resource value: 0x7F0A0366
-			public const int xyzu_view_misc_dialog_navigationbarinsetview = 2131362662;
+			public const int xyzu_view_misc_dialog_buttons_negative_appcompatbutton = 2131362662;
 			
 			// aapt resource value: 0x7F0A0367
-			public const int xyzu_view_misc_dialog_statusbarinsetview = 2131362663;
+			public const int xyzu_view_misc_dialog_buttons_neutral_appcompatbutton = 2131362663;
 			
 			// aapt resource value: 0x7F0A0368
-			public const int xyzu_view_misc_dialog_title_appcompattextview = 2131362664;
+			public const int xyzu_view_misc_dialog_buttons_positive_appcompatbutton = 2131362664;
 			
 			// aapt resource value: 0x7F0A0369
-			public const int xyzu_view_misc_navigationheader_icon_appcompatimageview = 2131362665;
+			public const int xyzu_view_misc_dialog_buttons_space = 2131362665;
 			
 			// aapt resource value: 0x7F0A036A
-			public const int xyzu_view_misc_navigationheader_statusbarinsetview = 2131362666;
+			public const int xyzu_view_misc_dialog_contentview_linearlayoutcompat = 2131362666;
 			
 			// aapt resource value: 0x7F0A036B
-			public const int xyzu_view_nowplaying = 2131362667;
-			
-			// aapt resource value: 0x7F0A036D
-			public const int xyzu_view_nowplaying_artworkdetails_space = 2131362669;
+			public const int xyzu_view_misc_dialog_contentview_nestedscrollview = 2131362667;
 			
 			// aapt resource value: 0x7F0A036C
-			public const int xyzu_view_nowplaying_artwork_simplehorizontalrecyclerview = 2131362668;
+			public const int xyzu_view_misc_dialog_description_appcompattextview = 2131362668;
+			
+			// aapt resource value: 0x7F0A036D
+			public const int xyzu_view_misc_dialog_navigationbarinsetview = 2131362669;
 			
 			// aapt resource value: 0x7F0A036E
-			public const int xyzu_view_nowplaying_backgroundblur_appcompatimageview = 2131362670;
+			public const int xyzu_view_misc_dialog_statusbarinsetview = 2131362670;
 			
 			// aapt resource value: 0x7F0A036F
-			public const int xyzu_view_nowplaying_buttons_menu_audioeffects_appcompatimagebutton = 2131362671;
+			public const int xyzu_view_misc_dialog_title_appcompattextview = 2131362671;
 			
 			// aapt resource value: 0x7F0A0370
-			public const int xyzu_view_nowplaying_buttons_menu_options_appcompatimagebutton = 2131362672;
+			public const int xyzu_view_misc_navigationheader_icon_appcompatimageview = 2131362672;
 			
 			// aapt resource value: 0x7F0A0371
-			public const int xyzu_view_nowplaying_buttons_menu_playersettings_appcompatimagebutton = 2131362673;
+			public const int xyzu_view_misc_navigationheader_statusbarinsetview = 2131362673;
 			
 			// aapt resource value: 0x7F0A0372
-			public const int xyzu_view_nowplaying_buttons_menu_queue_appcompatimagebutton = 2131362674;
-			
-			// aapt resource value: 0x7F0A0373
-			public const int xyzu_view_nowplaying_buttons_player_next_appcompatimagebutton = 2131362675;
+			public const int xyzu_view_nowplaying = 2131362674;
 			
 			// aapt resource value: 0x7F0A0374
-			public const int xyzu_view_nowplaying_buttons_player_playpause_appcompatimagebutton = 2131362676;
+			public const int xyzu_view_nowplaying_artworkdetails_space = 2131362676;
+			
+			// aapt resource value: 0x7F0A0373
+			public const int xyzu_view_nowplaying_artwork_simplehorizontalrecyclerview = 2131362675;
 			
 			// aapt resource value: 0x7F0A0375
-			public const int xyzu_view_nowplaying_buttons_player_previous_appcompatimagebutton = 2131362677;
+			public const int xyzu_view_nowplaying_backgroundblur_appcompatimageview = 2131362677;
 			
 			// aapt resource value: 0x7F0A0376
-			public const int xyzu_view_nowplaying_detail_one_appcompattextview = 2131362678;
+			public const int xyzu_view_nowplaying_buttons_menu_audioeffects_appcompatimagebutton = 2131362678;
 			
 			// aapt resource value: 0x7F0A0377
-			public const int xyzu_view_nowplaying_detail_two_appcompattextview = 2131362679;
+			public const int xyzu_view_nowplaying_buttons_menu_options_appcompatimagebutton = 2131362679;
 			
 			// aapt resource value: 0x7F0A0378
-			public const int xyzu_view_nowplaying_navigationbarinsetview = 2131362680;
-			
-			// aapt resource value: 0x7F0A037A
-			public const int xyzu_view_nowplaying_positiontext_appcompattextview = 2131362682;
+			public const int xyzu_view_nowplaying_buttons_menu_playersettings_appcompatimagebutton = 2131362680;
 			
 			// aapt resource value: 0x7F0A0379
-			public const int xyzu_view_nowplaying_position_fixedmusicbar = 2131362681;
+			public const int xyzu_view_nowplaying_buttons_menu_queue_appcompatimagebutton = 2131362681;
+			
+			// aapt resource value: 0x7F0A037A
+			public const int xyzu_view_nowplaying_buttons_player_next_appcompatimagebutton = 2131362682;
 			
 			// aapt resource value: 0x7F0A037B
-			public const int xyzu_view_nowplaying_statusbarinsetview = 2131362683;
+			public const int xyzu_view_nowplaying_buttons_player_playpause_appcompatimagebutton = 2131362683;
 			
 			// aapt resource value: 0x7F0A037C
-			public const int xyzu_view_option_createandview_createbutton_appcompatimagebutton = 2131362684;
+			public const int xyzu_view_nowplaying_buttons_player_previous_appcompatimagebutton = 2131362684;
 			
 			// aapt resource value: 0x7F0A037D
-			public const int xyzu_view_option_createandview_createmessage_appcompattextview = 2131362685;
+			public const int xyzu_view_nowplaying_detail_one_appcompattextview = 2131362685;
 			
 			// aapt resource value: 0x7F0A037E
-			public const int xyzu_view_option_createandview_createname_appcompatedittext = 2131362686;
+			public const int xyzu_view_nowplaying_detail_two_appcompattextview = 2131362686;
 			
 			// aapt resource value: 0x7F0A037F
-			public const int xyzu_view_option_createandview_view_simpleverticalrecyclerview = 2131362687;
-			
-			// aapt resource value: 0x7F0A0380
-			public const int xyzu_view_option_librarylist_options_isreversed_appcompatcheckbox = 2131362688;
+			public const int xyzu_view_nowplaying_navigationbarinsetview = 2131362687;
 			
 			// aapt resource value: 0x7F0A0381
-			public const int xyzu_view_option_librarylist_options_layouttype_appcompattextview = 2131362689;
+			public const int xyzu_view_nowplaying_positiontext_appcompattextview = 2131362689;
+			
+			// aapt resource value: 0x7F0A0380
+			public const int xyzu_view_nowplaying_position_fixedmusicbar = 2131362688;
 			
 			// aapt resource value: 0x7F0A0382
-			public const int xyzu_view_option_librarylist_options_optionsbuttonbarrier_bottom = 2131362690;
+			public const int xyzu_view_nowplaying_statusbarinsetview = 2131362690;
 			
 			// aapt resource value: 0x7F0A0383
-			public const int xyzu_view_option_librarylist_options_paddingtop_space = 2131362691;
+			public const int xyzu_view_option_createandview_createbutton_appcompatimagebutton = 2131362691;
 			
 			// aapt resource value: 0x7F0A0384
-			public const int xyzu_view_option_librarylist_options_simplehorizontalrecyclerview = 2131362692;
+			public const int xyzu_view_option_createandview_createmessage_appcompattextview = 2131362692;
 			
 			// aapt resource value: 0x7F0A0385
-			public const int xyzu_view_option_librarylist_options_sortkey_appcompattextview = 2131362693;
+			public const int xyzu_view_option_createandview_createname_appcompatedittext = 2131362693;
 			
 			// aapt resource value: 0x7F0A0386
-			public const int xyzu_view_option_menu_all_appcompatcheckbox = 2131362694;
+			public const int xyzu_view_option_createandview_view_simpleverticalrecyclerview = 2131362694;
 			
 			// aapt resource value: 0x7F0A0387
-			public const int xyzu_view_option_menu_cancel_appcompatimagebutton = 2131362695;
+			public const int xyzu_view_option_librarylist_options_isreversed_appcompatcheckbox = 2131362695;
 			
 			// aapt resource value: 0x7F0A0388
-			public const int xyzu_view_option_menu_menu_simplehorizontalrecyclerview = 2131362696;
+			public const int xyzu_view_option_librarylist_options_layouttype_appcompattextview = 2131362696;
 			
 			// aapt resource value: 0x7F0A0389
-			public const int xyzu_view_option_menu_navigationbarinsetview = 2131362697;
+			public const int xyzu_view_option_librarylist_options_optionsbuttonbarrier_bottom = 2131362697;
 			
 			// aapt resource value: 0x7F0A038A
-			public const int xyzu_view_option_menu_text_appcompattextview = 2131362698;
+			public const int xyzu_view_option_librarylist_options_paddingtop_space = 2131362698;
 			
 			// aapt resource value: 0x7F0A038B
-			public const int xyzu_view_setting_audioband_footer_appcompattextview = 2131362699;
+			public const int xyzu_view_option_librarylist_options_simplehorizontalrecyclerview = 2131362699;
 			
 			// aapt resource value: 0x7F0A038C
-			public const int xyzu_view_setting_audioband_max_appcompattextview = 2131362700;
+			public const int xyzu_view_option_librarylist_options_sortkey_appcompattextview = 2131362700;
 			
 			// aapt resource value: 0x7F0A038D
-			public const int xyzu_view_setting_audioband_min_appcompattextview = 2131362701;
+			public const int xyzu_view_option_menu_all_appcompatcheckbox = 2131362701;
 			
 			// aapt resource value: 0x7F0A038E
-			public const int xyzu_view_setting_audioband_title_appcompattextview = 2131362702;
+			public const int xyzu_view_option_menu_cancel_appcompatimagebutton = 2131362702;
 			
 			// aapt resource value: 0x7F0A038F
-			public const int xyzu_view_setting_audioband_value_appcompatseekbar = 2131362703;
+			public const int xyzu_view_option_menu_menu_simplehorizontalrecyclerview = 2131362703;
 			
 			// aapt resource value: 0x7F0A0390
-			public const int xyzu_view_setting_audioband_value_frame_contentframelayout = 2131362704;
+			public const int xyzu_view_option_menu_navigationbarinsetview = 2131362704;
 			
 			// aapt resource value: 0x7F0A0391
-			public const int xyzu_view_setting_directoryitem_directorychildren_recursiveitemsrecyclerview = 2131362705;
+			public const int xyzu_view_option_menu_text_appcompattextview = 2131362705;
 			
 			// aapt resource value: 0x7F0A0392
-			public const int xyzu_view_setting_directoryitem_directoryisselected_appcompatcheckbox = 2131362706;
+			public const int xyzu_view_setting_audioband_footer_appcompattextview = 2131362706;
 			
 			// aapt resource value: 0x7F0A0393
-			public const int xyzu_view_setting_directoryitem_directorytitle_appcompatbutton = 2131362707;
+			public const int xyzu_view_setting_audioband_max_appcompattextview = 2131362707;
 			
 			// aapt resource value: 0x7F0A0394
-			public const int xyzu_view_toolbar_drawerlayout_statusbarinsetview = 2131362708;
+			public const int xyzu_view_setting_audioband_min_appcompattextview = 2131362708;
 			
 			// aapt resource value: 0x7F0A0395
-			public const int xyzu_view_toolbar_drawerlayout_toolbar = 2131362709;
+			public const int xyzu_view_setting_audioband_title_appcompattextview = 2131362709;
 			
 			// aapt resource value: 0x7F0A0396
-			public const int xyzu_view_toolbar_search_searcher_albumstoggle_appcompatimagebutton = 2131362710;
+			public const int xyzu_view_setting_audioband_value_appcompatseekbar = 2131362710;
 			
 			// aapt resource value: 0x7F0A0397
-			public const int xyzu_view_toolbar_search_searcher_artiststoggle_appcompatimagebutton = 2131362711;
+			public const int xyzu_view_setting_audioband_value_frame_contentframelayout = 2131362711;
 			
 			// aapt resource value: 0x7F0A0398
-			public const int xyzu_view_toolbar_search_searcher_genrestoggle_appcompatimagebutton = 2131362712;
+			public const int xyzu_view_setting_directoryitem_directorychildren_recursiveitemsrecyclerview = 2131362712;
 			
 			// aapt resource value: 0x7F0A0399
-			public const int xyzu_view_toolbar_search_searcher_horizontalscrollview = 2131362713;
+			public const int xyzu_view_setting_directoryitem_directoryisselected_appcompatcheckbox = 2131362713;
 			
 			// aapt resource value: 0x7F0A039A
-			public const int xyzu_view_toolbar_search_searcher_playliststoggle_appcompatimagebutton = 2131362714;
+			public const int xyzu_view_setting_directoryitem_directorytitle_appcompatbutton = 2131362714;
 			
 			// aapt resource value: 0x7F0A039B
-			public const int xyzu_view_toolbar_search_searcher_songstoggle_appcompatimagebutton = 2131362715;
+			public const int xyzu_view_toolbar_drawerlayout_statusbarinsetview = 2131362715;
 			
 			// aapt resource value: 0x7F0A039C
-			public const int xyzu_view_toolbar_search_searchresults_optionstoggle_appcompatimagebutton = 2131362716;
+			public const int xyzu_view_toolbar_drawerlayout_toolbar = 2131362716;
 			
 			// aapt resource value: 0x7F0A039D
-			public const int xyzu_view_toolbar_search_searchview = 2131362717;
+			public const int xyzu_view_toolbar_search_searcher_albumstoggle_appcompatimagebutton = 2131362717;
 			
 			// aapt resource value: 0x7F0A039E
-			public const int xyzu_view_toolbar_search_statusbarinsetview = 2131362718;
+			public const int xyzu_view_toolbar_search_searcher_artiststoggle_appcompatimagebutton = 2131362718;
 			
 			// aapt resource value: 0x7F0A039F
-			public const int xyzu_view_toolbar_settings_statusbarinsetview = 2131362719;
+			public const int xyzu_view_toolbar_search_searcher_genrestoggle_appcompatimagebutton = 2131362719;
 			
 			// aapt resource value: 0x7F0A03A0
-			public const int xyzu_view_toolbar_settings_toolbar = 2131362720;
+			public const int xyzu_view_toolbar_search_searcher_horizontalscrollview = 2131362720;
 			
 			// aapt resource value: 0x7F0A03A1
-			public const int xyzu_view_toolbar_tablayout_statusbarinsetview = 2131362721;
+			public const int xyzu_view_toolbar_search_searcher_playliststoggle_appcompatimagebutton = 2131362721;
 			
 			// aapt resource value: 0x7F0A03A2
-			public const int xyzu_view_toolbar_tablayout_tablayout = 2131362722;
+			public const int xyzu_view_toolbar_search_searcher_songstoggle_appcompatimagebutton = 2131362722;
 			
 			// aapt resource value: 0x7F0A03A3
-			public const int xyzu_view_toolbar_tablayout_toolbar = 2131362723;
+			public const int xyzu_view_toolbar_search_searchresults_optionstoggle_appcompatimagebutton = 2131362723;
+			
+			// aapt resource value: 0x7F0A03A4
+			public const int xyzu_view_toolbar_search_searchview = 2131362724;
+			
+			// aapt resource value: 0x7F0A03A5
+			public const int xyzu_view_toolbar_search_statusbarinsetview = 2131362725;
+			
+			// aapt resource value: 0x7F0A03A6
+			public const int xyzu_view_toolbar_settings_statusbarinsetview = 2131362726;
+			
+			// aapt resource value: 0x7F0A03A7
+			public const int xyzu_view_toolbar_settings_toolbar = 2131362727;
+			
+			// aapt resource value: 0x7F0A03A8
+			public const int xyzu_view_toolbar_tablayout_statusbarinsetview = 2131362728;
+			
+			// aapt resource value: 0x7F0A03A9
+			public const int xyzu_view_toolbar_tablayout_tablayout = 2131362729;
+			
+			// aapt resource value: 0x7F0A03AA
+			public const int xyzu_view_toolbar_tablayout_toolbar = 2131362730;
 			
 			// aapt resource value: 0x7F0A024E
 			public const int x_left = 2131362382;
@@ -13464,8 +13485,8 @@ namespace Xyzu.Droid
 			// aapt resource value: 0x7F0A024F
 			public const int x_right = 2131362383;
 			
-			// aapt resource value: 0x7F0A03A4
-			public const int zoom = 2131362724;
+			// aapt resource value: 0x7F0A03AB
+			public const int zoom = 2131362731;
 			
 			static Id()
 			{

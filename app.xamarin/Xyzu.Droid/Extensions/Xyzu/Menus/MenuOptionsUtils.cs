@@ -85,6 +85,7 @@ namespace Xyzu.Menus
 			public Action<IDialogInterface?>? DialogInterfaceListenerOnSelect { get; set; }
 			public Action<IDialogInterface?>? DialogInterfaceListenerSave { get; set; }
 			public IDialogInterfaceOnDismissListener? DialogInterfaceListenerOnDismiss { get; set; }
+			public IDialogInterfaceOnShowListener? DialogInterfaceListenerOnShow { get; set; }
 		}
  
 		private static Snackbar? CreateSnackbar(VariableContainer variables)
@@ -203,10 +204,20 @@ namespace Xyzu.Menus
 		public static int DialogWidth(Context context)
 		{
 			if (context.Resources?.Configuration?.Orientation is Orientation.Landscape)
+				return ViewGroup.LayoutParams.WrapContent;
+			else return ViewGroup.LayoutParams.MatchParent;
+		}
+		public static int DialogHeight(Context _)
+		{
+			return ViewGroup.LayoutParams.WrapContent;
+		}
+		public static int DialogMaxWidth(Context context)
+		{
+			if (context.Resources?.Configuration?.Orientation is Orientation.Landscape)
 				return (int)((context.Resources?.DisplayMetrics?.WidthPixels ?? 0) * 0.60);
 			else return context.Resources?.DisplayMetrics?.WidthPixels ?? 0;
 		}
-		public static int DialogHeight(Context context)
+		public static int DialogMaxHeight(Context context)
 		{
 			if (context.Resources?.Configuration?.Orientation is Orientation.Portrait)
 				return (int)((context.Resources?.DisplayMetrics?.HeightPixels ?? 0) * 0.70);

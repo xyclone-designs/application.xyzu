@@ -51,10 +51,10 @@ namespace Xyzu
 			public static BottomSheetDialog BottomSheet(Context context, Action<BottomSheetDialog>? bottomsheetdialogaction)
 			{
 				BottomSheetDialog bottomsheetdialog = new BottomSheetDialog(context, Resource.Style.Xyzu_Material_Dialog_Sheet_Bottom);
-
+				
 				bottomsheetdialog.Behavior.State = BottomSheetBehavior.StateExpanded;
-				bottomsheetdialog.Behavior.MaxWidth = MenuOptionsUtils.DialogWidth(context);
-				bottomsheetdialog.Behavior.MaxHeight = MenuOptionsUtils.DialogHeight(context);
+				bottomsheetdialog.Behavior.MaxWidth = MenuOptionsUtils.DialogMaxWidth(context);
+				bottomsheetdialog.Behavior.MaxHeight = MenuOptionsUtils.DialogMaxHeight(context);
 
 				if (bottomsheetdialog.Window != null)
 				{
@@ -62,10 +62,9 @@ namespace Xyzu
 					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
 					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.TranslucentStatus);
 					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
-					bottomsheetdialog.Window.SetLayout(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
-					bottomsheetdialog.Window.SetGravity(GravityFlags.Bottom | GravityFlags.End);
+					bottomsheetdialog.Window.SetLayout(MenuOptionsUtils.DialogWidth(context), MenuOptionsUtils.DialogHeight(context));
+					bottomsheetdialog.Window.SetGravity(MenuOptionsUtils.DialogGravityFlags(context));
 					bottomsheetdialog.Window.SetSoftInputMode(SoftInput.AdjustResize);
-					bottomsheetdialog.Window.DecorView.SetBackgroundColor(Color.LightBlue);
 				}
 
 				bottomsheetdialogaction?.Invoke(bottomsheetdialog);

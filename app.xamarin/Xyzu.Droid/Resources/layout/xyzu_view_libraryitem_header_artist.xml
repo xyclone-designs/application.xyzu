@@ -8,6 +8,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Xyzu.Views.Insets.StatusBarInsetView
+        android:id="@+id/xyzu_view_libraryitem_header_artist_statusbarinsetview"
+        android:layout_height="@dimen/dp0"
+        android:layout_width="@dimen/dp0"
+        
+        app:layout_constraintWidth="wrap_content_constrained"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_artist_artwork_appcompatimageview" />
+
     <androidx.appcompat.widget.AppCompatImageView
         style="@style/Xyzu.View.LibraryItem.Header.Image"
         android:id="@+id/xyzu_view_libraryitem_header_artist_artwork_appcompatimageview"
@@ -25,8 +37,8 @@
         app:layout_constraintWidth_min="@dimen/dp112"
         app:layout_constraintWidth_percent="0.5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_libraryitem_header_artist_statusbarinsetview"
         app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_artist_lineone_appcompattextview"/>
 
     <androidx.appcompat.widget.AppCompatTextView

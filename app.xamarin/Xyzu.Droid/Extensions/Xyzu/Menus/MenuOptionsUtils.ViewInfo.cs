@@ -1,5 +1,9 @@
 ﻿#nullable enable
 
+using Android.Content;
+using Android.Content.Res;
+using Android.Views;
+
 using Google.Android.Material.BottomSheet;
 
 using System;
@@ -7,12 +11,31 @@ using System;
 using Xyzu.Droid;
 using Xyzu.Views.Misc;
 using Xyzu.Views.Info;
-using Android.Content.Res;
 
 namespace Xyzu.Menus
 {
 	public partial class MenuOptionsUtils
 	{
+		private static DialogInterfaceOnShowListener ViewInfoOnShowListener(View view, IDialogInterfaceOnShowListener? listener = null)
+		{
+			view.SetVisibility(ViewStates.Invisible);
+
+			return new DialogInterfaceOnShowListener
+			{
+				OnShowAction = dialoginterface =>
+				{
+					if
+					(
+						view.Resources?.Configuration?.Orientation is Orientation.Landscape &&
+						view.Parent is View parent &&
+						parent.Parent is View grandparent
+					) parent.TranslationX = grandparent.Width - view.Width - ((int)parent.GetX());
+
+					view.SetVisibility(ViewStates.Visible);
+					listener?.OnShow(dialoginterface);
+				}
+			};
+		}
 		private static DialogView ViewInfoDialogView(VariableContainer variables, Action<DialogView>? oncreatedialogview)
 		{
 			if (variables.Context is null)
@@ -20,8 +43,8 @@ namespace Xyzu.Menus
 
 			DialogView dialogview = new DialogView(variables.Context)
 			{
-				ContentViewMaxWidth = DialogWidth(variables.Context),
-				ContentViewMaxHeight = DialogHeight(variables.Context),
+				ContentViewMaxWidth = DialogMaxWidth(variables.Context),
+				ContentViewMaxHeight = DialogMaxHeight(variables.Context),
 
 				ButtonsPositiveText = Resource.String.edit,
 				ButtonsNegativeText = Resource.String.close,
@@ -52,8 +75,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				appcompatdialog.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
-				appcompatdialog.SetContentView(ViewInfoDialogView(variables, _dialogview => 
+				DialogView view = ViewInfoDialogView(variables, _dialogview =>
 				{
 					_dialogview.ContentView = new InfoAlbumView(variables.Context)
 					{
@@ -63,8 +85,11 @@ namespace Xyzu.Menus
 
 					_dialogview.Dialog = appcompatdialog;
 					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Album);
+				});
 
-				}), DialogLayoutParams(variables.Context));
+				appcompatdialog.SetContentView(view, DialogLayoutParams(variables.Context));
+				appcompatdialog.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
+				appcompatdialog.SetOnShowListener(ViewInfoOnShowListener(view, variables.DialogInterfaceListenerOnShow));
 			});
 		}
 		public static BottomSheetDialog? ViewInfoArtist(VariableContainer variables)
@@ -85,8 +110,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				appcompatdialog.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
-				appcompatdialog.SetContentView(ViewInfoDialogView(variables, _dialogview =>
+				DialogView view = ViewInfoDialogView(variables, _dialogview =>
 				{
 					_dialogview.ContentView = new InfoArtistView(variables.Context)
 					{
@@ -96,8 +120,11 @@ namespace Xyzu.Menus
 
 					_dialogview.Dialog = appcompatdialog;
 					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Artist);
+				});
 
-				}), DialogLayoutParams(variables.Context));
+				appcompatdialog.SetContentView(view, DialogLayoutParams(variables.Context));
+				appcompatdialog.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
+				appcompatdialog.SetOnShowListener(ViewInfoOnShowListener(view, variables.DialogInterfaceListenerOnShow));
 			});
 		}
 		public static BottomSheetDialog? ViewInfoGenre(VariableContainer variables)
@@ -118,8 +145,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				appcompatdialog.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
-				appcompatdialog.SetContentView(ViewInfoDialogView(variables, _dialogview =>
+				DialogView view = ViewInfoDialogView(variables, _dialogview =>
 				{
 					_dialogview.ContentView = new InfoGenreView(variables.Context)
 					{
@@ -129,8 +155,11 @@ namespace Xyzu.Menus
 
 					_dialogview.Dialog = appcompatdialog;
 					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Genre);
+				});
 
-				}), DialogLayoutParams(variables.Context));
+				appcompatdialog.SetContentView(view, DialogLayoutParams(variables.Context));
+				appcompatdialog.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
+				appcompatdialog.SetOnShowListener(ViewInfoOnShowListener(view, variables.DialogInterfaceListenerOnShow));
 			});
 		}
 		public static BottomSheetDialog? ViewInfoPlaylist(VariableContainer variables)
@@ -151,8 +180,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				appcompatdialog.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
-				appcompatdialog.SetContentView(ViewInfoDialogView(variables, _dialogview =>
+				DialogView view = ViewInfoDialogView(variables, _dialogview =>
 				{
 					_dialogview.ContentView = new InfoPlaylistView(variables.Context)
 					{
@@ -162,8 +190,11 @@ namespace Xyzu.Menus
 
 					_dialogview.Dialog = appcompatdialog;
 					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Playlist);
+				});
 
-				}), DialogLayoutParams(variables.Context));
+				appcompatdialog.SetContentView(view, DialogLayoutParams(variables.Context));
+				appcompatdialog.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
+				appcompatdialog.SetOnShowListener(ViewInfoOnShowListener(view, variables.DialogInterfaceListenerOnShow));
 			});
 		}
 		public static BottomSheetDialog? ViewInfoSong(VariableContainer variables)
@@ -184,9 +215,10 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				appcompatdialog.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
-				appcompatdialog.SetContentView(ViewInfoDialogView(variables, _dialogview =>
+				DialogView view = ViewInfoDialogView(variables, _dialogview =>
 				{
+					_dialogview.SetVisibility(ViewStates.Visible);
+
 					_dialogview.ContentView = new InfoSongView(variables.Context)
 					{
 						Song = variables.Song,
@@ -197,8 +229,11 @@ namespace Xyzu.Menus
 					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Song);
 					_dialogview.ButtonsNeutralText = Resource.String.lyrics;
 					_dialogview.OnClickNeutral = CreateSheetDialogBottomViewAction(variables.DialogInterfaceListenerLyrics);
+				});
 
-				}), DialogLayoutParams(variables.Context));
+				appcompatdialog.SetContentView(view, DialogLayoutParams(variables.Context));
+				appcompatdialog.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
+				appcompatdialog.SetOnShowListener(ViewInfoOnShowListener(view, variables.DialogInterfaceListenerOnShow));
 			});
 		}
 		public static BottomSheetDialog? ViewInfoSongLyrics(VariableContainer variables)
@@ -219,8 +254,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				appcompatdialog.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
-				appcompatdialog.SetContentView(ViewInfoDialogView(variables, _dialogview =>
+				DialogView view = ViewInfoDialogView(variables, _dialogview =>
 				{
 					_dialogview.ContentView = new InfoSongLyricsView(variables.Context)
 					{
@@ -230,8 +264,11 @@ namespace Xyzu.Menus
 
 					_dialogview.Dialog = appcompatdialog;
 					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Song);
-				
-				}), DialogLayoutParams(variables.Context));
+				});
+
+				appcompatdialog.SetContentView(view, DialogLayoutParams(variables.Context));
+				appcompatdialog.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
+				appcompatdialog.SetOnShowListener(ViewInfoOnShowListener(view, variables.DialogInterfaceListenerOnShow));
 			});
 		}
 	}
