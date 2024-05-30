@@ -205,37 +205,29 @@
     <item name="app:elevation">@dimen/dp16</item>
     <item name="app:itemBackground">@null</item>
     <item name="app:itemIconPadding">@dimen/dp16</item>
-    <item name="app:itemHorizontalPadding">@dimen/dp16</item>
+    <item name="app:itemHorizontalPadding">@dimen/dp32</item>
     <item name="app:itemIconSize">@dimen/dp32</item>
     <item name="app:itemIconTint">@color/selector_list_item</item>
     <item name="app:itemMaxLines">1</item>
-    <item name="app:itemShapeAppearance">@style/Xyzu.Material.NavigationView.ItemShapeAppearance</item>
     <item name="app:itemShapeAppearanceOverlay">@style/Xyzu.Material.NavigationView.ItemShapeAppearanceOverlay</item>
     <item name="app:itemShapeFillColor">@color/selector_list_itembackground</item>
     <item name="app:itemShapeInsetBottom">@dimen/dp0</item>
-    <item name="app:itemShapeInsetEnd">@dimen/dp8</item>
-    <item name="app:itemShapeInsetStart">@dimen/dp8</item>
+    <item name="app:itemShapeInsetEnd">@dimen/dp0</item>
+    <item name="app:itemShapeInsetStart">@dimen/dp0</item>
     <item name="app:itemShapeInsetTop">@dimen/dp0</item>
     <item name="app:itemTextColor">@color/selector_list_item</item>
     <item name="app:itemTextAppearance">@style/Xyzu.TextAppearance</item>
-    <item name="app:shapeAppearance">@style/Xyzu.Material.NavigationView.ShapeAppearance</item>
     <item name="app:shapeAppearanceOverlay">@style/Xyzu.Material.NavigationView.ShapeAppearanceOverlay</item>
-  </style>
-  <style name="Xyzu.Material.NavigationView.ItemShapeAppearance" parent=""> 
-    <item name="android:layout_marginEnd">@dimen/dp16</item>
-    <item name="android:layout_marginStart">@dimen/dp16</item>
   </style>
   <style name="Xyzu.Material.NavigationView.ItemShapeAppearanceOverlay" parent="">    
     <item name="app:cornerFamily">rounded</item>
-    <item name="app:cornerSize">@dimen/dp8</item>
+    <item name="app:cornerSize">@dimen/dp16</item>
   </style>
   <style name="Xyzu.Material.NavigationView.TextAppearance" parent="Xyzu.TextAppearance">
     <item name="android:textStyle">bold</item>
   </style>
   <style name="Xyzu.Material.NavigationView.Theme" parent="">
     <item name="android:colorControlHighlight">@android:color/transparent</item>
-  </style>
-  <style name="Xyzu.Material.NavigationView.ShapeAppearance" parent="">
   </style>
   <style name="Xyzu.Material.NavigationView.ShapeAppearanceOverlay" parent="">
     <item name="cornerFamily">rounded</item>

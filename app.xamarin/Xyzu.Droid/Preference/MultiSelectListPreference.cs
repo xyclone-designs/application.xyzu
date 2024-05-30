@@ -55,17 +55,20 @@ namespace Xyzu.Preference
 		{
 			// base.OnClick();
 
-			AlertDialog.Builder? alertdialogbuilder = PreferenceUtils.StyledAlertDialog(Context, this, () => Dialog);
+			Dialog = XyzuUtils.Dialogs.Alert(
+				context: Context,
+				style: Resource.Style.Xyzu_Preference_AlertDialog,
+				action: (dialogbuilder, dialog) =>
+				{
+					if (dialogbuilder is null)
+						return;
 
-			if (NeutralButtonTextId.HasValue)
-				alertdialogbuilder?.SetNeutralButton(NeutralButtonTextId.Value, (sender, args) => { });
+					dialogbuilder.ProcessListMulti(this, () => Dialog);
 
-			Dialog = alertdialogbuilder?.Create();
-			Dialog?.Show();
-
-			if (NeutralButtonTextId.HasValue) Dialog?
-				.GetButton((int)DialogButtonType.Neutral)?
-				.SetOnClickListener(NeutralButtonOnClickListener);
+					if (NeutralButtonTextId.HasValue)
+						dialogbuilder.SetNeutralButton(NeutralButtonTextId.Value, (sender, args) => { });
+				});			
+			Dialog.Show();
 		}
 
 		public override void OnBindViewHolder(PreferenceViewHolder holder)

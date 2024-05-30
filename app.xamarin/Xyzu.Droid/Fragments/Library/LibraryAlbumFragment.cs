@@ -9,7 +9,7 @@ using AndroidX.RecyclerView.Widget;
 using Google.Android.Material.Tabs;
 
 using System;
-
+using Xyzu.Activities;
 using Xyzu.Droid;
 using Xyzu.Views.Library;
 
@@ -23,6 +23,10 @@ namespace Xyzu.Fragments.Library
 		public override LibraryView? LibraryView
 		{
 			get => View;
+		}
+		public override LibraryActivity.LibraryTypes LibraryType
+		{
+			get => LibraryActivity.LibraryTypes.LibraryAlbum;
 		}
 
 		public override View? OnCreateView(LayoutInflater inflater, ViewGroup? container, Bundle? savedInstanceState)

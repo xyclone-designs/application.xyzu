@@ -1,7 +1,7 @@
 ﻿#nullable enable
 
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 using Xyzu.Library;
@@ -13,16 +13,16 @@ namespace Xyzu.Menus
 {
 	public partial class MenuOptionsUtils
 	{
-		private static string Album = "Album";
-		private static string Albums = "Albums";
-		private static string Artist = "Artist";
-		private static string Artists = "Artists";
-		private static string Genre = "Genre";
-		private static string Genres = "Genres";
-		private static string Playlist = "Playlist";
-		private static string Playlists = "Playlists";
-		private static string Search = "Search";
-		private static string Songs = "Songs";
+		private readonly static string Album = "Album";
+		private readonly static string Albums = "Albums";
+		private readonly static string Artist = "Artist";
+		private readonly static string Artists = "Artists";
+		private readonly static string Genre = "Genre";
+		private readonly static string Genres = "Genres";
+		private readonly static string Playlist = "Playlist";
+		private readonly static string Playlists = "Playlists";
+		private readonly static string Search = "Search";
+		private readonly static string Songs = "Songs";
 
 		private static bool SkippedAhead(VariableContainer variables)
 		{
@@ -150,8 +150,14 @@ namespace Xyzu.Menus
 				.Concat(QueueItemsFrom(variables.Genres))
 				.Concat(QueueItemsFrom(variables.Playlists))
 				.Concat(QueueItemsFrom(variables.Songs));
+			int index = 
+				variables.Index == -1 && 
+				queueitems.Count() - 1 is int queueindex &&
+				queueindex > 0
+					? new Random().Next(0, queueindex)
+					: variables.Index ?? 0;
 
-			XyzuPlayer.Instance.Player.Queue.Refresh(variables.Index ?? 0, queueitems);
+			XyzuPlayer.Instance.Player.Queue.Refresh(index, queueitems);
 			XyzuPlayer.Instance.Player.Play();
 		}
 		public static void PlayAlbums(VariableContainer variables, IAlbum? album)
@@ -162,8 +168,11 @@ namespace Xyzu.Menus
 			IEnumerable<IQueueItem> queueitems = QueueItemsFrom(album is null
 				? variables.Albums
 				: Enumerable.Empty<IAlbum>().Append(album));
+			int index = variables.Index == -1
+				? new Random().Next(0, queueitems.Count() - 1)
+				: variables.Index ?? 0;
 
-			XyzuPlayer.Instance.Player.Queue.Refresh(variables.Index ?? 0, queueitems);
+			XyzuPlayer.Instance.Player.Queue.Refresh(index, queueitems);
 			XyzuPlayer.Instance.Player.Queue.Id ??= variables.QueueId ??=
 				variables.Album?.Id is string albumid
 					? QueueIdAlbum(albumid, variables.AlbumSettings)
@@ -179,8 +188,11 @@ namespace Xyzu.Menus
 			IEnumerable<IQueueItem> queueitems = QueueItemsFrom(artist is null
 				? variables.Artists
 				: Enumerable.Empty<IArtist>().Append(artist));
+			int index = variables.Index == -1
+				? new Random().Next(0, queueitems.Count() - 1)
+				: variables.Index ?? 0;
 
-			XyzuPlayer.Instance.Player.Queue.Refresh(variables.Index ?? 0, queueitems);
+			XyzuPlayer.Instance.Player.Queue.Refresh(index, queueitems);
 			XyzuPlayer.Instance.Player.Queue.Id ??= variables.QueueId ??=
 				variables.Artist?.Id is string albumid
 					? QueueIdArtistSongs(albumid, variables.ArtistSettings)
@@ -196,8 +208,11 @@ namespace Xyzu.Menus
 			IEnumerable<IQueueItem> queueitems = QueueItemsFrom(genre is null
 				? variables.Genres
 				: Enumerable.Empty<IGenre>().Append(genre));
+			int index = variables.Index == -1
+				? new Random().Next(0, queueitems.Count() - 1)
+				: variables.Index ?? 0;
 
-			XyzuPlayer.Instance.Player.Queue.Refresh(variables.Index ?? 0, queueitems);
+			XyzuPlayer.Instance.Player.Queue.Refresh(index, queueitems);
 			XyzuPlayer.Instance.Player.Queue.Id ??= variables.QueueId ??=
 				variables.Genre?.Id is string genreid
 					? QueueIdGenre(genreid, variables.GenreSettings)
@@ -213,8 +228,11 @@ namespace Xyzu.Menus
 			IEnumerable<IQueueItem> queueitems = QueueItemsFrom(playlist is null
 				? variables.Playlists
 				: Enumerable.Empty<IPlaylist>().Append(playlist));
+			int index = variables.Index == -1
+				? new Random().Next(0, queueitems.Count() - 1)
+				: variables.Index ?? 0;
 
-			XyzuPlayer.Instance.Player.Queue.Refresh(variables.Index ?? 0, queueitems);
+			XyzuPlayer.Instance.Player.Queue.Refresh(index, queueitems);
 			XyzuPlayer.Instance.Player.Queue.Id ??= variables.QueueId ??=
 				variables.Playlist?.Id is string playlistid
 					? QueueIdPlaylist(playlistid, variables.PlaylistSettings)
@@ -230,8 +248,11 @@ namespace Xyzu.Menus
 			IEnumerable<IQueueItem> queueitems = QueueItemsFrom(song is null
 				? variables.Songs
 				: Enumerable.Empty<ISong>().Append(song));
+			int index = variables.Index == -1
+				? new Random().Next(0, queueitems.Count() - 1)
+				: variables.Index ?? 0;
 
-			XyzuPlayer.Instance.Player.Queue.Refresh(variables.Index ?? 0, queueitems);
+			XyzuPlayer.Instance.Player.Queue.Refresh(index, queueitems);
 			XyzuPlayer.Instance.Player.Queue.Id ??= variables.QueueId ??= QueueIdSongs(variables.SongsSettings);
 
 			XyzuPlayer.Instance.Player.Play();

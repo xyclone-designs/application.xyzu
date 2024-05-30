@@ -142,6 +142,7 @@ namespace Xyzu.Activities
 			public const string ReconfigureType_Toolbar = "Toolbar";
 
 			Fragment Fragment { get; }
+			LibraryTypes LibraryType { get; }
 
 			event EventHandler<string> OnReconfigure;
 

@@ -7,9 +7,16 @@ using AndroidX.CardView.Widget;
 
 using Com.Sothree.Slidinguppanel;
 
+using System;
+using System.Linq;
+
 using Xyzu.Droid;
 using Xyzu.Views.Library;
 using Xyzu.Views.NowPlaying;
+using Xyzu.Library.Models;
+using Xyzu.Menus;
+
+using ILibraryIIdentifiers = Xyzu.Library.ILibrary.IIdentifiers;
 
 namespace Xyzu.Activities
 {
@@ -289,6 +296,66 @@ namespace Xyzu.Activities
 				{
 					switch (args.ViewOperation)
 					{
+						case NowPlayingView.ViewOperations.PressPlayPauseRandom:
+							MenuOptionsUtils.VariableContainer variables = new MenuOptionsUtils.VariableContainer { Index = -1 };
+							switch (CurrentLibraryFragment?.LibraryType)
+							{
+								case LibraryTypes.LibraryAlbums when FragmentLibraryAlbums.View != null:
+									variables.Albums = XyzuLibrary.Instance.Albums
+										.GetAlbums(null, new IAlbum.Default<bool>(true))
+										.Sort(FragmentLibraryAlbums.View.Settings.SortKey, FragmentLibraryAlbums.View.Settings.IsReversed);
+									break;
+								case LibraryTypes.LibraryAlbum when FragmentLibraryAlbum.View != null:
+									variables.Songs = XyzuLibrary.Instance.Songs
+										.GetSongs(ILibraryIIdentifiers.FromAlbum(FragmentLibraryAlbum.View.Album), new ISong.Default<bool>(true))
+										.Sort(FragmentLibraryAlbum.View.Settings.SongsSortKey, FragmentLibraryAlbum.View.Settings.SongsIsReversed);
+									break;
+
+								case LibraryTypes.LibraryArtists when FragmentLibraryArtists.View != null:
+									variables.Artists = XyzuLibrary.Instance.Artists
+										.GetArtists(null, new IArtist.Default<bool>(true))
+										.Sort(FragmentLibraryArtists.View.Settings.SortKey, FragmentLibraryArtists.View.Settings.IsReversed);
+									break;
+								case LibraryTypes.LibraryArtist when FragmentLibraryArtist.View != null:
+									variables.Songs = XyzuLibrary.Instance.Songs
+										.GetSongs(ILibraryIIdentifiers.FromArtist(FragmentLibraryArtist.View.Artist), new ISong.Default<bool>(true))
+										.Sort(FragmentLibraryArtist.View.Settings.SongsSortKey, FragmentLibraryArtist.View.Settings.SongsIsReversed);
+									break;
+
+								case LibraryTypes.LibraryGenres when FragmentLibraryGenres.View != null:
+									variables.Genres = XyzuLibrary.Instance.Genres
+										.GetGenres(null, new IGenre.Default<bool>(true))
+										.Sort(FragmentLibraryGenres.View.Settings.SortKey, FragmentLibraryGenres.View.Settings.IsReversed);
+									break;
+								case LibraryTypes.LibraryGenre when FragmentLibraryGenre.View != null:
+									variables.Songs = XyzuLibrary.Instance.Songs
+										.GetSongs(ILibraryIIdentifiers.FromGenre(FragmentLibraryGenre.View.Genre), new ISong.Default<bool>(true))
+										.Sort(FragmentLibraryGenre.View.Settings.SongsSortKey, FragmentLibraryGenre.View.Settings.SongsIsReversed);
+									break;
+
+								case LibraryTypes.LibraryPlaylists when FragmentLibraryPlaylists.View != null:
+									variables.Playlists = XyzuLibrary.Instance.Playlists
+										.GetPlaylists(null, new IPlaylist.Default<bool>(true))
+										.Sort(FragmentLibraryPlaylists.View.Settings.SortKey, FragmentLibraryPlaylists.View.Settings.IsReversed);
+									break;
+								case LibraryTypes.LibraryPlaylist when FragmentLibraryPlaylist.View != null:
+									variables.Songs = XyzuLibrary.Instance.Songs
+										.GetSongs(ILibraryIIdentifiers.FromPlaylist(FragmentLibraryPlaylist.View.Playlist), new ISong.Default<bool>(true))
+										.Sort(FragmentLibraryPlaylist.View.Settings.SongsSortKey, FragmentLibraryPlaylist.View.Settings.SongsIsReversed);
+									break;
+
+								case LibraryTypes.LibrarySongs when FragmentLibrarySongs.View != null:
+									variables.Songs = XyzuLibrary.Instance.Songs
+										.GetSongs(null, new ISong.Default<bool>(true))
+										.Sort(FragmentLibrarySongs.View.Settings.SortKey, FragmentLibrarySongs.View.Settings.IsReversed);
+									break;
+
+								default: break;
+							}
+
+							MenuOptionsUtils.Play(variables);
+							break;
+
 						case NowPlayingView.ViewOperations.PressView:
 							if (SlidingUpPanel != null && SlidingUpPanel.GetPanelState() != SlidingUpPanelLayout.PanelState.Expanded)
 								SlidingUpPanel.SetPanelState(SlidingUpPanelLayout.PanelState.Expanded);

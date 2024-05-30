@@ -39,9 +39,9 @@ namespace Xyzu.Views.Library
 		protected static int[] MenuOptionEnabledArray_SingleMultiple = new int[] { MenuOptionEnabledWhenSingle, MenuOptionEnabledWhenMultiple };
 		protected static int[] MenuOptionEnabledArray_All = new int[] { MenuOptionEnabledWhenNone, MenuOptionEnabledWhenSingle, MenuOptionEnabledWhenMultiple };
 
-		protected BottomSheetDialog MenuOptionsDialog
+		public BottomSheetDialog MenuOptionsDialog
 		{
-			set => _MenuOptionsDialog = value;
+			protected set => _MenuOptionsDialog = value;
 			get => _MenuOptionsDialog ??= XyzuUtils.Dialogs.BottomSheet(Context ?? throw new Exception(), _menuoptionsdialog =>
 			{
 				MenuOptionsView.SetVisibility(ViewStates.Invisible);
@@ -58,9 +58,9 @@ namespace Xyzu.Views.Library
 				});
 			});
 		}
-		protected OptionsMenuView MenuOptionsView
+		public OptionsMenuView MenuOptionsView
 		{
-			set => _MenuOptionsView = value;
+			protected set => _MenuOptionsView = value;
 			get => _MenuOptionsView ??= new OptionsMenuView(Context!)
 			{
 				MaxWidth = MenuOptionsUtils.DialogMaxWidth(Context!),
@@ -74,9 +74,9 @@ namespace Xyzu.Views.Library
 				OnMenuOptionClicked = OnMenuOptionClick,
 			};
 		}
-		protected MenuOptionsUtils.VariableContainer MenuVariables
+		public MenuOptionsUtils.VariableContainer MenuVariables
 		{
-			set => _MenuVariables = value;
+			protected set => _MenuVariables = value;
 			get => _MenuVariables ??= new MenuOptionsUtils.VariableContainer
 			{
 				Activity = LibraryFragment?.Activity,
@@ -88,9 +88,9 @@ namespace Xyzu.Views.Library
 				SnackbarParent = this,
 			};
 		}
-		protected PopupMenuDismissListener? PopupmenuDismissListener
+		public PopupMenuDismissListener? PopupmenuDismissListener
 		{
-			get; set;
+			protected get; set;
 		}
 
 		protected virtual IDictionary<MenuOptions, int[]?>? MenuOptionsViewOptions { get; }
@@ -114,14 +114,15 @@ namespace Xyzu.Views.Library
 
 					OptionsMenuView.ViewHolder optionsmenuviewholder = (OptionsMenuView.ViewHolder)viewholder;
 
-					viewholder.ItemView.Enabled = adapter?.SelectedPositions.Count() switch
+					bool? visible = adapter?.SelectedPositions.Count() switch
 					{
 						0 => MenuOptionsViewOptions[optionsmenuviewholder.MenuOption]?.Contains(MenuOptionEnabledWhenNone),
 						1 => MenuOptionsViewOptions[optionsmenuviewholder.MenuOption]?.Contains(MenuOptionEnabledWhenSingle),
-
 						_ => MenuOptionsViewOptions[optionsmenuviewholder.MenuOption]?.Contains(MenuOptionEnabledWhenMultiple),
+					};
 
-					} ?? true;
+					viewholder.ItemView.Enabled = visible ?? true;
+					viewholder.ItemView.Alpha = viewholder.ItemView.Enabled ? 100F : 0.30F;
 				};
 
 			switch (adapter.SelectedPositions.Count())
@@ -214,14 +215,18 @@ namespace Xyzu.Views.Library
 			{
 				WithHeaderButtons = false,
 			};
-			AndroidXAlertDialog alertdialog = XyzuUtils.Dialogs.Alert(Context!, alertdialogbuilderaction: null);
+			AndroidXAlertDialog alertdialog = XyzuUtils.Dialogs.Alert(Context!, (alertdialogbuilder, alertdialog) => 
+			{
+				if (alertdialog == null)
+					return;
 
-			alertdialog.SetCancelable(true);
-			alertdialog.SetCanceledOnTouchOutside(true);
-			alertdialog.SetContentView(menuoptionsview);
-			alertdialog.SetDim(false);
-			alertdialog.SetOnShowListener(this);
-			alertdialog.SetOnDismissListener(this);
+				alertdialog.SetCancelable(true);
+				alertdialog.SetCanceledOnTouchOutside(true);
+				alertdialog.SetContentView(menuoptionsview);
+				alertdialog.SetDim(false);
+				alertdialog.SetOnShowListener(this);
+				alertdialog.SetOnDismissListener(this);
+			});
 
 			buildaction?.Invoke(menuoptionsview, alertdialog);
 

@@ -13,6 +13,21 @@ namespace Xyzu.Activities
 {
 	public partial class LibraryActivity 
 	{
+		public enum LibraryTypes
+		{
+			LibraryAlbum,
+			LibraryAlbums,
+			LibraryArtist,
+			LibraryArtists,
+			LibraryGenre,
+			LibraryGenres,
+			LibraryPlaylist,
+			LibraryPlaylists,
+			LibraryQueue,
+			LibrarySearch,
+			LibrarySongs,
+		}
+
 		private LibraryAlbumFragment? _FragmentLibraryAlbum;
 		private LibraryAlbumsFragment? _FragmentLibraryAlbums;
 		private LibraryArtistFragment? _FragmentLibraryArtist;

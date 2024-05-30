@@ -18,6 +18,7 @@ using Xyzu.Settings.UserInterface.Library;
 using Xyzu.Views.Library;
 using Xyzu.Views.Option;
 using Xyzu.Views.Misc;
+using Xyzu.Activities;
 
 namespace Xyzu.Fragments.Library
 {
@@ -29,6 +30,10 @@ namespace Xyzu.Fragments.Library
 		public override LibraryView? LibraryView
 		{
 			get => View;
+		}
+		public override LibraryActivity.LibraryTypes LibraryType
+		{
+			get => LibraryActivity.LibraryTypes.LibraryQueue;
 		}
 
 		public override View? OnCreateView(LayoutInflater inflater, ViewGroup? container, Bundle? savedInstanceState)

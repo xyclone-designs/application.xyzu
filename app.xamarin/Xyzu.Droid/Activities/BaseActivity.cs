@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using Xyzu.Settings.System;
 
 using AndroidEnvironment = Android.OS.Environment;
+using AndroidRuntimeEnvironment = Android.Runtime.AndroidEnvironment;
 
 namespace Xyzu.Activities
 {
@@ -37,9 +38,11 @@ namespace Xyzu.Activities
 
 			base.OnCreate(savedInstaneState);
 
+			ISystemSettingsDroid.PackageDirectory = ExternalCacheDir?.ParentFile;
+
 			AppDomain.CurrentDomain.UnhandledException += ISystemSettingsDroid.OnUnhandledException;
 			TaskScheduler.UnobservedTaskException += ISystemSettingsDroid.OnUnobservedTaskException;
-
+			AndroidRuntimeEnvironment.UnhandledExceptionRaiser += ISystemSettingsDroid.UnhandledExceptionRaiser;
 			ResultLauncher = RegisterForActivityResult(ResultContract, ResultCallback);
 		}
 		protected override void OnStart()
@@ -81,8 +84,9 @@ namespace Xyzu.Activities
 		{
 			base.OnDestroy();
 
-			AppDomain.CurrentDomain.UnhandledException -= ISystemSettingsDroid.OnUnhandledException;
-			TaskScheduler.UnobservedTaskException -= ISystemSettingsDroid.OnUnobservedTaskException; 
+			//AppDomain.CurrentDomain.UnhandledException -= ISystemSettingsDroid.OnUnhandledException;
+			//TaskScheduler.UnobservedTaskException -= ISystemSettingsDroid.OnUnobservedTaskException;
+			//AndroidRuntimeEnvironment.UnhandledExceptionRaiser -= ISystemSettingsDroid.UnhandledExceptionRaiser;
 		}
 
 		public override void OnConfigurationChanged(Configuration newConfig)

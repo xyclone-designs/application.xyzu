@@ -393,10 +393,13 @@ namespace Xyzu.Activities
 
 			if (args.Tab != null)
 				CurrentTabLayoutable = Tablayoutadapter?.TabLayoutables.ElementAtOrDefault(args.Tab.Position);
-			
+
 			RefreshTabLayout(CurrentTabLayoutable);
 		}
-		protected void TabUnselected(object sender, TabLayout.TabUnselectedEventArgs args) { }
+		protected void TabUnselected(object sender, TabLayout.TabUnselectedEventArgs args) 
+		{
+			FragmentActions(fragment => fragment.LibraryView?.MenuOptionsDialog?.Dismiss());
+		}
 		protected void TabReselected(object sender, TabLayout.TabReselectedEventArgs args) { }
 
 		protected async void RefreshTabLayout(ITabLayoutable? tablayoutable, bool force = false)

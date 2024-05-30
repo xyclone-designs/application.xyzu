@@ -50,6 +50,8 @@ namespace Xyzu.Views.InfoEdit
 
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{
+			base.Init(context, attrs);
+
 			Inflate(Context, Ids.Layout, this);
 
 			Title = FindViewById(Ids.Title) as AppCompatTextView;

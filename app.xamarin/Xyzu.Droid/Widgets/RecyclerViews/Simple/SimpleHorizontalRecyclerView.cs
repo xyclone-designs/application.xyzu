@@ -21,6 +21,7 @@ namespace Xyzu.Widgets.RecyclerViews.Simple
 		{ }
 		public SimpleHorizontalRecyclerView(Context context, IAttributeSet attrs, int defStyleRef) : base(context, attrs, defStyleRef)
 		{
+			HasFixedSize = true;
 			SetLayoutManager(_SimpleLayoutManager = new LayoutManager(context));
 		}
 

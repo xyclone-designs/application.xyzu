@@ -207,7 +207,7 @@ namespace Xyzu.Views.Library
 
 			await OnRefresh();
 
-			CreatePlaylistAlertDialog = XyzuUtils.Dialogs.Alert(Context, alertdialogbuilder =>
+			CreatePlaylistAlertDialog = XyzuUtils.Dialogs.Alert(Context, (alertdialogbuilder, alertdialog) =>
 			{
 				if (alertdialogbuilder is null)
 					return;

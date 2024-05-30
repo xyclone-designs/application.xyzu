@@ -259,7 +259,7 @@ namespace Xyzu.Player.Exoplayer
 					RefreshNotification();
 					break;								
 				case StartIds.RefreshQueue:
-					//RefreshQueue();
+					RefreshQueue();
 					break;
 
 				default:

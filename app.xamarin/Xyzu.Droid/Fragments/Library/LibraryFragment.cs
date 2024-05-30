@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using Android.Content;
+using Android.Content.Res;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
 using AndroidX.Fragment.App;
@@ -13,6 +14,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Xyzu.Droid;
 using Xyzu.Activities;
 using Xyzu.Menus;
 using Xyzu.Views.Library;
@@ -42,6 +44,7 @@ namespace Xyzu.Fragments.Library
 		{
 			get; set;
 		}
+		public virtual LibraryActivity.LibraryTypes LibraryType { get; }
 		protected OptionsLibraryListView? ListOptions 
 		{ 
 			get; set;
@@ -131,7 +134,16 @@ namespace Xyzu.Fragments.Library
 			else appBarLayout.RemoveView(ListOptions);
 		}		 
 		public virtual void ConfigureTab(TabLayout.Tab tab, Context? context) 
-		{ }
+		{
+			if (tab.Parent?.InlineLabel ?? false && context?.Resources != null)
+			{
+				tab.View.LayoutParameters = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent)
+				{
+					MarginEnd = context.Resources.GetDimensionPixelSize(Resource.Dimension.dp8),
+					MarginStart = context.Resources.GetDimensionPixelSize(Resource.Dimension.dp8),
+				};
+			}
+		}
 		public virtual void ConfigureToolbar(Toolbar? toolbar, Context? context)
 		{ }
 		public virtual void ConfigureMenuItem(IMenuItem? menuitem, Context? context) 

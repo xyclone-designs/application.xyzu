@@ -81,7 +81,7 @@ namespace Xyzu.Views.Misc
 			if (ButtonNegative != null) ButtonNegative.Click -= ButtonsNegativeAppCompatButton_Click;
 		}
 
-		private Context _Context;
+		private readonly Context _Context;
 
 		protected AppCompatDialog? _Dialog;
 		protected StatusBarInsetView? _StatusBarInset;

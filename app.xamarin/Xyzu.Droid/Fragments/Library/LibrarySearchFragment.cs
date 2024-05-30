@@ -12,7 +12,7 @@ using Google.Android.Material.Tabs;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Xyzu.Activities;
 using Xyzu.Droid;
 using Xyzu.Settings.Enums;
 using Xyzu.Settings.UserInterface.Library;
@@ -30,6 +30,10 @@ namespace Xyzu.Fragments.Library
 		public override LibraryView? LibraryView
 		{
 			get => View;
+		}
+		public override LibraryActivity.LibraryTypes LibraryType
+		{
+			get => LibraryActivity.LibraryTypes.LibrarySearch;
 		}
 		public ToolbarSearchView? LibrarySearch { get;set; }
 

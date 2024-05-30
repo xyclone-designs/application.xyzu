@@ -339,7 +339,7 @@ namespace Xyzu.Menus
 			{
 				DialogView view = EditInfoDialogView(variables, _dialogview =>
 				{
-					_dialogview.ContentView = new InfoEditSongView(variables.Context)
+					_dialogview.ContentView = new InfoEditSongView(variables.Context) 
 					{
 						Images = XyzuImages.Instance,
 						Song = variables.Song,
@@ -375,7 +375,7 @@ namespace Xyzu.Menus
 
 					_dialogview.Dialog = appcompatdialog;
 					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Song);
-					_dialogview.OnClickPositive = CreateSheetDialogBottomViewAction(variables.DialogInterfaceListenerSave ?? (dialoginterface =>
+					_dialogview.OnClickPositive = CreateSheetDialogBottomViewAction(variables.DialogInterfaceListenerSave ?? (dialoginterface => 
 					{
 						InfoEditSongView infoeditsongview = (InfoEditSongView)_dialogview.ContentView;
 

@@ -122,7 +122,7 @@
         android:id="@+id/xyzu_view_infoedit_album_albumreleasedate_barrier_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierMargin="@dimen/dp16"
+        app:barrierMargin="@dimen/dp8"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="xyzu_view_infoedit_album_albumreleasedate_value_appcompateditdate"/>
     <!---->

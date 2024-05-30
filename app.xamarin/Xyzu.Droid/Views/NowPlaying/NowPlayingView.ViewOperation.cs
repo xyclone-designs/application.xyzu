@@ -22,6 +22,7 @@ namespace Xyzu.Views.NowPlaying
 			PressQueue,
 			PressPlayerSettings,
 			PressPlayPause,
+			PressPlayPauseRandom,
 			PressView,
 			PressNext,
 			PressPrevious,
@@ -57,8 +58,13 @@ namespace Xyzu.Views.NowPlaying
 					Player?.Stop();
 					break;
 
-				case ViewOperations.PressPlayPause when
-				Player != null:
+				case ViewOperations.PressPlayPause when Player is null:
+					ViewOperationEventArgs randomargs = new ViewOperationEventArgs(ViewOperations.PressPlayPauseRandom);
+					OnViewOperationAction?.Invoke(randomargs);
+					OnViewOperation?.Invoke(sender, randomargs);
+					break;
+
+				case ViewOperations.PressPlayPause:
 					switch (Player.State)
 					{
 						case PlayerStates.NoSong:

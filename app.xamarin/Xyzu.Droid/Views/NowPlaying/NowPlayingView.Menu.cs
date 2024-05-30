@@ -189,12 +189,16 @@ namespace Xyzu.Views.NowPlaying
 			if (Context is null)
 				return;
 
-			MenuDialog = XyzuUtils.Dialogs.Alert(Context, alertdialogbuilderaction: null);
+			MenuDialog = XyzuUtils.Dialogs.Alert(Context, (alertdialogbuilder, alertdialog) => 
+			{
+				if (alertdialog == null)
+					return;
 
-			MenuDialog.Window?.SetGravity(GravityFlags.Bottom | GravityFlags.End);
-			MenuDialog.SetView(view);
-			MenuDialog.SetCancelable(true);
-			MenuDialog.SetCanceledOnTouchOutside(true);
+				alertdialog.Window?.SetGravity(GravityFlags.Bottom | GravityFlags.End);
+				alertdialog.SetView(view);
+				alertdialog.SetCancelable(true);
+				alertdialog.SetCanceledOnTouchOutside(true);
+			});
 			
 			builddialogaction?.Invoke(MenuDialog);
 

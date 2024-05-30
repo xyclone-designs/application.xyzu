@@ -61,11 +61,11 @@ namespace Xyzu.Preference
 
 		protected override void OnClick()
 		{
-			if (PreferenceUtils.StyledAlertDialog(Context, this, () => Dialog) is AlertDialog.Builder alertdialogbuilder)
-			{
-				Dialog = alertdialogbuilder.Create();
-				Dialog.Show();
-			}
+			Dialog = XyzuUtils.Dialogs.Alert(
+				context: Context,
+				style: Resource.Style.Xyzu_Preference_AlertDialog,
+				action: (dialogbuilder, dialog) => dialogbuilder?.ProcessList(this, () => Dialog));
+			Dialog.Show();
 		}
 
 		public override void SetValueIndex(int index)

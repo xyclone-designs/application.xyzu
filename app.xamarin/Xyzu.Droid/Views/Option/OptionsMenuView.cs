@@ -160,7 +160,6 @@ namespace Xyzu.Views.Option
 			Drawable? menuoptiondrawable = menuoption.AsDrawable(Context);
 
 			viewholder.MenuOption = menuoption;
-			viewholder.ItemView.Activated = true;
 			viewholder.ItemView.SetText(menuoptiontitle, null);
 			viewholder.ItemView.SetCompoundDrawablesRelativeWithIntrinsicBounds(null, menuoptiondrawable, null, null);
 		}
@@ -194,6 +193,7 @@ namespace Xyzu.Views.Option
 				ContextThemeWrapper contextthemewrapper = new ContextThemeWrapper(context, Resource.Style.Xyzu_View_Option_Menu_RecyclerView_ItemView);
 				AppCompatTextView itemview = new AppCompatTextView(contextthemewrapper, null!, Resource.Style.Xyzu_View_Option_Menu_RecyclerView_ItemView);
 
+				itemview.SetMaxLines(1);
 				itemview.SetSingleLine(true);
 
 				return itemview;

@@ -55,7 +55,7 @@ namespace Xyzu.Fragments.Settings.System
 				ErrorLogsPreference);
 
 			ISystemSettingsDroid settings = XyzuSettings.Instance.GetSystemDroid();
-			settings.ErrorLogs = ISystemSettingsDroid.GetErrorLogs(Context!);
+			settings.ErrorLogs = ISystemSettingsDroid.GetErrorLogs();
 
 			ErrorLogs = settings.ErrorLogs;
 		}
@@ -86,22 +86,25 @@ namespace Xyzu.Fragments.Settings.System
 					if (ErrorLogsPreference.NegativeButtonText != null)
 						dialogbuilder.SetNegativeButton(ErrorLogsPreference.NegativeButtonText, (sender, args) =>
 						{
-							ErrorLogDialog = XyzuUtils.Dialogs.Alert(Context!, alertdialogbuilder =>
+							ErrorLogDialog = XyzuUtils.Dialogs.Alert(Context!, (alertdialogbuilder, alertdialog) =>
 							{
-								alertdialogbuilder.SetTitle(Resource.String.settings_system_errorlogs_confirmationdialog_title);
-								alertdialogbuilder.SetMessage(Resource.String.settings_system_errorlogs_confirmationdialog_message);
-								alertdialogbuilder.SetNegativeButton(Resource.String.settings_system_errorlogs_confirmationdialog_negativebutton, (sender, args) =>
+								if (alertdialogbuilder != null)
 								{
-									ErrorLogDialog?.Dismiss();
+									alertdialogbuilder.SetTitle(Resource.String.settings_system_errorlogs_confirmationdialog_title);
+									alertdialogbuilder.SetMessage(Resource.String.settings_system_errorlogs_confirmationdialog_message);
+									alertdialogbuilder.SetNegativeButton(Resource.String.settings_system_errorlogs_confirmationdialog_negativebutton, (sender, args) =>
+									{
+										ErrorLogDialog?.Dismiss();
 
-									ErrorLogsPreference.DialogShow();
-								});
-								alertdialogbuilder.SetPositiveButton(Resource.String.settings_system_errorlogs_confirmationdialog_positivebutton, async (sender, args) =>
-								{
-									ErrorLogDialog?.Dismiss();
+										ErrorLogsPreference.DialogShow();
+									});
+									alertdialogbuilder.SetPositiveButton(Resource.String.settings_system_errorlogs_confirmationdialog_positivebutton, async (sender, args) =>
+									{
+										ErrorLogDialog?.Dismiss();
 
-									await ISystemSettingsDroid.ClearErrorLogs(Context!);
-								});
+										await ISystemSettingsDroid.ClearErrorLogs();
+									});
+								}
 							});
 
 							ErrorLogDialog.Show();

@@ -28,29 +28,30 @@ namespace Xyzu
 	{
 		public static class Dialogs
 		{
-			public static AlertDialog Alert(Context context, Action<AlertDialog.Builder>? alertdialogbuilderaction)
+			public static AlertDialog Alert(Context context, Action<AlertDialog.Builder?, AlertDialog?>? action, int? style = null)
 			{
-				AlertDialog.Builder alertdialogbuilder = new MaterialAlertDialogBuilder(context, Resource.Style.Xyzu_Material_Dialog_Alert);
+				AlertDialog.Builder alertdialogbuilder = new MaterialAlertDialogBuilder(context, style ?? Resource.Style.Xyzu_Material_Dialog_Alert);
 
-				alertdialogbuilderaction?.Invoke(alertdialogbuilder);
-
-				return alertdialogbuilder.Create();
-			}									  
-			public static AlertDialog Alert(Context context, Action<AlertDialog.Builder?, AlertDialog?>? alertdialogbuilderdialogaction)
-			{
-				AlertDialog.Builder alertdialogbuilder = new MaterialAlertDialogBuilder(context, Resource.Style.Xyzu_Material_Dialog_Alert);
-
-				alertdialogbuilderdialogaction?.Invoke(alertdialogbuilder, null);
+				action?.Invoke(alertdialogbuilder, null);
 
 				AlertDialog alertdialog = alertdialogbuilder.Create();
 
-				alertdialogbuilderdialogaction?.Invoke(null, alertdialog);
+				if (alertdialog.Window != null)
+				{
+					alertdialog.Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
+					alertdialog.Window.AddFlags(WindowManagerFlags.TranslucentStatus);
+					alertdialog.Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
+					alertdialog.Window.SetLayout(MenuOptionsUtils.DialogWidth(context), MenuOptionsUtils.DialogHeight(context));
+					alertdialog.Window.SetSoftInputMode(SoftInput.AdjustResize | SoftInput.StateHidden);
+				}
+
+				action?.Invoke(null, alertdialog);
 
 				return alertdialog;
 			}
-			public static BottomSheetDialog BottomSheet(Context context, Action<BottomSheetDialog>? bottomsheetdialogaction)
+			public static BottomSheetDialog BottomSheet(Context context, Action<BottomSheetDialog>? bottomsheetdialogaction, int? style = null)
 			{
-				BottomSheetDialog bottomsheetdialog = new BottomSheetDialog(context, Resource.Style.Xyzu_Material_Dialog_Sheet_Bottom);
+				BottomSheetDialog bottomsheetdialog = new BottomSheetDialog(context, style ?? Resource.Style.Xyzu_Material_Dialog_Sheet_Bottom);
 				
 				bottomsheetdialog.Behavior.State = BottomSheetBehavior.StateExpanded;
 				bottomsheetdialog.Behavior.MaxWidth = MenuOptionsUtils.DialogMaxWidth(context);
@@ -58,13 +59,12 @@ namespace Xyzu
 
 				if (bottomsheetdialog.Window != null)
 				{
-					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
 					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.TranslucentStatus);
 					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
 					bottomsheetdialog.Window.SetLayout(MenuOptionsUtils.DialogWidth(context), MenuOptionsUtils.DialogHeight(context));
 					bottomsheetdialog.Window.SetGravity(MenuOptionsUtils.DialogGravityFlags(context));
-					bottomsheetdialog.Window.SetSoftInputMode(SoftInput.AdjustResize);
+					bottomsheetdialog.Window.SetSoftInputMode(SoftInput.AdjustResize | SoftInput.StateHidden);
 				}
 
 				bottomsheetdialogaction?.Invoke(bottomsheetdialog);

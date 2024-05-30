@@ -3,6 +3,7 @@
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
+
 using AndroidX.AppCompat.App;
 
 using System;
@@ -51,13 +52,18 @@ namespace Xyzu.Preference
 		{
 			// base.OnClick();
 
-			if (PreferenceUtils.StyledAlertDialog(Context, this) is AlertDialog.Builder alertdialogbuilder)
-			{
-				DialogOnBuild?.Invoke(alertdialogbuilder);
+			CurrentAlertDialog = XyzuUtils.Dialogs.Alert(
+				context: Context,
+				style: Resource.Style.Xyzu_Preference_AlertDialog,
+				action: (dialogbuilder, dialog) =>
+				{
+					if (dialogbuilder is null)
+						return;
 
-				CurrentAlertDialog = alertdialogbuilder.Create();
-				CurrentAlertDialog.Show();
-			}
+					dialogbuilder.ProcessDialog(this);
+					DialogOnBuild?.Invoke(dialogbuilder);
+				});
+			CurrentAlertDialog.Show();
 		}
 	}
 }

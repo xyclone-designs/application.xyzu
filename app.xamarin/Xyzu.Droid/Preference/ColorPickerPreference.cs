@@ -77,25 +77,31 @@ namespace Xyzu.Preference
 		{
 			// base.OnClick();
 
-			if (PreferenceUtils.StyledAlertDialog(Context, this) is AlertDialog.Builder alertdialogbuilder)
-			{
-				_ColorPicker = null;
-
-				alertdialogbuilder.SetView(ColorPicker);
-				alertdialogbuilder.SetPositiveButton(Resource.String.save, (sender, args) =>
+			CurrentAlertDialog = XyzuUtils.Dialogs.Alert(
+				context: Context,
+				style: Resource.Style.Xyzu_Preference_AlertDialog,
+				action: (dialogbuilder, dialog) =>
 				{
-					CurrentColor = new Color(ColorPanel.Color = ColorPanel.BorderColor = ColorPicker.Color);
+					if (dialogbuilder is null)
+						return;
 
-					CurrentAlertDialog?.Dismiss();
+					_ColorPicker = null;
 
-					CallChangeListener(CurrentColor.ToArgb());
+					dialogbuilder.ProcessDialog(this);
+					dialogbuilder.SetView(ColorPicker);
+					dialogbuilder.SetPositiveButton(Resource.String.save, (sender, args) =>
+					{
+						CurrentColor = new Color(ColorPanel.Color = ColorPanel.BorderColor = ColorPicker.Color);
+
+						CurrentAlertDialog?.Dismiss();
+
+						CallChangeListener(CurrentColor.ToArgb());
+					});
+
+					DialogOnBuild?.Invoke(dialogbuilder);
 				});
 
-				DialogOnBuild?.Invoke(alertdialogbuilder);
-
-				(CurrentAlertDialog = alertdialogbuilder.Create())
-					.Show();
-			}
+			CurrentAlertDialog.Show();
 		}
 		public override void OnBindViewHolder(AndroidX.Preference.PreferenceViewHolder holder)
 		{

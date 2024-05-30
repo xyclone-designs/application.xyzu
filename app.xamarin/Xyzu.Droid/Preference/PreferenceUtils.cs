@@ -3,12 +3,8 @@
 using Android.Content;
 using AndroidX.AppCompat.App;
 
-using Google.Android.Material.Dialog;
-
 using System;
 using System.Linq;
-
-using Xyzu.Droid;
 
 using AndroidXDialogPreference = AndroidX.Preference.DialogPreference;
 using AndroidXListPreference = AndroidX.Preference.ListPreference;
@@ -16,16 +12,15 @@ using AndroidXMultiSelectListPreference = AndroidX.Preference.MultiSelectListPre
 
 namespace Xyzu.Preference
 {
-	public class PreferenceUtils
+	public static class PreferenceUtils
 	{
-		public static AlertDialog.Builder? StyledAlertDialog(Context context, AndroidXDialogPreference dialogpreference)
+		public static AlertDialog.Builder ProcessDialog(this AlertDialog.Builder dialogbuilder, AndroidXDialogPreference dialogpreference)
 		{
-			AlertDialog.Builder? alertdialogbuilder = new MaterialAlertDialogBuilder(context, Resource.Style.Xyzu_Preference_AlertDialog)
-				.SetTitle(dialogpreference.DialogTitle);
+			dialogbuilder.SetTitle(dialogpreference.DialogTitle);
 
-			return alertdialogbuilder;
+			return dialogbuilder;
 		}
-		public static AlertDialog.Builder? StyledAlertDialog(Context context, AndroidXListPreference listpreference, Func<AlertDialog?>? getalertdialog)
+		public static AlertDialog.Builder ProcessList(this AlertDialog.Builder dialogbuilder, AndroidXListPreference listpreference, Func<AlertDialog?>? getalertdialog)
 		{
 			void SingleChoiceItemsHandler(object sender, DialogClickEventArgs args)
 			{
@@ -36,27 +31,27 @@ namespace Xyzu.Preference
 				alertdialog?.Dismiss();
 			};
 
-			AlertDialog.Builder? alertdialogbuilder = StyledAlertDialog(context, listpreference)?
+			return dialogbuilder
+				.ProcessDialog(listpreference)
 				.SetSingleChoiceItems(
 					handler: SingleChoiceItemsHandler,
-					items: listpreference.GetEntryValues() ?? Array.Empty<string>(), 
+					items: listpreference.GetEntryValues() ?? Array.Empty<string>(),
 					checkedItem: listpreference.FindIndexOfValue(listpreference.Value));
-
-			return alertdialogbuilder;
-		}	  
-		public static AlertDialog.Builder? StyledAlertDialog(Context context, AndroidXMultiSelectListPreference multiselectlistpreference, Func<AlertDialog?>? getalertdialog)
+		}
+		public static AlertDialog.Builder ProcessListMulti(this AlertDialog.Builder dialogbuilder, AndroidXMultiSelectListPreference multiselectlistpreference, Func<AlertDialog?>? getalertdialog) 
 		{
 			void PositiveButtonHandler(object sender, DialogClickEventArgs args)
 			{
 				AlertDialog? alertdialog = getalertdialog?.Invoke();
 				alertdialog?.Dismiss();
-			};									   
+			};
 			void MultiChoiceItemsHandler(object sender, DialogMultiChoiceClickEventArgs args)
 			{
 				multiselectlistpreference.CallChangeListener(args.Which);
 			};
 
-			AlertDialog.Builder? alertdialogbuilder = StyledAlertDialog(context, multiselectlistpreference)?
+			dialogbuilder = dialogbuilder
+				.ProcessDialog(multiselectlistpreference)
 				.SetMultiChoiceItems(
 					handler: MultiChoiceItemsHandler,
 					items: multiselectlistpreference.GetEntryValues() ?? Array.Empty<string>(),
@@ -72,9 +67,9 @@ namespace Xyzu.Preference
 
 
 			if (multiselectlistpreference.PositiveButtonText != null)
-				alertdialogbuilder?.SetPositiveButton(multiselectlistpreference.PositiveButtonText, PositiveButtonHandler);
+				dialogbuilder.SetPositiveButton(multiselectlistpreference.PositiveButtonText, PositiveButtonHandler);
 
-			return alertdialogbuilder;
+			return dialogbuilder;
 		}
 	}
 }

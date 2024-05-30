@@ -11,7 +11,6 @@ using AndroidX.DrawerLayout.Widget;
 
 using Com.Sothree.Slidinguppanel;
 
-using Google.Android.Material.AppBar;			
 using Google.Android.Material.Navigation;			
 
 using System;

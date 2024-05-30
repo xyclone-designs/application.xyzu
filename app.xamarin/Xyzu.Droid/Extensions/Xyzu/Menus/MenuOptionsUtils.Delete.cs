@@ -308,16 +308,19 @@ namespace Xyzu.Menus
 				}));
 		}
 
-		private static Action<AppCompatAlertDialog.Builder>? Delete_AlertDialogBuilderAction(int title, VariableContainer variables, Action<AppCompatAlertDialog.Builder>? additional)
+		private static Action<AppCompatAlertDialog.Builder?, AppCompatAlertDialog?>? Delete_AlertDialogBuilderAction(int title, VariableContainer variables, Action<AppCompatAlertDialog.Builder>? additional)
 		{
-			return alertdialogbuilder =>
+			return (dialogbuilder, dialog) =>
 			{
-				alertdialogbuilder.SetTitle(title);
-				alertdialogbuilder.SetMessage(Resource.String.delete_warning_action_cant_be_undone);
-				alertdialogbuilder.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
-				alertdialogbuilder.SetNegativeButton(Resource.String.cancel, CreateDialogInterfaceOnClickListener(variables.DialogInterfaceListenerCancel));
+				if (dialogbuilder != null)
+				{
+					dialogbuilder.SetTitle(title);
+					dialogbuilder.SetMessage(Resource.String.delete_warning_action_cant_be_undone);
+					dialogbuilder.SetOnDismissListener(variables.DialogInterfaceListenerOnDismiss);
+					dialogbuilder.SetNegativeButton(Resource.String.cancel, CreateDialogInterfaceOnClickListener(variables.DialogInterfaceListenerCancel));
 
-				additional?.Invoke(alertdialogbuilder);
+					additional?.Invoke(dialogbuilder);
+				}
 			};
 		}
 	}
