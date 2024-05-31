@@ -68,6 +68,8 @@ namespace Xyzu.Fragments.Library
 				return true;
 			}
 
+			Activity?.OnBackPressed();
+
 			return false;
 		}
 		public virtual bool OnMenuOptionClick(MenuOptions menuoption)

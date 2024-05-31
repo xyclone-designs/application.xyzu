@@ -66,6 +66,10 @@ namespace Xyzu.Views.Library
 
 			PlaylistHeader.Images = Images;
 			PlaylistHeader.Library = Library;
+			PlaylistHeader.OnBackClick = (sender, args) =>
+			{
+				LibraryFragment?.OnBackPressed();
+			};
 			PlaylistHeader.OnClickOptions = (sender, args) =>
 			{
 				CreateOptionsMenuAlertDialog((optionsmenuview, alertdialog) =>

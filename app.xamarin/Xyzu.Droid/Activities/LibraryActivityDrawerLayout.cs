@@ -2,6 +2,7 @@
 
 using Android.Content;
 using Android.Content.PM;
+using Android.Content.Res;
 using Android.OS;
 using Android.Views;
 using AndroidX.AppCompat.App;
@@ -108,7 +109,6 @@ namespace Xyzu.Activities
 				FindViewById<DrawerLayout>(Resource.Id.xyzu_layout_library_drawerlayout_drawerlayout) ??
 				throw new InflateException("Could not find view 'xyzu_layout_library_drawerlayout_drawerlayout' in 'layout_library_drawerlayout'");
 		}
-		
 		public NavigationView Navigationview 
 		{ 
 			get => _Navigationview ??=

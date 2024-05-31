@@ -66,6 +66,10 @@ namespace Xyzu.Views.Library
 
 			AlbumHeader.Images = Images;
 			AlbumHeader.Library = Library;
+			AlbumHeader.OnBackClick = (sender, args) =>
+			{
+				LibraryFragment?.OnBackPressed();
+			};
 			AlbumHeader.OnClickOptions = (sender, args) =>
 			{
 				CreateOptionsMenuAlertDialog((optionsmenuview, alertdialog) =>

@@ -66,6 +66,10 @@ namespace Xyzu.Views.Library
 
 			GenreHeader.Images = Images;
 			GenreHeader.Library = Library;
+			GenreHeader.OnBackClick = (sender, args) =>
+			{
+				LibraryFragment?.OnBackPressed();
+			};
 			GenreHeader.OnClickOptions = (sender, args) =>
 			{
 				CreateOptionsMenuAlertDialog((optionsmenuview, alertdialog) =>

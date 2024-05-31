@@ -20,6 +20,7 @@ namespace Xyzu.Views.LibraryItem.Header
 		{
 			public const int Layout = Resource.Layout.xyzu_view_libraryitem_header_genre;
 
+			public const int Back_AppCompatImageButton = Resource.Id.xyzu_view_libraryitem_header_genre_back_appcompatimagebutton;
 			public const int Artwork_AppCompatImageView = Resource.Id.xyzu_view_libraryitem_header_genre_artwork_appcompatimageview;
 			public const int LineOne_AppCompatTextView = Resource.Id.xyzu_view_libraryitem_header_genre_lineone_appcompattextview;
 			public const int LineTwo_AppCompatTextView = Resource.Id.xyzu_view_libraryitem_header_genre_linetwo_appcompattextview;
@@ -38,6 +39,7 @@ namespace Xyzu.Views.LibraryItem.Header
 
 			base.Init(context, attrs);
 
+			Back = FindViewById<AppCompatImageButton>(Ids.Back_AppCompatImageButton);
 			Artwork = FindViewById<AppCompatImageView>(Ids.Artwork_AppCompatImageView);
 			LineOne = FindViewById<AppCompatTextView>(Ids.LineOne_AppCompatTextView);
 			LineTwo = FindViewById<AppCompatTextView>(Ids.LineTwo_AppCompatTextView);

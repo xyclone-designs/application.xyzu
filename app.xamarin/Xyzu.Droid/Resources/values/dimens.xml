@@ -22,7 +22,10 @@
   <dimen name="dp192">192dp</dimen>
   <dimen name="dp256">256dp</dimen>
   <dimen name="dp280">280dp</dimen>
-  <dimen name="dp630">360dp</dimen>
+  <dimen name="dp360">360dp</dimen>
+  <dimen name="dp540">540dp</dimen>
+  <dimen name="dp600">6000dp</dimen>
+  <dimen name="dp720">720dp</dimen>
   
   <dimen name="percent10">10%</dimen>
   <dimen name="percent20">20%</dimen>

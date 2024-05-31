@@ -43,6 +43,7 @@ namespace Xyzu.Activities
 			AppDomain.CurrentDomain.UnhandledException += ISystemSettingsDroid.OnUnhandledException;
 			TaskScheduler.UnobservedTaskException += ISystemSettingsDroid.OnUnobservedTaskException;
 			AndroidRuntimeEnvironment.UnhandledExceptionRaiser += ISystemSettingsDroid.UnhandledExceptionRaiser;
+
 			ResultLauncher = RegisterForActivityResult(ResultContract, ResultCallback);
 		}
 		protected override void OnStart()

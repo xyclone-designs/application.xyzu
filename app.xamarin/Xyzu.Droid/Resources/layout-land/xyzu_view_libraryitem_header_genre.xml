@@ -18,7 +18,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" 
-        app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_genre_artwork_appcompatimageview" />
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_genre_back_appcompatimagebutton" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        style="@style/Xyzu.View.LibraryItem.Header.ImageButton"
+        android:id="@+id/xyzu_view_libraryitem_header_genre_back_appcompatimagebutton"
+        android:src="@drawable/icon_general_arrow_previous"
+        android:layout_height="@dimen/dp40"
+        android:layout_width="@dimen/dp40"
+        android:layout_margin="@dimen/dp8"
+        
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_libraryitem_header_genre_statusbarinsetview" />
 
     <androidx.appcompat.widget.AppCompatImageView
         style="@style/Xyzu.View.LibraryItem.Header.Image"
@@ -32,11 +45,11 @@
         app:layout_constrainedWidth="true"
         app:layout_constrainedHeight="true"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintWidth_max="@dimen/dp630"
+        app:layout_constraintWidth_max="@dimen/dp600"
         app:layout_constraintWidth_min="@dimen/dp112"
         app:layout_constraintWidth_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/xyzu_view_libraryitem_header_genre_statusbarinsetview"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_libraryitem_header_genre_back_appcompatimagebutton"
         app:layout_constraintBottom_toTopOf="@id/xyzu_view_libraryitem_header_genre_genresongs_headerlibraryitemsview"/>
 
     <androidx.appcompat.widget.AppCompatTextView

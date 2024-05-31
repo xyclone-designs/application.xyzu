@@ -103,6 +103,10 @@ namespace Xyzu.Views.Library
 
 			ArtistHeader.Images = Images;
 			ArtistHeader.Library = Library;
+			ArtistHeader.OnBackClick = (sender, args) =>
+			{
+				LibraryFragment?.OnBackPressed();
+			};
 			ArtistHeader.ArtistItems.TextClick = async (sender, args) =>
 			{
 				Showing = Showing == ArtistItemType.Albums ? ArtistItemType.Songs : ArtistItemType.Albums;
