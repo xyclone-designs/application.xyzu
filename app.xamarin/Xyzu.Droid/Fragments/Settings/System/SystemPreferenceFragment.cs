@@ -66,7 +66,7 @@ namespace Xyzu.Fragments.Settings.System
 			RemovePreferenceChangeHandler(
 				ErrorLogsPreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutSystemDroid(this)
 				.Apply();

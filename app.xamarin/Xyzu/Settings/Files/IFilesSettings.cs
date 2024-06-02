@@ -10,6 +10,7 @@ namespace Xyzu.Settings.Files
 	{
 		T TrackLengthIgnore { get; set; }
 		T Directories { get; set; }
+		T DirectoriesExclude { get; set; }
 		T Mimetypes { get; set; }
 	}
 	public interface IFilesSettings : ISettings
@@ -20,12 +21,14 @@ namespace Xyzu.Settings.Files
 			
 			public const string TrackLengthIgnore = Base + "." + nameof(TrackLengthIgnore);
 			public const string Directories = Base + "." + nameof(Directories);
+			public const string DirectoriesExclude = Base + "." + nameof(DirectoriesExclude);
 			public const string Mimetypes = Base + "." + nameof(Mimetypes);
 		}
 		public new class Defaults : ISettings.Defaults
 		{
 			public const int TrackLengthIgnore = 5;
 			public static readonly IEnumerable<string> Directories = Enumerable.Empty<string>();										
+			public static readonly IEnumerable<string> DirectoriesExclude = Enumerable.Empty<string>();										
 			public static readonly IEnumerable<MimeTypes> Mimetypes = Enum
 				.GetValues(typeof(MimeTypes))
 				.Cast<MimeTypes>();
@@ -33,6 +36,7 @@ namespace Xyzu.Settings.Files
 			public static readonly IFilesSettings FilesSettings = new Default
 			{
 				Directories = Directories,
+				DirectoriesExclude = DirectoriesExclude,
 				Mimetypes = Mimetypes,
 				TrackLengthIgnore = TrackLengthIgnore,
 			};
@@ -63,6 +67,7 @@ namespace Xyzu.Settings.Files
 
 		int TrackLengthIgnore { get; set; }
 		IEnumerable<string> Directories { get; set; }
+		IEnumerable<string> DirectoriesExclude { get; set; }
 		IEnumerable<MimeTypes> Mimetypes { get; set; }
 
 		public new class Default : ISettings.Default, IFilesSettings 
@@ -70,11 +75,13 @@ namespace Xyzu.Settings.Files
 			public Default()
 			{
 				_Directories = Enumerable.Empty<string>();
+				_DirectoriesExclude = Enumerable.Empty<string>();
 				_Mimetypes = Enumerable.Empty<MimeTypes>();
 			}
 
 			private int _TrackLengthIgnore;
 			private IEnumerable<string> _Directories;
+			private IEnumerable<string> _DirectoriesExclude;
 			private IEnumerable<MimeTypes> _Mimetypes;
 
 			public int TrackLengthIgnore
@@ -97,6 +104,16 @@ namespace Xyzu.Settings.Files
 					OnPropertyChanged();
 				}
 			}
+			public IEnumerable<string> DirectoriesExclude
+			{
+				get => _DirectoriesExclude;
+				set
+				{
+					_DirectoriesExclude = value;
+
+					OnPropertyChanged();
+				}
+			}
 			public IEnumerable<MimeTypes> Mimetypes
 			{
 				get => _Mimetypes;
@@ -114,11 +131,13 @@ namespace Xyzu.Settings.Files
 			{
 				TrackLengthIgnore = defaultvalue;
 				Directories = defaultvalue;
+				DirectoriesExclude = defaultvalue;
 				Mimetypes = defaultvalue;
 			}
 
 			public T TrackLengthIgnore { get; set; }
 			public T Directories { get; set; }
+			public T DirectoriesExclude { get; set; }
 			public T Mimetypes { get; set; }
 		}
 	}

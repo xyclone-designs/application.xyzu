@@ -7,6 +7,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.Widget;
+using AndroidX.ConstraintLayout.Core;
 using AndroidX.ConstraintLayout.Widget;
 
 using Java.IO;
@@ -70,18 +71,10 @@ namespace Xyzu.Views.Setting
 		private Drawable? _DirectoryChildrenDrawableGone;
 		private Drawable? _DirectoryChildrenDrawableVisible;
 
-		private string? DirectoryTitleText
-		{
-			get => Directory is null
-				? null
-				: Directory.ParentFile is null
-					? Directory.AbsolutePath
-					: Directory.AbsolutePath.Replace(Directory.ParentFile.AbsolutePath, string.Join(string.Empty, Enumerable.Range(0, DirectoryLevel).Select(num => "    ")) + "..");
-		}
-
 		private File? _Directory;
 		private int _DirectoryLevel;
 		private bool _DirectoryHasChildren;
+		private string? _DirectoryTitleText;
 		private AppCompatCheckBox? _DirectoryIsSelected;
 		private AppCompatButton? _DirectoryTitle;
 		private RecursiveItemsRecyclerView? _DirectoryChildren;
@@ -115,6 +108,15 @@ namespace Xyzu.Views.Setting
 
 				OnPropertyChanged();
 			}
+		}
+		public string? DirectoryTitleText
+		{
+			set => _DirectoryTitleText = value;
+			get => _DirectoryTitleText != null ? _DirectoryTitleText 
+				: Directory is null ? null
+				: Directory.ParentFile is null
+					? Directory.AbsolutePath
+					: Directory.AbsolutePath.Replace(Directory.ParentFile.AbsolutePath, string.Join(string.Empty, Enumerable.Range(0, DirectoryLevel).Select(num => "    ")) + "..");
 		}
 
 		public AppCompatCheckBox DirectoryIsSelected 

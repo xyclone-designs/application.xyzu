@@ -101,8 +101,10 @@ namespace Xyzu.Activities
 			};
 			xyzulibrary.OnCreateAction = new Library.TagLibSharp.TagLibSharpActions.OnCreate
 			{
-				Paths = AndroidOSEnvironment.StorageDirectory
-					.ListFilesSettingsFiles(FilesSettings ?? IFilesSettingsDroid.Defaults.FilesSettingsDroid)
+				Paths = IFilesSettingsDroid.Storages()
+					.SelectMany(storage => storage.ListAllFiles())
+					.Where(IFilesSettingsDroid.PredicateDirectories(FilesSettings ?? IFilesSettingsDroid.Defaults.FilesSettingsDroid))
+					.Where(IFilesSettingsDroid.PredicateDirectoriesExclude(FilesSettings ?? IFilesSettingsDroid.Defaults.FilesSettingsDroid))
 					.ToDictionary(file => file.AbsolutePath, file => file.AbsolutePath),
 			};
 			xyzulibrary.OnDeleteActions = new List<ILibrary.IOnDeleteActions>
@@ -216,6 +218,33 @@ namespace Xyzu.Activities
 				}
 			};
 		}
+		private void XyzuSettingsInit(XyzuSettings xyzusettings)
+		{
+			if (FilesSettings.Directories.Any() is false)
+			{
+				IEnumerable<string> defaultdirectories = Enumerable.Empty<string>()
+					.Append(AndroidOSEnvironment.DirectoryAudiobooks)
+					.Append(AndroidOSEnvironment.DirectoryDownloads)
+					.Append(AndroidOSEnvironment.DirectoryMusic)
+					.Append(AndroidOSEnvironment.DirectoryPodcasts)
+					.OfType<string>();
+
+				foreach (File storage in IFilesSettingsDroid.Storages())
+					foreach (string defaultdirectory in defaultdirectories)
+					{
+						string defaultdirectorypath = string.Format("{0}/{1}", storage.AbsolutePath, defaultdirectory);
+						File file = new File(defaultdirectorypath);
+
+						if (file.Exists() && file.IsDirectory)
+							FilesSettings.Directories = FilesSettings.Directories.Append(file.AbsolutePath);
+					}
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutFilesDroid(FilesSettings)
+					.Apply();
+			}
+		}
 
 		private async void Start(bool permissionchecked)
 		{
@@ -239,7 +268,7 @@ namespace Xyzu.Activities
 				await CacheDir.ClearDirectoryAsync();
 
 			XyzuBroadcast.Init(Application.Context, XyzuBroadcastInit);
-			XyzuSettings.Init(Application.Context);
+			XyzuSettings.Init(Application.Context, XyzuSettingsInit);
 			XyzuLibrary.Init(Application.Context, XyzuLibraryInit);
 			XyzuImages.Init(Application.Context, XyzuImagesInit);
 			XyzuPlayer.Init(Application.Context, typeof(ExoPlayerService), XyzuPlayerInit);

@@ -62,7 +62,7 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			RemovePreferenceChangeHandler(
 				LayoutTypePreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutUserInterfaceLibrarySearch(this)
 				.Apply();

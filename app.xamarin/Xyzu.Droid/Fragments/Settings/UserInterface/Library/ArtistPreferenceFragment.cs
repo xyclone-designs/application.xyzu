@@ -151,7 +151,7 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 				SongsLayoutTypePreference,
 				SongsSortKeyPreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutUserInterfaceLibraryArtist(this)
 				.Apply();

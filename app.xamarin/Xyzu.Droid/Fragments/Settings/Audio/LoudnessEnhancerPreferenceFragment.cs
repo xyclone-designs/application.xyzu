@@ -115,7 +115,7 @@ namespace Xyzu.Fragments.Settings.Audio
 				CurrentPresetPreference,
 				TargetGainPreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutAudioLoudnessEnhancer(this)
 				.Apply();

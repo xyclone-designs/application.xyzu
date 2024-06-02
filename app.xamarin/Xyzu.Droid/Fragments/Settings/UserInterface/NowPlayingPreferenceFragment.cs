@@ -59,7 +59,7 @@ namespace Xyzu.Fragments.Settings.UserInterface
 			RemovePreferenceChangeHandler(
 				ForceShowNowPlayingPreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutUserInterfaceNowPlayingDroid(this)
 				.Apply();

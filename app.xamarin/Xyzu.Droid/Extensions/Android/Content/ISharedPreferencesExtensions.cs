@@ -287,7 +287,8 @@ namespace Android.Content
 		{
 			return new IFilesSettingsDroid.Default
 			{
-				Directories = sharedpreferences.GetStringSet(IFilesSettingsDroid.Keys.Directories, null) ?? IFilesSettingsDroid.Defaults.Directories,
+				Directories = sharedpreferences.GetStringSet(IFilesSettingsDroid.Keys.Directories, IFilesSettingsDroid.Defaults.Directories.ToList()) ?? IFilesSettingsDroid.Defaults.Directories,
+				DirectoriesExclude = sharedpreferences.GetStringSet(IFilesSettingsDroid.Keys.DirectoriesExclude, IFilesSettingsDroid.Defaults.DirectoriesExclude.ToList()) ?? IFilesSettingsDroid.Defaults.DirectoriesExclude,
 				Mimetypes = sharedpreferences.GetEnumSet<MimeTypes>(IFilesSettingsDroid.Keys.Mimetypes, IFilesSettingsDroid.Defaults.Mimetypes) ?? IFilesSettingsDroid.Defaults.Mimetypes,
 				TrackLengthIgnore = sharedpreferences.GetInt(IFilesSettingsDroid.Keys.TrackLengthIgnore, IFilesSettingsDroid.Defaults.TrackLengthIgnore),
 			};

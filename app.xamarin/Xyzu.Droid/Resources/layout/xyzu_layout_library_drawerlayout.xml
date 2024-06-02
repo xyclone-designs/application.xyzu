@@ -65,7 +65,7 @@
                 android:id="@+id/xyzu_layout_library_drawerlayout_floatingactionbutton"
                 android:layout_height="@dimen/dp0"
                 android:layout_width="@dimen/dp0"
-                android:layout_marginEnd="@dimen/dp32"
+                android:layout_marginEnd="@dimen/dp8"
             
                 app:srcCompat="@drawable/icon_general_plus"
                 app:layout_constraintWidth="wrap_content"

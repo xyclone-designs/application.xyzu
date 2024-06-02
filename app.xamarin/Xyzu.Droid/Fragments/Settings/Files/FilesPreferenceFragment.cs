@@ -1,12 +1,16 @@
 ﻿#nullable enable
 
 using Android.Content;
+using Android.Net;
 using Android.OS;
+using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using AndroidX.RecyclerView.Widget;
+using AndroidX.DocumentFile.Provider;
 
 using Java.IO;
+using Java.Net;
 
 using System;
 using System.Collections.Generic;
@@ -18,14 +22,15 @@ using Xyzu.Library.Enums;
 using Xyzu.Settings.Enums;
 using Xyzu.Settings.Files;
 using Xyzu.Views.Setting;
-using Xyzu.Widgets.RecyclerViews.LibraryItems;
+using Xyzu.Widgets.RecyclerViews;
 
+using AndroidNetUri = Android.Net.Uri;
 using AndroidOSEnvironment = Android.OS.Environment;
 using AndroidXPreference = AndroidX.Preference.Preference;
+using SystemIOPath = System.IO.Path;
 using XyzuDialogPreference = Xyzu.Preference.DialogPreference;
 using XyzuSeekBarPreference = Xyzu.Preference.SeekBarPreference;
 using XyzuMultiSelectListPreference = Xyzu.Preference.MultiSelectListPreference;
-using Xyzu.Widgets.RecyclerViews;
 
 namespace Xyzu.Fragments.Settings.Files
 {
@@ -43,6 +48,7 @@ namespace Xyzu.Fragments.Settings.Files
 
 		private int _TrackLengthIgnore;
 		private IEnumerable<string>? _Directories;
+		private IEnumerable<string>? _DirectoriesExclude;
 		private IEnumerable<MimeTypes>? _Mimetypes;
 		private Func<File, bool>? _FilesSettingsDirectoryPredicate;
 
@@ -64,6 +70,17 @@ namespace Xyzu.Fragments.Settings.Files
 			{
 
 				_Directories = value;
+
+				OnPropertyChanged();
+			}
+		}
+		public IEnumerable<string> DirectoriesExclude
+		{
+			get => _DirectoriesExclude ?? Enumerable.Empty<string>();
+			set
+			{
+
+				_DirectoriesExclude = value;
 
 				OnPropertyChanged();
 			}
@@ -103,6 +120,7 @@ namespace Xyzu.Fragments.Settings.Files
 
 			TrackLengthIgnore = settings.TrackLengthIgnore;
 			Directories = settings.Directories;
+			DirectoriesExclude = settings.DirectoriesExclude;
 			Mimetypes = settings.Mimetypes;
 		}
 		public override void OnPause()
@@ -114,7 +132,7 @@ namespace Xyzu.Fragments.Settings.Files
 				DirectoriesPreference,
 				MimetypesPreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutFilesDroid(this)
 				.Apply();
@@ -157,13 +175,20 @@ namespace Xyzu.Fragments.Settings.Files
 							callback.OnActivityResultAction = result =>
 							{
 								Intent? intentresult = result as Intent;
+								AndroidNetUri? documenturi = DocumentsContract.BuildDocumentUriUsingTree(intentresult?.Data, intentresult?.Identifier);
 
-								if (intentresult is null)
+								if (documenturi?.PathSegments is null)
 									return;
 
-								if (intentresult.Data?.Path is string directory && Directories.Contains(directory) is false)
-									Directories = Directories.Append(directory);
+								string path = SystemIOPath.Combine(
+									AndroidOSEnvironment.StorageDirectory.AbsolutePath,
+									documenturi.PathSegments[1]
+										.Replace(':', '/')
+										.Replace("primary", "emulated/0"));
 
+								Directories = Directories
+									.Append(path)
+									.OrderBy(dir => dir);
 								DirectoriesPreferenceView?.RecursiveAdapter.NotifyDataSetChanged();
 							};
 
@@ -178,15 +203,9 @@ namespace Xyzu.Fragments.Settings.Files
 					{
 						RecursiveAdapter = new DirectoriesRecyclerView.Adapter(Context)
 						{
-							Directories = AndroidOSEnvironment.StorageDirectory
-								.ListFilesSettingsDiretories(XyzuSettings.Instance.GetFilesDroid() ?? IFilesSettingsDroid.Defaults.FilesSettingsDroid, Context)
-								.Where(directory =>
-								{
-									bool predicate = Directories.Any(dir => directory.AbsolutePath.Contains(string.Format("/{0}/", dir), StringComparison.OrdinalIgnoreCase));
-									
-									return predicate is false;
-
-								}).OrderBy(file => file.AbsolutePath).ToList(),
+							Directories = IFilesSettingsDroid.Storages()
+								.OrderBy(file => file.AbsolutePath)
+								.ToList(),
 
 							ViewHolderOnBind = OnBindViewHolder,
 						}
@@ -254,16 +273,32 @@ namespace Xyzu.Fragments.Settings.Files
 		{
 			DirectoriesRecyclerView.ViewHolder viewholder = (DirectoriesRecyclerView.ViewHolder)holder;
 
-			viewholder.ItemChildrenAdapter.Directories = viewholder.ItemView.Directory?
-				.ListFiles()?
-				.Where(_FilesSettingsDirectoryPredicate)
-				.OrderBy(file => file.AbsolutePath)
-				.ToList();
+			if (Context is null || viewholder.Parent is null) return;
 
+			viewholder.ItemChildrenAdapter = new DirectoriesRecyclerView.Adapter(Context)
+			{
+				ParentChecked = viewholder.Parent.ParentChecked ?? true,
+				ParentLevel = viewholder.Parent.ParentLevel + 1 ?? 0,
+				ViewHolderOnBind = OnBindViewHolder,
+				Directories = viewholder.ItemView.Directory?
+					.ListFiles()?
+					//.Where(_FilesSettingsDirectoryPredicate)
+					.OrderBy(file => file.AbsolutePath)
+					.ToList()
+			};
+
+			viewholder.ItemView.Directory = viewholder.Parent.Directories?[position];
+			viewholder.ItemView.DirectoryLevel = viewholder.Parent.ParentLevel + 1 ?? 0;
 			viewholder.ItemView.DirectoryHasChildren = viewholder.ItemChildrenAdapter.Directories?.Any() ?? false;
+			viewholder.ItemView.DirectoryIsSelected.Checked = viewholder.Parent.ParentChecked ?? true;
+			viewholder.ItemView.DirectoryIsSelectedCheckChange = (sender, args) =>
+			{
+				viewholder.ItemChildrenAdapter.ParentChecked = args.IsChecked;
+				viewholder.ItemChildrenAdapter.NotifyDataSetChanged();
+			};
 		}
 
-		public static class DirectoriesRecyclerView 
+		public  class DirectoriesRecyclerView 
 		{
 			public class Adapter : RecursiveItemsRecyclerView.Adapter
 			{
@@ -304,7 +339,10 @@ namespace Xyzu.Fragments.Settings.Files
 				}
 				public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
 				{
-					return new ViewHolder(Context);
+					return new ViewHolder(Context)
+					{
+						Parent = this
+					};
 				}
 			}
 			public class ViewHolder : RecursiveItemsRecyclerView.ViewHolder
@@ -320,12 +358,13 @@ namespace Xyzu.Fragments.Settings.Files
 					ItemChildren = itemView.DirectoryChildren;
 				}
 
+				public Adapter? Parent { get; set; }
+
 				public new DirectoryItem ItemView
 				{
 					set => base.ItemView = value;
 					get => (DirectoryItem)base.ItemView;
-				}			
-
+				}
 				public Adapter ItemChildrenAdapter
 				{
 					set => ItemView.DirectoryChildren.RecursiveAdapter = value;

@@ -316,7 +316,7 @@ namespace Xyzu.Fragments.Settings.Audio
 				RoomHFLevelPreference,
 				RoomLevelPreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutAudioEnvironmentalReverb(this)
 				.Apply();

@@ -13,11 +13,11 @@ using Google.Android.Material.Snackbar;
 
 using System;
 using System.Collections.Generic;
-using System.Drawing.Drawing2D;
 using System.Linq;
 
 using Xyzu.Droid;
 using Xyzu.Menus;
+
 using AndroidUri = Android.Net.Uri;
 using JavaFile = Java.IO.File;
 using JavaURI = Java.Net.URI;
@@ -42,7 +42,7 @@ namespace Xyzu
 					alertdialog.Window.AddFlags(WindowManagerFlags.TranslucentStatus);
 					alertdialog.Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
 					alertdialog.Window.SetLayout(MenuOptionsUtils.DialogWidth(context), MenuOptionsUtils.DialogHeight(context));
-					alertdialog.Window.SetSoftInputMode(SoftInput.AdjustResize | SoftInput.StateHidden);
+					alertdialog.Window.SetSoftInputMode(SoftInput.AdjustPan | SoftInput.AdjustResize | SoftInput.StateHidden);
 				}
 
 				action?.Invoke(null, alertdialog);
@@ -64,7 +64,7 @@ namespace Xyzu
 					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
 					bottomsheetdialog.Window.SetLayout(MenuOptionsUtils.DialogWidth(context), MenuOptionsUtils.DialogHeight(context));
 					bottomsheetdialog.Window.SetGravity(MenuOptionsUtils.DialogGravityFlags(context));
-					bottomsheetdialog.Window.SetSoftInputMode(SoftInput.AdjustResize | SoftInput.StateHidden);
+					bottomsheetdialog.Window.SetSoftInputMode(SoftInput.AdjustPan | SoftInput.AdjustResize | SoftInput.StateHidden);
 				}
 
 				bottomsheetdialogaction?.Invoke(bottomsheetdialog);

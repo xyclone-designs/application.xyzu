@@ -114,7 +114,7 @@ namespace Xyzu.Fragments.Settings.Audio
 				CurrentPresetPreference,
 				CurrentPresetBandsPreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutAudioEqualiser(this)
 				.Apply();

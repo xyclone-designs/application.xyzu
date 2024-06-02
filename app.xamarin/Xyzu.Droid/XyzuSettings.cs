@@ -1,8 +1,7 @@
 ﻿#nullable enable
 
-using Android.App;
 using Android.Content;
-using Java.Interop;
+
 using System;
 using System.Collections.Generic;
 
@@ -13,6 +12,8 @@ namespace Xyzu
 		private XyzuSettings(Context context) 
 		{
 			Context = context;
+			SharedPreferences = Context.GetSharedPreferences(Context.PackageName, FileCreationMode.Append) ?? 
+				throw new ArgumentException("Could not create shared preerences");
 		}
 
 		private static XyzuSettings? _Instance;
@@ -21,64 +22,57 @@ namespace Xyzu
 			get => _Instance ?? throw new Exception("Instance is null. Init AppSettings before use");
 		}
 
-		public static void Init(Context context)
+		public static void Init(Context context, Action<XyzuSettings>? oninit)
 		{
 			_Instance = new XyzuSettings(context) { };
+			oninit?.Invoke(_Instance);
 		}
 
-		public Context Context { get; set; }
+		private Context Context { get; }
+		private ISharedPreferences SharedPreferences { get; }
 
-		public const string SharedPreferencesName = "co.za.xyclonedesigns.xyzu";
-
-		private ISharedPreferences? _SharedPreferences;
-		public ISharedPreferences? SharedPreferences
-		{
-			get => _SharedPreferences ??= Context.GetSharedPreferences(Context.PackageName, FileCreationMode.Append);
-		}
-
-		public IDictionary<string, object>? All => SharedPreferences?.All;
-
-		public ISharedPreferencesEditor? Edit()
-		{
-			return SharedPreferences?.Edit();
-		}
-
+		public IDictionary<string, object>? All => SharedPreferences.All;
 		public bool Contains(string? key)
 		{
-			return SharedPreferences?.Contains(key) ?? false;
+			return SharedPreferences.Contains(key);
+		}
+		public ISharedPreferencesEditor? Edit()
+		{
+			return SharedPreferences.Edit();
 		}
 		public bool GetBoolean(string? key, bool defValue)
 		{
-			return SharedPreferences?.GetBoolean(key, defValue) ?? defValue;
+			return SharedPreferences.GetBoolean(key, defValue);
 		}
 		public float GetFloat(string? key, float defValue)
 		{
-			return SharedPreferences?.GetFloat(key, defValue) ?? defValue;
+			return SharedPreferences.GetFloat(key, defValue);
 		}
 		public int GetInt(string? key, int defValue)
 		{
-			return SharedPreferences?.GetInt(key, defValue) ?? defValue;
+			return SharedPreferences.GetInt(key, defValue);
 		}
 		public long GetLong(string? key, long defValue)
 		{
-			return SharedPreferences?.GetLong(key, defValue) ?? defValue;
+			return SharedPreferences.GetLong(key, defValue);
 		}
 		public string? GetString(string? key, string? defValue)
 		{
-			return SharedPreferences?.GetString(key, defValue) ?? defValue;
+			return SharedPreferences.GetString(key, defValue);
 		}
 		public ICollection<string>? GetStringSet(string? key, ICollection<string>? defValues)
 		{
-			return SharedPreferences?.GetStringSet(key, defValues) ?? defValues;
+			return SharedPreferences.GetStringSet(key, defValues);
 		}
 		public void RegisterOnSharedPreferenceChangeListener(ISharedPreferencesOnSharedPreferenceChangeListener? listener)
 		{
-			SharedPreferences?.RegisterOnSharedPreferenceChangeListener(listener);
+			SharedPreferences.RegisterOnSharedPreferenceChangeListener(listener);
 		}
 		public void UnregisterOnSharedPreferenceChangeListener(ISharedPreferencesOnSharedPreferenceChangeListener? listener)
 		{
-			SharedPreferences?.UnregisterOnSharedPreferenceChangeListener(listener);
+			SharedPreferences.UnregisterOnSharedPreferenceChangeListener(listener);
 		}
+
 
 		public class OnSharedPreferenceChangeEventArgs : EventArgs
 		{

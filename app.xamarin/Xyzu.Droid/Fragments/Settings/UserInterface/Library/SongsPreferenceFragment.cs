@@ -99,7 +99,7 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 				LayoutTypePreference,
 				SortKeyPreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutUserInterfaceLibrarySongs(this)
 				.Apply();

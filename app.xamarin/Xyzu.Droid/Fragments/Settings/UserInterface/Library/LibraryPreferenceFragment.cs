@@ -124,7 +124,7 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 				PageDefaultPreference,
 				PagesOrderedPreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutUserInterfaceLibraryDroid(this)?
 				.Apply();

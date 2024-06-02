@@ -79,7 +79,7 @@ namespace Xyzu.Fragments.Settings.UserInterface
 				CurrentLanguagePreference,
 				ModePreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutUserInterfaceLanguages(this)
 				.Apply();

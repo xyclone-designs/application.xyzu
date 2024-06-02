@@ -102,7 +102,7 @@ namespace Xyzu.Fragments.Settings.Audio
 				CurrentPresetPreference,
 				StrengthPreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutAudioBassBoost(this)
 				.Apply();

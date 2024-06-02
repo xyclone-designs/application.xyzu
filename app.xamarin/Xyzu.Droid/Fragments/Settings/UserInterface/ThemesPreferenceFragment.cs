@@ -60,7 +60,7 @@ namespace Xyzu.Fragments.Settings.UserInterface
 
 			RemovePreferenceChangeHandler(ModePreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutUserInterfaceThemes(this)
 				.Apply();

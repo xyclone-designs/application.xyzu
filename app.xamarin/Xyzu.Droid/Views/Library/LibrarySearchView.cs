@@ -175,7 +175,7 @@ namespace Xyzu.Views.Library
 			if (Settings != null)
 				SharedPreferences?
 					.Edit()?
-					.PutUserInterfaceLibrarySearch(Settings)?
+					.PutUserInterfaceLibrarySearch(Settings)
 					.Apply();
 		}
 

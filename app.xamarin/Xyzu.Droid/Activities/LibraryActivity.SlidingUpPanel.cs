@@ -41,13 +41,13 @@ namespace Xyzu.Activities
 					_ViewNowPlaying.FragmentActivity = this;
 					_ViewNowPlaying.Images = XyzuImages.Instance;
 					_ViewNowPlaying.Library = XyzuLibrary.Instance;
-					_ViewNowPlaying.MenuVariables = new Menus.MenuOptionsUtils.VariableContainer
+					_ViewNowPlaying.MenuVariables = new MenuOptionsUtils.VariableContainer
 					{
 						Activity = this,
 						LibraryNavigatable = this,
 					};
 					_ViewNowPlaying.Player = XyzuPlayer.Instance.Player;
-					_ViewNowPlaying.SharedPreferences = XyzuSettings.Instance.SharedPreferences;
+					_ViewNowPlaying.SharedPreferences = XyzuSettings.Instance;
 				}
 			}
 		}
@@ -98,7 +98,7 @@ namespace Xyzu.Activities
 
 				SlidingUpPanel.PanelHeight = slidinguppanelpanelheight = ViewNowPlaying.Height;
 
-				XyzuSettings.Instance.SharedPreferences?
+				XyzuSettings.Instance
 					.Edit()?
 					.PutInt(_ConfigureSlidingUpPanelHeightKey, slidinguppanelpanelheight)?
 					.Commit();
@@ -164,7 +164,7 @@ namespace Xyzu.Activities
 					ViewNowPlaying.ConstraintSetCollapsed?.ApplyTo(ViewNowPlaying);
 				}
 
-				XyzuSettings.Instance.SharedPreferences?
+				XyzuSettings.Instance
 					.Edit()?
 					.PutInt(_ConfigureNowPlayingArtworkDetailsSpaceKey, artworkdetailsspaceheight)?
 					.Commit();
@@ -243,7 +243,7 @@ namespace Xyzu.Activities
 						FragmentActions(libraryfragment => ConfigurePanelInsets(libraryfragment.LibraryView));
 						if (_ConfigureFloatingActionButtonState != SlidingUpPanelLayout.PanelState.Hidden)
 						{
-							Floatingactionbutton.SetMarginBottom(Resources?.GetNavigationBarHeight() ?? 0 + Resources?.GetDimensionPixelSize(Resource.Dimension.dp16) ?? 0);
+							Floatingactionbutton.SetMarginBottom(Resources?.GetNavigationBarHeight() ?? 0 + Resources?.GetDimensionPixelSize(Resource.Dimension.dp8) ?? 0);
 							_ConfigureFloatingActionButtonState = SlidingUpPanelLayout.PanelState.Hidden;
 						}
 						break;
@@ -253,7 +253,7 @@ namespace Xyzu.Activities
 						FragmentActions(libraryfragment => ConfigurePanelInsets(libraryfragment.LibraryView));
 						if (_ConfigureFloatingActionButtonState != SlidingUpPanelLayout.PanelState.Collapsed)
 						{
-							Floatingactionbutton.SetMarginBottom(SlidingUpPanel.PanelHeight + Resources?.GetDimensionPixelSize(Resource.Dimension.dp16) ?? 0);
+							Floatingactionbutton.SetMarginBottom(SlidingUpPanel.PanelHeight + Resources?.GetDimensionPixelSize(Resource.Dimension.dp8) ?? 0);
 							_ConfigureFloatingActionButtonState = SlidingUpPanelLayout.PanelState.Collapsed;
 						}
 						break;

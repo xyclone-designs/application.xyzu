@@ -153,6 +153,7 @@ namespace Android.Content
 		public static ISharedPreferencesEditor PutFiles(this ISharedPreferencesEditor sharedpreferenceseditor, IFilesSettings files)
 		{
 			sharedpreferenceseditor.PutStringSet(IFilesSettings.Keys.Directories, files.Directories.ToList());
+			sharedpreferenceseditor.PutStringSet(IFilesSettings.Keys.DirectoriesExclude, files.DirectoriesExclude.ToList());
 			sharedpreferenceseditor.PutEnumSet(IFilesSettings.Keys.Mimetypes, files.Mimetypes);
 			sharedpreferenceseditor.PutInt(IFilesSettings.Keys.TrackLengthIgnore, files.TrackLengthIgnore);
 

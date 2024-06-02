@@ -181,6 +181,11 @@ namespace Xyzu.Activities
 					menuitem: Navigationview.Menu
 						.Add(0, index, 0, string.Empty)?
 						.SetCheckable(true));
+
+			if (Navigationview.LayoutParameters != null)
+				Navigationview.LayoutParameters!.Width = Resources?.Configuration?.Orientation == Orientation.Landscape
+					? Resources.GetDimensionPixelSize(Resource.Dimension.dp360)
+					: DrawerLayout.LayoutParams.WrapContent;
 		}		  
 		protected override void OnResume()
 		{

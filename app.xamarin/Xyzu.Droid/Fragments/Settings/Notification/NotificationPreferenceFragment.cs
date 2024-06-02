@@ -130,7 +130,7 @@ namespace Xyzu.Fragments.Settings.Notification
 				PriorityPreference,
 				BadgeIconTypePreference);
 
-			XyzuSettings.Instance.SharedPreferences?
+			XyzuSettings.Instance
 				.Edit()?
 				.PutNotificationDroid(this)?
 				.Apply();
