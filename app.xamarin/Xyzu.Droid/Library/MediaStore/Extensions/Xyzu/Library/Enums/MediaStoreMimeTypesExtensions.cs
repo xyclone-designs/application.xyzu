@@ -11,7 +11,6 @@ namespace Xyzu.Library.Enums
 				MimeTypes.FLAC => "audio/flac",
 				MimeTypes.M4A => "audio/m4a",
 				MimeTypes.MP3 => "audio/mp3",
-				MimeTypes.MP4 => "video/mp4",
 				MimeTypes.WAV => "audio/wav",
 
 				_ => mimetype.ToString()

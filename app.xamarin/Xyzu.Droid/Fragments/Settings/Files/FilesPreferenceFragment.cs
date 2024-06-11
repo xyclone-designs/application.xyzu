@@ -1,16 +1,13 @@
 ﻿#nullable enable
 
 using Android.Content;
-using Android.Net;
 using Android.OS;
 using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using AndroidX.RecyclerView.Widget;
-using AndroidX.DocumentFile.Provider;
 
 using Java.IO;
-using Java.Net;
 
 using System;
 using System.Collections.Generic;
@@ -100,7 +97,6 @@ namespace Xyzu.Fragments.Settings.Files
 		public XyzuDialogPreference? DirectoriesPreference { get; set; }
 		public XyzuMultiSelectListPreference? MimetypesPreference { get; set; }
 		public XyzuSeekBarPreference? TrackLengthIgnorePreference { get; set; }
-
 		public RecursiveItemsRecyclerView? DirectoriesPreferenceView { get; set; }
 
 		public override void OnResume()
@@ -116,7 +112,7 @@ namespace Xyzu.Fragments.Settings.Files
 
 			IFilesSettingsDroid settings = XyzuSettings.Instance.GetFilesDroid();
 
-			_FilesSettingsDirectoryPredicate = IFilesSettingsDroid.FilesSettingsDirectoryPredicate(settings);
+			_FilesSettingsDirectoryPredicate = IFilesSettingsDroid.PredicateDirectories(settings);
 
 			TrackLengthIgnore = settings.TrackLengthIgnore;
 			Directories = settings.Directories;
@@ -155,46 +151,8 @@ namespace Xyzu.Fragments.Settings.Files
 			{
 				DirectoriesPreference.DialogOnBuild = alertdialogbuilder =>
 				{
-					alertdialogbuilder.SetNeutralButton(Resource.String.settings_files_directories_dialog_neutralbutton, (sender, args) =>
-					{
-						if (AppCompatActivity is null)
-							return;
-
-						AppCompatActivity.RegisterForActivityResult((contract, callback) =>
-						{
-							contract.CreateIntentAction = (context, input) =>
-							{
-								Intent actionpickcontent = new Intent(Intent.ActionOpenDocumentTree);
-
-								return actionpickcontent;
-							};
-							contract.ParseResultAction = (resultcode, intent) =>
-							{
-								return intent;
-							};
-							callback.OnActivityResultAction = result =>
-							{
-								Intent? intentresult = result as Intent;
-								AndroidNetUri? documenturi = DocumentsContract.BuildDocumentUriUsingTree(intentresult?.Data, intentresult?.Identifier);
-
-								if (documenturi?.PathSegments is null)
-									return;
-
-								string path = SystemIOPath.Combine(
-									AndroidOSEnvironment.StorageDirectory.AbsolutePath,
-									documenturi.PathSegments[1]
-										.Replace(':', '/')
-										.Replace("primary", "emulated/0"));
-
-								Directories = Directories
-									.Append(path)
-									.OrderBy(dir => dir);
-								DirectoriesPreferenceView?.RecursiveAdapter.NotifyDataSetChanged();
-							};
-
-						})?.Launch(null, null);
-					});
-
+					alertdialogbuilder.SetNeutralButton(Resource.String.settings_files_directories_dialog_neutralbutton, DirectoriesPreferenceOnNeutralButton);
+					alertdialogbuilder.SetPositiveButton(Resource.String.settings_files_directories_dialog_positivebutton, DirectoriesPreferenceOnPositiveButton);
 					alertdialogbuilder.SetOnDismissListener(new DialogInterfaceOnDismissListener
 					{
 						OnDismissAction = dialoginterface => DirectoriesPreferenceView = null
@@ -269,28 +227,69 @@ namespace Xyzu.Fragments.Settings.Files
 			}
 		}
 
+		private void DirectoriesPreferenceOnNeutralButton(object sender, EventArgs args) 
+		{
+			AppCompatActivity?.RegisterForActivityResult((contract, callback) =>
+			{
+				contract.CreateIntentAction = (context, input) =>
+				{
+					Intent actionpickcontent = new Intent(Intent.ActionOpenDocumentTree);
+
+					return actionpickcontent;
+				};
+				contract.ParseResultAction = (resultcode, intent) =>
+				{
+					return intent;
+				};
+				callback.OnActivityResultAction = result =>
+				{
+					Intent? intentresult = result as Intent;
+					AndroidNetUri? documenturi = DocumentsContract.BuildDocumentUriUsingTree(intentresult?.Data, intentresult?.Identifier);
+
+					if (documenturi?.PathSegments is null)
+						return;
+
+					string path = SystemIOPath.Combine(
+						AndroidOSEnvironment.StorageDirectory.AbsolutePath,
+						documenturi.PathSegments[1]
+							.Replace(':', '/')
+							.Replace("primary", "emulated/0"));
+
+					Directories = Directories
+						.Append(path)
+						.OrderBy(dir => dir);
+
+					DirectoriesPreferenceView?.RecursiveAdapter.NotifyDataSetChanged();
+				};
+
+			})?.Launch(null, null);
+		}
+		private void DirectoriesPreferenceOnPositiveButton(object sender, EventArgs args) { }
+
 		private void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
 		{
 			DirectoriesRecyclerView.ViewHolder viewholder = (DirectoriesRecyclerView.ViewHolder)holder;
+			File? file = viewholder.Parent?.Directories?[position];
 
-			if (Context is null || viewholder.Parent is null) return;
+			if (Context is null || viewholder.Parent is null || file is null) return;
 
 			viewholder.ItemChildrenAdapter = new DirectoriesRecyclerView.Adapter(Context)
 			{
 				ParentChecked = viewholder.Parent.ParentChecked ?? true,
 				ParentLevel = viewholder.Parent.ParentLevel + 1 ?? 0,
 				ViewHolderOnBind = OnBindViewHolder,
-				Directories = viewholder.ItemView.Directory?
+				Directories = file
 					.ListFiles()?
-					//.Where(_FilesSettingsDirectoryPredicate)
+					.Where(file => file.IsDirectory)
 					.OrderBy(file => file.AbsolutePath)
 					.ToList()
 			};
 
-			viewholder.ItemView.Directory = viewholder.Parent.Directories?[position];
+			viewholder.ItemView.Directory = file;
 			viewholder.ItemView.DirectoryLevel = viewholder.Parent.ParentLevel + 1 ?? 0;
+			viewholder.ItemView.DirectoryTitleText = file.AbsolutePath == IFilesSettingsDroid.IntenalStorageFilespath0 ? "Internal" : null;
 			viewholder.ItemView.DirectoryHasChildren = viewholder.ItemChildrenAdapter.Directories?.Any() ?? false;
-			viewholder.ItemView.DirectoryIsSelected.Checked = viewholder.Parent.ParentChecked ?? true;
+			viewholder.ItemView.DirectoryIsSelected.Checked = _FilesSettingsDirectoryPredicate?.Invoke(file) ?? true;
 			viewholder.ItemView.DirectoryIsSelectedCheckChange = (sender, args) =>
 			{
 				viewholder.ItemChildrenAdapter.ParentChecked = args.IsChecked;
@@ -311,31 +310,6 @@ namespace Xyzu.Fragments.Settings.Files
 				public override int ItemCount
 				{
 					get => Directories?.Count ?? base.ItemCount;
-				}
-
-				public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
-				{
-					ViewHolder viewholder = (ViewHolder)holder;
-
-					if ((viewholder.ItemView.Directory = Directories?[position]) is null)
-						return;
-
-					viewholder.ItemView.DirectoryLevel = ParentLevel + 1 ?? 0;
-					viewholder.ItemView.DirectoryIsSelected.Checked = ParentChecked ?? true;
-					viewholder.ItemView.DirectoryIsSelectedCheckChange = (sender, args) =>
-					{
-						viewholder.ItemChildrenAdapter.ParentChecked = args.IsChecked;
-						viewholder.ItemChildrenAdapter.NotifyDataSetChanged();
-					};
-
-					viewholder.ItemChildrenAdapter = new Adapter(Context)
-					{
-						ParentChecked = viewholder.ItemView.DirectoryIsSelected.Checked,
-						ParentLevel = ParentLevel + 1 ?? 0,
-						ViewHolderOnBind = ViewHolderOnBind,
-					};
-
-					base.OnBindViewHolder(holder, position);
 				}
 				public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
 				{

@@ -148,8 +148,6 @@
   <string name="enums_mimetypes_m4a_description">M4A mime type</string>
   <string name="enums_mimetypes_mp3_title">MP3</string>
   <string name="enums_mimetypes_mp3_description">MP3 mime type</string>
-  <string name="enums_mimetypes_mp4_title">MP4</string>
-  <string name="enums_mimetypes_mp4_description">MP4 mime type</string>
   <string name="enums_mimetypes_wav_title">WAV</string>
   <string name="enums_mimetypes_wav_description">WAV mime type</string>
 

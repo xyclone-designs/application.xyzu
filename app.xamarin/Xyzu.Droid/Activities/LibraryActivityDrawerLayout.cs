@@ -163,6 +163,8 @@ namespace Xyzu.Activities
 
 			SetContentView(Resource.Layout.xyzu_layout_library_drawerlayout);
 
+			RootView = Drawerlayout;
+
 			SetSupportActionBar(ActivityToolbar = ToolbarDrawer.Toolbar);
 
 			SupportActionBar?.SetHomeButtonEnabled(true);
@@ -171,7 +173,7 @@ namespace Xyzu.Activities
 			SupportActionBar?.SetDisplayShowTitleEnabled(false);
 
 			InitSlidingPanelLayout(
-				RootView = FindViewById(Resource.Id.xyzu_layout_library_drawerlayout_root_slidinguppanellayout),
+				FindViewById(Resource.Id.xyzu_layout_library_drawerlayout_root_slidinguppanellayout),
 				FindViewById(Resource.Id.xyzu_layout_library_drawerlayout_nowplayingview),
 				FindViewById(Resource.Id.xyzu_layout_library_drawerlayout_nowplayingview_cardview));
 

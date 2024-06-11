@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using Android.Content;
+using Android.Content.Res;
 using Android.Animation;
 using Android.Views;
 using AndroidX.CardView.Widget;
@@ -101,7 +102,7 @@ namespace Xyzu.Activities
 				XyzuSettings.Instance
 					.Edit()?
 					.PutInt(_ConfigureSlidingUpPanelHeightKey, slidinguppanelpanelheight)?
-					.Commit();
+					.Apply();
 			}
 			else return wasinitial;
 
@@ -131,9 +132,12 @@ namespace Xyzu.Activities
 			}
 			else if (ViewNowPlaying.Height != 0 && ViewNowPlaying.CurrentState == NowPlayingView.Ids.MotionScene.ConstraintSets.Expanded)
 			{
-				wasinitial = true;
-
 				artworkdetailsspaceheight = SlidingUpPanel.Bottom - ViewNowPlaying.NavigationbarInset.Bottom;
+
+				if (artworkdetailsspaceheight == 0)
+					return wasinitial;
+
+				wasinitial = true;
 
 				if (ViewNowPlaying.FindViewById(NowPlayingView.Ids.ArtworkDetails_Space)?.Height is int height && ValueAnimator.OfInt(height, artworkdetailsspaceheight) is ValueAnimator valueanimator)
 				{
@@ -167,7 +171,7 @@ namespace Xyzu.Activities
 				XyzuSettings.Instance
 					.Edit()?
 					.PutInt(_ConfigureNowPlayingArtworkDetailsSpaceKey, artworkdetailsspaceheight)?
-					.Commit();
+					.Apply();
 			}
 			else return wasinitial;
 

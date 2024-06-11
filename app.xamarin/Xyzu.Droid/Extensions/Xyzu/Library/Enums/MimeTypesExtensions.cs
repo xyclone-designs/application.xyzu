@@ -18,7 +18,6 @@ namespace Xyzu.Library.Enums
 				MimeTypes.FLAC => Resource.String.enums_mimetypes_flac_title,
 				MimeTypes.M4A => Resource.String.enums_mimetypes_m4a_title,
 				MimeTypes.MP3 => Resource.String.enums_mimetypes_mp3_title,
-				MimeTypes.MP4 => Resource.String.enums_mimetypes_mp4_title,
 				MimeTypes.WAV => Resource.String.enums_mimetypes_wav_title,
 
 				_ => throw new ArgumentException(string.Format("Invalid MimeTypes '{0}'", mimetype))
@@ -32,7 +31,6 @@ namespace Xyzu.Library.Enums
 				MimeTypes.FLAC => Resource.String.enums_mimetypes_flac_description,
 				MimeTypes.M4A => Resource.String.enums_mimetypes_m4a_description,
 				MimeTypes.MP3 => Resource.String.enums_mimetypes_mp3_description,
-				MimeTypes.MP4 => Resource.String.enums_mimetypes_mp4_description,
 				MimeTypes.WAV => Resource.String.enums_mimetypes_wav_description,
 
 				_ => throw new ArgumentException(string.Format("Invalid MimeTypes '{0}'", mimetype))

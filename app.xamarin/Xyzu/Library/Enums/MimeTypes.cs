@@ -8,7 +8,6 @@ namespace Xyzu.Library.Enums
 		FLAC,
 		M4A,
 		MP3,
-		MP4,
 		WAV,
 	}
 

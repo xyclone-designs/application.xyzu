@@ -96,15 +96,12 @@ namespace Xyzu.Activities
 
 			xyzulibrary.Settings = new ILibrary.ISettings.Default
 			{
-				Directories = FilesSettings?.Directories ?? IFilesSettingsDroid.Defaults.Directories,
-				Mimetypes = FilesSettings?.Mimetypes ?? IFilesSettingsDroid.Defaults.Mimetypes,
+				Directories = FilesSettings.Directories,
+				Mimetypes = FilesSettings.Mimetypes,
 			};
 			xyzulibrary.OnCreateAction = new Library.TagLibSharp.TagLibSharpActions.OnCreate
 			{
-				Paths = IFilesSettingsDroid.Storages()
-					.SelectMany(storage => storage.ListAllFiles())
-					.Where(IFilesSettingsDroid.PredicateDirectories(FilesSettings ?? IFilesSettingsDroid.Defaults.FilesSettingsDroid))
-					.Where(IFilesSettingsDroid.PredicateDirectoriesExclude(FilesSettings ?? IFilesSettingsDroid.Defaults.FilesSettingsDroid))
+				Paths = FilesSettings.Files()
 					.ToDictionary(file => file.AbsolutePath, file => file.AbsolutePath),
 			};
 			xyzulibrary.OnDeleteActions = new List<ILibrary.IOnDeleteActions>

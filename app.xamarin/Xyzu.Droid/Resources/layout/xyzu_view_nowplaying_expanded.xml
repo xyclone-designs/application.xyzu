@@ -41,8 +41,6 @@
         android:layout_height="@dimen/dp0"
         
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintWidth="match_constraint"
-        app:layout_constraintHeight="match_constraint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_statusbarinsetview"

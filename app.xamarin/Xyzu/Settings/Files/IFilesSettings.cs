@@ -49,7 +49,6 @@ namespace Xyzu.Settings.Files
 				public const MimeTypes FLAC = MimeTypes.FLAC;
 				public const MimeTypes M4A = MimeTypes.M4A;
 				public const MimeTypes MP3 = MimeTypes.MP3;
-				public const MimeTypes MP4 = MimeTypes.MP4;
 				public const MimeTypes WAV = MimeTypes.WAV;
 
 				public static IEnumerable<MimeTypes> AsEnumerable()
@@ -59,7 +58,6 @@ namespace Xyzu.Settings.Files
 						.Append(FLAC)
 						.Append(M4A)
 						.Append(MP3)
-						.Append(MP4)
 						.Append(WAV);
 				}
 			}

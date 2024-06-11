@@ -15190,2686 +15190,2680 @@ namespace Xyzu.Droid
 			public const int enums_mimetypes_mp3_title = 2131820774;
 			
 			// aapt resource value: 0x7F1100E7
-			public const int enums_mimetypes_mp4_description = 2131820775;
+			public const int enums_mimetypes_title = 2131820775;
 			
 			// aapt resource value: 0x7F1100E8
-			public const int enums_mimetypes_mp4_title = 2131820776;
+			public const int enums_mimetypes_wav_description = 2131820776;
 			
 			// aapt resource value: 0x7F1100E9
-			public const int enums_mimetypes_title = 2131820777;
-			
-			// aapt resource value: 0x7F1100EA
-			public const int enums_mimetypes_wav_description = 2131820778;
-			
-			// aapt resource value: 0x7F1100EB
-			public const int enums_mimetypes_wav_title = 2131820779;
-			
-			// aapt resource value: 0x7F1100EE
-			public const int enums_modelsortkeys_albumartist_description = 2131820782;
-			
-			// aapt resource value: 0x7F1100EF
-			public const int enums_modelsortkeys_albumartist_title = 2131820783;
-			
-			// aapt resource value: 0x7F1100F0
-			public const int enums_modelsortkeys_albums_description = 2131820784;
-			
-			// aapt resource value: 0x7F1100F1
-			public const int enums_modelsortkeys_albums_title = 2131820785;
+			public const int enums_mimetypes_wav_title = 2131820777;
 			
 			// aapt resource value: 0x7F1100EC
-			public const int enums_modelsortkeys_album_description = 2131820780;
+			public const int enums_modelsortkeys_albumartist_description = 2131820780;
 			
 			// aapt resource value: 0x7F1100ED
-			public const int enums_modelsortkeys_album_title = 2131820781;
+			public const int enums_modelsortkeys_albumartist_title = 2131820781;
+			
+			// aapt resource value: 0x7F1100EE
+			public const int enums_modelsortkeys_albums_description = 2131820782;
+			
+			// aapt resource value: 0x7F1100EF
+			public const int enums_modelsortkeys_albums_title = 2131820783;
+			
+			// aapt resource value: 0x7F1100EA
+			public const int enums_modelsortkeys_album_description = 2131820778;
+			
+			// aapt resource value: 0x7F1100EB
+			public const int enums_modelsortkeys_album_title = 2131820779;
+			
+			// aapt resource value: 0x7F1100F0
+			public const int enums_modelsortkeys_artist_description = 2131820784;
+			
+			// aapt resource value: 0x7F1100F1
+			public const int enums_modelsortkeys_artist_title = 2131820785;
 			
 			// aapt resource value: 0x7F1100F2
-			public const int enums_modelsortkeys_artist_description = 2131820786;
+			public const int enums_modelsortkeys_bitrate_description = 2131820786;
 			
 			// aapt resource value: 0x7F1100F3
-			public const int enums_modelsortkeys_artist_title = 2131820787;
+			public const int enums_modelsortkeys_bitrate_title = 2131820787;
 			
 			// aapt resource value: 0x7F1100F4
-			public const int enums_modelsortkeys_bitrate_description = 2131820788;
+			public const int enums_modelsortkeys_dateadded_description = 2131820788;
 			
 			// aapt resource value: 0x7F1100F5
-			public const int enums_modelsortkeys_bitrate_title = 2131820789;
+			public const int enums_modelsortkeys_dateadded_title = 2131820789;
 			
 			// aapt resource value: 0x7F1100F6
-			public const int enums_modelsortkeys_dateadded_description = 2131820790;
+			public const int enums_modelsortkeys_datecreated_description = 2131820790;
 			
 			// aapt resource value: 0x7F1100F7
-			public const int enums_modelsortkeys_dateadded_title = 2131820791;
+			public const int enums_modelsortkeys_datecreated_title = 2131820791;
 			
 			// aapt resource value: 0x7F1100F8
-			public const int enums_modelsortkeys_datecreated_description = 2131820792;
+			public const int enums_modelsortkeys_datemodified_description = 2131820792;
 			
 			// aapt resource value: 0x7F1100F9
-			public const int enums_modelsortkeys_datecreated_title = 2131820793;
+			public const int enums_modelsortkeys_datemodified_title = 2131820793;
 			
 			// aapt resource value: 0x7F1100FA
-			public const int enums_modelsortkeys_datemodified_description = 2131820794;
+			public const int enums_modelsortkeys_description = 2131820794;
 			
 			// aapt resource value: 0x7F1100FB
-			public const int enums_modelsortkeys_datemodified_title = 2131820795;
+			public const int enums_modelsortkeys_discnumber_description = 2131820795;
 			
 			// aapt resource value: 0x7F1100FC
-			public const int enums_modelsortkeys_description = 2131820796;
+			public const int enums_modelsortkeys_discnumber_title = 2131820796;
 			
 			// aapt resource value: 0x7F1100FD
-			public const int enums_modelsortkeys_discnumber_description = 2131820797;
+			public const int enums_modelsortkeys_discs_description = 2131820797;
 			
 			// aapt resource value: 0x7F1100FE
-			public const int enums_modelsortkeys_discnumber_title = 2131820798;
+			public const int enums_modelsortkeys_discs_title = 2131820798;
 			
 			// aapt resource value: 0x7F1100FF
-			public const int enums_modelsortkeys_discs_description = 2131820799;
+			public const int enums_modelsortkeys_duration_description = 2131820799;
 			
 			// aapt resource value: 0x7F110100
-			public const int enums_modelsortkeys_discs_title = 2131820800;
+			public const int enums_modelsortkeys_duration_title = 2131820800;
 			
 			// aapt resource value: 0x7F110101
-			public const int enums_modelsortkeys_duration_description = 2131820801;
+			public const int enums_modelsortkeys_genre_description = 2131820801;
 			
 			// aapt resource value: 0x7F110102
-			public const int enums_modelsortkeys_duration_title = 2131820802;
+			public const int enums_modelsortkeys_genre_title = 2131820802;
 			
 			// aapt resource value: 0x7F110103
-			public const int enums_modelsortkeys_genre_description = 2131820803;
+			public const int enums_modelsortkeys_name_description = 2131820803;
 			
 			// aapt resource value: 0x7F110104
-			public const int enums_modelsortkeys_genre_title = 2131820804;
+			public const int enums_modelsortkeys_name_title = 2131820804;
 			
 			// aapt resource value: 0x7F110105
-			public const int enums_modelsortkeys_name_description = 2131820805;
+			public const int enums_modelsortkeys_playlist_description = 2131820805;
 			
 			// aapt resource value: 0x7F110106
-			public const int enums_modelsortkeys_name_title = 2131820806;
+			public const int enums_modelsortkeys_playlist_title = 2131820806;
 			
 			// aapt resource value: 0x7F110107
-			public const int enums_modelsortkeys_playlist_description = 2131820807;
+			public const int enums_modelsortkeys_position_description = 2131820807;
 			
 			// aapt resource value: 0x7F110108
-			public const int enums_modelsortkeys_playlist_title = 2131820808;
+			public const int enums_modelsortkeys_position_title = 2131820808;
 			
 			// aapt resource value: 0x7F110109
-			public const int enums_modelsortkeys_position_description = 2131820809;
+			public const int enums_modelsortkeys_rating_description = 2131820809;
 			
 			// aapt resource value: 0x7F11010A
-			public const int enums_modelsortkeys_position_title = 2131820810;
+			public const int enums_modelsortkeys_rating_title = 2131820810;
 			
 			// aapt resource value: 0x7F11010B
-			public const int enums_modelsortkeys_rating_description = 2131820811;
+			public const int enums_modelsortkeys_releasedate_description = 2131820811;
 			
 			// aapt resource value: 0x7F11010C
-			public const int enums_modelsortkeys_rating_title = 2131820812;
+			public const int enums_modelsortkeys_releasedate_title = 2131820812;
 			
 			// aapt resource value: 0x7F11010D
-			public const int enums_modelsortkeys_releasedate_description = 2131820813;
+			public const int enums_modelsortkeys_size_description = 2131820813;
 			
 			// aapt resource value: 0x7F11010E
-			public const int enums_modelsortkeys_releasedate_title = 2131820814;
+			public const int enums_modelsortkeys_size_title = 2131820814;
 			
 			// aapt resource value: 0x7F11010F
-			public const int enums_modelsortkeys_size_description = 2131820815;
+			public const int enums_modelsortkeys_songs_description = 2131820815;
 			
 			// aapt resource value: 0x7F110110
-			public const int enums_modelsortkeys_size_title = 2131820816;
+			public const int enums_modelsortkeys_songs_title = 2131820816;
 			
 			// aapt resource value: 0x7F110111
-			public const int enums_modelsortkeys_songs_description = 2131820817;
+			public const int enums_modelsortkeys_title = 2131820817;
 			
 			// aapt resource value: 0x7F110112
-			public const int enums_modelsortkeys_songs_title = 2131820818;
+			public const int enums_modelsortkeys_title_description = 2131820818;
 			
 			// aapt resource value: 0x7F110113
-			public const int enums_modelsortkeys_title = 2131820819;
+			public const int enums_modelsortkeys_title_title = 2131820819;
 			
 			// aapt resource value: 0x7F110114
-			public const int enums_modelsortkeys_title_description = 2131820820;
+			public const int enums_modelsortkeys_tracknumber_description = 2131820820;
 			
 			// aapt resource value: 0x7F110115
-			public const int enums_modelsortkeys_title_title = 2131820821;
+			public const int enums_modelsortkeys_tracknumber_title = 2131820821;
 			
 			// aapt resource value: 0x7F110116
-			public const int enums_modelsortkeys_tracknumber_description = 2131820822;
+			public const int enums_playerstates_description = 2131820822;
 			
 			// aapt resource value: 0x7F110117
-			public const int enums_modelsortkeys_tracknumber_title = 2131820823;
+			public const int enums_playerstates_loading_description = 2131820823;
 			
 			// aapt resource value: 0x7F110118
-			public const int enums_playerstates_description = 2131820824;
+			public const int enums_playerstates_loading_title = 2131820824;
 			
 			// aapt resource value: 0x7F110119
-			public const int enums_playerstates_loading_description = 2131820825;
+			public const int enums_playerstates_nosong_description = 2131820825;
 			
 			// aapt resource value: 0x7F11011A
-			public const int enums_playerstates_loading_title = 2131820826;
+			public const int enums_playerstates_nosong_title = 2131820826;
 			
 			// aapt resource value: 0x7F11011B
-			public const int enums_playerstates_nosong_description = 2131820827;
+			public const int enums_playerstates_paused_description = 2131820827;
 			
 			// aapt resource value: 0x7F11011C
-			public const int enums_playerstates_nosong_title = 2131820828;
+			public const int enums_playerstates_paused_title = 2131820828;
 			
 			// aapt resource value: 0x7F11011D
-			public const int enums_playerstates_paused_description = 2131820829;
+			public const int enums_playerstates_playing_description = 2131820829;
 			
 			// aapt resource value: 0x7F11011E
-			public const int enums_playerstates_paused_title = 2131820830;
+			public const int enums_playerstates_playing_title = 2131820830;
 			
 			// aapt resource value: 0x7F11011F
-			public const int enums_playerstates_playing_description = 2131820831;
+			public const int enums_playerstates_seeking_description = 2131820831;
 			
 			// aapt resource value: 0x7F110120
-			public const int enums_playerstates_playing_title = 2131820832;
+			public const int enums_playerstates_seeking_title = 2131820832;
 			
 			// aapt resource value: 0x7F110121
-			public const int enums_playerstates_seeking_description = 2131820833;
+			public const int enums_playerstates_stopped_description = 2131820833;
 			
 			// aapt resource value: 0x7F110122
-			public const int enums_playerstates_seeking_title = 2131820834;
+			public const int enums_playerstates_stopped_title = 2131820834;
 			
 			// aapt resource value: 0x7F110123
-			public const int enums_playerstates_stopped_description = 2131820835;
+			public const int enums_playerstates_title = 2131820835;
 			
 			// aapt resource value: 0x7F110124
-			public const int enums_playerstates_stopped_title = 2131820836;
+			public const int enums_playerstates_uninitialised_description = 2131820836;
 			
 			// aapt resource value: 0x7F110125
-			public const int enums_playerstates_title = 2131820837;
+			public const int enums_playerstates_uninitialised_title = 2131820837;
 			
 			// aapt resource value: 0x7F110126
-			public const int enums_playerstates_uninitialised_description = 2131820838;
-			
-			// aapt resource value: 0x7F110127
-			public const int enums_playerstates_uninitialised_title = 2131820839;
-			
-			// aapt resource value: 0x7F110128
-			public const int enums_priorities_description = 2131820840;
-			
-			// aapt resource value: 0x7F11012B
-			public const int enums_priorities_highest_description = 2131820843;
-			
-			// aapt resource value: 0x7F11012C
-			public const int enums_priorities_highest_title = 2131820844;
+			public const int enums_priorities_description = 2131820838;
 			
 			// aapt resource value: 0x7F110129
-			public const int enums_priorities_high_description = 2131820841;
+			public const int enums_priorities_highest_description = 2131820841;
 			
 			// aapt resource value: 0x7F11012A
-			public const int enums_priorities_high_title = 2131820842;
+			public const int enums_priorities_highest_title = 2131820842;
 			
-			// aapt resource value: 0x7F11012F
-			public const int enums_priorities_lowest_description = 2131820847;
+			// aapt resource value: 0x7F110127
+			public const int enums_priorities_high_description = 2131820839;
 			
-			// aapt resource value: 0x7F110130
-			public const int enums_priorities_lowest_title = 2131820848;
+			// aapt resource value: 0x7F110128
+			public const int enums_priorities_high_title = 2131820840;
 			
 			// aapt resource value: 0x7F11012D
-			public const int enums_priorities_low_description = 2131820845;
+			public const int enums_priorities_lowest_description = 2131820845;
 			
 			// aapt resource value: 0x7F11012E
-			public const int enums_priorities_low_title = 2131820846;
+			public const int enums_priorities_lowest_title = 2131820846;
+			
+			// aapt resource value: 0x7F11012B
+			public const int enums_priorities_low_description = 2131820843;
+			
+			// aapt resource value: 0x7F11012C
+			public const int enums_priorities_low_title = 2131820844;
+			
+			// aapt resource value: 0x7F11012F
+			public const int enums_priorities_medium_description = 2131820847;
+			
+			// aapt resource value: 0x7F110130
+			public const int enums_priorities_medium_title = 2131820848;
 			
 			// aapt resource value: 0x7F110131
-			public const int enums_priorities_medium_description = 2131820849;
+			public const int enums_priorities_title = 2131820849;
 			
 			// aapt resource value: 0x7F110132
-			public const int enums_priorities_medium_title = 2131820850;
-			
-			// aapt resource value: 0x7F110133
-			public const int enums_priorities_title = 2131820851;
-			
-			// aapt resource value: 0x7F110134
-			public const int enums_queuepositions_description = 2131820852;
-			
-			// aapt resource value: 0x7F110137
-			public const int enums_queuepositions_downonesubqueue_description = 2131820855;
-			
-			// aapt resource value: 0x7F110138
-			public const int enums_queuepositions_downonesubqueue_title = 2131820856;
+			public const int enums_queuepositions_description = 2131820850;
 			
 			// aapt resource value: 0x7F110135
-			public const int enums_queuepositions_downone_description = 2131820853;
+			public const int enums_queuepositions_downonesubqueue_description = 2131820853;
 			
 			// aapt resource value: 0x7F110136
-			public const int enums_queuepositions_downone_title = 2131820854;
+			public const int enums_queuepositions_downonesubqueue_title = 2131820854;
+			
+			// aapt resource value: 0x7F110133
+			public const int enums_queuepositions_downone_description = 2131820851;
+			
+			// aapt resource value: 0x7F110134
+			public const int enums_queuepositions_downone_title = 2131820852;
+			
+			// aapt resource value: 0x7F110137
+			public const int enums_queuepositions_first_description = 2131820855;
+			
+			// aapt resource value: 0x7F110138
+			public const int enums_queuepositions_first_title = 2131820856;
 			
 			// aapt resource value: 0x7F110139
-			public const int enums_queuepositions_first_description = 2131820857;
+			public const int enums_queuepositions_last_description = 2131820857;
 			
 			// aapt resource value: 0x7F11013A
-			public const int enums_queuepositions_first_title = 2131820858;
+			public const int enums_queuepositions_last_title = 2131820858;
 			
 			// aapt resource value: 0x7F11013B
-			public const int enums_queuepositions_last_description = 2131820859;
+			public const int enums_queuepositions_next_description = 2131820859;
 			
 			// aapt resource value: 0x7F11013C
-			public const int enums_queuepositions_last_title = 2131820860;
+			public const int enums_queuepositions_next_title = 2131820860;
 			
 			// aapt resource value: 0x7F11013D
-			public const int enums_queuepositions_next_description = 2131820861;
+			public const int enums_queuepositions_now_description = 2131820861;
 			
 			// aapt resource value: 0x7F11013E
-			public const int enums_queuepositions_next_title = 2131820862;
+			public const int enums_queuepositions_now_title = 2131820862;
 			
 			// aapt resource value: 0x7F11013F
-			public const int enums_queuepositions_now_description = 2131820863;
+			public const int enums_queuepositions_previous_description = 2131820863;
 			
 			// aapt resource value: 0x7F110140
-			public const int enums_queuepositions_now_title = 2131820864;
+			public const int enums_queuepositions_previous_title = 2131820864;
 			
 			// aapt resource value: 0x7F110141
-			public const int enums_queuepositions_previous_description = 2131820865;
-			
-			// aapt resource value: 0x7F110142
-			public const int enums_queuepositions_previous_title = 2131820866;
-			
-			// aapt resource value: 0x7F110143
-			public const int enums_queuepositions_title = 2131820867;
-			
-			// aapt resource value: 0x7F110146
-			public const int enums_queuepositions_uponesubqueue_description = 2131820870;
-			
-			// aapt resource value: 0x7F110147
-			public const int enums_queuepositions_uponesubqueue_title = 2131820871;
+			public const int enums_queuepositions_title = 2131820865;
 			
 			// aapt resource value: 0x7F110144
-			public const int enums_queuepositions_upone_description = 2131820868;
+			public const int enums_queuepositions_uponesubqueue_description = 2131820868;
 			
 			// aapt resource value: 0x7F110145
-			public const int enums_queuepositions_upone_title = 2131820869;
+			public const int enums_queuepositions_uponesubqueue_title = 2131820869;
+			
+			// aapt resource value: 0x7F110142
+			public const int enums_queuepositions_upone_description = 2131820866;
+			
+			// aapt resource value: 0x7F110143
+			public const int enums_queuepositions_upone_title = 2131820867;
+			
+			// aapt resource value: 0x7F110146
+			public const int enums_repeatmodes_description = 2131820870;
+			
+			// aapt resource value: 0x7F110147
+			public const int enums_repeatmodes_norepeat_description = 2131820871;
 			
 			// aapt resource value: 0x7F110148
-			public const int enums_repeatmodes_description = 2131820872;
+			public const int enums_repeatmodes_norepeat_title = 2131820872;
 			
 			// aapt resource value: 0x7F110149
-			public const int enums_repeatmodes_norepeat_description = 2131820873;
+			public const int enums_repeatmodes_repeatentirequeue_description = 2131820873;
 			
 			// aapt resource value: 0x7F11014A
-			public const int enums_repeatmodes_norepeat_title = 2131820874;
+			public const int enums_repeatmodes_repeatentirequeue_title = 2131820874;
 			
 			// aapt resource value: 0x7F11014B
-			public const int enums_repeatmodes_repeatentirequeue_description = 2131820875;
+			public const int enums_repeatmodes_repeatsong_description = 2131820875;
 			
 			// aapt resource value: 0x7F11014C
-			public const int enums_repeatmodes_repeatentirequeue_title = 2131820876;
+			public const int enums_repeatmodes_repeatsong_title = 2131820876;
 			
 			// aapt resource value: 0x7F11014D
-			public const int enums_repeatmodes_repeatsong_description = 2131820877;
+			public const int enums_repeatmodes_repeatsubqueue_description = 2131820877;
 			
 			// aapt resource value: 0x7F11014E
-			public const int enums_repeatmodes_repeatsong_title = 2131820878;
+			public const int enums_repeatmodes_repeatsubqueue_title = 2131820878;
 			
 			// aapt resource value: 0x7F11014F
-			public const int enums_repeatmodes_repeatsubqueue_description = 2131820879;
+			public const int enums_repeatmodes_title = 2131820879;
 			
 			// aapt resource value: 0x7F110150
-			public const int enums_repeatmodes_repeatsubqueue_title = 2131820880;
+			public const int enums_shufflemodes_description = 2131820880;
 			
 			// aapt resource value: 0x7F110151
-			public const int enums_repeatmodes_title = 2131820881;
+			public const int enums_shufflemodes_noshuffle_description = 2131820881;
 			
 			// aapt resource value: 0x7F110152
-			public const int enums_shufflemodes_description = 2131820882;
+			public const int enums_shufflemodes_noshuffle_title = 2131820882;
 			
 			// aapt resource value: 0x7F110153
-			public const int enums_shufflemodes_noshuffle_description = 2131820883;
+			public const int enums_shufflemodes_shuffleall_description = 2131820883;
 			
 			// aapt resource value: 0x7F110154
-			public const int enums_shufflemodes_noshuffle_title = 2131820884;
-			
-			// aapt resource value: 0x7F110155
-			public const int enums_shufflemodes_shuffleall_description = 2131820885;
-			
-			// aapt resource value: 0x7F110156
-			public const int enums_shufflemodes_shuffleall_title = 2131820886;
-			
-			// aapt resource value: 0x7F110159
-			public const int enums_shufflemodes_shufflesubqueuesongs_description = 2131820889;
-			
-			// aapt resource value: 0x7F11015A
-			public const int enums_shufflemodes_shufflesubqueuesongs_title = 2131820890;
+			public const int enums_shufflemodes_shuffleall_title = 2131820884;
 			
 			// aapt resource value: 0x7F110157
-			public const int enums_shufflemodes_shufflesubqueues_description = 2131820887;
+			public const int enums_shufflemodes_shufflesubqueuesongs_description = 2131820887;
 			
 			// aapt resource value: 0x7F110158
-			public const int enums_shufflemodes_shufflesubqueues_title = 2131820888;
+			public const int enums_shufflemodes_shufflesubqueuesongs_title = 2131820888;
+			
+			// aapt resource value: 0x7F110155
+			public const int enums_shufflemodes_shufflesubqueues_description = 2131820885;
+			
+			// aapt resource value: 0x7F110156
+			public const int enums_shufflemodes_shufflesubqueues_title = 2131820886;
+			
+			// aapt resource value: 0x7F110159
+			public const int enums_shufflemodes_title = 2131820889;
+			
+			// aapt resource value: 0x7F11015A
+			public const int enums_thememodes_description = 2131820890;
 			
 			// aapt resource value: 0x7F11015B
-			public const int enums_shufflemodes_title = 2131820891;
+			public const int enums_thememodes_followsystem_description = 2131820891;
 			
 			// aapt resource value: 0x7F11015C
-			public const int enums_thememodes_description = 2131820892;
+			public const int enums_thememodes_followsystem_title = 2131820892;
 			
 			// aapt resource value: 0x7F11015D
-			public const int enums_thememodes_followsystem_description = 2131820893;
+			public const int enums_thememodes_forcedark_description = 2131820893;
 			
 			// aapt resource value: 0x7F11015E
-			public const int enums_thememodes_followsystem_title = 2131820894;
+			public const int enums_thememodes_forcedark_title = 2131820894;
 			
 			// aapt resource value: 0x7F11015F
-			public const int enums_thememodes_forcedark_description = 2131820895;
+			public const int enums_thememodes_forcelight_description = 2131820895;
 			
 			// aapt resource value: 0x7F110160
-			public const int enums_thememodes_forcedark_title = 2131820896;
+			public const int enums_thememodes_forcelight_title = 2131820896;
 			
 			// aapt resource value: 0x7F110161
-			public const int enums_thememodes_forcelight_description = 2131820897;
+			public const int enums_thememodes_title = 2131820897;
 			
 			// aapt resource value: 0x7F110162
-			public const int enums_thememodes_forcelight_title = 2131820898;
+			public const int error_a11y_label = 2131820898;
 			
 			// aapt resource value: 0x7F110163
-			public const int enums_thememodes_title = 2131820899;
+			public const int error_icon_content_description = 2131820899;
 			
 			// aapt resource value: 0x7F110164
-			public const int error_a11y_label = 2131820900;
+			public const int exo_controls_fastforward_description = 2131820900;
 			
 			// aapt resource value: 0x7F110165
-			public const int error_icon_content_description = 2131820901;
+			public const int exo_controls_fullscreen_description = 2131820901;
 			
 			// aapt resource value: 0x7F110166
-			public const int exo_controls_fastforward_description = 2131820902;
+			public const int exo_controls_hide = 2131820902;
 			
 			// aapt resource value: 0x7F110167
-			public const int exo_controls_fullscreen_description = 2131820903;
+			public const int exo_controls_next_description = 2131820903;
 			
 			// aapt resource value: 0x7F110168
-			public const int exo_controls_hide = 2131820904;
+			public const int exo_controls_pause_description = 2131820904;
 			
 			// aapt resource value: 0x7F110169
-			public const int exo_controls_next_description = 2131820905;
+			public const int exo_controls_play_description = 2131820905;
 			
 			// aapt resource value: 0x7F11016A
-			public const int exo_controls_pause_description = 2131820906;
+			public const int exo_controls_previous_description = 2131820906;
 			
 			// aapt resource value: 0x7F11016B
-			public const int exo_controls_play_description = 2131820907;
+			public const int exo_controls_repeat_all_description = 2131820907;
 			
 			// aapt resource value: 0x7F11016C
-			public const int exo_controls_previous_description = 2131820908;
+			public const int exo_controls_repeat_off_description = 2131820908;
 			
 			// aapt resource value: 0x7F11016D
-			public const int exo_controls_repeat_all_description = 2131820909;
+			public const int exo_controls_repeat_one_description = 2131820909;
 			
 			// aapt resource value: 0x7F11016E
-			public const int exo_controls_repeat_off_description = 2131820910;
+			public const int exo_controls_rewind_description = 2131820910;
 			
 			// aapt resource value: 0x7F11016F
-			public const int exo_controls_repeat_one_description = 2131820911;
+			public const int exo_controls_show = 2131820911;
 			
 			// aapt resource value: 0x7F110170
-			public const int exo_controls_rewind_description = 2131820912;
+			public const int exo_controls_shuffle_off_description = 2131820912;
 			
 			// aapt resource value: 0x7F110171
-			public const int exo_controls_show = 2131820913;
+			public const int exo_controls_shuffle_on_description = 2131820913;
 			
 			// aapt resource value: 0x7F110172
-			public const int exo_controls_shuffle_off_description = 2131820914;
+			public const int exo_controls_stop_description = 2131820914;
 			
 			// aapt resource value: 0x7F110173
-			public const int exo_controls_shuffle_on_description = 2131820915;
+			public const int exo_controls_vr_description = 2131820915;
 			
 			// aapt resource value: 0x7F110174
-			public const int exo_controls_stop_description = 2131820916;
+			public const int exo_download_completed = 2131820916;
 			
 			// aapt resource value: 0x7F110175
-			public const int exo_controls_vr_description = 2131820917;
+			public const int exo_download_description = 2131820917;
 			
 			// aapt resource value: 0x7F110176
-			public const int exo_download_completed = 2131820918;
+			public const int exo_download_downloading = 2131820918;
 			
 			// aapt resource value: 0x7F110177
-			public const int exo_download_description = 2131820919;
+			public const int exo_download_failed = 2131820919;
 			
 			// aapt resource value: 0x7F110178
-			public const int exo_download_downloading = 2131820920;
+			public const int exo_download_notification_channel_name = 2131820920;
 			
 			// aapt resource value: 0x7F110179
-			public const int exo_download_failed = 2131820921;
+			public const int exo_download_removing = 2131820921;
 			
 			// aapt resource value: 0x7F11017A
-			public const int exo_download_notification_channel_name = 2131820922;
+			public const int exo_item_list = 2131820922;
 			
 			// aapt resource value: 0x7F11017B
-			public const int exo_download_removing = 2131820923;
+			public const int exo_media_action_repeat_all_description = 2131820923;
 			
 			// aapt resource value: 0x7F11017C
-			public const int exo_item_list = 2131820924;
+			public const int exo_media_action_repeat_off_description = 2131820924;
 			
 			// aapt resource value: 0x7F11017D
-			public const int exo_media_action_repeat_all_description = 2131820925;
+			public const int exo_media_action_repeat_one_description = 2131820925;
 			
 			// aapt resource value: 0x7F11017E
-			public const int exo_media_action_repeat_off_description = 2131820926;
+			public const int exo_track_bitrate = 2131820926;
 			
 			// aapt resource value: 0x7F11017F
-			public const int exo_media_action_repeat_one_description = 2131820927;
+			public const int exo_track_mono = 2131820927;
 			
 			// aapt resource value: 0x7F110180
-			public const int exo_track_bitrate = 2131820928;
+			public const int exo_track_resolution = 2131820928;
 			
 			// aapt resource value: 0x7F110181
-			public const int exo_track_mono = 2131820929;
+			public const int exo_track_role_alternate = 2131820929;
 			
 			// aapt resource value: 0x7F110182
-			public const int exo_track_resolution = 2131820930;
+			public const int exo_track_role_closed_captions = 2131820930;
 			
 			// aapt resource value: 0x7F110183
-			public const int exo_track_role_alternate = 2131820931;
+			public const int exo_track_role_commentary = 2131820931;
 			
 			// aapt resource value: 0x7F110184
-			public const int exo_track_role_closed_captions = 2131820932;
+			public const int exo_track_role_supplementary = 2131820932;
 			
 			// aapt resource value: 0x7F110185
-			public const int exo_track_role_commentary = 2131820933;
+			public const int exo_track_selection_auto = 2131820933;
 			
 			// aapt resource value: 0x7F110186
-			public const int exo_track_role_supplementary = 2131820934;
+			public const int exo_track_selection_none = 2131820934;
 			
 			// aapt resource value: 0x7F110187
-			public const int exo_track_selection_auto = 2131820935;
+			public const int exo_track_selection_title_audio = 2131820935;
 			
 			// aapt resource value: 0x7F110188
-			public const int exo_track_selection_none = 2131820936;
+			public const int exo_track_selection_title_text = 2131820936;
 			
 			// aapt resource value: 0x7F110189
-			public const int exo_track_selection_title_audio = 2131820937;
+			public const int exo_track_selection_title_video = 2131820937;
 			
 			// aapt resource value: 0x7F11018A
-			public const int exo_track_selection_title_text = 2131820938;
+			public const int exo_track_stereo = 2131820938;
 			
 			// aapt resource value: 0x7F11018B
-			public const int exo_track_selection_title_video = 2131820939;
+			public const int exo_track_surround = 2131820939;
 			
 			// aapt resource value: 0x7F11018C
-			public const int exo_track_stereo = 2131820940;
+			public const int exo_track_surround_5_point_1 = 2131820940;
 			
 			// aapt resource value: 0x7F11018D
-			public const int exo_track_surround = 2131820941;
+			public const int exo_track_surround_7_point_1 = 2131820941;
 			
 			// aapt resource value: 0x7F11018E
-			public const int exo_track_surround_5_point_1 = 2131820942;
-			
-			// aapt resource value: 0x7F11018F
-			public const int exo_track_surround_7_point_1 = 2131820943;
+			public const int exo_track_unknown = 2131820942;
 			
 			// aapt resource value: 0x7F110190
-			public const int exo_track_unknown = 2131820944;
+			public const int expanded = 2131820944;
 			
-			// aapt resource value: 0x7F110192
-			public const int expanded = 2131820946;
+			// aapt resource value: 0x7F11018F
+			public const int expand_button_title = 2131820943;
 			
 			// aapt resource value: 0x7F110191
-			public const int expand_button_title = 2131820945;
+			public const int exposed_dropdown_menu_content_description = 2131820945;
+			
+			// aapt resource value: 0x7F110192
+			public const int extra_microwavetime_zero = 2131820946;
 			
 			// aapt resource value: 0x7F110193
-			public const int exposed_dropdown_menu_content_description = 2131820947;
+			public const int fab_transformation_scrim_behavior = 2131820947;
 			
 			// aapt resource value: 0x7F110194
-			public const int extra_microwavetime_zero = 2131820948;
+			public const int fab_transformation_sheet_behavior = 2131820948;
 			
 			// aapt resource value: 0x7F110195
-			public const int fab_transformation_scrim_behavior = 2131820949;
+			public const int hide_bottom_view_on_scroll_behavior = 2131820949;
 			
 			// aapt resource value: 0x7F110196
-			public const int fab_transformation_sheet_behavior = 2131820950;
+			public const int icon_content_description = 2131820950;
 			
 			// aapt resource value: 0x7F110197
-			public const int hide_bottom_view_on_scroll_behavior = 2131820951;
+			public const int intentchooser_select_all = 2131820951;
 			
 			// aapt resource value: 0x7F110198
-			public const int icon_content_description = 2131820952;
+			public const int intentchooser_select_application = 2131820952;
 			
 			// aapt resource value: 0x7F110199
-			public const int intentchooser_select_all = 2131820953;
+			public const int intentchooser_select_application_pdf = 2131820953;
 			
 			// aapt resource value: 0x7F11019A
-			public const int intentchooser_select_application = 2131820954;
+			public const int intentchooser_select_audio = 2131820954;
 			
 			// aapt resource value: 0x7F11019B
-			public const int intentchooser_select_application_pdf = 2131820955;
+			public const int intentchooser_select_audio_flac = 2131820955;
 			
 			// aapt resource value: 0x7F11019C
-			public const int intentchooser_select_audio = 2131820956;
+			public const int intentchooser_select_audio_m4a = 2131820956;
 			
 			// aapt resource value: 0x7F11019D
-			public const int intentchooser_select_audio_flac = 2131820957;
+			public const int intentchooser_select_audio_mp3 = 2131820957;
 			
 			// aapt resource value: 0x7F11019E
-			public const int intentchooser_select_audio_m4a = 2131820958;
+			public const int intentchooser_select_audio_wav = 2131820958;
 			
 			// aapt resource value: 0x7F11019F
-			public const int intentchooser_select_audio_mp3 = 2131820959;
+			public const int intentchooser_select_image = 2131820959;
 			
 			// aapt resource value: 0x7F1101A0
-			public const int intentchooser_select_audio_wav = 2131820960;
+			public const int intentchooser_select_image_gif = 2131820960;
 			
 			// aapt resource value: 0x7F1101A1
-			public const int intentchooser_select_image = 2131820961;
+			public const int intentchooser_select_image_jpeg = 2131820961;
 			
 			// aapt resource value: 0x7F1101A2
-			public const int intentchooser_select_image_gif = 2131820962;
+			public const int intentchooser_select_image_jpg = 2131820962;
 			
 			// aapt resource value: 0x7F1101A3
-			public const int intentchooser_select_image_jpeg = 2131820963;
+			public const int intentchooser_select_image_png = 2131820963;
 			
 			// aapt resource value: 0x7F1101A4
-			public const int intentchooser_select_image_jpg = 2131820964;
+			public const int intentchooser_select_text = 2131820964;
 			
 			// aapt resource value: 0x7F1101A5
-			public const int intentchooser_select_image_png = 2131820965;
+			public const int intentchooser_select_text_html = 2131820965;
 			
 			// aapt resource value: 0x7F1101A6
-			public const int intentchooser_select_text = 2131820966;
+			public const int intentchooser_select_text_json = 2131820966;
 			
 			// aapt resource value: 0x7F1101A7
-			public const int intentchooser_select_text_html = 2131820967;
+			public const int intentchooser_select_text_plain = 2131820967;
 			
 			// aapt resource value: 0x7F1101A8
-			public const int intentchooser_select_text_json = 2131820968;
+			public const int intentchooser_select_text_rtf = 2131820968;
 			
 			// aapt resource value: 0x7F1101A9
-			public const int intentchooser_select_text_plain = 2131820969;
+			public const int intentchooser_select_video = 2131820969;
 			
 			// aapt resource value: 0x7F1101AA
-			public const int intentchooser_select_text_rtf = 2131820970;
+			public const int intentchooser_select_video_3gp = 2131820970;
 			
 			// aapt resource value: 0x7F1101AB
-			public const int intentchooser_select_video = 2131820971;
+			public const int intentchooser_select_video_mp4 = 2131820971;
 			
 			// aapt resource value: 0x7F1101AC
-			public const int intentchooser_select_video_3gp = 2131820972;
+			public const int intentchooser_share_files = 2131820972;
 			
 			// aapt resource value: 0x7F1101AD
-			public const int intentchooser_select_video_mp4 = 2131820973;
+			public const int intentchooser_view_errorlog = 2131820973;
 			
 			// aapt resource value: 0x7F1101AE
-			public const int intentchooser_share_files = 2131820974;
+			public const int item_view_role_description = 2131820974;
 			
 			// aapt resource value: 0x7F1101AF
-			public const int intentchooser_view_errorlog = 2131820975;
+			public const int library_album = 2131820975;
 			
 			// aapt resource value: 0x7F1101B0
-			public const int item_view_role_description = 2131820976;
+			public const int library_albums = 2131820976;
 			
 			// aapt resource value: 0x7F1101B1
-			public const int library_album = 2131820977;
+			public const int library_artist = 2131820977;
 			
 			// aapt resource value: 0x7F1101B2
-			public const int library_albums = 2131820978;
+			public const int library_artists = 2131820978;
 			
 			// aapt resource value: 0x7F1101B3
-			public const int library_artist = 2131820979;
+			public const int library_genre = 2131820979;
 			
 			// aapt resource value: 0x7F1101B4
-			public const int library_artists = 2131820980;
+			public const int library_genres = 2131820980;
 			
 			// aapt resource value: 0x7F1101B5
-			public const int library_genre = 2131820981;
+			public const int library_item = 2131820981;
 			
 			// aapt resource value: 0x7F1101B6
-			public const int library_genres = 2131820982;
+			public const int library_items = 2131820982;
 			
 			// aapt resource value: 0x7F1101B7
-			public const int library_item = 2131820983;
+			public const int library_list_options = 2131820983;
 			
 			// aapt resource value: 0x7F1101B8
-			public const int library_items = 2131820984;
+			public const int library_no_lyrics = 2131820984;
 			
 			// aapt resource value: 0x7F1101B9
-			public const int library_list_options = 2131820985;
+			public const int library_playlist = 2131820985;
 			
 			// aapt resource value: 0x7F1101BA
-			public const int library_no_lyrics = 2131820986;
+			public const int library_playlists = 2131820986;
 			
 			// aapt resource value: 0x7F1101BB
-			public const int library_playlist = 2131820987;
+			public const int library_queue = 2131820987;
 			
 			// aapt resource value: 0x7F1101BC
-			public const int library_playlists = 2131820988;
+			public const int library_search = 2131820988;
 			
 			// aapt resource value: 0x7F1101BD
-			public const int library_queue = 2131820989;
+			public const int library_search_albums = 2131820989;
 			
 			// aapt resource value: 0x7F1101BE
-			public const int library_search = 2131820990;
+			public const int library_search_artists = 2131820990;
 			
 			// aapt resource value: 0x7F1101BF
-			public const int library_search_albums = 2131820991;
+			public const int library_search_genres = 2131820991;
 			
 			// aapt resource value: 0x7F1101C0
-			public const int library_search_artists = 2131820992;
+			public const int library_search_playlists = 2131820992;
 			
 			// aapt resource value: 0x7F1101C1
-			public const int library_search_genres = 2131820993;
+			public const int library_search_songs = 2131820993;
 			
 			// aapt resource value: 0x7F1101C2
-			public const int library_search_playlists = 2131820994;
+			public const int library_songs = 2131820994;
 			
 			// aapt resource value: 0x7F1101C3
-			public const int library_search_songs = 2131820995;
+			public const int library_unknown_album = 2131820995;
 			
 			// aapt resource value: 0x7F1101C4
-			public const int library_songs = 2131820996;
+			public const int library_unknown_albumartist = 2131820996;
 			
 			// aapt resource value: 0x7F1101C5
-			public const int library_unknown_album = 2131820997;
+			public const int library_unknown_artist = 2131820997;
 			
 			// aapt resource value: 0x7F1101C6
-			public const int library_unknown_albumartist = 2131820998;
+			public const int library_unknown_genre = 2131820998;
 			
 			// aapt resource value: 0x7F1101C7
-			public const int library_unknown_artist = 2131820999;
+			public const int library_unknown_playlist = 2131820999;
 			
 			// aapt resource value: 0x7F1101C8
-			public const int library_unknown_genre = 2131821000;
+			public const int library_unknown_title = 2131821000;
 			
 			// aapt resource value: 0x7F1101C9
-			public const int library_unknown_playlist = 2131821001;
+			public const int lyrics = 2131821001;
 			
 			// aapt resource value: 0x7F1101CA
-			public const int library_unknown_title = 2131821002;
+			public const int m3_exceed_max_badge_text_suffix = 2131821002;
 			
 			// aapt resource value: 0x7F1101CB
-			public const int lyrics = 2131821003;
+			public const int m3_ref_typeface_brand_medium = 2131821003;
 			
 			// aapt resource value: 0x7F1101CC
-			public const int m3_exceed_max_badge_text_suffix = 2131821004;
+			public const int m3_ref_typeface_brand_regular = 2131821004;
 			
 			// aapt resource value: 0x7F1101CD
-			public const int m3_ref_typeface_brand_medium = 2131821005;
+			public const int m3_ref_typeface_plain_medium = 2131821005;
 			
 			// aapt resource value: 0x7F1101CE
-			public const int m3_ref_typeface_brand_regular = 2131821006;
+			public const int m3_ref_typeface_plain_regular = 2131821006;
 			
 			// aapt resource value: 0x7F1101CF
-			public const int m3_ref_typeface_plain_medium = 2131821007;
+			public const int m3_sys_motion_easing_emphasized = 2131821007;
 			
 			// aapt resource value: 0x7F1101D0
-			public const int m3_ref_typeface_plain_regular = 2131821008;
+			public const int m3_sys_motion_easing_emphasized_accelerate = 2131821008;
 			
 			// aapt resource value: 0x7F1101D1
-			public const int m3_sys_motion_easing_emphasized = 2131821009;
+			public const int m3_sys_motion_easing_emphasized_decelerate = 2131821009;
 			
 			// aapt resource value: 0x7F1101D2
-			public const int m3_sys_motion_easing_emphasized_accelerate = 2131821010;
+			public const int m3_sys_motion_easing_emphasized_path_data = 2131821010;
 			
 			// aapt resource value: 0x7F1101D3
-			public const int m3_sys_motion_easing_emphasized_decelerate = 2131821011;
+			public const int m3_sys_motion_easing_legacy = 2131821011;
 			
 			// aapt resource value: 0x7F1101D4
-			public const int m3_sys_motion_easing_emphasized_path_data = 2131821012;
+			public const int m3_sys_motion_easing_legacy_accelerate = 2131821012;
 			
 			// aapt resource value: 0x7F1101D5
-			public const int m3_sys_motion_easing_legacy = 2131821013;
+			public const int m3_sys_motion_easing_legacy_decelerate = 2131821013;
 			
 			// aapt resource value: 0x7F1101D6
-			public const int m3_sys_motion_easing_legacy_accelerate = 2131821014;
+			public const int m3_sys_motion_easing_linear = 2131821014;
 			
 			// aapt resource value: 0x7F1101D7
-			public const int m3_sys_motion_easing_legacy_decelerate = 2131821015;
+			public const int m3_sys_motion_easing_standard = 2131821015;
 			
 			// aapt resource value: 0x7F1101D8
-			public const int m3_sys_motion_easing_linear = 2131821016;
+			public const int m3_sys_motion_easing_standard_accelerate = 2131821016;
 			
 			// aapt resource value: 0x7F1101D9
-			public const int m3_sys_motion_easing_standard = 2131821017;
+			public const int m3_sys_motion_easing_standard_decelerate = 2131821017;
 			
 			// aapt resource value: 0x7F1101DA
-			public const int m3_sys_motion_easing_standard_accelerate = 2131821018;
+			public const int material_clock_display_divider = 2131821018;
 			
 			// aapt resource value: 0x7F1101DB
-			public const int m3_sys_motion_easing_standard_decelerate = 2131821019;
+			public const int material_clock_toggle_content_description = 2131821019;
 			
 			// aapt resource value: 0x7F1101DC
-			public const int material_clock_display_divider = 2131821020;
+			public const int material_hour_24h_suffix = 2131821020;
 			
 			// aapt resource value: 0x7F1101DD
-			public const int material_clock_toggle_content_description = 2131821021;
+			public const int material_hour_selection = 2131821021;
 			
 			// aapt resource value: 0x7F1101DE
-			public const int material_hour_24h_suffix = 2131821022;
+			public const int material_hour_suffix = 2131821022;
 			
 			// aapt resource value: 0x7F1101DF
-			public const int material_hour_selection = 2131821023;
+			public const int material_minute_selection = 2131821023;
 			
 			// aapt resource value: 0x7F1101E0
-			public const int material_hour_suffix = 2131821024;
+			public const int material_minute_suffix = 2131821024;
 			
 			// aapt resource value: 0x7F1101E1
-			public const int material_minute_selection = 2131821025;
+			public const int material_motion_easing_accelerated = 2131821025;
 			
 			// aapt resource value: 0x7F1101E2
-			public const int material_minute_suffix = 2131821026;
+			public const int material_motion_easing_decelerated = 2131821026;
 			
 			// aapt resource value: 0x7F1101E3
-			public const int material_motion_easing_accelerated = 2131821027;
+			public const int material_motion_easing_emphasized = 2131821027;
 			
 			// aapt resource value: 0x7F1101E4
-			public const int material_motion_easing_decelerated = 2131821028;
+			public const int material_motion_easing_linear = 2131821028;
 			
 			// aapt resource value: 0x7F1101E5
-			public const int material_motion_easing_emphasized = 2131821029;
+			public const int material_motion_easing_standard = 2131821029;
 			
 			// aapt resource value: 0x7F1101E6
-			public const int material_motion_easing_linear = 2131821030;
+			public const int material_slider_range_end = 2131821030;
 			
 			// aapt resource value: 0x7F1101E7
-			public const int material_motion_easing_standard = 2131821031;
+			public const int material_slider_range_start = 2131821031;
 			
 			// aapt resource value: 0x7F1101E8
-			public const int material_slider_range_end = 2131821032;
+			public const int material_slider_value = 2131821032;
 			
 			// aapt resource value: 0x7F1101E9
-			public const int material_slider_range_start = 2131821033;
+			public const int material_timepicker_am = 2131821033;
 			
 			// aapt resource value: 0x7F1101EA
-			public const int material_slider_value = 2131821034;
+			public const int material_timepicker_clock_mode_description = 2131821034;
 			
 			// aapt resource value: 0x7F1101EB
-			public const int material_timepicker_am = 2131821035;
+			public const int material_timepicker_hour = 2131821035;
 			
 			// aapt resource value: 0x7F1101EC
-			public const int material_timepicker_clock_mode_description = 2131821036;
+			public const int material_timepicker_minute = 2131821036;
 			
 			// aapt resource value: 0x7F1101ED
-			public const int material_timepicker_hour = 2131821037;
+			public const int material_timepicker_pm = 2131821037;
 			
 			// aapt resource value: 0x7F1101EE
-			public const int material_timepicker_minute = 2131821038;
+			public const int material_timepicker_select_time = 2131821038;
 			
 			// aapt resource value: 0x7F1101EF
-			public const int material_timepicker_pm = 2131821039;
+			public const int material_timepicker_text_input_mode_description = 2131821039;
 			
 			// aapt resource value: 0x7F1101F0
-			public const int material_timepicker_select_time = 2131821040;
+			public const int models_album_artist = 2131821040;
 			
 			// aapt resource value: 0x7F1101F1
-			public const int material_timepicker_text_input_mode_description = 2131821041;
+			public const int models_album_disccount = 2131821041;
 			
 			// aapt resource value: 0x7F1101F2
-			public const int models_album_artist = 2131821042;
+			public const int models_album_duration = 2131821042;
 			
 			// aapt resource value: 0x7F1101F3
-			public const int models_album_disccount = 2131821043;
+			public const int models_album_rating = 2131821043;
 			
 			// aapt resource value: 0x7F1101F4
-			public const int models_album_duration = 2131821044;
+			public const int models_album_releasedate = 2131821044;
 			
 			// aapt resource value: 0x7F1101F5
-			public const int models_album_rating = 2131821045;
+			public const int models_album_songcount = 2131821045;
 			
 			// aapt resource value: 0x7F1101F6
-			public const int models_album_releasedate = 2131821046;
+			public const int models_album_songs = 2131821046;
 			
 			// aapt resource value: 0x7F1101F7
-			public const int models_album_songcount = 2131821047;
+			public const int models_album_title = 2131821047;
 			
 			// aapt resource value: 0x7F1101F8
-			public const int models_album_songs = 2131821048;
+			public const int models_artist_albumcount = 2131821048;
 			
 			// aapt resource value: 0x7F1101F9
-			public const int models_album_title = 2131821049;
+			public const int models_artist_albums = 2131821049;
 			
 			// aapt resource value: 0x7F1101FA
-			public const int models_artist_albumcount = 2131821050;
+			public const int models_artist_biography = 2131821050;
 			
 			// aapt resource value: 0x7F1101FB
-			public const int models_artist_albums = 2131821051;
+			public const int models_artist_name = 2131821051;
 			
 			// aapt resource value: 0x7F1101FC
-			public const int models_artist_biography = 2131821052;
+			public const int models_artist_rating = 2131821052;
 			
 			// aapt resource value: 0x7F1101FD
-			public const int models_artist_name = 2131821053;
+			public const int models_artist_songcount = 2131821053;
 			
 			// aapt resource value: 0x7F1101FE
-			public const int models_artist_rating = 2131821054;
+			public const int models_artist_songs = 2131821054;
 			
 			// aapt resource value: 0x7F1101FF
-			public const int models_artist_songcount = 2131821055;
+			public const int models_genre_duration = 2131821055;
 			
 			// aapt resource value: 0x7F110200
-			public const int models_artist_songs = 2131821056;
+			public const int models_genre_name = 2131821056;
 			
 			// aapt resource value: 0x7F110201
-			public const int models_genre_duration = 2131821057;
+			public const int models_genre_rating = 2131821057;
 			
 			// aapt resource value: 0x7F110202
-			public const int models_genre_name = 2131821058;
+			public const int models_genre_songcount = 2131821058;
 			
 			// aapt resource value: 0x7F110203
-			public const int models_genre_rating = 2131821059;
+			public const int models_genre_songs = 2131821059;
 			
 			// aapt resource value: 0x7F110204
-			public const int models_genre_songcount = 2131821060;
+			public const int models_playlist_datecreated = 2131821060;
 			
 			// aapt resource value: 0x7F110205
-			public const int models_genre_songs = 2131821061;
+			public const int models_playlist_datemodified = 2131821061;
 			
 			// aapt resource value: 0x7F110206
-			public const int models_playlist_datecreated = 2131821062;
+			public const int models_playlist_duration = 2131821062;
 			
 			// aapt resource value: 0x7F110207
-			public const int models_playlist_datemodified = 2131821063;
+			public const int models_playlist_name = 2131821063;
 			
 			// aapt resource value: 0x7F110208
-			public const int models_playlist_duration = 2131821064;
+			public const int models_playlist_rating = 2131821064;
 			
 			// aapt resource value: 0x7F110209
-			public const int models_playlist_name = 2131821065;
+			public const int models_playlist_songcount = 2131821065;
 			
 			// aapt resource value: 0x7F11020A
-			public const int models_playlist_rating = 2131821066;
+			public const int models_playlist_songs = 2131821066;
 			
 			// aapt resource value: 0x7F11020B
-			public const int models_playlist_songcount = 2131821067;
+			public const int models_song_album = 2131821067;
 			
 			// aapt resource value: 0x7F11020C
-			public const int models_playlist_songs = 2131821068;
+			public const int models_song_albumartist = 2131821068;
 			
 			// aapt resource value: 0x7F11020D
-			public const int models_song_album = 2131821069;
+			public const int models_song_artist = 2131821069;
 			
 			// aapt resource value: 0x7F11020E
-			public const int models_song_albumartist = 2131821070;
+			public const int models_song_bitrate = 2131821070;
 			
 			// aapt resource value: 0x7F11020F
-			public const int models_song_artist = 2131821071;
+			public const int models_song_channels = 2131821071;
 			
 			// aapt resource value: 0x7F110210
-			public const int models_song_bitrate = 2131821072;
+			public const int models_song_copyright = 2131821072;
 			
 			// aapt resource value: 0x7F110211
-			public const int models_song_channels = 2131821073;
+			public const int models_song_dateadded = 2131821073;
 			
 			// aapt resource value: 0x7F110212
-			public const int models_song_copyright = 2131821074;
+			public const int models_song_datemodified = 2131821074;
 			
 			// aapt resource value: 0x7F110213
-			public const int models_song_dateadded = 2131821075;
+			public const int models_song_discnumber = 2131821075;
 			
 			// aapt resource value: 0x7F110214
-			public const int models_song_datemodified = 2131821076;
+			public const int models_song_duration = 2131821076;
 			
 			// aapt resource value: 0x7F110215
-			public const int models_song_discnumber = 2131821077;
+			public const int models_song_filepath = 2131821077;
 			
 			// aapt resource value: 0x7F110216
-			public const int models_song_duration = 2131821078;
+			public const int models_song_genre = 2131821078;
 			
 			// aapt resource value: 0x7F110217
-			public const int models_song_filepath = 2131821079;
+			public const int models_song_lyrics = 2131821079;
 			
 			// aapt resource value: 0x7F110218
-			public const int models_song_genre = 2131821080;
+			public const int models_song_mimetype = 2131821080;
 			
 			// aapt resource value: 0x7F110219
-			public const int models_song_lyrics = 2131821081;
+			public const int models_song_rating = 2131821081;
 			
 			// aapt resource value: 0x7F11021A
-			public const int models_song_mimetype = 2131821082;
+			public const int models_song_releasedate = 2131821082;
 			
 			// aapt resource value: 0x7F11021B
-			public const int models_song_rating = 2131821083;
+			public const int models_song_size = 2131821083;
 			
 			// aapt resource value: 0x7F11021C
-			public const int models_song_releasedate = 2131821084;
+			public const int models_song_title = 2131821084;
 			
 			// aapt resource value: 0x7F11021D
-			public const int models_song_size = 2131821085;
+			public const int models_song_tracknumber = 2131821085;
 			
 			// aapt resource value: 0x7F11021E
-			public const int models_song_title = 2131821086;
+			public const int models_song_uri = 2131821086;
 			
 			// aapt resource value: 0x7F11021F
-			public const int models_song_tracknumber = 2131821087;
+			public const int move = 2131821087;
 			
 			// aapt resource value: 0x7F110220
-			public const int models_song_uri = 2131821088;
+			public const int moved = 2131821088;
 			
 			// aapt resource value: 0x7F110221
-			public const int move = 2131821089;
+			public const int mtrl_badge_numberless_content_description = 2131821089;
 			
 			// aapt resource value: 0x7F110222
-			public const int moved = 2131821090;
+			public const int mtrl_checkbox_button_icon_path_checked = 2131821090;
 			
 			// aapt resource value: 0x7F110223
-			public const int mtrl_badge_numberless_content_description = 2131821091;
+			public const int mtrl_checkbox_button_icon_path_group_name = 2131821091;
 			
 			// aapt resource value: 0x7F110224
-			public const int mtrl_checkbox_button_icon_path_checked = 2131821092;
+			public const int mtrl_checkbox_button_icon_path_indeterminate = 2131821092;
 			
 			// aapt resource value: 0x7F110225
-			public const int mtrl_checkbox_button_icon_path_group_name = 2131821093;
+			public const int mtrl_checkbox_button_icon_path_name = 2131821093;
 			
 			// aapt resource value: 0x7F110226
-			public const int mtrl_checkbox_button_icon_path_indeterminate = 2131821094;
+			public const int mtrl_checkbox_button_path_checked = 2131821094;
 			
 			// aapt resource value: 0x7F110227
-			public const int mtrl_checkbox_button_icon_path_name = 2131821095;
+			public const int mtrl_checkbox_button_path_group_name = 2131821095;
 			
 			// aapt resource value: 0x7F110228
-			public const int mtrl_checkbox_button_path_checked = 2131821096;
+			public const int mtrl_checkbox_button_path_name = 2131821096;
 			
 			// aapt resource value: 0x7F110229
-			public const int mtrl_checkbox_button_path_group_name = 2131821097;
+			public const int mtrl_checkbox_button_path_unchecked = 2131821097;
 			
 			// aapt resource value: 0x7F11022A
-			public const int mtrl_checkbox_button_path_name = 2131821098;
+			public const int mtrl_checkbox_state_description_checked = 2131821098;
 			
 			// aapt resource value: 0x7F11022B
-			public const int mtrl_checkbox_button_path_unchecked = 2131821099;
+			public const int mtrl_checkbox_state_description_indeterminate = 2131821099;
 			
 			// aapt resource value: 0x7F11022C
-			public const int mtrl_checkbox_state_description_checked = 2131821100;
+			public const int mtrl_checkbox_state_description_unchecked = 2131821100;
 			
 			// aapt resource value: 0x7F11022D
-			public const int mtrl_checkbox_state_description_indeterminate = 2131821101;
+			public const int mtrl_chip_close_icon_content_description = 2131821101;
 			
 			// aapt resource value: 0x7F11022E
-			public const int mtrl_checkbox_state_description_unchecked = 2131821102;
+			public const int mtrl_exceed_max_badge_number_content_description = 2131821102;
 			
 			// aapt resource value: 0x7F11022F
-			public const int mtrl_chip_close_icon_content_description = 2131821103;
+			public const int mtrl_exceed_max_badge_number_suffix = 2131821103;
 			
 			// aapt resource value: 0x7F110230
-			public const int mtrl_exceed_max_badge_number_content_description = 2131821104;
+			public const int mtrl_picker_a11y_next_month = 2131821104;
 			
 			// aapt resource value: 0x7F110231
-			public const int mtrl_exceed_max_badge_number_suffix = 2131821105;
+			public const int mtrl_picker_a11y_prev_month = 2131821105;
 			
 			// aapt resource value: 0x7F110232
-			public const int mtrl_picker_a11y_next_month = 2131821106;
+			public const int mtrl_picker_announce_current_range_selection = 2131821106;
 			
 			// aapt resource value: 0x7F110233
-			public const int mtrl_picker_a11y_prev_month = 2131821107;
+			public const int mtrl_picker_announce_current_selection = 2131821107;
 			
 			// aapt resource value: 0x7F110234
-			public const int mtrl_picker_announce_current_range_selection = 2131821108;
+			public const int mtrl_picker_announce_current_selection_none = 2131821108;
 			
 			// aapt resource value: 0x7F110235
-			public const int mtrl_picker_announce_current_selection = 2131821109;
+			public const int mtrl_picker_cancel = 2131821109;
 			
 			// aapt resource value: 0x7F110236
-			public const int mtrl_picker_announce_current_selection_none = 2131821110;
+			public const int mtrl_picker_confirm = 2131821110;
 			
 			// aapt resource value: 0x7F110237
-			public const int mtrl_picker_cancel = 2131821111;
+			public const int mtrl_picker_date_header_selected = 2131821111;
 			
 			// aapt resource value: 0x7F110238
-			public const int mtrl_picker_confirm = 2131821112;
+			public const int mtrl_picker_date_header_title = 2131821112;
 			
 			// aapt resource value: 0x7F110239
-			public const int mtrl_picker_date_header_selected = 2131821113;
+			public const int mtrl_picker_date_header_unselected = 2131821113;
 			
 			// aapt resource value: 0x7F11023A
-			public const int mtrl_picker_date_header_title = 2131821114;
+			public const int mtrl_picker_day_of_week_column_header = 2131821114;
 			
 			// aapt resource value: 0x7F11023B
-			public const int mtrl_picker_date_header_unselected = 2131821115;
+			public const int mtrl_picker_end_date_description = 2131821115;
 			
 			// aapt resource value: 0x7F11023C
-			public const int mtrl_picker_day_of_week_column_header = 2131821116;
+			public const int mtrl_picker_invalid_format = 2131821116;
 			
 			// aapt resource value: 0x7F11023D
-			public const int mtrl_picker_end_date_description = 2131821117;
+			public const int mtrl_picker_invalid_format_example = 2131821117;
 			
 			// aapt resource value: 0x7F11023E
-			public const int mtrl_picker_invalid_format = 2131821118;
+			public const int mtrl_picker_invalid_format_use = 2131821118;
 			
 			// aapt resource value: 0x7F11023F
-			public const int mtrl_picker_invalid_format_example = 2131821119;
+			public const int mtrl_picker_invalid_range = 2131821119;
 			
 			// aapt resource value: 0x7F110240
-			public const int mtrl_picker_invalid_format_use = 2131821120;
+			public const int mtrl_picker_navigate_to_current_year_description = 2131821120;
 			
 			// aapt resource value: 0x7F110241
-			public const int mtrl_picker_invalid_range = 2131821121;
+			public const int mtrl_picker_navigate_to_year_description = 2131821121;
 			
 			// aapt resource value: 0x7F110242
-			public const int mtrl_picker_navigate_to_current_year_description = 2131821122;
+			public const int mtrl_picker_out_of_range = 2131821122;
 			
 			// aapt resource value: 0x7F110243
-			public const int mtrl_picker_navigate_to_year_description = 2131821123;
+			public const int mtrl_picker_range_header_only_end_selected = 2131821123;
 			
 			// aapt resource value: 0x7F110244
-			public const int mtrl_picker_out_of_range = 2131821124;
+			public const int mtrl_picker_range_header_only_start_selected = 2131821124;
 			
 			// aapt resource value: 0x7F110245
-			public const int mtrl_picker_range_header_only_end_selected = 2131821125;
+			public const int mtrl_picker_range_header_selected = 2131821125;
 			
 			// aapt resource value: 0x7F110246
-			public const int mtrl_picker_range_header_only_start_selected = 2131821126;
+			public const int mtrl_picker_range_header_title = 2131821126;
 			
 			// aapt resource value: 0x7F110247
-			public const int mtrl_picker_range_header_selected = 2131821127;
+			public const int mtrl_picker_range_header_unselected = 2131821127;
 			
 			// aapt resource value: 0x7F110248
-			public const int mtrl_picker_range_header_title = 2131821128;
+			public const int mtrl_picker_save = 2131821128;
 			
 			// aapt resource value: 0x7F110249
-			public const int mtrl_picker_range_header_unselected = 2131821129;
+			public const int mtrl_picker_start_date_description = 2131821129;
 			
 			// aapt resource value: 0x7F11024A
-			public const int mtrl_picker_save = 2131821130;
+			public const int mtrl_picker_text_input_date_hint = 2131821130;
 			
 			// aapt resource value: 0x7F11024B
-			public const int mtrl_picker_start_date_description = 2131821131;
+			public const int mtrl_picker_text_input_date_range_end_hint = 2131821131;
 			
 			// aapt resource value: 0x7F11024C
-			public const int mtrl_picker_text_input_date_hint = 2131821132;
+			public const int mtrl_picker_text_input_date_range_start_hint = 2131821132;
 			
 			// aapt resource value: 0x7F11024D
-			public const int mtrl_picker_text_input_date_range_end_hint = 2131821133;
+			public const int mtrl_picker_text_input_day_abbr = 2131821133;
 			
 			// aapt resource value: 0x7F11024E
-			public const int mtrl_picker_text_input_date_range_start_hint = 2131821134;
+			public const int mtrl_picker_text_input_month_abbr = 2131821134;
 			
 			// aapt resource value: 0x7F11024F
-			public const int mtrl_picker_text_input_day_abbr = 2131821135;
+			public const int mtrl_picker_text_input_year_abbr = 2131821135;
 			
 			// aapt resource value: 0x7F110250
-			public const int mtrl_picker_text_input_month_abbr = 2131821136;
+			public const int mtrl_picker_today_description = 2131821136;
 			
 			// aapt resource value: 0x7F110251
-			public const int mtrl_picker_text_input_year_abbr = 2131821137;
+			public const int mtrl_picker_toggle_to_calendar_input_mode = 2131821137;
 			
 			// aapt resource value: 0x7F110252
-			public const int mtrl_picker_today_description = 2131821138;
+			public const int mtrl_picker_toggle_to_day_selection = 2131821138;
 			
 			// aapt resource value: 0x7F110253
-			public const int mtrl_picker_toggle_to_calendar_input_mode = 2131821139;
+			public const int mtrl_picker_toggle_to_text_input_mode = 2131821139;
 			
 			// aapt resource value: 0x7F110254
-			public const int mtrl_picker_toggle_to_day_selection = 2131821140;
+			public const int mtrl_picker_toggle_to_year_selection = 2131821140;
 			
 			// aapt resource value: 0x7F110255
-			public const int mtrl_picker_toggle_to_text_input_mode = 2131821141;
+			public const int mtrl_switch_thumb_group_name = 2131821141;
 			
 			// aapt resource value: 0x7F110256
-			public const int mtrl_picker_toggle_to_year_selection = 2131821142;
+			public const int mtrl_switch_thumb_path_checked = 2131821142;
 			
 			// aapt resource value: 0x7F110257
-			public const int mtrl_switch_thumb_group_name = 2131821143;
+			public const int mtrl_switch_thumb_path_morphing = 2131821143;
 			
 			// aapt resource value: 0x7F110258
-			public const int mtrl_switch_thumb_path_checked = 2131821144;
+			public const int mtrl_switch_thumb_path_name = 2131821144;
 			
 			// aapt resource value: 0x7F110259
-			public const int mtrl_switch_thumb_path_morphing = 2131821145;
+			public const int mtrl_switch_thumb_path_pressed = 2131821145;
 			
 			// aapt resource value: 0x7F11025A
-			public const int mtrl_switch_thumb_path_name = 2131821146;
+			public const int mtrl_switch_thumb_path_unchecked = 2131821146;
 			
 			// aapt resource value: 0x7F11025B
-			public const int mtrl_switch_thumb_path_pressed = 2131821147;
+			public const int mtrl_switch_track_decoration_path = 2131821147;
 			
 			// aapt resource value: 0x7F11025C
-			public const int mtrl_switch_thumb_path_unchecked = 2131821148;
+			public const int mtrl_switch_track_path = 2131821148;
 			
 			// aapt resource value: 0x7F11025D
-			public const int mtrl_switch_track_decoration_path = 2131821149;
+			public const int mtrl_timepicker_cancel = 2131821149;
 			
 			// aapt resource value: 0x7F11025E
-			public const int mtrl_switch_track_path = 2131821150;
+			public const int mtrl_timepicker_confirm = 2131821150;
 			
 			// aapt resource value: 0x7F11025F
-			public const int mtrl_timepicker_cancel = 2131821151;
+			public const int not_set = 2131821151;
 			
 			// aapt resource value: 0x7F110260
-			public const int mtrl_timepicker_confirm = 2131821152;
+			public const int open = 2131821152;
 			
 			// aapt resource value: 0x7F110261
-			public const int not_set = 2131821153;
+			public const int options = 2131821153;
 			
 			// aapt resource value: 0x7F110262
-			public const int open = 2131821154;
+			public const int password_toggle_content_description = 2131821154;
 			
 			// aapt resource value: 0x7F110263
-			public const int options = 2131821155;
+			public const int path_password_eye = 2131821155;
 			
 			// aapt resource value: 0x7F110264
-			public const int password_toggle_content_description = 2131821156;
+			public const int path_password_eye_mask_strike_through = 2131821156;
 			
 			// aapt resource value: 0x7F110265
-			public const int path_password_eye = 2131821157;
+			public const int path_password_eye_mask_visible = 2131821157;
 			
 			// aapt resource value: 0x7F110266
-			public const int path_password_eye_mask_strike_through = 2131821158;
-			
-			// aapt resource value: 0x7F110267
-			public const int path_password_eye_mask_visible = 2131821159;
-			
-			// aapt resource value: 0x7F110268
-			public const int path_password_strike_through = 2131821160;
-			
-			// aapt resource value: 0x7F110270
-			public const int playerserviceoptions_notificationoptions_channel_description = 2131821168;
-			
-			// aapt resource value: 0x7F110271
-			public const int playerserviceoptions_notificationoptions_channel_name = 2131821169;
-			
-			// aapt resource value: 0x7F110272
-			public const int playerserviceoptions_notificationoptions_channel_unkownalbum = 2131821170;
-			
-			// aapt resource value: 0x7F110273
-			public const int playerserviceoptions_notificationoptions_channel_unkownartist = 2131821171;
-			
-			// aapt resource value: 0x7F110274
-			public const int playerserviceoptions_notificationoptions_channel_unkowntitle = 2131821172;
-			
-			// aapt resource value: 0x7F110275
-			public const int playerserviceoptions_notificationoptions_id = 2131821173;
-			
-			// aapt resource value: 0x7F110269
-			public const int player_default_detail_one = 2131821161;
-			
-			// aapt resource value: 0x7F11026A
-			public const int player_default_detail_two = 2131821162;
-			
-			// aapt resource value: 0x7F11026B
-			public const int player_default_positiontext = 2131821163;
-			
-			// aapt resource value: 0x7F11026C
-			public const int player_unknown_album = 2131821164;
-			
-			// aapt resource value: 0x7F11026D
-			public const int player_unknown_artist = 2131821165;
+			public const int path_password_strike_through = 2131821158;
 			
 			// aapt resource value: 0x7F11026E
-			public const int player_unknown_genre = 2131821166;
+			public const int playerserviceoptions_notificationoptions_channel_description = 2131821166;
 			
 			// aapt resource value: 0x7F11026F
-			public const int player_unknown_title = 2131821167;
+			public const int playerserviceoptions_notificationoptions_channel_name = 2131821167;
+			
+			// aapt resource value: 0x7F110270
+			public const int playerserviceoptions_notificationoptions_channel_unkownalbum = 2131821168;
+			
+			// aapt resource value: 0x7F110271
+			public const int playerserviceoptions_notificationoptions_channel_unkownartist = 2131821169;
+			
+			// aapt resource value: 0x7F110272
+			public const int playerserviceoptions_notificationoptions_channel_unkowntitle = 2131821170;
+			
+			// aapt resource value: 0x7F110273
+			public const int playerserviceoptions_notificationoptions_id = 2131821171;
+			
+			// aapt resource value: 0x7F110267
+			public const int player_default_detail_one = 2131821159;
+			
+			// aapt resource value: 0x7F110268
+			public const int player_default_detail_two = 2131821160;
+			
+			// aapt resource value: 0x7F110269
+			public const int player_default_positiontext = 2131821161;
+			
+			// aapt resource value: 0x7F11026A
+			public const int player_unknown_album = 2131821162;
+			
+			// aapt resource value: 0x7F11026B
+			public const int player_unknown_artist = 2131821163;
+			
+			// aapt resource value: 0x7F11026C
+			public const int player_unknown_genre = 2131821164;
+			
+			// aapt resource value: 0x7F11026D
+			public const int player_unknown_title = 2131821165;
+			
+			// aapt resource value: 0x7F110274
+			public const int preference_copied = 2131821172;
+			
+			// aapt resource value: 0x7F110275
+			public const int removed = 2131821173;
 			
 			// aapt resource value: 0x7F110276
-			public const int preference_copied = 2131821174;
+			public const int reverse = 2131821174;
 			
 			// aapt resource value: 0x7F110277
-			public const int removed = 2131821175;
+			public const int save = 2131821175;
 			
 			// aapt resource value: 0x7F110278
-			public const int reverse = 2131821176;
+			public const int saved = 2131821176;
 			
 			// aapt resource value: 0x7F110279
-			public const int save = 2131821177;
+			public const int scannerservice_currently_scanning = 2131821177;
 			
 			// aapt resource value: 0x7F11027A
-			public const int saved = 2131821178;
+			public const int scannerservice_notification_contenttext_preparing = 2131821178;
 			
 			// aapt resource value: 0x7F11027B
-			public const int scannerservice_currently_scanning = 2131821179;
+			public const int scannerservice_notification_contenttext_preparing_albums = 2131821179;
 			
 			// aapt resource value: 0x7F11027C
-			public const int scannerservice_notification_contenttext_preparing = 2131821180;
+			public const int scannerservice_notification_contenttext_preparing_artists = 2131821180;
 			
 			// aapt resource value: 0x7F11027D
-			public const int scannerservice_notification_contenttext_preparing_albums = 2131821181;
+			public const int scannerservice_notification_contenttext_preparing_genres = 2131821181;
 			
 			// aapt resource value: 0x7F11027E
-			public const int scannerservice_notification_contenttext_preparing_artists = 2131821182;
+			public const int scannerservice_notification_contenttext_preparing_playlists = 2131821182;
 			
 			// aapt resource value: 0x7F11027F
-			public const int scannerservice_notification_contenttext_preparing_genres = 2131821183;
+			public const int scannerservice_notification_contenttext_preparing_songs = 2131821183;
 			
 			// aapt resource value: 0x7F110280
-			public const int scannerservice_notification_contenttext_preparing_playlists = 2131821184;
+			public const int scannerservice_notification_contenttext_reading_albums = 2131821184;
 			
 			// aapt resource value: 0x7F110281
-			public const int scannerservice_notification_contenttext_preparing_songs = 2131821185;
+			public const int scannerservice_notification_contenttext_reading_artists = 2131821185;
 			
 			// aapt resource value: 0x7F110282
-			public const int scannerservice_notification_contenttext_reading_albums = 2131821186;
+			public const int scannerservice_notification_contenttext_reading_genres = 2131821186;
 			
 			// aapt resource value: 0x7F110283
-			public const int scannerservice_notification_contenttext_reading_artists = 2131821187;
+			public const int scannerservice_notification_contenttext_reading_playlists = 2131821187;
 			
 			// aapt resource value: 0x7F110284
-			public const int scannerservice_notification_contenttext_reading_genres = 2131821188;
+			public const int scannerservice_notification_contenttext_reading_songs = 2131821188;
 			
 			// aapt resource value: 0x7F110285
-			public const int scannerservice_notification_contenttext_reading_playlists = 2131821189;
+			public const int scannerservice_notification_contenttext_removing_albums = 2131821189;
 			
 			// aapt resource value: 0x7F110286
-			public const int scannerservice_notification_contenttext_reading_songs = 2131821190;
+			public const int scannerservice_notification_contenttext_removing_artists = 2131821190;
 			
 			// aapt resource value: 0x7F110287
-			public const int scannerservice_notification_contenttext_removing_albums = 2131821191;
+			public const int scannerservice_notification_contenttext_removing_genres = 2131821191;
 			
 			// aapt resource value: 0x7F110288
-			public const int scannerservice_notification_contenttext_removing_artists = 2131821192;
+			public const int scannerservice_notification_contenttext_removing_playlists = 2131821192;
 			
 			// aapt resource value: 0x7F110289
-			public const int scannerservice_notification_contenttext_removing_genres = 2131821193;
+			public const int scannerservice_notification_contenttext_removing_songs = 2131821193;
 			
 			// aapt resource value: 0x7F11028A
-			public const int scannerservice_notification_contenttext_removing_playlists = 2131821194;
+			public const int scannerservice_notification_contenttext_saving_albums = 2131821194;
 			
 			// aapt resource value: 0x7F11028B
-			public const int scannerservice_notification_contenttext_removing_songs = 2131821195;
+			public const int scannerservice_notification_contenttext_saving_artists = 2131821195;
 			
 			// aapt resource value: 0x7F11028C
-			public const int scannerservice_notification_contenttext_saving_albums = 2131821196;
+			public const int scannerservice_notification_contenttext_saving_genres = 2131821196;
 			
 			// aapt resource value: 0x7F11028D
-			public const int scannerservice_notification_contenttext_saving_artists = 2131821197;
+			public const int scannerservice_notification_contenttext_saving_playlists = 2131821197;
 			
 			// aapt resource value: 0x7F11028E
-			public const int scannerservice_notification_contenttext_saving_genres = 2131821198;
+			public const int scannerservice_notification_contenttext_saving_songs = 2131821198;
 			
 			// aapt resource value: 0x7F11028F
-			public const int scannerservice_notification_contenttext_saving_playlists = 2131821199;
+			public const int scannerservice_notification_contenttext_scanning_albums = 2131821199;
 			
 			// aapt resource value: 0x7F110290
-			public const int scannerservice_notification_contenttext_saving_songs = 2131821200;
+			public const int scannerservice_notification_contenttext_scanning_artists = 2131821200;
 			
 			// aapt resource value: 0x7F110291
-			public const int scannerservice_notification_contenttext_scanning_albums = 2131821201;
+			public const int scannerservice_notification_contenttext_scanning_genres = 2131821201;
 			
 			// aapt resource value: 0x7F110292
-			public const int scannerservice_notification_contenttext_scanning_artists = 2131821202;
+			public const int scannerservice_notification_contenttext_scanning_playlists = 2131821202;
 			
 			// aapt resource value: 0x7F110293
-			public const int scannerservice_notification_contenttext_scanning_genres = 2131821203;
-			
-			// aapt resource value: 0x7F110294
-			public const int scannerservice_notification_contenttext_scanning_playlists = 2131821204;
+			public const int scannerservice_notification_contenttext_scanning_songs = 2131821203;
 			
 			// aapt resource value: 0x7F110295
-			public const int scannerservice_notification_contenttext_scanning_songs = 2131821205;
-			
-			// aapt resource value: 0x7F110297
-			public const int searchbar_scrolling_view_behavior = 2131821207;
-			
-			// aapt resource value: 0x7F110298
-			public const int searchview_clear_text_content_description = 2131821208;
-			
-			// aapt resource value: 0x7F110299
-			public const int searchview_navigation_content_description = 2131821209;
+			public const int searchbar_scrolling_view_behavior = 2131821205;
 			
 			// aapt resource value: 0x7F110296
-			public const int search_menu_title = 2131821206;
+			public const int searchview_clear_text_content_description = 2131821206;
+			
+			// aapt resource value: 0x7F110297
+			public const int searchview_navigation_content_description = 2131821207;
+			
+			// aapt resource value: 0x7F110294
+			public const int search_menu_title = 2131821204;
+			
+			// aapt resource value: 0x7F110298
+			public const int select = 2131821208;
+			
+			// aapt resource value: 0x7F110299
+			public const int selected = 2131821209;
 			
 			// aapt resource value: 0x7F11029A
-			public const int select = 2131821210;
+			public const int settings_about_description = 2131821210;
 			
 			// aapt resource value: 0x7F11029B
-			public const int selected = 2131821211;
+			public const int settings_about_title = 2131821211;
 			
 			// aapt resource value: 0x7F11029C
-			public const int settings_about_description = 2131821212;
+			public const int settings_audio_bassboost_currentpreset_description = 2131821212;
 			
 			// aapt resource value: 0x7F11029D
-			public const int settings_about_title = 2131821213;
+			public const int settings_audio_bassboost_currentpreset_dialog_negativebutton = 2131821213;
 			
 			// aapt resource value: 0x7F11029E
-			public const int settings_audio_bassboost_currentpreset_description = 2131821214;
+			public const int settings_audio_bassboost_currentpreset_dialog_positivebutton = 2131821214;
 			
 			// aapt resource value: 0x7F11029F
-			public const int settings_audio_bassboost_currentpreset_dialog_negativebutton = 2131821215;
+			public const int settings_audio_bassboost_currentpreset_dialog_title = 2131821215;
 			
 			// aapt resource value: 0x7F1102A0
-			public const int settings_audio_bassboost_currentpreset_dialog_positivebutton = 2131821216;
+			public const int settings_audio_bassboost_currentpreset_title = 2131821216;
 			
 			// aapt resource value: 0x7F1102A1
-			public const int settings_audio_bassboost_currentpreset_dialog_title = 2131821217;
+			public const int settings_audio_bassboost_description = 2131821217;
 			
 			// aapt resource value: 0x7F1102A2
-			public const int settings_audio_bassboost_currentpreset_title = 2131821218;
+			public const int settings_audio_bassboost_isenabled_description = 2131821218;
 			
 			// aapt resource value: 0x7F1102A3
-			public const int settings_audio_bassboost_description = 2131821219;
+			public const int settings_audio_bassboost_isenabled_description_off = 2131821219;
 			
 			// aapt resource value: 0x7F1102A4
-			public const int settings_audio_bassboost_isenabled_description = 2131821220;
+			public const int settings_audio_bassboost_isenabled_description_on = 2131821220;
 			
 			// aapt resource value: 0x7F1102A5
-			public const int settings_audio_bassboost_isenabled_description_off = 2131821221;
+			public const int settings_audio_bassboost_isenabled_title = 2131821221;
 			
 			// aapt resource value: 0x7F1102A6
-			public const int settings_audio_bassboost_isenabled_description_on = 2131821222;
+			public const int settings_audio_bassboost_strength_description = 2131821222;
 			
 			// aapt resource value: 0x7F1102A7
-			public const int settings_audio_bassboost_isenabled_title = 2131821223;
+			public const int settings_audio_bassboost_strength_title = 2131821223;
 			
 			// aapt resource value: 0x7F1102A8
-			public const int settings_audio_bassboost_strength_description = 2131821224;
+			public const int settings_audio_bassboost_title = 2131821224;
 			
 			// aapt resource value: 0x7F1102A9
-			public const int settings_audio_bassboost_strength_title = 2131821225;
+			public const int settings_audio_description = 2131821225;
 			
 			// aapt resource value: 0x7F1102AA
-			public const int settings_audio_bassboost_title = 2131821226;
+			public const int settings_audio_environmentalreverb_currentpreset_description = 2131821226;
 			
 			// aapt resource value: 0x7F1102AB
-			public const int settings_audio_description = 2131821227;
+			public const int settings_audio_environmentalreverb_currentpreset_dialog_negativebutton = 2131821227;
 			
 			// aapt resource value: 0x7F1102AC
-			public const int settings_audio_environmentalreverb_currentpreset_description = 2131821228;
+			public const int settings_audio_environmentalreverb_currentpreset_dialog_positivebutton = 2131821228;
 			
 			// aapt resource value: 0x7F1102AD
-			public const int settings_audio_environmentalreverb_currentpreset_dialog_negativebutton = 2131821229;
+			public const int settings_audio_environmentalreverb_currentpreset_dialog_title = 2131821229;
 			
 			// aapt resource value: 0x7F1102AE
-			public const int settings_audio_environmentalreverb_currentpreset_dialog_positivebutton = 2131821230;
+			public const int settings_audio_environmentalreverb_currentpreset_title = 2131821230;
 			
 			// aapt resource value: 0x7F1102AF
-			public const int settings_audio_environmentalreverb_currentpreset_dialog_title = 2131821231;
+			public const int settings_audio_environmentalreverb_decayhfratio_description = 2131821231;
 			
 			// aapt resource value: 0x7F1102B0
-			public const int settings_audio_environmentalreverb_currentpreset_title = 2131821232;
+			public const int settings_audio_environmentalreverb_decayhfratio_title = 2131821232;
 			
 			// aapt resource value: 0x7F1102B1
-			public const int settings_audio_environmentalreverb_decayhfratio_description = 2131821233;
+			public const int settings_audio_environmentalreverb_decaytime_description = 2131821233;
 			
 			// aapt resource value: 0x7F1102B2
-			public const int settings_audio_environmentalreverb_decayhfratio_title = 2131821234;
+			public const int settings_audio_environmentalreverb_decaytime_title = 2131821234;
 			
 			// aapt resource value: 0x7F1102B3
-			public const int settings_audio_environmentalreverb_decaytime_description = 2131821235;
+			public const int settings_audio_environmentalreverb_density_description = 2131821235;
 			
 			// aapt resource value: 0x7F1102B4
-			public const int settings_audio_environmentalreverb_decaytime_title = 2131821236;
+			public const int settings_audio_environmentalreverb_density_title = 2131821236;
 			
 			// aapt resource value: 0x7F1102B5
-			public const int settings_audio_environmentalreverb_density_description = 2131821237;
+			public const int settings_audio_environmentalreverb_description = 2131821237;
 			
 			// aapt resource value: 0x7F1102B6
-			public const int settings_audio_environmentalreverb_density_title = 2131821238;
+			public const int settings_audio_environmentalreverb_diffusion_description = 2131821238;
 			
 			// aapt resource value: 0x7F1102B7
-			public const int settings_audio_environmentalreverb_description = 2131821239;
+			public const int settings_audio_environmentalreverb_diffusion_title = 2131821239;
 			
 			// aapt resource value: 0x7F1102B8
-			public const int settings_audio_environmentalreverb_diffusion_description = 2131821240;
+			public const int settings_audio_environmentalreverb_isenabled_description = 2131821240;
 			
 			// aapt resource value: 0x7F1102B9
-			public const int settings_audio_environmentalreverb_diffusion_title = 2131821241;
+			public const int settings_audio_environmentalreverb_isenabled_description_off = 2131821241;
 			
 			// aapt resource value: 0x7F1102BA
-			public const int settings_audio_environmentalreverb_isenabled_description = 2131821242;
+			public const int settings_audio_environmentalreverb_isenabled_description_on = 2131821242;
 			
 			// aapt resource value: 0x7F1102BB
-			public const int settings_audio_environmentalreverb_isenabled_description_off = 2131821243;
+			public const int settings_audio_environmentalreverb_isenabled_title = 2131821243;
 			
 			// aapt resource value: 0x7F1102BC
-			public const int settings_audio_environmentalreverb_isenabled_description_on = 2131821244;
+			public const int settings_audio_environmentalreverb_reflectionsdelay_description = 2131821244;
 			
 			// aapt resource value: 0x7F1102BD
-			public const int settings_audio_environmentalreverb_isenabled_title = 2131821245;
+			public const int settings_audio_environmentalreverb_reflectionsdelay_title = 2131821245;
 			
 			// aapt resource value: 0x7F1102BE
-			public const int settings_audio_environmentalreverb_reflectionsdelay_description = 2131821246;
+			public const int settings_audio_environmentalreverb_reflectionslevel_description = 2131821246;
 			
 			// aapt resource value: 0x7F1102BF
-			public const int settings_audio_environmentalreverb_reflectionsdelay_title = 2131821247;
+			public const int settings_audio_environmentalreverb_reflectionslevel_title = 2131821247;
 			
 			// aapt resource value: 0x7F1102C0
-			public const int settings_audio_environmentalreverb_reflectionslevel_description = 2131821248;
+			public const int settings_audio_environmentalreverb_reverbdelay_description = 2131821248;
 			
 			// aapt resource value: 0x7F1102C1
-			public const int settings_audio_environmentalreverb_reflectionslevel_title = 2131821249;
+			public const int settings_audio_environmentalreverb_reverbdelay_title = 2131821249;
 			
 			// aapt resource value: 0x7F1102C2
-			public const int settings_audio_environmentalreverb_reverbdelay_description = 2131821250;
+			public const int settings_audio_environmentalreverb_reverblevel_description = 2131821250;
 			
 			// aapt resource value: 0x7F1102C3
-			public const int settings_audio_environmentalreverb_reverbdelay_title = 2131821251;
+			public const int settings_audio_environmentalreverb_reverblevel_title = 2131821251;
 			
 			// aapt resource value: 0x7F1102C4
-			public const int settings_audio_environmentalreverb_reverblevel_description = 2131821252;
+			public const int settings_audio_environmentalreverb_roomhflevel_description = 2131821252;
 			
 			// aapt resource value: 0x7F1102C5
-			public const int settings_audio_environmentalreverb_reverblevel_title = 2131821253;
+			public const int settings_audio_environmentalreverb_roomhflevel_title = 2131821253;
 			
 			// aapt resource value: 0x7F1102C6
-			public const int settings_audio_environmentalreverb_roomhflevel_description = 2131821254;
+			public const int settings_audio_environmentalreverb_roomlevel_description = 2131821254;
 			
 			// aapt resource value: 0x7F1102C7
-			public const int settings_audio_environmentalreverb_roomhflevel_title = 2131821255;
+			public const int settings_audio_environmentalreverb_roomlevel_title = 2131821255;
 			
 			// aapt resource value: 0x7F1102C8
-			public const int settings_audio_environmentalreverb_roomlevel_description = 2131821256;
+			public const int settings_audio_environmentalreverb_title = 2131821256;
 			
 			// aapt resource value: 0x7F1102C9
-			public const int settings_audio_environmentalreverb_roomlevel_title = 2131821257;
+			public const int settings_audio_equaliser_currentpreset_description = 2131821257;
 			
 			// aapt resource value: 0x7F1102CA
-			public const int settings_audio_environmentalreverb_title = 2131821258;
+			public const int settings_audio_equaliser_currentpreset_dialog_negativebutton = 2131821258;
 			
 			// aapt resource value: 0x7F1102CB
-			public const int settings_audio_equaliser_currentpreset_description = 2131821259;
+			public const int settings_audio_equaliser_currentpreset_dialog_positivebutton = 2131821259;
 			
 			// aapt resource value: 0x7F1102CC
-			public const int settings_audio_equaliser_currentpreset_dialog_negativebutton = 2131821260;
+			public const int settings_audio_equaliser_currentpreset_dialog_title = 2131821260;
 			
 			// aapt resource value: 0x7F1102CD
-			public const int settings_audio_equaliser_currentpreset_dialog_positivebutton = 2131821261;
+			public const int settings_audio_equaliser_currentpreset_title = 2131821261;
 			
 			// aapt resource value: 0x7F1102CE
-			public const int settings_audio_equaliser_currentpreset_dialog_title = 2131821262;
+			public const int settings_audio_equaliser_description = 2131821262;
 			
 			// aapt resource value: 0x7F1102CF
-			public const int settings_audio_equaliser_currentpreset_title = 2131821263;
+			public const int settings_audio_equaliser_isenabled_description = 2131821263;
 			
 			// aapt resource value: 0x7F1102D0
-			public const int settings_audio_equaliser_description = 2131821264;
+			public const int settings_audio_equaliser_isenabled_description_off = 2131821264;
 			
 			// aapt resource value: 0x7F1102D1
-			public const int settings_audio_equaliser_isenabled_description = 2131821265;
+			public const int settings_audio_equaliser_isenabled_description_on = 2131821265;
 			
 			// aapt resource value: 0x7F1102D2
-			public const int settings_audio_equaliser_isenabled_description_off = 2131821266;
+			public const int settings_audio_equaliser_isenabled_title = 2131821266;
 			
 			// aapt resource value: 0x7F1102D3
-			public const int settings_audio_equaliser_isenabled_description_on = 2131821267;
+			public const int settings_audio_equaliser_title = 2131821267;
 			
 			// aapt resource value: 0x7F1102D4
-			public const int settings_audio_equaliser_isenabled_title = 2131821268;
+			public const int settings_audio_loudnessenhancer_currentpreset_description = 2131821268;
 			
 			// aapt resource value: 0x7F1102D5
-			public const int settings_audio_equaliser_title = 2131821269;
+			public const int settings_audio_loudnessenhancer_currentpreset_dialog_negativebutton = 2131821269;
 			
 			// aapt resource value: 0x7F1102D6
-			public const int settings_audio_loudnessenhancer_currentpreset_description = 2131821270;
+			public const int settings_audio_loudnessenhancer_currentpreset_dialog_positivebutton = 2131821270;
 			
 			// aapt resource value: 0x7F1102D7
-			public const int settings_audio_loudnessenhancer_currentpreset_dialog_negativebutton = 2131821271;
+			public const int settings_audio_loudnessenhancer_currentpreset_dialog_title = 2131821271;
 			
 			// aapt resource value: 0x7F1102D8
-			public const int settings_audio_loudnessenhancer_currentpreset_dialog_positivebutton = 2131821272;
+			public const int settings_audio_loudnessenhancer_currentpreset_title = 2131821272;
 			
 			// aapt resource value: 0x7F1102D9
-			public const int settings_audio_loudnessenhancer_currentpreset_dialog_title = 2131821273;
+			public const int settings_audio_loudnessenhancer_description = 2131821273;
 			
 			// aapt resource value: 0x7F1102DA
-			public const int settings_audio_loudnessenhancer_currentpreset_title = 2131821274;
+			public const int settings_audio_loudnessenhancer_isenabled_description = 2131821274;
 			
 			// aapt resource value: 0x7F1102DB
-			public const int settings_audio_loudnessenhancer_description = 2131821275;
+			public const int settings_audio_loudnessenhancer_isenabled_description_off = 2131821275;
 			
 			// aapt resource value: 0x7F1102DC
-			public const int settings_audio_loudnessenhancer_isenabled_description = 2131821276;
+			public const int settings_audio_loudnessenhancer_isenabled_description_on = 2131821276;
 			
 			// aapt resource value: 0x7F1102DD
-			public const int settings_audio_loudnessenhancer_isenabled_description_off = 2131821277;
+			public const int settings_audio_loudnessenhancer_isenabled_title = 2131821277;
 			
 			// aapt resource value: 0x7F1102DE
-			public const int settings_audio_loudnessenhancer_isenabled_description_on = 2131821278;
+			public const int settings_audio_loudnessenhancer_targetgain_description = 2131821278;
 			
 			// aapt resource value: 0x7F1102DF
-			public const int settings_audio_loudnessenhancer_isenabled_title = 2131821279;
+			public const int settings_audio_loudnessenhancer_targetgain_title = 2131821279;
 			
 			// aapt resource value: 0x7F1102E0
-			public const int settings_audio_loudnessenhancer_targetgain_description = 2131821280;
+			public const int settings_audio_loudnessenhancer_title = 2131821280;
 			
 			// aapt resource value: 0x7F1102E1
-			public const int settings_audio_loudnessenhancer_targetgain_title = 2131821281;
+			public const int settings_audio_title = 2131821281;
 			
 			// aapt resource value: 0x7F1102E2
-			public const int settings_audio_loudnessenhancer_title = 2131821282;
+			public const int settings_description = 2131821282;
 			
 			// aapt resource value: 0x7F1102E3
-			public const int settings_audio_title = 2131821283;
+			public const int settings_files_description = 2131821283;
 			
 			// aapt resource value: 0x7F1102E4
-			public const int settings_description = 2131821284;
+			public const int settings_files_directories_description = 2131821284;
 			
 			// aapt resource value: 0x7F1102E5
-			public const int settings_files_description = 2131821285;
+			public const int settings_files_directories_dialog_negativebutton = 2131821285;
 			
 			// aapt resource value: 0x7F1102E6
-			public const int settings_files_directories_description = 2131821286;
+			public const int settings_files_directories_dialog_neutralbutton = 2131821286;
 			
 			// aapt resource value: 0x7F1102E7
-			public const int settings_files_directories_dialog_negativebutton = 2131821287;
+			public const int settings_files_directories_dialog_positivebutton = 2131821287;
 			
 			// aapt resource value: 0x7F1102E8
-			public const int settings_files_directories_dialog_neutralbutton = 2131821288;
+			public const int settings_files_directories_dialog_title = 2131821288;
 			
 			// aapt resource value: 0x7F1102E9
-			public const int settings_files_directories_dialog_positivebutton = 2131821289;
+			public const int settings_files_directories_title = 2131821289;
 			
 			// aapt resource value: 0x7F1102EA
-			public const int settings_files_directories_dialog_title = 2131821290;
+			public const int settings_files_mimetypes_description = 2131821290;
 			
 			// aapt resource value: 0x7F1102EB
-			public const int settings_files_directories_title = 2131821291;
+			public const int settings_files_mimetypes_dialog_negativebutton = 2131821291;
 			
 			// aapt resource value: 0x7F1102EC
-			public const int settings_files_mimetypes_description = 2131821292;
+			public const int settings_files_mimetypes_dialog_positivebutton = 2131821292;
 			
 			// aapt resource value: 0x7F1102ED
-			public const int settings_files_mimetypes_dialog_negativebutton = 2131821293;
+			public const int settings_files_mimetypes_dialog_title = 2131821293;
 			
 			// aapt resource value: 0x7F1102EE
-			public const int settings_files_mimetypes_dialog_positivebutton = 2131821294;
+			public const int settings_files_mimetypes_title = 2131821294;
 			
 			// aapt resource value: 0x7F1102EF
-			public const int settings_files_mimetypes_dialog_title = 2131821295;
+			public const int settings_files_title = 2131821295;
 			
 			// aapt resource value: 0x7F1102F0
-			public const int settings_files_mimetypes_title = 2131821296;
+			public const int settings_files_tracklengthignore_description = 2131821296;
 			
 			// aapt resource value: 0x7F1102F1
-			public const int settings_files_title = 2131821297;
+			public const int settings_files_tracklengthignore_title = 2131821297;
 			
 			// aapt resource value: 0x7F1102F2
-			public const int settings_files_tracklengthignore_description = 2131821298;
+			public const int settings_lockscreen_description = 2131821298;
 			
 			// aapt resource value: 0x7F1102F3
-			public const int settings_files_tracklengthignore_title = 2131821299;
+			public const int settings_lockscreen_title = 2131821299;
 			
 			// aapt resource value: 0x7F1102F4
-			public const int settings_lockscreen_description = 2131821300;
+			public const int settings_notification_badgeicontype_description = 2131821300;
 			
 			// aapt resource value: 0x7F1102F5
-			public const int settings_lockscreen_title = 2131821301;
+			public const int settings_notification_badgeicontype_dialog_negativebutton = 2131821301;
 			
 			// aapt resource value: 0x7F1102F6
-			public const int settings_notification_badgeicontype_description = 2131821302;
+			public const int settings_notification_badgeicontype_dialog_positivebutton = 2131821302;
 			
 			// aapt resource value: 0x7F1102F7
-			public const int settings_notification_badgeicontype_dialog_negativebutton = 2131821303;
+			public const int settings_notification_badgeicontype_dialog_title = 2131821303;
 			
 			// aapt resource value: 0x7F1102F8
-			public const int settings_notification_badgeicontype_dialog_positivebutton = 2131821304;
+			public const int settings_notification_badgeicontype_title = 2131821304;
 			
 			// aapt resource value: 0x7F1102F9
-			public const int settings_notification_badgeicontype_dialog_title = 2131821305;
+			public const int settings_notification_customcolour_description = 2131821305;
 			
 			// aapt resource value: 0x7F1102FA
-			public const int settings_notification_badgeicontype_title = 2131821306;
+			public const int settings_notification_customcolour_dialog_title = 2131821306;
 			
 			// aapt resource value: 0x7F1102FB
-			public const int settings_notification_customcolour_description = 2131821307;
+			public const int settings_notification_customcolour_title = 2131821307;
 			
 			// aapt resource value: 0x7F1102FC
-			public const int settings_notification_customcolour_dialog_title = 2131821308;
+			public const int settings_notification_description = 2131821308;
 			
 			// aapt resource value: 0x7F1102FD
-			public const int settings_notification_customcolour_title = 2131821309;
+			public const int settings_notification_iscolourised_description = 2131821309;
 			
 			// aapt resource value: 0x7F1102FE
-			public const int settings_notification_description = 2131821310;
+			public const int settings_notification_iscolourised_description_off = 2131821310;
 			
 			// aapt resource value: 0x7F1102FF
-			public const int settings_notification_iscolourised_description = 2131821311;
+			public const int settings_notification_iscolourised_description_on = 2131821311;
 			
 			// aapt resource value: 0x7F110300
-			public const int settings_notification_iscolourised_description_off = 2131821312;
+			public const int settings_notification_iscolourised_title = 2131821312;
 			
 			// aapt resource value: 0x7F110301
-			public const int settings_notification_iscolourised_description_on = 2131821313;
+			public const int settings_notification_priority_description = 2131821313;
 			
 			// aapt resource value: 0x7F110302
-			public const int settings_notification_iscolourised_title = 2131821314;
+			public const int settings_notification_priority_dialog_negativebutton = 2131821314;
 			
 			// aapt resource value: 0x7F110303
-			public const int settings_notification_priority_description = 2131821315;
+			public const int settings_notification_priority_dialog_positivebutton = 2131821315;
 			
 			// aapt resource value: 0x7F110304
-			public const int settings_notification_priority_dialog_negativebutton = 2131821316;
+			public const int settings_notification_priority_dialog_title = 2131821316;
 			
 			// aapt resource value: 0x7F110305
-			public const int settings_notification_priority_dialog_positivebutton = 2131821317;
+			public const int settings_notification_priority_title = 2131821317;
 			
 			// aapt resource value: 0x7F110306
-			public const int settings_notification_priority_dialog_title = 2131821318;
+			public const int settings_notification_title = 2131821318;
 			
 			// aapt resource value: 0x7F110307
-			public const int settings_notification_priority_title = 2131821319;
+			public const int settings_notification_usecustomcolour_description = 2131821319;
 			
 			// aapt resource value: 0x7F110308
-			public const int settings_notification_title = 2131821320;
+			public const int settings_notification_usecustomcolour_description_off = 2131821320;
 			
 			// aapt resource value: 0x7F110309
-			public const int settings_notification_usecustomcolour_description = 2131821321;
+			public const int settings_notification_usecustomcolour_description_on = 2131821321;
 			
 			// aapt resource value: 0x7F11030A
-			public const int settings_notification_usecustomcolour_description_off = 2131821322;
+			public const int settings_notification_usecustomcolour_title = 2131821322;
 			
 			// aapt resource value: 0x7F11030B
-			public const int settings_notification_usecustomcolour_description_on = 2131821323;
+			public const int settings_system_description = 2131821323;
 			
 			// aapt resource value: 0x7F11030C
-			public const int settings_notification_usecustomcolour_title = 2131821324;
+			public const int settings_system_errorlogs_confirmationdialog_message = 2131821324;
 			
 			// aapt resource value: 0x7F11030D
-			public const int settings_system_description = 2131821325;
+			public const int settings_system_errorlogs_confirmationdialog_negativebutton = 2131821325;
 			
 			// aapt resource value: 0x7F11030E
-			public const int settings_system_errorlogs_confirmationdialog_message = 2131821326;
+			public const int settings_system_errorlogs_confirmationdialog_positivebutton = 2131821326;
 			
 			// aapt resource value: 0x7F11030F
-			public const int settings_system_errorlogs_confirmationdialog_negativebutton = 2131821327;
+			public const int settings_system_errorlogs_confirmationdialog_title = 2131821327;
 			
 			// aapt resource value: 0x7F110310
-			public const int settings_system_errorlogs_confirmationdialog_positivebutton = 2131821328;
+			public const int settings_system_errorlogs_description = 2131821328;
 			
 			// aapt resource value: 0x7F110311
-			public const int settings_system_errorlogs_confirmationdialog_title = 2131821329;
+			public const int settings_system_errorlogs_dialog_negativebutton = 2131821329;
 			
 			// aapt resource value: 0x7F110312
-			public const int settings_system_errorlogs_description = 2131821330;
+			public const int settings_system_errorlogs_dialog_positivebutton = 2131821330;
 			
 			// aapt resource value: 0x7F110313
-			public const int settings_system_errorlogs_dialog_negativebutton = 2131821331;
+			public const int settings_system_errorlogs_dialog_title = 2131821331;
 			
 			// aapt resource value: 0x7F110314
-			public const int settings_system_errorlogs_dialog_positivebutton = 2131821332;
+			public const int settings_system_errorlogs_title = 2131821332;
 			
 			// aapt resource value: 0x7F110315
-			public const int settings_system_errorlogs_dialog_title = 2131821333;
+			public const int settings_system_title = 2131821333;
 			
 			// aapt resource value: 0x7F110316
-			public const int settings_system_errorlogs_title = 2131821334;
+			public const int settings_title = 2131821334;
 			
 			// aapt resource value: 0x7F110317
-			public const int settings_system_title = 2131821335;
+			public const int settings_userinterface_description = 2131821335;
 			
 			// aapt resource value: 0x7F110318
-			public const int settings_title = 2131821336;
+			public const int settings_userinterface_languages_currentlanguage_description = 2131821336;
 			
 			// aapt resource value: 0x7F110319
-			public const int settings_userinterface_description = 2131821337;
+			public const int settings_userinterface_languages_currentlanguage_dialog_negativebutton = 2131821337;
 			
 			// aapt resource value: 0x7F11031A
-			public const int settings_userinterface_languages_currentlanguage_description = 2131821338;
+			public const int settings_userinterface_languages_currentlanguage_dialog_positivebutton = 2131821338;
 			
 			// aapt resource value: 0x7F11031B
-			public const int settings_userinterface_languages_currentlanguage_dialog_negativebutton = 2131821339;
+			public const int settings_userinterface_languages_currentlanguage_dialog_title = 2131821339;
 			
 			// aapt resource value: 0x7F11031C
-			public const int settings_userinterface_languages_currentlanguage_dialog_positivebutton = 2131821340;
+			public const int settings_userinterface_languages_currentlanguage_title = 2131821340;
 			
 			// aapt resource value: 0x7F11031D
-			public const int settings_userinterface_languages_currentlanguage_dialog_title = 2131821341;
+			public const int settings_userinterface_languages_description = 2131821341;
 			
 			// aapt resource value: 0x7F11031E
-			public const int settings_userinterface_languages_currentlanguage_title = 2131821342;
+			public const int settings_userinterface_languages_mode_description = 2131821342;
 			
 			// aapt resource value: 0x7F11031F
-			public const int settings_userinterface_languages_description = 2131821343;
+			public const int settings_userinterface_languages_mode_dialog_negativebutton = 2131821343;
 			
 			// aapt resource value: 0x7F110320
-			public const int settings_userinterface_languages_mode_description = 2131821344;
+			public const int settings_userinterface_languages_mode_dialog_positivebutton = 2131821344;
 			
 			// aapt resource value: 0x7F110321
-			public const int settings_userinterface_languages_mode_dialog_negativebutton = 2131821345;
+			public const int settings_userinterface_languages_mode_dialog_title = 2131821345;
 			
 			// aapt resource value: 0x7F110322
-			public const int settings_userinterface_languages_mode_dialog_positivebutton = 2131821346;
+			public const int settings_userinterface_languages_mode_title = 2131821346;
 			
 			// aapt resource value: 0x7F110323
-			public const int settings_userinterface_languages_mode_dialog_title = 2131821347;
-			
-			// aapt resource value: 0x7F110324
-			public const int settings_userinterface_languages_mode_title = 2131821348;
-			
-			// aapt resource value: 0x7F110325
-			public const int settings_userinterface_languages_title = 2131821349;
-			
-			// aapt resource value: 0x7F110336
-			public const int settings_userinterface_library_albums_description = 2131821366;
-			
-			// aapt resource value: 0x7F110337
-			public const int settings_userinterface_library_albums_isreversed_description = 2131821367;
-			
-			// aapt resource value: 0x7F110338
-			public const int settings_userinterface_library_albums_isreversed_description_off = 2131821368;
-			
-			// aapt resource value: 0x7F110339
-			public const int settings_userinterface_library_albums_isreversed_description_on = 2131821369;
-			
-			// aapt resource value: 0x7F11033A
-			public const int settings_userinterface_library_albums_isreversed_title = 2131821370;
-			
-			// aapt resource value: 0x7F11033B
-			public const int settings_userinterface_library_albums_layouttype_description = 2131821371;
-			
-			// aapt resource value: 0x7F11033C
-			public const int settings_userinterface_library_albums_layouttype_dialog_negativebutton = 2131821372;
-			
-			// aapt resource value: 0x7F11033D
-			public const int settings_userinterface_library_albums_layouttype_dialog_positivebutton = 2131821373;
-			
-			// aapt resource value: 0x7F11033E
-			public const int settings_userinterface_library_albums_layouttype_dialog_title = 2131821374;
-			
-			// aapt resource value: 0x7F11033F
-			public const int settings_userinterface_library_albums_layouttype_title = 2131821375;
-			
-			// aapt resource value: 0x7F110340
-			public const int settings_userinterface_library_albums_sortkey_description = 2131821376;
-			
-			// aapt resource value: 0x7F110341
-			public const int settings_userinterface_library_albums_sortkey_dialog_negativebutton = 2131821377;
-			
-			// aapt resource value: 0x7F110342
-			public const int settings_userinterface_library_albums_sortkey_dialog_positivebutton = 2131821378;
-			
-			// aapt resource value: 0x7F110343
-			public const int settings_userinterface_library_albums_sortkey_dialog_title = 2131821379;
-			
-			// aapt resource value: 0x7F110344
-			public const int settings_userinterface_library_albums_sortkey_title = 2131821380;
-			
-			// aapt resource value: 0x7F110345
-			public const int settings_userinterface_library_albums_title = 2131821381;
-			
-			// aapt resource value: 0x7F110326
-			public const int settings_userinterface_library_album_description = 2131821350;
-			
-			// aapt resource value: 0x7F110327
-			public const int settings_userinterface_library_album_songs_isreversed_description = 2131821351;
-			
-			// aapt resource value: 0x7F110328
-			public const int settings_userinterface_library_album_songs_isreversed_description_off = 2131821352;
-			
-			// aapt resource value: 0x7F110329
-			public const int settings_userinterface_library_album_songs_isreversed_description_on = 2131821353;
-			
-			// aapt resource value: 0x7F11032A
-			public const int settings_userinterface_library_album_songs_isreversed_title = 2131821354;
-			
-			// aapt resource value: 0x7F11032B
-			public const int settings_userinterface_library_album_songs_layouttype_description = 2131821355;
-			
-			// aapt resource value: 0x7F11032C
-			public const int settings_userinterface_library_album_songs_layouttype_dialog_negativebutton = 2131821356;
-			
-			// aapt resource value: 0x7F11032D
-			public const int settings_userinterface_library_album_songs_layouttype_dialog_positivebutton = 2131821357;
-			
-			// aapt resource value: 0x7F11032E
-			public const int settings_userinterface_library_album_songs_layouttype_dialog_title = 2131821358;
-			
-			// aapt resource value: 0x7F11032F
-			public const int settings_userinterface_library_album_songs_layouttype_title = 2131821359;
-			
-			// aapt resource value: 0x7F110330
-			public const int settings_userinterface_library_album_songs_sortkey_description = 2131821360;
-			
-			// aapt resource value: 0x7F110331
-			public const int settings_userinterface_library_album_songs_sortkey_dialog_negativebutton = 2131821361;
-			
-			// aapt resource value: 0x7F110332
-			public const int settings_userinterface_library_album_songs_sortkey_dialog_positivebutton = 2131821362;
-			
-			// aapt resource value: 0x7F110333
-			public const int settings_userinterface_library_album_songs_sortkey_dialog_title = 2131821363;
+			public const int settings_userinterface_languages_title = 2131821347;
 			
 			// aapt resource value: 0x7F110334
-			public const int settings_userinterface_library_album_songs_sortkey_title = 2131821364;
+			public const int settings_userinterface_library_albums_description = 2131821364;
 			
 			// aapt resource value: 0x7F110335
-			public const int settings_userinterface_library_album_title = 2131821365;
+			public const int settings_userinterface_library_albums_isreversed_description = 2131821365;
 			
-			// aapt resource value: 0x7F110364
-			public const int settings_userinterface_library_artists_description = 2131821412;
+			// aapt resource value: 0x7F110336
+			public const int settings_userinterface_library_albums_isreversed_description_off = 2131821366;
 			
-			// aapt resource value: 0x7F110365
-			public const int settings_userinterface_library_artists_isreversed_description = 2131821413;
+			// aapt resource value: 0x7F110337
+			public const int settings_userinterface_library_albums_isreversed_description_on = 2131821367;
 			
-			// aapt resource value: 0x7F110366
-			public const int settings_userinterface_library_artists_isreversed_description_off = 2131821414;
+			// aapt resource value: 0x7F110338
+			public const int settings_userinterface_library_albums_isreversed_title = 2131821368;
 			
-			// aapt resource value: 0x7F110367
-			public const int settings_userinterface_library_artists_isreversed_description_on = 2131821415;
+			// aapt resource value: 0x7F110339
+			public const int settings_userinterface_library_albums_layouttype_description = 2131821369;
 			
-			// aapt resource value: 0x7F110368
-			public const int settings_userinterface_library_artists_isreversed_title = 2131821416;
+			// aapt resource value: 0x7F11033A
+			public const int settings_userinterface_library_albums_layouttype_dialog_negativebutton = 2131821370;
 			
-			// aapt resource value: 0x7F110369
-			public const int settings_userinterface_library_artists_layouttype_description = 2131821417;
+			// aapt resource value: 0x7F11033B
+			public const int settings_userinterface_library_albums_layouttype_dialog_positivebutton = 2131821371;
 			
-			// aapt resource value: 0x7F11036A
-			public const int settings_userinterface_library_artists_layouttype_dialog_negativebutton = 2131821418;
+			// aapt resource value: 0x7F11033C
+			public const int settings_userinterface_library_albums_layouttype_dialog_title = 2131821372;
 			
-			// aapt resource value: 0x7F11036B
-			public const int settings_userinterface_library_artists_layouttype_dialog_positivebutton = 2131821419;
+			// aapt resource value: 0x7F11033D
+			public const int settings_userinterface_library_albums_layouttype_title = 2131821373;
 			
-			// aapt resource value: 0x7F11036C
-			public const int settings_userinterface_library_artists_layouttype_dialog_title = 2131821420;
+			// aapt resource value: 0x7F11033E
+			public const int settings_userinterface_library_albums_sortkey_description = 2131821374;
 			
-			// aapt resource value: 0x7F11036D
-			public const int settings_userinterface_library_artists_layouttype_title = 2131821421;
+			// aapt resource value: 0x7F11033F
+			public const int settings_userinterface_library_albums_sortkey_dialog_negativebutton = 2131821375;
 			
-			// aapt resource value: 0x7F11036E
-			public const int settings_userinterface_library_artists_sortkey_description = 2131821422;
+			// aapt resource value: 0x7F110340
+			public const int settings_userinterface_library_albums_sortkey_dialog_positivebutton = 2131821376;
 			
-			// aapt resource value: 0x7F11036F
-			public const int settings_userinterface_library_artists_sortkey_dialog_negativebutton = 2131821423;
+			// aapt resource value: 0x7F110341
+			public const int settings_userinterface_library_albums_sortkey_dialog_title = 2131821377;
 			
-			// aapt resource value: 0x7F110370
-			public const int settings_userinterface_library_artists_sortkey_dialog_positivebutton = 2131821424;
+			// aapt resource value: 0x7F110342
+			public const int settings_userinterface_library_albums_sortkey_title = 2131821378;
 			
-			// aapt resource value: 0x7F110371
-			public const int settings_userinterface_library_artists_sortkey_dialog_title = 2131821425;
+			// aapt resource value: 0x7F110343
+			public const int settings_userinterface_library_albums_title = 2131821379;
 			
-			// aapt resource value: 0x7F110372
-			public const int settings_userinterface_library_artists_sortkey_title = 2131821426;
+			// aapt resource value: 0x7F110324
+			public const int settings_userinterface_library_album_description = 2131821348;
 			
-			// aapt resource value: 0x7F110373
-			public const int settings_userinterface_library_artists_title = 2131821427;
+			// aapt resource value: 0x7F110325
+			public const int settings_userinterface_library_album_songs_isreversed_description = 2131821349;
 			
-			// aapt resource value: 0x7F110346
-			public const int settings_userinterface_library_artist_albums_isreversed_description = 2131821382;
+			// aapt resource value: 0x7F110326
+			public const int settings_userinterface_library_album_songs_isreversed_description_off = 2131821350;
 			
-			// aapt resource value: 0x7F110347
-			public const int settings_userinterface_library_artist_albums_isreversed_description_off = 2131821383;
+			// aapt resource value: 0x7F110327
+			public const int settings_userinterface_library_album_songs_isreversed_description_on = 2131821351;
 			
-			// aapt resource value: 0x7F110348
-			public const int settings_userinterface_library_artist_albums_isreversed_description_on = 2131821384;
+			// aapt resource value: 0x7F110328
+			public const int settings_userinterface_library_album_songs_isreversed_title = 2131821352;
 			
-			// aapt resource value: 0x7F110349
-			public const int settings_userinterface_library_artist_albums_isreversed_title = 2131821385;
+			// aapt resource value: 0x7F110329
+			public const int settings_userinterface_library_album_songs_layouttype_description = 2131821353;
 			
-			// aapt resource value: 0x7F11034A
-			public const int settings_userinterface_library_artist_albums_layouttype_description = 2131821386;
+			// aapt resource value: 0x7F11032A
+			public const int settings_userinterface_library_album_songs_layouttype_dialog_negativebutton = 2131821354;
 			
-			// aapt resource value: 0x7F11034B
-			public const int settings_userinterface_library_artist_albums_layouttype_dialog_negativebutton = 2131821387;
+			// aapt resource value: 0x7F11032B
+			public const int settings_userinterface_library_album_songs_layouttype_dialog_positivebutton = 2131821355;
 			
-			// aapt resource value: 0x7F11034C
-			public const int settings_userinterface_library_artist_albums_layouttype_dialog_positivebutton = 2131821388;
+			// aapt resource value: 0x7F11032C
+			public const int settings_userinterface_library_album_songs_layouttype_dialog_title = 2131821356;
 			
-			// aapt resource value: 0x7F11034D
-			public const int settings_userinterface_library_artist_albums_layouttype_dialog_title = 2131821389;
+			// aapt resource value: 0x7F11032D
+			public const int settings_userinterface_library_album_songs_layouttype_title = 2131821357;
 			
-			// aapt resource value: 0x7F11034E
-			public const int settings_userinterface_library_artist_albums_layouttype_title = 2131821390;
+			// aapt resource value: 0x7F11032E
+			public const int settings_userinterface_library_album_songs_sortkey_description = 2131821358;
 			
-			// aapt resource value: 0x7F11034F
-			public const int settings_userinterface_library_artist_albums_sortkey_description = 2131821391;
+			// aapt resource value: 0x7F11032F
+			public const int settings_userinterface_library_album_songs_sortkey_dialog_negativebutton = 2131821359;
 			
-			// aapt resource value: 0x7F110350
-			public const int settings_userinterface_library_artist_albums_sortkey_dialog_negativebutton = 2131821392;
+			// aapt resource value: 0x7F110330
+			public const int settings_userinterface_library_album_songs_sortkey_dialog_positivebutton = 2131821360;
 			
-			// aapt resource value: 0x7F110351
-			public const int settings_userinterface_library_artist_albums_sortkey_dialog_positivebutton = 2131821393;
+			// aapt resource value: 0x7F110331
+			public const int settings_userinterface_library_album_songs_sortkey_dialog_title = 2131821361;
 			
-			// aapt resource value: 0x7F110352
-			public const int settings_userinterface_library_artist_albums_sortkey_dialog_title = 2131821394;
+			// aapt resource value: 0x7F110332
+			public const int settings_userinterface_library_album_songs_sortkey_title = 2131821362;
 			
-			// aapt resource value: 0x7F110353
-			public const int settings_userinterface_library_artist_albums_sortkey_title = 2131821395;
-			
-			// aapt resource value: 0x7F110354
-			public const int settings_userinterface_library_artist_description = 2131821396;
-			
-			// aapt resource value: 0x7F110355
-			public const int settings_userinterface_library_artist_songs_isreversed_description = 2131821397;
-			
-			// aapt resource value: 0x7F110356
-			public const int settings_userinterface_library_artist_songs_isreversed_description_off = 2131821398;
-			
-			// aapt resource value: 0x7F110357
-			public const int settings_userinterface_library_artist_songs_isreversed_description_on = 2131821399;
-			
-			// aapt resource value: 0x7F110358
-			public const int settings_userinterface_library_artist_songs_isreversed_title = 2131821400;
-			
-			// aapt resource value: 0x7F110359
-			public const int settings_userinterface_library_artist_songs_layouttype_description = 2131821401;
-			
-			// aapt resource value: 0x7F11035A
-			public const int settings_userinterface_library_artist_songs_layouttype_dialog_negativebutton = 2131821402;
-			
-			// aapt resource value: 0x7F11035B
-			public const int settings_userinterface_library_artist_songs_layouttype_dialog_positivebutton = 2131821403;
-			
-			// aapt resource value: 0x7F11035C
-			public const int settings_userinterface_library_artist_songs_layouttype_dialog_title = 2131821404;
-			
-			// aapt resource value: 0x7F11035D
-			public const int settings_userinterface_library_artist_songs_layouttype_title = 2131821405;
-			
-			// aapt resource value: 0x7F11035E
-			public const int settings_userinterface_library_artist_songs_sortkey_description = 2131821406;
-			
-			// aapt resource value: 0x7F11035F
-			public const int settings_userinterface_library_artist_songs_sortkey_dialog_negativebutton = 2131821407;
-			
-			// aapt resource value: 0x7F110360
-			public const int settings_userinterface_library_artist_songs_sortkey_dialog_positivebutton = 2131821408;
-			
-			// aapt resource value: 0x7F110361
-			public const int settings_userinterface_library_artist_songs_sortkey_dialog_title = 2131821409;
+			// aapt resource value: 0x7F110333
+			public const int settings_userinterface_library_album_title = 2131821363;
 			
 			// aapt resource value: 0x7F110362
-			public const int settings_userinterface_library_artist_songs_sortkey_title = 2131821410;
+			public const int settings_userinterface_library_artists_description = 2131821410;
 			
 			// aapt resource value: 0x7F110363
-			public const int settings_userinterface_library_artist_title = 2131821411;
+			public const int settings_userinterface_library_artists_isreversed_description = 2131821411;
 			
-			// aapt resource value: 0x7F110374
-			public const int settings_userinterface_library_description = 2131821428;
+			// aapt resource value: 0x7F110364
+			public const int settings_userinterface_library_artists_isreversed_description_off = 2131821412;
 			
-			// aapt resource value: 0x7F110385
-			public const int settings_userinterface_library_genres_description = 2131821445;
+			// aapt resource value: 0x7F110365
+			public const int settings_userinterface_library_artists_isreversed_description_on = 2131821413;
 			
-			// aapt resource value: 0x7F110386
-			public const int settings_userinterface_library_genres_isreversed_description = 2131821446;
+			// aapt resource value: 0x7F110366
+			public const int settings_userinterface_library_artists_isreversed_title = 2131821414;
 			
-			// aapt resource value: 0x7F110387
-			public const int settings_userinterface_library_genres_isreversed_description_off = 2131821447;
+			// aapt resource value: 0x7F110367
+			public const int settings_userinterface_library_artists_layouttype_description = 2131821415;
 			
-			// aapt resource value: 0x7F110388
-			public const int settings_userinterface_library_genres_isreversed_description_on = 2131821448;
+			// aapt resource value: 0x7F110368
+			public const int settings_userinterface_library_artists_layouttype_dialog_negativebutton = 2131821416;
 			
-			// aapt resource value: 0x7F110389
-			public const int settings_userinterface_library_genres_isreversed_title = 2131821449;
+			// aapt resource value: 0x7F110369
+			public const int settings_userinterface_library_artists_layouttype_dialog_positivebutton = 2131821417;
 			
-			// aapt resource value: 0x7F11038A
-			public const int settings_userinterface_library_genres_layouttype_description = 2131821450;
+			// aapt resource value: 0x7F11036A
+			public const int settings_userinterface_library_artists_layouttype_dialog_title = 2131821418;
 			
-			// aapt resource value: 0x7F11038B
-			public const int settings_userinterface_library_genres_layouttype_dialog_negativebutton = 2131821451;
+			// aapt resource value: 0x7F11036B
+			public const int settings_userinterface_library_artists_layouttype_title = 2131821419;
 			
-			// aapt resource value: 0x7F11038C
-			public const int settings_userinterface_library_genres_layouttype_dialog_positivebutton = 2131821452;
+			// aapt resource value: 0x7F11036C
+			public const int settings_userinterface_library_artists_sortkey_description = 2131821420;
 			
-			// aapt resource value: 0x7F11038D
-			public const int settings_userinterface_library_genres_layouttype_dialog_title = 2131821453;
+			// aapt resource value: 0x7F11036D
+			public const int settings_userinterface_library_artists_sortkey_dialog_negativebutton = 2131821421;
 			
-			// aapt resource value: 0x7F11038E
-			public const int settings_userinterface_library_genres_layouttype_title = 2131821454;
+			// aapt resource value: 0x7F11036E
+			public const int settings_userinterface_library_artists_sortkey_dialog_positivebutton = 2131821422;
 			
-			// aapt resource value: 0x7F11038F
-			public const int settings_userinterface_library_genres_sortkey_description = 2131821455;
+			// aapt resource value: 0x7F11036F
+			public const int settings_userinterface_library_artists_sortkey_dialog_title = 2131821423;
 			
-			// aapt resource value: 0x7F110390
-			public const int settings_userinterface_library_genres_sortkey_dialog_negativebutton = 2131821456;
+			// aapt resource value: 0x7F110370
+			public const int settings_userinterface_library_artists_sortkey_title = 2131821424;
 			
-			// aapt resource value: 0x7F110391
-			public const int settings_userinterface_library_genres_sortkey_dialog_positivebutton = 2131821457;
+			// aapt resource value: 0x7F110371
+			public const int settings_userinterface_library_artists_title = 2131821425;
 			
-			// aapt resource value: 0x7F110392
-			public const int settings_userinterface_library_genres_sortkey_dialog_title = 2131821458;
+			// aapt resource value: 0x7F110344
+			public const int settings_userinterface_library_artist_albums_isreversed_description = 2131821380;
 			
-			// aapt resource value: 0x7F110393
-			public const int settings_userinterface_library_genres_sortkey_title = 2131821459;
+			// aapt resource value: 0x7F110345
+			public const int settings_userinterface_library_artist_albums_isreversed_description_off = 2131821381;
 			
-			// aapt resource value: 0x7F110394
-			public const int settings_userinterface_library_genres_title = 2131821460;
+			// aapt resource value: 0x7F110346
+			public const int settings_userinterface_library_artist_albums_isreversed_description_on = 2131821382;
 			
-			// aapt resource value: 0x7F110375
-			public const int settings_userinterface_library_genre_description = 2131821429;
+			// aapt resource value: 0x7F110347
+			public const int settings_userinterface_library_artist_albums_isreversed_title = 2131821383;
 			
-			// aapt resource value: 0x7F110376
-			public const int settings_userinterface_library_genre_songs_isreversed_description = 2131821430;
+			// aapt resource value: 0x7F110348
+			public const int settings_userinterface_library_artist_albums_layouttype_description = 2131821384;
 			
-			// aapt resource value: 0x7F110377
-			public const int settings_userinterface_library_genre_songs_isreversed_description_off = 2131821431;
+			// aapt resource value: 0x7F110349
+			public const int settings_userinterface_library_artist_albums_layouttype_dialog_negativebutton = 2131821385;
 			
-			// aapt resource value: 0x7F110378
-			public const int settings_userinterface_library_genre_songs_isreversed_description_on = 2131821432;
+			// aapt resource value: 0x7F11034A
+			public const int settings_userinterface_library_artist_albums_layouttype_dialog_positivebutton = 2131821386;
 			
-			// aapt resource value: 0x7F110379
-			public const int settings_userinterface_library_genre_songs_isreversed_title = 2131821433;
+			// aapt resource value: 0x7F11034B
+			public const int settings_userinterface_library_artist_albums_layouttype_dialog_title = 2131821387;
 			
-			// aapt resource value: 0x7F11037A
-			public const int settings_userinterface_library_genre_songs_layouttype_description = 2131821434;
+			// aapt resource value: 0x7F11034C
+			public const int settings_userinterface_library_artist_albums_layouttype_title = 2131821388;
 			
-			// aapt resource value: 0x7F11037B
-			public const int settings_userinterface_library_genre_songs_layouttype_dialog_negativebutton = 2131821435;
+			// aapt resource value: 0x7F11034D
+			public const int settings_userinterface_library_artist_albums_sortkey_description = 2131821389;
 			
-			// aapt resource value: 0x7F11037C
-			public const int settings_userinterface_library_genre_songs_layouttype_dialog_positivebutton = 2131821436;
+			// aapt resource value: 0x7F11034E
+			public const int settings_userinterface_library_artist_albums_sortkey_dialog_negativebutton = 2131821390;
 			
-			// aapt resource value: 0x7F11037D
-			public const int settings_userinterface_library_genre_songs_layouttype_dialog_title = 2131821437;
+			// aapt resource value: 0x7F11034F
+			public const int settings_userinterface_library_artist_albums_sortkey_dialog_positivebutton = 2131821391;
 			
-			// aapt resource value: 0x7F11037E
-			public const int settings_userinterface_library_genre_songs_layouttype_title = 2131821438;
+			// aapt resource value: 0x7F110350
+			public const int settings_userinterface_library_artist_albums_sortkey_dialog_title = 2131821392;
 			
-			// aapt resource value: 0x7F11037F
-			public const int settings_userinterface_library_genre_songs_sortkey_description = 2131821439;
+			// aapt resource value: 0x7F110351
+			public const int settings_userinterface_library_artist_albums_sortkey_title = 2131821393;
 			
-			// aapt resource value: 0x7F110380
-			public const int settings_userinterface_library_genre_songs_sortkey_dialog_negativebutton = 2131821440;
+			// aapt resource value: 0x7F110352
+			public const int settings_userinterface_library_artist_description = 2131821394;
 			
-			// aapt resource value: 0x7F110381
-			public const int settings_userinterface_library_genre_songs_sortkey_dialog_positivebutton = 2131821441;
+			// aapt resource value: 0x7F110353
+			public const int settings_userinterface_library_artist_songs_isreversed_description = 2131821395;
 			
-			// aapt resource value: 0x7F110382
-			public const int settings_userinterface_library_genre_songs_sortkey_dialog_title = 2131821442;
+			// aapt resource value: 0x7F110354
+			public const int settings_userinterface_library_artist_songs_isreversed_description_off = 2131821396;
+			
+			// aapt resource value: 0x7F110355
+			public const int settings_userinterface_library_artist_songs_isreversed_description_on = 2131821397;
+			
+			// aapt resource value: 0x7F110356
+			public const int settings_userinterface_library_artist_songs_isreversed_title = 2131821398;
+			
+			// aapt resource value: 0x7F110357
+			public const int settings_userinterface_library_artist_songs_layouttype_description = 2131821399;
+			
+			// aapt resource value: 0x7F110358
+			public const int settings_userinterface_library_artist_songs_layouttype_dialog_negativebutton = 2131821400;
+			
+			// aapt resource value: 0x7F110359
+			public const int settings_userinterface_library_artist_songs_layouttype_dialog_positivebutton = 2131821401;
+			
+			// aapt resource value: 0x7F11035A
+			public const int settings_userinterface_library_artist_songs_layouttype_dialog_title = 2131821402;
+			
+			// aapt resource value: 0x7F11035B
+			public const int settings_userinterface_library_artist_songs_layouttype_title = 2131821403;
+			
+			// aapt resource value: 0x7F11035C
+			public const int settings_userinterface_library_artist_songs_sortkey_description = 2131821404;
+			
+			// aapt resource value: 0x7F11035D
+			public const int settings_userinterface_library_artist_songs_sortkey_dialog_negativebutton = 2131821405;
+			
+			// aapt resource value: 0x7F11035E
+			public const int settings_userinterface_library_artist_songs_sortkey_dialog_positivebutton = 2131821406;
+			
+			// aapt resource value: 0x7F11035F
+			public const int settings_userinterface_library_artist_songs_sortkey_dialog_title = 2131821407;
+			
+			// aapt resource value: 0x7F110360
+			public const int settings_userinterface_library_artist_songs_sortkey_title = 2131821408;
+			
+			// aapt resource value: 0x7F110361
+			public const int settings_userinterface_library_artist_title = 2131821409;
+			
+			// aapt resource value: 0x7F110372
+			public const int settings_userinterface_library_description = 2131821426;
 			
 			// aapt resource value: 0x7F110383
-			public const int settings_userinterface_library_genre_songs_sortkey_title = 2131821443;
+			public const int settings_userinterface_library_genres_description = 2131821443;
 			
 			// aapt resource value: 0x7F110384
-			public const int settings_userinterface_library_genre_title = 2131821444;
+			public const int settings_userinterface_library_genres_isreversed_description = 2131821444;
+			
+			// aapt resource value: 0x7F110385
+			public const int settings_userinterface_library_genres_isreversed_description_off = 2131821445;
+			
+			// aapt resource value: 0x7F110386
+			public const int settings_userinterface_library_genres_isreversed_description_on = 2131821446;
+			
+			// aapt resource value: 0x7F110387
+			public const int settings_userinterface_library_genres_isreversed_title = 2131821447;
+			
+			// aapt resource value: 0x7F110388
+			public const int settings_userinterface_library_genres_layouttype_description = 2131821448;
+			
+			// aapt resource value: 0x7F110389
+			public const int settings_userinterface_library_genres_layouttype_dialog_negativebutton = 2131821449;
+			
+			// aapt resource value: 0x7F11038A
+			public const int settings_userinterface_library_genres_layouttype_dialog_positivebutton = 2131821450;
+			
+			// aapt resource value: 0x7F11038B
+			public const int settings_userinterface_library_genres_layouttype_dialog_title = 2131821451;
+			
+			// aapt resource value: 0x7F11038C
+			public const int settings_userinterface_library_genres_layouttype_title = 2131821452;
+			
+			// aapt resource value: 0x7F11038D
+			public const int settings_userinterface_library_genres_sortkey_description = 2131821453;
+			
+			// aapt resource value: 0x7F11038E
+			public const int settings_userinterface_library_genres_sortkey_dialog_negativebutton = 2131821454;
+			
+			// aapt resource value: 0x7F11038F
+			public const int settings_userinterface_library_genres_sortkey_dialog_positivebutton = 2131821455;
+			
+			// aapt resource value: 0x7F110390
+			public const int settings_userinterface_library_genres_sortkey_dialog_title = 2131821456;
+			
+			// aapt resource value: 0x7F110391
+			public const int settings_userinterface_library_genres_sortkey_title = 2131821457;
+			
+			// aapt resource value: 0x7F110392
+			public const int settings_userinterface_library_genres_title = 2131821458;
+			
+			// aapt resource value: 0x7F110373
+			public const int settings_userinterface_library_genre_description = 2131821427;
+			
+			// aapt resource value: 0x7F110374
+			public const int settings_userinterface_library_genre_songs_isreversed_description = 2131821428;
+			
+			// aapt resource value: 0x7F110375
+			public const int settings_userinterface_library_genre_songs_isreversed_description_off = 2131821429;
+			
+			// aapt resource value: 0x7F110376
+			public const int settings_userinterface_library_genre_songs_isreversed_description_on = 2131821430;
+			
+			// aapt resource value: 0x7F110377
+			public const int settings_userinterface_library_genre_songs_isreversed_title = 2131821431;
+			
+			// aapt resource value: 0x7F110378
+			public const int settings_userinterface_library_genre_songs_layouttype_description = 2131821432;
+			
+			// aapt resource value: 0x7F110379
+			public const int settings_userinterface_library_genre_songs_layouttype_dialog_negativebutton = 2131821433;
+			
+			// aapt resource value: 0x7F11037A
+			public const int settings_userinterface_library_genre_songs_layouttype_dialog_positivebutton = 2131821434;
+			
+			// aapt resource value: 0x7F11037B
+			public const int settings_userinterface_library_genre_songs_layouttype_dialog_title = 2131821435;
+			
+			// aapt resource value: 0x7F11037C
+			public const int settings_userinterface_library_genre_songs_layouttype_title = 2131821436;
+			
+			// aapt resource value: 0x7F11037D
+			public const int settings_userinterface_library_genre_songs_sortkey_description = 2131821437;
+			
+			// aapt resource value: 0x7F11037E
+			public const int settings_userinterface_library_genre_songs_sortkey_dialog_negativebutton = 2131821438;
+			
+			// aapt resource value: 0x7F11037F
+			public const int settings_userinterface_library_genre_songs_sortkey_dialog_positivebutton = 2131821439;
+			
+			// aapt resource value: 0x7F110380
+			public const int settings_userinterface_library_genre_songs_sortkey_dialog_title = 2131821440;
+			
+			// aapt resource value: 0x7F110381
+			public const int settings_userinterface_library_genre_songs_sortkey_title = 2131821441;
+			
+			// aapt resource value: 0x7F110382
+			public const int settings_userinterface_library_genre_title = 2131821442;
+			
+			// aapt resource value: 0x7F110393
+			public const int settings_userinterface_library_headerscrolltype_description = 2131821459;
+			
+			// aapt resource value: 0x7F110394
+			public const int settings_userinterface_library_headerscrolltype_dialog_negativebutton = 2131821460;
 			
 			// aapt resource value: 0x7F110395
-			public const int settings_userinterface_library_headerscrolltype_description = 2131821461;
+			public const int settings_userinterface_library_headerscrolltype_dialog_positivebutton = 2131821461;
 			
 			// aapt resource value: 0x7F110396
-			public const int settings_userinterface_library_headerscrolltype_dialog_negativebutton = 2131821462;
+			public const int settings_userinterface_library_headerscrolltype_dialog_title = 2131821462;
 			
 			// aapt resource value: 0x7F110397
-			public const int settings_userinterface_library_headerscrolltype_dialog_positivebutton = 2131821463;
+			public const int settings_userinterface_library_headerscrolltype_title = 2131821463;
 			
 			// aapt resource value: 0x7F110398
-			public const int settings_userinterface_library_headerscrolltype_dialog_title = 2131821464;
+			public const int settings_userinterface_library_navigationtype_description = 2131821464;
 			
 			// aapt resource value: 0x7F110399
-			public const int settings_userinterface_library_headerscrolltype_title = 2131821465;
+			public const int settings_userinterface_library_navigationtype_dialog_negativebutton = 2131821465;
 			
 			// aapt resource value: 0x7F11039A
-			public const int settings_userinterface_library_navigationtype_description = 2131821466;
+			public const int settings_userinterface_library_navigationtype_dialog_positivebutton = 2131821466;
 			
 			// aapt resource value: 0x7F11039B
-			public const int settings_userinterface_library_navigationtype_dialog_negativebutton = 2131821467;
+			public const int settings_userinterface_library_navigationtype_dialog_title = 2131821467;
 			
 			// aapt resource value: 0x7F11039C
-			public const int settings_userinterface_library_navigationtype_dialog_positivebutton = 2131821468;
+			public const int settings_userinterface_library_navigationtype_title = 2131821468;
 			
 			// aapt resource value: 0x7F11039D
-			public const int settings_userinterface_library_navigationtype_dialog_title = 2131821469;
+			public const int settings_userinterface_library_pagedefault_description = 2131821469;
 			
 			// aapt resource value: 0x7F11039E
-			public const int settings_userinterface_library_navigationtype_title = 2131821470;
+			public const int settings_userinterface_library_pagedefault_dialog_negativebutton = 2131821470;
 			
 			// aapt resource value: 0x7F11039F
-			public const int settings_userinterface_library_pagedefault_description = 2131821471;
+			public const int settings_userinterface_library_pagedefault_dialog_positivebutton = 2131821471;
 			
 			// aapt resource value: 0x7F1103A0
-			public const int settings_userinterface_library_pagedefault_dialog_negativebutton = 2131821472;
+			public const int settings_userinterface_library_pagedefault_dialog_title = 2131821472;
 			
 			// aapt resource value: 0x7F1103A1
-			public const int settings_userinterface_library_pagedefault_dialog_positivebutton = 2131821473;
+			public const int settings_userinterface_library_pagedefault_title = 2131821473;
 			
 			// aapt resource value: 0x7F1103A2
-			public const int settings_userinterface_library_pagedefault_dialog_title = 2131821474;
+			public const int settings_userinterface_library_pagesordered_description = 2131821474;
 			
 			// aapt resource value: 0x7F1103A3
-			public const int settings_userinterface_library_pagedefault_title = 2131821475;
+			public const int settings_userinterface_library_pagesordered_dialog_negativebutton = 2131821475;
 			
 			// aapt resource value: 0x7F1103A4
-			public const int settings_userinterface_library_pagesordered_description = 2131821476;
+			public const int settings_userinterface_library_pagesordered_dialog_positivebutton = 2131821476;
 			
 			// aapt resource value: 0x7F1103A5
-			public const int settings_userinterface_library_pagesordered_dialog_negativebutton = 2131821477;
+			public const int settings_userinterface_library_pagesordered_dialog_title = 2131821477;
 			
 			// aapt resource value: 0x7F1103A6
-			public const int settings_userinterface_library_pagesordered_dialog_positivebutton = 2131821478;
-			
-			// aapt resource value: 0x7F1103A7
-			public const int settings_userinterface_library_pagesordered_dialog_title = 2131821479;
-			
-			// aapt resource value: 0x7F1103A8
-			public const int settings_userinterface_library_pagesordered_title = 2131821480;
-			
-			// aapt resource value: 0x7F1103B9
-			public const int settings_userinterface_library_playlists_description = 2131821497;
-			
-			// aapt resource value: 0x7F1103BA
-			public const int settings_userinterface_library_playlists_isreversed_description = 2131821498;
-			
-			// aapt resource value: 0x7F1103BB
-			public const int settings_userinterface_library_playlists_isreversed_description_off = 2131821499;
-			
-			// aapt resource value: 0x7F1103BC
-			public const int settings_userinterface_library_playlists_isreversed_description_on = 2131821500;
-			
-			// aapt resource value: 0x7F1103BD
-			public const int settings_userinterface_library_playlists_isreversed_title = 2131821501;
-			
-			// aapt resource value: 0x7F1103BE
-			public const int settings_userinterface_library_playlists_layouttype_description = 2131821502;
-			
-			// aapt resource value: 0x7F1103BF
-			public const int settings_userinterface_library_playlists_layouttype_dialog_negativebutton = 2131821503;
-			
-			// aapt resource value: 0x7F1103C0
-			public const int settings_userinterface_library_playlists_layouttype_dialog_positivebutton = 2131821504;
-			
-			// aapt resource value: 0x7F1103C1
-			public const int settings_userinterface_library_playlists_layouttype_dialog_title = 2131821505;
-			
-			// aapt resource value: 0x7F1103C2
-			public const int settings_userinterface_library_playlists_layouttype_title = 2131821506;
-			
-			// aapt resource value: 0x7F1103C3
-			public const int settings_userinterface_library_playlists_sortkey_description = 2131821507;
-			
-			// aapt resource value: 0x7F1103C4
-			public const int settings_userinterface_library_playlists_sortkey_dialog_negativebutton = 2131821508;
-			
-			// aapt resource value: 0x7F1103C5
-			public const int settings_userinterface_library_playlists_sortkey_dialog_positivebutton = 2131821509;
-			
-			// aapt resource value: 0x7F1103C6
-			public const int settings_userinterface_library_playlists_sortkey_dialog_title = 2131821510;
-			
-			// aapt resource value: 0x7F1103C7
-			public const int settings_userinterface_library_playlists_sortkey_title = 2131821511;
-			
-			// aapt resource value: 0x7F1103C8
-			public const int settings_userinterface_library_playlists_title = 2131821512;
-			
-			// aapt resource value: 0x7F1103A9
-			public const int settings_userinterface_library_playlist_description = 2131821481;
-			
-			// aapt resource value: 0x7F1103AA
-			public const int settings_userinterface_library_playlist_songs_isreversed_description = 2131821482;
-			
-			// aapt resource value: 0x7F1103AB
-			public const int settings_userinterface_library_playlist_songs_isreversed_description_off = 2131821483;
-			
-			// aapt resource value: 0x7F1103AC
-			public const int settings_userinterface_library_playlist_songs_isreversed_description_on = 2131821484;
-			
-			// aapt resource value: 0x7F1103AD
-			public const int settings_userinterface_library_playlist_songs_isreversed_title = 2131821485;
-			
-			// aapt resource value: 0x7F1103AE
-			public const int settings_userinterface_library_playlist_songs_layouttype_description = 2131821486;
-			
-			// aapt resource value: 0x7F1103AF
-			public const int settings_userinterface_library_playlist_songs_layouttype_dialog_negativebutton = 2131821487;
-			
-			// aapt resource value: 0x7F1103B0
-			public const int settings_userinterface_library_playlist_songs_layouttype_dialog_positivebutton = 2131821488;
-			
-			// aapt resource value: 0x7F1103B1
-			public const int settings_userinterface_library_playlist_songs_layouttype_dialog_title = 2131821489;
-			
-			// aapt resource value: 0x7F1103B2
-			public const int settings_userinterface_library_playlist_songs_layouttype_title = 2131821490;
-			
-			// aapt resource value: 0x7F1103B3
-			public const int settings_userinterface_library_playlist_songs_sortkey_description = 2131821491;
-			
-			// aapt resource value: 0x7F1103B4
-			public const int settings_userinterface_library_playlist_songs_sortkey_dialog_negativebutton = 2131821492;
-			
-			// aapt resource value: 0x7F1103B5
-			public const int settings_userinterface_library_playlist_songs_sortkey_dialog_positivebutton = 2131821493;
-			
-			// aapt resource value: 0x7F1103B6
-			public const int settings_userinterface_library_playlist_songs_sortkey_dialog_title = 2131821494;
+			public const int settings_userinterface_library_pagesordered_title = 2131821478;
 			
 			// aapt resource value: 0x7F1103B7
-			public const int settings_userinterface_library_playlist_songs_sortkey_title = 2131821495;
+			public const int settings_userinterface_library_playlists_description = 2131821495;
 			
 			// aapt resource value: 0x7F1103B8
-			public const int settings_userinterface_library_playlist_title = 2131821496;
+			public const int settings_userinterface_library_playlists_isreversed_description = 2131821496;
+			
+			// aapt resource value: 0x7F1103B9
+			public const int settings_userinterface_library_playlists_isreversed_description_off = 2131821497;
+			
+			// aapt resource value: 0x7F1103BA
+			public const int settings_userinterface_library_playlists_isreversed_description_on = 2131821498;
+			
+			// aapt resource value: 0x7F1103BB
+			public const int settings_userinterface_library_playlists_isreversed_title = 2131821499;
+			
+			// aapt resource value: 0x7F1103BC
+			public const int settings_userinterface_library_playlists_layouttype_description = 2131821500;
+			
+			// aapt resource value: 0x7F1103BD
+			public const int settings_userinterface_library_playlists_layouttype_dialog_negativebutton = 2131821501;
+			
+			// aapt resource value: 0x7F1103BE
+			public const int settings_userinterface_library_playlists_layouttype_dialog_positivebutton = 2131821502;
+			
+			// aapt resource value: 0x7F1103BF
+			public const int settings_userinterface_library_playlists_layouttype_dialog_title = 2131821503;
+			
+			// aapt resource value: 0x7F1103C0
+			public const int settings_userinterface_library_playlists_layouttype_title = 2131821504;
+			
+			// aapt resource value: 0x7F1103C1
+			public const int settings_userinterface_library_playlists_sortkey_description = 2131821505;
+			
+			// aapt resource value: 0x7F1103C2
+			public const int settings_userinterface_library_playlists_sortkey_dialog_negativebutton = 2131821506;
+			
+			// aapt resource value: 0x7F1103C3
+			public const int settings_userinterface_library_playlists_sortkey_dialog_positivebutton = 2131821507;
+			
+			// aapt resource value: 0x7F1103C4
+			public const int settings_userinterface_library_playlists_sortkey_dialog_title = 2131821508;
+			
+			// aapt resource value: 0x7F1103C5
+			public const int settings_userinterface_library_playlists_sortkey_title = 2131821509;
+			
+			// aapt resource value: 0x7F1103C6
+			public const int settings_userinterface_library_playlists_title = 2131821510;
+			
+			// aapt resource value: 0x7F1103A7
+			public const int settings_userinterface_library_playlist_description = 2131821479;
+			
+			// aapt resource value: 0x7F1103A8
+			public const int settings_userinterface_library_playlist_songs_isreversed_description = 2131821480;
+			
+			// aapt resource value: 0x7F1103A9
+			public const int settings_userinterface_library_playlist_songs_isreversed_description_off = 2131821481;
+			
+			// aapt resource value: 0x7F1103AA
+			public const int settings_userinterface_library_playlist_songs_isreversed_description_on = 2131821482;
+			
+			// aapt resource value: 0x7F1103AB
+			public const int settings_userinterface_library_playlist_songs_isreversed_title = 2131821483;
+			
+			// aapt resource value: 0x7F1103AC
+			public const int settings_userinterface_library_playlist_songs_layouttype_description = 2131821484;
+			
+			// aapt resource value: 0x7F1103AD
+			public const int settings_userinterface_library_playlist_songs_layouttype_dialog_negativebutton = 2131821485;
+			
+			// aapt resource value: 0x7F1103AE
+			public const int settings_userinterface_library_playlist_songs_layouttype_dialog_positivebutton = 2131821486;
+			
+			// aapt resource value: 0x7F1103AF
+			public const int settings_userinterface_library_playlist_songs_layouttype_dialog_title = 2131821487;
+			
+			// aapt resource value: 0x7F1103B0
+			public const int settings_userinterface_library_playlist_songs_layouttype_title = 2131821488;
+			
+			// aapt resource value: 0x7F1103B1
+			public const int settings_userinterface_library_playlist_songs_sortkey_description = 2131821489;
+			
+			// aapt resource value: 0x7F1103B2
+			public const int settings_userinterface_library_playlist_songs_sortkey_dialog_negativebutton = 2131821490;
+			
+			// aapt resource value: 0x7F1103B3
+			public const int settings_userinterface_library_playlist_songs_sortkey_dialog_positivebutton = 2131821491;
+			
+			// aapt resource value: 0x7F1103B4
+			public const int settings_userinterface_library_playlist_songs_sortkey_dialog_title = 2131821492;
+			
+			// aapt resource value: 0x7F1103B5
+			public const int settings_userinterface_library_playlist_songs_sortkey_title = 2131821493;
+			
+			// aapt resource value: 0x7F1103B6
+			public const int settings_userinterface_library_playlist_title = 2131821494;
+			
+			// aapt resource value: 0x7F1103C7
+			public const int settings_userinterface_library_queue_description = 2131821511;
+			
+			// aapt resource value: 0x7F1103C8
+			public const int settings_userinterface_library_queue_layouttype_description = 2131821512;
 			
 			// aapt resource value: 0x7F1103C9
-			public const int settings_userinterface_library_queue_description = 2131821513;
+			public const int settings_userinterface_library_queue_layouttype_dialog_negativebutton = 2131821513;
 			
 			// aapt resource value: 0x7F1103CA
-			public const int settings_userinterface_library_queue_layouttype_description = 2131821514;
+			public const int settings_userinterface_library_queue_layouttype_dialog_positivebutton = 2131821514;
 			
 			// aapt resource value: 0x7F1103CB
-			public const int settings_userinterface_library_queue_layouttype_dialog_negativebutton = 2131821515;
+			public const int settings_userinterface_library_queue_layouttype_dialog_title = 2131821515;
 			
 			// aapt resource value: 0x7F1103CC
-			public const int settings_userinterface_library_queue_layouttype_dialog_positivebutton = 2131821516;
+			public const int settings_userinterface_library_queue_layouttype_title = 2131821516;
 			
 			// aapt resource value: 0x7F1103CD
-			public const int settings_userinterface_library_queue_layouttype_dialog_title = 2131821517;
+			public const int settings_userinterface_library_queue_title = 2131821517;
 			
 			// aapt resource value: 0x7F1103CE
-			public const int settings_userinterface_library_queue_layouttype_title = 2131821518;
+			public const int settings_userinterface_library_search_description = 2131821518;
 			
 			// aapt resource value: 0x7F1103CF
-			public const int settings_userinterface_library_queue_title = 2131821519;
+			public const int settings_userinterface_library_search_layouttype_description = 2131821519;
 			
 			// aapt resource value: 0x7F1103D0
-			public const int settings_userinterface_library_search_description = 2131821520;
+			public const int settings_userinterface_library_search_layouttype_dialog_negativebutton = 2131821520;
 			
 			// aapt resource value: 0x7F1103D1
-			public const int settings_userinterface_library_search_layouttype_description = 2131821521;
+			public const int settings_userinterface_library_search_layouttype_dialog_positivebutton = 2131821521;
 			
 			// aapt resource value: 0x7F1103D2
-			public const int settings_userinterface_library_search_layouttype_dialog_negativebutton = 2131821522;
+			public const int settings_userinterface_library_search_layouttype_dialog_title = 2131821522;
 			
 			// aapt resource value: 0x7F1103D3
-			public const int settings_userinterface_library_search_layouttype_dialog_positivebutton = 2131821523;
+			public const int settings_userinterface_library_search_layouttype_title = 2131821523;
 			
 			// aapt resource value: 0x7F1103D4
-			public const int settings_userinterface_library_search_layouttype_dialog_title = 2131821524;
+			public const int settings_userinterface_library_search_title = 2131821524;
 			
 			// aapt resource value: 0x7F1103D5
-			public const int settings_userinterface_library_search_layouttype_title = 2131821525;
+			public const int settings_userinterface_library_songs_description = 2131821525;
 			
 			// aapt resource value: 0x7F1103D6
-			public const int settings_userinterface_library_search_title = 2131821526;
+			public const int settings_userinterface_library_songs_isreversed_description = 2131821526;
 			
 			// aapt resource value: 0x7F1103D7
-			public const int settings_userinterface_library_songs_description = 2131821527;
+			public const int settings_userinterface_library_songs_isreversed_description_off = 2131821527;
 			
 			// aapt resource value: 0x7F1103D8
-			public const int settings_userinterface_library_songs_isreversed_description = 2131821528;
+			public const int settings_userinterface_library_songs_isreversed_description_on = 2131821528;
 			
 			// aapt resource value: 0x7F1103D9
-			public const int settings_userinterface_library_songs_isreversed_description_off = 2131821529;
+			public const int settings_userinterface_library_songs_isreversed_title = 2131821529;
 			
 			// aapt resource value: 0x7F1103DA
-			public const int settings_userinterface_library_songs_isreversed_description_on = 2131821530;
+			public const int settings_userinterface_library_songs_layouttype_description = 2131821530;
 			
 			// aapt resource value: 0x7F1103DB
-			public const int settings_userinterface_library_songs_isreversed_title = 2131821531;
+			public const int settings_userinterface_library_songs_layouttype_dialog_negativebutton = 2131821531;
 			
 			// aapt resource value: 0x7F1103DC
-			public const int settings_userinterface_library_songs_layouttype_description = 2131821532;
+			public const int settings_userinterface_library_songs_layouttype_dialog_positivebutton = 2131821532;
 			
 			// aapt resource value: 0x7F1103DD
-			public const int settings_userinterface_library_songs_layouttype_dialog_negativebutton = 2131821533;
+			public const int settings_userinterface_library_songs_layouttype_dialog_title = 2131821533;
 			
 			// aapt resource value: 0x7F1103DE
-			public const int settings_userinterface_library_songs_layouttype_dialog_positivebutton = 2131821534;
+			public const int settings_userinterface_library_songs_layouttype_title = 2131821534;
 			
 			// aapt resource value: 0x7F1103DF
-			public const int settings_userinterface_library_songs_layouttype_dialog_title = 2131821535;
+			public const int settings_userinterface_library_songs_sortkey_description = 2131821535;
 			
 			// aapt resource value: 0x7F1103E0
-			public const int settings_userinterface_library_songs_layouttype_title = 2131821536;
+			public const int settings_userinterface_library_songs_sortkey_dialog_negativebutton = 2131821536;
 			
 			// aapt resource value: 0x7F1103E1
-			public const int settings_userinterface_library_songs_sortkey_description = 2131821537;
+			public const int settings_userinterface_library_songs_sortkey_dialog_positivebutton = 2131821537;
 			
 			// aapt resource value: 0x7F1103E2
-			public const int settings_userinterface_library_songs_sortkey_dialog_negativebutton = 2131821538;
+			public const int settings_userinterface_library_songs_sortkey_dialog_title = 2131821538;
 			
 			// aapt resource value: 0x7F1103E3
-			public const int settings_userinterface_library_songs_sortkey_dialog_positivebutton = 2131821539;
+			public const int settings_userinterface_library_songs_sortkey_title = 2131821539;
 			
 			// aapt resource value: 0x7F1103E4
-			public const int settings_userinterface_library_songs_sortkey_dialog_title = 2131821540;
+			public const int settings_userinterface_library_songs_title = 2131821540;
 			
 			// aapt resource value: 0x7F1103E5
-			public const int settings_userinterface_library_songs_sortkey_title = 2131821541;
+			public const int settings_userinterface_library_title = 2131821541;
 			
 			// aapt resource value: 0x7F1103E6
-			public const int settings_userinterface_library_songs_title = 2131821542;
+			public const int settings_userinterface_nowplaying_description = 2131821542;
 			
 			// aapt resource value: 0x7F1103E7
-			public const int settings_userinterface_library_title = 2131821543;
+			public const int settings_userinterface_nowplaying_forceshownowplaying_description = 2131821543;
 			
 			// aapt resource value: 0x7F1103E8
-			public const int settings_userinterface_nowplaying_description = 2131821544;
+			public const int settings_userinterface_nowplaying_forceshownowplaying_description_off = 2131821544;
 			
 			// aapt resource value: 0x7F1103E9
-			public const int settings_userinterface_nowplaying_forceshownowplaying_description = 2131821545;
+			public const int settings_userinterface_nowplaying_forceshownowplaying_description_on = 2131821545;
 			
 			// aapt resource value: 0x7F1103EA
-			public const int settings_userinterface_nowplaying_forceshownowplaying_description_off = 2131821546;
+			public const int settings_userinterface_nowplaying_forceshownowplaying_title = 2131821546;
 			
 			// aapt resource value: 0x7F1103EB
-			public const int settings_userinterface_nowplaying_forceshownowplaying_description_on = 2131821547;
+			public const int settings_userinterface_nowplaying_title = 2131821547;
 			
 			// aapt resource value: 0x7F1103EC
-			public const int settings_userinterface_nowplaying_forceshownowplaying_title = 2131821548;
+			public const int settings_userinterface_themes_description = 2131821548;
 			
 			// aapt resource value: 0x7F1103ED
-			public const int settings_userinterface_nowplaying_title = 2131821549;
+			public const int settings_userinterface_themes_mode_description = 2131821549;
 			
 			// aapt resource value: 0x7F1103EE
-			public const int settings_userinterface_themes_description = 2131821550;
+			public const int settings_userinterface_themes_mode_dialog_negativebutton = 2131821550;
 			
 			// aapt resource value: 0x7F1103EF
-			public const int settings_userinterface_themes_mode_description = 2131821551;
+			public const int settings_userinterface_themes_mode_dialog_positivebutton = 2131821551;
 			
 			// aapt resource value: 0x7F1103F0
-			public const int settings_userinterface_themes_mode_dialog_negativebutton = 2131821552;
+			public const int settings_userinterface_themes_mode_dialog_title = 2131821552;
 			
 			// aapt resource value: 0x7F1103F1
-			public const int settings_userinterface_themes_mode_dialog_positivebutton = 2131821553;
+			public const int settings_userinterface_themes_mode_title = 2131821553;
 			
 			// aapt resource value: 0x7F1103F2
-			public const int settings_userinterface_themes_mode_dialog_title = 2131821554;
+			public const int settings_userinterface_themes_title = 2131821554;
 			
 			// aapt resource value: 0x7F1103F3
-			public const int settings_userinterface_themes_mode_title = 2131821555;
+			public const int settings_userinterface_title = 2131821555;
 			
 			// aapt resource value: 0x7F1103F4
-			public const int settings_userinterface_themes_title = 2131821556;
+			public const int side_sheet_accessibility_pane_title = 2131821556;
 			
 			// aapt resource value: 0x7F1103F5
-			public const int settings_userinterface_title = 2131821557;
+			public const int side_sheet_behavior = 2131821557;
 			
 			// aapt resource value: 0x7F1103F6
-			public const int side_sheet_accessibility_pane_title = 2131821558;
+			public const int snackbars_albums_added = 2131821558;
 			
 			// aapt resource value: 0x7F1103F7
-			public const int side_sheet_behavior = 2131821559;
+			public const int snackbars_albums_could_not_be_added = 2131821559;
 			
 			// aapt resource value: 0x7F1103F8
-			public const int snackbars_albums_added = 2131821560;
+			public const int snackbars_albums_could_not_be_created = 2131821560;
 			
 			// aapt resource value: 0x7F1103F9
-			public const int snackbars_albums_could_not_be_added = 2131821561;
+			public const int snackbars_albums_could_not_be_deleted = 2131821561;
 			
 			// aapt resource value: 0x7F1103FA
-			public const int snackbars_albums_could_not_be_created = 2131821562;
+			public const int snackbars_albums_could_not_be_edited = 2131821562;
 			
 			// aapt resource value: 0x7F1103FB
-			public const int snackbars_albums_could_not_be_deleted = 2131821563;
+			public const int snackbars_albums_could_not_be_moved = 2131821563;
 			
 			// aapt resource value: 0x7F1103FC
-			public const int snackbars_albums_could_not_be_edited = 2131821564;
+			public const int snackbars_albums_could_not_be_removed = 2131821564;
 			
 			// aapt resource value: 0x7F1103FD
-			public const int snackbars_albums_could_not_be_moved = 2131821565;
+			public const int snackbars_albums_created = 2131821565;
 			
 			// aapt resource value: 0x7F1103FE
-			public const int snackbars_albums_could_not_be_removed = 2131821566;
+			public const int snackbars_albums_deleted = 2131821566;
 			
 			// aapt resource value: 0x7F1103FF
-			public const int snackbars_albums_created = 2131821567;
+			public const int snackbars_albums_edited = 2131821567;
 			
 			// aapt resource value: 0x7F110400
-			public const int snackbars_albums_deleted = 2131821568;
+			public const int snackbars_albums_moved = 2131821568;
 			
 			// aapt resource value: 0x7F110401
-			public const int snackbars_albums_edited = 2131821569;
+			public const int snackbars_albums_none_selected = 2131821569;
 			
 			// aapt resource value: 0x7F110402
-			public const int snackbars_albums_moved = 2131821570;
+			public const int snackbars_albums_removed = 2131821570;
 			
 			// aapt resource value: 0x7F110403
-			public const int snackbars_albums_none_selected = 2131821571;
+			public const int snackbars_artists_added = 2131821571;
 			
 			// aapt resource value: 0x7F110404
-			public const int snackbars_albums_removed = 2131821572;
+			public const int snackbars_artists_could_not_be_added = 2131821572;
 			
 			// aapt resource value: 0x7F110405
-			public const int snackbars_artists_added = 2131821573;
+			public const int snackbars_artists_could_not_be_created = 2131821573;
 			
 			// aapt resource value: 0x7F110406
-			public const int snackbars_artists_could_not_be_added = 2131821574;
+			public const int snackbars_artists_could_not_be_deleted = 2131821574;
 			
 			// aapt resource value: 0x7F110407
-			public const int snackbars_artists_could_not_be_created = 2131821575;
+			public const int snackbars_artists_could_not_be_edited = 2131821575;
 			
 			// aapt resource value: 0x7F110408
-			public const int snackbars_artists_could_not_be_deleted = 2131821576;
+			public const int snackbars_artists_could_not_be_moved = 2131821576;
 			
 			// aapt resource value: 0x7F110409
-			public const int snackbars_artists_could_not_be_edited = 2131821577;
+			public const int snackbars_artists_could_not_be_removed = 2131821577;
 			
 			// aapt resource value: 0x7F11040A
-			public const int snackbars_artists_could_not_be_moved = 2131821578;
+			public const int snackbars_artists_created = 2131821578;
 			
 			// aapt resource value: 0x7F11040B
-			public const int snackbars_artists_could_not_be_removed = 2131821579;
+			public const int snackbars_artists_deleted = 2131821579;
 			
 			// aapt resource value: 0x7F11040C
-			public const int snackbars_artists_created = 2131821580;
+			public const int snackbars_artists_edited = 2131821580;
 			
 			// aapt resource value: 0x7F11040D
-			public const int snackbars_artists_deleted = 2131821581;
+			public const int snackbars_artists_moved = 2131821581;
 			
 			// aapt resource value: 0x7F11040E
-			public const int snackbars_artists_edited = 2131821582;
+			public const int snackbars_artists_none_selected = 2131821582;
 			
 			// aapt resource value: 0x7F11040F
-			public const int snackbars_artists_moved = 2131821583;
+			public const int snackbars_artists_removed = 2131821583;
 			
 			// aapt resource value: 0x7F110410
-			public const int snackbars_artists_none_selected = 2131821584;
+			public const int snackbars_genres_added = 2131821584;
 			
 			// aapt resource value: 0x7F110411
-			public const int snackbars_artists_removed = 2131821585;
+			public const int snackbars_genres_could_not_be_added = 2131821585;
 			
 			// aapt resource value: 0x7F110412
-			public const int snackbars_genres_added = 2131821586;
+			public const int snackbars_genres_could_not_be_created = 2131821586;
 			
 			// aapt resource value: 0x7F110413
-			public const int snackbars_genres_could_not_be_added = 2131821587;
+			public const int snackbars_genres_could_not_be_deleted = 2131821587;
 			
 			// aapt resource value: 0x7F110414
-			public const int snackbars_genres_could_not_be_created = 2131821588;
+			public const int snackbars_genres_could_not_be_edited = 2131821588;
 			
 			// aapt resource value: 0x7F110415
-			public const int snackbars_genres_could_not_be_deleted = 2131821589;
+			public const int snackbars_genres_could_not_be_moved = 2131821589;
 			
 			// aapt resource value: 0x7F110416
-			public const int snackbars_genres_could_not_be_edited = 2131821590;
+			public const int snackbars_genres_could_not_be_removed = 2131821590;
 			
 			// aapt resource value: 0x7F110417
-			public const int snackbars_genres_could_not_be_moved = 2131821591;
+			public const int snackbars_genres_created = 2131821591;
 			
 			// aapt resource value: 0x7F110418
-			public const int snackbars_genres_could_not_be_removed = 2131821592;
+			public const int snackbars_genres_deleted = 2131821592;
 			
 			// aapt resource value: 0x7F110419
-			public const int snackbars_genres_created = 2131821593;
+			public const int snackbars_genres_edited = 2131821593;
 			
 			// aapt resource value: 0x7F11041A
-			public const int snackbars_genres_deleted = 2131821594;
+			public const int snackbars_genres_moved = 2131821594;
 			
 			// aapt resource value: 0x7F11041B
-			public const int snackbars_genres_edited = 2131821595;
+			public const int snackbars_genres_none_selected = 2131821595;
 			
 			// aapt resource value: 0x7F11041C
-			public const int snackbars_genres_moved = 2131821596;
+			public const int snackbars_genres_removed = 2131821596;
 			
 			// aapt resource value: 0x7F11041D
-			public const int snackbars_genres_none_selected = 2131821597;
+			public const int snackbars_items_added = 2131821597;
 			
 			// aapt resource value: 0x7F11041E
-			public const int snackbars_genres_removed = 2131821598;
+			public const int snackbars_items_could_not_be_added = 2131821598;
 			
 			// aapt resource value: 0x7F11041F
-			public const int snackbars_items_added = 2131821599;
+			public const int snackbars_items_could_not_be_created = 2131821599;
 			
 			// aapt resource value: 0x7F110420
-			public const int snackbars_items_could_not_be_added = 2131821600;
+			public const int snackbars_items_could_not_be_deleted = 2131821600;
 			
 			// aapt resource value: 0x7F110421
-			public const int snackbars_items_could_not_be_created = 2131821601;
+			public const int snackbars_items_could_not_be_edited = 2131821601;
 			
 			// aapt resource value: 0x7F110422
-			public const int snackbars_items_could_not_be_deleted = 2131821602;
+			public const int snackbars_items_could_not_be_moved = 2131821602;
 			
 			// aapt resource value: 0x7F110423
-			public const int snackbars_items_could_not_be_edited = 2131821603;
+			public const int snackbars_items_could_not_be_removed = 2131821603;
 			
 			// aapt resource value: 0x7F110424
-			public const int snackbars_items_could_not_be_moved = 2131821604;
+			public const int snackbars_items_created = 2131821604;
 			
 			// aapt resource value: 0x7F110425
-			public const int snackbars_items_could_not_be_removed = 2131821605;
+			public const int snackbars_items_deleted = 2131821605;
 			
 			// aapt resource value: 0x7F110426
-			public const int snackbars_items_created = 2131821606;
+			public const int snackbars_items_edited = 2131821606;
 			
 			// aapt resource value: 0x7F110427
-			public const int snackbars_items_deleted = 2131821607;
+			public const int snackbars_items_moved = 2131821607;
 			
 			// aapt resource value: 0x7F110428
-			public const int snackbars_items_edited = 2131821608;
+			public const int snackbars_items_none_selected = 2131821608;
 			
 			// aapt resource value: 0x7F110429
-			public const int snackbars_items_moved = 2131821609;
+			public const int snackbars_items_removed = 2131821609;
 			
 			// aapt resource value: 0x7F11042A
-			public const int snackbars_items_none_selected = 2131821610;
+			public const int snackbars_playlists_added = 2131821610;
 			
 			// aapt resource value: 0x7F11042B
-			public const int snackbars_items_removed = 2131821611;
+			public const int snackbars_playlists_could_not_be_added = 2131821611;
 			
 			// aapt resource value: 0x7F11042C
-			public const int snackbars_playlists_added = 2131821612;
+			public const int snackbars_playlists_could_not_be_created = 2131821612;
 			
 			// aapt resource value: 0x7F11042D
-			public const int snackbars_playlists_could_not_be_added = 2131821613;
+			public const int snackbars_playlists_could_not_be_deleted = 2131821613;
 			
 			// aapt resource value: 0x7F11042E
-			public const int snackbars_playlists_could_not_be_created = 2131821614;
+			public const int snackbars_playlists_could_not_be_edited = 2131821614;
 			
 			// aapt resource value: 0x7F11042F
-			public const int snackbars_playlists_could_not_be_deleted = 2131821615;
+			public const int snackbars_playlists_could_not_be_moved = 2131821615;
 			
 			// aapt resource value: 0x7F110430
-			public const int snackbars_playlists_could_not_be_edited = 2131821616;
+			public const int snackbars_playlists_could_not_be_removed = 2131821616;
 			
 			// aapt resource value: 0x7F110431
-			public const int snackbars_playlists_could_not_be_moved = 2131821617;
+			public const int snackbars_playlists_created = 2131821617;
 			
 			// aapt resource value: 0x7F110432
-			public const int snackbars_playlists_could_not_be_removed = 2131821618;
+			public const int snackbars_playlists_deleted = 2131821618;
 			
 			// aapt resource value: 0x7F110433
-			public const int snackbars_playlists_created = 2131821619;
+			public const int snackbars_playlists_edited = 2131821619;
 			
 			// aapt resource value: 0x7F110434
-			public const int snackbars_playlists_deleted = 2131821620;
+			public const int snackbars_playlists_moved = 2131821620;
 			
 			// aapt resource value: 0x7F110435
-			public const int snackbars_playlists_edited = 2131821621;
+			public const int snackbars_playlists_none_selected = 2131821621;
 			
 			// aapt resource value: 0x7F110436
-			public const int snackbars_playlists_moved = 2131821622;
+			public const int snackbars_playlists_removed = 2131821622;
 			
 			// aapt resource value: 0x7F110437
-			public const int snackbars_playlists_none_selected = 2131821623;
+			public const int snackbars_songs_added = 2131821623;
 			
 			// aapt resource value: 0x7F110438
-			public const int snackbars_playlists_removed = 2131821624;
+			public const int snackbars_songs_could_not_be_added = 2131821624;
 			
 			// aapt resource value: 0x7F110439
-			public const int snackbars_songs_added = 2131821625;
+			public const int snackbars_songs_could_not_be_created = 2131821625;
 			
 			// aapt resource value: 0x7F11043A
-			public const int snackbars_songs_could_not_be_added = 2131821626;
+			public const int snackbars_songs_could_not_be_deleted = 2131821626;
 			
 			// aapt resource value: 0x7F11043B
-			public const int snackbars_songs_could_not_be_created = 2131821627;
+			public const int snackbars_songs_could_not_be_edited = 2131821627;
 			
 			// aapt resource value: 0x7F11043C
-			public const int snackbars_songs_could_not_be_deleted = 2131821628;
+			public const int snackbars_songs_could_not_be_moved = 2131821628;
 			
 			// aapt resource value: 0x7F11043D
-			public const int snackbars_songs_could_not_be_edited = 2131821629;
+			public const int snackbars_songs_could_not_be_removed = 2131821629;
 			
 			// aapt resource value: 0x7F11043E
-			public const int snackbars_songs_could_not_be_moved = 2131821630;
+			public const int snackbars_songs_created = 2131821630;
 			
 			// aapt resource value: 0x7F11043F
-			public const int snackbars_songs_could_not_be_removed = 2131821631;
+			public const int snackbars_songs_deleted = 2131821631;
 			
 			// aapt resource value: 0x7F110440
-			public const int snackbars_songs_created = 2131821632;
+			public const int snackbars_songs_edited = 2131821632;
 			
 			// aapt resource value: 0x7F110441
-			public const int snackbars_songs_deleted = 2131821633;
+			public const int snackbars_songs_moved = 2131821633;
 			
 			// aapt resource value: 0x7F110442
-			public const int snackbars_songs_edited = 2131821634;
+			public const int snackbars_songs_none_selected = 2131821634;
 			
 			// aapt resource value: 0x7F110443
-			public const int snackbars_songs_moved = 2131821635;
+			public const int snackbars_songs_removed = 2131821635;
 			
 			// aapt resource value: 0x7F110444
-			public const int snackbars_songs_none_selected = 2131821636;
+			public const int sort = 2131821636;
 			
 			// aapt resource value: 0x7F110445
-			public const int snackbars_songs_removed = 2131821637;
+			public const int status_bar_notification_info_overflow = 2131821637;
 			
 			// aapt resource value: 0x7F110446
-			public const int sort = 2131821638;
+			public const int summary_collapsed_preference_list = 2131821638;
 			
 			// aapt resource value: 0x7F110447
-			public const int status_bar_notification_info_overflow = 2131821639;
+			public const int v7_preference_off = 2131821639;
 			
 			// aapt resource value: 0x7F110448
-			public const int summary_collapsed_preference_list = 2131821640;
-			
-			// aapt resource value: 0x7F110449
-			public const int v7_preference_off = 2131821641;
-			
-			// aapt resource value: 0x7F11044A
-			public const int v7_preference_on = 2131821642;
-			
-			// aapt resource value: 0x7F110451
-			public const int xyzu_view_infoedit_album_header = 2131821649;
-			
-			// aapt resource value: 0x7F110452
-			public const int xyzu_view_infoedit_album_releasedate_defaulttext = 2131821650;
-			
-			// aapt resource value: 0x7F110453
-			public const int xyzu_view_infoedit_artist_header = 2131821651;
-			
-			// aapt resource value: 0x7F110454
-			public const int xyzu_view_infoedit_genre_header = 2131821652;
-			
-			// aapt resource value: 0x7F110455
-			public const int xyzu_view_infoedit_playlist_header = 2131821653;
-			
-			// aapt resource value: 0x7F110456
-			public const int xyzu_view_infoedit_song_header = 2131821654;
-			
-			// aapt resource value: 0x7F110457
-			public const int xyzu_view_infoedit_song_lyrics_header = 2131821655;
-			
-			// aapt resource value: 0x7F110458
-			public const int xyzu_view_infoedit_song_releasedate_defaulttext = 2131821656;
-			
-			// aapt resource value: 0x7F11044B
-			public const int xyzu_view_info_album_header = 2131821643;
-			
-			// aapt resource value: 0x7F11044C
-			public const int xyzu_view_info_artist_header = 2131821644;
-			
-			// aapt resource value: 0x7F11044D
-			public const int xyzu_view_info_genre_header = 2131821645;
-			
-			// aapt resource value: 0x7F11044E
-			public const int xyzu_view_info_playlist_header = 2131821646;
+			public const int v7_preference_on = 2131821640;
 			
 			// aapt resource value: 0x7F11044F
-			public const int xyzu_view_info_song_header = 2131821647;
+			public const int xyzu_view_infoedit_album_header = 2131821647;
 			
 			// aapt resource value: 0x7F110450
-			public const int xyzu_view_info_song_lyrics_header = 2131821648;
+			public const int xyzu_view_infoedit_album_releasedate_defaulttext = 2131821648;
+			
+			// aapt resource value: 0x7F110451
+			public const int xyzu_view_infoedit_artist_header = 2131821649;
+			
+			// aapt resource value: 0x7F110452
+			public const int xyzu_view_infoedit_genre_header = 2131821650;
+			
+			// aapt resource value: 0x7F110453
+			public const int xyzu_view_infoedit_playlist_header = 2131821651;
+			
+			// aapt resource value: 0x7F110454
+			public const int xyzu_view_infoedit_song_header = 2131821652;
+			
+			// aapt resource value: 0x7F110455
+			public const int xyzu_view_infoedit_song_lyrics_header = 2131821653;
+			
+			// aapt resource value: 0x7F110456
+			public const int xyzu_view_infoedit_song_releasedate_defaulttext = 2131821654;
+			
+			// aapt resource value: 0x7F110449
+			public const int xyzu_view_info_album_header = 2131821641;
+			
+			// aapt resource value: 0x7F11044A
+			public const int xyzu_view_info_artist_header = 2131821642;
+			
+			// aapt resource value: 0x7F11044B
+			public const int xyzu_view_info_genre_header = 2131821643;
+			
+			// aapt resource value: 0x7F11044C
+			public const int xyzu_view_info_playlist_header = 2131821644;
+			
+			// aapt resource value: 0x7F11044D
+			public const int xyzu_view_info_song_header = 2131821645;
+			
+			// aapt resource value: 0x7F11044E
+			public const int xyzu_view_info_song_lyrics_header = 2131821646;
+			
+			// aapt resource value: 0x7F110457
+			public const int xyzu_view_libraryitem_grid_large_artwork_appcompatimageview_contentdescription = 2131821655;
+			
+			// aapt resource value: 0x7F110458
+			public const int xyzu_view_libraryitem_grid_large_options_appcompatimagebutton_contentdescription = 2131821656;
 			
 			// aapt resource value: 0x7F110459
-			public const int xyzu_view_libraryitem_grid_large_artwork_appcompatimageview_contentdescription = 2131821657;
+			public const int xyzu_view_libraryitem_grid_medium_artwork_appcompatimageview_contentdescription = 2131821657;
 			
 			// aapt resource value: 0x7F11045A
-			public const int xyzu_view_libraryitem_grid_large_options_appcompatimagebutton_contentdescription = 2131821658;
+			public const int xyzu_view_libraryitem_grid_medium_options_appcompatimagebutton_contentdescription = 2131821658;
 			
 			// aapt resource value: 0x7F11045B
-			public const int xyzu_view_libraryitem_grid_medium_artwork_appcompatimageview_contentdescription = 2131821659;
+			public const int xyzu_view_libraryitem_grid_small_artwork_appcompatimageview_contentdescription = 2131821659;
 			
 			// aapt resource value: 0x7F11045C
-			public const int xyzu_view_libraryitem_grid_medium_options_appcompatimagebutton_contentdescription = 2131821660;
+			public const int xyzu_view_libraryitem_grid_small_options_appcompatimagebutton_contentdescription = 2131821660;
 			
 			// aapt resource value: 0x7F11045D
-			public const int xyzu_view_libraryitem_grid_small_artwork_appcompatimageview_contentdescription = 2131821661;
+			public const int xyzu_view_libraryitem_list_large_artwork_appcompatimageview_contentdescription = 2131821661;
 			
 			// aapt resource value: 0x7F11045E
-			public const int xyzu_view_libraryitem_grid_small_options_appcompatimagebutton_contentdescription = 2131821662;
+			public const int xyzu_view_libraryitem_list_large_options_appcompatimagebutton_contentdescription = 2131821662;
 			
 			// aapt resource value: 0x7F11045F
-			public const int xyzu_view_libraryitem_list_large_artwork_appcompatimageview_contentdescription = 2131821663;
+			public const int xyzu_view_libraryitem_list_medium_artwork_appcompatimageview_contentdescription = 2131821663;
 			
 			// aapt resource value: 0x7F110460
-			public const int xyzu_view_libraryitem_list_large_options_appcompatimagebutton_contentdescription = 2131821664;
+			public const int xyzu_view_libraryitem_list_medium_options_appcompatimagebutton_contentdescription = 2131821664;
 			
 			// aapt resource value: 0x7F110461
-			public const int xyzu_view_libraryitem_list_medium_artwork_appcompatimageview_contentdescription = 2131821665;
+			public const int xyzu_view_libraryitem_list_small_artwork_appcompatimageview_contentdescription = 2131821665;
 			
 			// aapt resource value: 0x7F110462
-			public const int xyzu_view_libraryitem_list_medium_options_appcompatimagebutton_contentdescription = 2131821666;
-			
-			// aapt resource value: 0x7F110463
-			public const int xyzu_view_libraryitem_list_small_artwork_appcompatimageview_contentdescription = 2131821667;
-			
-			// aapt resource value: 0x7F110464
-			public const int xyzu_view_libraryitem_list_small_options_appcompatimagebutton_contentdescription = 2131821668;
+			public const int xyzu_view_libraryitem_list_small_options_appcompatimagebutton_contentdescription = 2131821666;
 			
 			static String()
 			{
