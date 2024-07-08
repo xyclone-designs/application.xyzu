@@ -134,7 +134,7 @@ namespace Xyzu
 		{
 			if (ServiceBinder != null)
 			{
-				ServiceBinder.PlayerService.OnIntent += OnServiceIntent;
+				ServiceBinder.PlayerService.OnIntent -= OnServiceIntent;
 			}
 			
 			ServiceBinder = null;
