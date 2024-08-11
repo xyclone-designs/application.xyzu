@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
         
-    style="@style/Xyzu.View.NowPlayling"
+    style="@style/Xyzu.View.NowPlaying"
     android:id="@+id/xyzu_view_nowplaying"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_artwork_simplehorizontalrecyclerview"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/Xyzu.View.NowPlayling.Text"
+        style="@style/Xyzu.View.NowPlaying.Text"
         android:id="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
         android:layout_width="@dimen/dp0"
         android:layout_height="@dimen/dp0"
@@ -74,7 +74,7 @@
         app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/Xyzu.View.NowPlayling.Text"
+        style="@style/Xyzu.View.NowPlaying.Text"
         android:id="@id/xyzu_view_nowplaying_detail_two_appcompattextview"
         android:layout_width="@dimen/dp0"
         android:layout_height="@dimen/dp0"
@@ -87,12 +87,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_detail_one_appcompattextview"
-        app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_position_fixedmusicbar"/>
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_position_progressbarfixed"/>
 
     <!---->
     
-    <com.oze.music.musicbar.FixedMusicBar
-        android:id="@id/xyzu_view_nowplaying_position_fixedmusicbar"
+    <xyzu.views.nowplaying.ProgressBarFixed
+        android:id="@id/xyzu_view_nowplaying_position_progressbarfixed"
         android:layout_width="@dimen/dp0"
         android:layout_height="@dimen/dp80"
         android:layout_marginEnd="@dimen/dp8"
@@ -101,15 +101,14 @@
         android:layout_marginBottom="@dimen/dp16"
         
         app:layout_constrainedHeight="true"
-        app:layout_constraintWidth="match_constraint"
-        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintWidth="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_detail_two_appcompattextview"
         app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_buttons_player_playpause_appcompatimagebutton"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/Xyzu.View.NowPlayling.Text"
+        style="@style/Xyzu.View.NowPlaying.Text"
         android:id="@id/xyzu_view_nowplaying_positiontext_appcompattextview"
         android:layout_width="@dimen/dp0"
         android:layout_height="@dimen/dp0"
@@ -118,15 +117,15 @@
     
         app:layout_constraintWidth="wrap_content_constrained"
         app:layout_constraintHeight="wrap_content_constrained"
-        app:layout_constraintTop_toTopOf="@id/xyzu_view_nowplaying_position_fixedmusicbar"
-        app:layout_constraintEnd_toEndOf="@id/xyzu_view_nowplaying_position_fixedmusicbar"
-        app:layout_constraintStart_toStartOf="@id/xyzu_view_nowplaying_position_fixedmusicbar"
-        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_position_fixedmusicbar" />
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_nowplaying_position_progressbarfixed"
+        app:layout_constraintEnd_toEndOf="@id/xyzu_view_nowplaying_position_progressbarfixed"
+        app:layout_constraintStart_toStartOf="@id/xyzu_view_nowplaying_position_progressbarfixed"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_position_progressbarfixed" />
 
     <!---->
 
     <androidx.appcompat.widget.AppCompatImageButton
-        style="@style/Xyzu.View.NowPlayling.Button.Player"
+        style="@style/Xyzu.View.NowPlaying.Button.Player"
         android:id="@id/xyzu_view_nowplaying_buttons_player_previous_appcompatimagebutton"
         android:src="@drawable/icon_player_skip_backward"
         
@@ -137,19 +136,19 @@
         app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_buttons_player_playpause_appcompatimagebutton"/>
 
     <androidx.appcompat.widget.AppCompatImageButton
-        style="@style/Xyzu.View.NowPlayling.Button.Player"
+        style="@style/Xyzu.View.NowPlaying.Button.Player"
         android:id="@id/xyzu_view_nowplaying_buttons_player_playpause_appcompatimagebutton"
         android:src="@drawable/icon_player_play"
         android:layout_marginEnd="@dimen/dp16"
         android:layout_marginStart="@dimen/dp16"
         
-        app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_position_fixedmusicbar"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_position_progressbarfixed"
         app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_buttons_menu_options_appcompatimagebutton"
         app:layout_constraintEnd_toStartOf="@id/xyzu_view_nowplaying_buttons_player_next_appcompatimagebutton"
         app:layout_constraintStart_toEndOf="@id/xyzu_view_nowplaying_buttons_player_previous_appcompatimagebutton"/>
 
     <androidx.appcompat.widget.AppCompatImageButton
-        style="@style/Xyzu.View.NowPlayling.Button.Player"
+        style="@style/Xyzu.View.NowPlaying.Button.Player"
         android:id="@id/xyzu_view_nowplaying_buttons_player_next_appcompatimagebutton"
         android:src="@drawable/icon_player_skip_foward"
         
@@ -161,7 +160,7 @@
     <!---->
 
     <androidx.appcompat.widget.AppCompatImageButton
-        style="@style/Xyzu.View.NowPlayling.Button.Menu"
+        style="@style/Xyzu.View.NowPlaying.Button.Menu"
         android:id="@id/xyzu_view_nowplaying_buttons_menu_queue_appcompatimagebutton"
         android:src="@drawable/icon_menuoptions_gotoqueue"
         
@@ -171,7 +170,7 @@
         app:layout_constraintEnd_toStartOf="@id/xyzu_view_nowplaying_buttons_menu_audioeffects_appcompatimagebutton"/>
 
     <androidx.appcompat.widget.AppCompatImageButton
-        style="@style/Xyzu.View.NowPlayling.Button.Menu"
+        style="@style/Xyzu.View.NowPlaying.Button.Menu"
         android:id="@id/xyzu_view_nowplaying_buttons_menu_audioeffects_appcompatimagebutton"
         android:src="@drawable/icon_menuoptions_audioeffects"
         
@@ -181,7 +180,7 @@
         app:layout_constraintEnd_toStartOf="@id/xyzu_view_nowplaying_buttons_menu_playersettings_appcompatimagebutton"/>
     
     <androidx.appcompat.widget.AppCompatImageButton
-        style="@style/Xyzu.View.NowPlayling.Button.Menu"
+        style="@style/Xyzu.View.NowPlaying.Button.Menu"
         android:id="@id/xyzu_view_nowplaying_buttons_menu_playersettings_appcompatimagebutton"
         android:src="@drawable/icon_menuoptions_viewinfo"
         
@@ -191,7 +190,7 @@
         app:layout_constraintStart_toEndOf="@id/xyzu_view_nowplaying_buttons_menu_audioeffects_appcompatimagebutton"/>
 
     <androidx.appcompat.widget.AppCompatImageButton
-        style="@style/Xyzu.View.NowPlayling.Button.Menu"
+        style="@style/Xyzu.View.NowPlaying.Button.Menu"
         android:id="@id/xyzu_view_nowplaying_buttons_menu_options_appcompatimagebutton"
         android:src="@drawable/icon_general_dots_vertical"
         android:layout_marginTop="@dimen/dp8"

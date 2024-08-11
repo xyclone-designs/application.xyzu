@@ -1,14 +1,12 @@
 ﻿#nullable enable
 
 using Android.Content;
-using Android.Content.Res;
 using Android.Animation;
 using Android.Views;
 using AndroidX.CardView.Widget;
 
 using Com.Sothree.Slidinguppanel;
 
-using System;
 using System.Linq;
 
 using Xyzu.Droid;
@@ -75,6 +73,47 @@ namespace Xyzu.Activities
 					default: break;
 				}
 		}
+		private void ConfigureNowPlayingState(SlidingUpPanelLayout.PanelState state1, SlidingUpPanelLayout.PanelState state2)
+		{
+			if (ViewNowPlaying is null)
+				return;
+
+			switch (true)
+			{
+				// Collapsed => Dragging
+				case true when
+				state1 == SlidingUpPanelLayout.PanelState.Collapsed &&
+				state2 == SlidingUpPanelLayout.PanelState.Dragging:
+					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Expand);
+					break;
+
+				// Dragging => Expanded
+				case true when
+				state1 == SlidingUpPanelLayout.PanelState.Dragging &&
+				state2 == SlidingUpPanelLayout.PanelState.Expanded:
+					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Expand);
+					ViewNowPlaying.SetInterpolatedProgress(1);
+					break;
+
+				// Expanded => Dragging 
+				case true when
+				state1 == SlidingUpPanelLayout.PanelState.Expanded &&
+				state2 == SlidingUpPanelLayout.PanelState.Dragging:
+					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Collapse);
+					break;
+
+				// Dragging => Collapsed
+				case true when
+				state1 == SlidingUpPanelLayout.PanelState.Dragging &&
+				state2 == SlidingUpPanelLayout.PanelState.Collapsed:
+					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Collapse);
+					ViewNowPlaying.SetInterpolatedProgress(1);
+					break;
+
+				default: break;
+			}
+		}
+
 
 		private bool ConfigureSlidingUpPanelHeight(bool force = false)
 		{
@@ -204,40 +243,7 @@ namespace Xyzu.Activities
 			if (ViewNowPlaying is null)
 				return;
 
-			switch (true)
-			{
-				// Collapsed => Dragging
-				case true when
-				state1 == SlidingUpPanelLayout.PanelState.Collapsed &&
-				state2 == SlidingUpPanelLayout.PanelState.Dragging:
-					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Expand);
-					break;
-
-				// Dragging => Expanded
-				case true when
-				state1 == SlidingUpPanelLayout.PanelState.Dragging &&
-				state2 == SlidingUpPanelLayout.PanelState.Expanded:
-					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Expand);
-					ViewNowPlaying.SetInterpolatedProgress(1);
-					break;
-
-				// Expanded => Dragging 
-				case true when
-				state1 == SlidingUpPanelLayout.PanelState.Expanded &&
-				state2 == SlidingUpPanelLayout.PanelState.Dragging:
-					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Collapse);
-					break;
-
-				// Dragging => Collapsed
-				case true when
-				state1 == SlidingUpPanelLayout.PanelState.Dragging &&
-				state2 == SlidingUpPanelLayout.PanelState.Collapsed:
-					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Collapse);
-					ViewNowPlaying.SetInterpolatedProgress(1);
-					break;
-
-				default: break;
-			}
+			ConfigureNowPlayingState(state1, state2);
 
 			if (SlidingUpPanel?.GetPanelState() is SlidingUpPanelLayout.PanelState panelstate)
 				switch (true)

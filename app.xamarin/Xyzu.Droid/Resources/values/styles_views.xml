@@ -182,9 +182,12 @@
   <!-- Xyzu.View.LibraryItem -->
   
   
-  <!-- Xyzu.View.NowPlayling -->
-  <style name="Xyzu.View.NowPlayling" parent="Xyzu.View" />
-  <style name="Xyzu.View.NowPlayling.Container" parent="Xyzu">
+  <!-- Xyzu.View.NowPlaying -->
+  <style name="Xyzu.View.NowPlaying" parent="Xyzu.View" />
+  <style name="Xyzu.View.NowPlaying.ProgressBar" parent="Xyzu.View.NowPlaying" />
+  <style name="Xyzu.View.NowPlaying.ProgressBar.Fixed" parent="Xyzu.View.NowPlaying.ProgressBar" />
+  <style name="Xyzu.View.NowPlaying.ProgressBar.Scrollable" parent="Xyzu.View.NowPlaying.ProgressBar" />
+  <style name="Xyzu.View.NowPlaying.Container" parent="Xyzu">
     <item name="android:background">@color/ColorSurface</item>
     <item name="android:backgroundTint">@color/ColorSurface</item>
     <item name="android:clickable">false</item>
@@ -199,7 +202,7 @@
     <item name="app:cardUseCompatPadding">false</item>
     <item name="app:contentPadding">@dimen/dp0</item>
   </style>
-  <style name="Xyzu.View.NowPlayling.Image" parent="Xyzu.AppCompat.Image">
+  <style name="Xyzu.View.NowPlaying.Image" parent="Xyzu.AppCompat.Image">
     <item name="android:elevation">@dimen/dp16</item>
     <item name="android:gravity">center</item>
     <item name="android:layout_margin">@dimen/dp32</item>
@@ -207,7 +210,7 @@
     <item name="android:outlineAmbientShadowColor">@color/ColorSurface</item>
     <item name="android:outlineSpotShadowColor">@color/ColorSurface</item>
   </style>
-  <style name="Xyzu.View.NowPlayling.Text" parent="Xyzu.AppCompat.Text">
+  <style name="Xyzu.View.NowPlaying.Text" parent="Xyzu.AppCompat.Text">
     <item name="android:clipToPadding">false</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
@@ -221,20 +224,20 @@
     <item name="android:textColor">@color/ColorOnSurface</item>
     <item name="android:textSize">@dimen/abc_text_size_subhead_material</item>
   </style>
-  <style name="Xyzu.View.NowPlayling.Button" parent="Xyzu.AppCompat.ImageButton">
-    <item name="android:background">@drawable/xyzu_view_nowplayling_button_background</item>
+  <style name="Xyzu.View.NowPlaying.Button" parent="Xyzu.AppCompat.ImageButton">
+    <item name="android:background">@drawable/xyzu_view_nowplaying_button_background</item>
   </style>
-  <style name="Xyzu.View.NowPlayling.Button.Menu" parent="Xyzu.View.NowPlayling.Button">
+  <style name="Xyzu.View.NowPlaying.Button.Menu" parent="Xyzu.View.NowPlaying.Button">
     <item name="android:padding">@dimen/dp8</item>
     <item name="android:layout_width">@dimen/dp48</item>
     <item name="android:layout_height">@dimen/dp48</item>
   </style>
-  <style name="Xyzu.View.NowPlayling.Button.Player" parent="Xyzu.View.NowPlayling.Button">
+  <style name="Xyzu.View.NowPlaying.Button.Player" parent="Xyzu.View.NowPlaying.Button">
     <item name="android:padding">@dimen/dp16</item>
     <item name="android:layout_width">@dimen/dp80</item>
     <item name="android:layout_height">@dimen/dp80</item>
   </style>
-  <!-- Xyzu.View.NowPlayling -->
+  <!-- Xyzu.View.NowPlaying -->
   
 
   <!-- Xyzu.View.Misc -->

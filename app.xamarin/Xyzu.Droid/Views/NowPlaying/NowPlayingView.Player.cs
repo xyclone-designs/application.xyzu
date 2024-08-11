@@ -480,7 +480,7 @@ namespace Xyzu.Views.NowPlaying
 			FragmentActivity?.RunOnUiThread(() => PositionText?.SetText(text, null));
 
 			if (withprogress)
-				Position?.SetProgress((int)current.Value.TotalMilliseconds);
+				try { Position?.SetProgress((int)current.Value.TotalMilliseconds); } catch (Exception) { }
 		}
 
 		private void ConfigureMenuOptionButton(View? view)

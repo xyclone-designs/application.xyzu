@@ -48,7 +48,7 @@ namespace Xyzu.Menus
 
 			DialogView dialogview = new DialogView(variables.Context)
 			{
-				MaxWidth = DialogMaxWidth(variables.Context),
+				ContentViewMaxWidth = DialogMaxWidth(variables.Context),
 				ContentViewMaxHeight = DialogMaxHeight(variables.Context),
 
 				ButtonsPositiveText = Resource.String.save,

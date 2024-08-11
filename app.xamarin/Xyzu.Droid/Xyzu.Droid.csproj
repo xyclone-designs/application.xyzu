@@ -255,6 +255,7 @@
     <Compile Include="Views\Library\LibraryView.cs" />
     <Compile Include="Views\LibraryItem\Header\HeaderLibraryItemsView.cs" />
     <Compile Include="Views\NowPlaying\NowPlayingView.cs" />
+    <Compile Include="Views\NowPlaying\NowPlayingView.ProgressBar.cs" />
     <Compile Include="Views\NowPlaying\NowPlayingView.Menu.cs" />
     <Compile Include="Views\NowPlaying\NowPlayingView.MotionLayout.cs" />
     <Compile Include="Views\NowPlaying\NowPlayingView.Player.cs" />
@@ -1044,7 +1045,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\xyzu_view_nowplayling_button_background.xml">
+    <AndroidResource Include="Resources\drawable\xyzu_view_nowplaying_button_background.xml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>

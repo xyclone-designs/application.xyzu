@@ -76,7 +76,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
         
         <com.google.android.material.card.MaterialCardView
-            style="@style/Xyzu.View.NowPlayling.Container"
+            style="@style/Xyzu.View.NowPlaying.Container"
             android:id="@+id/xyzu_layout_library_drawerlayout_nowplayingview_cardview"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

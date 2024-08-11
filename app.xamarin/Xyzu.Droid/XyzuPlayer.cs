@@ -91,7 +91,7 @@ namespace Xyzu
 			if (ServiceBinder is null)
 				return;
 
-			Context.UnbindService(this);
+			try { Context.UnbindService(this); } catch (Exception) { }
 		}
 		public void OnServiceConnected(ComponentName? name, IBinder? binder)
 		{

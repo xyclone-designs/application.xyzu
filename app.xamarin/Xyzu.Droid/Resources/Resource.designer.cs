@@ -10625,7 +10625,7 @@ namespace Xyzu.Droid
 			public const int xyzu_view_nowplaying_background = 2131231126;
 			
 			// aapt resource value: 0x7F080197
-			public const int xyzu_view_nowplayling_button_background = 2131231127;
+			public const int xyzu_view_nowplaying_button_background = 2131231127;
 			
 			// aapt resource value: 0x7F080198
 			public const int xyzu_view_option_button_background = 2131231128;
@@ -13381,7 +13381,7 @@ namespace Xyzu.Droid
 			public const int xyzu_view_nowplaying_positiontext_appcompattextview = 2131362694;
 			
 			// aapt resource value: 0x7F0A0385
-			public const int xyzu_view_nowplaying_position_fixedmusicbar = 2131362693;
+			public const int xyzu_view_nowplaying_position_progressbarfixed = 2131362693;
 			
 			// aapt resource value: 0x7F0A0387
 			public const int xyzu_view_nowplaying_statusbarinsetview = 2131362695;
@@ -18751,8 +18751,8 @@ namespace Xyzu.Droid
 			// aapt resource value: 0x7F120122
 			public const int CardView_Light = 2131886370;
 			
-			// aapt resource value: 0x7F120544
-			public const int cpv_ColorPickerViewStyle = 2131887428;
+			// aapt resource value: 0x7F120547
+			public const int cpv_ColorPickerViewStyle = 2131887431;
 			
 			// aapt resource value: 0x7F120123
 			public const int ExoMediaButton = 2131886371;
@@ -21373,8 +21373,8 @@ namespace Xyzu.Droid
 			// aapt resource value: 0x7F12048B
 			public const int Xyzu = 2131887243;
 			
-			// aapt resource value: 0x7F120543
-			public const int XyzuTheme = 2131887427;
+			// aapt resource value: 0x7F120546
+			public const int XyzuTheme = 2131887430;
 			
 			// aapt resource value: 0x7F12048C
 			public const int Xyzu_AppCompat = 2131887244;
@@ -21749,181 +21749,190 @@ namespace Xyzu.Droid
 			public const int Xyzu_View_Misc_NavigationView_Icon = 2131887367;
 			
 			// aapt resource value: 0x7F120508
-			public const int Xyzu_View_NowPlayling = 2131887368;
+			public const int Xyzu_View_NowPlaying = 2131887368;
 			
 			// aapt resource value: 0x7F120509
-			public const int Xyzu_View_NowPlayling_Button = 2131887369;
+			public const int Xyzu_View_NowPlaying_Button = 2131887369;
 			
 			// aapt resource value: 0x7F12050A
-			public const int Xyzu_View_NowPlayling_Button_Menu = 2131887370;
+			public const int Xyzu_View_NowPlaying_Button_Menu = 2131887370;
 			
 			// aapt resource value: 0x7F12050B
-			public const int Xyzu_View_NowPlayling_Button_Player = 2131887371;
+			public const int Xyzu_View_NowPlaying_Button_Player = 2131887371;
 			
 			// aapt resource value: 0x7F12050C
-			public const int Xyzu_View_NowPlayling_Container = 2131887372;
+			public const int Xyzu_View_NowPlaying_Container = 2131887372;
 			
 			// aapt resource value: 0x7F12050D
-			public const int Xyzu_View_NowPlayling_Image = 2131887373;
+			public const int Xyzu_View_NowPlaying_Image = 2131887373;
 			
 			// aapt resource value: 0x7F12050E
-			public const int Xyzu_View_NowPlayling_Text = 2131887374;
+			public const int Xyzu_View_NowPlaying_ProgressBar = 2131887374;
 			
 			// aapt resource value: 0x7F12050F
-			public const int Xyzu_View_Option = 2131887375;
+			public const int Xyzu_View_NowPlaying_ProgressBar_Fixed = 2131887375;
 			
 			// aapt resource value: 0x7F120510
-			public const int Xyzu_View_Option_Button = 2131887376;
+			public const int Xyzu_View_NowPlaying_ProgressBar_Scrollable = 2131887376;
 			
 			// aapt resource value: 0x7F120511
-			public const int Xyzu_View_Option_CheckBox = 2131887377;
+			public const int Xyzu_View_NowPlaying_Text = 2131887377;
 			
 			// aapt resource value: 0x7F120512
-			public const int Xyzu_View_Option_CreateAndView = 2131887378;
+			public const int Xyzu_View_Option = 2131887378;
 			
 			// aapt resource value: 0x7F120513
-			public const int Xyzu_View_Option_CreateAndView_Button = 2131887379;
+			public const int Xyzu_View_Option_Button = 2131887379;
 			
 			// aapt resource value: 0x7F120514
-			public const int Xyzu_View_Option_CreateAndView_EditText = 2131887380;
+			public const int Xyzu_View_Option_CheckBox = 2131887380;
 			
 			// aapt resource value: 0x7F120515
-			public const int Xyzu_View_Option_CreateAndView_RecyclerView = 2131887381;
+			public const int Xyzu_View_Option_CreateAndView = 2131887381;
 			
 			// aapt resource value: 0x7F120516
-			public const int Xyzu_View_Option_CreateAndView_RecyclerView_ItemView = 2131887382;
+			public const int Xyzu_View_Option_CreateAndView_Button = 2131887382;
 			
 			// aapt resource value: 0x7F120517
-			public const int Xyzu_View_Option_CreateAndView_Text = 2131887383;
+			public const int Xyzu_View_Option_CreateAndView_EditText = 2131887383;
 			
 			// aapt resource value: 0x7F120518
-			public const int Xyzu_View_Option_EditText = 2131887384;
+			public const int Xyzu_View_Option_CreateAndView_RecyclerView = 2131887384;
 			
 			// aapt resource value: 0x7F120519
-			public const int Xyzu_View_Option_ImageButton = 2131887385;
+			public const int Xyzu_View_Option_CreateAndView_RecyclerView_ItemView = 2131887385;
 			
 			// aapt resource value: 0x7F12051A
-			public const int Xyzu_View_Option_LibraryList = 2131887386;
+			public const int Xyzu_View_Option_CreateAndView_Text = 2131887386;
 			
 			// aapt resource value: 0x7F12051B
-			public const int Xyzu_View_Option_LibraryList_Button = 2131887387;
+			public const int Xyzu_View_Option_EditText = 2131887387;
 			
 			// aapt resource value: 0x7F12051C
-			public const int Xyzu_View_Option_LibraryList_CheckBox = 2131887388;
+			public const int Xyzu_View_Option_ImageButton = 2131887388;
 			
 			// aapt resource value: 0x7F12051D
-			public const int Xyzu_View_Option_LibraryList_RecyclerView = 2131887389;
+			public const int Xyzu_View_Option_LibraryList = 2131887389;
 			
 			// aapt resource value: 0x7F12051E
-			public const int Xyzu_View_Option_LibraryList_RecyclerView_ItemView = 2131887390;
+			public const int Xyzu_View_Option_LibraryList_Button = 2131887390;
 			
 			// aapt resource value: 0x7F12051F
-			public const int Xyzu_View_Option_Menu = 2131887391;
+			public const int Xyzu_View_Option_LibraryList_CheckBox = 2131887391;
 			
 			// aapt resource value: 0x7F120520
-			public const int Xyzu_View_Option_Menu_CheckBox = 2131887392;
+			public const int Xyzu_View_Option_LibraryList_RecyclerView = 2131887392;
 			
 			// aapt resource value: 0x7F120521
-			public const int Xyzu_View_Option_Menu_ImageButton = 2131887393;
+			public const int Xyzu_View_Option_LibraryList_RecyclerView_ItemView = 2131887393;
 			
 			// aapt resource value: 0x7F120522
-			public const int Xyzu_View_Option_Menu_RecyclerView = 2131887394;
+			public const int Xyzu_View_Option_Menu = 2131887394;
 			
 			// aapt resource value: 0x7F120523
-			public const int Xyzu_View_Option_Menu_RecyclerView_ItemView = 2131887395;
+			public const int Xyzu_View_Option_Menu_CheckBox = 2131887395;
 			
 			// aapt resource value: 0x7F120524
-			public const int Xyzu_View_Option_Menu_Text = 2131887396;
+			public const int Xyzu_View_Option_Menu_ImageButton = 2131887396;
 			
 			// aapt resource value: 0x7F120525
-			public const int Xyzu_View_Option_Text = 2131887397;
+			public const int Xyzu_View_Option_Menu_RecyclerView = 2131887397;
 			
 			// aapt resource value: 0x7F120526
-			public const int Xyzu_View_Option_Text_Subtitle = 2131887398;
+			public const int Xyzu_View_Option_Menu_RecyclerView_ItemView = 2131887398;
 			
 			// aapt resource value: 0x7F120527
-			public const int Xyzu_View_Option_Text_Title = 2131887399;
+			public const int Xyzu_View_Option_Menu_Text = 2131887399;
 			
 			// aapt resource value: 0x7F120528
-			public const int Xyzu_View_Setting = 2131887400;
+			public const int Xyzu_View_Option_Text = 2131887400;
 			
 			// aapt resource value: 0x7F120529
-			public const int Xyzu_View_Setting_AudioBand = 2131887401;
+			public const int Xyzu_View_Option_Text_Subtitle = 2131887401;
 			
 			// aapt resource value: 0x7F12052A
-			public const int Xyzu_View_Setting_AudioBand_Text = 2131887402;
+			public const int Xyzu_View_Option_Text_Title = 2131887402;
 			
 			// aapt resource value: 0x7F12052B
-			public const int Xyzu_View_Setting_AudioBand_Text_Footer = 2131887403;
+			public const int Xyzu_View_Setting = 2131887403;
 			
 			// aapt resource value: 0x7F12052C
-			public const int Xyzu_View_Setting_AudioBand_Text_Max = 2131887404;
+			public const int Xyzu_View_Setting_AudioBand = 2131887404;
 			
 			// aapt resource value: 0x7F12052D
-			public const int Xyzu_View_Setting_AudioBand_Text_Min = 2131887405;
+			public const int Xyzu_View_Setting_AudioBand_Text = 2131887405;
 			
 			// aapt resource value: 0x7F12052E
-			public const int Xyzu_View_Setting_AudioBand_Text_Title = 2131887406;
+			public const int Xyzu_View_Setting_AudioBand_Text_Footer = 2131887406;
 			
 			// aapt resource value: 0x7F12052F
-			public const int Xyzu_View_Setting_AudioBand_Value = 2131887407;
+			public const int Xyzu_View_Setting_AudioBand_Text_Max = 2131887407;
 			
 			// aapt resource value: 0x7F120530
-			public const int Xyzu_View_Setting_DirectoryItem = 2131887408;
+			public const int Xyzu_View_Setting_AudioBand_Text_Min = 2131887408;
 			
 			// aapt resource value: 0x7F120531
-			public const int Xyzu_View_Setting_DirectoryItem_Button = 2131887409;
+			public const int Xyzu_View_Setting_AudioBand_Text_Title = 2131887409;
 			
 			// aapt resource value: 0x7F120532
-			public const int Xyzu_View_Setting_DirectoryItem_CheckBox = 2131887410;
+			public const int Xyzu_View_Setting_AudioBand_Value = 2131887410;
 			
 			// aapt resource value: 0x7F120533
-			public const int Xyzu_View_Setting_DirectoryItem_RecyclerView = 2131887411;
+			public const int Xyzu_View_Setting_DirectoryItem = 2131887411;
 			
 			// aapt resource value: 0x7F120534
-			public const int Xyzu_View_Toolbar = 2131887412;
+			public const int Xyzu_View_Setting_DirectoryItem_Button = 2131887412;
 			
 			// aapt resource value: 0x7F120535
-			public const int Xyzu_View_Toolbar_Button = 2131887413;
+			public const int Xyzu_View_Setting_DirectoryItem_CheckBox = 2131887413;
 			
 			// aapt resource value: 0x7F120536
-			public const int Xyzu_View_Toolbar_OptionsLibraryList = 2131887414;
+			public const int Xyzu_View_Setting_DirectoryItem_RecyclerView = 2131887414;
 			
 			// aapt resource value: 0x7F120537
-			public const int Xyzu_View_Toolbar_Search = 2131887415;
+			public const int Xyzu_View_Toolbar = 2131887415;
 			
 			// aapt resource value: 0x7F120538
-			public const int Xyzu_View_Toolbar_StatusBarInset = 2131887416;
+			public const int Xyzu_View_Toolbar_Button = 2131887416;
 			
 			// aapt resource value: 0x7F120539
-			public const int Xyzu_View_Toolbar_TabLayout = 2131887417;
+			public const int Xyzu_View_Toolbar_OptionsLibraryList = 2131887417;
 			
 			// aapt resource value: 0x7F12053A
-			public const int Xyzu_View_Toolbar_Toolbar = 2131887418;
+			public const int Xyzu_View_Toolbar_Search = 2131887418;
 			
 			// aapt resource value: 0x7F12053B
-			public const int Xyzu_Widget = 2131887419;
+			public const int Xyzu_View_Toolbar_StatusBarInset = 2131887419;
 			
 			// aapt resource value: 0x7F12053C
-			public const int Xyzu_Widget_RecyclerView = 2131887420;
+			public const int Xyzu_View_Toolbar_TabLayout = 2131887420;
 			
 			// aapt resource value: 0x7F12053D
-			public const int Xyzu_Widget_RecyclerView_DropdownCheckableItems = 2131887421;
+			public const int Xyzu_View_Toolbar_Toolbar = 2131887421;
 			
 			// aapt resource value: 0x7F12053E
-			public const int Xyzu_Widget_RecyclerView_LibraryItems = 2131887422;
+			public const int Xyzu_Widget = 2131887422;
 			
 			// aapt resource value: 0x7F12053F
-			public const int Xyzu_Widget_RecyclerView_RecursiveItems = 2131887423;
+			public const int Xyzu_Widget_RecyclerView = 2131887423;
 			
 			// aapt resource value: 0x7F120540
-			public const int Xyzu_Widget_RecyclerView_Simple = 2131887424;
+			public const int Xyzu_Widget_RecyclerView_DropdownCheckableItems = 2131887424;
 			
 			// aapt resource value: 0x7F120541
-			public const int Xyzu_Widget_RecyclerView_Simple_Horizontal = 2131887425;
+			public const int Xyzu_Widget_RecyclerView_LibraryItems = 2131887425;
 			
 			// aapt resource value: 0x7F120542
-			public const int Xyzu_Widget_RecyclerView_Simple_Vertical = 2131887426;
+			public const int Xyzu_Widget_RecyclerView_RecursiveItems = 2131887426;
+			
+			// aapt resource value: 0x7F120543
+			public const int Xyzu_Widget_RecyclerView_Simple = 2131887427;
+			
+			// aapt resource value: 0x7F120544
+			public const int Xyzu_Widget_RecyclerView_Simple_Horizontal = 2131887428;
+			
+			// aapt resource value: 0x7F120545
+			public const int Xyzu_Widget_RecyclerView_Simple_Vertical = 2131887429;
 			
 			static Style()
 			{

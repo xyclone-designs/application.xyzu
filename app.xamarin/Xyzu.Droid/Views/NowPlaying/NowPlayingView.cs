@@ -36,7 +36,7 @@ namespace Xyzu.Views.NowPlaying
 			public const int ArtworkDetails_Space = Resource.Id.xyzu_view_nowplaying_artworkdetails_space;
 			public const int Detail_One_AppCompatTextView = Resource.Id.xyzu_view_nowplaying_detail_one_appcompattextview;
 			public const int Detail_Two_AppCompatTextView = Resource.Id.xyzu_view_nowplaying_detail_two_appcompattextview;
-			public const int Position_FixedMusicBar = Resource.Id.xyzu_view_nowplaying_position_fixedmusicbar;
+			public const int Position_ProgressBarFixed = Resource.Id.xyzu_view_nowplaying_position_progressbarfixed;
 			public const int PositionText_AppCompatTextView = Resource.Id.xyzu_view_nowplaying_positiontext_appcompattextview;
 			public const int Buttons_Player_Previous_AppCompatImageButton = Resource.Id.xyzu_view_nowplaying_buttons_player_previous_appcompatimagebutton;
 			public const int Buttons_Player_PlayPause_AppCompatImageButton = Resource.Id.xyzu_view_nowplaying_buttons_player_playpause_appcompatimagebutton;
@@ -48,7 +48,7 @@ namespace Xyzu.Views.NowPlaying
 		}
 
 		public NowPlayingView(Context context) : this(context, null!) { }
-		public NowPlayingView(Context context, IAttributeSet attrs) : this(context, attrs, Resource.Style.Xyzu_View_NowPlayling) { }
+		public NowPlayingView(Context context, IAttributeSet attrs) : this(context, attrs, Resource.Style.Xyzu_View_NowPlaying) { }
 		public NowPlayingView(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
 		{
 			Init(context, attrs);
@@ -120,7 +120,7 @@ namespace Xyzu.Views.NowPlaying
 			_Buttons_Player_Next = FindViewById(Ids.Buttons_Player_Next_AppCompatImageButton) as AppCompatImageButton;
 
 			_PositionText = FindViewById(Ids.PositionText_AppCompatTextView) as AppCompatTextView;
-			_Position = FindViewById(Ids.Position_FixedMusicBar) as FixedMusicBar;
+			_Position = FindViewById(Ids.Position_ProgressBarFixed) as ProgressBarFixed;
 			
 			_Buttons_Menu_Queue = FindViewById(Ids.Buttons_Menu_Queue_AppCompatImageButton) as AppCompatImageButton;
 			_Buttons_Menu_AudioEffects = FindViewById(Ids.Buttons_Menu_AudioEffects_AppCompatImageButton) as AppCompatImageButton;
@@ -141,7 +141,7 @@ namespace Xyzu.Views.NowPlaying
 		private AppCompatImageButton? _Buttons_Player_Previous;
 		private AppCompatImageButton? _Buttons_Player_PlayPause;
 		private AppCompatImageButton? _Buttons_Player_Next;
-		private FixedMusicBar? _Position;
+		private ProgressBarFixed? _Position;
 		private AppCompatTextView? _PositionText;
 		private AppCompatImageButton? _Buttons_Menu_Queue;
 		private AppCompatImageButton? _Buttons_Menu_AudioEffects;
@@ -202,7 +202,7 @@ namespace Xyzu.Views.NowPlaying
 		{ 
 			get => _Buttons_Player_Next ?? throw new InflateException("Could not find 'Buttons_Player_Next'");
 		}
-		public FixedMusicBar Position 
+		public ProgressBarFixed Position 
 		{ 
 			get => _Position ?? throw new InflateException("Could not find 'Position'");
 		}
@@ -265,6 +265,7 @@ namespace Xyzu.Views.NowPlaying
 				true when sender == Buttons_Player_Previous => ViewOperations.PressPrevious,
 				true when sender == Buttons_Player_PlayPause => ViewOperations.PressPlayPause,
 				true when sender == Buttons_Player_Next => ViewOperations.PressNext,
+
 
 				true when sender == Buttons_Menu_AudioEffects => ViewOperations.PressEffects,
 				true when sender == Buttons_Menu_Options => ViewOperations.PressOptions,
@@ -333,7 +334,7 @@ namespace Xyzu.Views.NowPlaying
 		{
 			private static AppCompatImageView ItemViewDefault(Context context)
 			{
-				ContextThemeWrapper contextthemewrapper = new ContextThemeWrapper(context, Resource.Style.Xyzu_View_NowPlayling_Image);
+				ContextThemeWrapper contextthemewrapper = new ContextThemeWrapper(context, Resource.Style.Xyzu_View_NowPlaying_Image);
 				AppCompatImageView itemview = new AppCompatImageView(contextthemewrapper)
 				{
 					LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent)
