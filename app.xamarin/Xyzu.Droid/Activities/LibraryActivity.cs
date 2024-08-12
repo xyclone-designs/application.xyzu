@@ -2,6 +2,7 @@
 
 using Android.Content;
 using Android.Content.Res;
+using Android.OS;
 using Android.Views;
 using AndroidX.Fragment.App;
 using AndroidX.SwipeRefreshLayout.Widget;
@@ -23,6 +24,10 @@ namespace Xyzu.Activities
 {
 	public partial class LibraryActivity : BaseActivity, SwipeRefreshLayout.IOnRefreshListener
 	{
+		public static class BundleKeys
+		{
+			public const string SlidingUpPanel_State = "BundleKeys_SlidingUpPanel_State";
+		}
 		public static class IntentKeys
 		{
 			public const string IsFromNotification = "IntentKey_IsFromNotification";
@@ -74,6 +79,41 @@ namespace Xyzu.Activities
 			base.OnPause();
 
 			Floatingactionbutton.Click -= OnFloatingactionbuttonClick;
+		}
+		protected override void OnSaveInstanceState(Bundle outstate)
+		{
+			base.OnSaveInstanceState(outstate);
+
+			outstate.PutString(BundleKeys.SlidingUpPanel_State, true switch
+			{
+				true when SlidingUpPanel?.GetPanelState() == SlidingUpPanelLayout.PanelState.Hidden => "Hidden",
+				true when SlidingUpPanel?.GetPanelState() == SlidingUpPanelLayout.PanelState.Dragging => "Dragging",
+				true when SlidingUpPanel?.GetPanelState() == SlidingUpPanelLayout.PanelState.Expanded => "Expanded",
+				true when SlidingUpPanel?.GetPanelState() == SlidingUpPanelLayout.PanelState.Collapsed => "Collapsed",
+
+				_ => null
+			});
+		}
+		protected override void OnRestoreInstanceState(Bundle savedInstanceState)
+		{
+			base.OnRestoreInstanceState(savedInstanceState);
+
+			if (XyzuPlayer.Instance.ServiceConnectionState == ServiceConnectionChangedEventArgs.Events.Connected)
+				switch (savedInstanceState.GetString(BundleKeys.SlidingUpPanel_State))
+				{
+					case "Expanded":
+						SlidingUpPanel?.SetPanelState(SlidingUpPanelLayout.PanelState.Expanded);
+						ConfigureNowPlayingState(SlidingUpPanelLayout.PanelState.Dragging, SlidingUpPanelLayout.PanelState.Expanded);
+						break;
+					case "Collapsed":
+						SlidingUpPanel?.SetPanelState(SlidingUpPanelLayout.PanelState.Collapsed);
+						ConfigureNowPlayingState(SlidingUpPanelLayout.PanelState.Dragging, SlidingUpPanelLayout.PanelState.Collapsed);
+						break;
+
+					case "Hidden": break;
+					case "Dragging": break;
+					default: break;
+				}				
 		}
 		protected override void OnUiModeChanged(Configuration newConfig)
 		{
@@ -158,15 +198,15 @@ namespace Xyzu.Activities
 			};
 		}
 
-		public virtual void OnRefresh()
-		{ }
-
 		protected virtual void OnDialogRequested(DialogFragment? dialogfragment)
 		{
 			dialogfragment?.SetStyle(DialogFragment.StyleNoFrame, 0);
 			dialogfragment?.Show(SupportFragmentManager, string.Empty);
 		}
 		protected virtual void OnFloatingactionbuttonClick(object sender, EventArgs args)
+		{ }
+
+		public virtual void OnRefresh()
 		{ }
 	}
 }

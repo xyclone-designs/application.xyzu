@@ -52,6 +52,7 @@ namespace Xyzu.Activities
 		}
 		protected CardView? ViewNowPlayingContainer { get; set; }
 		protected float? ViewNowPlayingContainerRadius { get; set; }
+		protected ViewTreeObserverOnGlobalLayoutListener? ViewNowPlayingGlobalLayoutListener { get; set; }
 		protected SlidingUpPanelLayout? SlidingUpPanel { get; set; }
 		protected SlidingUpPanelLayout.IPanelSlideListener? SlidingUpPanelSlideListener { get; set; }
 
@@ -73,48 +74,6 @@ namespace Xyzu.Activities
 					default: break;
 				}
 		}
-		private void ConfigureNowPlayingState(SlidingUpPanelLayout.PanelState state1, SlidingUpPanelLayout.PanelState state2)
-		{
-			if (ViewNowPlaying is null)
-				return;
-
-			switch (true)
-			{
-				// Collapsed => Dragging
-				case true when
-				state1 == SlidingUpPanelLayout.PanelState.Collapsed &&
-				state2 == SlidingUpPanelLayout.PanelState.Dragging:
-					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Expand);
-					break;
-
-				// Dragging => Expanded
-				case true when
-				state1 == SlidingUpPanelLayout.PanelState.Dragging &&
-				state2 == SlidingUpPanelLayout.PanelState.Expanded:
-					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Expand);
-					ViewNowPlaying.SetInterpolatedProgress(1);
-					break;
-
-				// Expanded => Dragging 
-				case true when
-				state1 == SlidingUpPanelLayout.PanelState.Expanded &&
-				state2 == SlidingUpPanelLayout.PanelState.Dragging:
-					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Collapse);
-					break;
-
-				// Dragging => Collapsed
-				case true when
-				state1 == SlidingUpPanelLayout.PanelState.Dragging &&
-				state2 == SlidingUpPanelLayout.PanelState.Collapsed:
-					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Collapse);
-					ViewNowPlaying.SetInterpolatedProgress(1);
-					break;
-
-				default: break;
-			}
-		}
-
-
 		private bool ConfigureSlidingUpPanelHeight(bool force = false)
 		{
 			bool wasinitial = false;
@@ -201,7 +160,7 @@ namespace Xyzu.Activities
 				else
 				{
 					ViewNowPlaying.ConstraintSetExpanded?.ConstrainHeight(NowPlayingView.Ids.ArtworkDetails_Space, artworkdetailsspaceheight);
-					ViewNowPlaying.ConstraintSetExpanded?.ApplyTo(ViewNowPlaying);		  
+					ViewNowPlaying.ConstraintSetExpanded?.ApplyTo(ViewNowPlaying);
 
 					ViewNowPlaying.ConstraintSetCollapsed?.ConstrainHeight(NowPlayingView.Ids.ArtworkDetails_Space, 0);
 					ViewNowPlaying.ConstraintSetCollapsed?.ApplyTo(ViewNowPlaying);
@@ -218,7 +177,119 @@ namespace Xyzu.Activities
 
 			return wasinitial;
 		}
+		private void ConfigureNowPlayingState(SlidingUpPanelLayout.PanelState state1, SlidingUpPanelLayout.PanelState state2)
+		{
+			if (ViewNowPlaying is null)
+				return;
 
+			switch (true)
+			{
+				// Collapsed => Dragging
+				case true when
+				state1 == SlidingUpPanelLayout.PanelState.Collapsed &&
+				state2 == SlidingUpPanelLayout.PanelState.Dragging:
+					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Expand);
+					break;
+
+				// Dragging => Expanded
+				case true when
+				state1 == SlidingUpPanelLayout.PanelState.Dragging &&
+				state2 == SlidingUpPanelLayout.PanelState.Expanded:
+					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Expand);
+					ViewNowPlaying.SetInterpolatedProgress(1);
+					break;
+
+				// Expanded => Dragging 
+				case true when
+				state1 == SlidingUpPanelLayout.PanelState.Expanded &&
+				state2 == SlidingUpPanelLayout.PanelState.Dragging:
+					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Collapse);
+					break;
+
+				// Dragging => Collapsed
+				case true when
+				state1 == SlidingUpPanelLayout.PanelState.Dragging &&
+				state2 == SlidingUpPanelLayout.PanelState.Collapsed:
+					ViewNowPlaying.SetTransition(NowPlayingView.Ids.MotionScene.Transitions.Collapse);
+					ViewNowPlaying.SetInterpolatedProgress(1);
+					break;
+
+				default: break;
+			}
+		}
+
+		protected virtual void OnViewNowPlayingOperation(NowPlayingView.ViewOperationEventArgs args)
+		{
+			switch (args.ViewOperation)
+			{
+				case NowPlayingView.ViewOperations.PressPlayPauseRandom:
+					MenuOptionsUtils.VariableContainer variables = new MenuOptionsUtils.VariableContainer { Index = -1 };
+					switch (CurrentLibraryFragment?.LibraryType)
+					{
+						case LibraryTypes.LibraryAlbums when FragmentLibraryAlbums.View != null:
+							variables.Albums = XyzuLibrary.Instance.Albums
+								.GetAlbums(null, new IAlbum.Default<bool>(true))
+								.Sort(FragmentLibraryAlbums.View.Settings.SortKey, FragmentLibraryAlbums.View.Settings.IsReversed);
+							break;
+						case LibraryTypes.LibraryAlbum when FragmentLibraryAlbum.View != null:
+							variables.Songs = XyzuLibrary.Instance.Songs
+								.GetSongs(ILibraryIIdentifiers.FromAlbum(FragmentLibraryAlbum.View.Album), new ISong.Default<bool>(true))
+								.Sort(FragmentLibraryAlbum.View.Settings.SongsSortKey, FragmentLibraryAlbum.View.Settings.SongsIsReversed);
+							break;
+
+						case LibraryTypes.LibraryArtists when FragmentLibraryArtists.View != null:
+							variables.Artists = XyzuLibrary.Instance.Artists
+								.GetArtists(null, new IArtist.Default<bool>(true))
+								.Sort(FragmentLibraryArtists.View.Settings.SortKey, FragmentLibraryArtists.View.Settings.IsReversed);
+							break;
+						case LibraryTypes.LibraryArtist when FragmentLibraryArtist.View != null:
+							variables.Songs = XyzuLibrary.Instance.Songs
+								.GetSongs(ILibraryIIdentifiers.FromArtist(FragmentLibraryArtist.View.Artist), new ISong.Default<bool>(true))
+								.Sort(FragmentLibraryArtist.View.Settings.SongsSortKey, FragmentLibraryArtist.View.Settings.SongsIsReversed);
+							break;
+
+						case LibraryTypes.LibraryGenres when FragmentLibraryGenres.View != null:
+							variables.Genres = XyzuLibrary.Instance.Genres
+								.GetGenres(null, new IGenre.Default<bool>(true))
+								.Sort(FragmentLibraryGenres.View.Settings.SortKey, FragmentLibraryGenres.View.Settings.IsReversed);
+							break;
+						case LibraryTypes.LibraryGenre when FragmentLibraryGenre.View != null:
+							variables.Songs = XyzuLibrary.Instance.Songs
+								.GetSongs(ILibraryIIdentifiers.FromGenre(FragmentLibraryGenre.View.Genre), new ISong.Default<bool>(true))
+								.Sort(FragmentLibraryGenre.View.Settings.SongsSortKey, FragmentLibraryGenre.View.Settings.SongsIsReversed);
+							break;
+
+						case LibraryTypes.LibraryPlaylists when FragmentLibraryPlaylists.View != null:
+							variables.Playlists = XyzuLibrary.Instance.Playlists
+								.GetPlaylists(null, new IPlaylist.Default<bool>(true))
+								.Sort(FragmentLibraryPlaylists.View.Settings.SortKey, FragmentLibraryPlaylists.View.Settings.IsReversed);
+							break;
+						case LibraryTypes.LibraryPlaylist when FragmentLibraryPlaylist.View != null:
+							variables.Songs = XyzuLibrary.Instance.Songs
+								.GetSongs(ILibraryIIdentifiers.FromPlaylist(FragmentLibraryPlaylist.View.Playlist), new ISong.Default<bool>(true))
+								.Sort(FragmentLibraryPlaylist.View.Settings.SongsSortKey, FragmentLibraryPlaylist.View.Settings.SongsIsReversed);
+							break;
+
+						case LibraryTypes.LibrarySongs when FragmentLibrarySongs.View != null:
+							variables.Songs = XyzuLibrary.Instance.Songs
+								.GetSongs(null, new ISong.Default<bool>(true))
+								.Sort(FragmentLibrarySongs.View.Settings.SortKey, FragmentLibrarySongs.View.Settings.IsReversed);
+							break;
+
+						default: break;
+					}
+
+					MenuOptionsUtils.Play(variables);
+					break;
+
+				case NowPlayingView.ViewOperations.PressView:
+					if (SlidingUpPanel != null && SlidingUpPanel.GetPanelState() != SlidingUpPanelLayout.PanelState.Expanded)
+						SlidingUpPanel.SetPanelState(SlidingUpPanelLayout.PanelState.Expanded);
+					break;
+
+				default: break;
+			}
+		}
 		protected virtual void OnPanelSlideAction(View view, float percentage)
 		{
 			if (ViewNowPlayingContainer != null)
@@ -286,94 +357,26 @@ namespace Xyzu.Activities
 			ConfigureSlidingUpPanelHeight();
 			ConfigureNowPlayingArtworkDetailsSpace();
 
-			SlidingUpPanel?.AddPanelSlideListener(SlidingUpPanelSlideListener ??= new PanelSlideListener
-			{
-				OnPanelSlideAction = OnPanelSlideAction,
-				OnPanelStateChangedAction = OnPanelStateChangedAction
-			});
+			if (SlidingUpPanelSlideListener is null)
+				SlidingUpPanel?.AddPanelSlideListener(SlidingUpPanelSlideListener = new PanelSlideListener
+				{
+					OnPanelSlideAction = OnPanelSlideAction,
+					OnPanelStateChangedAction = OnPanelStateChangedAction
+				});
 
 			if (ViewNowPlaying != null)
 			{
-				ViewNowPlaying.ViewTreeObserver?.AddOnGlobalLayoutListener(new ViewTreeObserverOnGlobalLayoutListener
-				{
-					OnGlobalLayoutAction = () =>
+				ViewNowPlaying.OnViewOperationAction = OnViewNowPlayingOperation;
+
+				if (ViewNowPlayingGlobalLayoutListener is null)
+					ViewNowPlaying.ViewTreeObserver?.AddOnGlobalLayoutListener(ViewNowPlayingGlobalLayoutListener = new ViewTreeObserverOnGlobalLayoutListener
 					{
-						ConfigureSlidingUpPanelHeight();
-						ConfigureNowPlayingArtworkDetailsSpace();
-					}
-				});
-				ViewNowPlaying.OnViewOperationAction = args =>
-				{
-					switch (args.ViewOperation)
-					{
-						case NowPlayingView.ViewOperations.PressPlayPauseRandom:
-							MenuOptionsUtils.VariableContainer variables = new MenuOptionsUtils.VariableContainer { Index = -1 };
-							switch (CurrentLibraryFragment?.LibraryType)
-							{
-								case LibraryTypes.LibraryAlbums when FragmentLibraryAlbums.View != null:
-									variables.Albums = XyzuLibrary.Instance.Albums
-										.GetAlbums(null, new IAlbum.Default<bool>(true))
-										.Sort(FragmentLibraryAlbums.View.Settings.SortKey, FragmentLibraryAlbums.View.Settings.IsReversed);
-									break;
-								case LibraryTypes.LibraryAlbum when FragmentLibraryAlbum.View != null:
-									variables.Songs = XyzuLibrary.Instance.Songs
-										.GetSongs(ILibraryIIdentifiers.FromAlbum(FragmentLibraryAlbum.View.Album), new ISong.Default<bool>(true))
-										.Sort(FragmentLibraryAlbum.View.Settings.SongsSortKey, FragmentLibraryAlbum.View.Settings.SongsIsReversed);
-									break;
-
-								case LibraryTypes.LibraryArtists when FragmentLibraryArtists.View != null:
-									variables.Artists = XyzuLibrary.Instance.Artists
-										.GetArtists(null, new IArtist.Default<bool>(true))
-										.Sort(FragmentLibraryArtists.View.Settings.SortKey, FragmentLibraryArtists.View.Settings.IsReversed);
-									break;
-								case LibraryTypes.LibraryArtist when FragmentLibraryArtist.View != null:
-									variables.Songs = XyzuLibrary.Instance.Songs
-										.GetSongs(ILibraryIIdentifiers.FromArtist(FragmentLibraryArtist.View.Artist), new ISong.Default<bool>(true))
-										.Sort(FragmentLibraryArtist.View.Settings.SongsSortKey, FragmentLibraryArtist.View.Settings.SongsIsReversed);
-									break;
-
-								case LibraryTypes.LibraryGenres when FragmentLibraryGenres.View != null:
-									variables.Genres = XyzuLibrary.Instance.Genres
-										.GetGenres(null, new IGenre.Default<bool>(true))
-										.Sort(FragmentLibraryGenres.View.Settings.SortKey, FragmentLibraryGenres.View.Settings.IsReversed);
-									break;
-								case LibraryTypes.LibraryGenre when FragmentLibraryGenre.View != null:
-									variables.Songs = XyzuLibrary.Instance.Songs
-										.GetSongs(ILibraryIIdentifiers.FromGenre(FragmentLibraryGenre.View.Genre), new ISong.Default<bool>(true))
-										.Sort(FragmentLibraryGenre.View.Settings.SongsSortKey, FragmentLibraryGenre.View.Settings.SongsIsReversed);
-									break;
-
-								case LibraryTypes.LibraryPlaylists when FragmentLibraryPlaylists.View != null:
-									variables.Playlists = XyzuLibrary.Instance.Playlists
-										.GetPlaylists(null, new IPlaylist.Default<bool>(true))
-										.Sort(FragmentLibraryPlaylists.View.Settings.SortKey, FragmentLibraryPlaylists.View.Settings.IsReversed);
-									break;
-								case LibraryTypes.LibraryPlaylist when FragmentLibraryPlaylist.View != null:
-									variables.Songs = XyzuLibrary.Instance.Songs
-										.GetSongs(ILibraryIIdentifiers.FromPlaylist(FragmentLibraryPlaylist.View.Playlist), new ISong.Default<bool>(true))
-										.Sort(FragmentLibraryPlaylist.View.Settings.SongsSortKey, FragmentLibraryPlaylist.View.Settings.SongsIsReversed);
-									break;
-
-								case LibraryTypes.LibrarySongs when FragmentLibrarySongs.View != null:
-									variables.Songs = XyzuLibrary.Instance.Songs
-										.GetSongs(null, new ISong.Default<bool>(true))
-										.Sort(FragmentLibrarySongs.View.Settings.SortKey, FragmentLibrarySongs.View.Settings.IsReversed);
-									break;
-
-								default: break;
-							}
-
-							MenuOptionsUtils.Play(variables);
-							break;
-
-						case NowPlayingView.ViewOperations.PressView:
-							if (SlidingUpPanel != null && SlidingUpPanel.GetPanelState() != SlidingUpPanelLayout.PanelState.Expanded)
-								SlidingUpPanel.SetPanelState(SlidingUpPanelLayout.PanelState.Expanded);
-							break;
-
-						default: break;
-					}
-				};
+						OnGlobalLayoutAction = () =>
+						{
+							ConfigureSlidingUpPanelHeight();
+							ConfigureNowPlayingArtworkDetailsSpace();
+						}
+					});
 			}
 		}
 	}

@@ -11,9 +11,9 @@ using AndroidX.Fragment.App;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Contexts;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Xyzu.Settings.System;
 
 using AndroidEnvironment = Android.OS.Environment;

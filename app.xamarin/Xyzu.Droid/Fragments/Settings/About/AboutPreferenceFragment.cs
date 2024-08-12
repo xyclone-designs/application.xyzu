@@ -18,6 +18,8 @@ namespace Xyzu.Fragments.Settings.About
 			base.OnResume();
 
 			AppCompatActivity?.SetTitle(Resource.String.settings_about_title);
+
+			AndroidX.Preference.Preference
 		}
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{

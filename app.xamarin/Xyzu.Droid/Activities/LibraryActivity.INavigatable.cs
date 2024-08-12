@@ -9,6 +9,14 @@ namespace Xyzu.Activities
 {
 	public partial class LibraryActivity : ILibrary.INavigatable
 	{
+		protected void Navigate()
+		{
+			ActivityCancellationTokenSourceCancel();
+
+			if (SlidingUpPanel != null && SlidingUpPanel.GetPanelState() != SlidingUpPanelLayout.PanelState.Hidden)
+				SlidingUpPanel.SetPanelState(SlidingUpPanelLayout.PanelState.Collapsed);
+		}
+
 		public virtual void NavigateModel(IModel? model)
 		{
 			switch (true)
@@ -39,49 +47,31 @@ namespace Xyzu.Activities
 		}
 		public virtual void NavigateAlbum(IAlbum? album)
 		{
-			ActivityCancellationTokenSourceCancel();
-
-			if (SlidingUpPanel != null && SlidingUpPanel.GetPanelState() != SlidingUpPanelLayout.PanelState.Hidden)
-				SlidingUpPanel.SetPanelState(SlidingUpPanelLayout.PanelState.Collapsed);
+			Navigate();
 		}
 		public virtual void NavigateArtist(IArtist? artist)
 		{
-			ActivityCancellationTokenSourceCancel();
-
-			if (SlidingUpPanel != null && SlidingUpPanel.GetPanelState() != SlidingUpPanelLayout.PanelState.Hidden)
-				SlidingUpPanel.SetPanelState(SlidingUpPanelLayout.PanelState.Collapsed);
+			Navigate();
 		}
 		public virtual void NavigateGenre(IGenre? genre)
 		{
-			ActivityCancellationTokenSourceCancel();
-
-			if (SlidingUpPanel != null && SlidingUpPanel.GetPanelState() != SlidingUpPanelLayout.PanelState.Hidden)
-				SlidingUpPanel.SetPanelState(SlidingUpPanelLayout.PanelState.Collapsed);
+			Navigate();
 		}
 		public virtual void NavigatePlaylist(IPlaylist? playlist)
 		{
-			ActivityCancellationTokenSourceCancel();
-
-			if (SlidingUpPanel != null && SlidingUpPanel.GetPanelState() != SlidingUpPanelLayout.PanelState.Hidden)
-				SlidingUpPanel.SetPanelState(SlidingUpPanelLayout.PanelState.Collapsed);
+			Navigate();
 		}
 		public virtual void NavigateQueue()
 		{
-			ActivityCancellationTokenSourceCancel();
-
-			if (SlidingUpPanel != null && SlidingUpPanel.GetPanelState() != SlidingUpPanelLayout.PanelState.Hidden)
-				SlidingUpPanel.SetPanelState(SlidingUpPanelLayout.PanelState.Collapsed);
+			Navigate();
 		}
 		public virtual void NavigateSearch()
 		{
-			ActivityCancellationTokenSourceCancel();
-
-			if (SlidingUpPanel != null && SlidingUpPanel.GetPanelState() != SlidingUpPanelLayout.PanelState.Hidden)
-				SlidingUpPanel.SetPanelState(SlidingUpPanelLayout.PanelState.Collapsed);
+			Navigate();
 		}
 		public virtual void NavigateSong(ISong? song)
 		{
-			SlidingUpPanel?.SetPanelState(SlidingUpPanelLayout.PanelState.Expanded);
+			Navigate();
 		}
 	}
 }

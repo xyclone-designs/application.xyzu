@@ -162,7 +162,7 @@ namespace Xyzu.Activities
 							ContentIntent = PendingIntent.GetActivity(
 								requestCode: 0,
 								context: xyzuplayer.Context,
-								flags: PendingIntentFlags.OneShot,
+								flags: PendingIntentFlags.Mutable,
 								intent: XyzuSettings.Utils.MainActivityIntent(this, null).PutExtra(LibraryActivity.IntentKeys.IsFromNotification, true)),
 							Icons = new Dictionary<string, int>
 							{

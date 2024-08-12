@@ -246,6 +246,8 @@ namespace Xyzu.Player.Exoplayer
 		{
 			switch (startId)
 			{
+				case StartIds.PostBind when Binder.PreviouslyBound:
+					return StartCommandResult.Sticky;
 				case StartIds.PostBind when Binder.PreviouslyBound is false:
 				case StartIds.RefreshAll:
 					RefreshQueue();
