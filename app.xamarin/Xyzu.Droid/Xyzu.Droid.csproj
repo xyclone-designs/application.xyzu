@@ -171,6 +171,7 @@
     <Compile Include="Preference\ListPreference.cs" />
     <Compile Include="Preference\MultiSelectListPreference.cs" />
     <Compile Include="Preference\NavigationBarInsetPreference.cs" />
+    <Compile Include="Preference\PlainPreference.cs" />
     <Compile Include="Preference\ViewPreference.cs" />
     <Compile Include="Preference\SeekBarPreference.cs" />
     <Compile Include="Preference\SeekBarVerticalPreference.cs" />

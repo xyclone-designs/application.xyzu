@@ -95,9 +95,28 @@ namespace Xyzu
 		{
 			public const string FilePrividerAuthority = "co.za.xyclonedesigns.xyzu.provider";
 
-			public static Intent? Chooser_ShareFiles(Context context, params JavaURI[] uris)
+			public static Intent? App_Email(Context? context, string? address)
 			{
-				IList<IParcelable> parcelables = uris
+				Intent intent = new Intent(Intent.ActionSendto)
+					.SetData(AndroidUri.Parse(string.Format("mailto:{0}", address)));
+
+				Intent? intentchooser = Intent.CreateChooser(intent, null as string);
+
+				return intentchooser;
+			}
+			public static Intent? App_Browser(Context? context, string? url)
+			{
+				AndroidUri? uri = AndroidUri.Parse(url);
+				Intent intent = new Intent(Intent.ActionView, uri);
+
+				Intent? intentchooser = Intent.CreateChooser(intent, null as string);
+
+				return intent;
+			}
+
+			public static Intent? Chooser_ShareFiles(Context? context, params JavaURI[] uris)
+			{
+				IList<IParcelable> parcelables = context is null ? new List<IParcelable> { } : uris
 					.Select(uri => FileProvider.GetUriForFile(context, FilePrividerAuthority, new JavaFile(uri)))
 					.OfType<IParcelable>()
 					.ToList();
@@ -107,19 +126,19 @@ namespace Xyzu
 					.SetType(IntentTypes.Audio.AsIntentType())
 					.PutParcelableArrayListExtra(Intent.ExtraStream, parcelables);
 
-				Intent? intentchooser = Intent.CreateChooser(intent, context.GetString(Resource.String.intentchooser_share_files))?
+				Intent? intentchooser = Intent.CreateChooser(intent, context?.GetString(Resource.String.intentchooser_share_files))?
 					.AddFlags(ActivityFlags.GrantReadUriPermission | ActivityFlags.GrantPersistableUriPermission);
 
 				return intentchooser;
 			}		 
-			public static Intent? Chooser_ViewErrorLog(Context context, JavaFile file)
+			public static Intent? Chooser_ViewErrorLog(Context? context, JavaFile file)
 			{
-				AndroidUri? androiduri = FileProvider.GetUriForFile(context, FilePrividerAuthority, file);
+				AndroidUri? androiduri = context is null ? null : FileProvider.GetUriForFile(context, FilePrividerAuthority, file);
 
 				Intent intent = new Intent(Intent.ActionView);
 				intent.SetDataAndType(androiduri, "text/plain");
 
-				Intent? intentchooser = Intent.CreateChooser(intent, context.GetString(Resource.String.intentchooser_view_errorlog));
+				Intent? intentchooser = Intent.CreateChooser(intent, context?.GetString(Resource.String.intentchooser_view_errorlog));
 
 				return intentchooser;
 			}

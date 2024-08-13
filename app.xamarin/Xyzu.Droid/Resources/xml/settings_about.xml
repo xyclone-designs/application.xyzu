@@ -1,7 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <androidx.preference.Preference about />
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_about_version_preference_key"
+      app:title="@string/settings_about_version_title"
+      app:summary="@string/settings_about_version_description" />
+  
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_about_copyright_preference_key"
+      app:title="@string/settings_about_copyright_title"
+      app:summary="@string/settings_about_copyright_description" />
+
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_about_legal_preference_key"
+      app:title="@string/settings_about_legal_title"
+      app:summary="@string/settings_about_legal_description" />
+
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_about_information_email_developers_preference_key"
+      app:title="@string/settings_about_information_email_developers_title"
+      app:summary="@string/settings_about_information_email_developers_description" />
+
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_about_information_website_xyclonedesigns_preference_key"
+      app:title="@string/settings_about_information_website_xyclonedesigns_title"
+      app:summary="@string/settings_about_information_website_xyclonedesigns_description" />
+
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="false"
+      app:key="settings_about_information_website_github_preference_key"
+      app:title="@string/settings_about_information_website_github_title"
+      app:summary="@string/settings_about_information_website_github_description" />
+
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_exoplayer_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_exoplayer"
+      app:title="@string/settings_about_licenses_exoplayer_title"
+      app:summary="@string/settings_about_licenses_exoplayer_description" />
+
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_sqlnetpcl_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_sqlnetpcl"
+      app:title="@string/settings_about_licenses_sqlnetpcl_title"
+      app:summary="@string/settings_about_licenses_sqlnetpcl_description" />
+
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_id3_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_id3"
+      app:title="@string/settings_about_licenses_id3_title"
+      app:summary="@string/settings_about_licenses_id3_description" />
+
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_taglibsharp_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_taglibsharp"
+      app:title="@string/settings_about_licenses_taglibsharp_title"
+      app:summary="@string/settings_about_licenses_taglibsharp_description" />
+
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_musicbar_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_musicbar"
+      app:title="@string/settings_about_licenses_musicbar_title"
+      app:summary="@string/settings_about_licenses_musicbar_description" />
+
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_glide_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_glide"
+      app:title="@string/settings_about_licenses_glide_title"
+      app:summary="@string/settings_about_licenses_glide_description" />
+
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_picasso_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_picasso"
+      app:title="@string/settings_about_licenses_picasso_title"
+      app:summary="@string/settings_about_licenses_picasso_description" />
+
+  <xyzu.preference.PlainPreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_colorpicker_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_colorpicker"
+      app:title="@string/settings_about_licenses_colorpicker_title"
+      app:summary="@string/settings_about_licenses_colorpicker_description" />
   
   <xyzu.preference.NavigationBarInsetPreference />
 

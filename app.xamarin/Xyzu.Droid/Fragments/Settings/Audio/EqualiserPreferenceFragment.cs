@@ -88,12 +88,23 @@ namespace Xyzu.Fragments.Settings.Audio
 			}
 		}
 
+		public override bool OnPreferenceClick(AndroidXPreference? preference)
+		{
+			if (preference == CurrentPresetBandsPreference)
+				CurrentPresetBandsPreference.ViewFrame.Visibility = CurrentPresetBandsPreference.ViewFrame.Visibility == Android.Views.ViewStates.Visible
+					? Android.Views.ViewStates.Gone
+					: Android.Views.ViewStates.Visible;
+
+			return true;
+		}
+
 		public override void OnResume()
 		{
 			base.OnResume();
 
 			AppCompatActivity?.SetTitle(Resource.String.settings_audio_equaliser_title);
 
+			AddPreferenceClickHandler(CurrentPresetBandsPreference);
 			AddPreferenceChangeHandler(
 				IsEnabledPreference,
 				CurrentPresetPreference,

@@ -43,31 +43,44 @@ namespace Xyzu.Preference
 		}
 
 		private View? _View;
+		private ContentFrameLayout? _ViewFrame;
 
 		public View? View
 		{
 			get => _View;
 			set
-
 			{
-				ViewFrame?.RemoveAllViews();
-
 				_View = value;
 
-				if (_View != null)
-					ViewFrame?.AddView(_View, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent));
+				if (ViewFrame is null)
+					return;
+
+				ViewFrame.RemoveAllViews();
+
+				if (_View is null)
+					ViewFrame.Visibility = ViewStates.Gone;
+				else
+				{
+					ViewFrame.Visibility = ViewStates.Visible;
+					ViewFrame.AddView(_View, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent));
+				}
 			}
 		}
-		public ContentFrameLayout? ViewFrame { get; protected set; }
+		public ContentFrameLayout? ViewFrame
+		{
+			get => _ViewFrame;
+			set
+			{
+				_ViewFrame = value;
+				View = _View;
+			}
+		}
 
 		public override void OnBindViewHolder(PreferenceViewHolder holder)
 		{
 			base.OnBindViewHolder(holder);
 
 			ViewFrame = holder.FindViewById(Resource.Id.xyzu_preference_viewpreference_contentframelayout) as ContentFrameLayout;
-			
-			if (View != null)
-				ViewFrame?.AddView(View, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent));
 		}
 	}
 }

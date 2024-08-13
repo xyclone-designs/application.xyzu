@@ -3,7 +3,6 @@
 using Android.Graphics;
 using Android.OS;
 using Android.Views;
-using AndroidX.AppCompat.App;
 using AndroidX.Preference;
 
 using System.ComponentModel;
@@ -17,7 +16,7 @@ using AndroidXPreference = AndroidX.Preference.Preference;
 
 namespace Xyzu.Fragments.Settings
 {
-	public abstract class BasePreferenceFragment : PreferenceFragmentCompat, ISettings, AndroidXPreference.IOnPreferenceChangeListener
+	public abstract class BasePreferenceFragment : PreferenceFragmentCompat, ISettings, AndroidXPreference.IOnPreferenceClickListener, AndroidXPreference.IOnPreferenceChangeListener
 	{
 		public SettingsActivity? AppCompatActivity
 		{
@@ -42,6 +41,10 @@ namespace Xyzu.Fragments.Settings
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
+		public virtual bool OnPreferenceClick(AndroidXPreference preference)
+		{
+			return false;
+		}
 		public virtual bool OnPreferenceChange(AndroidXPreference preference, Java.Lang.Object? newValue) 
 		{ 
 			return false; 
@@ -61,12 +64,24 @@ namespace Xyzu.Fragments.Settings
 						default: break;
 					}
 		}
+		protected virtual void AddPreferenceClickHandler(params AndroidXPreference?[] preferences)
+		{
+			foreach (AndroidXPreference? preference in preferences)
+				if (preference != null)
+					preference.OnPreferenceClickListener = this;
+		}			
 		protected virtual void AddPreferenceChangeHandler(params AndroidXPreference?[] preferences)
 		{
 			foreach (AndroidXPreference? preference in preferences)
 				if (preference != null)
 					preference.OnPreferenceChangeListener = this;
 		}			
+		protected virtual void RemovePreferenceClickHandler(params AndroidXPreference?[] preferences)
+		{
+			foreach (AndroidXPreference? preference in preferences)
+				if (preference != null)
+					preference.OnPreferenceClickListener = null;
+		}
 		protected virtual void RemovePreferenceChangeHandler(params AndroidXPreference?[] preferences)
 		{
 			foreach (AndroidXPreference? preference in preferences)
