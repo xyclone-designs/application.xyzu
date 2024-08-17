@@ -4,12 +4,12 @@ using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using AndroidX.AppCompat.App;
-using AndroidX.AppCompat.Widget;
 using AndroidX.Preference;
 
 using System;
 
 using Xyzu.Droid;
+using Xyzu.Views.Preference;
 
 using AndroidXListPreference = AndroidX.Preference.ListPreference;
 
@@ -38,23 +38,24 @@ namespace Xyzu.Preference
 
 		protected virtual void Init(Context context, IAttributeSet? atts)
 		{
-			LayoutResource = Resource.Layout.xyzu_preference_dropdownpreference;
+			LayoutResource = Resource.Layout.xyzu_preference_preference;
+			View = new PreferenceView();
 		}
 
 		int _ValueIndex;
 
-		AlertDialog? Dialog { get; set; }
-		AppCompatTextView? ValueSummary { get; set; }
+		public AlertDialog? Dialog { get; set; }
+		public PreferenceView? View { get; set; }
 
 		void ReloadValueSummary()
 		{
-			if (ValueSummary is null)
+			if (View?.ViewValueSummary is null)
 				return;
 
 			string? valuesummary = GetEntryValues()?[_ValueIndex];
 
-			ValueSummary.SetText(valuesummary, null);
-			ValueSummary.Visibility = valuesummary is null
+			View.ViewValueSummary.SetText(valuesummary, null);
+			View.ViewValueSummary.Visibility = valuesummary is null
 				? Android.Views.ViewStates.Gone
 				: Android.Views.ViewStates.Visible;
 		}
@@ -76,9 +77,8 @@ namespace Xyzu.Preference
 		}
 		public override void OnBindViewHolder(PreferenceViewHolder holder)
 		{
+			View?.OnBindViewHolder(holder);
 			base.OnBindViewHolder(holder);
-
-			ValueSummary = holder.FindViewById(Resource.Id.xyzu_preference_preference_valuesummary) as AppCompatTextView;
 
 			ReloadValueSummary();
 		}

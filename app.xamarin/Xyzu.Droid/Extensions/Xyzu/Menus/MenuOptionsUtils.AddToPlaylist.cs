@@ -132,7 +132,7 @@ namespace Xyzu.Menus
 
 					case true when playlistnames.Contains(text):
 						optioncreateandviewview.CreateButton.Enabled = false;
-						optioncreateandviewview.SetMessageError(string.Format("'{0}' {1}", text, optioncreateandviewview.Context?.Resources?.GetString(Resource.String.already_exists) ?? string.Empty));
+						optioncreateandviewview.SetMessageError(string.Format("'{0}' {1}", text, optioncreateandviewview.Context?.Resources?.GetString(Resource.String.extra_alreadyexists) ?? string.Empty));
 						break;
 
 					default:

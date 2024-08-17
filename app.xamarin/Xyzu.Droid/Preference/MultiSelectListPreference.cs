@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Xyzu.Droid;
+using Xyzu.Views.Preference;
 
 using AndroidXMultiSelectListPreference = AndroidX.Preference.MultiSelectListPreference;
 
@@ -41,12 +42,13 @@ namespace Xyzu.Preference
 
 		protected virtual void Init(Context context, IAttributeSet? atts)
 		{
-			LayoutResource = Resource.Layout.xyzu_preference_dropdownpreference;
+			LayoutResource = Resource.Layout.xyzu_preference_preference;
+			View = new PreferenceView();
 		}
 
 		public AlertDialog? Dialog { get; protected set; }
 		public View? DialogView { get; protected set; }
-		public AppCompatTextView? ValueSummary { get; protected set; }
+		public PreferenceView? View { get; set; }
 
 		public int? NeutralButtonTextId { get; set; }
 		public View.IOnClickListener? NeutralButtonOnClickListener { get; set; }
@@ -73,13 +75,11 @@ namespace Xyzu.Preference
 
 		public override void OnBindViewHolder(PreferenceViewHolder holder)
 		{
+			View?.OnBindViewHolder(holder);
 			base.OnBindViewHolder(holder);
-
-			ValueSummary = holder.FindViewById(Resource.Id.xyzu_preference_preference_valuesummary) as AppCompatTextView;
 
 			SetValueSummary(null);
 		}
-
 		public override bool CallChangeListener(Java.Lang.Object? newValue)
 		{
 			SetValueSummary(null);
@@ -89,17 +89,17 @@ namespace Xyzu.Preference
 
 		public void SetValueSummary(string? valuesummary)
 		{
-			if (ValueSummary is null)
+			if (View?.ViewValueSummary is null)
 				return;
 
 			valuesummary ??= Values?.Any() ?? false
 				? null
 				: string.Join(", ", Values);
 
-			ValueSummary.SetText(valuesummary, null);
-			ValueSummary.Visibility = valuesummary is null
-				? Android.Views.ViewStates.Gone
-				: Android.Views.ViewStates.Visible;
+			View.ViewValueSummary.SetText(valuesummary, null);
+			View.ViewValueSummary.Visibility = valuesummary is null
+				? ViewStates.Gone
+				: ViewStates.Visible;
 		}
 	}
 }

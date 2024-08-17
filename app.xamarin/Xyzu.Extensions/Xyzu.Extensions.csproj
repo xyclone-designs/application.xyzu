@@ -119,6 +119,7 @@
     <Compile Include="Android\Views\MenuItemOnActionExpandListener.cs" />
     <Compile Include="Android\Views\MenuItemOnMenuItemClickListener.cs" />
     <Compile Include="Android\Views\ViewPropertyAnimatorExtensions.cs" />
+    <Compile Include="Android\Widget\OnCheckedChangeListener.cs" />
     <Compile Include="Android\Widget\PopupWindowExtensions.cs" />
     <Compile Include="Android\Widget\CompoundButtonExtensions.cs" />
     <Compile Include="Android\Widget\TextViewExtensions.cs" />

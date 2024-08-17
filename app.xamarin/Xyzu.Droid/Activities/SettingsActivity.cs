@@ -44,9 +44,9 @@ namespace Xyzu.Activities
 			SupportActionBar?.SetDisplayShowHomeEnabled(true);
 			SupportActionBar?.SetDisplayHomeAsUpEnabled(true);
 		}
-		protected override void OnStart()
+		protected override void OnResume()
 		{
-			base.OnStart();
+			base.OnResume();
 
 			SupportFragmentManager?
 				.BeginTransaction()

@@ -78,8 +78,6 @@ namespace Xyzu.Preference
 
 		public override void OnBindViewHolder(PreferenceViewHolder holder)
 		{
-			base.OnBindViewHolder(holder);
-
 			Seekbar = holder.FindViewById(Resource.Id.seekbar) as AppCompatSeekBar;
 			MinTextView = holder.FindViewById(Resource.Id.seekbar_min) as AppCompatTextView;
 			ValueTextView = holder.FindViewById(Resource.Id.seekbar_value) as AppCompatTextView;
@@ -88,6 +86,8 @@ namespace Xyzu.Preference
 			MinTextView?.SetText(Min.ToString(), null);
 			ValueTextView?.SetText(Value.ToString(), null);
 			MaxTextView?.SetText(Max.ToString(), null);
+
+			base.OnBindViewHolder(holder);
 		}
 	}
 }

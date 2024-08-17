@@ -10,27 +10,29 @@
     <include
         android:id="@+id/include_xyzu_preference_preference"
         layout="@layout/xyzu_preference_preference"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
         
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/spinner" />
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        style="@style/Xyzu.Preference.Spinner"
-        android:id="@id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp24"
-        android:layout_marginBottom="@dimen/dp16"
-        android:layout_marginHorizontal="@dimen/dp16"
-        
-        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintWidth="match_parent"
         app:layout_constraintHeight="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/include_xyzu_preference_preference" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_preference_dropdownpreference_contentframelayout"/>
+
+    <androidx.appcompat.widget.ContentFrameLayout
+        android:id="@+id/xyzu_preference_dropdownpreference_contentframelayout"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginBottom="@dimen/dp16"
+        android:layout_marginHorizontal="@dimen/dp16"
+        android:visibility="gone"
+        
+        app:layout_constraintWidth="match_parent"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/include_xyzu_preference_preference" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

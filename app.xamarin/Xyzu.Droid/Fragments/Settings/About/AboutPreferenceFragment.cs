@@ -3,10 +3,14 @@
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Views;
+
+using System.IO;
 
 using Xyzu.Droid;
 using Xyzu.Preference;
 using Xyzu.Settings.About;
+using Xyzu.Views.Preference;
 
 using AndroidXPreference = AndroidX.Preference.Preference;
 
@@ -45,14 +49,49 @@ namespace Xyzu.Fragments.Settings.About
 		public PlainPreference? Information_Website_XycloneDesignsPreference { get; set; }
 		public PlainPreference? Information_Website_GithubPreference { get; set; }
 		public PlainPreference? LicensesPreference { get; set; }
-		public PlainPreference? Licenses_ExoPlayerPreference { get; set; }
-		public PlainPreference? Licenses_SqlnetpclPreference { get; set; }
-		public PlainPreference? Licenses_Id3Preference { get; set; }
-		public PlainPreference? Licenses_TagLibSharpPreference { get; set; }
-		public PlainPreference? Licenses_MusicBarPreference { get; set; }
-		public PlainPreference? Licenses_GlidePreference { get; set; }
-		public PlainPreference? Licenses_PicassoPreference { get; set; }
-		public PlainPreference? Licenses_ColorPickerPreference { get; set; }
+		public DropdownPreference? Licenses_ExoPlayerPreference { get; set; }
+		public DropdownPreference? Licenses_SqlnetpclPreference { get; set; }
+		public DropdownPreference? Licenses_Id3Preference { get; set; }
+		public DropdownPreference? Licenses_TagLibSharpPreference { get; set; }
+		public DropdownPreference? Licenses_MusicBarPreference { get; set; }
+		public DropdownPreference? Licenses_GlidePreference { get; set; }
+		public DropdownPreference? Licenses_PicassoPreference { get; set; }
+		public DropdownPreference? Licenses_ColorPickerPreference { get; set; }
+
+		protected override void OnBindPreferences()
+		{
+			base.OnBindPreferences();
+
+			if (Context?.Assets is null)
+				return;
+
+			using Stream exoplayerstream = Context.Assets.Open("licenses/package_exoplayer.txt");
+			using Stream sqlnetpclstream = Context.Assets.Open("licenses/package_sqlnetpcl.txt");
+			using Stream id3stream = Context.Assets.Open("licenses/package_id3.txt");
+			using Stream taglibsharpstream = Context.Assets.Open("licenses/package_taglibsharp.txt");
+			using Stream musicbarstream = Context.Assets.Open("licenses/package_musicbar.txt");
+			using Stream glidestream = Context.Assets.Open("licenses/package_glide.txt");
+			using Stream picassostream = Context.Assets.Open("licenses/package_picasso.txt");
+			using Stream colorpickerstream = Context.Assets.Open("licenses/package_colorpicker.txt");
+
+			using StreamReader exoplayerstreamreader = new StreamReader(exoplayerstream);
+			using StreamReader sqlnetpclstreamreader = new StreamReader(sqlnetpclstream);
+			using StreamReader id3streamreader = new StreamReader(id3stream);
+			using StreamReader taglibsharpstreamreader = new StreamReader(taglibsharpstream);
+			using StreamReader musicbarstreamreader = new StreamReader(musicbarstream);
+			using StreamReader glidestreamreader = new StreamReader(glidestream);
+			using StreamReader picassostreamreader = new StreamReader(picassostream);
+			using StreamReader colorpickerstreamreader = new StreamReader(colorpickerstream);
+
+			Licenses_ExoPlayerPreference?.SetLibraryItem(this, exoplayerstreamreader.ReadToEnd(), Resource.String.settings_about_licenses_exoplayer_url);
+			Licenses_SqlnetpclPreference?.SetLibraryItem(this, sqlnetpclstreamreader.ReadToEnd(), Resource.String.settings_about_licenses_sqlnetpcl_url);
+			Licenses_Id3Preference?.SetLibraryItem(this, id3streamreader.ReadToEnd(), Resource.String.settings_about_licenses_id3_url);
+			Licenses_TagLibSharpPreference?.SetLibraryItem(this, taglibsharpstreamreader.ReadToEnd(), Resource.String.settings_about_licenses_taglibsharp_url);
+			Licenses_MusicBarPreference?.SetLibraryItem(this, musicbarstreamreader.ReadToEnd(), Resource.String.settings_about_licenses_musicbar_url);
+			Licenses_GlidePreference?.SetLibraryItem(this, glidestreamreader.ReadToEnd(), Resource.String.settings_about_licenses_glide_url);
+			Licenses_PicassoPreference?.SetLibraryItem(this, picassostreamreader.ReadToEnd(), Resource.String.settings_about_licenses_picasso_url);
+			Licenses_ColorPickerPreference?.SetLibraryItem(this, colorpickerstreamreader.ReadToEnd(), Resource.String.settings_about_licenses_colorpicker_url);
+		}
 
 		public override void OnResume()
 		{
@@ -110,28 +149,15 @@ namespace Xyzu.Fragments.Settings.About
 					=> XyzuUtils.Intents.App_Browser(Context, Resources?.GetString(Resource.String.settings_about_information_website_xyclonedesigns_url)),
 				true when preference == Information_Website_GithubPreference
 					=> XyzuUtils.Intents.App_Browser(Context, Resources?.GetString(Resource.String.settings_about_information_website_github_url)),
-				true when preference == Licenses_ExoPlayerPreference
-					=> XyzuUtils.Intents.App_Browser(Context, Resources?.GetString(Resource.String.settings_about_licenses_exoplayer_url)),
-				true when preference == Licenses_SqlnetpclPreference
-					=> XyzuUtils.Intents.App_Browser(Context, Resources?.GetString(Resource.String.settings_about_licenses_sqlnetpcl_url)),
-				true when preference == Licenses_Id3Preference
-					=> XyzuUtils.Intents.App_Browser(Context, Resources?.GetString(Resource.String.settings_about_licenses_id3_url)),
-				true when preference == Licenses_TagLibSharpPreference
-					=> XyzuUtils.Intents.App_Browser(Context, Resources?.GetString(Resource.String.settings_about_licenses_taglibsharp_url)),
-				true when preference == Licenses_MusicBarPreference
-					=> XyzuUtils.Intents.App_Browser(Context, Resources?.GetString(Resource.String.settings_about_licenses_musicbar_url)),
-				true when preference == Licenses_GlidePreference
-					=> XyzuUtils.Intents.App_Browser(Context, Resources?.GetString(Resource.String.settings_about_licenses_glide_url)),
-				true when preference == Licenses_PicassoPreference
-					=> XyzuUtils.Intents.App_Browser(Context, Resources?.GetString(Resource.String.settings_about_licenses_picasso_url)),
-				true when preference == Licenses_ColorPickerPreference
-					=> XyzuUtils.Intents.App_Browser(Context, Resources?.GetString(Resource.String.settings_about_licenses_colorpicker_url)),
 
 				_ => null,
 
 			} is Intent intent) { Activity?.StartActivity(intent); return true; }
 
-			return OnPreferenceClick(preference);
+			if (preference is DropdownPreference dropdownpreference && dropdownpreference.View != null)
+				dropdownpreference.View.Expanded = !dropdownpreference.View.Expanded;
+
+			return base.OnPreferenceClick(preference);
 		}
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
@@ -145,14 +171,28 @@ namespace Xyzu.Fragments.Settings.About
 				Information_Website_XycloneDesignsPreference = FindPreference(Keys.Information_Website_XycloneDesigns) as PlainPreference,
 				Information_Website_GithubPreference = FindPreference(Keys.Information_Website_Github) as PlainPreference,
 				LicensesPreference = FindPreference(Keys.Licenses) as PlainPreference,
-				Licenses_ExoPlayerPreference = FindPreference(Keys.Licenses_ExoPlayer) as PlainPreference,
-				Licenses_SqlnetpclPreference = FindPreference(Keys.Licenses_Sqlnetpcl) as PlainPreference,
-				Licenses_Id3Preference = FindPreference(Keys.Licenses_Id3) as PlainPreference,
-				Licenses_TagLibSharpPreference = FindPreference(Keys.Licenses_TagLibSharp) as PlainPreference,
-				Licenses_MusicBarPreference = FindPreference(Keys.Licenses_MusicBar) as PlainPreference,
-				Licenses_GlidePreference = FindPreference(Keys.Licenses_Glide) as PlainPreference,
-				Licenses_PicassoPreference = FindPreference(Keys.Licenses_Picasso) as PlainPreference,
-				Licenses_ColorPickerPreference = FindPreference(Keys.Licenses_ColorPicker) as PlainPreference);
+				Licenses_ExoPlayerPreference = FindPreference(Keys.Licenses_ExoPlayer) as DropdownPreference,
+				Licenses_SqlnetpclPreference = FindPreference(Keys.Licenses_Sqlnetpcl) as DropdownPreference,
+				Licenses_Id3Preference = FindPreference(Keys.Licenses_Id3) as DropdownPreference,
+				Licenses_TagLibSharpPreference = FindPreference(Keys.Licenses_TagLibSharp) as DropdownPreference,
+				Licenses_MusicBarPreference = FindPreference(Keys.Licenses_MusicBar) as DropdownPreference,
+				Licenses_GlidePreference = FindPreference(Keys.Licenses_Glide) as DropdownPreference,
+				Licenses_PicassoPreference = FindPreference(Keys.Licenses_Picasso) as DropdownPreference,
+				Licenses_ColorPickerPreference = FindPreference(Keys.Licenses_ColorPicker) as DropdownPreference);
+		}
+	}
+
+	public static class AboutPreferenceFragmentExtensions
+	{
+		public static void SetLibraryItem(this DropdownPreference dropdownpreference, AboutPreferenceFragment fragment, string text, int licenseurl)
+		{
+			if (dropdownpreference.View is null)
+				return;
+
+			dropdownpreference.View.ViewAdditionalContentView = LicenseView.ForDropdownPreference(dropdownpreference.Context, text, new OnClickListener(_ =>
+			{
+				fragment.Activity?.StartActivity(XyzuUtils.Intents.App_Browser(dropdownpreference.Context, dropdownpreference.Context.Resources?.GetString(licenseurl)));
+			}));
 		}
 	}
 }

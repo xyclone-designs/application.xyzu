@@ -31,8 +31,6 @@
   <string name="select">Select</string>  
   <string name="selected">Selected</string>  
   <string name="sort">Sort</string>  
-
-  <string name="already_exists">Already Exists</string>  
   
   <string name="add_to_playlist">Add to playlist</string>  
   <string name="add_to_playlist_albums">Add selected albums to playlist</string>  
@@ -57,9 +55,11 @@
   <string name="delete_selected_songs">Delete Selected Songs</string>  
   <string name="delete_warning_action_cant_be_undone">This action cannot be undone</string>  
   
-  <string name="extra_microwavetime_zero">00:00</string>  
-  
-	<string name="intentchooser_view_errorlog">View Error Log</string>
+  <string name="extra_microwavetime_zero">00:00</string>
+  <string name="extra_alreadyexists">Already Exists</string>
+  <string name="extra_presstoviewmore">Press to view more</string>
+
+  <string name="intentchooser_view_errorlog">View Error Log</string>
 	<string name="intentchooser_share_files">Share Files</string>
   
 	<string name="intentchooser_select_all">Select all</string>

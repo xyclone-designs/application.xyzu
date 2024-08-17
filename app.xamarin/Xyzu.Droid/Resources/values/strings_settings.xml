@@ -24,31 +24,36 @@
   <string name="settings_about_licenses_description">License/s relevent to programs and/or packages used in the creation of the Xyzu application</string>
   <string name="settings_about_licenses_colorpicker_title">ColorPicker</string>
   <string name="settings_about_licenses_colorpicker_description">License/s relevent to ColorPicker</string>
-  <string name="settings_about_licenses_colorpicker_url">Placeholder</string>
+  <string name="settings_about_licenses_colorpicker_url">https://github.com/jaredrummler/ColorPicker</string>
   <string name="settings_about_licenses_exoplayer_title">ExoPlayer</string>
   <string name="settings_about_licenses_exoplayer_description">License/s relevent to ExoPlayer</string>
   <string name="settings_about_licenses_exoplayer_url">Placeholder</string>
   <string name="settings_about_licenses_glide_title">Glide</string>
   <string name="settings_about_licenses_glide_description">License/s relevent to Glide</string>
-  <string name="settings_about_licenses_glide_url">Placeholder</string>
+  <string name="settings_about_licenses_glide_url">https://github.com/bumptech/glide</string>
   <string name="settings_about_licenses_id3_title">Id3</string>
   <string name="settings_about_licenses_id3_description">License/s relevent to Id3</string>
   <string name="settings_about_licenses_id3_url">Placeholder</string>
   <string name="settings_about_licenses_musicbar_title">MusicBar</string>
   <string name="settings_about_licenses_musicbar_description">License/s relevent to MusicBar</string>
-  <string name="settings_about_licenses_musicbar_url">Placeholder</string>
+  <string name="settings_about_licenses_musicbar_url">https://github.com/emadabdalrahman/MusicBar</string>
   <string name="settings_about_licenses_picasso_title">Picasso</string>
   <string name="settings_about_licenses_picasso_description">License/s relevent to Picasso</string>
   <string name="settings_about_licenses_picasso_url">Placeholder</string>
+  <string name="settings_about_licenses_slidinguppanel_title">sql-net-pcl</string>
+  <string name="settings_about_licenses_slidinguppanel_description">License/s relevent to sql-net-pcl</string>
+  <string name="settings_about_licenses_slidinguppanel_url">https://github.com/umano/AndroidSlidingUpPanel</string>
   <string name="settings_about_licenses_sqlnetpcl_title">sql-net-pcl</string>
   <string name="settings_about_licenses_sqlnetpcl_description">License/s relevent to sql-net-pcl</string>
-  <string name="settings_about_licenses_sqlnetpcl_url">Placeholder</string>
+  <string name="settings_about_licenses_sqlnetpcl_url">https://github.com/praeclarum/sqlite-net</string>
   <string name="settings_about_licenses_taglibsharp_title">TagLibSharp</string>
   <string name="settings_about_licenses_taglibsharp_description">License/s relevent to TagLibSharp</string>
   <string name="settings_about_licenses_taglibsharp_url">Placeholder</string>
+  
   <string name="settings_about_version_title">Version</string>
   <string name="settings_about_version_description">1.00</string>
-  
+
+
   <string name="settings_audio_title">Audio</string>
   <string name="settings_audio_description">Audio management settings for the Xyzu music player</string>
   

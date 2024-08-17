@@ -14,12 +14,11 @@ using System.Runtime.CompilerServices;
 using Xyzu.Droid;
 using Xyzu.Settings.Audio;
 using Xyzu.Views.Setting;
-using Xyzu.Widgets.RecyclerViews.LibraryItems;
 using Xyzu.Widgets.RecyclerViews.Simple;
+
 using AndroidXPreference = AndroidX.Preference.Preference;
 using XyzuListPreference = Xyzu.Preference.ListPreference;
 using XyzuSwitchPreference = Xyzu.Preference.SwitchPreference;
-using XyzuViewPreference = Xyzu.Preference.ViewPreference;
 
 namespace Xyzu.Fragments.Settings.Audio
 {
@@ -77,7 +76,6 @@ namespace Xyzu.Fragments.Settings.Audio
 
 		public XyzuSwitchPreference? IsEnabledPreference { get; set; }
 		public XyzuListPreference? CurrentPresetPreference { get; set; }
-		public XyzuViewPreference? CurrentPresetBandsPreference { get; set; }
 		public SimpleHorizontalRecyclerView? CurrentPresetBandsView { get; set; }
 
 		public void CurrentPresetPropertyChanged(object sender, PropertyChangedEventArgs args)
@@ -88,27 +86,16 @@ namespace Xyzu.Fragments.Settings.Audio
 			}
 		}
 
-		public override bool OnPreferenceClick(AndroidXPreference? preference)
-		{
-			if (preference == CurrentPresetBandsPreference)
-				CurrentPresetBandsPreference.ViewFrame.Visibility = CurrentPresetBandsPreference.ViewFrame.Visibility == Android.Views.ViewStates.Visible
-					? Android.Views.ViewStates.Gone
-					: Android.Views.ViewStates.Visible;
-
-			return true;
-		}
-
 		public override void OnResume()
 		{
 			base.OnResume();
 
 			AppCompatActivity?.SetTitle(Resource.String.settings_audio_equaliser_title);
 
-			AddPreferenceClickHandler(CurrentPresetBandsPreference);
+			//AddPreferenceClickHandler(CurrentPresetBandsPreference);
 			AddPreferenceChangeHandler(
 				IsEnabledPreference,
-				CurrentPresetPreference,
-				CurrentPresetBandsPreference);
+				CurrentPresetPreference);
 
 			IEqualiserSettings.IPresetable equalisersettings = XyzuSettings.Instance.GetAudioEqualiser();
 
@@ -122,27 +109,24 @@ namespace Xyzu.Fragments.Settings.Audio
 
 			RemovePreferenceChangeHandler(
 				IsEnabledPreference,
-				CurrentPresetPreference,
-				CurrentPresetBandsPreference);
+				CurrentPresetPreference);
 
 			XyzuSettings.Instance
 				.Edit()?
 				.PutAudioEqualiser(this)
 				.Apply();
 		}
-		
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_audio_equaliser, rootKey);
 			InitPreferences(
 				IsEnabledPreference = FindPreference(Keys.IsEnabled) as XyzuSwitchPreference,
-				CurrentPresetPreference = FindPreference(Keys.CurrentPreset) as XyzuListPreference,
-				CurrentPresetBandsPreference = FindPreference(Keys.CurrentPresetBands) as XyzuViewPreference);
+				CurrentPresetPreference = FindPreference(Keys.CurrentPreset) as XyzuListPreference);
 
-			if (CurrentPresetBandsPreference != null && Context != null)
+			if (CurrentPresetPreference?.View != null && Context != null)
 			{
-				CurrentPresetBandsPreference.View = 
-				CurrentPresetBandsView = new SimpleHorizontalRecyclerView(Context);
+				CurrentPresetPreference.View.Expanded = true;
+				CurrentPresetPreference.View.ViewAdditionalContentView = CurrentPresetBandsView = new SimpleHorizontalRecyclerView(Context);
 
 				CurrentPresetBandsView.SimpleLayoutManager.SpanCount = 1;
 				CurrentPresetBandsView.SimpleAdapter.GetItemCount = () => CurrentPreset.FrequencyLevels.Length;

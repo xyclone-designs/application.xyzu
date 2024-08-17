@@ -5,11 +5,10 @@ using Android.Runtime;
 using Android.Util;
 
 using AndroidX.AppCompat.App;
-
+using AndroidX.Preference;
 using System;
-
 using Xyzu.Droid;
-
+using Xyzu.Views.Preference;
 using AndroidXDialogPreference = AndroidX.Preference.DialogPreference;
 
 namespace Xyzu.Preference
@@ -38,11 +37,12 @@ namespace Xyzu.Preference
 		protected virtual void Init(Context context, IAttributeSet? atts)
 		{
 			LayoutResource = Resource.Layout.xyzu_preference_preference;
+			View = new PreferenceView();
 		}
 
 		public AlertDialog? CurrentAlertDialog { get; protected set; }
-
 		public Action<AlertDialog.Builder>? DialogOnBuild { get; set; }
+		public PreferenceView? View { get; set; }
 
 		public void DialogShow()
 		{
@@ -64,6 +64,12 @@ namespace Xyzu.Preference
 					DialogOnBuild?.Invoke(dialogbuilder);
 				});
 			CurrentAlertDialog.Show();
+		}
+
+		public override void OnBindViewHolder(PreferenceViewHolder holder)
+		{
+			View?.OnBindViewHolder(holder);
+			base.OnBindViewHolder(holder);
 		}
 	}
 }

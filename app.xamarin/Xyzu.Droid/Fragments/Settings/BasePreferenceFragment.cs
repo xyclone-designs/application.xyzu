@@ -58,7 +58,7 @@ namespace Xyzu.Fragments.Settings
 					{
 						case true when
 						preference is PreferenceScreen preferencescreen:
-							preferencescreen.LayoutResource = Resource.Layout.xyzu_preference_preferencescreen;
+							preferencescreen.LayoutResource = Resource.Layout.xyzu_preference_preference;
 							break;
 
 						default: break;

@@ -3,11 +3,12 @@
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
-using AndroidXPreference = AndroidX.Preference.Preference;
 
 using System;
 
 using Xyzu.Droid;
+
+using AndroidXPreference = AndroidX.Preference.Preference;
 
 namespace Xyzu.Preference
 {

@@ -97,7 +97,7 @@ namespace Xyzu.Fragments.Settings.Files
 		public XyzuDialogPreference? DirectoriesPreference { get; set; }
 		public XyzuMultiSelectListPreference? MimetypesPreference { get; set; }
 		public XyzuSeekBarPreference? TrackLengthIgnorePreference { get; set; }
-		public RecursiveItemsRecyclerView? DirectoriesPreferenceView { get; set; }
+		public RecursiveItemsRecyclerView? DirectoriesDialogView { get; set; }
 
 		public override void OnResume()
 		{
@@ -151,13 +151,13 @@ namespace Xyzu.Fragments.Settings.Files
 			{
 				DirectoriesPreference.DialogOnBuild = alertdialogbuilder =>
 				{
-					alertdialogbuilder.SetNeutralButton(Resource.String.settings_files_directories_dialog_neutralbutton, DirectoriesPreferenceOnNeutralButton);
+					//alertdialogbuilder.SetNeutralButton(Resource.String.settings_files_directories_dialog_neutralbutton, DirectoriesPreferenceOnNeutralButton);
 					alertdialogbuilder.SetPositiveButton(Resource.String.settings_files_directories_dialog_positivebutton, DirectoriesPreferenceOnPositiveButton);
 					alertdialogbuilder.SetOnDismissListener(new DialogInterfaceOnDismissListener
 					{
-						OnDismissAction = dialoginterface => DirectoriesPreferenceView = null
+						OnDismissAction = dialoginterface => DirectoriesDialogView = null
 					});
-					alertdialogbuilder.SetView(DirectoriesPreferenceView ??= new RecursiveItemsRecyclerView(Context)
+					alertdialogbuilder.SetView(DirectoriesDialogView ??= new RecursiveItemsRecyclerView(Context)
 					{
 						RecursiveAdapter = new DirectoriesRecyclerView.Adapter(Context)
 						{
@@ -169,7 +169,7 @@ namespace Xyzu.Fragments.Settings.Files
 						}
 					});
 
-					DirectoriesPreferenceView.RecursiveAdapter.NotifyDataSetChanged();
+					DirectoriesDialogView.RecursiveAdapter.NotifyDataSetChanged();
 				};
 			}
 
@@ -259,7 +259,7 @@ namespace Xyzu.Fragments.Settings.Files
 						.Append(path)
 						.OrderBy(dir => dir);
 
-					DirectoriesPreferenceView?.RecursiveAdapter.NotifyDataSetChanged();
+					DirectoriesDialogView?.RecursiveAdapter.NotifyDataSetChanged();
 				};
 
 			})?.Launch(null, null);
@@ -292,6 +292,10 @@ namespace Xyzu.Fragments.Settings.Files
 			viewholder.ItemView.DirectoryIsSelected.Checked = _FilesSettingsDirectoryPredicate?.Invoke(file) ?? true;
 			viewholder.ItemView.DirectoryIsSelectedCheckChange = (sender, args) =>
 			{
+				Directories = Directories.Contains(file.AbsolutePath) is false 
+					? Directories.Append(file.AbsolutePath).OrderBy(dir => dir)
+					: Directories.Where(_ => _ != file.AbsolutePath).OrderBy(dir => dir);
+
 				viewholder.ItemChildrenAdapter.ParentChecked = args.IsChecked;
 				viewholder.ItemChildrenAdapter.NotifyDataSetChanged();
 			};

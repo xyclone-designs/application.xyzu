@@ -3,14 +3,12 @@
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
-using Android.Views;
-using Android.Widget;
-using AndroidX.AppCompat.Widget;			  
 using AndroidX.Preference;
 
 using System;
 
 using Xyzu.Droid;
+using Xyzu.Views.Preference;
 
 using AndroidXPreference = AndroidX.Preference.Preference;
 
@@ -40,13 +38,15 @@ namespace Xyzu.Preference
 		protected virtual void Init(Context context, IAttributeSet? atts)
 		{
 			LayoutResource = Resource.Layout.xyzu_preference_preference;
+			View = new PreferenceView();
 		}
 
-		protected override void OnClick()
+		public PreferenceView? View { get; protected set; }
+
+		public override void OnBindViewHolder(PreferenceViewHolder holder)
 		{
-			base.OnClick();
+			View?.OnBindViewHolder(holder);
+			base.OnBindViewHolder(holder);
 		}
-
-		public Action? OnClickAction { get; set; }
 	}
 }

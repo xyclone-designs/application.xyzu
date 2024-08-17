@@ -1,11 +1,20 @@
 ﻿#nullable enable
 
 using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Views;
+using Android.Widget;
 using AndroidX.AppCompat.App;
+using AndroidX.AppCompat.Widget;
+using AndroidX.Preference;
 
 using System;
 using System.Linq;
 
+using Xyzu.Droid;
+
+using AndroidXPreference = AndroidX.Preference.Preference;
 using AndroidXDialogPreference = AndroidX.Preference.DialogPreference;
 using AndroidXListPreference = AndroidX.Preference.ListPreference;
 using AndroidXMultiSelectListPreference = AndroidX.Preference.MultiSelectListPreference;

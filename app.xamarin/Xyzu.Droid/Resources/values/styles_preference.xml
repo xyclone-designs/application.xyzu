@@ -12,6 +12,7 @@
   <style name="Xyzu.Preference.DialogPreference" parent="Xyzu.Preference"></style>
   <style name="Xyzu.Preference.DropDownPreference" parent="Xyzu.Preference"></style>
   <style name="Xyzu.Preference.EditTextPreference" parent="Xyzu.Preference"></style>
+  <style name="Xyzu.Preference.ImageButton" parent="Xyzu.Preference"></style>
   <style name="Xyzu.Preference.ListPreference" parent="Xyzu.Preference"></style>
   <style name="Xyzu.Preference.MultiSelectListPreference" parent="Xyzu.Preference"></style>
   <style name="Xyzu.Preference.PreferenceScreen" parent="Xyzu.Preference"></style>
@@ -20,6 +21,8 @@
   <style name="Xyzu.Preference.SummaryText" parent="Xyzu.AppCompat.Text">
     <item name="android:ellipsize">middle</item>
     <item name="android:maxLines">4</item>
+  </style>
+  <style name="Xyzu.Preference.BasicText" parent="Xyzu.AppCompat.Text">
   </style>
   <style name="Xyzu.Preference.SwitchCompat" parent="Xyzu.AppCompat.SwitchCompat"></style>
   <style name="Xyzu.Preference.Theme" parent=""></style>

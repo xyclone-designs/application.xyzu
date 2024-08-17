@@ -5,8 +5,8 @@ using Android.Graphics;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
-using AndroidX.AppCompat.App;
-using AndroidX.AppCompat.Widget;
+
+using AndroidX.Preference;
 
 using JaredRummler.Android.ColorPicker;
 
@@ -103,16 +103,17 @@ namespace Xyzu.Preference
 
 			CurrentAlertDialog.Show();
 		}
-		public override void OnBindViewHolder(AndroidX.Preference.PreferenceViewHolder holder)
+		public override void OnBindViewHolder(PreferenceViewHolder holder)
 		{
 			base.OnBindViewHolder(holder);
 
-			if (holder.FindViewById(Resource.Id.xyzu_preference_preference_additionalitem_contentframelayout) is ContentFrameLayout contentframelayout)
+			if (View?.ViewAdditionalItem != null)
 			{
 				_ColorPanel = null;
 
-				contentframelayout.RemoveAllViews();
-				contentframelayout.AddView(ColorPanel);
+				View.ViewAdditionalItem.RemoveAllViews();
+				View.ViewAdditionalItem.AddView(ColorPanel);
+				View.ViewAdditionalItem.Visibility = ViewStates.Visible;
 			}
 		}
 	}

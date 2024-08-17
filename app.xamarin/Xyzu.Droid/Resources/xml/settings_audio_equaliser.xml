@@ -18,10 +18,6 @@
       app:negativeButtonText="@string/settings_audio_equaliser_currentpreset_dialog_negativebutton"
       app:positiveButtonText="@string/settings_audio_equaliser_currentpreset_dialog_positivebutton"/>
 
-  <xyzu.preference.ViewPreference
-      app:iconSpaceReserved="false"
-      app:key="settings_audio_equaliser_currentpreset_bands_listpreference_key"/>
-
   <xyzu.preference.NavigationBarInsetPreference />
 
 </androidx.preference.PreferenceScreen>
