@@ -5,6 +5,7 @@ using AndroidX.Core.App;
 
 using System.Collections.Generic;
 using System.ComponentModel;
+
 using Xyzu.Player.Exoplayer;
 using Xyzu.Settings.Audio;
 using Xyzu.Settings.Enums;

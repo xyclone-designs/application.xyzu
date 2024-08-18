@@ -9,7 +9,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
+using Xyzu.Library.Enums;
 using Xyzu.Settings.Enums;
+using Xyzu.Settings.UserInterface;
 using Xyzu.Settings.UserInterface.Library;
 
 using AndroidXPreference = AndroidX.Preference.Preference;
@@ -36,10 +38,15 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			{
 				_LayoutType = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(ISearchSettings.Keys.LayoutType, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
-		
+
 		public XyzuListPreference? LayoutTypePreference { get; set; }
 
 		public override void OnResume()
@@ -53,7 +60,7 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 
 			ISearchSettings settings = XyzuSettings.Instance.GetUserInterfaceLibrarySearch();
 
-			LayoutType = settings.LayoutType;
+			_LayoutType = settings.LayoutType; OnPropertyChanged(nameof(LayoutType));
 		}
 		public override void OnPause()
 		{
@@ -61,13 +68,7 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 
 			RemovePreferenceChangeHandler(
 				LayoutTypePreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutUserInterfaceLibrarySearch(this)
-				.Apply();
 		}
-
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_userinterface_library_search, rootKey);	   

@@ -43,6 +43,11 @@ namespace Xyzu.Fragments.Settings.Audio
 			{
 				_IsEnabled = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutBoolean(IEqualiserSettings.IPresetable.Keys.IsEnabled, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
@@ -55,8 +60,12 @@ namespace Xyzu.Fragments.Settings.Audio
 					_CurrentPreset.PropertyChanged -= CurrentPresetPropertyChanged;
 
 				_CurrentPreset = value;
-
 				_CurrentPreset.PropertyChanged += CurrentPresetPropertyChanged;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutString(IBassBoostSettings.IPresetable.Keys.CurrentPreset, value?.Name)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -67,6 +76,11 @@ namespace Xyzu.Fragments.Settings.Audio
 			set
 			{
 				_AllPresets = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutAudioBassBoost(value.ToArray())?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -87,11 +101,11 @@ namespace Xyzu.Fragments.Settings.Audio
 				CurrentPresetPreference,
 				StrengthPreference);
 
-			IBassBoostSettings.IPresetable bassboostsettings = XyzuSettings.Instance.GetAudioBassBoost();
+			IBassBoostSettings.IPresetable settings = XyzuSettings.Instance.GetAudioBassBoost();
 
-			IsEnabled = bassboostsettings.IsEnabled;
-			CurrentPreset = bassboostsettings.CurrentPreset;
-			AllPresets = bassboostsettings.AllPresets;
+			_IsEnabled = settings.IsEnabled; OnPropertyChanged(nameof(IsEnabled));
+			_AllPresets = settings.AllPresets; OnPropertyChanged(nameof(AllPresets));
+			_CurrentPreset = settings.CurrentPreset; OnPropertyChanged(nameof(CurrentPreset));
 		}
 		public override void OnPause()
 		{
@@ -101,13 +115,7 @@ namespace Xyzu.Fragments.Settings.Audio
 				IsEnabledPreference,
 				CurrentPresetPreference,
 				StrengthPreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutAudioBassBoost(this)
-				.Apply();
 		}
-
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_audio_bassboost, rootKey);
@@ -135,7 +143,7 @@ namespace Xyzu.Fragments.Settings.Audio
 
 						if (XyzuPlayer.Instance.SettingsBassBoost != null && XyzuPlayer.Instance.SettingsBassBoost.IsEnabled != IsEnabled)
 							XyzuPlayer.Instance.SettingsBassBoost.IsEnabled = IsEnabled;
-					
+
 					} break;
 
 				case nameof(AllPresets):

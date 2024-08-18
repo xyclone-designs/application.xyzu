@@ -43,6 +43,11 @@ namespace Xyzu.Fragments.Settings.Audio
 			{
 				_IsEnabled = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutBoolean(ILoudnessEnhancerSettings.IPresetable.Keys.IsEnabled, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
@@ -54,8 +59,12 @@ namespace Xyzu.Fragments.Settings.Audio
 				if (_CurrentPreset != null) _CurrentPreset.PropertyChanged -= CurrentPresetPropertyChanged;
 
 				_CurrentPreset = value;
-
 				_CurrentPreset.PropertyChanged += CurrentPresetPropertyChanged;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutString(ILoudnessEnhancerSettings.IPresetable.Keys.CurrentPreset, value?.Name)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -66,6 +75,11 @@ namespace Xyzu.Fragments.Settings.Audio
 			set
 			{
 				_AllPresets = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutAudioLoudnessEnhancer(value.ToArray())?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -100,11 +114,11 @@ namespace Xyzu.Fragments.Settings.Audio
 				CurrentPresetPreference, 
 				TargetGainPreference);
 
-			ILoudnessEnhancerSettings.IPresetable loudnessenhancersettings = XyzuSettings.Instance.GetAudioLoudnessEnhancer();
+			ILoudnessEnhancerSettings.IPresetable settings = XyzuSettings.Instance.GetAudioLoudnessEnhancer();
 
-			IsEnabled = loudnessenhancersettings.IsEnabled;
-			CurrentPreset = loudnessenhancersettings.CurrentPreset;
-			AllPresets = loudnessenhancersettings.AllPresets;
+			_IsEnabled = settings.IsEnabled; OnPropertyChanged(nameof(IsEnabled));
+			_CurrentPreset = settings.CurrentPreset; OnPropertyChanged(nameof(CurrentPreset));
+			_AllPresets = settings.AllPresets; OnPropertyChanged(nameof(AllPresets));
 		}
 		public override void OnPause()
 		{
@@ -114,11 +128,6 @@ namespace Xyzu.Fragments.Settings.Audio
 				IsEnabledPreference,
 				CurrentPresetPreference,
 				TargetGainPreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutAudioLoudnessEnhancer(this)
-				.Apply();
 		}
 		
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)

@@ -137,7 +137,7 @@ namespace Xyzu.Fragments.Library
 		}		 
 		public virtual void ConfigureTab(TabLayout.Tab tab, Context? context) 
 		{
-			if (tab.Parent?.InlineLabel ?? false && context?.Resources != null)
+			if ((tab.Parent?.InlineLabel ?? false) && context?.Resources != null)
 			{
 				tab.View.LayoutParameters = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent)
 				{

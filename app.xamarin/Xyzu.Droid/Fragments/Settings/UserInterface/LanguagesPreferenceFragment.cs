@@ -39,6 +39,11 @@ namespace Xyzu.Fragments.Settings.UserInterface
 			{
 				_Mode = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(ILanguagesSettings.Keys.Mode, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
@@ -48,6 +53,11 @@ namespace Xyzu.Fragments.Settings.UserInterface
 			set
 			{
 				_CurrentLanguage = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutCultureInfo(ILanguagesSettings.Keys.CurrentLanguage, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -68,8 +78,8 @@ namespace Xyzu.Fragments.Settings.UserInterface
 
 			ILanguagesSettings settings = XyzuSettings.Instance.GetUserInterfaceLanguages();
 
-			Mode = settings.Mode;
-			CurrentLanguage = settings.CurrentLanguage;
+			_Mode = settings.Mode; OnPropertyChanged(nameof(Mode));
+			_CurrentLanguage = settings.CurrentLanguage; OnPropertyChanged(nameof(CurrentLanguage));
 		}
 		public override void OnPause()
 		{
@@ -78,13 +88,7 @@ namespace Xyzu.Fragments.Settings.UserInterface
 			RemovePreferenceChangeHandler(
 				CurrentLanguagePreference,
 				ModePreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutUserInterfaceLanguages(this)
-				.Apply();
 		}
-
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_userinterface_languages, rootKey);

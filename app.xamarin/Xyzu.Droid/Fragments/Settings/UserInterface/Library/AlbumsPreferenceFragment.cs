@@ -40,8 +40,12 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			get => _IsReversed;
 			set
 			{
-
 				_IsReversed = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutBoolean(IAlbumsSettings.Keys.IsReversed, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -51,8 +55,12 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			get => _LayoutType;
 			set
 			{
-
 				_LayoutType = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(IAlbumsSettings.Keys.LayoutType, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -62,8 +70,12 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			get => _SortKey;
 			set
 			{
-
 				_SortKey = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(IAlbumsSettings.Keys.SortKey, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -86,9 +98,9 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 
 			IAlbumsSettings settings = XyzuSettings.Instance.GetUserInterfaceLibraryAlbums();
 
-			IsReversed = settings.IsReversed;
-			LayoutType = settings.LayoutType;
-			SortKey = settings.SortKey;
+			_IsReversed = settings.IsReversed; OnPropertyChanged(nameof(IsReversed));
+			_LayoutType = settings.LayoutType; OnPropertyChanged(nameof(LayoutType));
+			_SortKey = settings.SortKey; OnPropertyChanged(nameof(SortKey));
 		}							   
 		public override void OnPause()
 		{
@@ -98,13 +110,7 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 				IsReversedPreference,
 				LayoutTypePreference,
 				SortKeyPreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutUserInterfaceLibraryAlbums(this)
-				.Apply();
 		}
-
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_userinterface_library_albums, rootKey);

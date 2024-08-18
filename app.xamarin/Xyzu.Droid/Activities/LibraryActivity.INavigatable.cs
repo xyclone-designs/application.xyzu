@@ -72,6 +72,9 @@ namespace Xyzu.Activities
 		public virtual void NavigateSong(ISong? song)
 		{
 			Navigate();
+
+			if (SlidingUpPanel != null && SlidingUpPanel.GetPanelState() != SlidingUpPanelLayout.PanelState.Hidden)
+				SlidingUpPanel.SetPanelState(SlidingUpPanelLayout.PanelState.Expanded);
 		}
 	}
 }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
+using Xyzu.Settings.Audio;
 using Xyzu.Settings.Enums;
 using Xyzu.Settings.UserInterface;
 
@@ -36,6 +37,11 @@ namespace Xyzu.Fragments.Settings.UserInterface
 			{
 				_Mode = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(IThemesSettings.Keys.Mode, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
@@ -52,20 +58,14 @@ namespace Xyzu.Fragments.Settings.UserInterface
 
 			IThemesSettings settings = XyzuSettings.Instance.GetUserInterfaceThemes();
 
-			Mode = settings.Mode;
+			_Mode = settings.Mode; OnPropertyChanged(nameof(Mode));
 		}
 		public override void OnPause()
 		{
 			base.OnPause();
 
 			RemovePreferenceChangeHandler(ModePreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutUserInterfaceThemes(this)
-				.Apply();
 		}
-
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_userinterface_themes, rootKey);

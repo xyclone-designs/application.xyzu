@@ -21,6 +21,7 @@ using Xyzu.Views.LibraryItem;
 
 using ILibraryIdentifiers = Xyzu.Library.ILibrary.IIdentifiers;
 using IXyzuPlayer = Xyzu.Player.IPlayer;
+using Xyzu.Player;
 
 namespace Xyzu.Views.Library
 {
@@ -223,21 +224,19 @@ namespace Xyzu.Views.Library
 
 			Refreshing = true;
 
-			// TODO: For some reason doing this metho the same as everywhere else caseus multiple refreshes
+			IEnumerable<ISong> songs = Library.Songs
+				.PopulateSongs(Player.Queue.Select(queueitem => new ISong.Default(queueitem.PrimaryId)
+				{
+					Uri = queueitem.Uri,
+					Filepath = queueitem.PrimaryId,
+
+				}).ToList()).Select(_ =>
+				{
+					Library.Misc.SetImage(_); return _;
+
+				}) ?? Enumerable.Empty<ISong>();
 
 			QueueSongs.LibraryItemsAdapter.LibraryItems.Clear();
-
-			IList<ISong> songs = await Task.Run(() => Library.Songs.GetSongs(
-				retriever: LibraryItemView.Retrievers.GenerateSongRetriever(
-					modelsortkey: null,
-					librarylayouttype: Settings.LayoutType,
-					songs: QueueSongs.LibraryItemsAdapter.LibraryItems),
-				identifiers: new ILibraryIdentifiers.Default
-				{
-					SongIds = Player.Queue.Select(queueitem => queueitem.PrimaryId)
-
-				}).ToList(), Cancellationtoken);
-
 			QueueSongs.LibraryItemsAdapter.LibraryItems.AddRange(songs);
 
 			Refreshing = false;

@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using Android.Content;
+using Android.Media.Audiofx;
 using Android.OS;
 using Android.Runtime;
 using AndroidX.RecyclerView.Widget;
@@ -13,6 +14,7 @@ using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
 using Xyzu.Settings.Audio;
+using Xyzu.Settings.UserInterface;
 using Xyzu.Views.Setting;
 using Xyzu.Widgets.RecyclerViews.Simple;
 
@@ -45,6 +47,11 @@ namespace Xyzu.Fragments.Settings.Audio
 			{
 				_IsEnabled = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutBoolean(IEqualiserSettings.IPresetable.Keys.IsEnabled, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
@@ -57,8 +64,12 @@ namespace Xyzu.Fragments.Settings.Audio
 					_CurrentPreset.PropertyChanged -= CurrentPresetPropertyChanged;
 
 				_CurrentPreset = value;
-
 				_CurrentPreset.PropertyChanged += CurrentPresetPropertyChanged;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutString(IEqualiserSettings.IPresetable.Keys.CurrentPreset, value?.Name)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -69,6 +80,11 @@ namespace Xyzu.Fragments.Settings.Audio
 			set
 			{
 				_AllPresets = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutAudioEqualiser(value.ToArray())?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -97,11 +113,11 @@ namespace Xyzu.Fragments.Settings.Audio
 				IsEnabledPreference,
 				CurrentPresetPreference);
 
-			IEqualiserSettings.IPresetable equalisersettings = XyzuSettings.Instance.GetAudioEqualiser();
+			IEqualiserSettings.IPresetable settings = XyzuSettings.Instance.GetAudioEqualiser();
 
-			IsEnabled = equalisersettings.IsEnabled;
-			AllPresets = equalisersettings.AllPresets;
-			CurrentPreset = equalisersettings.CurrentPreset;
+			_IsEnabled = settings.IsEnabled; OnPropertyChanged(nameof(IsEnabled));
+			_AllPresets = settings.AllPresets; OnPropertyChanged(nameof(AllPresets));
+			_CurrentPreset = settings.CurrentPreset; OnPropertyChanged(nameof(CurrentPreset));
 		}
 		public override void OnPause()
 		{
@@ -110,11 +126,6 @@ namespace Xyzu.Fragments.Settings.Audio
 			RemovePreferenceChangeHandler(
 				IsEnabledPreference,
 				CurrentPresetPreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutAudioEqualiser(this)
-				.Apply();
 		}
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{

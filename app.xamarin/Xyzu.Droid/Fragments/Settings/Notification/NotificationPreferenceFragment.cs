@@ -48,6 +48,11 @@ namespace Xyzu.Fragments.Settings.Notification
 			{
 				_BadgeIconType = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(INotificationSettingsDroid.Keys.BadgeIconType, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
@@ -57,6 +62,11 @@ namespace Xyzu.Fragments.Settings.Notification
 			set
 			{
 				_CustomColour = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutColor(INotificationSettingsDroid.Keys.CustomColour, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -68,6 +78,11 @@ namespace Xyzu.Fragments.Settings.Notification
 			{
 				_UseCustomColour = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutBoolean(INotificationSettingsDroid.Keys.UseCustomColour, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
@@ -78,6 +93,11 @@ namespace Xyzu.Fragments.Settings.Notification
 			{
 				_IsColourised = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutBoolean(INotificationSettingsDroid.Keys.IsColourised, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
@@ -87,6 +107,11 @@ namespace Xyzu.Fragments.Settings.Notification
 			set
 			{
 				_Priority = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(INotificationSettingsDroid.Keys.Priority, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -111,13 +136,19 @@ namespace Xyzu.Fragments.Settings.Notification
 				PriorityPreference,
 				BadgeIconTypePreference);
 
-			INotificationSettingsDroid notification = XyzuSettings.Instance.GetNotificationDroid();
+			INotificationSettingsDroid settings = XyzuSettings.Instance.GetNotificationDroid();
 
-			BadgeIconType = notification.BadgeIconType;
-			CustomColour = notification.CustomColour;
-			UseCustomColour = notification.UseCustomColour;
-			IsColourised = notification.IsColourised;
-			Priority = notification.Priority;   
+			BadgeIconType = settings.BadgeIconType;
+			CustomColour = settings.CustomColour;
+			UseCustomColour = settings.UseCustomColour;
+			IsColourised = settings.IsColourised;
+			Priority = settings.Priority;
+
+			_BadgeIconType = settings.BadgeIconType; OnPropertyChanged(nameof(BadgeIconType));
+			_CustomColour = settings.CustomColour; OnPropertyChanged(nameof(CustomColour));
+			_UseCustomColour = settings.UseCustomColour; OnPropertyChanged(nameof(UseCustomColour));
+			_IsColourised = settings.IsColourised; OnPropertyChanged(nameof(IsColourised));
+			_Priority = settings.Priority; OnPropertyChanged(nameof(Priority));
 		}
 		public override void OnPause()
 		{
@@ -129,13 +160,7 @@ namespace Xyzu.Fragments.Settings.Notification
 				CustomColourPreference,
 				PriorityPreference,
 				BadgeIconTypePreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutNotificationDroid(this)?
-				.Apply();
 		}
-
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_notification, rootKey);

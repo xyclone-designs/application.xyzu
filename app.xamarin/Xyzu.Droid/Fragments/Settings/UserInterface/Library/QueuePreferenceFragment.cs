@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
 using Xyzu.Settings.Enums;
+using Xyzu.Settings.UserInterface;
 using Xyzu.Settings.UserInterface.Library;
 
 using AndroidXPreference = AndroidX.Preference.Preference;
@@ -28,19 +29,23 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 		}
 
 		private LibraryLayoutTypes _LayoutType;
-		
+
 		public LibraryLayoutTypes LayoutType
 		{
 			get => _LayoutType;
 			set
 			{
-
 				_LayoutType = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(IQueueSettings.Keys.LayoutType, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
 		}
-		
+
 		public XyzuListPreference? LayoutTypePreference { get; set; }
 		
 		public override void OnResume()
@@ -53,20 +58,14 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 
 			IQueueSettings settings = XyzuSettings.Instance.GetUserInterfaceLibraryQueue();
 
-			LayoutType = settings.LayoutType;
+			_LayoutType = settings.LayoutType; OnPropertyChanged(nameof(LayoutType));
 		}
 		public override void OnPause()
 		{
 			base.OnPause();
 
 			RemovePreferenceChangeHandler(LayoutTypePreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutUserInterfaceLibraryQueue(this)
-				.Apply();
 		}
-
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_userinterface_library_queue, rootKey);

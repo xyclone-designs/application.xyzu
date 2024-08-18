@@ -61,7 +61,7 @@ namespace Xyzu.Menus
 			return dialogview;
 		}
 
-		private static Intent CntractCreateIntentAction(Context context, Java.Lang.Object input)
+		private static Intent CntractCreateIntentAction(Context context, Java.Lang.Object? input)
 		{
 			IntentTypes intenttype = IntentTypes.Image;
 
@@ -70,7 +70,7 @@ namespace Xyzu.Menus
 
 			return actionpickcontent;
 		}
-		private static Java.Lang.Object ContractParseResultAction(int resultcode, Intent intent)
+		private static Java.Lang.Object? ContractParseResultAction(int resultcode, Intent? intent)
 		{
 			return intent;
 		}

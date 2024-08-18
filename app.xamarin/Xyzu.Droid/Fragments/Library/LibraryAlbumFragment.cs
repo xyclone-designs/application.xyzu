@@ -80,7 +80,7 @@ namespace Xyzu.Fragments.Library
 		{
 			base.ConfigureToolbar(toolbar, context);
 
-			if (toolbar is null || Activity?.GetType() == typeof(Activities.LibraryActivityTabLayout))
+			if (toolbar is null || Activity?.GetType() == typeof(LibraryActivityTabLayout))
 				return;
 
 			toolbar.SetTitle(Resource.String.library_album);

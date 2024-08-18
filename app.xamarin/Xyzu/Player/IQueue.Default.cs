@@ -160,13 +160,6 @@ namespace Xyzu.Player
 					case QueuePositions.Now:
 						Add(CurrentIndex ?? 0, songs);
 						break;
-
-					case QueuePositions.First:
-						Add(0, songs);
-						break;
-					case QueuePositions.Last:
-						Add(Count - 1, songs);
-						break;
 					case QueuePositions.UpOne:
 					case QueuePositions.Next:
 						Add(CurrentIndex ?? 1, songs);
@@ -194,9 +187,12 @@ namespace Xyzu.Player
 						if (uponesubqueuesong != null)
 							Add(uponesubqueuesong);
 						break;
+					case QueuePositions.First:
+						Add(0, songs);
+						break;
+					case QueuePositions.Last:
 					default:
-						foreach (IQueueItem song in songs)
-							Add(song);
+						AddRange(songs);
 						break;
 				}
 			}

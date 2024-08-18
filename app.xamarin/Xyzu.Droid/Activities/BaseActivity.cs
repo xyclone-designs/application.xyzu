@@ -16,7 +16,6 @@ using System.Threading.Tasks;
 
 using Xyzu.Settings.System;
 
-using AndroidEnvironment = Android.OS.Environment;
 using AndroidRuntimeEnvironment = Android.Runtime.AndroidEnvironment;
 
 namespace Xyzu.Activities

@@ -28,7 +28,7 @@ namespace Com.Google.Android.Exoplayer2.UI
 		{
 			set => SetMediaSessionToken(value);
 		}
-		public Action<IExoPlayer2Player, NotificationCompat.Builder, bool, Bitmap>? OnUpdate { get; set; }
+		public Action<IExoPlayer2Player, NotificationCompat.Builder?, bool, Bitmap?>? OnUpdate { get; set; }
 
 		protected override int[] GetActionIndicesForCompactView(IList<string> actionNames, IExoPlayer2Player player)
 		{

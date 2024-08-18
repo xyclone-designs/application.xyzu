@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using Android.Content;
+using Android.Media.Audiofx;
 using Android.OS;
 using Android.Runtime;
 
@@ -62,6 +63,11 @@ namespace Xyzu.Fragments.Settings.Audio
 			{
 				_IsEnabled = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutBoolean(IEnvironmentalReverbSettings.IPresetable.Keys.IsEnabled, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
@@ -74,8 +80,12 @@ namespace Xyzu.Fragments.Settings.Audio
 					_CurrentPreset.PropertyChanged -= CurrentPresetPropertyChanged;
 
 				_CurrentPreset = value;
-
 				_CurrentPreset.PropertyChanged += CurrentPresetPropertyChanged;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutString(IEnvironmentalReverbSettings.IPresetable.Keys.CurrentPreset, value?.Name)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -86,6 +96,11 @@ namespace Xyzu.Fragments.Settings.Audio
 			set
 			{
 				_AllPresets = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutAudioEnvironmentalReverb(value.ToArray())?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -292,11 +307,11 @@ namespace Xyzu.Fragments.Settings.Audio
 				RoomHFLevelPreference,
 				RoomLevelPreference);
 
-			IEnvironmentalReverbSettings.IPresetable environmentalreverbsettings = XyzuSettings.Instance.GetAudioEnvironmentalReverb();
+			IEnvironmentalReverbSettings.IPresetable settings = XyzuSettings.Instance.GetAudioEnvironmentalReverb();
 
-			IsEnabled = environmentalreverbsettings.IsEnabled;
-			CurrentPreset = environmentalreverbsettings.CurrentPreset;
-			AllPresets = environmentalreverbsettings.AllPresets;
+			_IsEnabled = settings.IsEnabled; OnPropertyChanged(nameof(IsEnabled));
+			_CurrentPreset = settings.CurrentPreset; OnPropertyChanged(nameof(CurrentPreset));
+			_AllPresets = settings.AllPresets; OnPropertyChanged(nameof(AllPresets));
 		}
 		public override void OnPause()
 		{
@@ -315,13 +330,7 @@ namespace Xyzu.Fragments.Settings.Audio
 				ReverbLevelPreference,
 				RoomHFLevelPreference,
 				RoomLevelPreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutAudioEnvironmentalReverb(this)
-				.Apply();
 		}
-
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_audio_environmentalreverb, rootKey);

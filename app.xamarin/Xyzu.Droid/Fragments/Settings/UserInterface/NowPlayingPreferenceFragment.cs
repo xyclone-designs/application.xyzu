@@ -33,6 +33,11 @@ namespace Xyzu.Fragments.Settings.UserInterface
 
 				_ForceShowNowPlaying = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutBoolean(INowPlayingSettingsDroid.Keys.ForceShowNowPlaying, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
@@ -50,7 +55,7 @@ namespace Xyzu.Fragments.Settings.UserInterface
 
 			INowPlayingSettingsDroid settings = XyzuSettings.Instance.GetUserInterfaceNowPlayingDroid();
 
-			ForceShowNowPlaying = settings.ForceShowNowPlaying;
+			_ForceShowNowPlaying = settings.ForceShowNowPlaying; OnPropertyChanged(nameof(ForceShowNowPlaying));
 		}
 		public override void OnPause()
 		{
@@ -58,13 +63,7 @@ namespace Xyzu.Fragments.Settings.UserInterface
 
 			RemovePreferenceChangeHandler(
 				ForceShowNowPlayingPreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutUserInterfaceNowPlayingDroid(this)
-				.Apply();
 		}
-
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_userinterface_nowplaying, rootKey);

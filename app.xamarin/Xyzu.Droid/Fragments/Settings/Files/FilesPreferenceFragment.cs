@@ -54,8 +54,12 @@ namespace Xyzu.Fragments.Settings.Files
 			get => _TrackLengthIgnore;
 			set
 			{
-
 				_TrackLengthIgnore = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutInt(IFilesSettingsDroid.Keys.TrackLengthIgnore, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -65,8 +69,12 @@ namespace Xyzu.Fragments.Settings.Files
 			get => _Directories ?? Enumerable.Empty<string>();
 			set
 			{
-
 				_Directories = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutStringSet(IFilesSettingsDroid.Keys.Directories, value.ToList())?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -76,8 +84,12 @@ namespace Xyzu.Fragments.Settings.Files
 			get => _DirectoriesExclude ?? Enumerable.Empty<string>();
 			set
 			{
-
 				_DirectoriesExclude = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutStringSet(IFilesSettingsDroid.Keys.DirectoriesExclude, value.ToList())?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -87,8 +99,12 @@ namespace Xyzu.Fragments.Settings.Files
 			get => _Mimetypes ?? Enumerable.Empty<MimeTypes>();
 			set
 			{
-
 				_Mimetypes = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnumSet(IFilesSettingsDroid.Keys.Mimetypes, value.ToList())?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -113,11 +129,10 @@ namespace Xyzu.Fragments.Settings.Files
 			IFilesSettingsDroid settings = XyzuSettings.Instance.GetFilesDroid();
 
 			_FilesSettingsDirectoryPredicate = IFilesSettingsDroid.PredicateDirectories(settings);
-
-			TrackLengthIgnore = settings.TrackLengthIgnore;
-			Directories = settings.Directories;
-			DirectoriesExclude = settings.DirectoriesExclude;
-			Mimetypes = settings.Mimetypes;
+			_TrackLengthIgnore = settings.TrackLengthIgnore; OnPropertyChanged(nameof(TrackLengthIgnore));
+			_Directories = settings.Directories; OnPropertyChanged(nameof(Directories));
+			_DirectoriesExclude = settings.DirectoriesExclude; OnPropertyChanged(nameof(DirectoriesExclude));
+			_Mimetypes = settings.Mimetypes; OnPropertyChanged(nameof(Mimetypes));
 		}
 		public override void OnPause()
 		{
@@ -127,11 +142,6 @@ namespace Xyzu.Fragments.Settings.Files
 				TrackLengthIgnorePreference,
 				DirectoriesPreference,
 				MimetypesPreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutFilesDroid(this)
-				.Apply();
 		}
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{

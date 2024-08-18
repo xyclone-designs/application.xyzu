@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using Xyzu.Droid;
 using Xyzu.Library.Enums;
 using Xyzu.Settings.Enums;
+using Xyzu.Settings.UserInterface;
 using Xyzu.Settings.UserInterface.Library;
 
 using AndroidXPreference = AndroidX.Preference.Preference;
@@ -40,8 +41,12 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			get => _IsReversed;
 			set
 			{
-
 				_IsReversed = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutBoolean(IArtistsSettings.Keys.IsReversed, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -51,8 +56,12 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			get => _LayoutType;
 			set
 			{
-
 				_LayoutType = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(IArtistsSettings.Keys.LayoutType, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -62,8 +71,12 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			get => _SortKey;
 			set
 			{
-
 				_SortKey = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(IArtistsSettings.Keys.SortKey, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -86,9 +99,9 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 
 			IArtistsSettings settings = XyzuSettings.Instance.GetUserInterfaceLibraryArtists();
 
-			IsReversed = settings.IsReversed;
-			LayoutType = settings.LayoutType;
-			SortKey = settings.SortKey;
+			_IsReversed = settings.IsReversed; OnPropertyChanged(nameof(IsReversed));
+			_LayoutType = settings.LayoutType; OnPropertyChanged(nameof(LayoutType));
+			_SortKey = settings.SortKey; OnPropertyChanged(nameof(SortKey));
 		}
 		public override void OnPause()
 		{
@@ -97,14 +110,8 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			RemovePreferenceChangeHandler(
 				IsReversedPreference,
 				LayoutTypePreference,
-				SortKeyPreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutUserInterfaceLibraryArtists(this)
-				.Apply();
+				SortKeyPreference);			
 		}
-
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_userinterface_library_artists, rootKey);

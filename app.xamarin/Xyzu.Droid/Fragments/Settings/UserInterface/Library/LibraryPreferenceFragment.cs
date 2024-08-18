@@ -56,6 +56,11 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			{
 				_NavigationType = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(ILibrarySettingsDroid.Keys.NavigationType, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
@@ -65,6 +70,11 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			set
 			{
 				_HeaderScrollType = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(ILibrarySettingsDroid.Keys.HeaderScrollType, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -76,6 +86,11 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			{
 				_PageDefault = value;
 
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(ILibrarySettingsDroid.Keys.PageDefault, value)?
+					.Apply();
+
 				OnPropertyChanged();
 			}
 		}
@@ -85,6 +100,11 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			set
 			{
 				_PagesOrdered = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutUserInterfaceLibrary(this)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -109,10 +129,10 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 
 			ILibrarySettingsDroid settings = XyzuSettings.Instance.GetUserInterfaceLibraryDroid();
 
-			HeaderScrollType = settings.HeaderScrollType;
-			NavigationType = settings.NavigationType;
-			PageDefault = settings.PageDefault;
-			PagesOrdered = settings.PagesOrdered;
+			_HeaderScrollType = settings.HeaderScrollType; OnPropertyChanged(nameof(HeaderScrollType));
+			_NavigationType = settings.NavigationType; OnPropertyChanged(nameof(NavigationType));
+			_PageDefault = settings.PageDefault; OnPropertyChanged(nameof(PageDefault));
+			_PagesOrdered = settings.PagesOrdered; OnPropertyChanged(nameof(PagesOrdered));
 		}
 		public override void OnPause()
 		{
@@ -123,11 +143,6 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 				NavigationTypePreference,
 				PageDefaultPreference,
 				PagesOrderedPreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutUserInterfaceLibraryDroid(this)?
-				.Apply();
 		}
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{

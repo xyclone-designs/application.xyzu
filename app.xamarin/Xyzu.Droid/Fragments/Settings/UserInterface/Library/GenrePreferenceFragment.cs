@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using Xyzu.Droid;
 using Xyzu.Library.Enums;
 using Xyzu.Settings.Enums;
+using Xyzu.Settings.UserInterface;
 using Xyzu.Settings.UserInterface.Library;
 
 using AndroidXPreference = AndroidX.Preference.Preference;
@@ -40,8 +41,12 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			get => _SongsIsReversed;
 			set
 			{
-
 				_SongsIsReversed = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutBoolean(IAlbumSettings.Keys.SongsIsReversed, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -51,8 +56,12 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			get => _SongsLayoutType;
 			set
 			{
-
 				_SongsLayoutType = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(IAlbumSettings.Keys.SongsLayoutType, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -62,8 +71,12 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 			get => _SongsSortKey;
 			set
 			{
-
 				_SongsSortKey = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(IGenreSettings.Keys.SongsSortKey, value)?
+					.Apply();
 
 				OnPropertyChanged();
 			}
@@ -86,9 +99,9 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 
 			IGenreSettings settings = XyzuSettings.Instance.GetUserInterfaceLibraryGenre();
 
-			SongsIsReversed = settings.SongsIsReversed;
-			SongsLayoutType = settings.SongsLayoutType;
-			SongsSortKey = settings.SongsSortKey;
+			_SongsIsReversed = settings.SongsIsReversed; OnPropertyChanged(nameof(SongsIsReversed));
+			_SongsLayoutType = settings.SongsLayoutType; OnPropertyChanged(nameof(SongsLayoutType));
+			_SongsSortKey = settings.SongsSortKey; OnPropertyChanged(nameof(SongsSortKey));
 		}
 		public override void OnPause()
 		{
@@ -98,13 +111,7 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 				SongsIsReversedPreference,
 				SongsLayoutTypePreference,
 				SongsSortKeyPreference);
-
-			XyzuSettings.Instance
-				.Edit()?
-				.PutUserInterfaceLibraryGenre(this)
-				.Apply();
 		}
-
 		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_userinterface_library_genre, rootKey);
