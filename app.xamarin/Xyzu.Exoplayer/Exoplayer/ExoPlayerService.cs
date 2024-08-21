@@ -240,6 +240,8 @@ namespace Xyzu.Player.Exoplayer
 			StopSelf(_LatestStartId);
 			NotificationManager.SetPlayer(null!);
 
+			Player.Queue.Clear();
+
 			base.OnDestroy();
 		}
 		public override StartCommandResult OnStartCommand(Intent? intent, [GeneratedEnum] StartCommandFlags flags, int startId)

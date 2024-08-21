@@ -167,21 +167,6 @@ namespace Xyzu.Views.Library
 			get => QueueSongs.LibraryItemsAdapter;
 		}
 
-		public new IXyzuPlayer? Player
-		{
-			get => base.Player;
-			set
-			{
-				if (base.Player != null)
-					base.Player.Queue.ListChanged -= Queue_ListChanged;
-
-				base.Player = value;
-
-				if (base.Player != null)
-					base.Player.Queue.ListChanged += Queue_ListChanged;
-			}
-		}
-
 		public ILibraryIdentifiers? Identifiers { get; set; }
 		public IQueueSettings Settings
 		{
@@ -222,19 +207,20 @@ namespace Xyzu.Views.Library
 				return;
 			}
 
+			Player.Queue.ListChanged -= OnQueueListChanged; Player.Queue.ListChanged += OnQueueListChanged;
+			Player.Queue.PropertyChanged -= OnQueuePropertyChanged; Player.Queue.PropertyChanged += OnQueuePropertyChanged;
+
 			Refreshing = true;
 
-			IEnumerable<ISong> songs = Library.Songs
-				.PopulateSongs(Player.Queue.Select(queueitem => new ISong.Default(queueitem.PrimaryId)
-				{
-					Uri = queueitem.Uri,
-					Filepath = queueitem.PrimaryId,
+			IList<ISong.Default> songs = Player.Queue.Select(queueitem => new ISong.Default(queueitem.PrimaryId)
+			{
+				Uri = queueitem.Uri,
+				Filepath = queueitem.PrimaryId,
 
-				}).ToList()).Select(_ =>
-				{
-					Library.Misc.SetImage(_); return _;
+			}).ToList();
 
-				}) ?? Enumerable.Empty<ISong>();
+			await Library.Misc.SetImages(songs, Cancellationtoken);
+			await Library.Songs.PopulateSongs(songs, Cancellationtoken);
 
 			QueueSongs.LibraryItemsAdapter.LibraryItems.Clear();
 			QueueSongs.LibraryItemsAdapter.LibraryItems.AddRange(songs);
@@ -334,9 +320,23 @@ namespace Xyzu.Views.Library
 			QueueSongs.LibraryItemsAdapter.SelectLibraryItemsAll(false);
 		}
 
-		private async void Queue_ListChanged(object sender, NotifyListChangedEventArgs args)
+		private async void OnQueueListChanged(object sender, NotifyListChangedEventArgs args)
 		{
 			await OnRefresh(true);
+		}
+		private void OnQueuePropertyChanged(object sender, PropertyChangedEventArgs args)
+		{
+			switch (args.PropertyName)
+			{
+				case nameof(IQueue.CurrentIndex):
+					if (Player?.Queue?.CurrentIndex is int currentindex)
+						QueueSongs.LibraryItemsAdapter.NotifyItemChanged(currentindex);
+					if (Player?.Queue?.PreviousIndex is int previousindex)
+						QueueSongs.LibraryItemsAdapter.NotifyItemChanged(previousindex);
+					break;
+
+				default: break;
+			}
 		}
 	}
 }

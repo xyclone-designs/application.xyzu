@@ -47,7 +47,7 @@ namespace Xyzu
 			get => _Player ??= new DefaultPlayer
 			{
 				Intent = Intent,
-				OnInit = OnInit,
+				OnIntent = OnIntent,
 			};
 		}
 		public IPlayerServiceBinder? ServiceBinder { get; private set; }
@@ -60,16 +60,23 @@ namespace Xyzu
 	
 		public event EventHandler<ServiceConnectionChangedEventArgs>? OnServiceConnectionChanged;
 
-		private void OnInit()
+		private void OnIntent()
 		{
-			string? previousaction = Intent.Action;
-			
-			Intent.SetAction(Intents.Actions.Initialise);
+			if (ServiceBinder?.PlayerService is null)
+			{
+				string? previousaction = Intent.Action;
 
-			Context.StartService(Intent);
-			Context.BindService(Intent, this, Bind.AutoCreate);
+				Intent.SetAction(Intents.Actions.Initialise);
 
-			Intent.SetAction(previousaction);
+				Context.StartService(Intent);
+				Context.BindService(Intent, this, Bind.AutoCreate);
+
+				Intent.SetAction(previousaction);
+
+				return;
+			}
+
+			ServiceBinder.PlayerService.ProcessIntent(Intent);
 		}
 		private void OnDestroy()
 		{
@@ -136,7 +143,7 @@ namespace Xyzu
 			{
 				ServiceBinder.PlayerService.OnIntent -= OnServiceIntent;
 			}
-			
+
 			ServiceBinder = null;
 
 			ServiceConnectionChangedEventArgs serviceconnectionchangedeventargs =
@@ -152,43 +159,43 @@ namespace Xyzu
 		private class DefaultPlayer : IPlayer.Default, IPlayer
 		{
 			public Intent? Intent { get; set; }
-			public Action? OnInit { get; set; }
+			public Action? OnIntent { get; set; }
 
 			public override void Init()
 			{
 				base.Init();
 
-				OnInit?.Invoke();
+				OnIntent?.Invoke();
 			}
 			public override void Next()
 			{
 				Intent?.SetAction(Intents.Actions.Next);
 
-				OnInit?.Invoke();
+				OnIntent?.Invoke();
 			}
 			public override void Pause()
 			{
 				Intent?.SetAction(Intents.Actions.Pause);
 
-				OnInit?.Invoke();
+				OnIntent?.Invoke();
 			}
 			public override void Play()
 			{
 				Intent?.SetAction(Intents.Actions.Play);
 
-				OnInit?.Invoke();
+				OnIntent?.Invoke();
 			}
 			public override void PlayPause()
 			{
 				Intent?.SetAction(Intents.Actions.PlayPause);
 
-				OnInit?.Invoke();
+				OnIntent?.Invoke();
 			}
 			public override void Previous()
 			{
 				Intent?.SetAction(Intents.Actions.Previous);
 
-				OnInit?.Invoke();
+				OnIntent?.Invoke();
 			}
 			public override void Seek(long position)
 			{
@@ -196,7 +203,7 @@ namespace Xyzu
 					.SetAction(Intents.Actions.Seek)
 					.PutExtra(Intents.Extras.Seek.Millisecond_Long, position);
 
-				OnInit?.Invoke();
+				OnIntent?.Invoke();
 			}
 			public override void Skip(int queueindex)
 			{
@@ -204,13 +211,13 @@ namespace Xyzu
 					.SetAction(Intents.Actions.Skip)
 					.PutExtra(Intents.Extras.Skip.QueueIndex_Int, queueindex);
 
-				OnInit?.Invoke();
+				OnIntent?.Invoke();
 			}
 			public override void Stop()
 			{
 				Intent?.SetAction(Intents.Actions.Stop);
 
-				OnInit?.Invoke();
+				OnIntent?.Invoke();
 			}
 		}
 	}

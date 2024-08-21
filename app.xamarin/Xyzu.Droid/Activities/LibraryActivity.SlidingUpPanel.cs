@@ -276,7 +276,31 @@ namespace Xyzu.Activities
 								.Sort(FragmentLibrarySongs.View.Settings.SortKey, FragmentLibrarySongs.View.Settings.IsReversed);
 							break;
 
-						default: break;
+						case LibraryTypes.LibrarySearch when FragmentLibrarySearch.View != null:
+							variables.Songs = XyzuLibrary.Instance.Songs
+								.GetSongs(new ILibraryIIdentifiers.Default
+								{ 
+									SongIds = FragmentLibrarySearch.View.SearchResults.LibraryItemsAdapter.LibraryItems
+										.SelectMany(_ =>
+										{
+											return true switch
+											{
+												true when _ is IAlbum album => album.SongIds,
+												true when _ is IArtist artist => artist.SongIds,
+												true when _ is IGenre genre => genre.SongIds,
+												true when _ is IPlaylist playlist => playlist.SongIds,
+												true when _ is ISong song => Enumerable.Empty<string>().Append(song.Id),
+
+												_ => Enumerable.Empty<string>(),
+											};
+
+										}).Distinct().OfType<string>()
+
+								}, new ISong.Default<bool>(true));
+							break;
+
+						case LibraryTypes.LibraryQueue:
+						default: return;
 					}
 
 					MenuOptionsUtils.Play(variables);

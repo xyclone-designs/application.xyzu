@@ -155,8 +155,8 @@ namespace Xyzu.Activities
 									operations: IImages.DefaultOperations.Downsample,
 									sources: new object?[]
 									{
-											song,
-											XyzuResource.Drawable.icon_xyzu
+										song,
+										XyzuResource.Drawable.icon_xyzu
 									});
 							},
 							ContentIntent = PendingIntent.GetActivity(
