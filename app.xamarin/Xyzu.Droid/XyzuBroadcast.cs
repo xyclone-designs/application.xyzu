@@ -33,6 +33,8 @@ namespace Xyzu
 		{
 			get => _Instance ?? throw new Exception("Init before use");
 		}
+		public static bool Inited => _Instance != null;
+
 		public static void Init(Context context, Action<XyzuBroadcast>? oninit = null)
 		{
 			_Instance = new XyzuBroadcast(context) { };

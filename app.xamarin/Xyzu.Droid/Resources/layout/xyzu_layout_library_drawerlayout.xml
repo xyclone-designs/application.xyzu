@@ -28,6 +28,13 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+              
+                <androidx.appcompat.widget.ContentFrameLayout
+                    android:id="@+id/xyzu_layout_library_drawerlayout_contentframelayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/ColorBackground" 
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
                 <com.google.android.material.appbar.AppBarLayout
                     style="@style/Xyzu.Material.AppBarLayout"
@@ -35,23 +42,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                  <xyzu.views.toolbar.ToolbarDrawerView
-                      android:id="@+id/xyzu_layout_library_drawerlayout_toolbardrawerview"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content" />
+                    <xyzu.views.toolbar.ToolbarDrawerView
+                        android:id="@+id/xyzu_layout_library_drawerlayout_toolbardrawerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-                  <xyzu.views.toolbar.ToolbarSearchView
-                      android:id="@+id/xyzu_layout_library_drawerlayout_toolbarsearchview"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"/>
+                    <xyzu.views.toolbar.ToolbarSearchView
+                        android:id="@+id/xyzu_layout_library_drawerlayout_toolbarsearchview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
                 </com.google.android.material.appbar.AppBarLayout>
-
-                <androidx.appcompat.widget.ContentFrameLayout
-                    android:id="@+id/xyzu_layout_library_drawerlayout_contentframelayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

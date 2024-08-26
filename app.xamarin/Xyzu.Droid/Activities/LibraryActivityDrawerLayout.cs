@@ -24,7 +24,7 @@ using Xyzu.Library.Models;
 using Xyzu.Settings.Enums;
 using Xyzu.Settings.UserInterface.Library;
 using Xyzu.Views.Toolbar;
-
+using static Xyzu.Activities.LibraryActivityTabLayout;
 using JavaRunnable = Java.Lang.Runnable;
 
 namespace Xyzu.Activities
@@ -36,6 +36,7 @@ namespace Xyzu.Activities
 	{
 		protected IDrawerLayoutable[]? _DrawerLayoutables;
 		protected IDrawerLayoutable? _CurrentDrawerLayoutable;
+		protected LibraryTypes? _CurrentLibraryType;
 		protected CoordinatorLayout? _Coordinatorlayout;
 		protected DrawerLayout? _Drawerlayout;
 		protected NavigationView? _Navigationview;
@@ -163,7 +164,11 @@ namespace Xyzu.Activities
 
 			SetContentView(Resource.Layout.xyzu_layout_library_drawerlayout);
 
-			RootView = Drawerlayout;
+			_CurrentLibraryType = 
+				savedInstanceState?.GetString(nameof(_CurrentLibraryType)) is string currentlibrarytype &&
+				Enum.TryParse(currentlibrarytype, out LibraryTypes librarytype) 
+					? librarytype
+					: new LibraryTypes?();
 
 			SetSupportActionBar(ActivityToolbar = ToolbarDrawer.Toolbar);
 
@@ -188,15 +193,30 @@ namespace Xyzu.Activities
 				Navigationview.LayoutParameters!.Width = Resources?.Configuration?.Orientation == Orientation.Landscape
 					? Resources.GetDimensionPixelSize(Resource.Dimension.dp360)
 					: DrawerLayout.LayoutParams.WrapContent;
-		}		  
+		}
+		protected override void OnStart()
+		{
+			base.OnStart();
+
+			ToDrawerLayoutable(_CurrentLibraryType switch
+			{
+				LibraryTypes.LibraryAlbums => FragmentLibraryAlbums,
+				LibraryTypes.LibraryArtists => FragmentLibraryArtists,
+				LibraryTypes.LibraryGenres => FragmentLibraryGenres,
+				LibraryTypes.LibraryPlaylists => FragmentLibraryPlaylists,
+				LibraryTypes.LibraryQueue => FragmentLibraryQueue,
+				LibraryTypes.LibrarySongs => FragmentLibrarySongs,
+				LibraryTypes.LibrarySearch => FragmentLibrarySearch,
+
+				_ => null
+			});
+		}
 		protected override void OnResume()
 		{
 			base.OnResume();
 
 			Navigationview?.SetNavigationItemSelectedListener(this);
 			if (Actionbardrawertoggle != null) Drawerlayout?.AddDrawerListener(Actionbardrawertoggle);
-
-			ToDrawerLayoutable(null);
 		}
 		protected override void OnPause()
 		{
@@ -204,6 +224,12 @@ namespace Xyzu.Activities
 
 			Navigationview?.SetNavigationItemSelectedListener(null);
 			if (Actionbardrawertoggle != null) Drawerlayout?.RemoveDrawerListener(Actionbardrawertoggle);
+		}
+		protected override void OnSaveInstanceState(Bundle outstate)
+		{
+			base.OnSaveInstanceState(outstate);
+
+			outstate.PutString(nameof(_CurrentLibraryType), CurrentDrawerLayoutable?.LibraryType.ToString() ?? string.Empty);
 		}
 
 		public override void OnBackPressed()
@@ -213,7 +239,6 @@ namespace Xyzu.Activities
 			else
 			{
 				ToDrawerLayoutable(CurrentDrawerLayoutable = PreviousDrawerLayoutable);
-
 				PreviousDrawerLayoutable = null;
 			}
 
@@ -259,63 +284,6 @@ namespace Xyzu.Activities
 			return result ? result : base.OnMenuItemClick(menuitem);
 		}
 
-		public override void NavigateAlbum(IAlbum? album)
-		{
-			base.NavigateAlbum(album);
-
-			SupportFragmentManager
-				.BeginTransaction()
-				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentDrawerLayoutable = FragmentLibraryAlbum, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout, GenerateFragmentLibraryAlbum(album))
-				.Commit();
-		}
-		public override void NavigateArtist(IArtist? artist)
-		{
-			base.NavigateArtist(artist);
-
-			SupportFragmentManager
-				.BeginTransaction()
-				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentDrawerLayoutable = FragmentLibraryArtist, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout, GenerateFragmentLibraryArtist(artist))
-				.Commit();
-		}
-		public override void NavigateGenre(IGenre? genre)
-		{
-			base.NavigateGenre(genre);
-
-			SupportFragmentManager
-				.BeginTransaction()
-				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentDrawerLayoutable = FragmentLibraryGenre, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout, GenerateFragmentLibraryGenre(genre))
-				.Commit();
-		}
-		public override void NavigatePlaylist(IPlaylist? playlist)
-		{
-			base.NavigatePlaylist(playlist);
-
-			SupportFragmentManager
-				.BeginTransaction()
-				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentDrawerLayoutable = FragmentLibraryPlaylist, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout, GenerateFragmentLibraryPlaylist(playlist))
-				.Commit();
-		}
-		public override void NavigateQueue()
-		{
-			base.NavigateQueue();
-
-			ToDrawerLayoutable(FragmentLibraryQueue);
-		}
-		public override void NavigateSearch()
-		{
-			base.NavigateSearch();
-
-			SupportFragmentManager
-				.BeginTransaction()
-				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentDrawerLayoutable = FragmentLibrarySearch, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout, FragmentLibrarySearch)
-				.Commit();
-		}
-
 		public bool OnNavigationItemSelected(IMenuItem menuitem)
 		{
 			IDrawerLayoutable? drawerlayoutable = true switch
@@ -355,20 +323,20 @@ namespace Xyzu.Activities
 			SupportFragmentManager
 				.BeginTransaction()
 				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout, drawerlayoutable.Fragment)
-				.Commit();
+				.RunOnCommit(new JavaRunnable(() =>
+				{
+					Drawerlayout?.CloseDrawers();
 
-			Drawerlayout?.CloseDrawers();
+					if (Actionbardrawertoggle != null)
+						Actionbardrawertoggle.DrawerIndicatorEnabled = true;
 
-			CurrentDrawerLayoutable = drawerlayoutable;
+					OnReconfigure(this, CurrentDrawerLayoutable = drawerlayoutable, IConfigurable.ReconfigureType_All);
 
-			if (Actionbardrawertoggle != null)
-				Actionbardrawertoggle.DrawerIndicatorEnabled = true;
+					menuitem?.SetChecked(true);
 
-			menuitem?.SetChecked(true);
+					RefreshDrawerLayout(CurrentDrawerLayoutable);
 
-			OnReconfigure(this, IConfigurable.ReconfigureType_All);
-
-			RefreshDrawerLayout(CurrentDrawerLayoutable);
+				})).Commit();
 		}
 		protected async void RefreshDrawerLayout(IDrawerLayoutable? drawerlayoutable, bool force = false)
 		{
@@ -425,112 +393,6 @@ namespace Xyzu.Activities
 
 				default: break;
 			}
-		}
-		protected override void OnReconfigure(object sender, IConfigurable? toolbarconfigurable, params string[] reconfiguretypes)
-		{
-			ReconfigureLayout();
-
-			foreach (string reconfiguretype in reconfiguretypes)
-				switch (reconfiguretype)
-				{
-					case IConfigurable.ReconfigureType_All:
-						ReconfigureAppBar();
-						ReconfigureMenu();
-						ReconfigureMenuItem();
-						ReconfigureToolbar();
-						break;
-
-					case IConfigurable.ReconfigureType_AppBar:
-						ReconfigureAppBar();
-						break;							
-
-					case IConfigurable.ReconfigureType_Menu:
-						ReconfigureMenu();
-						break;
-
-					case IConfigurable.ReconfigureType_MenuItem:
-						ReconfigureMenuItem();
-						break;
-
-					case IConfigurable.ReconfigureType_Toolbar:
-						ReconfigureToolbar();
-						break;
-
-					default: break;
-				}
-		}
-		protected override void ReconfigureAppBar()
-		{
-			base.ReconfigureAppBar();
-
-			CurrentDrawerLayoutable?.ConfigureAppBar(Appbarlayout, this);
-		}
-		protected override void ReconfigureLayout()
-		{
-			switch (true)
-			{
-				case true when CurrentDrawerLayoutable == FragmentLibrarySearch:
-
-					ToolbarSearch.Visibility = ViewStates.Visible;
-					ToolbarDrawer.Visibility = ViewStates.Gone;
-					Contentframelayout.Visibility = ViewStates.Visible;
-
-					break;
-
-				case true when CurrentDrawerLayoutable == FragmentLibraryAlbum:
-				case true when CurrentDrawerLayoutable == FragmentLibraryArtist:
-				case true when CurrentDrawerLayoutable == FragmentLibraryGenre:
-				case true when CurrentDrawerLayoutable == FragmentLibraryPlaylist:
-
-					ToolbarSearch.Visibility = ViewStates.Gone;
-					ToolbarDrawer.Visibility = ViewStates.Gone;
-					Contentframelayout.Visibility = ViewStates.Visible;
-
-					break;
-
-				case true when CurrentDrawerLayoutable == FragmentLibraryAlbums:
-				case true when CurrentDrawerLayoutable == FragmentLibraryArtists:
-				case true when CurrentDrawerLayoutable == FragmentLibraryGenres:
-				case true when CurrentDrawerLayoutable == FragmentLibraryPlaylists:
-				case true when CurrentDrawerLayoutable == FragmentLibraryQueue:
-				case true when CurrentDrawerLayoutable == FragmentLibrarySongs:
-				case true when CurrentDrawerLayoutable == FragmentLibrarySearch:
-				default:
-
-					ToolbarSearch.Visibility = ViewStates.Gone;
-					ToolbarDrawer.Visibility = ViewStates.Visible;
-					Contentframelayout.Visibility = ViewStates.Visible;
-
-					break;
-			}
-
-			base.ReconfigureLayout();
-		}
-		protected override void ReconfigureMenu()
-		{
-			CurrentDrawerLayoutable?.ConfigureMenu(ActivityToolbar?.Menu, this);
-
-			base.ReconfigureMenu();
-		}
-		protected override void ReconfigureMenuItem()
-		{
-			if
-			(
-				ActivityToolbar?.Menu != null &&
-				DrawerLayoutables?.Index(CurrentDrawerLayoutable) is int index &&
-				index < ActivityToolbar.Menu.Size() &&
-				ActivityToolbar.Menu.GetItem(index) is IMenuItem menuitem
-
-			) CurrentDrawerLayoutable?.ConfigureMenuItem(menuitem, this);
-
-			base.ReconfigureMenuItem();
-		}
-		protected override void ReconfigureToolbar()
-		{
-			Actionbardrawertoggle?.SyncState();
-			CurrentDrawerLayoutable?.ConfigureToolbar(ActivityToolbar, this);
-
-			base.ReconfigureToolbar();
 		}
 		protected override void XyzuLibraryOnServiceConnectionChanged(object sender, ServiceConnectionChangedEventArgs args)
 		{

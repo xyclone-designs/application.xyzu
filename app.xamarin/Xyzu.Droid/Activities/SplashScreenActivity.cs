@@ -1,8 +1,8 @@
 ﻿#nullable enable
 
-using Android.Content;
 using Android;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
@@ -30,7 +30,7 @@ using ExoPlayerService = Xyzu.Player.Exoplayer.ExoPlayerService;
 
 namespace Xyzu.Activities
 {
-    [Activity(
+	[Activity(
 		Exported = true,
 		NoHistory = true,
 		MainLauncher = true,
@@ -53,7 +53,66 @@ namespace Xyzu.Activities
 			get => _LibrarySettings ??= XyzuSettings.Instance.GetUserInterfaceLibraryDroid();
 		}
 
-		private void XyzuBroadcastInit(XyzuBroadcast xyzubroadcast)
+		private async void Start(bool permissionchecked)
+		{
+			if (permissionchecked is false)
+				permissionchecked = 
+					CheckCallingPermission(Manifest.Permission.ReadExternalStorage) is Permission.Granted &&
+					CheckCallingPermission(Manifest.Permission.ManageExternalStorage) is Permission.Granted;
+
+			if (permissionchecked is false)
+			{
+				RequestPermissions(requestCode: 0, permissions: new string[]
+				{
+					Manifest.Permission.ReadExternalStorage,
+					Manifest.Permission.ManageExternalStorage,
+				});
+
+				return;
+			}
+
+			if (CacheDir != null)
+				await CacheDir.ClearDirectoryAsync();
+
+			XyzuBroadcast.Init(Application.Context, InitBroadcast);
+			XyzuSettings.Init(Application.Context, InitSettings);
+			XyzuLibrary.Init(Application.Context, InitLibrary);
+			XyzuImages.Init(Application.Context, InitImages);
+			XyzuPlayer.Init(Application.Context, typeof(ExoPlayerService), InitPlayer);
+
+			StartActivity(XyzuSettings.Utils.MainActivityIntent(this, null));
+		}
+
+		protected override void OnCreate(Bundle? savedInstaneState)
+		{
+			base.OnCreate(savedInstaneState);
+
+			AppDomain.CurrentDomain.UnhandledException += ISystemSettingsDroid.OnUnhandledException;
+			TaskScheduler.UnobservedTaskException += ISystemSettingsDroid.OnUnobservedTaskException;
+		}
+		protected override void OnStart()
+		{
+			base.OnStart();
+
+			Start(false);
+		}
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+
+			AppDomain.CurrentDomain.UnhandledException -= ISystemSettingsDroid.OnUnhandledException;
+			TaskScheduler.UnobservedTaskException -= ISystemSettingsDroid.OnUnobservedTaskException;
+		}
+
+		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+		{
+			base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+			if (permissions.Contains(Manifest.Permission.ReadExternalStorage))
+				Start(true);
+		}
+
+		public void InitBroadcast(XyzuBroadcast xyzubroadcast)
 		{
 			xyzubroadcast.ReceiveActions = new Dictionary<string, Action<object, OnReceiveEventArgs>>
 			{
@@ -74,11 +133,11 @@ namespace Xyzu.Activities
 				} },
 			};
 		}
-		private void XyzuImagesInit(XyzuImages xyzuimages)
+		public void InitImages(XyzuImages xyzuimages)
 		{
 			xyzuimages.LibraryMisc = XyzuLibrary.Instance.Misc;
-		}				   
-		private void XyzuLibraryInit(XyzuLibrary xyzulibrary)
+		}
+		public void InitLibrary(XyzuLibrary xyzulibrary)
 		{
 			ISong? OnGetSong(string? songid)
 			{
@@ -96,12 +155,12 @@ namespace Xyzu.Activities
 
 			xyzulibrary.Settings = new ILibrary.ISettings.Default
 			{
-				Directories = FilesSettings.Directories,
-				Mimetypes = FilesSettings.Mimetypes,
+				Directories = FilesSettings?.Directories,
+				Mimetypes = FilesSettings?.Mimetypes,
 			};
 			xyzulibrary.OnCreateAction = new Library.TagLibSharp.TagLibSharpActions.OnCreate
 			{
-				Paths = FilesSettings.Files()
+				Paths = FilesSettings?.Files()
 					.ToDictionary(file => file.AbsolutePath, file => file.AbsolutePath),
 			};
 			xyzulibrary.OnDeleteActions = new List<ILibrary.IOnDeleteActions>
@@ -131,7 +190,7 @@ namespace Xyzu.Activities
 
 			xyzulibrary.ScannerServiceScan(false);
 		}
-		private void XyzuPlayerInit(XyzuPlayer xyzuplayer)
+		public void InitPlayer(XyzuPlayer xyzuplayer)
 		{
 			xyzuplayer.ServiceConnectionChangedAction = args =>
 			{
@@ -215,9 +274,9 @@ namespace Xyzu.Activities
 				}
 			};
 		}
-		private void XyzuSettingsInit(XyzuSettings xyzusettings)
+		public void InitSettings(XyzuSettings xyzusettings)
 		{
-			if (FilesSettings.Directories.Any() is false)
+			if (FilesSettings?.Directories.Any() is false)
 			{
 				IEnumerable<string> defaultdirectories = Enumerable.Empty<string>()
 					.Append(AndroidOSEnvironment.DirectoryAudiobooks)
@@ -241,65 +300,6 @@ namespace Xyzu.Activities
 					.PutFilesDroid(FilesSettings)
 					.Apply();
 			}
-		}
-
-		private async void Start(bool permissionchecked)
-		{
-			if (permissionchecked is false)
-				permissionchecked = 
-					CheckCallingPermission(Manifest.Permission.ReadExternalStorage) is Permission.Granted &&
-					CheckCallingPermission(Manifest.Permission.ManageExternalStorage) is Permission.Granted;
-
-			if (permissionchecked is false)
-			{
-				RequestPermissions(requestCode: 0, permissions: new string[]
-				{
-					Manifest.Permission.ReadExternalStorage,
-					Manifest.Permission.ManageExternalStorage,
-				});
-
-				return;
-			}
-
-			if (CacheDir != null)
-				await CacheDir.ClearDirectoryAsync();
-
-			XyzuBroadcast.Init(Application.Context, XyzuBroadcastInit);
-			XyzuSettings.Init(Application.Context, XyzuSettingsInit);
-			XyzuLibrary.Init(Application.Context, XyzuLibraryInit);
-			XyzuImages.Init(Application.Context, XyzuImagesInit);
-			XyzuPlayer.Init(Application.Context, typeof(ExoPlayerService), XyzuPlayerInit);
-
-			StartActivity(XyzuSettings.Utils.MainActivityIntent(this, null));
-		}
-
-		protected override void OnCreate(Bundle? savedInstaneState)
-		{
-			base.OnCreate(savedInstaneState);
-
-			AppDomain.CurrentDomain.UnhandledException += ISystemSettingsDroid.OnUnhandledException;
-			TaskScheduler.UnobservedTaskException += ISystemSettingsDroid.OnUnobservedTaskException;
-		}
-		protected override void OnStart()
-		{
-			base.OnStart();
-
-			Start(false);
-		}
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
-
-			AppDomain.CurrentDomain.UnhandledException -= ISystemSettingsDroid.OnUnhandledException;
-			TaskScheduler.UnobservedTaskException -= ISystemSettingsDroid.OnUnobservedTaskException;
-		}
-
-		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
-		{
-			base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-			if (permissions.Contains(Manifest.Permission.ReadExternalStorage))
-				Start(true);
 		}
 	}
 }

@@ -50,7 +50,7 @@ namespace Xyzu.Fragments.Library
 			base.OnDestroyView();
 
 			if (View != null)
-				View.AlbumSongs.LibraryItemsAdapter.PropertyChanged += LibraryItemsAdapter_PropertyChanged;
+				View.AlbumSongs.LibraryItemsAdapter.PropertyChanged -= LibraryItemsAdapter_PropertyChanged;
 		}
 		public override bool OnBackPressed()
 		{

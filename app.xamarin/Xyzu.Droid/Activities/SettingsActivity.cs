@@ -36,9 +36,7 @@ namespace Xyzu.Activities
 		{
 			base.OnCreate(savedInstanceState);
 
-			SetContentView(Resource.Layout.xyzu_layout_settings);
-			RootView = FindViewById(Resource.Id.xyzu_layout_settings_root_linearlayoutcompat);
-			
+			SetContentView(Resource.Layout.xyzu_layout_settings);			
 			SetSupportActionBar(ActivityToolbar = ToolbarSettings.Toolbar);
 			SupportActionBar?.SetHomeButtonEnabled(true);
 			SupportActionBar?.SetDisplayShowHomeEnabled(true);

@@ -24,7 +24,6 @@ namespace Xyzu.Activities
 	{
 		public BaseActivity() : base() { }
 
-		public View? RootView { get; protected set; }
 		public Toolbar? ActivityToolbar { get; protected set; }
 		public CancellationTokenSource? ActivityCancellationTokenSource { get; protected set; }
 
@@ -34,6 +33,7 @@ namespace Xyzu.Activities
 		protected override void OnCreate(Bundle? savedInstaneState)
 		{
 			Window?.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
+			Window?.SetSoftInputMode(SoftInput.AdjustResize);
 
 			base.OnCreate(savedInstaneState);
 

@@ -373,7 +373,7 @@ namespace Xyzu.Activities
 		}	 
 		protected void InitSlidingPanelLayout(SlidingUpPanelLayout? slidinguppanel, NowPlayingView? viewnowplaying, CardView? viewnowplayingcontainer)
 		{
-			RootView = SlidingUpPanel = slidinguppanel;
+			SlidingUpPanel = slidinguppanel;
 			ViewNowPlaying = viewnowplaying;
 			ViewNowPlayingContainer = viewnowplayingcontainer;
 			ViewNowPlayingContainerRadius = viewnowplayingcontainer?.Radius;

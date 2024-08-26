@@ -9,7 +9,6 @@ using Google.Android.Material.AppBar;
 
 using System;
 using System.ComponentModel;
-using System.Threading;
 using System.Threading.Tasks;
 
 using Xyzu.Menus;
@@ -131,6 +130,7 @@ namespace Xyzu.Activities
 		}
 		protected virtual void ReconfigureMenuItem() { }
 		protected virtual void ReconfigureToolbar() { }
+
 		public virtual void OnSettingsPropertyChanged(object sender, PropertyChangedEventArgs args) { }
 
 		public interface IConfigurable

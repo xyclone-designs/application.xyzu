@@ -28,11 +28,14 @@ using Xyzu.Views.Library;
 using Xyzu.Views.Toolbar;
 
 using JavaRunnable = Java.Lang.Runnable;
+using Com.Sothree.Slidinguppanel;
+using Xyzu.Player.Exoplayer;
 
 namespace Xyzu.Activities
 {
 	[Android.App.Activity(
 		Theme = "@style/LibraryTheme",
+		WindowSoftInputMode = SoftInput.AdjustPan | SoftInput.AdjustResize,
 		ConfigurationChanges = ConfigChanges.Locale | ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
 	public partial class LibraryActivityTabLayout : LibraryActivity
 	{
@@ -41,6 +44,7 @@ namespace Xyzu.Activities
 		private ViewPager2? _Viewpager2;
 		private ContentFrameLayout? _Contentframelayout;
 		private ToolbarTabLayoutView? _ToolbarTabLayout;
+		private int? _SelectedPosition;
 
 		protected ITabLayoutable? CurrentTabLayoutable 
 		{
@@ -219,7 +223,7 @@ namespace Xyzu.Activities
 			SupportActionBar?.SetHomeButtonEnabled(true);
 
 			InitSlidingPanelLayout(
-				RootView = FindViewById(Resource.Id.xyzu_layout_library_tablayout_root_slidinguppanellayout),
+				FindViewById(Resource.Id.xyzu_layout_library_tablayout_root_slidinguppanellayout),
 				FindViewById(Resource.Id.xyzu_layout_library_tablayout_nowplayingview),
 				FindViewById(Resource.Id.xyzu_layout_library_tablayout_nowplayingview_cardview));
 
@@ -244,16 +248,9 @@ namespace Xyzu.Activities
 
 			Tablayoutmediator ??= new TabLayoutMediator(ToolbarTabLayout.Tablayout, Viewpager2, true, true, Tablayoutadapter);
 			Tablayoutmediator.Attach();
-		}
-		protected override void OnStart() 
-		{
-			base.OnStart();
 
-			ToolbarTabLayout.Tablayout.TabSelected += TabSelected;
-			ToolbarTabLayout.Tablayout.TabReselected += TabReselected;
-			ToolbarTabLayout.Tablayout.TabUnselected += TabUnselected;
-
-			if (Settings.PageDefault switch
+			_SelectedPosition = savedInstanceState?.GetInt(nameof(ToolbarTabLayout.Tablayout.SelectedTabPosition), -1);
+			_SelectedPosition = _SelectedPosition is null || _SelectedPosition.Value == -1 ? Settings.PageDefault switch
 			{
 				ILibrarySettingsDroid.Options.Pages.Albums => FragmentLibraryAlbums,
 				ILibrarySettingsDroid.Options.Pages.Artists => FragmentLibraryArtists,
@@ -263,8 +260,18 @@ namespace Xyzu.Activities
 				ILibrarySettingsDroid.Options.Pages.Songs => FragmentLibrarySongs,
 
 				_ => null as ITabLayoutable
-			
-			} is ITabLayoutable tablayoutable && Tablayoutadapter?.TabLayoutables.Index(tablayoutable) is int index && ToolbarTabLayout.Tablayout.GetTabAt(index) is TabLayout.Tab tab)
+
+			} is ITabLayoutable tablayoutable ? Tablayoutadapter?.TabLayoutables.Index(tablayoutable) : null : _SelectedPosition;
+		}
+		protected override void OnStart() 
+		{
+			base.OnStart();
+
+			ToolbarTabLayout.Tablayout.TabSelected += TabSelected;
+			ToolbarTabLayout.Tablayout.TabReselected += TabReselected;
+			ToolbarTabLayout.Tablayout.TabUnselected += TabUnselected;
+
+			if (_SelectedPosition.HasValue && ToolbarTabLayout.Tablayout.GetTabAt(_SelectedPosition.Value) is TabLayout.Tab tab)
 				ToolbarTabLayout.Tablayout.SelectTab(tab, true);
 		}
 		protected override void OnStop() 
@@ -274,6 +281,19 @@ namespace Xyzu.Activities
 			ToolbarTabLayout.Tablayout.TabSelected -= TabSelected;
 			ToolbarTabLayout.Tablayout.TabReselected -= TabReselected;
 			ToolbarTabLayout.Tablayout.TabUnselected -= TabUnselected;
+		}
+
+		protected override void OnRestoreInstanceState(Bundle savedInstanceState)
+		{
+			base.OnRestoreInstanceState(savedInstanceState);
+
+			_SelectedPosition = savedInstanceState?.GetInt(nameof(ToolbarTabLayout.Tablayout.SelectedTabPosition), -1);
+		}
+		protected override void OnSaveInstanceState(Bundle outstate)
+		{
+			outstate.PutInt(nameof(ToolbarTabLayout.Tablayout.SelectedTabPosition), ToolbarTabLayout.Tablayout.SelectedTabPosition);
+
+			base.OnSaveInstanceState(outstate);
 		}
 
 		protected override void OnFloatingactionbuttonClick(object sender, EventArgs args)

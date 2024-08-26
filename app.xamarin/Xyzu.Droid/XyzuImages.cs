@@ -32,6 +32,7 @@ using Xyzu.Images.Enums;
 using Xyzu.Library.Models;
 
 using AndroidUri = Android.Net.Uri;
+using System.Runtime.Remoting.Messaging;
 
 namespace Xyzu
 {
@@ -44,10 +45,12 @@ namespace Xyzu
 		}
 
 		private static XyzuImages? _Instance;
+
 		public static XyzuImages Instance
 		{
 			get => _Instance ?? throw new Exception("Instane is null. Init AppImages before use");
 		}
+		public static bool Inited => _Instance != null;
 
 		public static void Init(Context context, Action<XyzuImages>? action = null)
 		{

@@ -30,10 +30,12 @@ namespace Xyzu
 		}
 
 		private static XyzuLibrary? _Instance;
+		
 		public static XyzuLibrary Instance
 		{
 			get => _Instance ?? throw new Exception("Instane is null. Init AppLibrary before use");
 		}
+		public static bool Inited => _Instance != null;
 
 		public static void Init(Context context, Action<XyzuLibrary>? action = null) 
 		{

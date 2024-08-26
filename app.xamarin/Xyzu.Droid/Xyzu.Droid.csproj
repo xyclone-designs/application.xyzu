@@ -83,6 +83,8 @@
     <Compile Include="Activities\LibraryActivity.cs" />
     <Compile Include="Activities\LibraryActivity.Fragments.cs" />
     <Compile Include="Activities\LibraryActivity.SlidingUpPanel.cs" />
+    <Compile Include="Activities\LibraryActivityDrawerLayout.IConfigurable.cs" />
+    <Compile Include="Activities\LibraryActivityDrawerLayout.INavigatable.cs" />
     <Compile Include="Activities\LibraryActivityDrawerLayout.cs" />
     <Compile Include="Activities\LibraryActivityTabLayout.cs" />
     <Compile Include="Activities\SettingsActivity.cs" />

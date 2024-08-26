@@ -1,6 +1,5 @@
 ﻿#nullable enable
 
-using Android.Content;
 using Java.IO;
 
 using System;
@@ -74,7 +73,6 @@ namespace Xyzu.Settings.Files
 						yield return new File(IntenalStorageFilespath0);
 					else yield return file;
 		}
-
 		public static IEnumerable<File> StoragesDirectories()
 		{
 			foreach (File storage in Storages())
@@ -86,6 +84,64 @@ namespace Xyzu.Settings.Files
 		{
 			foreach (File storage in Storages())
 				foreach (File storagefile in storage.ListAllFiles())
+					if (storagefile.AbsolutePath.StartsWith(storage.AbsolutePath + "/Android") is false)
+						yield return storagefile;
+		}
+
+		public async IAsyncEnumerable<File> FilesAsync()
+		{
+			Func<File, bool> predicate = PredicateFiles(this);
+
+			await foreach (File directoryfile in FilesDirectoriesAsync())
+				if (await directoryfile.ListFilesAsync() is File[] files)
+					foreach (File file in files)
+						if (predicate.Invoke(file))
+							yield return file;
+		}
+		public IAsyncEnumerable<File> FilesDirectoriesAsync()
+		{
+			IAsyncEnumerable<File> directoriesfiles = AsyncEnumerable.Empty<File>();
+
+			if (Directories != null)
+				directoriesfiles = Directories
+					.ToAsyncEnumerable()
+					.SelectMany(dir =>
+					{
+						File file = new File(dir);
+						if (file.Exists() && file.IsDirectory)
+							return file.ListAllFilesAsync().Where(dirr => dirr.IsDirectory);
+						return AsyncEnumerable.Empty<File>();
+					});
+
+			if (DirectoriesExclude != null)
+				directoriesfiles = directoriesfiles.Where(dir =>
+				{
+					return DirectoriesExclude.Any(dirr => dir.AbsolutePath.StartsWith(dirr)) is false;
+				});
+
+			return directoriesfiles;
+		}
+		public static async IAsyncEnumerable<File> StoragesAsync()
+		{
+			if (await AndroidOSEnvironment.StorageDirectory.ListFilesAsync() is File[] files)
+				foreach (File file in files)
+					if (file.AbsolutePath == "/storage/self")
+						continue;
+					else if (file.AbsolutePath == IntenalStorageFilespath)
+						yield return new File(IntenalStorageFilespath0);
+					else yield return file;
+		}
+		public static async IAsyncEnumerable<File> StoragesDirectoriesAsync()
+		{
+			await foreach (File storage in StoragesAsync())
+				await foreach (File storagefile in storage.ListAllFilesAsync())
+					if (storagefile.AbsolutePath.StartsWith(storage.AbsolutePath + "/Android") is false)
+						yield return storagefile;
+		}
+		public static async IAsyncEnumerable<File> StoragesFilesAsync()
+		{
+			await foreach (File storage in StoragesAsync())
+				await foreach (File storagefile in storage.ListAllFilesAsync())
 					if (storagefile.AbsolutePath.StartsWith(storage.AbsolutePath + "/Android") is false)
 						yield return storagefile;
 		}

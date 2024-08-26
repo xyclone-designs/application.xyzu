@@ -21,6 +21,7 @@ namespace Xyzu
 		{
 			get => _Instance ?? throw new Exception("Instance is null. Init AppSettings before use");
 		}
+		public static bool Inited => _Instance != null;
 
 		public static void Init(Context context, Action<XyzuSettings>? oninit)
 		{

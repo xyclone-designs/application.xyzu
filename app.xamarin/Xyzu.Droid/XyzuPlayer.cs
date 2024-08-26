@@ -23,6 +23,7 @@ namespace Xyzu
 		{
 			get => _Instance ?? throw new Exception("Instance is null. Init AppPlayer before use");
 		}
+		public static bool Inited => _Instance != null;
 
 		public static void Init(Context context, Type servietype, Action<XyzuPlayer>? oninit)
 		{
