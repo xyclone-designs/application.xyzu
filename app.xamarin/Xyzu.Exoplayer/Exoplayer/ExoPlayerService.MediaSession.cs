@@ -27,7 +27,6 @@ namespace Xyzu.Player.Exoplayer
 				if (_MediaSessionConnector is null)
 				{
 					_MediaSessionConnector = new MediaSessionConnector(MediaSession);
-
 					_MediaSessionConnector.SetPlayer(Exoplayer);
 				}
 

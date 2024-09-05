@@ -38,7 +38,7 @@ namespace Xyzu.Views.NowPlaying
 
 		protected int PositionTimerDue = 0;
 		protected int PositionTimerPeriodStop = -1;
-		protected int PositionTimerPeriodStart = 500;
+		protected int PositionTimerPeriodStart = 1_000;
 
 		protected IPlayer? _Player;
 		protected INowPlayingSettingsDroid? _Settings;
@@ -480,7 +480,7 @@ namespace Xyzu.Views.NowPlaying
 			FragmentActivity?.RunOnUiThread(() => PositionText?.SetText(text, null));
 
 			if (withprogress)
-				try { Position?.SetProgress((int)current.Value.TotalMilliseconds); } catch (Exception) { }
+				Position?.SetProgress((int)current.Value.TotalMilliseconds);
 		}
 
 		private void ConfigureMenuOptionButton(View? view)

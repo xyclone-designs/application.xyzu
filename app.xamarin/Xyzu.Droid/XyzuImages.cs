@@ -169,6 +169,78 @@ namespace Xyzu
 
 			return bitmap;
 		}
+		private async Task<Bitmap?> GenerateBitmapAsync(params object?[] sources)
+		{
+			Bitmap? bitmap = null;
+
+			IEnumerator sourceenumerator = sources.GetEnumerator();
+
+			while (sourceenumerator.MoveNext() && bitmap is null)
+				switch (true)
+				{
+					case true when
+					sourceenumerator.Current is IModel model:
+						byte[]? modelbuffer = Buffer(model);
+
+						if (modelbuffer is null && true switch
+						{
+							true when model is IAlbum album => album.Artwork?.BufferHash != null,
+							true when model is IArtist artist => artist.Image?.BufferHash != null,
+							true when model is ISong song => song.Artwork?.BufferHash != null,
+
+							_ => false,
+
+						}) LibraryMisc?.SetImage(model);
+
+						modelbuffer ??= Buffer(model);
+
+						if (modelbuffer != null)
+							bitmap ??= await BitmapFactory.DecodeByteArrayAsync(modelbuffer, 0, modelbuffer.Length);
+						break;
+
+					case true when sourceenumerator.Current is IImage image:
+						switch (true)
+						{
+							case true when image.Buffer != null:
+								bitmap ??= await BitmapFactory.DecodeByteArrayAsync(image.Buffer, 0, image.Buffer.Length);
+								break;
+
+							case true when image.Uri?.ToAndroidUri() is AndroidUri androiduri:
+								bitmap ??=
+									await BitmapFactory.DecodeFileAsync(androiduri.Path) ??
+									await BitmapFactory.DecodeFileDescriptorAsync(Context.ContentResolver?.OpenFileDescriptorSafe(androiduri, "r")?.FileDescriptor);
+								break;
+
+							default: break;
+						}
+						break;
+
+					case true when sourceenumerator.Current is Bitmap sourcebitmap:
+						bitmap ??= sourcebitmap;
+						break;
+
+					case true when sourceenumerator.Current is byte[] sourcebuffer:
+						bitmap ??= await BitmapFactory.DecodeByteArrayAsync(sourcebuffer, 0, sourcebuffer.Length);
+						break;
+
+					case true when sourceenumerator.Current is Java.Lang.Integer sourceresourceid:
+						bitmap ??= await BitmapFactory.DecodeResourceAsync(Context.Resources, sourceresourceid.IntValue());
+						break;
+
+					case true when sourceenumerator.Current is Drawable sourcedrawable:
+						break;
+
+					case true when (sourceenumerator.Current as AndroidUri ?? (sourceenumerator.Current as Uri)?.ToAndroidUri()) is AndroidUri sourceandroiduri:
+						bitmap ??=
+							await BitmapFactory.DecodeFileAsync(sourceandroiduri.Path) ??
+							await BitmapFactory.DecodeFileDescriptorAsync(Context.ContentResolver?.OpenFileDescriptorSafe(sourceandroiduri, "r")?.FileDescriptor);
+						break;
+
+					default: break;
+				}
+
+			return bitmap;
+		}
 
 		private async Task<RequestBuilder?> RequestBuilder(Func<RequestManager?, RequestBuilder?>? requestbuilderaction, CancellationToken cancellationtoken = default, params object?[] sources)
 		{
@@ -359,6 +431,27 @@ namespace Xyzu
 
 			return bitmap ?? GenerateBitmap(sources);
 		}
+		public async Task<Bitmap?> GetBitmapAsync(Operations[] operations, BitmapFactory.Options? options, params object?[] sources)
+		{
+			Bitmap? bitmap = null;
+
+			await Task.Run(() =>
+			{
+				try
+				{
+					using RequestBuilder? requestbuilder = RequestBuilder(requestmanager => requestmanager?.AsBitmap(), sources)?
+						.Override(options?.OutWidth ?? -1, options?.OutHeight ?? -1);
+					using IFutureTarget? futuretarget = RequestBuilderOperations(requestbuilder, operations)?
+						.Submit();
+
+					bitmap = futuretarget?.Get() as Bitmap;
+				}
+				catch (Java.Util.Concurrent.ExecutionException) { }
+				catch (Java.Lang.InterruptedException) { }
+			});
+
+			return bitmap ?? await GenerateBitmapAsync(sources);
+		}
 		public Drawable? GetDrawable(Operations[] operations, params object?[] sources)
 		{
 			BitmapDrawable? bitmapdrawable = null;
@@ -385,6 +478,13 @@ namespace Xyzu
 
 			return null;
 
+		}
+		public async Task<Palette?> GetPaletteAsync(params object?[] sources)
+		{
+			if (await GetBitmapAsync(Array.Empty<Operations>(), null, sources) is Bitmap bitmap)
+				return Palette.From(bitmap).Generate();
+
+			return null;
 		}
 		public async Task SetToImageView(Operations[] operations, ImageView? imageview, Action<bool>? oncomplete, CancellationToken cancellationtoken = default, params object?[] sources)
 		{
@@ -560,9 +660,17 @@ namespace Xyzu
 		{
 			return (images as IImagesDroid)?.GetBitmap(operations, options, sources);
 		}
+		public static Task<Bitmap?> GetBitmapAsync(this IImages images, Operations[] operations, BitmapFactory.Options? options, params object?[] sources)
+		{
+			return (images as IImagesDroid)?.GetBitmapAsync(operations, options, sources) ?? Task.FromResult<Bitmap?>(null);
+		}
 		public static Palette? GetPalette(this IImages images, params object?[] sources)
 		{
 			return (images as IImagesDroid)?.GetPalette(sources);
+		}
+		public static Task<Palette?> GetPaletteAsync(this IImages images, params object?[] sources)
+		{
+			return (images as IImagesDroid)?.GetPaletteAsync(sources) ?? Task.FromResult<Palette?>(null);
 		}
 
 		public static Task SetToImageView(this IImages images, Operations[] operations, ImageView? imageview, Action<bool>? oncomplete, CancellationToken cancellationtoken = default, params object?[] sources)

@@ -6,7 +6,6 @@ using Com.Google.Android.Exoplayer2.Upstream;
 using Com.Google.Android.Exoplayer2.Util;
 
 using System;
-using System.Linq;
 
 namespace Xyzu.Player.Exoplayer
 {

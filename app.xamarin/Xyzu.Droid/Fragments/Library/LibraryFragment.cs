@@ -1,7 +1,6 @@
 ﻿#nullable enable
 
 using Android.Content;
-using Android.Content.Res;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
 using AndroidX.Fragment.App;

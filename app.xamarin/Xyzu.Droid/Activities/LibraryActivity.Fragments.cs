@@ -240,8 +240,8 @@ namespace Xyzu.Activities
 			libraryview.Library = XyzuLibrary.Instance;
 			libraryview.Navigatable = this;
 			libraryview.Player = XyzuPlayer.Instance.Player;
-			libraryview.SetOnRefreshListener(this);
 			libraryview.SharedPreferences = XyzuSettings.Instance;
+			libraryview.SetOnRefreshListener(this);
 			libraryview.AddInsets("NavigationBarHeight", null, null, null, Resources?.GetNavigationBarHeight());
 
 			ConfigurePanelInsets(libraryview);

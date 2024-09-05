@@ -266,7 +266,6 @@ namespace Xyzu.Views.NowPlaying
 				true when sender == Buttons_Player_PlayPause => ViewOperations.PressPlayPause,
 				true when sender == Buttons_Player_Next => ViewOperations.PressNext,
 
-
 				true when sender == Buttons_Menu_AudioEffects => ViewOperations.PressEffects,
 				true when sender == Buttons_Menu_Options => ViewOperations.PressOptions,
 				true when sender == Buttons_Menu_Queue => ViewOperations.PressQueue,

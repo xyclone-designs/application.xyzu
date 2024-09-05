@@ -12,7 +12,6 @@ using Com.Google.Android.Exoplayer2;
 using Xyzu.Player.Enums;
 
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
 
 namespace Xyzu.Player.Exoplayer

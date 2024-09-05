@@ -35,7 +35,6 @@ namespace Xyzu.Menus
 
 			) return false;
 
-			XyzuPlayer.Instance.Player.Queue.CurrentIndex = variables.Index.Value;
 			XyzuPlayer.Instance.Player.Skip(variables.Index.Value);
 
 			return true;

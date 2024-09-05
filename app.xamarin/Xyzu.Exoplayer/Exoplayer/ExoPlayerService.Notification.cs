@@ -121,6 +121,9 @@ namespace Xyzu.Player.Exoplayer
 					MediaSessionToken = MediaSessionConnector.MediaSession.SessionToken,
 					OnUpdate = (player, builder, ongoing, largeIcon) =>
 					{
+						if (builder is null)
+							return;
+
 						builder.MActions ??= new List<NotificationCompat.Action>();
 
 						if (NotificationInited is true)
@@ -210,7 +213,7 @@ namespace Xyzu.Player.Exoplayer
 		{
 			Bitmap? bitmap = Options.Notification?.OnBitmap?.Invoke(new BitmapFactory.Options { }, Player.Queue.CurrentSong);
 			
-			return bitmap;
+			return bitmap; 
 		}
 	}
 }

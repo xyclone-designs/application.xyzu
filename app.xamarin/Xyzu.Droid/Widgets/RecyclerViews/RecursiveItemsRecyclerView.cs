@@ -4,7 +4,6 @@ using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
-using AndroidX.AppCompat.Widget;
 using AndroidX.RecyclerView.Widget;
 
 using System;
