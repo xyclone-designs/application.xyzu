@@ -111,7 +111,7 @@
         android:id="@id/xyzu_view_nowplaying_statusbarinsetview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:visibility="invisible" />
     
     <Space
         android:id="@id/xyzu_view_nowplaying_artworkdetails_space"
@@ -125,7 +125,7 @@
         android:visibility="gone" />
 
     <xyzu.views.nowplaying.NowPlayingView.ProgressBarFixed
-	    android:id="@id/xyzu_view_nowplaying_position_progressbarfixed"
+	      android:id="@id/xyzu_view_nowplaying_position_progressbarfixed"
         android:layout_width="@dimen/dp0"
         android:layout_height="@dimen/dp0"
         android:visibility="gone"/>

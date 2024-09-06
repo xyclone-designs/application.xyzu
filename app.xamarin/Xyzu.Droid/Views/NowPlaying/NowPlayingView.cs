@@ -8,14 +8,11 @@ using AndroidX.ConstraintLayout.Motion.Widget;
 using AndroidX.Palette.Graphics;
 using AndroidX.RecyclerView.Widget;
 
-using Oze.Music.MusicBarLib;
-
 using System;
 
 using Xyzu.Droid;
 using Xyzu.Images;
 using Xyzu.Views.Insets;
-using Xyzu.Widgets.RecyclerViews.LibraryItems;
 using Xyzu.Widgets.RecyclerViews.Simple;
 
 namespace Xyzu.Views.NowPlaying

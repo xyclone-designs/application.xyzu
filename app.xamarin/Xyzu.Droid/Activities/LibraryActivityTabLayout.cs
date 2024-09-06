@@ -2,7 +2,6 @@
 
 using Android.Content;
 using Android.Content.PM;
-using Android.Content.Res;
 using Android.OS;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
@@ -28,8 +27,6 @@ using Xyzu.Views.Library;
 using Xyzu.Views.Toolbar;
 
 using JavaRunnable = Java.Lang.Runnable;
-using Com.Sothree.Slidinguppanel;
-using Xyzu.Player.Exoplayer;
 
 namespace Xyzu.Activities
 {
