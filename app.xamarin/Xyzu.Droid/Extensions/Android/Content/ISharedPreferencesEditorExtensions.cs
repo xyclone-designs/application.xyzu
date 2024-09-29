@@ -43,7 +43,7 @@ namespace Android.Content
 		}			  
 		public static ISharedPreferencesEditor? PutShortArray(this ISharedPreferencesEditor sharedpreferenceseditor, string? key, short[] value)
 		{
-			return sharedpreferenceseditor.PutStringSet(key, value.Select(val => value.ToString()).ToList()); 
+			return sharedpreferenceseditor.PutStringSet(key, value.Select(val => value.ToString()).OfType<string>().ToList()); 
 		}
 
 		public static ISharedPreferencesEditor PutSettings(this ISharedPreferencesEditor sharedpreferenceseditor, ISettings settings)

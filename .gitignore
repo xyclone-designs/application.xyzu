@@ -3,7 +3,9 @@ app.xamarin/Xyzu/bin
 app.xamarin/Xyzu/obj
 app.xamarin/Xyzu.Droid/bin
 app.xamarin/Xyzu.Droid/obj
-app.xamarin/Xyzu.ExoPlayer/bin
-app.xamarin/Xyzu.ExoPlayer/obj
-app.xamarin/Xyzu.Extensions/bin
-app.xamarin/Xyzu.Extensions/obj
+app.xamarin/Xyzu.Droid.Player/bin
+app.xamarin/Xyzu.Droid.Player/obj
+app.xamarin/Xyzu.Droid.Library/bin
+app.xamarin/Xyzu.Droid.Library/obj
+app.xamarin/Xyzu.Droid.Extensions/bin
+app.xamarin/Xyzu.Droid.Extensions/obj

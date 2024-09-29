@@ -135,7 +135,7 @@ namespace Xyzu.Views.Library
 					break;
 			}
 		}
-		protected override void PropertyChangedSettings(object sender, PropertyChangedEventArgs args)
+		protected override void PropertyChangedSettings(object? sender, PropertyChangedEventArgs args)
 		{
 			base.PropertyChangedSettings(sender, args);
 
@@ -313,18 +313,18 @@ namespace Xyzu.Views.Library
 				default: return false;
 			}
 		}
-		public override void OnMenuOptionsAllClick(object sender, EventArgs args)
+		public override void OnMenuOptionsAllClick(object? sender, EventArgs args)
 		{
 			base.OnMenuOptionsAllClick(sender, args);
 
 			QueueSongs.LibraryItemsAdapter.SelectLibraryItemsAll(false);
 		}
 
-		private async void OnQueueListChanged(object sender, NotifyListChangedEventArgs args)
+		private async void OnQueueListChanged(object? sender, NotifyListChangedEventArgs args)
 		{
 			await OnRefresh(true);
 		}
-		private void OnQueuePropertyChanged(object sender, PropertyChangedEventArgs args)
+		private void OnQueuePropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			switch (args.PropertyName)
 			{

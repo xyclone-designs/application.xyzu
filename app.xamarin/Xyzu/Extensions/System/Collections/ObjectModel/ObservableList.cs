@@ -160,7 +160,7 @@ namespace System.Collections.ObjectModel
 		{
 			ListChanged?.Invoke(this, NotifyListChangedEventArgs.FromArgs(args));
 		}
-		protected virtual void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+		protected virtual void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
 		{
 			ListChanged?.Invoke(sender, NotifyListChangedEventArgs.FromArgs(args));
 		}

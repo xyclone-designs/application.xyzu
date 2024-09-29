@@ -10,13 +10,13 @@ namespace Xyzu.Library
 	{
 		public interface IPlaylists
 		{
-			IPlaylist? Random(IIdentifiers? identifiers = null, IPlaylist<bool>? retriever = null);
-			Task<IPlaylist?> Random(IIdentifiers? identifiers = null, IPlaylist<bool>? retriever = null, CancellationToken cancellationToken = default);
+			IPlaylist? Random(IIdentifiers? identifiers = null);
+			Task<IPlaylist?> Random(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
-			IPlaylist? GetPlaylist(IIdentifiers? identifiers = null, IPlaylist<bool>? retriever = null);
-			Task<IPlaylist?> GetPlaylist(IIdentifiers? identifiers = null, IPlaylist<bool>? retriever = null, CancellationToken cancellationToken = default);
-			IEnumerable<IPlaylist> GetPlaylists(IIdentifiers? identifiers = null, IPlaylist<bool>? retriever = null);
-			IAsyncEnumerable<IPlaylist> GetPlaylists(IIdentifiers? identifiers = null, IPlaylist<bool>? retriever = null, CancellationToken cancellationToken = default);
+			IPlaylist? GetPlaylist(IIdentifiers? identifiers = null);
+			Task<IPlaylist?> GetPlaylist(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
+			IEnumerable<IPlaylist> GetPlaylists(IIdentifiers? identifiers = null);
+			IAsyncEnumerable<IPlaylist> GetPlaylists(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
 			IPlaylist? PopulatePlaylist(IPlaylist? playlist);
 			Task<IPlaylist?> PopulatePlaylist(IPlaylist? playlist, CancellationToken cancellationToken = default);

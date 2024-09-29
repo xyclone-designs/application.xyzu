@@ -284,11 +284,11 @@ namespace Xyzu.Views.Option
 			}
 		}
 
-		private void OptionsIsReversed_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs args)
+		private void OptionsIsReversed_CheckedChange(object? sender, CompoundButton.CheckedChangeEventArgs args)
 		{
 			OnOptionsIsReversedClicked?.Invoke(IsReversed);
 		}
-		private void OptionsIsReversed_Click(object sender, EventArgs args)
+		private void OptionsIsReversed_Click(object? sender, EventArgs args)
 		{
 			IsReversed = !IsReversed;
 
@@ -297,7 +297,7 @@ namespace Xyzu.Views.Option
 			OptionsSortKeysExpanded = false;
 			OptionsLayoutTypesExpanded = OptionsLayoutTypesExpanded is false;
 		}								
-		private void OptionsLayoutType_Click(object sender, EventArgs args)
+		private void OptionsLayoutType_Click(object? sender, EventArgs args)
 		{
 			OptionsSortKeysExpanded = false;
 			OptionsLayoutType.Selected = OptionsLayoutTypesExpanded = OptionsLayoutTypesExpanded is false;
@@ -305,7 +305,7 @@ namespace Xyzu.Views.Option
 				? ViewStates.Gone
 				: ViewStates.Visible;
 		}
-		private void OptionsSortKey_Click(object sender, EventArgs args)
+		private void OptionsSortKey_Click(object? sender, EventArgs args)
 		{
 			OptionsLayoutTypesExpanded = false;
 			OptionsSortKey.Selected = OptionsSortKeysExpanded = OptionsSortKeysExpanded is false; 

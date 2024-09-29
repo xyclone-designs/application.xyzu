@@ -4,60 +4,59 @@ namespace Xyzu.Library.TagLibSharp
 {
 	public partial class TagLibSharpUtils
 	{
-		public static bool WouldBenefit(IAlbum? retrieved, IAlbum<bool>? retriever)
+		public static bool WouldBenefit(IAlbum? retrieved)
 		{
 			if (retrieved is null)
 				return false;
 
 			return
-				(retrieved.Artist is null && (retriever?.Artist ?? true)) ||
-				(retriever?.Duration ?? true) ||
-				(retrieved.ReleaseDate is null && (retriever?.ReleaseDate ?? true)) ||
-				(retrieved.Title is null && (retriever?.Title ?? true));
+				retrieved.Artist is null || 
+				retrieved.ReleaseDate is null || 
+				retrieved.Title is null;
 		}
-		public static bool WouldBenefit(IArtist? retrieved, IArtist<bool>? retriever)
+		public static bool WouldBenefit(IArtist? retrieved)
 		{
 			if (retrieved is null)
 				return false;
 
 			return
-				(retrieved.Image is null && (retriever?.Image?.Buffer ?? true) || (retriever?.Image?.BufferHash ?? true)) ||
-				(retrieved.Name is null && (retriever?.Name ?? true));
+				retrieved.Image is null ||
+				retrieved.Name is null;
 		}
-		public static bool WouldBenefit(IGenre? retrieved, IGenre<bool>? retriever)
+		public static bool WouldBenefit(IGenre? retrieved)
 		{
 			if (retrieved is null)
 				return false;
 
 			return
-				retrieved.Name is null && (retriever?.Name ?? true);
+				retrieved.Name is null;
 		}
-		public static bool WouldBenefit(IPlaylist? retrieved, IPlaylist<bool>? retriever)
+		public static bool WouldBenefit(IPlaylist? retrieved)
 		{
 			//if (retrieved is null)
 			//	return false;
 
 			return false;
 		}
-		public static bool WouldBenefit(ISong? retrieved, ISong<bool>? retriever)
+		public static bool WouldBenefit(ISong? retrieved)
 		{
 			if (retrieved is null)
 				return false;
 
 			return
-				(retrieved.Album is null && (retriever?.Album ?? true)) ||
-				(retrieved.AlbumArtist is null && (retriever?.AlbumArtist ?? true)) ||
-				(retrieved.Artist is null && (retriever?.Artist ?? true)) ||
-				(retrieved.DiscNumber is null && (retriever?.DiscNumber ?? true)) ||
-				(retrieved.Duration is null && (retriever?.Duration ?? true)) ||
-				(retrieved.Genre is null && (retriever?.Genre ?? true)) ||
-				(retrieved.Lyrics is null && (retriever?.Lyrics ?? true)) ||
-				(retrieved.Bitrate is null && (retriever?.Bitrate ?? false)) ||
-				(retrieved.Channels is null && (retriever?.Channels ?? false)) ||
-				(retrieved.Size is null && (retriever?.Size ?? false)) ||
-				(retrieved.ReleaseDate is null && (retriever?.ReleaseDate ?? true)) ||
-				(retrieved.Title is null && (retriever?.Title ?? true)) ||
-				(retrieved.TrackNumber is null && (retriever?.TrackNumber ?? true));
+				retrieved.Album is null ||
+				retrieved.AlbumArtist is null ||
+				retrieved.Artist is null ||
+				retrieved.DiscNumber is null ||
+				retrieved.Duration is null ||
+				retrieved.Genre is null ||
+				retrieved.Lyrics is null ||
+				retrieved.Bitrate is null ||
+				retrieved.Channels is null ||
+				retrieved.Size is null ||
+				retrieved.ReleaseDate is null ||
+				retrieved.Title is null ||
+				retrieved.TrackNumber is null;
 		}
 	}
 }

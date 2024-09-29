@@ -10,13 +10,13 @@ namespace Xyzu.Library
 	{
 		public interface ISongs
 		{
-			ISong? Random(IIdentifiers? identifiers = null, ISong<bool>? retriever = null);
-			Task<ISong?> Random(IIdentifiers? identifiers = null, ISong<bool>? retriever = null, CancellationToken cancellationToken = default);
+			ISong? Random(IIdentifiers? identifiers = null);
+			Task<ISong?> Random(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
-			ISong? GetSong(IIdentifiers? identifiers = null, ISong<bool>? retriever = null);
-			Task<ISong?> GetSong(IIdentifiers? identifiers = null, ISong<bool>? retriever = null, CancellationToken cancellationToken = default);
-			IEnumerable<ISong> GetSongs(IIdentifiers? identifiers = null, ISong<bool>? retriever = null);
-			IAsyncEnumerable<ISong> GetSongs(IIdentifiers? identifiers = null, ISong<bool>? retriever = null, CancellationToken cancellationToken = default);
+			ISong? GetSong(IIdentifiers? identifiers = null);
+			Task<ISong?> GetSong(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
+			IEnumerable<ISong> GetSongs(IIdentifiers? identifiers = null);
+			IAsyncEnumerable<ISong> GetSongs(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
 			ISong? PopulateSong(ISong? song);
 			Task<ISong?> PopulateSong(ISong? song, CancellationToken cancellationToken = default);

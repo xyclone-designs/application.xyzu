@@ -3,9 +3,10 @@
   <PropertyGroup>
     <SelectedDevice>TECNO MOBILE LIMITED TECNO KD7S</SelectedDevice>
     <SelectedPlatformGroup>PhysicalDevice</SelectedPlatformGroup>
-    <ActiveDebugProfile>TECNO MOBILE LIMITED TECNO KD7S %28Android 10.0 - API 29%29</ActiveDebugProfile>
+    <ActiveDebugProfile>TECNO MOBILE LIMITED TECNO KD7S (Android 10.0 - API 29)</ActiveDebugProfile>
     <DefaultDevice>pixel_2_pie_9_0_-_api_28</DefaultDevice>
-    <AndroidDesignerPreferredDevice>Nexus 4</AndroidDesignerPreferredDevice>
-    <ProjectView>ProjectFiles</ProjectView>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

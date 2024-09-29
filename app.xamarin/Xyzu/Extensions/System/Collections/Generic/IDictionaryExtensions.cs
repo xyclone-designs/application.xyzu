@@ -41,7 +41,7 @@ namespace System.Collections.Generic
 		}
 		public static TValue? TryGetValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
 		{
-			if (dictionary.TryGetValue(key, out TValue _out))
+			if (dictionary.TryGetValue(key, out TValue? _out))
 				return _out;
 
 			return default;

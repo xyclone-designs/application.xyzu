@@ -19,7 +19,7 @@ namespace Xyzu.Views.LibraryItem.Header
 	
 		public AppCompatImageButton? Back { get; set; }
 
-		public Action<object, EventArgs>? OnBackClick { get; set; }
+		public Action<object?, EventArgs>? OnBackClick { get; set; }
 
 		protected override void OnAttachedToWindow()
 		{
@@ -33,7 +33,7 @@ namespace Xyzu.Views.LibraryItem.Header
 
 			if (Back != null) Back.Click -= BackOnClick;
 		}
-		protected void BackOnClick(object sender, EventArgs args)
+		protected void BackOnClick(object? sender, EventArgs args)
 		{
 			OnBackClick?.Invoke(sender, args);
 		}

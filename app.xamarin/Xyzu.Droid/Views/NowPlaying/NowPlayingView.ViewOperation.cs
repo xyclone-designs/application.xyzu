@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Xyzu.Library.Models;
 using Xyzu.Player;
 using Xyzu.Player.Enums;
 
@@ -34,7 +33,7 @@ namespace Xyzu.Views.NowPlaying
 		public event EventHandler<ViewOperationEventArgs>? OnViewOperation;
 		public Action<ViewOperationEventArgs>? OnViewOperationAction { get; set; }
 
-		protected void InvokeOnViewOperation(object sender, ViewOperationEventArgs viewoperationeventargs)
+		protected void InvokeOnViewOperation(object? sender, ViewOperationEventArgs viewoperationeventargs)
 		{
 			switch (viewoperationeventargs.ViewOperation)
 			{
@@ -73,7 +72,7 @@ namespace Xyzu.Views.NowPlaying
 								break;
 
 							IEnumerable<IQueueItem> songs = Library.Songs
-								.GetSongs(null, new ISong.Default<bool>(false))
+								.GetSongs(null)
 								.Select(song => IQueueItem.FromSong(song, null));
 
 							Player.Queue.Clear();

@@ -182,11 +182,11 @@ namespace Xyzu.Views.Option
 			ViewViewHolderOnClickAction?.Invoke(args);
 		}
 
-		private void CreateButton_Click(object sender, EventArgs args)
+		private void CreateButton_Click(object? sender, EventArgs args)
 		{
 			CreateName.OnEditorAction(ImeAction.Done);
 		}
-		private void CreateName_TextChanged(object sender, TextChangedEventArgs args)
+		private void CreateName_TextChanged(object? sender, TextChangedEventArgs args)
 		{
 			OnCreateTextChanged?.Invoke(this, args.Text is null ? null : string.Join("", args.Text));
 		}

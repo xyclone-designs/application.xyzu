@@ -39,5 +39,8 @@
   <color name="Color_SplashScreenBackground">@color/ColorSurface</color>
   <color name="Color_SplashScreenIcon">@color/ColorOnSurface</color>
   <color name="Color_SplashScreenIconBackground">@color/ColorPrimary</color>
+
+  <color name="Color_Icon_Application_Background">@color/ColorPrimary</color>
+  <color name="Color_Icon_Application_Foreground">#ffffff</color>
   
 </resources>

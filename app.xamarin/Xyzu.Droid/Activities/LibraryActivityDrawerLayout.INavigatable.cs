@@ -16,7 +16,7 @@ namespace Xyzu.Activities
 			SupportFragmentManager
 				.BeginTransaction()
 				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentDrawerLayoutable = FragmentLibraryAlbum, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout, GenerateFragmentLibraryAlbum(album))
+				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_framelayout, GenerateFragmentLibraryAlbum(album))
 				.Commit();
 		}
 		public override void NavigateArtist(IArtist? artist)
@@ -26,7 +26,7 @@ namespace Xyzu.Activities
 			SupportFragmentManager
 				.BeginTransaction()
 				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentDrawerLayoutable = FragmentLibraryArtist, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout, GenerateFragmentLibraryArtist(artist))
+				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_framelayout, GenerateFragmentLibraryArtist(artist))
 				.Commit();
 		}
 		public override void NavigateGenre(IGenre? genre)
@@ -36,7 +36,7 @@ namespace Xyzu.Activities
 			SupportFragmentManager
 				.BeginTransaction()
 				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentDrawerLayoutable = FragmentLibraryGenre, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout, GenerateFragmentLibraryGenre(genre))
+				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_framelayout, GenerateFragmentLibraryGenre(genre))
 				.Commit();
 		}
 		public override void NavigatePlaylist(IPlaylist? playlist)
@@ -46,7 +46,7 @@ namespace Xyzu.Activities
 			SupportFragmentManager
 				.BeginTransaction()
 				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentDrawerLayoutable = FragmentLibraryPlaylist, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout, GenerateFragmentLibraryPlaylist(playlist))
+				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_framelayout, GenerateFragmentLibraryPlaylist(playlist))
 				.Commit();
 		}
 		public override void NavigateQueue()
@@ -62,7 +62,7 @@ namespace Xyzu.Activities
 			SupportFragmentManager
 				.BeginTransaction()
 				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentDrawerLayoutable = FragmentLibrarySearch, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout, FragmentLibrarySearch)
+				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_framelayout, FragmentLibrarySearch)
 				.Commit();
 		}
 	}

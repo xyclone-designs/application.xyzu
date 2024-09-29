@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics;
 using Android.Util;
 
@@ -18,7 +16,7 @@ namespace Xyzu.Views.NowPlaying
 		public ProgressBarFixed(Context context, IAttributeSet? attrs) : this(context, attrs, Resource.Style.Xyzu_View_NowPlaying_ProgressBar_Fixed) { }
 		public ProgressBarFixed(Context context, IAttributeSet? attrs, int defStyleAttr) : base(context, attrs, defStyleAttr) { }
 
-		protected override void OnDraw(Canvas? canvas)
+		protected override void OnDraw(Canvas canvas)
 		{
 			try { base.OnDraw(canvas); } catch (Exception) { }
 		}
@@ -47,7 +45,7 @@ namespace Xyzu.Views.NowPlaying
 		public ProgressBarScrollable(Context context, IAttributeSet? attrs) : this(context, attrs, Resource.Style.Xyzu_View_NowPlaying_ProgressBar_Scrollable) { }
 		public ProgressBarScrollable(Context context, IAttributeSet? attrs, int defStyleAttr) : base(context, attrs, defStyleAttr) { }
 
-		protected override void OnDraw(Canvas? canvas)
+		protected override void OnDraw(Canvas canvas)
 		{
 			try { base.OnDraw(canvas); } catch (Exception) { }
 		}

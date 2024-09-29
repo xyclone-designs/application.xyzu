@@ -27,6 +27,7 @@ using Xyzu.Views.Library;
 using Xyzu.Views.Toolbar;
 
 using JavaRunnable = Java.Lang.Runnable;
+using FrameLayout = Android.Widget.FrameLayout;
 
 namespace Xyzu.Activities
 {
@@ -39,7 +40,7 @@ namespace Xyzu.Activities
 		private ITabLayoutable? _CurrentTabLayoutable;
 		private CoordinatorLayout? _Coordinatorlayout;
 		private ViewPager2? _Viewpager2;
-		private ContentFrameLayout? _Contentframelayout;
+		private FrameLayout? _Contentframelayout;
 		private ToolbarTabLayoutView? _ToolbarTabLayout;
 		private int? _SelectedPosition;
 
@@ -101,11 +102,11 @@ namespace Xyzu.Activities
 		{
 			get; set;
 		}
-		protected ContentFrameLayout Contentframelayout 
+		protected FrameLayout Contentframelayout 
 		{
 			get => _Contentframelayout ??=
-				FindViewById<ContentFrameLayout>(Resource.Id.xyzu_layout_library_tablayout_contentframelayout) ??
-				throw new InflateException("Could not find view 'xyzu_layout_library_tablayout_contentframelayout' in 'layout_library_tablayout'");
+				FindViewById<FrameLayout>(Resource.Id.xyzu_layout_library_tablayout_framelayout) ??
+				throw new InflateException("Could not find view 'xyzu_layout_library_tablayout_framelayout' in 'layout_library_tablayout'");
 		}								 
 		protected ToolbarTabLayoutView ToolbarTabLayout 
 		{
@@ -134,7 +135,7 @@ namespace Xyzu.Activities
 			SupportFragmentManager
 				.BeginTransaction()
 				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentTabLayoutable = FragmentLibraryAlbum, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_contentframelayout, GenerateFragmentLibraryAlbum(album))
+				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_framelayout, GenerateFragmentLibraryAlbum(album))
 				.Commit();
 		}
 		public override void NavigateArtist(IArtist? artist) 
@@ -144,7 +145,7 @@ namespace Xyzu.Activities
 			SupportFragmentManager
 				.BeginTransaction()
 				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentTabLayoutable = FragmentLibraryArtist, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_contentframelayout, GenerateFragmentLibraryArtist(artist))
+				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_framelayout, GenerateFragmentLibraryArtist(artist))
 				.Commit();
 		}
 		public override void NavigateGenre(IGenre? genre) 
@@ -154,7 +155,7 @@ namespace Xyzu.Activities
 			SupportFragmentManager
 				.BeginTransaction()
 				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentTabLayoutable = FragmentLibraryGenre, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_contentframelayout, GenerateFragmentLibraryGenre(genre))
+				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_framelayout, GenerateFragmentLibraryGenre(genre))
 				.Commit();
 		}
 		public override void NavigatePlaylist(IPlaylist? playlist) 
@@ -164,7 +165,7 @@ namespace Xyzu.Activities
 			SupportFragmentManager
 				.BeginTransaction()
 				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentTabLayoutable = FragmentLibraryPlaylist, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_contentframelayout, GenerateFragmentLibraryPlaylist(playlist))
+				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_framelayout, GenerateFragmentLibraryPlaylist(playlist))
 				.Commit();
 		}
 		public override void NavigateQueue() 
@@ -181,7 +182,7 @@ namespace Xyzu.Activities
 			SupportFragmentManager
 				.BeginTransaction()
 				.RunOnCommit(new JavaRunnable(() => OnReconfigure(this, CurrentTabLayoutable = FragmentLibrarySearch, IConfigurable.ReconfigureType_All)))
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_contentframelayout, FragmentLibrarySearch)
+				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_tablayout_framelayout, FragmentLibrarySearch)
 				.Commit();
 		}
 
@@ -293,7 +294,7 @@ namespace Xyzu.Activities
 			base.OnSaveInstanceState(outstate);
 		}
 
-		protected override void OnFloatingactionbuttonClick(object sender, EventArgs args)
+		protected override void OnFloatingactionbuttonClick(object? sender, EventArgs args)
 		{
 			base.OnFloatingactionbuttonClick(sender, args);
 
@@ -388,7 +389,7 @@ namespace Xyzu.Activities
 
 			base.ReconfigureToolbar();
 		}
-		protected override void XyzuLibraryOnServiceConnectionChanged(object sender, ServiceConnectionChangedEventArgs args)
+		protected override void XyzuLibraryOnServiceConnectionChanged(object? sender, ServiceConnectionChangedEventArgs args)
 		{
 			base.XyzuLibraryOnServiceConnectionChanged(sender, args);
 
@@ -402,7 +403,7 @@ namespace Xyzu.Activities
 			}
 		}
 
-		protected void TabSelected(object sender, TabLayout.TabSelectedEventArgs args)
+		protected void TabSelected(object? sender, TabLayout.TabSelectedEventArgs args)
 		{
 			ActivityCancellationTokenSourceCancel();
 
@@ -413,11 +414,11 @@ namespace Xyzu.Activities
 
 			RefreshTabLayout(CurrentTabLayoutable);
 		}
-		protected void TabUnselected(object sender, TabLayout.TabUnselectedEventArgs args) 
+		protected void TabUnselected(object? sender, TabLayout.TabUnselectedEventArgs args) 
 		{
 			FragmentActions(fragment => fragment.LibraryView?.MenuOptionsDialog?.Dismiss());
 		}
-		protected void TabReselected(object sender, TabLayout.TabReselectedEventArgs args) { }
+		protected void TabReselected(object? sender, TabLayout.TabReselectedEventArgs args) { }
 
 		protected async void RefreshTabLayout(ITabLayoutable? tablayoutable, bool force = false)
 		{
@@ -472,7 +473,9 @@ namespace Xyzu.Activities
 
 			public void OnConfigureTab(TabLayout.Tab tab, int position)
 			{
-				TabLayoutables.ElementAtOrDefault(position).ConfigureTab(tab, Context);
+				TabLayoutables
+					.ElementAtOrDefault(position)?
+					.ConfigureTab(tab, Context);
 			}
 		}
 	}

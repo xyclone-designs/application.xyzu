@@ -1,7 +1,7 @@
 ﻿#nullable enable
 
 using System;
-
+using Xyzu.Library;
 using Xyzu.Library.Models;
 
 namespace Xyzu.Menus
@@ -27,7 +27,7 @@ namespace Xyzu.Menus
 		}
 		public static void GoToAlbum(ISong? albumsong, Action<IAlbum?>? navigate = null)
 		{
-			string? albumid = XyzuLibrary.Instance.AlbumTitleToId(albumsong?.Album, albumsong?.AlbumArtist);
+			string? albumid = ILibraryDroid.IdFromAlbumTitle(albumsong?.Album, albumsong?.AlbumArtist);
 			IAlbum? libraryalbum = albumid is null ? null : new IAlbum.Default(albumid)
 			{
 				Artist = albumsong?.AlbumArtist,
@@ -58,7 +58,7 @@ namespace Xyzu.Menus
 		}
 		public static void GoToArtist(IAlbum? artistalbum, Action<IArtist?>? navigate = null)
 		{
-			string? artistid = XyzuLibrary.Instance.ArtistNameToId(artistalbum?.Artist);
+			string? artistid = ILibraryDroid.IdFromArtistName(artistalbum?.Artist);
 			IArtist? libraryartist = artistid is null ? null : new IArtist.Default(artistid)
 			{
 				Name = artistalbum?.Artist,
@@ -68,7 +68,7 @@ namespace Xyzu.Menus
 		}
 		public static void GoToArtist(ISong? artistsong, Action<IArtist?>? navigate = null)
 		{
-			string? artistid = XyzuLibrary.Instance.ArtistNameToId(artistsong?.Artist);
+			string? artistid = ILibraryDroid.IdFromArtistName(artistsong?.Artist);
 			IArtist? libraryartist = artistid is null ? null : new IArtist.Default(artistid)
 			{
 				Name = artistsong?.Artist,
@@ -95,7 +95,7 @@ namespace Xyzu.Menus
 		}
 		public static void GoToGenre(ISong? genresong, Action<IGenre?>? navigate = null)
 		{
-			string? genreid = XyzuLibrary.Instance.GenreNameToId(genresong?.Genre);
+			string? genreid = ILibraryDroid.IdFromGenreName(genresong?.Genre);
 			IGenre? librarygenre = genreid is null ? null : new IGenre.Default(genreid)
 			{
 				Name = genresong?.Genre,

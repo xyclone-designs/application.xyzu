@@ -266,7 +266,7 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 
 				case true when
 				preference == PagesOrderedPreference:
-					PagesOrdered = PagesOrderedPreference.Values
+					PagesOrdered = PagesOrderedPreference.Values?
 						.Select(value =>
 						{
 							if (Enum.TryParse(value, out LibraryPages librarypage))
@@ -274,7 +274,7 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 
 							return new LibraryPages?();
 
-						}).OfType<LibraryPages>().ToList();
+						}).OfType<LibraryPages>().ToList() ?? new List<LibraryPages> { };
 					return true;
 
 				default: return result;

@@ -22,7 +22,7 @@ namespace Xyzu.Views.Setting
 
 			public const int Title_AppCompatTextView = Resource.Id.xyzu_view_setting_audioband_title_appcompattextview;
 			public const int Max_AppCompatTextView = Resource.Id.xyzu_view_setting_audioband_max_appcompattextview;
-			public const int ValueFrame_ContentFrameLayout = Resource.Id.xyzu_view_setting_audioband_value_frame_contentframelayout;
+			public const int ValueFrame_FrameLayout = Resource.Id.xyzu_view_setting_audioband_value_frame_framelayout;
 			public const int Value_AppCompatSeekBar = Resource.Id.xyzu_view_setting_audioband_value_appcompatseekbar;
 			public const int Min_AppCompatTextView = Resource.Id.xyzu_view_setting_audioband_min_appcompattextview;
 			public const int Footer_AppCompatTextView = Resource.Id.xyzu_view_setting_audioband_footer_appcompattextview;
@@ -42,7 +42,7 @@ namespace Xyzu.Views.Setting
 
 			_Title = FindViewById(Ids.Title_AppCompatTextView) as AppCompatTextView;
 			_Max = FindViewById(Ids.Max_AppCompatTextView) as AppCompatTextView;
-			_ValueFrame = FindViewById(Ids.ValueFrame_ContentFrameLayout) as ContentFrameLayout;
+			_ValueFrame = FindViewById(Ids.ValueFrame_FrameLayout) as FrameLayout;
 			_Value = FindViewById(Ids.Value_AppCompatSeekBar) as AppCompatSeekBar;
 			_Min = FindViewById(Ids.Min_AppCompatTextView) as AppCompatTextView;
 			_Footer = FindViewById(Ids.Footer_AppCompatTextView) as AppCompatTextView;
@@ -50,7 +50,7 @@ namespace Xyzu.Views.Setting
 
 		private AppCompatTextView? _Title;
 		private AppCompatTextView? _Max;
-		private ContentFrameLayout? _ValueFrame;
+		private FrameLayout? _ValueFrame;
 		private AppCompatSeekBar? _Value;
 		private AppCompatTextView? _Min;
 		private AppCompatTextView? _Footer;
@@ -63,7 +63,7 @@ namespace Xyzu.Views.Setting
 		{
 			get => _Max ?? throw new InflateException();
 		}
-		public ContentFrameLayout ValueFrame
+		public FrameLayout ValueFrame
 		{
 			get => _ValueFrame ?? throw new InflateException();
 		}											
@@ -80,7 +80,7 @@ namespace Xyzu.Views.Setting
 			get => _Footer ?? throw new InflateException();
 		}
 
-		public Action<object, SeekBar.ProgressChangedEventArgs>? ValueProgressChanged { get; set; }
+		public Action<object?, SeekBar.ProgressChangedEventArgs>? ValueProgressChanged { get; set; }
 
 		protected override void OnAttachedToWindow()
 		{
@@ -95,7 +95,7 @@ namespace Xyzu.Views.Setting
 			Value.ProgressChanged -= Value_ProgressChanged;
 		}
 
-		private void Value_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs args)
+		private void Value_ProgressChanged(object? sender, SeekBar.ProgressChangedEventArgs args)
 		{
 			ValueProgressChanged?.Invoke(sender, args);
 		}

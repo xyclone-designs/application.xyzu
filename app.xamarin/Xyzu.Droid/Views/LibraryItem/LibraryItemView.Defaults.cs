@@ -23,7 +23,7 @@ namespace Xyzu.Views.LibraryItem
 					context?.Resources?.GetResourceTypeName(Resource.Drawable.icon_xyzu),
 					context?.Resources?.GetResourceEntryName(Resource.Drawable.icon_xyzu));
 
-				Uri? uri = Uri.TryCreate(uristring, UriKind.RelativeOrAbsolute, out Uri outuri) ? outuri : null;
+				Uri? uri = Uri.TryCreate(uristring, UriKind.RelativeOrAbsolute, out Uri? outuri) ? outuri : null;
 
 				return new IImage.Default
 				{

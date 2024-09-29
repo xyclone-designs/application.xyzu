@@ -20,12 +20,12 @@ using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
 using Xyzu.Fragments.Library;
-using Xyzu.Library.Models;
 using Xyzu.Settings.Enums;
 using Xyzu.Settings.UserInterface.Library;
 using Xyzu.Views.Toolbar;
-using static Xyzu.Activities.LibraryActivityTabLayout;
+
 using JavaRunnable = Java.Lang.Runnable;
+using FrameLayout = Android.Widget.FrameLayout;
 
 namespace Xyzu.Activities
 {
@@ -40,7 +40,7 @@ namespace Xyzu.Activities
 		protected CoordinatorLayout? _Coordinatorlayout;
 		protected DrawerLayout? _Drawerlayout;
 		protected NavigationView? _Navigationview;
-		protected ContentFrameLayout? _Contentframelayout;
+		protected FrameLayout? _Contentframelayout;
 		protected ActionBarDrawerToggle? _Actionbardrawertoggle;
 		protected ToolbarDrawerView? _ToolbarDrawer;
 
@@ -116,11 +116,11 @@ namespace Xyzu.Activities
 				FindViewById<NavigationView>(Resource.Id.xyzu_layout_library_drawerlayout_navigationview) ??
 				throw new InflateException("Could not find view 'xyzu_layout_library_drawerlayout_navigationview' in 'layout_library_drawerlayout'");
 		}
-		public ContentFrameLayout Contentframelayout 
+		public FrameLayout Contentframelayout 
 		{ 
 			get => _Contentframelayout ??=
-				FindViewById<ContentFrameLayout>(Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout) ??
-				throw new InflateException("Could not find view 'xyzu_layout_library_drawerlayout_contentframelayout' in 'layout_library_drawerlayout'");
+				FindViewById<FrameLayout>(Resource.Id.xyzu_layout_library_drawerlayout_framelayout) ??
+				throw new InflateException("Could not find view 'xyzu_layout_library_drawerlayout_framelayout' in 'layout_library_drawerlayout'");
 		}
 		public ActionBarDrawerToggle Actionbardrawertoggle 
 		{ 
@@ -322,7 +322,7 @@ namespace Xyzu.Activities
 		{
 			SupportFragmentManager
 				.BeginTransaction()
-				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_contentframelayout, drawerlayoutable.Fragment)
+				.Replace(Contentframelayout?.Id ?? Resource.Id.xyzu_layout_library_drawerlayout_framelayout, drawerlayoutable.Fragment)
 				.RunOnCommit(new JavaRunnable(() =>
 				{
 					Drawerlayout?.CloseDrawers();
@@ -348,7 +348,7 @@ namespace Xyzu.Activities
 			await drawerlayoutable.Refresh(force);
 		}
 
-		protected override void OnFloatingactionbuttonClick(object sender, EventArgs args)
+		protected override void OnFloatingactionbuttonClick(object? sender, EventArgs args)
 		{
 			base.OnFloatingactionbuttonClick(sender, args);
 
@@ -394,7 +394,7 @@ namespace Xyzu.Activities
 				default: break;
 			}
 		}
-		protected override void XyzuLibraryOnServiceConnectionChanged(object sender, ServiceConnectionChangedEventArgs args)
+		protected override void XyzuLibraryOnServiceConnectionChanged(object? sender, ServiceConnectionChangedEventArgs args)
 		{
 			base.XyzuLibraryOnServiceConnectionChanged(sender, args);
 

@@ -4,45 +4,45 @@ namespace Xyzu.Library.IO
 {
 	public partial class IOUtils 
 	{
-		public static bool WouldBenefit(IAlbum? retrieved, IAlbum<bool>? retriever)
+		public static bool WouldBenefit(IAlbum? retrieved)
 		{
 			//if (retrieved is null)
 			//	return false;
 
 			return false;
 		}
-		public static bool WouldBenefit(IArtist? retrieved, IArtist<bool>? retriever)
+		public static bool WouldBenefit(IArtist? retrieved)
 		{
 			//if (retrieved is null)
 			//	return false;
 
 			return false;
 		}
-		public static bool WouldBenefit(IGenre? retrieved, IGenre<bool>? retriever)
+		public static bool WouldBenefit(IGenre? retrieved)
 		{
 			//if (retrieved is null)
 			//	return false;
 
 			return false;
 		}
-		public static bool WouldBenefit(IPlaylist? retrieved, IPlaylist<bool>? retriever)
+		public static bool WouldBenefit(IPlaylist? retrieved)
 		{
 			//if (retrieved is null)
 			//	return false;
 
 			return false;
 		}
-		public static bool WouldBenefit(ISong? retrieved, ISong<bool>? retriever)
+		public static bool WouldBenefit(ISong? retrieved)
 		{
 			if (retrieved is null)
 				return false;
 
 			return
-				retrieved.DateAdded is null && (retriever?.DateAdded ?? false) ||
-				retrieved.DateModified is null && (retriever?.DateModified ?? false) ||
-				retrieved.Filepath is null && (retriever?.Filepath ?? false) ||
-				retrieved.MimeType is null && (retriever?.MimeType ?? false) ||
-				retrieved.Size is null && (retriever?.Size ?? false);
+				retrieved.DateAdded is null ||
+				retrieved.DateModified is null ||
+				retrieved.Filepath is null ||
+				retrieved.MimeType is null ||
+				retrieved.Size is null;
 		}
 	}
 }

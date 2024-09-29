@@ -31,7 +31,7 @@ namespace Xyzu.Library.Models
 
 			public override string ToString()
 			{
-				string basestring = base.ToString();
+				string? basestring = base.ToString();
 
 				_StringBuilder ??= new StringBuilder();
 

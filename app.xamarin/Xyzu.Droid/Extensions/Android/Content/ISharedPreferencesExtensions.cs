@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 
-using Xyzu.Library;
 using Xyzu.Library.Enums;
 using Xyzu.Settings;
 using Xyzu.Settings.Enums;
@@ -35,17 +34,17 @@ namespace Android.Content
 		}		   				  
 		public static CultureInfo GetCultureInfo(this ISharedPreferences sharedpreferences, string? key, CultureInfo defaultvalue)
 		{
-			string defaultietflanguagetag = defaultvalue.IetfLanguageTag;
+			string? defaultietflanguagetag = defaultvalue.IetfLanguageTag;
 			string? valueietflanguagetag = sharedpreferences.GetString(key, defaultietflanguagetag);
 
-			if (valueietflanguagetag == defaultietflanguagetag)
+			if (valueietflanguagetag is null || valueietflanguagetag == defaultietflanguagetag)
 				return defaultvalue;
 
 			return CultureInfo.GetCultureInfoByIetfLanguageTag(valueietflanguagetag);
 		}		   
 		public static TEnum GetEnum<TEnum>(this ISharedPreferences sharedpreferences, string? key, TEnum defaultvalue) where TEnum : struct
 		{
-			string defaultstring = defaultvalue.ToString();
+			string? defaultstring = defaultvalue.ToString();
 			string? valuestring = sharedpreferences.GetString(key, defaultstring);
 
 			if (string.Equals(defaultstring, valuestring, StringComparison.OrdinalIgnoreCase))
@@ -119,9 +118,11 @@ namespace Android.Content
 					.OfType<IBassBoostSettings.IPreset>()
 					.Concat(IBassBoostSettings.IPresetable.Defaults.Presets.AsEnumerable())
 					.Distinct();
-			presetable.CurrentPreset = sharedpreferences.GetString(IBassBoostSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname
-				? presetable.AllPresets.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase))
-				: IBassBoostSettings.IPresetable.Defaults.Presets.Default;
+			presetable.CurrentPreset =
+				sharedpreferences.GetString(IBassBoostSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname && presetable.AllPresets
+				.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase)) is IBassBoostSettings.IPreset preset
+					? preset
+					: IBassBoostSettings.IPresetable.Defaults.Presets.Default;
 
 			return presetable;
 		}											 									 						 
@@ -139,7 +140,7 @@ namespace Android.Content
 			IBassBoostSettings.IPreset preset = new IBassBoostSettings.IPreset.Default(presetname);
 
 			foreach (string key in keys)
-				if (sharedpreferences.All.TryGetValue(key, out object value))
+				if (sharedpreferences.All.TryGetValue(key, out object? value))
 					(preset ??= new IBassBoostSettings.IPreset.Default(presetname))
 						.SetFromKey(key, value);
 
@@ -162,9 +163,11 @@ namespace Android.Content
 					.OfType<IEnvironmentalReverbSettings.IPreset>()
 					.Concat(IEnvironmentalReverbSettings.IPresetable.Defaults.Presets.AsEnumerable())
 					.Distinct();
-			presetable.CurrentPreset = sharedpreferences.GetString(IEnvironmentalReverbSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname
-				? presetable.AllPresets.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase))
-				: IEnvironmentalReverbSettings.IPresetable.Defaults.Presets.Default;
+			presetable.CurrentPreset =
+				sharedpreferences.GetString(IEnvironmentalReverbSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname && presetable.AllPresets
+				.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase)) is IEnvironmentalReverbSettings.IPreset preset
+					? preset
+					: IEnvironmentalReverbSettings.IPresetable.Defaults.Presets.Default;
 
 			return presetable;
 		}
@@ -182,7 +185,7 @@ namespace Android.Content
 			IEnvironmentalReverbSettings.IPreset preset = new IEnvironmentalReverbSettings.IPreset.Default(presetname);
 
 			foreach (string key in keys)
-				if (sharedpreferences.All.TryGetValue(key, out object value))
+				if (sharedpreferences.All.TryGetValue(key, out object? value))
 					(preset ??= new IEnvironmentalReverbSettings.IPreset.Default(presetname))
 						.SetFromKey(key, value);
 
@@ -205,9 +208,11 @@ namespace Android.Content
 					.OfType<IEqualiserSettings.IPreset>()
 					.Concat(IEqualiserSettings.IPresetable.Defaults.Presets.TenBand.AsEnumerable())
 					.Distinct();
-			presetable.CurrentPreset = sharedpreferences.GetString(IEqualiserSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname
-				? presetable.AllPresets.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase))
-				: IEqualiserSettings.IPresetable.Defaults.Presets.TenBand.Default;
+			presetable.CurrentPreset =
+				sharedpreferences.GetString(IEqualiserSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname && presetable.AllPresets
+				.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase)) is IEqualiserSettings.IPreset preset
+					? preset
+					: IEqualiserSettings.IPresetable.Defaults.Presets.TenBand.Default;
 
 			return presetable;
 		}
@@ -225,7 +230,7 @@ namespace Android.Content
 			IEqualiserSettings.IPreset preset = new IEqualiserSettings.IPreset.Default(presetname);
 
 			foreach (string key in keys)
-				if (sharedpreferences.All.TryGetValue(key, out object value))
+				if (sharedpreferences.All.TryGetValue(key, out object? value))
 					(preset ??= new IEqualiserSettings.IPreset.Default(presetname))
 						.SetFromKey(key, value);
 
@@ -248,9 +253,11 @@ namespace Android.Content
 					.OfType<ILoudnessEnhancerSettings.IPreset>()
 					.Concat(ILoudnessEnhancerSettings.IPresetable.Defaults.Presets.AsEnumerable())
 					.Distinct();
-			presetable.CurrentPreset = sharedpreferences.GetString(ILoudnessEnhancerSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname
-				? presetable.AllPresets.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase))
-				: ILoudnessEnhancerSettings.IPresetable.Defaults.Presets.Default;
+			presetable.CurrentPreset = 
+				sharedpreferences.GetString(ILoudnessEnhancerSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname && presetable.AllPresets
+				.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase)) is ILoudnessEnhancerSettings.IPreset preset
+					? preset
+					: ILoudnessEnhancerSettings.IPresetable.Defaults.Presets.Default;
 
 			return presetable;
 		}
@@ -268,7 +275,7 @@ namespace Android.Content
 			ILoudnessEnhancerSettings.IPreset preset = new ILoudnessEnhancerSettings.IPreset.Default(presetname);
 
 			foreach (string key in keys)
-				if (sharedpreferences.All.TryGetValue(key, out object value))
+				if (sharedpreferences.All.TryGetValue(key, out object? value))
 					(preset ??= new ILoudnessEnhancerSettings.IPreset.Default(presetname))
 						.SetFromKey(key, value);
 

@@ -126,19 +126,20 @@ namespace Xyzu.Views.Library
 				});
 		}
 		protected virtual void PropertyChanged([CallerMemberName] string? propertyname = null) { }
-		protected virtual void PropertyChangedLibraryItemsAdapter(object sender, PropertyChangedEventArgs args)
+		protected virtual void PropertyChangedLibraryItemsAdapter(object? sender, PropertyChangedEventArgs args)
 		{
-			switch (args.PropertyName)
-			{
-				case nameof(LibraryItemsRecyclerView.Adapter.SelectedPositions):
-					ProcessMenuOptions((LibraryItemsRecyclerView.Adapter)sender);
-					break;
+			if (sender is LibraryItemsRecyclerView.Adapter adapter)
+				switch (args.PropertyName)
+				{
+					case nameof(LibraryItemsRecyclerView.Adapter.SelectedPositions):
+						ProcessMenuOptions(adapter);
+						break;
 
-				default: break;
-			}
+					default: break;
+				}
 		}
-		protected virtual void PropertyChangedSettings(object sender, PropertyChangedEventArgs args) { }
-		protected virtual void PropertyChangedPlayerQueue(object sender, PropertyChangedEventArgs args) 
+		protected virtual void PropertyChangedSettings(object? sender, PropertyChangedEventArgs args) { }
+		protected virtual void PropertyChangedPlayerQueue(object? sender, PropertyChangedEventArgs args) 
 		{
 			switch (args.PropertyName)
 			{
@@ -180,7 +181,7 @@ namespace Xyzu.Views.Library
 
 			Refreshing = false;
 		}
-		public virtual async void OnRefresh(object sender, EventArgs args)
+		public virtual async void OnRefresh(object? sender, EventArgs args)
 		{
 			await OnRefresh(true);
 		}

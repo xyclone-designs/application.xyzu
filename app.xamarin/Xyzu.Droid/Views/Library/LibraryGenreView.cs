@@ -237,7 +237,7 @@ namespace Xyzu.Views.Library
 				default: break;
 			}
 		}
-		protected override void PropertyChangedSettings(object sender, PropertyChangedEventArgs args)
+		protected override void PropertyChangedSettings(object? sender, PropertyChangedEventArgs args)
 		{
 			base.PropertyChangedSettings(sender, args);
 
@@ -367,13 +367,8 @@ namespace Xyzu.Views.Library
 
 			await Library.Genres.PopulateGenre(Genre, Cancellationtoken);
 
-			IAsyncEnumerable<ISong> libraryitems = Library.Songs.GetSongs(
-				identifiers: Identifiers,
-				cancellationToken: Cancellationtoken,
-				retriever: LibraryItemView.Retrievers.GenerateSongRetriever(
-					songs: GenreSongs.LibraryItemsAdapter.LibraryItems,
-					modelsortkey: Settings.SongsSortKey,
-					librarylayouttype: Settings.SongsLayoutType))
+			IAsyncEnumerable<ISong> libraryitems = Library.Songs
+				.GetSongs(Identifiers, Cancellationtoken)
 				.Sort(Settings.SongsSortKey, Settings.SongsIsReversed);
 
 			await SetGenre(Genre, libraryitems);
@@ -442,7 +437,7 @@ namespace Xyzu.Views.Library
 				default: return false;
 			}
 		}
-		public override void OnMenuOptionsAllClick(object sender, EventArgs args)
+		public override void OnMenuOptionsAllClick(object? sender, EventArgs args)
 		{
 			base.OnMenuOptionsAllClick(sender, args);
 

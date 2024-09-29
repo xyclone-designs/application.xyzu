@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toTopOf="@id/seekbar_frame" 
         app:layout_constraintTop_toBottomOf="@id/seekbar_value" />
 
-    <androidx.appcompat.widget.ContentFrameLayout
+    <android.widget.FrameLayout
         android:id="@+id/seekbar_frame"
         android:layout_width="@dimen/dp64"
         android:layout_height="@dimen/dp280" 
@@ -44,7 +44,7 @@
             android:layout_gravity="center"
             android:rotation="270" />
 
-    </androidx.appcompat.widget.ContentFrameLayout>
+    </android.widget.FrameLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/Xyzu.Preference.SummaryText"

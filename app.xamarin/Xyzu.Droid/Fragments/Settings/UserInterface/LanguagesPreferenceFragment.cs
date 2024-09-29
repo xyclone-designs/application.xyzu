@@ -143,6 +143,7 @@ namespace Xyzu.Fragments.Settings.UserInterface
 			{
 				case true when
 				preference == CurrentLanguagePreference &&
+				CurrentLanguagePreference.Value is not null &&
 				CurrentLanguagePreference.Value != CurrentLanguage?.IetfLanguageTag:
 					CurrentLanguage = CultureInfo.GetCultureInfoByIetfLanguageTag(CurrentLanguagePreference.Value);
 					return true;					

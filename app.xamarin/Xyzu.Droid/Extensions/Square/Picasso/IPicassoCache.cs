@@ -34,7 +34,7 @@ namespace Square.Picasso
 			}
 			public Bitmap? Get(string keyPrefix)
 			{
-				return Cache.TryGetValue(keyPrefix, out Bitmap bitmap) ? bitmap : null;
+				return Cache.TryGetValue(keyPrefix, out Bitmap? bitmap) ? bitmap : null;
 			}
 			public int MaxSize()
 			{

@@ -13,9 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:background="@color/ColorSurface"/>
-
-    <androidx.appcompat.widget.ContentFrameLayout
-        android:id="@+id/xyzu_layout_settings_contentframelayout"
+  
+    <android.widget.FrameLayout
+        android:id="@+id/xyzu_layout_settings_framelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using TagLib;
 
@@ -14,28 +15,10 @@ namespace Xyzu.Library.TagLibSharp
 	{
 		public class OnCreate : ILibrary.IOnCreateActions.Default
 		{
-			public IDictionary<string, string>? Paths { get; set; }
-
-			public override IAlbum? Album(string id, IAlbum<bool>? retriever)
+			public override async Task<ISong?> Song(string id)
 			{
-				return base.Album(id, retriever);
-			}
-			public override IArtist? Artist(string id, IArtist<bool>? retriever)
-			{
-				return base.Artist(id, retriever);
-			}
-			public override IGenre? Genre(string id, IGenre<bool>? retriever)
-			{
-				return base.Genre(id, retriever);
-			}
-			public override IPlaylist? Playlist(string id, IPlaylist<bool>? retriever)
-			{
-				return base.Playlist(id, retriever);
-			}
-			public override ISong? Song(string id, ISong<bool>? retriever)
-			{
-				string? filepath = Paths is null || Paths.TryGetValue(id, out string outpath) is false ? null : outpath;
-				Uri? uri = filepath is null ? null : Uri.TryCreate(filepath, UriKind.RelativeOrAbsolute, out Uri outuri) ? outuri : null;
+				string? filepath = Paths is null || Paths.TryGetValue(id, out string? outpath) is false ? null : outpath;
+				Uri? uri = filepath is null ? null : Uri.TryCreate(filepath, UriKind.RelativeOrAbsolute, out Uri? outuri) ? outuri : null;
 
 				ISong song = new ISong.Default(id)
 				{
@@ -44,43 +27,25 @@ namespace Xyzu.Library.TagLibSharp
 				};
 
 				if (filepath is not null)
-					try
+					await Task.Run(() =>
 					{
-						using File file = File.Create(filepath);
+						try
+						{
+							using File file = File.Create(filepath);
 
-						song.Retrieve(file, retriever);
-					}
-					catch (Exception) { }
+							song.Retrieve(file);
+						}
+						catch (Exception) { }
+
+					}).ConfigureAwait(false);
 
 				return song;
 			}
 		}
-		public class OnDelete : ILibrary.IOnDeleteActions.Default
-		{
-			public override void Album(IAlbum album)
-			{
-				base.Album(album);
-			}
-			public override void Artist(IArtist artist)
-			{
-				base.Artist(artist);
-			}
-			public override void Genre(IGenre genre)
-			{
-				base.Genre(genre);
-			}
-			public override void Playlist(IPlaylist playlist)
-			{
-				base.Playlist(playlist);
-			}
-			public override void Song(ISong song)
-			{
-				base.Song(song);
-			}
-		}
+		public class OnDelete : ILibrary.IOnDeleteActions.Default { }
 		public class OnRetrieve : ILibrary.IOnRetrieveActions.Default
 		{
-			File? GetFile(string? filepath, Uri? uri)
+			static File? GetFile(string? filepath, Uri? uri)
 			{
 				File? file = null;
 
@@ -94,66 +59,62 @@ namespace Xyzu.Library.TagLibSharp
 				return file;
 			}
 
-			public override void Album(IAlbum? retrieved, IAlbum<bool>? retriever, ISong? retrievedsong)
+			public override Task Album(IAlbum? retrieved, ISong? retrievedsong)
 			{
 				if (GetFile(retrievedsong?.Filepath, retrievedsong?.Uri) is File file)
 				{
-					retrieved?.Retrieve(file, retriever);
+					retrieved?.Retrieve(file);
 
 					file.Dispose();
 				}
 
-				base.Album(retrieved, retriever, retrievedsong);
+				return base.Album(retrieved, retrievedsong);
 			}
-			public override void Artist(IArtist? retrieved, IArtist<bool>? retriever, IAlbum? retrievedalbum)
-			{
-				base.Artist(retrieved, retriever, retrievedalbum);
-			}
-			public override void Artist(IArtist? retrieved, IArtist<bool>? retriever, ISong? retrievedsong)
+			public override Task Artist(IArtist? retrieved, ISong? retrievedsong)
 			{
 				if (GetFile(retrievedsong?.Filepath, retrievedsong?.Uri) is File file)
 				{
-					retrieved?.Retrieve(file, retriever);
+					retrieved?.Retrieve(file);
 
 					file.Dispose();
 				}
 
-				base.Artist(retrieved, retriever, retrievedsong);
+				return base.Artist(retrieved, retrievedsong);
 			}
-			public override void Genre(IGenre? retrieved, IGenre<bool>? retriever, ISong? retrievedsong)
+			public override Task Genre(IGenre? retrieved, ISong? retrievedsong)
 			{
 				if (GetFile(retrievedsong?.Filepath, retrievedsong?.Uri) is File file)
 				{
-					retrieved?.Retrieve(file, retriever);
+					retrieved?.Retrieve(file);
 
 					file.Dispose();
 				}
 
-				base.Genre(retrieved, retriever, retrievedsong);
+				return base.Genre(retrieved, retrievedsong);
 			}
-			public override void Playlist(IPlaylist? retrieved, IPlaylist<bool>? retriever, ISong? retrievedsong) 
+			public override Task Playlist(IPlaylist? retrieved, ISong? retrievedsong) 
 			{
 				if (GetFile(retrievedsong?.Filepath, retrievedsong?.Uri) is File file)
 				{
-					retrieved?.Retrieve(file, retriever);
+					retrieved?.Retrieve(file);
 
 					file.Dispose();
 				}
 
-				base.Playlist(retrieved, retriever, retrievedsong);
+				return base.Playlist(retrieved, retrievedsong);
 			}
-			public override void Song(ISong? retrieved, ISong<bool>? retriever)
+			public override Task Song(ISong? retrieved)
 			{
 				if (GetFile(retrieved?.Filepath, retrieved?.Uri) is File file)
 				{
-					retrieved?.Retrieve(file, retriever);
+					retrieved?.Retrieve(file);
 
 					file.Dispose();
 				}
 
-				base.Song(retrieved, retriever);
+				return base.Song(retrieved);
 			}
-			public override void Image(IImage? retrieved, IImage<bool>? retriever, string? filepath, Uri? uri, IEnumerable<ModelTypes>? modeltypes)
+			public override Task Image(IImage? retrieved, IImage<bool>? retriever, string? filepath, Uri? uri, IEnumerable<ModelTypes>? modeltypes)
 			{
 				if (GetFile(filepath, uri) is File file)
 				{
@@ -179,13 +140,12 @@ namespace Xyzu.Library.TagLibSharp
 					file.Dispose();
 				}
 
-				base.Image(retrieved, retriever, filepath, uri, modeltypes);
+				return base.Image(retrieved, retriever, filepath, uri, modeltypes);
 			}
 		}
 		public class OnUpdate : ILibrary.IOnUpdateActions.Default
 		{
-			// TODO All Commented Outs
-			public override void Album(IAlbum? old, IAlbum? updated)
+			public async override Task Album(IAlbum? old, IAlbum? updated)
 			{
 				if (updated is null || old is null)
 					return;
@@ -201,22 +161,28 @@ namespace Xyzu.Library.TagLibSharp
 					return;
 
 				if (old.SongIds != null && OnGetSong != null)
-					foreach (string songid in old.SongIds)
-						if (OnGetSong.Invoke(songid) is ISong song && string.IsNullOrWhiteSpace(song.Filepath) is false)
-							try
+					await Task.WhenAll(
+						old.SongIds
+							.Select(_ => OnGetSong.Invoke(_) is ISong song && string.IsNullOrWhiteSpace(song.Filepath) is false ? song : null)
+							.OfType<ISong>()
+							.Select(song => Task.Run(() =>
 							{
-								using File file = File.Create(song.Filepath);
+								try
+								{
+									using File file = File.Create(song.Filepath);
 
-								//if (distincts.ReleaseDate) file.Tag.Year = updated.ReleaseDate?.Year;
-								if (distincts.Title) file.Tag.Album = updated.Title;
+									if (distincts.ReleaseDate) file.Tag.Year = (uint?)updated.ReleaseDate?.Year ?? default;
+									if (distincts.Title) file.Tag.Album = updated.Title;
 
-								file?.Save();
-							}
-							catch (Exception) { }
+									file?.Save();
+								}
+								catch (Exception) { }
 
-				base.Album(old, updated);
+							})).ToArray());
+
+				await base.Album(old, updated);
 			}
-			public override void Artist(IArtist? old, IArtist? updated)
+			public async override Task Artist(IArtist? old, IArtist? updated)
 			{
 				if (updated is null || old is null)
 					return;
@@ -230,21 +196,27 @@ namespace Xyzu.Library.TagLibSharp
 					return;
 
 				if (old.SongIds != null && OnGetSong != null)
-					foreach (string songid in old.SongIds)
-						if (OnGetSong.Invoke(songid) is ISong song && string.IsNullOrWhiteSpace(song.Filepath) is false)
-							try
+					await Task.WhenAll(
+						old.SongIds
+							.Select(_ => OnGetSong.Invoke(_) is ISong song && string.IsNullOrWhiteSpace(song.Filepath) is false ? song : null)
+							.OfType<ISong>()
+							.Select(song => Task.Run(() =>
 							{
-								using File file = File.Create(song.Filepath);
+								try
+								{
+									using File file = File.Create(song.Filepath);
 
-								if (distincts.Name && updated.Name != null) file.Tag.Performers = new string[] { updated.Name };
+									if (distincts.Name && updated.Name != null) file.Tag.Performers = new string[] { updated.Name };
 
-								file?.Save();
-							}
-							catch (Exception) { }
+									file?.Save();
+								}
+								catch (Exception) { }
 
-				base.Artist(old, updated);
+							})).ToArray());
+
+				await base.Artist(old, updated);
 			}
-			public override void Genre(IGenre? old, IGenre? updated)
+			public async override Task Genre(IGenre? old, IGenre? updated)
 			{
 				if (updated is null || old is null)
 					return;
@@ -258,25 +230,27 @@ namespace Xyzu.Library.TagLibSharp
 					return;
 
 				if (old.SongIds != null && OnGetSong != null)
-					foreach (string songid in old.SongIds)
-						if (OnGetSong.Invoke(songid) is ISong song && string.IsNullOrWhiteSpace(song.Filepath) is false)
-							try
+					await Task.WhenAll(
+						old.SongIds
+							.Select(_ => OnGetSong.Invoke(_) is ISong song && string.IsNullOrWhiteSpace(song.Filepath) is false ? song : null)
+							.OfType<ISong>()
+							.Select(song => Task.Run(() =>
 							{
-								using File file = File.Create(song.Filepath);
+								try
+								{
+									using File file = File.Create(song.Filepath);
 
-								if (distincts.Name) file.Tag.Genres = updated.Name?.Split(';').ToArray() ?? Array.Empty<string>();
+									if (distincts.Name) file.Tag.Genres = updated.Name?.Split(';').ToArray() ?? Array.Empty<string>();
 
-								file?.Save();
-							}
-							catch (Exception) { }
+									file?.Save();
+								}
+								catch (Exception) { }
 
-				base.Genre(old, updated);
+							})).ToArray());
+
+				await base.Genre(old, updated);
 			}
-			public override void Playlist(IPlaylist? old, IPlaylist? updated)
-			{
-				base.Playlist(old, updated);
-			}
-			public override void Song(ISong? old, ISong? updated)
+			public async override Task Song(ISong? old, ISong? updated)
 			{
 				if (old?.Filepath is null || updated is null)
 					return;
@@ -296,25 +270,28 @@ namespace Xyzu.Library.TagLibSharp
 					return;
 
 				if (old.Filepath is not null)
-					try
+					await Task.Run(() =>
 					{
-						using File file = File.Create(old.Filepath);
+						try
+						{
+							using File file = File.Create(old.Filepath);
 
-						if (distincts.Album) file.Tag.Album = updated.Album;
-						if (distincts.AlbumArtist && updated.AlbumArtist != null) file.Tag.AlbumArtists = new string[] { updated.AlbumArtist };
-						if (distincts.Artist && updated.Artist != null) file.Tag.Performers = new string[] { updated.Artist };
-						if (distincts.DiscNumber) file.Tag.Disc = (uint?)updated.DiscNumber ?? default;
-						if (distincts.Genre) file.Tag.Genres = updated.Genre?.Split(';').ToArray() ?? Array.Empty<string>();  
-						if (distincts.Lyrics) file.Tag.Lyrics = updated.Lyrics;
-						if (distincts.ReleaseDate) file.Tag.Year = (uint?)updated.ReleaseDate?.Year ?? default;
-						if (distincts.Title) file.Tag.Title = updated.Title;
-						if (distincts.TrackNumber) file.Tag.Track = (uint?)updated.TrackNumber ?? default;
+							if (distincts.Album) file.Tag.Album = updated.Album;
+							if (distincts.AlbumArtist && updated.AlbumArtist != null) file.Tag.AlbumArtists = new string[] { updated.AlbumArtist };
+							if (distincts.Artist && updated.Artist != null) file.Tag.Performers = new string[] { updated.Artist };
+							if (distincts.DiscNumber) file.Tag.Disc = (uint?)updated.DiscNumber ?? default;
+							if (distincts.Genre) file.Tag.Genres = updated.Genre?.Split(';').ToArray() ?? Array.Empty<string>();
+							if (distincts.Lyrics) file.Tag.Lyrics = updated.Lyrics;
+							if (distincts.ReleaseDate) file.Tag.Year = (uint?)updated.ReleaseDate?.Year ?? default;
+							if (distincts.Title) file.Tag.Title = updated.Title;
+							if (distincts.TrackNumber) file.Tag.Track = (uint?)updated.TrackNumber ?? default;
 
-						file?.Save();
-					}
-					catch (Exception) { }
+							file.Save();
+						}
+						catch (Exception) { }
+					});
 
-				base.Song(old, updated);
+				await base.Song(old, updated);
 			}
 		}
 	}

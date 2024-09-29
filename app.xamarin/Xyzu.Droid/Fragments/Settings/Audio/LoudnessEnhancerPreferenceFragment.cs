@@ -89,7 +89,7 @@ namespace Xyzu.Fragments.Settings.Audio
 		public XyzuListPreference? CurrentPresetPreference { get; set; }
 		public XyzuSeekBarPreference? TargetGainPreference { get; set; }
 
-		public void CurrentPresetPropertyChanged(object sender, PropertyChangedEventArgs args)
+		public void CurrentPresetPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			switch (args.PropertyName)
 			{

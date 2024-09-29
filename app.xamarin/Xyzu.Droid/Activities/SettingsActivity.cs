@@ -48,7 +48,7 @@ namespace Xyzu.Activities
 
 			SupportFragmentManager?
 				.BeginTransaction()
-				.Replace(Resource.Id.xyzu_layout_settings_contentframelayout, Intent?.GetStringExtra(Intents.ExtraKeys.FragmentName) switch
+				.Replace(Resource.Id.xyzu_layout_settings_framelayout, Intent?.GetStringExtra(Intents.ExtraKeys.FragmentName) switch
 				{
 					Fragments.Settings.About.AboutPreferenceFragment.FragmentName => new Fragments.Settings.About.AboutPreferenceFragment { },
 

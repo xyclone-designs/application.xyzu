@@ -29,7 +29,7 @@ namespace Xyzu.Settings.System
 	public interface ISystemSettingsDroid : ISystemSettings
 	{
 		public static File? PackageDirectory = null;
-		public static string DataDirectory_ErrorLog_PathName = "errorlogs";
+		public readonly static string DataDirectory_ErrorLog_PathName = "errorlogs";
 
 		public static Task ClearErrorLogs()
 		{
@@ -91,16 +91,16 @@ namespace Xyzu.Settings.System
 			return Task.CompletedTask;
 		}
 
-		public static void UnhandledExceptionRaiser(object sender, RaiseThrowableEventArgs args)
+		public static void UnhandledExceptionRaiser(object? sender, RaiseThrowableEventArgs args)
 		{
 			AddErrorLog(IErrorLog.FromException(args.Exception));
 		}
-		public static void OnUnhandledException(object sender, UnhandledExceptionEventArgs args)
+		public static void OnUnhandledException(object? sender, UnhandledExceptionEventArgs args)
 		{
 			if (args.ExceptionObject is Exception exception)
 				AddErrorLog(IErrorLog.FromException(exception));
 		}
-		public static void OnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs args)
+		public static void OnUnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs args)
 		{
 			AddErrorLog(IErrorLog.FromException(args.Exception));
 		}

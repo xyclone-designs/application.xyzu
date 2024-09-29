@@ -31,8 +31,9 @@ using Xyzu.Images;
 using Xyzu.Images.Enums;
 using Xyzu.Library.Models;
 
+using Xamarin.Essentials;
+
 using AndroidUri = Android.Net.Uri;
-using System.Runtime.Remoting.Messaging;
 
 namespace Xyzu
 {
@@ -78,7 +79,7 @@ namespace Xyzu
 				_ => null,
 
 			} is IImage image) return Buffer(image);
-
+			
 			return null;
 		}
 		private byte[]? Buffer(IImage image)
@@ -471,6 +472,25 @@ namespace Xyzu
 
 			return bitmapdrawable;
 		}
+		public async Task<Drawable?> GetDrawableAsync(Operations[] operations, params object?[] sources)
+		{
+			BitmapDrawable? bitmapdrawable = null;
+
+			await Task.Run(() =>
+			{
+				using RequestBuilder? requestbuilder = RequestBuilder(requestmanager => requestmanager?.AsDrawable(), sources);
+				using IFutureTarget? futuretarget = RequestBuilderOperations(requestbuilder, operations)?.Submit();
+
+				try
+				{
+					bitmapdrawable = futuretarget?.Get() as BitmapDrawable;
+				}
+				catch (Java.Util.Concurrent.ExecutionException) { }
+				catch (Java.Lang.InterruptedException) { }
+			});
+
+			return bitmapdrawable;
+		}
 		public Palette? GetPalette(params object?[] sources)
 		{
 			if (GetBitmap(Array.Empty<Operations>(), null, sources) is Bitmap bitmap)
@@ -622,8 +642,8 @@ namespace Xyzu
 			{
 				base.RegisterComponents(context, glide, registry);
 
-				glide.ClearMemory();
-				Task.Run(() => glide.ClearDiskCache());
+				glide.ClearDiskCache();
+				MainThread.BeginInvokeOnMainThread(() => glide.ClearMemory());
 			}
 
 			protected override void Dispose(bool disposing)
@@ -655,6 +675,10 @@ namespace Xyzu
 		public static Drawable? GetDrawable(this IImages images, Operations[] operations, params object?[] sources)
 		{
 			return (images as IImagesDroid)?.GetDrawable(operations, sources);
+		}
+		public static Task<Drawable?> GetDrawableAsync(this IImages images, Operations[] operations, params object?[] sources)
+		{
+			return (images as IImagesDroid)?.GetDrawableAsync(operations, sources) ?? Task.FromResult<Drawable?>(null);
 		}
 		public static Bitmap? GetBitmap(this IImages images, Operations[] operations, BitmapFactory.Options? options, params object?[] sources)
 		{

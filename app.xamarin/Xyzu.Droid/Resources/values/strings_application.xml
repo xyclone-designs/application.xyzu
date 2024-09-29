@@ -1,0 +1,7 @@
+<resources>
+
+  <string name="application_label_short">Xyzu</string>
+  <string name="application_label_long">Xyzu Music Player</string>
+  <string name="application_package">co.za.xyclonedesigns.xyzu</string>
+  
+</resources>

@@ -358,7 +358,7 @@ namespace Xyzu.Views.Library
 				default: break;
 			}
 		}
-		protected override void PropertyChangedSettings(object sender, PropertyChangedEventArgs args)
+		protected override void PropertyChangedSettings(object? sender, PropertyChangedEventArgs args)
 		{
 			base.PropertyChangedSettings(sender, args);
 
@@ -515,23 +515,11 @@ namespace Xyzu.Views.Library
 			(IAsyncEnumerable<IAlbum>? albums, IAsyncEnumerable<ISong>? songs) = Showing switch
 			{
 				ArtistItemType.Albums => (Library.Albums
-					.GetAlbums(
-						identifiers: Identifiers,
-						cancellationToken: Cancellationtoken,
-						retriever: LibraryItemView.Retrievers.GenerateAlbumRetriever(
-							modelsortkey: Settings.AlbumsSortKey,
-							librarylayouttype: Settings.AlbumsLayoutType,
-							albums: ArtistItems.LibraryItemsAdapter.LibraryItems.OfType<IAlbum>()))
+					.GetAlbums(Identifiers, Cancellationtoken)
 					.Sort(Settings.AlbumsSortKey, Settings.AlbumsIsReversed), null as IAsyncEnumerable<ISong>),
 
 				ArtistItemType.Songs => (null as IAsyncEnumerable<IAlbum>, Library.Songs
-					.GetSongs(
-						identifiers: Identifiers,
-						cancellationToken: Cancellationtoken,
-						retriever: LibraryItemView.Retrievers.GenerateSongRetriever(
-							modelsortkey: Settings.SongsSortKey,
-							librarylayouttype: Settings.SongsLayoutType,
-							songs: ArtistItems.LibraryItemsAdapter.LibraryItems.OfType<ISong>()))
+					.GetSongs(Identifiers, Cancellationtoken)
 					.Sort(Settings.SongsSortKey, Settings.SongsIsReversed)),
 
 				_ => throw new ArgumentException(), 
@@ -563,7 +551,7 @@ namespace Xyzu.Views.Library
 				_ => result
 			};
 		}
-		public override void OnMenuOptionsAllClick(object sender, EventArgs args)
+		public override void OnMenuOptionsAllClick(object? sender, EventArgs args)
 		{
 			base.OnMenuOptionsAllClick(sender, args);
 
@@ -731,13 +719,8 @@ namespace Xyzu.Views.Library
 
 			IEnumerable<IAlbum> albums = ArtistItems.LibraryItemsAdapter.LibraryItems.Cast<IAlbum>();
 
-			IAsyncEnumerable<IAlbum> libraryitems = Library.Albums.GetAlbums(
-				identifiers: Identifiers,
-				cancellationToken: Cancellationtoken,
-				retriever: LibraryItemView.Retrievers.GenerateAlbumRetriever(
-					albums: albums,
-					modelsortkey: Settings.AlbumsSortKey,
-					librarylayouttype: Settings.AlbumsLayoutType))
+			IAsyncEnumerable<IAlbum> libraryitems = Library.Albums
+				.GetAlbums(Identifiers, Cancellationtoken)
 				.Sort(Settings.AlbumsSortKey, Settings.AlbumsIsReversed);
 
 			if ((Settings.AlbumsSortKey).CanSort(albums) is false)
@@ -761,13 +744,8 @@ namespace Xyzu.Views.Library
 
 			IEnumerable<ISong> songs = ArtistItems.LibraryItemsAdapter.LibraryItems.Cast<ISong>();
 
-			IAsyncEnumerable<ISong> libraryitems = Library.Songs.GetSongs(
-				identifiers: Identifiers,
-				cancellationToken: Cancellationtoken,
-				retriever: LibraryItemView.Retrievers.GenerateSongRetriever(
-					songs: songs,
-					modelsortkey: Settings.SongsSortKey,
-					librarylayouttype: Settings.SongsLayoutType))
+			IAsyncEnumerable<ISong> libraryitems = Library.Songs
+				.GetSongs(Identifiers, Cancellationtoken)
 				.Sort(Settings.SongsSortKey, Settings.SongsIsReversed);
 
 			if ((Settings.SongsSortKey).CanSort(songs) is false)

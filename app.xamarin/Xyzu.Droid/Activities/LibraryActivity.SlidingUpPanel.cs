@@ -223,56 +223,56 @@ namespace Xyzu.Activities
 			switch (args.ViewOperation)
 			{
 				case NowPlayingView.ViewOperations.PressPlayPauseRandom:
-					MenuOptionsUtils.VariableContainer variables = new MenuOptionsUtils.VariableContainer { Index = -1 };
+					MenuOptionsUtils.VariableContainer variables = new () { Index = -1 };
 					switch (CurrentLibraryFragment?.LibraryType)
 					{
 						case LibraryTypes.LibraryAlbums when FragmentLibraryAlbums.View != null:
 							variables.Albums = XyzuLibrary.Instance.Albums
-								.GetAlbums(null, new IAlbum.Default<bool>(true))
+								.GetAlbums(null)
 								.Sort(FragmentLibraryAlbums.View.Settings.SortKey, FragmentLibraryAlbums.View.Settings.IsReversed);
 							break;
 						case LibraryTypes.LibraryAlbum when FragmentLibraryAlbum.View != null:
 							variables.Songs = XyzuLibrary.Instance.Songs
-								.GetSongs(ILibraryIIdentifiers.FromAlbum(FragmentLibraryAlbum.View.Album), new ISong.Default<bool>(true))
+								.GetSongs(ILibraryIIdentifiers.FromAlbum(FragmentLibraryAlbum.View.Album))
 								.Sort(FragmentLibraryAlbum.View.Settings.SongsSortKey, FragmentLibraryAlbum.View.Settings.SongsIsReversed);
 							break;
 
 						case LibraryTypes.LibraryArtists when FragmentLibraryArtists.View != null:
 							variables.Artists = XyzuLibrary.Instance.Artists
-								.GetArtists(null, new IArtist.Default<bool>(true))
+								.GetArtists(null)
 								.Sort(FragmentLibraryArtists.View.Settings.SortKey, FragmentLibraryArtists.View.Settings.IsReversed);
 							break;
 						case LibraryTypes.LibraryArtist when FragmentLibraryArtist.View != null:
 							variables.Songs = XyzuLibrary.Instance.Songs
-								.GetSongs(ILibraryIIdentifiers.FromArtist(FragmentLibraryArtist.View.Artist), new ISong.Default<bool>(true))
+								.GetSongs(ILibraryIIdentifiers.FromArtist(FragmentLibraryArtist.View.Artist))
 								.Sort(FragmentLibraryArtist.View.Settings.SongsSortKey, FragmentLibraryArtist.View.Settings.SongsIsReversed);
 							break;
 
 						case LibraryTypes.LibraryGenres when FragmentLibraryGenres.View != null:
 							variables.Genres = XyzuLibrary.Instance.Genres
-								.GetGenres(null, new IGenre.Default<bool>(true))
+								.GetGenres(null)
 								.Sort(FragmentLibraryGenres.View.Settings.SortKey, FragmentLibraryGenres.View.Settings.IsReversed);
 							break;
 						case LibraryTypes.LibraryGenre when FragmentLibraryGenre.View != null:
 							variables.Songs = XyzuLibrary.Instance.Songs
-								.GetSongs(ILibraryIIdentifiers.FromGenre(FragmentLibraryGenre.View.Genre), new ISong.Default<bool>(true))
+								.GetSongs(ILibraryIIdentifiers.FromGenre(FragmentLibraryGenre.View.Genre))
 								.Sort(FragmentLibraryGenre.View.Settings.SongsSortKey, FragmentLibraryGenre.View.Settings.SongsIsReversed);
 							break;
 
 						case LibraryTypes.LibraryPlaylists when FragmentLibraryPlaylists.View != null:
 							variables.Playlists = XyzuLibrary.Instance.Playlists
-								.GetPlaylists(null, new IPlaylist.Default<bool>(true))
+								.GetPlaylists(null)
 								.Sort(FragmentLibraryPlaylists.View.Settings.SortKey, FragmentLibraryPlaylists.View.Settings.IsReversed);
 							break;
 						case LibraryTypes.LibraryPlaylist when FragmentLibraryPlaylist.View != null:
 							variables.Songs = XyzuLibrary.Instance.Songs
-								.GetSongs(ILibraryIIdentifiers.FromPlaylist(FragmentLibraryPlaylist.View.Playlist), new ISong.Default<bool>(true))
+								.GetSongs(ILibraryIIdentifiers.FromPlaylist(FragmentLibraryPlaylist.View.Playlist))
 								.Sort(FragmentLibraryPlaylist.View.Settings.SongsSortKey, FragmentLibraryPlaylist.View.Settings.SongsIsReversed);
 							break;
 
 						case LibraryTypes.LibrarySongs when FragmentLibrarySongs.View != null:
 							variables.Songs = XyzuLibrary.Instance.Songs
-								.GetSongs(null, new ISong.Default<bool>(true))
+								.GetSongs(null)
 								.Sort(FragmentLibrarySongs.View.Settings.SortKey, FragmentLibrarySongs.View.Settings.IsReversed);
 							break;
 
@@ -296,7 +296,7 @@ namespace Xyzu.Activities
 
 										}).Distinct().OfType<string>()
 
-								}, new ISong.Default<bool>(true));
+								});
 							break;
 
 						case LibraryTypes.LibraryQueue:

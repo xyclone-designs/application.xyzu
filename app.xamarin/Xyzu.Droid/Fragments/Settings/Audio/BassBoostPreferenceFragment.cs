@@ -202,7 +202,7 @@ namespace Xyzu.Fragments.Settings.Audio
 				default: return base.OnPreferenceChange(preference, newvalue);
 			}
 		}
-		public void CurrentPresetPropertyChanged(object sender, PropertyChangedEventArgs args)
+		public void CurrentPresetPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			switch (args.PropertyName)
 			{

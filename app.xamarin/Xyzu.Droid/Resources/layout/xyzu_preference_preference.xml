@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.ContentFrameLayout
+    <android.widget.FrameLayout
         android:id="@android:id/icon_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@android:id/title">
 
-        <androidx.preference.internal.PreferenceImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@android:id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:maxHeight="@dimen/dp48" 
             android:tint="@color/ColorPrimary"/>
 
-    </androidx.appcompat.widget.ContentFrameLayout>
+    </android.widget.FrameLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/Xyzu.Preference.TitleText"
@@ -42,12 +42,12 @@
         app:layout_constraintHeight="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@android:id/icon_frame"
-        app:layout_constraintEnd_toStartOf="@id/xyzu_preference_preference_additionalitem_contentframelayout"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_preference_preference_additionalitem_framelayout"
         app:layout_constraintBottom_toTopOf="@id/xyzu_preference_preference_valuesummary_appcompattextview"/>
   
-    <androidx.appcompat.widget.ContentFrameLayout
+    <android.widget.FrameLayout
         style="@style/Xyzu.Preference"
-        android:id="@+id/xyzu_preference_preference_additionalitem_contentframelayout"
+        android:id="@+id/xyzu_preference_preference_additionalitem_framelayout"
         android:layout_width="@dimen/dp32"
         android:layout_height="@dimen/dp32"
         android:layout_marginTop="@dimen/dp24"
@@ -75,7 +75,7 @@
         app:layout_constraintHeight="wrap_content"
         app:layout_constraintTop_toTopOf="parent" 
         app:layout_constraintEnd_toStartOf="@id/xyzu_preference_preference_dropdown_appcomptimagebutton"
-        app:layout_constraintStart_toEndOf="@id/xyzu_preference_preference_additionalitem_contentframelayout"/>
+        app:layout_constraintStart_toEndOf="@id/xyzu_preference_preference_additionalitem_framelayout"/>
   
     <androidx.appcompat.widget.AppCompatImageButton
         style="@style/Xyzu.Preference.ImageButton"
@@ -119,10 +119,10 @@
         app:layout_constraintEnd_toEndOf="@android:id/title"
         app:layout_constraintStart_toStartOf="@android:id/title"
         app:layout_constraintTop_toBottomOf="@id/xyzu_preference_preference_valuesummary_appcompattextview"
-        app:layout_constraintBottom_toTopOf="@id/xyzu_preference_preference_additionalcontent_contentframelayout"/>
+        app:layout_constraintBottom_toTopOf="@id/xyzu_preference_preference_additionalcontent_framelayout"/>
   
-    <androidx.appcompat.widget.ContentFrameLayout
-        android:id="@+id/xyzu_preference_preference_additionalcontent_contentframelayout"
+    <android.widget.FrameLayout
+        android:id="@+id/xyzu_preference_preference_additionalcontent_framelayout"
         android:layout_width="@dimen/dp0"
         android:layout_height="@dimen/dp0"
         android:layout_marginBottom="@dimen/dp16"

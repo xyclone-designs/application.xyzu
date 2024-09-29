@@ -66,11 +66,11 @@ namespace Xyzu.Activities
 			};
 		}
 
-		protected virtual void OnReconfigure(object sender, string reconfiguretype) 
+		protected virtual void OnReconfigure(object? sender, string reconfiguretype) 
 		{
 			OnReconfigure(sender, null, reconfiguretype); 
 		}
-		protected virtual void OnReconfigure(object sender, IConfigurable? toolbarconfigurable, params string[] reconfiguretypes) 
+		protected virtual void OnReconfigure(object? sender, IConfigurable? toolbarconfigurable, params string[] reconfiguretypes) 
 		{
 			ReconfigureLayout();
 
@@ -131,7 +131,7 @@ namespace Xyzu.Activities
 		protected virtual void ReconfigureMenuItem() { }
 		protected virtual void ReconfigureToolbar() { }
 
-		public virtual void OnSettingsPropertyChanged(object sender, PropertyChangedEventArgs args) { }
+		public virtual void OnSettingsPropertyChanged(object? sender, PropertyChangedEventArgs args) { }
 
 		public interface IConfigurable
 		{

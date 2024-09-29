@@ -24,8 +24,10 @@ namespace TagLib
 			{
 				IEnumerable<PictureType> picturetypes = Enum
 					.GetValues(typeof(PictureType))
-					.Cast<PictureType>()
-					.Where(picturetype => !Order.Contains(picturetype));
+					.Cast<PictureType>();
+
+				if (Order is not null)
+					picturetypes = picturetypes.Where(picturetype => !Order.Contains(picturetype));
 
 				picturetypesorder = picturetypesorder.Concat(picturetypes);
 			}

@@ -125,7 +125,7 @@ namespace Xyzu.Views.Library
 					break;
 			}
 		}
-		protected override void PropertyChangedSettings(object sender, PropertyChangedEventArgs args)
+		protected override void PropertyChangedSettings(object? sender, PropertyChangedEventArgs args)
 		{
 			base.PropertyChangedSettings(sender, args);
 
@@ -208,13 +208,8 @@ namespace Xyzu.Views.Library
 
 			Refreshing = true;
 
-			IAsyncEnumerable<IAlbum> albums = Library.Albums.GetAlbums(
-				identifiers: null,
-				cancellationToken: Cancellationtoken,
-				retriever: LibraryItemView.Retrievers.GenerateAlbumRetriever(
-					albums: Albums.LibraryItemsAdapter.LibraryItems,
-					modelsortkey: Settings.SortKey,
-					librarylayouttype: Settings.LayoutType))
+			IAsyncEnumerable<IAlbum> albums = Library.Albums
+				.GetAlbums(null, Cancellationtoken)
 				.Sort(Settings.SortKey, Settings.IsReversed);
 
 			Albums.LibraryItemsAdapter.LibraryItems.Clear();
@@ -285,7 +280,7 @@ namespace Xyzu.Views.Library
 				default: return false;
 			}
 		}
-		public override void OnMenuOptionsAllClick(object sender, EventArgs args)
+		public override void OnMenuOptionsAllClick(object? sender, EventArgs args)
 		{
 			base.OnMenuOptionsAllClick(sender, args);
 

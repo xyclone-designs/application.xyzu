@@ -51,7 +51,7 @@ namespace Xyzu
 				OnIntent = OnIntent,
 			};
 		}
-		public IPlayerServiceBinder? ServiceBinder { get; private set; }
+		public IPlayerService.IBinder? ServiceBinder { get; private set; }
 		public ServiceConnectionChangedEventArgs.Events ServiceConnectionState
 		{
 			private set => _ServiceConnectionState = value;
@@ -106,7 +106,7 @@ namespace Xyzu
 			if (binder is null)
 				return;
 
-			ServiceBinder = binder as IPlayerServiceBinder ?? throw new ArgumentException(string.Format("'{0}' is not of type '{1}'", binder?.GetType(), typeof(IPlayerServiceBinder)));
+			ServiceBinder = binder as IPlayerService.IBinder ?? throw new ArgumentException(string.Format("'{0}' is not of type '{1}'", binder?.GetType(), typeof(IPlayerService.IBinder)));
 			ServiceBinder.ServiceConnection = this;
 			ServiceBinder.PlayerService.Componentname = name;
 			ServiceBinder.PlayerService.OnIntent += OnServiceIntent;
@@ -118,7 +118,7 @@ namespace Xyzu
 			SettingsNotificationPropertyChanged(this, new PropertyChangedEventArgs(_AllPropertyName));
 
 			ServiceConnectionChangedEventArgs serviceconnectionchangedeventargs =
-				new ServiceConnectionChangedEventArgs(ServiceConnectionState = ServiceConnectionChangedEventArgs.Events.Connected)
+				new (ServiceConnectionState = ServiceConnectionChangedEventArgs.Events.Connected)
 				{
 					Binder = binder,
 					Name = name,
@@ -127,7 +127,7 @@ namespace Xyzu
 			ServiceConnectionChangedAction?.Invoke(serviceconnectionchangedeventargs);
 			OnServiceConnectionChanged?.Invoke(this, serviceconnectionchangedeventargs);
 		}
-		public void OnServiceIntent(object sender, Intent intent)
+		public void OnServiceIntent(object? sender, Intent intent)
 		{
 			switch (intent.Action)
 			{
@@ -148,7 +148,7 @@ namespace Xyzu
 			ServiceBinder = null;
 
 			ServiceConnectionChangedEventArgs serviceconnectionchangedeventargs =
-				new ServiceConnectionChangedEventArgs(ServiceConnectionState = ServiceConnectionChangedEventArgs.Events.Disconnected)
+				new (ServiceConnectionState = ServiceConnectionChangedEventArgs.Events.Disconnected)
 				{
 					Name = name,
 				};

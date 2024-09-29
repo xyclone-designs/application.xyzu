@@ -1,7 +1,6 @@
 ﻿#nullable enable
 
 using Android.Content;
-using Android.Graphics;
 using AndroidX.ConstraintLayout.Motion.Widget;
 using AndroidX.ConstraintLayout.Widget;
 

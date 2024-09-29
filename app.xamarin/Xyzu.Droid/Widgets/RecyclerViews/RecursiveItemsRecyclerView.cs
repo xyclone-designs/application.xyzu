@@ -105,15 +105,15 @@ namespace Xyzu.Widgets.RecyclerViews
 				return ViewHolderOnCreate?.Invoke(parent, viewType) ?? new ViewHolder(new View(Context));
 			}
 
-			private void ViewHolder_OnCheckChange(object sender, RecyclerViewViewHolderDefault.ViewHolderEventArgs args)
+			private void ViewHolder_OnCheckChange(object? sender, RecyclerViewViewHolderDefault.ViewHolderEventArgs args)
 			{
 				ViewHolderOnCheckChange?.Invoke(args);
 			}																									 
-			private void ViewHolder_OnClick(object sender, RecyclerViewViewHolderDefault.ViewHolderEventArgs args)
+			private void ViewHolder_OnClick(object? sender, RecyclerViewViewHolderDefault.ViewHolderEventArgs args)
 			{
 				ViewHolderOnClick?.Invoke(args);
 			}							
-			private void ViewHolder_OnLongClick(object sender, RecyclerViewViewHolderDefault.ViewHolderEventArgs args)
+			private void ViewHolder_OnLongClick(object? sender, RecyclerViewViewHolderDefault.ViewHolderEventArgs args)
 			{
 				ViewHolderOnLongClick?.Invoke(args);
 			}						   

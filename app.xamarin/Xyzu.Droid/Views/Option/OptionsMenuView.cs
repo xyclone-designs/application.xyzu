@@ -143,8 +143,8 @@ namespace Xyzu.Views.Option
 			}
 		}
 
-		public Action<object, EventArgs>? OnAllClicked { get; set; }
-		public Action<object, EventArgs>? OnCancelClicked { get; set; }
+		public Action<object?, EventArgs>? OnAllClicked { get; set; }
+		public Action<object?, EventArgs>? OnCancelClicked { get; set; }
 		public Func<MenuOptions, bool>? OnMenuOptionClicked { get; set; }
 		
 		public int MenuOptionsGetItemCount()
@@ -177,11 +177,11 @@ namespace Xyzu.Views.Option
 			OnMenuOptionClicked?.Invoke(viewholder.MenuOption);
 		}
 
-		private void All_Click(object sender, EventArgs args)
+		private void All_Click(object? sender, EventArgs args)
 		{
 			OnAllClicked?.Invoke(sender, args);
 		}
-		private void Cancel_Click(object sender, EventArgs args)
+		private void Cancel_Click(object? sender, EventArgs args)
 		{
 			OnCancelClicked?.Invoke(sender, args);
 		}

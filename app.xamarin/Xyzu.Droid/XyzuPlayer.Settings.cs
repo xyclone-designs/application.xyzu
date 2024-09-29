@@ -188,7 +188,7 @@ namespace Xyzu
 			}
 		}
 
-		private void SettingsBassBoostPropertyChanged(object sender, PropertyChangedEventArgs args)
+		private void SettingsBassBoostPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			if (ServiceBinder?.PlayerService?.EffectsBassBoost != null && SettingsBassBoost?.CurrentPreset != null) switch (args.PropertyName)
 			{
@@ -208,7 +208,7 @@ namespace Xyzu
 				default: break;
 			}
 		}
-		private void SettingsEnvironmentalReverbPropertyChanged(object sender, PropertyChangedEventArgs args)
+		private void SettingsEnvironmentalReverbPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			if (ServiceBinder?.PlayerService?.EffectsEnvironmentalReverb != null && SettingsEnvironmentalReverb?.CurrentPreset != null) switch (args.PropertyName)
 			{
@@ -264,7 +264,7 @@ namespace Xyzu
 				default: break;
 			}
 		}
-		private void SettingsEqualiserPropertyChanged(object sender, PropertyChangedEventArgs args)
+		private void SettingsEqualiserPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			if (ServiceBinder?.PlayerService?.EffectsEqualizer != null && SettingsEqualiser?.CurrentPreset != null) switch (args.PropertyName)
 			{
@@ -282,7 +282,7 @@ namespace Xyzu
 				default: break;
 			}
 		}
-		private void SettingsLoudnessEnhancerPropertyChanged(object sender, PropertyChangedEventArgs args)
+		private void SettingsLoudnessEnhancerPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			if (ServiceBinder?.PlayerService?.EffectsLoudnessEnhancer != null && SettingsLoudnessEnhancer?.CurrentPreset != null) switch (args.PropertyName)
 			{
@@ -296,7 +296,7 @@ namespace Xyzu
 				default: break;
 			}
 		}									
-		private void SettingsNotificationPropertyChanged(object sender, PropertyChangedEventArgs args)
+		private void SettingsNotificationPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			if (ServiceBinder?.PlayerService is ExoPlayerService exoplayerservice)
 				switch (args.PropertyName)

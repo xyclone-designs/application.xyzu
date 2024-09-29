@@ -148,7 +148,7 @@ namespace Xyzu.Views.LibraryItem
 			if (Images is null)
 				return;
 
-			ILibrary.IIdentifiers? iidentifiers = true switch
+			ILibrary.IIdentifiers? identifiers = true switch
 			{
 				true when model is IGenre genre => ILibrary.IIdentifiers.FromGenre(genre),
 				true when model is IPlaylist playlist => ILibrary.IIdentifiers.FromPlaylist(playlist),
@@ -156,32 +156,19 @@ namespace Xyzu.Views.LibraryItem
 				_ => null,
 			};
 
-			if (iidentifiers is null)
+			if (identifiers is null)
 				await Images.SetToImageView(ImagesOperations ?? IImages.DefaultOperations.RoundedDownsample, Artwork, null, default, model);
 			else if (Library != null && Bitmap.Config.Argb8888 != null)
 			{
-				int index = 0;
-				Bitmap[] bitmaps = new Bitmap[4];
+				List<Bitmap> bitmaps = new(); 
+				IAsyncEnumerator<ISong> enumerator = Library.Songs.GetSongs(identifiers, default).GetAsyncEnumerator();
 
-				await foreach (ISong song in Library.Songs.GetSongs(
-					identifiers: iidentifiers,
-					cancellationToken: default,
-					retriever: new ISong.Default<bool>(false)
-					{
-						Artwork = new IImage.Default<bool>(true),
+				while (bitmaps.Count < 3 && await enumerator.MoveNextAsync())
+					if ((await Images.GetBitmapAsync(IImages.DefaultOperations.Downsample, null, enumerator.Current) ??
+						BitmapFactory.DecodeResource(Context?.Resources, Resource.Drawable.icon_xyzu)) is Bitmap bitmap) bitmaps.Add(bitmap);
 
-					})) if ((Images.GetBitmap(IImages.DefaultOperations.Downsample, null, song) ?? BitmapFactory.DecodeResource(Context?.Resources, Resource.Drawable.icon_xyzu)) is Bitmap songbitmap)
-					{
-						bitmaps[index] = songbitmap;
-
-						if (index == 3)
-							break;
-
-						index++;
-					}
-
-				if (await Task.Run(() => Images.MergeBitmaps(bitmaps[0], bitmaps[1], bitmaps[2], bitmaps[3])) is Bitmap bitmap)
-					await Images.SetToImageView(ImagesOperations ?? IImages.DefaultOperations.RoundedDownsample, Artwork, null, default, bitmap);
+				if (Images.MergeBitmaps(bitmaps[0], bitmaps[1], bitmaps[2], bitmaps[3]) is Bitmap mergedbitmap) await Images
+					.SetToImageView(ImagesOperations ?? IImages.DefaultOperations.RoundedDownsample, Artwork, null, default, mergedbitmap);
 			}
 		}
 	}

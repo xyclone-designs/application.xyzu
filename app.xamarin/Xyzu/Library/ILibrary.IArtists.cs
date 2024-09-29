@@ -10,13 +10,13 @@ namespace Xyzu.Library
 	{
 		public interface IArtists
 		{
-			IArtist? Random(IIdentifiers? identifiers = null, IArtist<bool>? retriever = null);
-			Task<IArtist?> Random(IIdentifiers? identifiers = null, IArtist<bool>? retriever = null, CancellationToken cancellationToken = default);
+			IArtist? Random(IIdentifiers? identifiers = null);
+			Task<IArtist?> Random(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
-			IArtist? GetArtist(IIdentifiers? identifiers = null, IArtist<bool>? retriever = null);
-			Task<IArtist?> GetArtist(IIdentifiers? identifiers = null, IArtist<bool>? retriever = null, CancellationToken cancellationToken = default);
-			IEnumerable<IArtist> GetArtists(IIdentifiers? identifiers = null, IArtist<bool>? retriever = null);
-			IAsyncEnumerable<IArtist> GetArtists(IIdentifiers? identifiers = null, IArtist<bool>? retriever = null, CancellationToken cancellationToken = default);
+			IArtist? GetArtist(IIdentifiers? identifiers = null);
+			Task<IArtist?> GetArtist(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
+			IEnumerable<IArtist> GetArtists(IIdentifiers? identifiers = null);
+			IAsyncEnumerable<IArtist> GetArtists(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
 			IArtist? PopulateArtist(IArtist? artist);
 			Task<IArtist?> PopulateArtist(IArtist? artist, CancellationToken cancellationToken = default);

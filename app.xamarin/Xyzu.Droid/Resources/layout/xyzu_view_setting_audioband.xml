@@ -33,10 +33,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/xyzu_view_setting_audioband_title_appcompattextview"
-        app:layout_constraintBottom_toTopOf="@id/xyzu_view_setting_audioband_value_frame_contentframelayout"  />
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_setting_audioband_value_frame_framelayout"  />
 
-    <androidx.appcompat.widget.ContentFrameLayout
-        android:id="@+id/xyzu_view_setting_audioband_value_frame_contentframelayout"
+    <android.widget.FrameLayout
+        android:id="@+id/xyzu_view_setting_audioband_value_frame_framelayout"
         android:layout_width="@dimen/dp64"
         android:layout_height="@dimen/dp280" 
 
@@ -54,7 +54,7 @@
             android:layout_gravity="center"
             android:rotation="270" />
 
-    </androidx.appcompat.widget.ContentFrameLayout>
+    </android.widget.FrameLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/Xyzu.View.Setting.AudioBand.Text.Min"
@@ -68,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/xyzu_view_setting_audioband_footer_appcompattextview"
-        app:layout_constraintTop_toBottomOf="@id/xyzu_view_setting_audioband_value_frame_contentframelayout" />
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_setting_audioband_value_frame_framelayout" />
     
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/Xyzu.View.Setting.AudioBand.Text.Footer"

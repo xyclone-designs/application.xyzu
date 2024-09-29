@@ -193,7 +193,6 @@
   
   <!-- Xyzu.Material.NavigationView -->
   <style name="Xyzu.Material.NavigationView" parent="Widget.MaterialComponents.NavigationView">
-    <item name="android:background">@drawable/shape_cornered_right</item>
     <item name="android:backgroundTint">@color/ColorSurface</item>
     <item name="android:choiceMode">singleChoice</item>
     <item name="android:clipChildren">false</item>
@@ -203,9 +202,8 @@
     <item name="android:theme">@style/Xyzu.Material.NavigationView.Theme</item>
 
     <item name="app:elevation">@dimen/dp16</item>
-    <item name="app:itemBackground">@null</item>
     <item name="app:itemIconPadding">@dimen/dp16</item>
-    <item name="app:itemHorizontalPadding">@dimen/dp32</item>
+    <item name="app:itemHorizontalPadding">@dimen/dp16</item>
     <item name="app:itemIconSize">@dimen/dp32</item>
     <item name="app:itemIconTint">@color/selector_list_item</item>
     <item name="app:itemMaxLines">1</item>

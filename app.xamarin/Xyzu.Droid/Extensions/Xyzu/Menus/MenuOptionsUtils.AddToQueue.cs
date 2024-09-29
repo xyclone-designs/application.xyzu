@@ -26,7 +26,7 @@ namespace Xyzu.Menus
 			foreach (IAlbum album in albums)
 			{
 				IEnumerable<ISong> songs = XyzuLibrary.Instance.Songs
-					.GetSongs(identifiers = ILibrary.IIdentifiers.FromAlbum(album), retriever);
+					.GetSongs(identifiers = ILibrary.IIdentifiers.FromAlbum(album));
 
 				foreach (ISong song in songs)
 					yield return IQueueItem.FromSong(song, queueitem =>
@@ -47,7 +47,7 @@ namespace Xyzu.Menus
 			foreach (IArtist artist in artists)
 			{
 				IEnumerable<ISong> songs = XyzuLibrary.Instance.Songs
-					.GetSongs(identifiers = ILibrary.IIdentifiers.FromArtist(artist), retriever);
+					.GetSongs(identifiers = ILibrary.IIdentifiers.FromArtist(artist));
 
 				foreach (ISong song in songs)
 					yield return IQueueItem.FromSong(song, queueitem =>
@@ -68,7 +68,7 @@ namespace Xyzu.Menus
 			foreach (IGenre genre in genres)
 			{
 				IEnumerable<ISong> songs = XyzuLibrary.Instance.Songs
-					.GetSongs(identifiers = ILibrary.IIdentifiers.FromGenre(genre), retriever);
+					.GetSongs(identifiers = ILibrary.IIdentifiers.FromGenre(genre));
 
 				foreach (ISong song in songs)
 					yield return IQueueItem.FromSong(song, queueitem =>
@@ -88,7 +88,7 @@ namespace Xyzu.Menus
 			foreach (IPlaylist playlist in playlists)
 			{
 				IEnumerable<ISong> songs = XyzuLibrary.Instance.Songs
-					.GetSongs(identifiers = ILibrary.IIdentifiers.FromPlaylist(playlist), retriever);
+					.GetSongs(identifiers = ILibrary.IIdentifiers.FromPlaylist(playlist));
 
 				foreach (ISong song in songs)
 					yield return IQueueItem.FromSong(song, queueitem =>

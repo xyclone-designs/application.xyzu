@@ -10,13 +10,13 @@ namespace Xyzu.Library
 	{
 		public interface IGenres
 		{
-			IGenre? Random(IIdentifiers? identifiers = null, IGenre<bool>? retriever = null);
-			Task<IGenre?> Random(IIdentifiers? identifiers = null, IGenre<bool>? retriever = null, CancellationToken cancellationToken = default);
+			IGenre? Random(IIdentifiers? identifiers = null);
+			Task<IGenre?> Random(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
-			IGenre? GetGenre(IIdentifiers? identifiers = null, IGenre<bool>? retriever = null);
-			Task<IGenre?> GetGenre(IIdentifiers? identifiers = null, IGenre<bool>? retriever = null, CancellationToken cancellationToken = default);
-			IEnumerable<IGenre> GetGenres(IIdentifiers? identifiers = null, IGenre<bool>? retriever = null);
-			IAsyncEnumerable<IGenre> GetGenres(IIdentifiers? identifiers = null, IGenre<bool>? retriever = null, CancellationToken cancellationToken = default);
+			IGenre? GetGenre(IIdentifiers? identifiers = null);
+			Task<IGenre?> GetGenre(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
+			IEnumerable<IGenre> GetGenres(IIdentifiers? identifiers = null);
+			IAsyncEnumerable<IGenre> GetGenres(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
 			IGenre? PopulateGenre(IGenre? genre);
 			Task<IGenre?> PopulateGenre(IGenre? genre, CancellationToken cancellationToken = default);

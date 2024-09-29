@@ -10,13 +10,13 @@ namespace Xyzu.Library
 	{
 		public interface IAlbums
 		{
-			IAlbum? Random(IIdentifiers? identifiers = null, IAlbum<bool>? retriever = null);
-			Task<IAlbum?> Random(IIdentifiers? identifiers = null, IAlbum<bool>? retriever = null, CancellationToken cancellationToken = default);
+			IAlbum? Random(IIdentifiers? identifiers = null);
+			Task<IAlbum?> Random(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
-			IAlbum? GetAlbum(IIdentifiers? identifiers = null, IAlbum<bool>? retriever = null);
-			Task<IAlbum?> GetAlbum(IIdentifiers? identifiers = null, IAlbum<bool>? retriever = null, CancellationToken cancellationToken = default);
-			IEnumerable<IAlbum> GetAlbums(IIdentifiers? identifiers = null, IAlbum<bool>? retriever = null);
-			IAsyncEnumerable<IAlbum> GetAlbums(IIdentifiers? identifiers = null, IAlbum<bool>? retriever = null, CancellationToken cancellationToken = default);
+			IAlbum? GetAlbum(IIdentifiers? identifiers = null);
+			Task<IAlbum?> GetAlbum(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
+			IEnumerable<IAlbum> GetAlbums(IIdentifiers? identifiers = null);
+			IAsyncEnumerable<IAlbum> GetAlbums(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
 			IAlbum? PopulateAlbum(IAlbum? album);
 			Task<IAlbum?> PopulateAlbum(IAlbum? album, CancellationToken cancellationToken = default);

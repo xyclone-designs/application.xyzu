@@ -227,6 +227,7 @@ namespace Xyzu.Fragments.Settings.Files
 
 				case true when
 				preference == MimetypesPreference &&
+				MimetypesPreference.Values is not null &&
 				Mimetypes.Select(mimetype => mimetype.ToString()).SequenceEqual(MimetypesPreference.Values) is false:
 					Mimetypes = MimetypesPreference.Values
 						.Select(mimetype => Enum.TryParse(mimetype, out MimeTypes outmimetypes) ? outmimetypes : new MimeTypes?())
@@ -237,20 +238,12 @@ namespace Xyzu.Fragments.Settings.Files
 			}
 		}
 
-		private void DirectoriesPreferenceOnNeutralButton(object sender, EventArgs args) 
+		private void DirectoriesPreferenceOnNeutralButton(object? sender, EventArgs args) 
 		{
 			AppCompatActivity?.RegisterForActivityResult((contract, callback) =>
 			{
-				contract.CreateIntentAction = (context, input) =>
-				{
-					Intent actionpickcontent = new Intent(Intent.ActionOpenDocumentTree);
-
-					return actionpickcontent;
-				};
-				contract.ParseResultAction = (resultcode, intent) =>
-				{
-					return intent;
-				};
+				contract.ParseResultAction = (resultcode, intent) => intent;
+				contract.CreateIntentAction = (context, input) => new (Intent.ActionOpenDocumentTree);
 				callback.OnActivityResultAction = result =>
 				{
 					Intent? intentresult = result as Intent;
@@ -260,7 +253,7 @@ namespace Xyzu.Fragments.Settings.Files
 						return;
 
 					string path = SystemIOPath.Combine(
-						AndroidOSEnvironment.StorageDirectory.AbsolutePath,
+						AndroidOSEnvironment.RootDirectory.AbsolutePath,
 						documenturi.PathSegments[1]
 							.Replace(':', '/')
 							.Replace("primary", "emulated/0"));
@@ -274,7 +267,7 @@ namespace Xyzu.Fragments.Settings.Files
 
 			})?.Launch(null, null);
 		}
-		private void DirectoriesPreferenceOnPositiveButton(object sender, EventArgs args) { }
+		private void DirectoriesPreferenceOnPositiveButton(object? sender, EventArgs args) { }
 
 		private void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
 		{
@@ -297,7 +290,7 @@ namespace Xyzu.Fragments.Settings.Files
 
 			viewholder.ItemView.Directory = file;
 			viewholder.ItemView.DirectoryLevel = viewholder.Parent.ParentLevel + 1 ?? 0;
-			viewholder.ItemView.DirectoryTitleText = file.AbsolutePath == IFilesSettingsDroid.IntenalStorageFilespath0 ? "Internal" : null;
+			viewholder.ItemView.DirectoryTitleText = file.AbsolutePath == IFilesSettingsDroid.IntenalStorageEmulated0 ? "Internal" : null;
 			viewholder.ItemView.DirectoryHasChildren = viewholder.ItemChildrenAdapter.Directories?.Any() ?? false;
 			viewholder.ItemView.DirectoryIsSelected.Checked = _FilesSettingsDirectoryPredicate?.Invoke(file) ?? true;
 			viewholder.ItemView.DirectoryIsSelectedCheckChange = (sender, args) =>
@@ -311,7 +304,7 @@ namespace Xyzu.Fragments.Settings.Files
 			};
 		}
 
-		public  class DirectoriesRecyclerView 
+		public class DirectoriesRecyclerView 
 		{
 			public class Adapter : RecursiveItemsRecyclerView.Adapter
 			{

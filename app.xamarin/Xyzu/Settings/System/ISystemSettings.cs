@@ -62,7 +62,7 @@ namespace Xyzu.Settings.System
 				if (Exception is null)
 					return stringbuilder.AppendLine("Exception: null").ToString();
 
-				Exception exception = Exception;
+				Exception? exception = Exception;
 
 				while (exception is not null)
 				{
@@ -99,10 +99,11 @@ namespace Xyzu.Settings.System
 			{
 				using StringReader stringreader = new (text);
 
-				string id = stringreader.ReadLine() [(IdPrefix.Length - 1) ..];
-				string date = stringreader.ReadLine() [(DatePrefix.Length - 1) ..];
+				string id = stringreader.ReadLine()?[(IdPrefix.Length - 1) ..] ?? string.Empty;
+				string date = stringreader.ReadLine()?[(DatePrefix.Length - 1) ..] ?? string.Empty;
+				DateTime datetime = DateTime.TryParse(date, out DateTime _datetime) ? _datetime : DateTime.Now;
 
-				return new Default(id, DateTime.Parse(date));
+				return new Default(id, datetime);
 			}
 			public static Default FromException(Exception exception)
 			{

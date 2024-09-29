@@ -23,7 +23,7 @@ namespace Xyzu.Menus
 		private static IEnumerable<string> PlaylistNames()
 		{
 			return XyzuLibrary.Instance.Playlists
-				.GetPlaylists(null, null)
+				.GetPlaylists(null)
 				.Select(playlist => playlist.Name)
 				.OfType<string>()
 				.Distinct()
@@ -32,39 +32,24 @@ namespace Xyzu.Menus
 		private static bool UpdatePlaylist(string? playlistname, IEnumerable<IAlbum> albums)
 		{
 			IEnumerable<string> songids = XyzuLibrary.Instance.Songs
-				.GetSongs(
-					identifiers: ILibrary.IIdentifiers.FromAlbums(albums),
-					retriever: new ISong.Default<bool>(false)
-					{
-						Id = true
-
-					}).Select(song => song.Id);
+				.GetSongs(ILibrary.IIdentifiers.FromAlbums(albums))
+				.Select(song => song.Id);
 
 			return UpdatePlaylist(playlistname, songids);
 		}
 		private static bool UpdatePlaylist(string? playlistname, IEnumerable<IArtist> artists)
 		{
 			IEnumerable<string> songids = XyzuLibrary.Instance.Songs
-				.GetSongs(
-					identifiers: ILibrary.IIdentifiers.FromArtists(artists),
-					retriever: new ISong.Default<bool>(false)
-					{
-						Id = true
-
-					}).Select(song => song.Id);
+				.GetSongs(ILibrary.IIdentifiers.FromArtists(artists))
+				.Select(song => song.Id);
 
 			return UpdatePlaylist(playlistname, songids);
 		}
 		private static bool UpdatePlaylist(string? playlistname, IEnumerable<IGenre> genres)
 		{
 			IEnumerable<string> songids = XyzuLibrary.Instance.Songs
-				.GetSongs(
-					identifiers: ILibrary.IIdentifiers.FromGenres(genres),
-					retriever: new ISong.Default<bool>(false)
-					{
-						Id = true
-
-					}).Select(song => song.Id);
+				.GetSongs(ILibrary.IIdentifiers.FromGenres(genres))
+				.Select(song => song.Id);
 
 			return UpdatePlaylist(playlistname, songids);
 		}
@@ -80,12 +65,10 @@ namespace Xyzu.Menus
 				return false;
 
 			IPlaylist? playlist = XyzuLibrary.Instance.Playlists
-				.GetPlaylist(
-					retriever: null,
-					identifiers: new ILibrary.IIdentifiers.Default
-					{
-						PlaylistNames = new string[1] { playlistname }
-					});
+				.GetPlaylist(new ILibrary.IIdentifiers.Default
+				{
+					PlaylistNames = new string[1] { playlistname }
+				});
 
 			if (playlist is null)
 				return false;
@@ -99,7 +82,6 @@ namespace Xyzu.Menus
 
 			return XyzuLibrary.Instance.Playlists.UpdatePlaylist(playlist, editedplaylist);
 		}
-
 
 		public static Func<string?, bool> PlaylistOnCreate(OptionsCreateAndViewView optionscreateandviewview, VariableContainer? variables)
 		{

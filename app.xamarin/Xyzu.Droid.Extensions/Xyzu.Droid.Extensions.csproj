@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <TargetFramework>net8.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>26</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <LangVersion>10.0</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <SingleProject>true</SingleProject>
+    <ApplicationId>co.za.xyclonedesigns.xyzu.extensions</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-arm\*.*" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout" Version="2.1.4.15" />
+    <PackageReference Include="Xamarin.AndroidX.Palette" Version="1.0.0.28" />
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.3.2.7" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Xyzu\Xyzu.csproj" />
+  </ItemGroup>
+  
+</Project>

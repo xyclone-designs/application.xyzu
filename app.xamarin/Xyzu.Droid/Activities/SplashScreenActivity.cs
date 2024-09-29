@@ -24,7 +24,6 @@ using Xyzu.Settings.Files;
 using Xyzu.Settings.System;
 using Xyzu.Settings.UserInterface.Library;
 
-using AndroidOSEnvironment = Android.OS.Environment;
 using XyzuResource = Xyzu.Droid.Resource;
 using ExoPlayerService = Xyzu.Player.Exoplayer.ExoPlayerService;
 
@@ -58,14 +57,14 @@ namespace Xyzu.Activities
 			if (permissionchecked is false)
 				permissionchecked = 
 					CheckCallingPermission(Manifest.Permission.ReadExternalStorage) is Permission.Granted &&
-					CheckCallingPermission(Manifest.Permission.ManageExternalStorage) is Permission.Granted;
+					CheckCallingPermission(Manifest.Permission.WriteExternalStorage) is Permission.Granted;
 
 			if (permissionchecked is false)
 			{
 				RequestPermissions(requestCode: 0, permissions: new string[]
 				{
 					Manifest.Permission.ReadExternalStorage,
-					Manifest.Permission.ManageExternalStorage,
+					Manifest.Permission.WriteExternalStorage,
 				});
 
 				return;
@@ -139,18 +138,17 @@ namespace Xyzu.Activities
 		}
 		public void InitLibrary(XyzuLibrary xyzulibrary)
 		{
-			ISong? OnGetSong(string? songid)
+			Task<ISong?> OnGetSong(string? songid)
 			{
 				if (songid is null)
-					return null;
+					return Task.FromResult<ISong?>(null);
 
-				return xyzulibrary.Songs.GetSong(
-					retriever: null,
-					identifiers: new ILibrary.IIdentifiers.Default
-					{
-						SongIds = Enumerable.Empty<string>()
-							.Append(songid)
-					});
+				return xyzulibrary.Songs.GetSong(new ILibrary.IIdentifiers.Default
+				{
+					SongIds = Enumerable.Empty<string>()
+						.Append(songid)
+
+				}, default);
 			}
 
 			xyzulibrary.Settings = new ILibrary.ISettings.Default
@@ -158,34 +156,38 @@ namespace Xyzu.Activities
 				Directories = FilesSettings?.Directories,
 				Mimetypes = FilesSettings?.Mimetypes,
 			};
-			xyzulibrary.OnCreateAction = new Library.TagLibSharp.TagLibSharpActions.OnCreate
+
+			xyzulibrary.Actions = new ILibrary.IActions.Container
 			{
-				Paths = FilesSettings?.Files()
-					.ToDictionary(file => file.AbsolutePath, file => file.AbsolutePath),
-			};
-			xyzulibrary.OnDeleteActions = new List<ILibrary.IOnDeleteActions>
-			{
-				new Library.TagLibSharp.TagLibSharpActions.OnDelete { },
-				new Library.MediaStore.MediaStoreActions.OnDelete { Context = xyzulibrary.Context },
-				new Library.MediaMetadata.MediaMetadataActions.OnDelete { },
-				new Library.ID3.ID3Actions.OnDelete { },
-				new Library.IO.IOActions.OnDelete { },
-			};
-			xyzulibrary.OnRetrieveActions = new List<ILibrary.IOnRetrieveActions>
-			{
-				new Library.TagLibSharp.TagLibSharpActions.OnRetrieve { },
-				new Library.MediaStore.MediaStoreActions.OnRetrieve { Context = xyzulibrary.Context },
-				new Library.MediaMetadata.MediaMetadataActions.OnRetrieve { Context = xyzulibrary.Context },
-				new Library.ID3.ID3Actions.OnRetrieve { },
-				new Library.IO.IOActions.OnRetrieve { },
-			};
-			xyzulibrary.OnUpdateActions = new List<ILibrary.IOnUpdateActions>
-			{
-				new Library.TagLibSharp.TagLibSharpActions.OnUpdate { OnGetSong = OnGetSong },
-				new Library.MediaStore.MediaStoreActions.OnUpdate { OnGetSong = OnGetSong, Context = xyzulibrary.Context },
-				new Library.ID3.ID3Actions.OnUpdate { OnGetSong = OnGetSong },
-				new Library.MediaMetadata.MediaMetadataActions.OnUpdate { OnGetSong = OnGetSong },
-				new Library.IO.IOActions.OnUpdate { OnGetSong = OnGetSong },
+				OnCreate = new Library.TagLibSharp.TagLibSharpActions.OnCreate
+				{
+					Paths = FilesSettings?.Files()
+						.ToDictionary(file => file.AbsolutePath, file => file.AbsolutePath),
+				},
+				OnDelete = new List<ILibrary.IOnDeleteActions>
+				{
+					new Library.TagLibSharp.TagLibSharpActions.OnDelete { },
+					new Library.MediaStore.MediaStoreActions.OnDelete { Context = xyzulibrary.Context },
+					new Library.MediaMetadata.MediaMetadataActions.OnDelete { },
+					new Library.ID3.ID3Actions.OnDelete { },
+					new Library.IO.IOActions.OnDelete { },
+				},
+				OnRetrieve = new List<ILibrary.IOnRetrieveActions>
+				{
+					new Library.TagLibSharp.TagLibSharpActions.OnRetrieve { },
+					new Library.MediaStore.MediaStoreActions.OnRetrieve { Context = xyzulibrary.Context },
+					new Library.MediaMetadata.MediaMetadataActions.OnRetrieve { Context = xyzulibrary.Context },
+					new Library.ID3.ID3Actions.OnRetrieve { },
+					new Library.IO.IOActions.OnRetrieve { },
+				},
+				OnUpdate = new List<ILibrary.IOnUpdateActions>
+				{
+					new Library.TagLibSharp.TagLibSharpActions.OnUpdate { OnGetSong = OnGetSong },
+					new Library.MediaStore.MediaStoreActions.OnUpdate { OnGetSong = OnGetSong, Context = xyzulibrary.Context },
+					new Library.ID3.ID3Actions.OnUpdate { OnGetSong = OnGetSong },
+					new Library.MediaMetadata.MediaMetadataActions.OnUpdate { OnGetSong = OnGetSong },
+					new Library.IO.IOActions.OnUpdate { OnGetSong = OnGetSong },
+				},
 			};
 
 			xyzulibrary.ScannerServiceScan(false);
@@ -197,8 +199,8 @@ namespace Xyzu.Activities
 				switch (args.Event)
 				{
 					case ServiceConnectionChangedEventArgs.Events.Connected when xyzuplayer.ServiceBinder != null:
-						xyzuplayer.ServiceBinder.PlayerService.Options ??= new IPlayerServiceOptions.Default();
-						xyzuplayer.ServiceBinder.PlayerService.Options.Notification = new IPlayerServiceOptions.INotificationOptions.Default
+						xyzuplayer.ServiceBinder.PlayerService.Options ??= new IPlayerService.IOptions.Default();
+						xyzuplayer.ServiceBinder.PlayerService.Options.Notification = new IPlayerService.IOptions.INotificationOptions.Default
 						{
 							Id = XyzuResource.String.playerserviceoptions_notificationoptions_id,
 							ChannelName = XyzuResource.String.playerserviceoptions_notificationoptions_channel_name,
@@ -221,17 +223,17 @@ namespace Xyzu.Activities
 							ContentIntent = PendingIntent.GetActivity(
 								requestCode: 0,
 								context: xyzuplayer.Context,
-								flags: PendingIntentFlags.Mutable,
+								flags: PendingIntentFlags.UpdateCurrent,
 								intent: XyzuSettings.Utils.MainActivityIntent(this, null).PutExtra(LibraryActivity.IntentKeys.IsFromNotification, true)),
 							Icons = new Dictionary<string, int>
 							{
-								{ IPlayerServiceOptions.INotificationOptions.IconKeys.SmallIcon, XyzuResource.Drawable.icon_xyzu },
-								{ IPlayerServiceOptions.INotificationOptions.IconKeys.Destroy, XyzuResource.Drawable.icon_general_x },
-								{ IPlayerServiceOptions.INotificationOptions.IconKeys.Next, XyzuResource.Drawable.icon_player_skip_foward },
-								{ IPlayerServiceOptions.INotificationOptions.IconKeys.Pause, XyzuResource.Drawable.icon_player_pause },
-								{ IPlayerServiceOptions.INotificationOptions.IconKeys.Play, XyzuResource.Drawable.icon_player_play },
-								{ IPlayerServiceOptions.INotificationOptions.IconKeys.Previous, XyzuResource.Drawable.icon_player_skip_backward },
-								{ IPlayerServiceOptions.INotificationOptions.IconKeys.Stop, XyzuResource.Drawable.icon_player_stop },
+								{ IPlayerService.IOptions.INotificationOptions.IconKeys.SmallIcon, XyzuResource.Drawable.icon_xyzu },
+								{ IPlayerService.IOptions.INotificationOptions.IconKeys.Destroy, XyzuResource.Drawable.icon_general_x },
+								{ IPlayerService.IOptions.INotificationOptions.IconKeys.Next, XyzuResource.Drawable.icon_player_skip_foward },
+								{ IPlayerService.IOptions.INotificationOptions.IconKeys.Pause, XyzuResource.Drawable.icon_player_pause },
+								{ IPlayerService.IOptions.INotificationOptions.IconKeys.Play, XyzuResource.Drawable.icon_player_play },
+								{ IPlayerService.IOptions.INotificationOptions.IconKeys.Previous, XyzuResource.Drawable.icon_player_skip_backward },
+								{ IPlayerService.IOptions.INotificationOptions.IconKeys.Stop, XyzuResource.Drawable.icon_player_stop },
 							},
 						};
 
@@ -253,14 +255,6 @@ namespace Xyzu.Activities
 									identifiers: new ILibrary.IIdentifiers.Default
 									{
 										SongIds = new string[] { queuesong.PrimaryId },
-									},
-									retriever: new ISong.Default<bool>(false)
-									{
-										Album = true,
-										Artist = true,
-										Filepath = true,
-										Title = true,
-										Uri = true,
 									});
 
 								return song;
@@ -278,18 +272,11 @@ namespace Xyzu.Activities
 		{
 			if (FilesSettings?.Directories.Any() is false)
 			{
-				IEnumerable<string> defaultdirectories = Enumerable.Empty<string>()
-					.Append(AndroidOSEnvironment.DirectoryAudiobooks)
-					.Append(AndroidOSEnvironment.DirectoryDownloads)
-					.Append(AndroidOSEnvironment.DirectoryMusic)
-					.Append(AndroidOSEnvironment.DirectoryPodcasts)
-					.OfType<string>();
-
 				foreach (File storage in IFilesSettingsDroid.Storages())
-					foreach (string defaultdirectory in defaultdirectories)
+					foreach (string defaultdirectory in IFilesSettingsDroid.DefaultDirectories())
 					{
 						string defaultdirectorypath = string.Format("{0}/{1}", storage.AbsolutePath, defaultdirectory);
-						File file = new File(defaultdirectorypath);
+						File file = new (defaultdirectorypath);
 
 						if (file.Exists() && file.IsDirectory)
 							FilesSettings.Directories = FilesSettings.Directories.Append(file.AbsolutePath);

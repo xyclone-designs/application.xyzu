@@ -8,7 +8,6 @@ using AndroidX.Preference;
 using AndroidX.Preference.Internal;
 
 using System;
-using System.Linq;
 
 using Xyzu.Droid;
 
@@ -20,15 +19,15 @@ namespace Xyzu.Views.Preference
 		{
 			public const int Layout = Resource.Layout.xyzu_preference_preference;
 
-			public const int IconFrame_ContentFrameLayout = Android.Resource.Id.IconFrame;
-			public const int Icon_PreferenceImageView = Android.Resource.Id.Icon;
+			public const int IconFrame_FrameLayout = Android.Resource.Id.IconFrame;
+			public const int Icon_AppCompatImageView = Android.Resource.Id.Icon;
 			public const int Title_AppCompatTextView = Android.Resource.Id.Title;
-			public const int AdditionalItem_ContentFrameLayout = Resource.Id.xyzu_preference_preference_additionalitem_contentframelayout;
+			public const int AdditionalItem_FrameLayout = Resource.Id.xyzu_preference_preference_additionalitem_framelayout;
 			public const int Checkbox_SwitchCompat = Resource.Id.switchWidget;
 			public const int Dropdown_AppCompatImageView = Resource.Id.xyzu_preference_preference_dropdown_appcomptimagebutton;
 			public const int ValueSummary_AppCompatTextView = Resource.Id.xyzu_preference_preference_valuesummary_appcompattextview;
 			public const int Summary_AppCompatTextView = Android.Resource.Id.Summary;
-			public const int AdditionalContent_ContentFrameLayout = Resource.Id.xyzu_preference_preference_additionalcontent_contentframelayout;
+			public const int AdditionalContent_FrameLayout = Resource.Id.xyzu_preference_preference_additionalcontent_framelayout;
 		}
 
 		private bool _Expanded = false;
@@ -36,15 +35,15 @@ namespace Xyzu.Views.Preference
 		private bool _IsSwitch = false;
 
 		private ConstraintLayout? _ViewContainer;
-		private ContentFrameLayout? _ViewIconFrame;
-		private PreferenceImageView? _ViewIcon;
+		private FrameLayout? _ViewIconFrame;
+		private AppCompatImageView? _ViewIcon;
 		private AppCompatTextView? _ViewTitle;
-		private ContentFrameLayout? _ViewAdditionalItem;
+		private FrameLayout? _ViewAdditionalItem;
 		private AppCompatImageButton? _ViewDropDown;
 		private SwitchCompat? _ViewSwitch;
 		private AppCompatTextView? _ViewValueSummary;
 		private AppCompatTextView? _ViewSummary;
-		private ContentFrameLayout? _ViewAdditionalContent;
+		private FrameLayout? _ViewAdditionalContent;
 		private View? _ViewAdditionalContentView;
 
 		public ConstraintLayout? ViewContainer 
@@ -52,12 +51,12 @@ namespace Xyzu.Views.Preference
 			get => _ViewContainer;
 			set => _ViewContainer = value; 
 		}
-		public ContentFrameLayout? ViewIconFrame 
+		public FrameLayout? ViewIconFrame 
 		{ 
 			get => _ViewIconFrame;
 			set => _ViewIconFrame = value; 
 		}
-		public PreferenceImageView? ViewIcon 
+		public AppCompatImageView? ViewIcon 
 		{ 
 			get => _ViewIcon;
 			set => _ViewIcon = value; 
@@ -67,7 +66,7 @@ namespace Xyzu.Views.Preference
 			get => _ViewTitle;
 			set => _ViewTitle = value; 
 		}
-		public ContentFrameLayout? ViewAdditionalItem 
+		public FrameLayout? ViewAdditionalItem 
 		{ 
 			get => _ViewAdditionalItem;
 			set => _ViewAdditionalItem = value; 
@@ -92,7 +91,7 @@ namespace Xyzu.Views.Preference
 			get => _ViewSummary;
 			set => _ViewSummary = value; 
 		}
-		public ContentFrameLayout? ViewAdditionalContent 
+		public FrameLayout? ViewAdditionalContent 
 		{ 
 			get => _ViewAdditionalContent;
 			set
@@ -150,15 +149,15 @@ namespace Xyzu.Views.Preference
 		public void OnBindViewHolder(PreferenceViewHolder holder)
 		{
 			ViewContainer = holder.ItemView as ConstraintLayout;
-			ViewIconFrame = holder.FindViewById(Ids.IconFrame_ContentFrameLayout) as ContentFrameLayout;
-			ViewIcon = holder.FindViewById(Ids.Icon_PreferenceImageView) as PreferenceImageView;
+			ViewIconFrame = holder.FindViewById(Ids.IconFrame_FrameLayout) as FrameLayout;
+			ViewIcon = holder.FindViewById(Ids.Icon_AppCompatImageView) as AppCompatImageView;
 			ViewTitle = holder.FindViewById(Ids.Title_AppCompatTextView) as AppCompatTextView;
-			ViewAdditionalItem = holder.FindViewById(Ids.AdditionalItem_ContentFrameLayout) as ContentFrameLayout;
+			ViewAdditionalItem = holder.FindViewById(Ids.AdditionalItem_FrameLayout) as FrameLayout;
 			ViewSwitch = holder.FindViewById(Ids.Checkbox_SwitchCompat) as SwitchCompat;
 			ViewDropDown = holder.FindViewById(Ids.Dropdown_AppCompatImageView) as AppCompatImageButton;
 			ViewValueSummary = holder.FindViewById(Ids.ValueSummary_AppCompatTextView) as AppCompatTextView;
 			ViewSummary = holder.FindViewById(Ids.Summary_AppCompatTextView) as AppCompatTextView;
-			ViewAdditionalContent = holder.FindViewById(Ids.AdditionalContent_ContentFrameLayout) as ContentFrameLayout;
+			ViewAdditionalContent = holder.FindViewById(Ids.AdditionalContent_FrameLayout) as FrameLayout;
 		}
 		public void SetIsDropDown(bool isdropdown, Action<View?>? ondropdownclick)
 		{

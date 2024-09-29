@@ -100,7 +100,7 @@ namespace Xyzu.Views.InfoEdit
 		public AppCompatTextView? AlbumTitle_Title { get; protected set; }
 		public AppCompatTextView? AlbumArtist_Title { get; protected set; }
 		public AppCompatTextView? AlbumReleaseDate_Title { get; protected set; }
-		public Action<InfoEditAlbumView, object, EventArgs>? AlbumArtworkClick { get; set; }
+		public Action<InfoEditAlbumView, object?, EventArgs>? AlbumArtworkClick { get; set; }
 
 		protected override void OnAttachedToWindow()
 		{
@@ -117,7 +117,7 @@ namespace Xyzu.Views.InfoEdit
 				AlbumArtwork.Click += OnAlbumArtworkClick;
 		}
 
-		protected void OnAlbumArtworkClick(object sender, EventArgs args)
+		protected void OnAlbumArtworkClick(object? sender, EventArgs args)
 		{
 			AlbumArtworkClick?.Invoke(this, sender, args);
 		}

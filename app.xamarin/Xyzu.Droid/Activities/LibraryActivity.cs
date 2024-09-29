@@ -119,7 +119,7 @@ namespace Xyzu.Activities
 		{
 			base.OnUiModeChanged(newConfig);
 		}
-		protected override void XyzuPlayerOnServiceConnectionChanged(object sender, ServiceConnectionChangedEventArgs args)
+		protected override void XyzuPlayerOnServiceConnectionChanged(object? sender, ServiceConnectionChangedEventArgs args)
 		{
 			base.XyzuPlayerOnServiceConnectionChanged(sender, args);
 
@@ -203,7 +203,7 @@ namespace Xyzu.Activities
 			dialogfragment?.SetStyle(DialogFragment.StyleNoFrame, 0);
 			dialogfragment?.Show(SupportFragmentManager, string.Empty);
 		}
-		protected virtual void OnFloatingactionbuttonClick(object sender, EventArgs args)
+		protected virtual void OnFloatingactionbuttonClick(object? sender, EventArgs args)
 		{ }
 
 		public virtual void OnRefresh()

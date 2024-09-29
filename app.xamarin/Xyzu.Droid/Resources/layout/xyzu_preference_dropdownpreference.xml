@@ -18,10 +18,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/xyzu_preference_dropdownpreference_contentframelayout"/>
+        app:layout_constraintBottom_toTopOf="@id/xyzu_preference_dropdownpreference_framelayout"/>
 
-    <androidx.appcompat.widget.ContentFrameLayout
-        android:id="@+id/xyzu_preference_dropdownpreference_contentframelayout"
+    <android.widget.FrameLayout
+        android:id="@+id/xyzu_preference_dropdownpreference_framelayout"
         android:layout_width="@dimen/dp0"
         android:layout_height="@dimen/dp0"
         android:layout_marginBottom="@dimen/dp16"

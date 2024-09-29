@@ -84,8 +84,10 @@ namespace Xyzu.Menus
 		public static void Share(Activity activity, IEnumerable<string> songids)
 		{
 			Share(activity, XyzuLibrary.Instance.Songs.GetSongs(
-				retriever: new ISong.Default<bool>(false) { Uri = true, },
-				identifiers: new ILibrary.IIdentifiers.Default { SongIds = songids }));
+				new ILibrary.IIdentifiers.Default 
+				{ 
+					SongIds = songids 
+				}));
 		}
 		public static void Share(Activity activity, params ISong[] songs)
 		{
@@ -94,7 +96,7 @@ namespace Xyzu.Menus
 		public static void Share(Activity activity, IEnumerable<ISong> songs)
 		{
 			Intent? intentchooser = XyzuUtils.Intents.Chooser_ShareFiles(activity, songs
-				.Distinct(new EqualityComparerDefault<ISong>((x, y) => x.Uri == y.Uri))
+				.Distinct(new EqualityComparerDefault<ISong>((x, y) => x?.Uri == y?.Uri))
 				.Select(song => song.Uri?.ToJavaUri())
 				.OfType<JavaUri>()
 				.ToArray());

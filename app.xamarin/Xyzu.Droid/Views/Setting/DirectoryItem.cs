@@ -132,8 +132,8 @@ namespace Xyzu.Views.Setting
 			get => _DirectoryChildren ?? throw new InflateException();
 		}
 
-		public Action<object, CompoundButton.CheckedChangeEventArgs>? DirectoryIsSelectedCheckChange { get; set; }
-		public Action<object, EventArgs>? DirectoryTitleClick { get; set; }
+		public Action<object?, CompoundButton.CheckedChangeEventArgs>? DirectoryIsSelectedCheckChange { get; set; }
+		public Action<object?, EventArgs>? DirectoryTitleClick { get; set; }
 
 		protected override void OnAttachedToWindow()
 		{
@@ -150,11 +150,11 @@ namespace Xyzu.Views.Setting
 			DirectoryTitle.Click -= DirectoryTitle_Click;
 		}
 
-		private void DirectoryIsSelected_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs args)
+		private void DirectoryIsSelected_CheckedChange(object? sender, CompoundButton.CheckedChangeEventArgs args)
 		{
 			DirectoryIsSelectedCheckChange?.Invoke(sender, args);
 		}
-		private void DirectoryTitle_Click(object sender, EventArgs args)
+		private void DirectoryTitle_Click(object? sender, EventArgs args)
 		{
 			_Expanded = !_Expanded;
 

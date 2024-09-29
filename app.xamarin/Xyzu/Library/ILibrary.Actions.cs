@@ -20,79 +20,90 @@ namespace Xyzu.Library
 			{
 				public ISettings? Settings { get; set; }
 			}
+			public class Container
+			{
+				public ILibrary.IOnCreateActions? OnCreate { get; set; }
+				public IEnumerable<ILibrary.IOnDeleteActions>? OnDelete { get; set; }
+				public IEnumerable<ILibrary.IOnRetrieveActions>? OnRetrieve { get; set; }
+				public IEnumerable<ILibrary.IOnUpdateActions>? OnUpdate { get; set; }
+			}
 		}
 		public interface IOnCreateActions : IActions
 		{
-			IAlbum? Album(string id, IAlbum<bool>? retriever);
-			IArtist? Artist(string id, IArtist<bool>? retriever);
-			IGenre? Genre(string id, IGenre<bool>? retriever);
-			IPlaylist? Playlist(string id, IPlaylist<bool>? retriever);
-			ISong? Song(string id, ISong<bool>? retriever);
+			IDictionary<string, string>? Paths { get; set; }
+
+			Task<IAlbum?> Album(string id);
+			Task<IArtist?> Artist(string id);
+			Task<IGenre?> Genre(string id);
+			Task<IPlaylist?> Playlist(string id);
+			Task<ISong?> Song(string id);
 
 			public new class Default: IActions.Default, IOnCreateActions
 			{
-				public virtual IAlbum? Album(string id, IAlbum<bool>? retriever) { return null; }
-				public virtual IArtist? Artist(string id, IArtist<bool>? retriever) { return null; }
-				public virtual IGenre? Genre(string id, IGenre<bool>? retriever) { return null; }
-				public virtual IPlaylist? Playlist(string id, IPlaylist<bool>? retriever) { return null; }
-				public virtual ISong? Song(string id, ISong<bool>? retriever) { return null; }
+				public IDictionary<string, string>? Paths { get; set; }
+
+				public virtual Task<IAlbum?> Album(string id) { return Task.FromResult<IAlbum?>(null); }
+				public virtual Task<IArtist?> Artist(string id) { return Task.FromResult<IArtist?>(null); }
+				public virtual Task<IGenre?> Genre(string id) { return Task.FromResult<IGenre?>(null); }
+				public virtual Task<IPlaylist?> Playlist(string id) { return Task.FromResult<IPlaylist?>(null); }
+				public virtual Task<ISong?> Song(string id) { return Task.FromResult<ISong?>(null); }
 			}
 		}
 		public interface IOnDeleteActions : IActions
 		{
-			void Album(IAlbum album);
-			void Artist(IArtist artist);
-			void Genre(IGenre genre);
-			void Playlist(IPlaylist playlist);
-			void Song(ISong song);
+			Task Album(IAlbum album);
+			Task Artist(IArtist artist);
+			Task Genre(IGenre genre);
+			Task Playlist(IPlaylist playlist);
+			Task Song(ISong song);
 
 			public new class Default : IActions.Default, IOnDeleteActions
 			{
-				public virtual void Album(IAlbum album) { }
-				public virtual void Artist(IArtist artist) { }
-				public virtual void Genre(IGenre genre) { }
-				public virtual void Playlist(IPlaylist playlist) { }
-				public virtual void Song(ISong song) { }
+				public virtual Task Album(IAlbum album) { return Task.CompletedTask; }
+				public virtual Task Artist(IArtist artist) { return Task.CompletedTask; }
+				public virtual Task Genre(IGenre genre) { return Task.CompletedTask; }
+				public virtual Task Playlist(IPlaylist playlist) { return Task.CompletedTask; }
+				public virtual Task Song(ISong song) { return Task.CompletedTask; }
 			}
 		}
 		public interface IOnRetrieveActions : IActions
 		{
-			void Album(IAlbum? retrieved, IAlbum<bool>? retriever, ISong? retrievedsong);
-			void Artist(IArtist? retrieved, IArtist<bool>? retriever, IAlbum? retrievedalbum);
-			void Artist(IArtist? retrieved, IArtist<bool>? retriever, ISong? retrievedsong);
-			void Genre(IGenre? retrieved, IGenre<bool>? retriever, ISong? retrievedsong);
-			void Playlist(IPlaylist? retrieved, IPlaylist<bool>? retriever, ISong? retrievedsong);
-			void Song(ISong? retrieved, ISong<bool>? retriever);
-			void Image(IImage? retrieved, IImage<bool>? retriever, string? filepath, Uri? uri, IEnumerable<ModelTypes>? modeltypes);
+			Task Album(IAlbum? retrieved, ISong? retrievedsong);
+			Task Artist(IArtist? retrieved, IAlbum? retrievedalbum);
+			Task Artist(IArtist? retrieved, ISong? retrievedsong);
+			Task Genre(IGenre? retrieved, ISong? retrievedsong);
+			Task Playlist(IPlaylist? retrieved, ISong? retrievedsong);
+			Task Song(ISong? retrieved);
+			Task Image(IImage? retrieved, IImage<bool>? retriever, string? filepath, Uri? uri, IEnumerable<ModelTypes>? modeltypes);
 
 			public new class Default : IActions.Default, IOnRetrieveActions
 			{
-				public virtual void Album(IAlbum? retrieved, IAlbum<bool>? retriever, ISong? retrievedsong) { }
-				public virtual void Artist(IArtist? retrieved, IArtist<bool>? retriever, IAlbum? retrievedalbum) { }
-				public virtual void Artist(IArtist? retrieved, IArtist<bool>? retriever, ISong? retrievedsong) { }
-				public virtual void Genre(IGenre? retrieved, IGenre<bool>? retriever, ISong? retrievedsong) { }
-				public virtual void Playlist(IPlaylist? retrieved, IPlaylist<bool>? retriever, ISong? retrievedsong) { }
-				public virtual void Song(ISong? retrieved, ISong<bool>? retriever) { }
-				public virtual void Image(IImage? retrieved, IImage<bool>? retriever, string? filepath, Uri? uri, IEnumerable<ModelTypes>? modeltypes) { }
+				public virtual Task Album(IAlbum? retrieved, ISong? retrievedsong) { return Task.CompletedTask; }
+				public virtual Task Artist(IArtist? retrieved, IAlbum? retrievedalbum) { return Task.CompletedTask; }
+				public virtual Task Artist(IArtist? retrieved, ISong? retrievedsong) { return Task.CompletedTask; }
+				public virtual Task Genre(IGenre? retrieved, ISong? retrievedsong) { return Task.CompletedTask; }
+				public virtual Task Playlist(IPlaylist? retrieved, ISong? retrievedsong) { return Task.CompletedTask; }
+				public virtual Task Song(ISong? retrieved) { return Task.CompletedTask; }
+				public virtual Task Image(IImage? retrieved, IImage<bool>? retriever, string? filepath, Uri? uri, IEnumerable<ModelTypes>? modeltypes) { return Task.CompletedTask; }
 			}
 		}
 		public interface IOnUpdateActions : IActions
 		{
-			void Album(IAlbum? old, IAlbum? updated);
-			void Artist(IArtist? old, IArtist? updated);
-			void Genre(IGenre? old, IGenre? updated);
-			void Playlist(IPlaylist? old, IPlaylist? updated);
-			void Song(ISong? old, ISong? updated);
+			Task Album(IAlbum? old, IAlbum? updated);
+			Task Artist(IArtist? old, IArtist? updated);
+			Task Genre(IGenre? old, IGenre? updated);
+			Task Playlist(IPlaylist? old, IPlaylist? updated);
+			Task Song(ISong? old, ISong? updated);
 
 			public new class Default : IActions.Default, IOnUpdateActions
 			{
-				public virtual void Album(IAlbum? old, IAlbum? updated) { }
-				public virtual void Artist(IArtist? old, IArtist? updated) { }
-				public virtual void Genre(IGenre? old, IGenre? updated) { }
-				public virtual void Playlist(IPlaylist? old, IPlaylist? updated) { }
-				public virtual void Song(ISong? old, ISong? updated) { }
+				public virtual Task Album(IAlbum? old, IAlbum? updated) { return Task.CompletedTask; }
+				public virtual Task Artist(IArtist? old, IArtist? updated) { return Task.CompletedTask; }
+				public virtual Task Genre(IGenre? old, IGenre? updated) { return Task.CompletedTask; }
+				public virtual Task Playlist(IPlaylist? old, IPlaylist? updated) { return Task.CompletedTask; }
+				public virtual Task Song(ISong? old, ISong? updated) { return Task.CompletedTask; }
 
-				public Func<string?, ISong?>? OnGetSong { get; set; }
+				public Func<string?, Task<ISong?>>? OnGetSong { get; set; }
 			}
 		}
 	}

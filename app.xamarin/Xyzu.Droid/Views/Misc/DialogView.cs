@@ -261,15 +261,15 @@ namespace Xyzu.Views.Misc
 				: ViewStates.Visible;
 		}
 
-		private void ButtonsNeutralAppCompatButton_Click(object sender, EventArgs args) 
+		private void ButtonsNeutralAppCompatButton_Click(object? sender, EventArgs args) 
 		{
 			OnClickNeutral?.Invoke(Dialog);
 		}
-		private void ButtonsPositiveAppCompatButton_Click(object sender, EventArgs args) 
+		private void ButtonsPositiveAppCompatButton_Click(object? sender, EventArgs args) 
 		{
 			OnClickPositive?.Invoke(Dialog);
 		}
-		private void ButtonsNegativeAppCompatButton_Click(object sender, EventArgs args) 
+		private void ButtonsNegativeAppCompatButton_Click(object? sender, EventArgs args) 
 		{
 			OnClickNegative?.Invoke(Dialog);
 		}

@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Util;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
@@ -9,6 +7,7 @@ using AndroidX.Palette.Graphics;
 using AndroidX.RecyclerView.Widget;
 
 using System;
+using System.Threading.Tasks;
 
 using Xyzu.Droid;
 using Xyzu.Images;
@@ -77,8 +76,9 @@ namespace Xyzu.Views.NowPlaying
 						break;
 									
 					case true when index == Player.Queue.CurrentIndex.Value:
-						SetBlur(SongCurrent);
-						await Images.SetToImageView(IImages.DefaultOperations.Rounded, viewholder.ItemView, null, default, _SongCurrentBitmap, SongCurrent);						
+						await Task.WhenAll(
+							SetBlur(SongCurrent),
+							Images.SetToImageView(IImages.DefaultOperations.Rounded, viewholder.ItemView, null, default, _SongCurrentBitmap, SongCurrent));						
 						break;										 
 																	
 					case true when index == Player.Queue.CurrentIndex.Value + 1:
@@ -255,7 +255,7 @@ namespace Xyzu.Views.NowPlaying
 			if (Buttons_Menu_PlayerSettings != null) Buttons_Menu_PlayerSettings.Click -= OnClick;
 		}
 
-		public virtual void OnClick(object sender, EventArgs args)
+		public virtual void OnClick(object? sender, EventArgs args)
 		{
 			if (true switch
 			{
@@ -330,8 +330,8 @@ namespace Xyzu.Views.NowPlaying
 		{
 			private static AppCompatImageView ItemViewDefault(Context context)
 			{
-				ContextThemeWrapper contextthemewrapper = new ContextThemeWrapper(context, Resource.Style.Xyzu_View_NowPlaying_Image);
-				AppCompatImageView itemview = new AppCompatImageView(contextthemewrapper)
+				ContextThemeWrapper contextthemewrapper = new (context, Resource.Style.Xyzu_View_NowPlaying_Image);
+				AppCompatImageView itemview = new (contextthemewrapper)
 				{
 					LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent)
 				};

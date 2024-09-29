@@ -3,6 +3,8 @@
 using Xyzu.Droid;
 using Xyzu.Settings;
 
+using AndroidXPreference = AndroidX.Preference.Preference;
+
 namespace Xyzu.Fragments.Settings
 {
 	public class SettingsPreferenceFragment : BasePreferenceFragment, ISettings
@@ -24,7 +26,7 @@ namespace Xyzu.Fragments.Settings
 
 			AppCompatActivity?.SetTitle(Resource.String.settings_title);
 		}
-		public override void OnCreatePreferences(Bundle savedInstanceState, string rootKey)
+		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
 			SetPreferencesFromResource(Resource.Xml.settings, rootKey);
 			InitPreferences(
@@ -36,7 +38,8 @@ namespace Xyzu.Fragments.Settings
 				FindPreference(Keys.System),
 				FindPreference(Keys.About));
 
-			FindPreference(Keys.Lockscreen).Visible = false;
+			if (FindPreference(Keys.Lockscreen) is AndroidXPreference androidxpreference)
+				androidxpreference.Visible = false;
 		}
 	}
 }

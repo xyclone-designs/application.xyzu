@@ -151,7 +151,7 @@ namespace Xyzu.Views.InfoEdit
 		public AppCompatTextView? SongTrackNumber_Title { get; protected set; }
 		public AppCompatTextView? SongDiscNumber_Title { get; protected set; }
 
-		public Action<InfoEditSongView, object, EventArgs>? SongArtworkClick { get; set; }
+		public Action<InfoEditSongView, object?, EventArgs>? SongArtworkClick { get; set; }
 
 		protected override void OnAttachedToWindow()
 		{
@@ -168,7 +168,7 @@ namespace Xyzu.Views.InfoEdit
 				SongArtwork.Click -= OnSongArtworkClick;
 		}
 
-		private void OnSongArtworkClick(object sender, EventArgs args)
+		private void OnSongArtworkClick(object? sender, EventArgs args)
 		{
 			SongArtworkClick?.Invoke(this, sender, args);
 		}

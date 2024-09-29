@@ -134,48 +134,48 @@ namespace Xyzu.Views.Toolbar
 			get => _SearchResultsOptionsToggle ??= FindViewById(Ids.SearchResults_OptionsToggle_AppCompatImageButton) as AppCompatImageButton ?? throw new InflateException();
 		}
 
-		void SearcherAlbumsToggleClick(object sender, EventArgs args)
+		void SearcherAlbumsToggleClick(object? sender, EventArgs args)
 		{
 			SearcherAlbumsToggle.Selected = Searcher.SearchAlbums = !SearcherAlbumsToggle.Selected;
 
 			OnSearcherPropertyChanged?.Invoke(nameof(Searcher.SearchAlbums));
 		}
-		void SearcherArtistsToggleClick(object sender, EventArgs args)
+		void SearcherArtistsToggleClick(object? sender, EventArgs args)
 		{
 			SearcherArtistsToggle.Selected = Searcher.SearchArtists = !SearcherArtistsToggle.Selected;
 
 			OnSearcherPropertyChanged?.Invoke(nameof(Searcher.SearchArtists));
 		}
-		void SearcherGenresToggleClick(object sender, EventArgs args)
+		void SearcherGenresToggleClick(object? sender, EventArgs args)
 		{
 			SearcherGenresToggle.Selected = Searcher.SearchGenres = !SearcherGenresToggle.Selected;
 
 			OnSearcherPropertyChanged?.Invoke(nameof(Searcher.SearchGenres));
 		}
-		void SearcherPlaylistsToggleClick(object sender, EventArgs args)
+		void SearcherPlaylistsToggleClick(object? sender, EventArgs args)
 		{
 			SearcherPlaylistsToggle.Selected = Searcher.SearchPlaylists = !SearcherPlaylistsToggle.Selected;
 
 			OnSearcherPropertyChanged?.Invoke(nameof(Searcher.SearchPlaylists));
 		}
-		void SearcherSongsToggleClick(object sender, EventArgs args)
+		void SearcherSongsToggleClick(object? sender, EventArgs args)
 		{
 			SearcherSongsToggle.Selected = Searcher.SearchSongs = !SearcherSongsToggle.Selected;
 
 			OnSearcherPropertyChanged?.Invoke(nameof(Searcher.SearchSongs));
 		}
-		void SearchResultsOptionsToggleClick(object sender, EventArgs args)
+		void SearchResultsOptionsToggleClick(object? sender, EventArgs args)
 		{
 			OnOptions?.Invoke();
 		}
 
-		private void SearchQueryTextChange(object sender, SearchView.QueryTextChangeEventArgs args)
+		private void SearchQueryTextChange(object? sender, SearchView.QueryTextChangeEventArgs args)
 		{
 			Searcher.String = args.NewText ?? string.Empty;
 
 			OnSearcherPropertyChanged?.Invoke(nameof(Searcher.String));
 		}
-		private void SearchQueryTextSubmit(object sender, SearchView.QueryTextSubmitEventArgs args)
+		private void SearchQueryTextSubmit(object? sender, SearchView.QueryTextSubmitEventArgs args)
 		{
 			Search.ClearFocus();
 

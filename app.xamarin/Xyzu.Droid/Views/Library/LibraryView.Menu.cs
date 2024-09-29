@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.Views;
@@ -280,9 +278,9 @@ namespace Xyzu.Views.Library
 
 			return false;
 		}
-		public virtual void OnMenuOptionsAllClick(object sender, EventArgs args)
+		public virtual void OnMenuOptionsAllClick(object? sender, EventArgs args)
 		{ }
-		public virtual void OnMenuOptionsCancelClick(object sender, EventArgs args)
+		public virtual void OnMenuOptionsCancelClick(object? sender, EventArgs args)
 		{
 			MenuOptionsDialog?.Dismiss();
 		}

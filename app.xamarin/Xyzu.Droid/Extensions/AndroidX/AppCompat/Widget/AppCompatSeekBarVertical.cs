@@ -64,10 +64,10 @@ namespace AndroidX.AppCompat.Widget
             return true;
         }
 
-        protected override void OnDraw(Canvas? c)
+        protected override void OnDraw(Canvas c)
         {
-            c?.Rotate(-90);
-            c?.Translate(-Height, 0);
+            c.Rotate(-90);
+            c.Translate(-Height, 0);
 
             base.OnDraw(c);
         }

@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace System.Collections.Specialized
 {
 	public class NotifyListChangedEventArgs : NotifyCollectionChangedEventArgs
 	{
 		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action) : base(action) { }
-		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, IList changedItems) : base(action, changedItems) { }
+		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, IList? changedItems) : base(action, changedItems) { }
 		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, object changedItem) : base(action, changedItem) { }
 		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, IList newItems, IList oldItems) : base(action, newItems, oldItems) { }
-		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, IList changedItems, int startingIndex) : base(action, changedItems, startingIndex) { }
+		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, IList? changedItems, int startingIndex) : base(action, changedItems, startingIndex) { }
 		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, object changedItem, int index) : base(action, changedItem, index) { }
 		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, object newItem, object oldItem) : base(action, newItem, oldItem) { }
 		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, IList newItems, IList oldItems, int startingIndex) : base(action, newItems, oldItems, startingIndex) { }
-		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, IList changedItems, int index, int oldIndex) : base(action, changedItems, index, oldIndex) { }
+		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, IList? changedItems, int index, int oldIndex) : base(action, changedItems, index, oldIndex) { }
 		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, object changedItem, int index, int oldIndex) : base(action, changedItem, index, oldIndex) { }
 		public NotifyListChangedEventArgs(NotifyCollectionChangedAction action, object newItem, object oldItem, int index) : base(action, newItem, oldItem, index) { }
 
@@ -31,7 +30,7 @@ namespace System.Collections.Specialized
 				NotifyCollectionChangedAction.Add => new NotifyListChangedEventArgs(args.Action, args.NewItems, args.NewStartingIndex),
 				NotifyCollectionChangedAction.Move => new NotifyListChangedEventArgs(args.Action, args.OldItems, args.NewStartingIndex, args.OldStartingIndex),
 				NotifyCollectionChangedAction.Remove => new NotifyListChangedEventArgs(args.Action, args.OldItems, args.OldStartingIndex),
-				NotifyCollectionChangedAction.Replace => new NotifyListChangedEventArgs(args.Action, args.NewItems, args.OldItems, args.OldStartingIndex),
+				NotifyCollectionChangedAction.Replace => new NotifyListChangedEventArgs(args.Action, args.NewItems ?? new ArrayList(), args.OldItems ?? new ArrayList(), args.OldStartingIndex),
 				NotifyCollectionChangedAction.Reset => new NotifyListChangedEventArgs(args.Action),
 
 				_ => throw new ArgumentException(string.Format("Invalid NotifyCollectionChangedEventArgs.Action '{0}'", args.Action))               

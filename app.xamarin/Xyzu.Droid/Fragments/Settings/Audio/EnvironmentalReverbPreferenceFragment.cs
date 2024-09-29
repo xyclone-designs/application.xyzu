@@ -219,7 +219,7 @@ namespace Xyzu.Fragments.Settings.Audio
 		public XyzuSeekBarPreference? RoomHFLevelPreference { get; set; }
 		public XyzuSeekBarPreference? RoomLevelPreference { get; set; }
 
-		public void CurrentPresetPropertyChanged(object sender, PropertyChangedEventArgs args)
+		public void CurrentPresetPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			switch (args.PropertyName)
 			{

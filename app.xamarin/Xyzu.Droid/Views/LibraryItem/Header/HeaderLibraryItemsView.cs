@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Util;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
@@ -81,20 +79,20 @@ namespace Xyzu.Views.LibraryItem.Header
 			get => _LibraryItemsOptions ??= FindViewById(Ids.LibraryItemsOptions_OptionsLibraryListView) as OptionsLibraryListView ?? throw new InflateException();
 		}
 
-		public Action<object, EventArgs>? TextClick { get; set; }
-		public Action<object, EventArgs>? PlayClick { get; set; }
-		public Action<object, EventArgs>? LibraryItemsOptionsExpandedClick { get; set; }
-		public Action<object, EventArgs>? OptionsClick { get; set; }
+		public Action<object?, EventArgs>? TextClick { get; set; }
+		public Action<object?, EventArgs>? PlayClick { get; set; }
+		public Action<object?, EventArgs>? LibraryItemsOptionsExpandedClick { get; set; }
+		public Action<object?, EventArgs>? OptionsClick { get; set; }
 
-		private void Text_Click(object sender, EventArgs args)
+		private void Text_Click(object? sender, EventArgs args)
 		{
 			TextClick?.Invoke(sender, args);
 		}		
-		private void Play_Click(object sender, EventArgs args)
+		private void Play_Click(object? sender, EventArgs args)
 		{
 			PlayClick?.Invoke(sender, args);
 		}						 
-		private void LibraryItemsOptionsExpanded_Click(object sender, EventArgs args)
+		private void LibraryItemsOptionsExpanded_Click(object? sender, EventArgs args)
 		{
 			LibraryItemsOptions.Visibility = LibraryItemsOptions.Visibility != ViewStates.Gone
 				? ViewStates.Gone
@@ -102,7 +100,7 @@ namespace Xyzu.Views.LibraryItem.Header
 
 			LibraryItemsOptionsExpandedClick?.Invoke(sender, args);
 		}
-		private void Options_Click(object sender, EventArgs args)
+		private void Options_Click(object? sender, EventArgs args)
 		{
 			OptionsClick?.Invoke(sender, args);
 		}

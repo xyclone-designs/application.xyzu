@@ -8,7 +8,7 @@ namespace Xyzu.Activities
 {
 	public partial class LibraryActivityDrawerLayout 
 	{
-		protected override void OnReconfigure(object sender, IConfigurable? toolbarconfigurable, params string[] reconfiguretypes)
+		protected override void OnReconfigure(object? sender, IConfigurable? toolbarconfigurable, params string[] reconfiguretypes)
 		{
 			foreach (string reconfiguretype in reconfiguretypes)
 				switch (reconfiguretype)

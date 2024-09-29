@@ -160,9 +160,9 @@ namespace Xyzu.Views.NowPlaying
 			}
 		}
 
-		protected virtual void SettingsPropertyChanged(object sender, PropertyChangedEventArgs args) 
+		protected virtual void SettingsPropertyChanged(object? sender, PropertyChangedEventArgs args) 
 		{ }
-		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyname = null)
+		protected async virtual void OnPropertyChanged([CallerMemberName] string? propertyname = null)
 		{
 			switch (propertyname)
 			{
@@ -177,12 +177,10 @@ namespace Xyzu.Views.NowPlaying
 						_SongPreviousBitmap = null;
 						_SongPreviousBlurDrawable = null;
 					}
-					else
+					else if (Images is not null)
 					{
-						_SongPreviousBitmap ??= Images?.GetBitmap(IImagesDroid.DefaultOperations.Rounded, null, SongPrevious);
-						_SongPreviousBlurDrawable ??= Images?.GetBitmap(IImagesDroid.DefaultOperations.BlurDownsample, null, _SongPreviousBitmap, SongPrevious) is Bitmap _songpreviousblurdrawable
-							? new BitmapDrawable(Context?.Resources, _songpreviousblurdrawable)
-							: null;
+						_SongPreviousBitmap ??= await Images.GetBitmapAsync(IImagesDroid.DefaultOperations.Rounded, null, SongPrevious);
+						_SongPreviousBlurDrawable ??= await Images.GetDrawableAsync(IImagesDroid.DefaultOperations.BlurDownsample, null, _SongPreviousBitmap, SongPrevious);
 					}
 					break;			
 
@@ -192,12 +190,10 @@ namespace Xyzu.Views.NowPlaying
 						_SongCurrentBitmap = null;
 						_SongCurrentBlurDrawable = null;
 					}
-					else
+					else if (Images is not null)
 					{
-						_SongCurrentBitmap ??= Images?.GetBitmap(IImagesDroid.DefaultOperations.Rounded, null, SongCurrent);
-						_SongCurrentBlurDrawable ??= Images?.GetBitmap(IImagesDroid.DefaultOperations.BlurDownsample, null, _SongCurrentBitmap, SongCurrent) is Bitmap _songcurrentblurdrawable
-							? new BitmapDrawable(Context?.Resources, _songcurrentblurdrawable)
-							: null;
+						_SongCurrentBitmap ??= await Images.GetBitmapAsync(IImagesDroid.DefaultOperations.Rounded, null, SongCurrent);
+						_SongCurrentBlurDrawable ??= await Images.GetDrawableAsync(IImagesDroid.DefaultOperations.BlurDownsample, null, _SongCurrentBitmap, SongCurrent);
 					}
 					break;			
 
@@ -207,12 +203,10 @@ namespace Xyzu.Views.NowPlaying
 						_SongNextBitmap = null;
 						_SongNextBlurDrawable = null;
 					}
-					else
+					else if (Images is not null)
 					{
-						_SongNextBitmap ??= Images?.GetBitmap(IImagesDroid.DefaultOperations.Rounded, null, SongNext);
-						_SongNextBlurDrawable ??= Images?.GetBitmap(IImagesDroid.DefaultOperations.BlurDownsample, null, _SongNextBitmap, SongNext) is Bitmap _songnextblurdrawable
-							? new BitmapDrawable(Context?.Resources, _songnextblurdrawable)
-							: null;
+						_SongNextBitmap ??= await Images.GetBitmapAsync(IImagesDroid.DefaultOperations.Rounded, null, SongNext);
+						_SongNextBlurDrawable ??= await Images.GetDrawableAsync(IImagesDroid.DefaultOperations.BlurDownsample, null, _SongNextBitmap, SongNext);
 					}
 					break;
 
@@ -255,8 +249,7 @@ namespace Xyzu.Views.NowPlaying
 
 			ViewRefresh();
 		}
-
-		public void PlayerPropertyChanged(object sender, PropertyChangedEventArgs args)
+		public void PlayerPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			switch (args.PropertyName)
 			{
@@ -309,7 +302,7 @@ namespace Xyzu.Views.NowPlaying
 				default: break;
 			}
 		}
-		public void PlayerOnPlayerOperation(object sender, IPlayer.PlayerOperationsEventArgs args)
+		public void PlayerOnPlayerOperation(object? sender, IPlayer.PlayerOperationsEventArgs args)
 		{
 			switch (args.PlayerOperation)
 			{
@@ -344,7 +337,7 @@ namespace Xyzu.Views.NowPlaying
 				default: break;
 			}
 		}
-		public void PlayerQueuePropertyChanged(object sender, PropertyChangedEventArgs args)
+		public void PlayerQueuePropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			switch (args.PropertyName)
 			{
@@ -382,7 +375,7 @@ namespace Xyzu.Views.NowPlaying
 			}
 		}
 
-		public void SetBlur(ISong? song)
+		public Task SetBlur(ISong? song)
 		{
 			void OnComplete(bool completed)
 			{
@@ -411,15 +404,18 @@ namespace Xyzu.Views.NowPlaying
 
 			if (song is null)
 				OnComplete(false);
-			else
-				Images?.SetToViewBackground(
+			else if (Images is not null)
+				return Images.SetToViewBackground(
 					view: BackgroundBlur,
 					oncomplete: OnComplete,
 					operations: IImages.DefaultOperations.Blur,
 					sources: song != SongCurrent
 						? new object?[] { song }
 						: new object?[] { _SongCurrentBitmap, SongCurrent });
+
+			return Task.CompletedTask;
 		}
+
 		public void SetText(ISong? song, string? detailone, string? detailtwo)
 		{
 			detailone ??= song is null
@@ -458,8 +454,8 @@ namespace Xyzu.Views.NowPlaying
 				Position.Hide();
 			else
 			{
-				Task.Run(() => Position.LoadFrom(song.Filepath, (int)song.Duration.Value.TotalMilliseconds));
 				Position.Show();
+				Task.Run(() => Position.LoadFrom(song.Filepath, (int)song.Duration.Value.TotalMilliseconds));
 			}
 			
 			SetPosition(TimeSpan.Zero, song?.Duration, true);
@@ -485,27 +481,20 @@ namespace Xyzu.Views.NowPlaying
 
 		private void ConfigureMenuOptionButton(View? view)
 		{
-			StateListDrawable? statelistdrawable = view?.Background as StateListDrawable;
-			int? color = ArtworkPalette?.DominantSwatch?.Rgb ?? Context?.Resources?.GetColor(Resource.Color.ColorPrimary, Context.Theme);
-
-			if (statelistdrawable is null || color is null)
+			if (view?.Background is not StateListDrawable statelistdrawable || (
+				ArtworkPalette?.DominantSwatch?.Rgb ?? Context?.Resources?.GetColor(Resource.Color.ColorPrimary, Context.Theme)) is not int color)
 				return;
 
+			int[] colors = new int[] { color, color, color, };
 			int state_active = statelistdrawable.FindStateDrawableIndex(new int[] { Android.Resource.Attribute.StateActive });
 			int state_pressed = statelistdrawable.FindStateDrawableIndex(new int[] { Android.Resource.Attribute.StatePressed });
-			int[] colors = new int[]
-			{
-				color.Value,
-				color.Value,
-				color.Value,
-			};
 
 			if (state_active != -1 && statelistdrawable.GetStateDrawable(state_active) is GradientDrawable state_active_gradientdrawable)
 				state_active_gradientdrawable.SetColors(colors);
 
 			if (state_pressed != -1 && statelistdrawable.GetStateDrawable(state_pressed) is RippleDrawable state_active_rippledrawable)
 			{
-				state_active_rippledrawable.SetColor(new Android.Content.Res.ColorStateList(new int[][] { new int[] { } }, new int[] { color.Value }));
+				state_active_rippledrawable.SetColor(new Android.Content.Res.ColorStateList(new int[][] { Array.Empty<int>() }, new int[] { color }));
 
 				if (state_active_rippledrawable.FindDrawableByLayerId(Android.Resource.Id.Mask) is GradientDrawable state_active_max_gradientdrawable)
 					state_active_max_gradientdrawable.SetColors(colors);
@@ -513,27 +502,20 @@ namespace Xyzu.Views.NowPlaying
 		}
 		private void ConfigureNowPlayingButton(View? view)
 		{
-			StateListDrawable? statelistdrawable = view?.Background as StateListDrawable;
-			int? color = ArtworkPalette?.DominantSwatch?.Rgb ?? Context?.Resources?.GetColor(Resource.Color.ColorPrimary, Context.Theme);
-
-			if (statelistdrawable is null || color is null)
+			if (view?.Background is not StateListDrawable statelistdrawable || (
+				ArtworkPalette?.DominantSwatch?.Rgb ?? Context?.Resources?.GetColor(Resource.Color.ColorPrimary, Context.Theme)) is not int color)
 				return;
 
+			int[] colors = new int[] { color, Color.Transparent.ToArgb(), Color.Transparent.ToArgb() };
 			int state_active = statelistdrawable.FindStateDrawableIndex(new int[] { Android.Resource.Attribute.StateActive });
 			int state_pressed = statelistdrawable.FindStateDrawableIndex(new int[] { Android.Resource.Attribute.StatePressed });
-			int[] colors = new int[]
-			{
-				color.Value,
-				Color.Transparent.ToArgb(),
-				Color.Transparent.ToArgb()
-			};
 
 			if (state_active != -1 && statelistdrawable.GetStateDrawable(state_active) is GradientDrawable state_active_gradientdrawable)
 				state_active_gradientdrawable.SetColors(colors);
 
 			if (state_pressed != -1 && statelistdrawable.GetStateDrawable(state_pressed) is RippleDrawable state_active_rippledrawable)
 			{
-				state_active_rippledrawable.SetColor(new Android.Content.Res.ColorStateList(new int[][] { new int[] { } }, new int[] { color.Value }));
+				state_active_rippledrawable.SetColor(new Android.Content.Res.ColorStateList(new int[][] { Array.Empty<int>() }, new int[] { color }));
 
 				if (state_active_rippledrawable.FindDrawableByLayerId(Android.Resource.Id.Mask) is GradientDrawable state_active_max_gradientdrawable)
 					state_active_max_gradientdrawable.SetColors(colors);

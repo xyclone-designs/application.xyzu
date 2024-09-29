@@ -129,32 +129,17 @@ namespace Xyzu.Menus
 		private static IEnumerable<ISong> GetSongs(IEnumerable<IAlbum> albums)
 		{
 			return XyzuLibrary.Instance.Songs
-				.GetSongs(
-					identifiers: ILibrary.IIdentifiers.FromAlbums(albums),
-					retriever: new ISong.Default<bool>(false)
-					{
-						Id = true
-					});
+				.GetSongs(ILibrary.IIdentifiers.FromAlbums(albums));
 		}	  
 		private static IEnumerable<ISong> GetSongs(IEnumerable<IArtist> artists)
 		{
 			return XyzuLibrary.Instance.Songs
-				.GetSongs(
-					identifiers: ILibrary.IIdentifiers.FromArtists(artists),
-					retriever: new ISong.Default<bool>(false)
-					{
-						Id = true
-					});
+				.GetSongs(ILibrary.IIdentifiers.FromArtists(artists));
 		}	  
 		private static IEnumerable<ISong> GetSongs(IEnumerable<IGenre> genres)
 		{
 			return XyzuLibrary.Instance.Songs
-				.GetSongs(
-					identifiers: ILibrary.IIdentifiers.FromGenres(genres),
-					retriever: new ISong.Default<bool>(false)
-					{
-						Id = true
-					});
+				.GetSongs(ILibrary.IIdentifiers.FromGenres(genres));
 		}
 
 		private static Action<IDialogInterface?> CreateSheetDialogBottomViewAction(Action<IDialogInterface?>? dialoginterfaceaction)

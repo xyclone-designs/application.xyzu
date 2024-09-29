@@ -166,9 +166,9 @@ namespace Xyzu.Activities
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname ?? string.Empty));
 		}
-		protected virtual void SupportFragmentManagerBackStackChanged(object sender, EventArgs args) { }
-		protected virtual void SupportFragmentManagerFragmentOnAttach(object sender, FragmentOnAttachEventArgs args) { }
-		protected virtual void XyzuLibraryOnServiceConnectionChanged(object sender, ServiceConnectionChangedEventArgs args) { }
-		protected virtual void XyzuPlayerOnServiceConnectionChanged(object sender, ServiceConnectionChangedEventArgs args) { }
+		protected virtual void SupportFragmentManagerBackStackChanged(object? sender, EventArgs args) { }
+		protected virtual void SupportFragmentManagerFragmentOnAttach(object? sender, FragmentOnAttachEventArgs args) { }
+		protected virtual void XyzuLibraryOnServiceConnectionChanged(object? sender, ServiceConnectionChangedEventArgs args) { }
+		protected virtual void XyzuPlayerOnServiceConnectionChanged(object? sender, ServiceConnectionChangedEventArgs args) { }
 	}
 }

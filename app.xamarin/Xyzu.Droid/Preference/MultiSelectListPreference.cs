@@ -5,12 +5,9 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using AndroidX.AppCompat.App;
-using AndroidX.AppCompat.Widget;
 using AndroidX.Preference;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 using Xyzu.Droid;
 using Xyzu.Views.Preference;
@@ -92,7 +89,7 @@ namespace Xyzu.Preference
 			if (View?.ViewValueSummary is null)
 				return;
 
-			valuesummary ??= Values?.Any() ?? false
+			valuesummary ??= Values is null || Values.Count == 0
 				? null
 				: string.Join(", ", Values);
 

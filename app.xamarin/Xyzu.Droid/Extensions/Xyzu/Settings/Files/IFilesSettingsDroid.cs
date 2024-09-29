@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Java.IO;
+﻿using Java.IO;
 
 using System;
 using System.Collections.Generic;
@@ -15,9 +13,23 @@ namespace Xyzu.Settings.Files
 	public interface IFilesSettingsDroid<T> : IFilesSettings<T> { } 
 	public interface IFilesSettingsDroid : IFilesSettings 
 	{
-		public static string IntenalStorageFilespath = "/storage/emulated";
-		public static string IntenalStorageFilespath0 = "/storage/emulated/0";
+		private static File _DirectoryStorage = new(IntenalStorage);
 
+		public const string IntenalStorage = "/storage";
+		public const string IntenalStorageSelf = IntenalStorage + "/self";
+		public const string IntenalStorageEmulated = IntenalStorage + "/emulated";
+		public const string IntenalStorageEmulated0 = IntenalStorageEmulated + "/0";
+
+		public readonly static string? DirectoryAudiobooks = "audiobooks"; //AndroidOSEnvironment.DirectoryAudiobooks;
+		public readonly static string? DirectoryDownloads = AndroidOSEnvironment.DirectoryDownloads;
+		public readonly static string? DirectoryMusic = AndroidOSEnvironment.DirectoryMusic;
+		public readonly static string? DirectoryPodcasts = AndroidOSEnvironment.DirectoryPodcasts;
+
+		public static File? DirectoryStorage
+		{
+			get => _DirectoryStorage.Exists() ? _DirectoryStorage : null;
+		}
+		
 		public new class Defaults : IFilesSettings.Defaults
 		{
 			public static readonly IFilesSettingsDroid FilesSettingsDroid = new Default
@@ -28,7 +40,6 @@ namespace Xyzu.Settings.Files
 				TrackLengthIgnore = TrackLengthIgnore,
 			};
 		}			  
-
 		public new class Default : IFilesSettings.Default, IFilesSettingsDroid { }
 		public new class Default<T> : IFilesSettings.Default<T>, IFilesSettingsDroid<T>
 		{
@@ -38,7 +49,7 @@ namespace Xyzu.Settings.Files
 		public IEnumerable<File> Files()
 		{
 			return FilesDirectories()
-				.SelectMany(directoryfile => directoryfile.ListFiles())
+				.SelectMany(directoryfile => directoryfile.ListFiles() ?? Array.Empty<File>())
 				.Where(PredicateFiles(this));
 		}
 		public IEnumerable<File> FilesDirectories()
@@ -48,7 +59,7 @@ namespace Xyzu.Settings.Files
 			if (Directories != null)
 				directoriesfiles = Directories.SelectMany(dir =>
 				{
-					File file = new File(dir);
+					File file = new (dir);
 					if (file.Exists() && file.IsDirectory)
 						return file.ListAllFiles().Where(dirr => dirr.IsDirectory);
 					return Enumerable.Empty<File>();
@@ -65,12 +76,14 @@ namespace Xyzu.Settings.Files
 
 		public static IEnumerable<File> Storages()
 		{
-			if (AndroidOSEnvironment.StorageDirectory.ListFiles() is File[] files)
+			File intenalstorage = new(IntenalStorage);
+
+			if (intenalstorage.Exists() && intenalstorage.ListFiles() is File[] files)
 				foreach (File file in files)
 					if (file.AbsolutePath == "/storage/self")
 						continue;
-					else if (file.AbsolutePath == IntenalStorageFilespath)
-						yield return new File(IntenalStorageFilespath0);
+					else if (file.AbsolutePath == IntenalStorageEmulated)
+						yield return new File(IntenalStorageEmulated0);
 					else yield return file;
 		}
 		public static IEnumerable<File> StoragesDirectories()
@@ -86,6 +99,15 @@ namespace Xyzu.Settings.Files
 				foreach (File storagefile in storage.ListAllFiles())
 					if (storagefile.AbsolutePath.StartsWith(storage.AbsolutePath + "/Android") is false)
 						yield return storagefile;
+		}
+		public static IEnumerable<string> DefaultDirectories()
+		{
+			return Enumerable.Empty<string?>()
+				.Append(DirectoryAudiobooks)
+				.Append(DirectoryDownloads)
+				.Append(DirectoryMusic)
+				.Append(DirectoryPodcasts)
+				.OfType<string>();
 		}
 
 		public async IAsyncEnumerable<File> FilesAsync()
@@ -107,7 +129,7 @@ namespace Xyzu.Settings.Files
 					.ToAsyncEnumerable()
 					.SelectMany(dir =>
 					{
-						File file = new File(dir);
+						File file = new (dir);
 						if (file.Exists() && file.IsDirectory)
 							return file.ListAllFilesAsync().Where(dirr => dirr.IsDirectory);
 						return AsyncEnumerable.Empty<File>();
@@ -123,12 +145,14 @@ namespace Xyzu.Settings.Files
 		}
 		public static async IAsyncEnumerable<File> StoragesAsync()
 		{
-			if (await AndroidOSEnvironment.StorageDirectory.ListFilesAsync() is File[] files)
+			File intenalstorage = new(IntenalStorage);
+
+			if (intenalstorage.Exists() && await intenalstorage.ListFilesAsync() is File[] files)
 				foreach (File file in files)
-					if (file.AbsolutePath == "/storage/self")
+					if (file.AbsolutePath == IntenalStorageSelf)
 						continue;
-					else if (file.AbsolutePath == IntenalStorageFilespath)
-						yield return new File(IntenalStorageFilespath0);
+					else if (file.AbsolutePath == IntenalStorageEmulated)
+						yield return new File(IntenalStorageEmulated0);
 					else yield return file;
 		}
 		public static async IAsyncEnumerable<File> StoragesDirectoriesAsync()

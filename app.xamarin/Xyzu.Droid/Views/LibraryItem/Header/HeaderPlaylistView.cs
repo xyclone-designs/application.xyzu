@@ -64,12 +64,12 @@ namespace Xyzu.Views.LibraryItem.Header
 			get => _PlaylistSongs ??= FindViewById(Ids.PlaylistSongs_LibraryHeaderLibraryItemsView) as HeaderLibraryItemsView ?? throw new InflateException();
 		}
 
-		public Action<object, EventArgs>? OnClickOptions
+		public Action<object?, EventArgs>? OnClickOptions
 		{
 			get => PlaylistSongs.OptionsClick;
 			set => PlaylistSongs.OptionsClick = value;
 		}
-		public Action<object, EventArgs>? OnClickPlay
+		public Action<object?, EventArgs>? OnClickPlay
 		{
 			get => PlaylistSongs.PlayClick;
 			set => PlaylistSongs.PlayClick = value;

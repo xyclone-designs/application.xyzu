@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 
 using Xyzu.Library.Models;
 
@@ -7,55 +8,11 @@ namespace Xyzu.Library.IO
 {
 	public partial class IOActions
 	{
-		public class OnCreate : ILibrary.IOnCreateActions.Default
-		{
-			public override IAlbum? Album(string id, IAlbum<bool>? retriever)
-			{
-				return base.Album(id, retriever);
-			}
-			public override IArtist? Artist(string id, IArtist<bool>? retriever)
-			{
-				return base.Artist(id, retriever);
-			}
-			public override IGenre? Genre(string id, IGenre<bool>? retriever)
-			{
-				return base.Genre(id, retriever);
-			}
-			public override IPlaylist? Playlist(string id, IPlaylist<bool>? retriever)
-			{
-				return base.Playlist(id, retriever);
-			}
-			public override ISong? Song(string id, ISong<bool>? retriever)
-			{
-				return base.Song(id, retriever);
-			}
-		}
-		public class OnDelete : ILibrary.IOnDeleteActions.Default
-		{
-			public override void Album(IAlbum album)
-			{
-				base.Album(album);
-			}
-			public override void Artist(IArtist artist)
-			{
-				base.Artist(artist);
-			}
-			public override void Genre(IGenre genre)
-			{
-				base.Genre(genre);
-			}
-			public override void Playlist(IPlaylist playlist)
-			{
-				base.Playlist(playlist);
-			}
-			public override void Song(ISong song)
-			{
-				base.Song(song);
-			}
-		}
+		public class OnCreate : ILibrary.IOnCreateActions.Default { }
+		public class OnDelete : ILibrary.IOnDeleteActions.Default { }
 		public class OnRetrieve : ILibrary.IOnRetrieveActions.Default
 		{
-			FileInfo? GetFileInfo(string? filepath, Uri? uri)
+			static FileInfo? GetFileInfo(string? filepath, Uri? uri)
 			{
 				FileInfo? fileinfo = null;
 
@@ -70,70 +27,50 @@ namespace Xyzu.Library.IO
 				return fileinfo;
 			}
 
-			public override void Album(IAlbum? retrieved, IAlbum<bool>? retriever, ISong? retrievedsong)
+			public override Task Album(IAlbum? retrieved, ISong? retrievedsong)
 			{
 				if (GetFileInfo(retrievedsong?.Filepath, retrievedsong?.Uri) is FileInfo fileinfo)
-					retrieved?.Retrieve(fileinfo, retriever);
+					retrieved?.Retrieve(fileinfo);
 
-				base.Album(retrieved, retriever, retrievedsong);
+				return base.Album(retrieved, retrievedsong);
 			}
-			public override void Artist(IArtist? retrieved, IArtist<bool>? retriever, IAlbum? retrievedalbum)
-			{
-				base.Artist(retrieved, retriever, retrievedalbum);
-			}
-			public override void Artist(IArtist? retrieved, IArtist<bool>? retriever, ISong? retrievedsong)
+			public override Task Artist(IArtist? retrieved, ISong? retrievedsong)
 			{
 				if (GetFileInfo(retrievedsong?.Filepath, retrievedsong?.Uri) is FileInfo fileinfo)
-					retrieved?.Retrieve(fileinfo, retriever);
+					retrieved?.Retrieve(fileinfo);
 
-				base.Artist(retrieved, retriever, retrievedsong);
+				return base.Artist(retrieved, retrievedsong);
 			}
-			public override void Genre(IGenre? retrieved, IGenre<bool>? retriever, ISong? retrievedsong)
+			public override Task Genre(IGenre? retrieved, ISong? retrievedsong)
 			{
 				if (GetFileInfo(retrievedsong?.Filepath, retrievedsong?.Uri) is FileInfo fileinfo)
-					retrieved?.Retrieve(fileinfo, retriever);
+					retrieved?.Retrieve(fileinfo);
 
-				base.Genre(retrieved, retriever, retrievedsong);
+				return base.Genre(retrieved, retrievedsong);
 			}
-			public override void Playlist(IPlaylist? retrieved, IPlaylist<bool>? retriever, ISong? retrievedsong)
+			public override Task Playlist(IPlaylist? retrieved, ISong? retrievedsong)
 			{
 				if (GetFileInfo(retrievedsong?.Filepath, retrievedsong?.Uri) is FileInfo fileinfo)
-					retrieved?.Retrieve(fileinfo, retriever);
+					retrieved?.Retrieve(fileinfo);
 
-				base.Playlist(retrieved, retriever, retrievedsong);
+				return base.Playlist(retrieved, retrievedsong);
 			}
-			public override void Song(ISong? retrieved, ISong<bool>? retriever)
+			public override Task Song(ISong? retrieved)
 			{
 				if (GetFileInfo(retrieved?.Filepath, retrieved?.Uri) is FileInfo fileinfo)
-					retrieved?.Retrieve(fileinfo, retriever);
+					retrieved?.Retrieve(fileinfo);
 
-				base.Song(retrieved, retriever);
+				return base.Song(retrieved);
 			}
 		}
 		public class OnUpdate : ILibrary.IOnUpdateActions.Default
 		{
-			public override void Album(IAlbum? old, IAlbum? updated)
-			{
-				base.Album(old, updated);
-			}
-			public override void Artist(IArtist? old, IArtist? updated)
-			{
-				base.Artist(old, updated);
-			}
-			public override void Genre(IGenre? old, IGenre? updated)
-			{
-				base.Genre(old, updated);
-			}
-			public override void Playlist(IPlaylist? old, IPlaylist? updated)
-			{
-				base.Playlist(old, updated);
-			}
-			public override void Song(ISong? old, ISong? updated)
+			public override Task Song(ISong? old, ISong? updated)
 			{
 				if (updated?.Filepath is not null)
 					try
 					{
-						FileInfo fileinfo = new(updated?.Filepath);
+						FileInfo fileinfo = new(updated.Filepath);
 
 						DateTime datetimenow = DateTime.Now;
 
@@ -142,7 +79,7 @@ namespace Xyzu.Library.IO
 					}
 					catch (Exception) { }
 
-				base.Song(old, updated);
+				return base.Song(old, updated);
 			}
 		}
 	}

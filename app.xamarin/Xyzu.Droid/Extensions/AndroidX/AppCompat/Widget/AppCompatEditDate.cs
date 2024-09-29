@@ -117,7 +117,7 @@ namespace AndroidX.AppCompat.Widget
 			SetDate(date);
 		}
 
-		private void OnViewClick(object sender, EventArgs e)
+		private void OnViewClick(object? sender, EventArgs e)
 		{
 			AlbumReleaseDatePicker ??= new DatePicker(new ContextThemeWrapper(Context, Resource.Style.Xyzu_DatePicker));
 			AlbumReleaseDatePicker.DateTime = Date ?? default;

@@ -552,7 +552,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 				}
 			}
 
-			protected virtual void LibraryItemsListChanged(object sender, NotifyListChangedEventArgs args)
+			protected virtual void LibraryItemsListChanged(object? sender, NotifyListChangedEventArgs args)
 			{
 				switch (args.Action)
 				{
@@ -600,13 +600,13 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 
 				Parent?.InvalidateItemDecorations();
 			}
-			protected virtual void ViewHolder_OnLongClick(object sender, RecyclerViewViewHolderDefault.ViewHolderEventArgs args)
+			protected virtual void ViewHolder_OnLongClick(object? sender, RecyclerViewViewHolderDefault.ViewHolderEventArgs args)
 			{
 				FocusedViewHolder = args.ViewHolder as ViewHolder;
 
 				ViewHolderOnEvent?.Invoke(args);
 			}
-			protected virtual void ViewHolder_OnClick(object sender, RecyclerViewViewHolderDefault.ViewHolderEventArgs args)
+			protected virtual void ViewHolder_OnClick(object? sender, RecyclerViewViewHolderDefault.ViewHolderEventArgs args)
 			{
 				FocusedViewHolder = args.ViewHolder as ViewHolder;
 

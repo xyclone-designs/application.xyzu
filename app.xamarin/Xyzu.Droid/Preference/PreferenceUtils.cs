@@ -1,20 +1,11 @@
 ﻿#nullable enable
 
 using Android.Content;
-using Android.Runtime;
-using Android.Util;
-using Android.Views;
-using Android.Widget;
 using AndroidX.AppCompat.App;
-using AndroidX.AppCompat.Widget;
-using AndroidX.Preference;
 
 using System;
 using System.Linq;
 
-using Xyzu.Droid;
-
-using AndroidXPreference = AndroidX.Preference.Preference;
 using AndroidXDialogPreference = AndroidX.Preference.DialogPreference;
 using AndroidXListPreference = AndroidX.Preference.ListPreference;
 using AndroidXMultiSelectListPreference = AndroidX.Preference.MultiSelectListPreference;
@@ -31,7 +22,7 @@ namespace Xyzu.Preference
 		}
 		public static AlertDialog.Builder ProcessList(this AlertDialog.Builder dialogbuilder, AndroidXListPreference listpreference, Func<AlertDialog?>? getalertdialog)
 		{
-			void SingleChoiceItemsHandler(object sender, DialogClickEventArgs args)
+			void SingleChoiceItemsHandler(object? sender, DialogClickEventArgs args)
 			{
 				if (listpreference.GetEntryValues()?[args.Which] is string value)
 					listpreference.CallChangeListener(value);
@@ -49,12 +40,12 @@ namespace Xyzu.Preference
 		}
 		public static AlertDialog.Builder ProcessListMulti(this AlertDialog.Builder dialogbuilder, AndroidXMultiSelectListPreference multiselectlistpreference, Func<AlertDialog?>? getalertdialog) 
 		{
-			void PositiveButtonHandler(object sender, DialogClickEventArgs args)
+			void PositiveButtonHandler(object? sender, DialogClickEventArgs args)
 			{
 				AlertDialog? alertdialog = getalertdialog?.Invoke();
 				alertdialog?.Dismiss();
 			};
-			void MultiChoiceItemsHandler(object sender, DialogMultiChoiceClickEventArgs args)
+			void MultiChoiceItemsHandler(object? sender, DialogMultiChoiceClickEventArgs args)
 			{
 				multiselectlistpreference.CallChangeListener(args.Which);
 			};
@@ -64,7 +55,7 @@ namespace Xyzu.Preference
 				.SetMultiChoiceItems(
 					handler: MultiChoiceItemsHandler,
 					items: multiselectlistpreference.GetEntryValues() ?? Array.Empty<string>(),
-					checkedItems: multiselectlistpreference.Values
+					checkedItems: multiselectlistpreference.Values?
 						.Select((value, index) =>
 						{
 							if (multiselectlistpreference.GetEntryValues()?[index] is string preferencevalue)
@@ -72,7 +63,7 @@ namespace Xyzu.Preference
 
 							return false;
 
-						}).ToArray());
+						}).ToArray() ?? Array.Empty<bool>());
 
 
 			if (multiselectlistpreference.PositiveButtonText != null)

@@ -1,29 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <LangVersion>9.0</LangVersion>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Library\IOLibrary\**" />
-    <Compile Remove="Menus\Enums\**" />
-    <EmbeddedResource Remove="Library\IOLibrary\**" />
-    <EmbeddedResource Remove="Menus\Enums\**" />
-    <None Remove="Library\IOLibrary\**" />
-    <None Remove="Menus\Enums\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Settings\UserInterface\Library\IGenresSettings.cs~RF10075a9e.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Library\ID3\Extensions\Xyzu\" />
-    <Folder Include="Library\TagLibSharp\Extensions\Xyzu\" />
-  </ItemGroup>
-  
   <ItemGroup>
     <PackageReference Include="ID3" Version="0.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

@@ -86,7 +86,7 @@ namespace Xyzu.Views.InfoEdit
 		public AppCompatEditText? ArtistName { get; protected set; }
 		public AppCompatTextView? ArtistName_Title { get; protected set; }
 
-		public Action<InfoEditArtistView, object, EventArgs>? ArtistImageClick { get; set; }
+		public Action<InfoEditArtistView, object?, EventArgs>? ArtistImageClick { get; set; }
 
 		protected override void OnAttachedToWindow()
 		{
@@ -103,7 +103,7 @@ namespace Xyzu.Views.InfoEdit
 				ArtistImage.Click -= OnArtistImageClick;
 		}
 
-		protected void OnArtistImageClick(object sender, EventArgs args)
+		protected void OnArtistImageClick(object? sender, EventArgs args)
 		{
 			ArtistImageClick?.Invoke(this, sender, args);
 		}

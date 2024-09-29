@@ -156,7 +156,7 @@ namespace Xyzu.Fragments.Library
 		{
 			OnReconfigure?.Invoke(this, reconfiguretype);
 		}
-		protected virtual void LibraryItemsAdapter_PropertyChanged(object sender, PropertyChangedEventArgs args)
+		protected virtual void LibraryItemsAdapter_PropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			switch (args.PropertyName)
 			{

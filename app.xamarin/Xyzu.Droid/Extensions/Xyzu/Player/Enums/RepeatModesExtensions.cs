@@ -40,9 +40,9 @@ namespace Xyzu.Player.Enums
 			return repeatmode switch
 			{
 				RepeatModes.NoRepeat => Resource.Drawable.icon_player_repeatmode_norepeat,
-				RepeatModes.RepeatEntireQueue => Resource.Drawable.exo_media_action_repeat_all,
-				RepeatModes.RepeatSong => Resource.Drawable.exo_controls_repeat_one,
-				RepeatModes.RepeatSubQueue => Resource.Drawable.exo_media_action_repeat_all,
+				RepeatModes.RepeatEntireQueue => Resource.Drawable.icon_player_repeatmode_repeatentirequeue,
+				RepeatModes.RepeatSong => Resource.Drawable.icon_player_repeatmode_repeatsong,
+				RepeatModes.RepeatSubQueue => Resource.Drawable.icon_player_repeatmode_repeatsubqueue,
 
 				_ => throw new ArgumentException()
 			};

@@ -159,7 +159,7 @@ namespace Xyzu.Views.Library
 					break;
 			}
 		}
-		protected override void PropertyChangedSettings(object sender, PropertyChangedEventArgs args)
+		protected override void PropertyChangedSettings(object? sender, PropertyChangedEventArgs args)
 		{
 			base.PropertyChangedSettings(sender, args);
 
@@ -277,19 +277,19 @@ namespace Xyzu.Views.Library
 					.Select(searchresult => searchresult.Id),
 			};
 
-			await foreach (ISong song in Library.Songs.GetSongs(identifiers, null, Cancellationtoken))
+			await foreach (ISong song in Library.Songs.GetSongs(identifiers, Cancellationtoken))
 				SearchResults.LibraryItemsAdapter.LibraryItems.Add(song);			   
 
-			await foreach (IAlbum album in Library.Albums.GetAlbums(identifiers, null, Cancellationtoken))
+			await foreach (IAlbum album in Library.Albums.GetAlbums(identifiers, Cancellationtoken))
 				SearchResults.LibraryItemsAdapter.LibraryItems.Add(album);
 
-			await foreach (IArtist artist in Library.Artists.GetArtists(identifiers, null, Cancellationtoken))
+			await foreach (IArtist artist in Library.Artists.GetArtists(identifiers, Cancellationtoken))
 				SearchResults.LibraryItemsAdapter.LibraryItems.Add(artist);
 
-			await foreach (IGenre genre in Library.Genres.GetGenres(identifiers, null, Cancellationtoken))
+			await foreach (IGenre genre in Library.Genres.GetGenres(identifiers, Cancellationtoken))
 				SearchResults.LibraryItemsAdapter.LibraryItems.Add(genre);			   
 
-			await foreach (IPlaylist playlist in Library.Playlists.GetPlaylists(identifiers, null, Cancellationtoken))
+			await foreach (IPlaylist playlist in Library.Playlists.GetPlaylists(identifiers, Cancellationtoken))
 				SearchResults.LibraryItemsAdapter.LibraryItems.Add(playlist);			   
 
 			Refreshing = false;
@@ -435,7 +435,7 @@ namespace Xyzu.Views.Library
 				default: return base.OnMenuOptionClick(menuoption);
 			}
 		}
-		public override void OnMenuOptionsAllClick(object sender, EventArgs args)
+		public override void OnMenuOptionsAllClick(object? sender, EventArgs args)
 		{
 			base.OnMenuOptionsAllClick(sender, args);
 
