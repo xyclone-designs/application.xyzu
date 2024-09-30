@@ -19,9 +19,9 @@ namespace Xyzu.Library
 		{
 			IAlbum? ILibraryDroid.IAlbums.Random(ILibraryDroid.IIdentifiers? identifiers)
 			{
-				TableQuery<AlbumEntity> albums = identifiers is null
+				IEnumerable<IAlbum> albums = identifiers is null
 					? SQLiteLibrary.AlbumsTable
-					: SQLiteLibrary.AlbumsTable.Where(identifiers.MatchesAlbum<AlbumEntity>());
+					: SQLiteLibrary.AlbumsTable.AsEnumerable().Where(_ => identifiers.MatchesAlbum(_));
 
 				Random random = new();
 				int index = random.Next(0, albums.Count() - 1);
@@ -31,13 +31,13 @@ namespace Xyzu.Library
 			}
 			async Task<IAlbum?> ILibraryDroid.IAlbums.Random(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
-				AsyncTableQuery<AlbumEntity> albums = identifiers is null
-					? SQLiteLibrary.AlbumsTableAsync
-					: SQLiteLibrary.AlbumsTableAsync.Where(identifiers.MatchesAlbum<AlbumEntity>());
+				IEnumerable<IAlbum> albums = identifiers is null
+					? SQLiteLibrary.AlbumsTable
+					: SQLiteLibrary.AlbumsTable.AsEnumerable().Where(_ => identifiers.MatchesAlbum(_));
 
 				Random random = new();
-				int index = random.Next(0, await albums.CountAsync() - 1);
-				IAlbum album = await albums.ElementAtAsync(index);
+				int index = random.Next(0, albums.Count() - 1);
+				IAlbum album = await Task.FromResult(albums.ElementAt(index));
 
 				return album;
 			}
@@ -47,7 +47,7 @@ namespace Xyzu.Library
 				if (identifiers is null)
 					return null;
 
-				IAlbum album = SQLiteLibrary.AlbumsTable.FirstOrDefault(identifiers.MatchesAlbum<AlbumEntity>());
+				IAlbum? album = SQLiteLibrary.AlbumsTable.AsEnumerable().FirstOrDefault(album => identifiers.MatchesAlbum(album));
 
 				return album;
 			}
@@ -56,27 +56,27 @@ namespace Xyzu.Library
 				if (identifiers is null)
 					return null;
 
-				IAlbum album = await SQLiteLibrary.AlbumsTableAsync.FirstOrDefaultAsync(identifiers.MatchesAlbum<AlbumEntity>());
+				IAlbum? album = SQLiteLibrary.AlbumsTable.AsEnumerable().FirstOrDefault(album => identifiers.MatchesAlbum(album));
 
-				return album;
+				return await Task.FromResult(album);
 			}
 			IEnumerable<IAlbum> ILibraryDroid.IAlbums.GetAlbums(ILibraryDroid.IIdentifiers? identifiers)
 			{
-				TableQuery<AlbumEntity> albums = identifiers is null
+				IEnumerable<IAlbum> albums = identifiers is null
 					? SQLiteLibrary.AlbumsTable
-					: SQLiteLibrary.AlbumsTable.Where(identifiers.MatchesAlbum<AlbumEntity>());
+					: SQLiteLibrary.AlbumsTable.AsEnumerable().Where(_ => identifiers.MatchesAlbum(_));
 
 				foreach (IAlbum album in albums)
 					yield return album;
 			}
 			async IAsyncEnumerable<IAlbum> ILibraryDroid.IAlbums.GetAlbums(ILibraryDroid.IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
 			{
-				AsyncTableQuery<AlbumEntity> albums = identifiers is null
-					? SQLiteLibrary.AlbumsTableAsync
-					: SQLiteLibrary.AlbumsTableAsync.Where(identifiers.MatchesAlbum<AlbumEntity>());
+				IEnumerable<IAlbum> albums = identifiers is null
+					? SQLiteLibrary.AlbumsTable
+					: SQLiteLibrary.AlbumsTable.AsEnumerable().Where(_ => identifiers.MatchesAlbum(_));
 
-				foreach (IAlbum album in await albums.ToListAsync())
-					yield return album;
+				foreach (IAlbum album in albums)
+					yield return await Task.FromResult(album);
 			}
 
 			IAlbum? ILibraryDroid.IAlbums.PopulateAlbum(IAlbum? album)

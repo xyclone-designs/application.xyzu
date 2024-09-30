@@ -8,7 +8,7 @@ using Exception = System.Exception;
 
 namespace Xyzu
 {
-	public sealed partial class XyzuLibrary
+	public sealed partial class XyzuLibrary : ILibraryDroid
 	{
 		private XyzuLibrary(Context context)
 		{

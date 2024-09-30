@@ -22,7 +22,7 @@ namespace Xyzu.Library
 			ILibrary.IIdentifiers? Identifiers { get; set; }
 			JavaFile? Directory { get; set; }
 
-			IScanner.INotification? Notification { get; set; }
+			IScanner.ServiceNotification? Notification { get; set; }
 
 			string? Filepath { get; set; }
 			Uri? Uri { get; set; }
@@ -45,7 +45,7 @@ namespace Xyzu.Library
 				public Func<IParameters, ICursor?>? CursorLazy { get; set; }
 				public IDictionary<string, int>? CursorPositions { get; set; }
 				public ILibrary.IIdentifiers? Identifiers { get; set; }
-				public IScanner.INotification? Notification { get; set; }
+				public IScanner.ServiceNotification? Notification { get; set; }
 				public ILibrary.IOnCreateActions? OnCreateAction { get; set; }
 
 				public string? Filepath { get; set; }

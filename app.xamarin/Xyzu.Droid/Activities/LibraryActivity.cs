@@ -152,6 +152,8 @@ namespace Xyzu.Activities
 
 				case ServiceConnectionChangedEventArgs.Events.Disconnected:
 
+					ViewNowPlaying.Player = null;
+
 					SlidingUpPanelLayout.PanelState disconnectedpanelstate = ViewNowPlaying.Settings.ForceShowNowPlaying
 						? SlidingUpPanelLayout.PanelState.Collapsed
 						: SlidingUpPanelLayout.PanelState.Hidden;

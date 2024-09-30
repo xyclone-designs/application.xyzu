@@ -19,9 +19,9 @@ namespace Xyzu.Library
 		{
 			IArtist? ILibraryDroid.IArtists.Random(ILibraryDroid.IIdentifiers? identifiers)
 			{
-				TableQuery<ArtistEntity> artists = identifiers is null
+				IEnumerable<IArtist> artists = identifiers is null
 					? SQLiteLibrary.ArtistsTable
-					: SQLiteLibrary.ArtistsTable.Where(identifiers.MatchesArtist<ArtistEntity>());
+					: SQLiteLibrary.ArtistsTable.AsEnumerable().Where(_ => identifiers.MatchesArtist(_));
 
 				Random random = new();
 				int index = random.Next(0, artists.Count() - 1);
@@ -31,13 +31,13 @@ namespace Xyzu.Library
 			}
 			async Task<IArtist?> ILibraryDroid.IArtists.Random(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
-				AsyncTableQuery<ArtistEntity> artists = identifiers is null
-					? SQLiteLibrary.ArtistsTableAsync
-					: SQLiteLibrary.ArtistsTableAsync.Where(identifiers.MatchesArtist<ArtistEntity>());
+				IEnumerable<IArtist> artists = identifiers is null
+					? SQLiteLibrary.ArtistsTable
+					: SQLiteLibrary.ArtistsTable.AsEnumerable().Where(_ => identifiers.MatchesArtist(_));
 
 				Random random = new();
-				int index = random.Next(0, await artists.CountAsync() - 1);
-				IArtist artist = await artists.ElementAtAsync(index);
+				int index = random.Next(0, artists.Count() - 1);
+				IArtist artist = await Task.FromResult(artists.ElementAt(index));
 
 				return artist;
 			}
@@ -47,7 +47,7 @@ namespace Xyzu.Library
 				if (identifiers is null)
 					return null;
 
-				IArtist artist = SQLiteLibrary.ArtistsTable.FirstOrDefault(identifiers.MatchesArtist<ArtistEntity>());
+				IArtist? artist = SQLiteLibrary.ArtistsTable.AsEnumerable().FirstOrDefault(artist => identifiers.MatchesArtist(artist));
 
 				return artist;
 			}
@@ -56,27 +56,27 @@ namespace Xyzu.Library
 				if (identifiers is null)
 					return null;
 
-				IArtist artist = await SQLiteLibrary.ArtistsTableAsync.FirstOrDefaultAsync(identifiers.MatchesArtist<ArtistEntity>());
+				IArtist? artist = SQLiteLibrary.ArtistsTable.AsEnumerable().FirstOrDefault(artist => identifiers.MatchesArtist(artist));
 
-				return artist;
+				return await Task.FromResult(artist);
 			}
 			IEnumerable<IArtist> ILibraryDroid.IArtists.GetArtists(ILibraryDroid.IIdentifiers? identifiers)
 			{
-				TableQuery<ArtistEntity> artists = identifiers is null
+				IEnumerable<IArtist> artists = identifiers is null
 					? SQLiteLibrary.ArtistsTable
-					: SQLiteLibrary.ArtistsTable.Where(identifiers.MatchesArtist<ArtistEntity>());
+					: SQLiteLibrary.ArtistsTable.AsEnumerable().Where(_ => identifiers.MatchesArtist(_));
 
 				foreach (IArtist artist in artists)
 					yield return artist;
 			}
 			async IAsyncEnumerable<IArtist> ILibraryDroid.IArtists.GetArtists(ILibraryDroid.IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
 			{
-				AsyncTableQuery<ArtistEntity> artists = identifiers is null
-					? SQLiteLibrary.ArtistsTableAsync
-					: SQLiteLibrary.ArtistsTableAsync.Where(identifiers.MatchesArtist<ArtistEntity>());
+				IEnumerable<IArtist> artists = identifiers is null
+					? SQLiteLibrary.ArtistsTable
+					: SQLiteLibrary.ArtistsTable.AsEnumerable().Where(_ => identifiers.MatchesArtist(_));
 
-				foreach (IArtist artist in await artists.ToListAsync())
-					yield return artist;
+				foreach (IArtist artist in artists)
+					yield return await Task.FromResult(artist);
 			}
 
 			IArtist? ILibraryDroid.IArtists.PopulateArtist(IArtist? artist)

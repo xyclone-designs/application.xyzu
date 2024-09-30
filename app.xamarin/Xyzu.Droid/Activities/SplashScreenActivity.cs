@@ -153,15 +153,14 @@ namespace Xyzu.Activities
 
 			xyzulibrary.Settings = new ILibrary.ISettings.Default
 			{
-				Directories = FilesSettings?.Directories,
-				Mimetypes = FilesSettings?.Mimetypes,
+				Directories = FilesSettings.Directories,
+				Mimetypes = FilesSettings.Mimetypes,
 			};
-
 			xyzulibrary.Actions = new ILibrary.IActions.Container
 			{
 				OnCreate = new Library.TagLibSharp.TagLibSharpActions.OnCreate
 				{
-					Paths = FilesSettings?.Files()
+					OnPaths = () => FilesSettings.Files()
 						.ToDictionary(file => file.AbsolutePath, file => file.AbsolutePath),
 				},
 				OnDelete = new List<ILibrary.IOnDeleteActions>

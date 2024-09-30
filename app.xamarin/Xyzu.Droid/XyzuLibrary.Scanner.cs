@@ -2,31 +2,19 @@
 
 using Android.App;
 using Android.Content;
-using Android.Content.PM;
-using Android.Content.Res;
 using Android.OS;
-using Android.Runtime;
 using AndroidX.Core.App;
-using SQLite;
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
 
 using Xyzu.Droid;
-using Xyzu.Images;
 using Xyzu.Library;
-using Xyzu.Library.Models;
-using Xyzu.Settings.Files;
 
 namespace Xyzu
 {
 	public sealed partial class XyzuLibrary : Java.Lang.Object, IServiceConnection
 	{
-
 		private ServiceConnectionChangedEventArgs.Events? _ServiceConnectionState;
 		public ServiceConnectionChangedEventArgs.Events ServiceConnectionState
 		{
@@ -50,13 +38,11 @@ namespace Xyzu
 			{
 				ServiceConnectionState = ServiceConnectionChangedEventArgs.Events.Connected;
 
-				//ScanServiceBinder.Directory = IFilesSettingsDroid.DirectoryStorage;
 				ScanServiceBinder.Filepaths = XyzuSettings.Instance.GetFilesDroid().Files().Select(file => file.AbsolutePath);
-
+				ScanServiceBinder.Library = Library;
 				ScanServiceBinder.ServiceConnection = this;
-				ScanServiceBinder.Service.Library = Instance;
 				ScanServiceBinder.Service.Componentname = name;
-				ScanServiceBinder.Service.Notification ??= new IScanner.INotification.Default(
+				ScanServiceBinder.Service.Notification ??= new IScanner.ServiceNotification(
 					IScanner.Notifications.Id,
 					IScanner.Notifications.ChannelId,
 					IScanner.Notifications.ChannelName);
@@ -142,13 +128,6 @@ namespace Xyzu
 
 		public void ScannerServiceScan(bool hard)
 		{
-			if (hard is false && IScanner.ShouldScan(
-				XyzuSettings.Instance.GetFilesDroid().Files().Select(file => file.AbsolutePath),
-				Instance.Library.SQLiteLibrary.SongsTable, 
-				out IEnumerable<string> _, 
-				out IEnumerable<string> _) is false)
-				return;
-
 			Intent service = new Intent(Context, typeof(IScanner.ScannerService))
 				.SetAction(
 					action: hard

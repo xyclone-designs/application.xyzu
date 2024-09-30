@@ -6,7 +6,7 @@ using Xyzu.Library;
 
 namespace Xyzu
 {
-	public sealed partial class XyzuLibrary : ILibraryDroid
+	public sealed partial class XyzuLibrary 
 	{
 		public ILibrary.IAlbums Albums => Library.Albums;
 		public ILibrary.IArtists Artists => Library.Artists;

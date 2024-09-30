@@ -19,9 +19,9 @@ namespace Xyzu.Library
 		{
 			IGenre? ILibraryDroid.IGenres.Random(ILibraryDroid.IIdentifiers? identifiers)
 			{
-				TableQuery<GenreEntity> genres = identifiers is null
+				IEnumerable<IGenre> genres = identifiers is null
 					? SQLiteLibrary.GenresTable
-					: SQLiteLibrary.GenresTable.Where(identifiers.MatchesGenre<GenreEntity>());
+					: SQLiteLibrary.GenresTable.AsEnumerable().Where(_ => identifiers.MatchesGenre(_));
 
 				Random random = new();
 				int index = random.Next(0, genres.Count() - 1);
@@ -31,13 +31,13 @@ namespace Xyzu.Library
 			}
 			async Task<IGenre?> ILibraryDroid.IGenres.Random(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
-				AsyncTableQuery<GenreEntity> genres = identifiers is null
-					? SQLiteLibrary.GenresTableAsync
-					: SQLiteLibrary.GenresTableAsync.Where(identifiers.MatchesGenre<GenreEntity>());
+				IEnumerable<IGenre> genres = identifiers is null
+					? SQLiteLibrary.GenresTable
+					: SQLiteLibrary.GenresTable.AsEnumerable().Where(_ => identifiers.MatchesGenre(_));
 
 				Random random = new();
-				int index = random.Next(0, await genres.CountAsync() - 1);
-				IGenre genre = await genres.ElementAtAsync(index);
+				int index = random.Next(0, genres.Count() - 1);
+				IGenre genre = await Task.FromResult(genres.ElementAt(index));
 
 				return genre;
 			}
@@ -47,7 +47,7 @@ namespace Xyzu.Library
 				if (identifiers is null)
 					return null;
 
-				IGenre genre = SQLiteLibrary.GenresTable.FirstOrDefault(identifiers.MatchesGenre<GenreEntity>());
+				IGenre? genre = SQLiteLibrary.GenresTable.AsEnumerable().FirstOrDefault(genre => identifiers.MatchesGenre(genre));
 
 				return genre;
 			}
@@ -56,27 +56,27 @@ namespace Xyzu.Library
 				if (identifiers is null)
 					return null;
 
-				IGenre genre = await SQLiteLibrary.GenresTableAsync.FirstOrDefaultAsync(identifiers.MatchesGenre<GenreEntity>());
+				IGenre? genre = SQLiteLibrary.GenresTable.AsEnumerable().FirstOrDefault(genre => identifiers.MatchesGenre(genre));
 
-				return genre;
+				return await Task.FromResult(genre);
 			}
 			IEnumerable<IGenre> ILibraryDroid.IGenres.GetGenres(ILibraryDroid.IIdentifiers? identifiers)
 			{
-				TableQuery<GenreEntity> genres = identifiers is null
+				IEnumerable<IGenre> genres = identifiers is null
 					? SQLiteLibrary.GenresTable
-					: SQLiteLibrary.GenresTable.Where(identifiers.MatchesGenre<GenreEntity>());
+					: SQLiteLibrary.GenresTable.AsEnumerable().Where(_ => identifiers.MatchesGenre(_));
 
 				foreach (IGenre genre in genres)
 					yield return genre;
 			}
 			async IAsyncEnumerable<IGenre> ILibraryDroid.IGenres.GetGenres(ILibraryDroid.IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
 			{
-				AsyncTableQuery<GenreEntity> genres = identifiers is null
-					? SQLiteLibrary.GenresTableAsync
-					: SQLiteLibrary.GenresTableAsync.Where(identifiers.MatchesGenre<GenreEntity>());
+				IEnumerable<IGenre> genres = identifiers is null
+					? SQLiteLibrary.GenresTable
+					: SQLiteLibrary.GenresTable.AsEnumerable().Where(_ => identifiers.MatchesGenre(_));
 
-				foreach (IGenre genre in await genres.ToListAsync())
-					yield return genre;
+				foreach (IGenre genre in genres)
+					yield return await Task.FromResult(genre);
 			}
 
 			IGenre? ILibraryDroid.IGenres.PopulateGenre(IGenre? genre)

@@ -17,9 +17,9 @@ namespace Xyzu.Library
 		{
 			IPlaylist? ILibraryDroid.IPlaylists.Random(ILibraryDroid.IIdentifiers? identifiers)
 			{
-				TableQuery<PlaylistEntity> playlists = identifiers is null
+				IEnumerable<IPlaylist> playlists = identifiers is null
 					? SQLiteLibrary.PlaylistsTable
-					: SQLiteLibrary.PlaylistsTable.Where(identifiers.MatchesPlaylist<PlaylistEntity>());
+					: SQLiteLibrary.PlaylistsTable.AsEnumerable().Where(_ => identifiers.MatchesPlaylist(_));
 
 				Random random = new();
 				int index = random.Next(0, playlists.Count() - 1);
@@ -29,13 +29,13 @@ namespace Xyzu.Library
 			}
 			async Task<IPlaylist?> ILibraryDroid.IPlaylists.Random(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
-				AsyncTableQuery<PlaylistEntity> playlists = identifiers is null
-					? SQLiteLibrary.PlaylistsTableAsync
-					: SQLiteLibrary.PlaylistsTableAsync.Where(identifiers.MatchesPlaylist<PlaylistEntity>());
+				IEnumerable<IPlaylist> playlists = identifiers is null
+					? SQLiteLibrary.PlaylistsTable
+					: SQLiteLibrary.PlaylistsTable.AsEnumerable().Where(_ => identifiers.MatchesPlaylist(_));
 
 				Random random = new();
-				int index = random.Next(0, await playlists.CountAsync() - 1);
-				IPlaylist playlist = await playlists.ElementAtAsync(index);
+				int index = random.Next(0, playlists.Count() - 1);
+				IPlaylist playlist = await Task.FromResult(playlists.ElementAt(index));
 
 				return playlist;
 			}
@@ -45,7 +45,7 @@ namespace Xyzu.Library
 				if (identifiers is null)
 					return null;
 
-				IPlaylist playlist = SQLiteLibrary.PlaylistsTable.FirstOrDefault(identifiers.MatchesPlaylist<PlaylistEntity>());
+				IPlaylist? playlist = SQLiteLibrary.PlaylistsTable.AsEnumerable().FirstOrDefault(playlist => identifiers.MatchesPlaylist(playlist));
 
 				return playlist;
 			}
@@ -54,27 +54,27 @@ namespace Xyzu.Library
 				if (identifiers is null)
 					return null;
 
-				IPlaylist playlist = await SQLiteLibrary.PlaylistsTableAsync.FirstOrDefaultAsync(identifiers.MatchesPlaylist<PlaylistEntity>());
+				IPlaylist? playlist = SQLiteLibrary.PlaylistsTable.AsEnumerable().FirstOrDefault(playlist => identifiers.MatchesPlaylist(playlist));
 
-				return playlist;
+				return await Task.FromResult(playlist);
 			}
 			IEnumerable<IPlaylist> ILibraryDroid.IPlaylists.GetPlaylists(ILibraryDroid.IIdentifiers? identifiers)
 			{
-				TableQuery<PlaylistEntity> playlists = identifiers is null
+				IEnumerable<IPlaylist> playlists = identifiers is null
 					? SQLiteLibrary.PlaylistsTable
-					: SQLiteLibrary.PlaylistsTable.Where(identifiers.MatchesPlaylist<PlaylistEntity>());
+					: SQLiteLibrary.PlaylistsTable.AsEnumerable().Where(_ => identifiers.MatchesPlaylist(_));
 
 				foreach (IPlaylist playlist in playlists)
 					yield return playlist;
 			}
 			async IAsyncEnumerable<IPlaylist> ILibraryDroid.IPlaylists.GetPlaylists(ILibraryDroid.IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
 			{
-				AsyncTableQuery<PlaylistEntity> playlists = identifiers is null
-					? SQLiteLibrary.PlaylistsTableAsync
-					: SQLiteLibrary.PlaylistsTableAsync.Where(identifiers.MatchesPlaylist<PlaylistEntity>());
+				IEnumerable<IPlaylist> playlists = identifiers is null
+					? SQLiteLibrary.PlaylistsTable
+					: SQLiteLibrary.PlaylistsTable.AsEnumerable().Where(_ => identifiers.MatchesPlaylist(_));
 
-				foreach (IPlaylist playlist in await playlists.ToListAsync())
-					yield return playlist;
+				foreach (IPlaylist playlist in playlists)
+					yield return await Task.FromResult(playlist);
 			}
 
 			IPlaylist? ILibraryDroid.IPlaylists.PopulatePlaylist(IPlaylist? playlist)

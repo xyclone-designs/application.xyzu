@@ -18,23 +18,21 @@ namespace Xyzu.Library
 			public ServiceBinder(IScanner scannerservice)
 			{
 				Service = scannerservice;
-				SQLiteLibrary = new SQLiteLibraryConnection();
 			}
 
 			public IScanner Service { get; }
+			public ILibraryDroid? Library { get; set; }
 			public IServiceConnection? ServiceConnection { get; set; }
-			public SQLiteLibraryConnection SQLiteLibrary { get; set; }
-			public CursorBuilder? DefaultCursorBuilder { get; set; }
 			public IEnumerable<string>? Filepaths { get; set; }
-			public ILibraryDroid.IActions.Container? Actions { get; set; }
+			
 			public ICursor? CursorToActions(Func<ICursor?> getcursor)
 			{
 				ICursor? cursor = null;
 
-				if (Actions?.OnCreate is MediaStoreActions.OnCreate mediastoreoncreateaction)
+				if (Library?.Actions?.OnCreate is MediaStoreActions.OnCreate mediastoreoncreateaction)
 					mediastoreoncreateaction.Cursor = cursor ??= getcursor.Invoke();
 
-				if (Actions?.OnRetrieve?.OfType<MediaStoreActions.OnRetrieve>().FirstOrDefault() is MediaStoreActions.OnRetrieve mediastoreonretrieveaction)
+				if (Library?.Actions?.OnRetrieve?.OfType<MediaStoreActions.OnRetrieve>().FirstOrDefault() is MediaStoreActions.OnRetrieve mediastoreonretrieveaction)
 					mediastoreonretrieveaction.Cursor = cursor ??= getcursor.Invoke();
 
 				return cursor;

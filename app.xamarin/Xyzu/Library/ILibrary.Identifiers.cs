@@ -62,12 +62,6 @@ namespace Xyzu.Library
 			bool MatchesPlaylist(IPlaylist playlist);
 			bool MatchesSong(ISong song);
 
-			Expression<Func<TAlbum, bool>> MatchesAlbum<TAlbum>() where TAlbum : IAlbum;
-			Expression<Func<TArtist, bool>> MatchesArtist<TArtist>() where TArtist : IArtist;
-			Expression<Func<TGenre, bool>> MatchesGenre<TGenre>() where TGenre : IGenre;
-			Expression<Func<TPlaylist, bool>> MatchesPlaylist<TPlaylist>() where TPlaylist : IPlaylist;
-			Expression<Func<TSong, bool>> MatchesSong<TSong>() where TSong : ISong;
-
 			public static IIdentifiers FromAlbum(IAlbum? album)
 			{
 				IIdentifiers identifiers = new Default();
@@ -830,70 +824,6 @@ namespace Xyzu.Library
 					}
 
 					return true;
-				}
-
-				public Expression<Func<TAlbum, bool>> MatchesAlbum<TAlbum>() where TAlbum : IAlbum
-				{
-					return album => true;
-				}
-				public Expression<Func<TArtist, bool>> MatchesArtist<TArtist>() where TArtist : IArtist
-				{
-					return artist => true;
-				}
-				public Expression<Func<TGenre, bool>> MatchesGenre<TGenre>() where TGenre : IGenre
-				{
-					return genre => true;
-				}
-				public Expression<Func<TPlaylist, bool>> MatchesPlaylist<TPlaylist>() where TPlaylist : IPlaylist
-				{
-					return playlist => true;
-				}
-				public Expression<Func<TSong, bool>> MatchesSong<TSong>() where TSong : ISong
-				{
-					if (SongIds == null && WithoutSongIds == null &&
-						SongTitles == null && WithoutSongTitles == null &&
-						AlbumTitles == null && WithoutAlbumTitles == null &&
-						AlbumArtistNames == null && WithoutAlbumArtistNames == null &&
-						ArtistNames == null && WithoutArtistNames == null &&
-						GenreNames == null && WithoutGenreNames == null) return song => false;
-
-					return song =>
-
-						// SongIds
-						// WithoutSongIds
-						!((SongIds != null && !SongIds.Contains(song.Id)) || (WithoutSongIds != null && WithoutSongIds.Contains(song.Id))) ||
-
-						// SongTitles
-						// WithoutSongTitles
-						!((song.Title != null) && (
-							(SongTitles != null && !SongTitles.Contains(song.Title)) ||
-							(WithoutSongTitles != null && WithoutSongTitles.Contains(song.Title)))) ||
-
-						// AlbumTitles
-						// WithoutAlbumTitles
-						!((song.Album != null) && (
-							(AlbumTitles != null && !AlbumTitles.Contains(song.Album)) ||
-							(WithoutAlbumTitles != null && WithoutAlbumTitles.Contains(song.Album)))) ||
-
-						// AlbumArtistNames
-						// WithoutAlbumArtistNames
-						!((song.AlbumArtist != null) && (
-							(AlbumArtistNames != null && !AlbumArtistNames.Contains(song.AlbumArtist)) ||
-							(WithoutAlbumArtistNames != null && WithoutAlbumArtistNames.Contains(song.AlbumArtist)))) ||
-
-						// ArtistNames
-						// WithoutArtistNames
-						!((song.Artist != null) && (
-							(ArtistNames != null && !ArtistNames.Contains(song.Artist)) ||
-							(WithoutArtistNames != null && WithoutArtistNames.Contains(song.Artist)))) ||
-
-						// SongTitles
-						// WithoutSongTitles
-						!((song.Genre != null) && (
-							(GenreNames != null && !GenreNames.Contains(song.Genre)) ||
-							(WithoutGenreNames != null && WithoutGenreNames.Contains(song.Genre)))) ||
-
-						true;
 				}
 			}
 		}

@@ -1,8 +1,4 @@
-﻿#nullable enable
-
-using SQLite;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -19,9 +15,9 @@ namespace Xyzu.Library
 		{
 			ISong? ILibraryDroid.ISongs.Random(ILibraryDroid.IIdentifiers? identifiers)
 			{
-				TableQuery<SongEntity> songs = identifiers is null 
+				IEnumerable<ISong> songs = identifiers is null
 					? SQLiteLibrary.SongsTable
-					: SQLiteLibrary.SongsTable.Where(identifiers.MatchesSong<SongEntity>());
+					: SQLiteLibrary.SongsTable.AsEnumerable().Where(_ => identifiers.MatchesSong(_));
 
 				Random random = new ();
 				int index = random.Next(0, songs.Count() - 1);
@@ -31,13 +27,13 @@ namespace Xyzu.Library
 			}
 			async Task<ISong?> ILibraryDroid.ISongs.Random(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
-				AsyncTableQuery<SongEntity> songs = identifiers is null
-					? SQLiteLibrary.SongsTableAsync
-					: SQLiteLibrary.SongsTableAsync.Where(identifiers.MatchesSong<SongEntity>());
+				IEnumerable<ISong> songs = identifiers is null
+					? SQLiteLibrary.SongsTable
+					: SQLiteLibrary.SongsTable.AsEnumerable().Where(_ => identifiers.MatchesSong(_));
 
 				Random random = new();
-				int index = random.Next(0, await songs.CountAsync() - 1);
-				ISong song = await songs.ElementAtAsync(index);
+				int index = random.Next(0, songs.Count() - 1);
+				ISong song = await Task.FromResult(songs.ElementAt(index));
 
 				return song;
 			}
@@ -47,7 +43,7 @@ namespace Xyzu.Library
 				if (identifiers is null)
 					return null;
 
-				ISong? song = (SQLiteLibrary.SongsTable as IEnumerable<ISong>).FirstOrDefault(song => identifiers.MatchesSong(song));
+				ISong? song = SQLiteLibrary.SongsTable.AsEnumerable().FirstOrDefault(song => identifiers.MatchesSong(song));
 
 				return song;
 			}
@@ -56,27 +52,27 @@ namespace Xyzu.Library
 				if (identifiers is null)
 					return null;
 
-				ISong song = await SQLiteLibrary.SongsTableAsync.FirstOrDefaultAsync(identifiers.MatchesSong<SongEntity>());
+				ISong? song = SQLiteLibrary.SongsTable.AsEnumerable().FirstOrDefault(song => identifiers.MatchesSong(song));
 
-				return song;
+				return await Task.FromResult(song);
 			}
 			IEnumerable<ISong> ILibraryDroid.ISongs.GetSongs(ILibraryDroid.IIdentifiers? identifiers)
 			{
-				TableQuery<SongEntity> songs = identifiers is null
+				IEnumerable<ISong> songs = identifiers is null
 					? SQLiteLibrary.SongsTable
-					: SQLiteLibrary.SongsTable.Where(identifiers.MatchesSong<SongEntity>());
+					: SQLiteLibrary.SongsTable.AsEnumerable().Where(_ => identifiers.MatchesSong(_));
 
 				foreach (ISong song in songs)
 					yield return song;
 			}
 			async IAsyncEnumerable<ISong> ILibraryDroid.ISongs.GetSongs(ILibraryDroid.IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
 			{
-				AsyncTableQuery<SongEntity> songs = identifiers is null
-					? SQLiteLibrary.SongsTableAsync
-					: SQLiteLibrary.SongsTableAsync.Where(identifiers.MatchesSong<SongEntity>());
+				IEnumerable<ISong> songs = identifiers is null
+					? SQLiteLibrary.SongsTable
+					: SQLiteLibrary.SongsTable.AsEnumerable().Where(_ => identifiers.MatchesSong(_));
 
-				foreach (ISong song in await songs.ToListAsync())
-					yield return song;
+				foreach (ISong song in songs)
+					yield return await Task.FromResult(song);
 			}
 
 			ISong? ILibraryDroid.ISongs.PopulateSong(ISong? song)

@@ -15,8 +15,13 @@ namespace Xyzu.Library.TagLibSharp
 	{
 		public class OnCreate : ILibrary.IOnCreateActions.Default
 		{
+			public IDictionary<string, string>? Paths { get; private set; }
+			public Func<IDictionary<string, string>>? OnPaths { get; set; }
+
 			public override async Task<ISong?> Song(string id)
 			{
+				Paths ??= OnPaths?.Invoke();
+
 				string? filepath = Paths is null || Paths.TryGetValue(id, out string? outpath) is false ? null : outpath;
 				Uri? uri = filepath is null ? null : Uri.TryCreate(filepath, UriKind.RelativeOrAbsolute, out Uri? outuri) ? outuri : null;
 

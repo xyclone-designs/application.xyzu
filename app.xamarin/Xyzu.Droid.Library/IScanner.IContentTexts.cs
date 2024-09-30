@@ -1,7 +1,4 @@
-﻿using Android.Content;
-using Android.Content.Res;
-using Android.OS;
-
+﻿
 namespace Xyzu.Library
 {
 	public partial interface IScanner

@@ -162,7 +162,7 @@ namespace Xyzu.Views.NowPlaying
 
 		protected virtual void SettingsPropertyChanged(object? sender, PropertyChangedEventArgs args) 
 		{ }
-		protected async virtual void OnPropertyChanged([CallerMemberName] string? propertyname = null)
+		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyname = null)
 		{
 			switch (propertyname)
 			{
@@ -171,43 +171,19 @@ namespace Xyzu.Views.NowPlaying
 					PlayerQueuePropertyChanged(this, new PropertyChangedEventArgs(nameof(IQueue.CurrentIndex)));
 					break;
 
-				case nameof(SongPrevious):
-					if (SongPrevious is null)
-					{
-						_SongPreviousBitmap = null;
-						_SongPreviousBlurDrawable = null;
-					}
-					else if (Images is not null)
-					{
-						_SongPreviousBitmap ??= await Images.GetBitmapAsync(IImagesDroid.DefaultOperations.Rounded, null, SongPrevious);
-						_SongPreviousBlurDrawable ??= await Images.GetDrawableAsync(IImagesDroid.DefaultOperations.BlurDownsample, null, _SongPreviousBitmap, SongPrevious);
-					}
+				case nameof(SongPrevious) when SongPrevious is null:
+					_SongPreviousBitmap = null;
+					_SongPreviousBlurDrawable = null;
 					break;			
 
-				case nameof(SongCurrent):
-					if (SongCurrent is null)
-					{
-						_SongCurrentBitmap = null;
-						_SongCurrentBlurDrawable = null;
-					}
-					else if (Images is not null)
-					{
-						_SongCurrentBitmap ??= await Images.GetBitmapAsync(IImagesDroid.DefaultOperations.Rounded, null, SongCurrent);
-						_SongCurrentBlurDrawable ??= await Images.GetDrawableAsync(IImagesDroid.DefaultOperations.BlurDownsample, null, _SongCurrentBitmap, SongCurrent);
-					}
+				case nameof(SongCurrent) when SongCurrent is null:
+					_SongCurrentBitmap = null;
+					_SongCurrentBlurDrawable = null;
 					break;			
 
-				case nameof(SongNext):
-					if (SongNext is null)
-					{
-						_SongNextBitmap = null;
-						_SongNextBlurDrawable = null;
-					}
-					else if (Images is not null)
-					{
-						_SongNextBitmap ??= await Images.GetBitmapAsync(IImagesDroid.DefaultOperations.Rounded, null, SongNext);
-						_SongNextBlurDrawable ??= await Images.GetDrawableAsync(IImagesDroid.DefaultOperations.BlurDownsample, null, _SongNextBitmap, SongNext);
-					}
+				case nameof(SongNext) when SongNext is null:
+					_SongNextBitmap = null;
+					_SongNextBlurDrawable = null;
 					break;
 
 				default: break;
@@ -337,7 +313,7 @@ namespace Xyzu.Views.NowPlaying
 				default: break;
 			}
 		}
-		public void PlayerQueuePropertyChanged(object? sender, PropertyChangedEventArgs args)
+		public async void PlayerQueuePropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			switch (args.PropertyName)
 			{
@@ -364,9 +340,12 @@ namespace Xyzu.Views.NowPlaying
 						_SongNext = null;
 					}
 
-					SongPrevious ??= Library?.Songs.PopulateSong(Player?.Queue.PreviousSong);
-					SongCurrent ??= Library?.Songs.PopulateSong(Player?.Queue.CurrentSong);
-					SongNext ??= Library?.Songs.PopulateSong(Player?.Queue.NextSong);
+					if (Library is not null && Player is not null)
+					{
+						SongPrevious ??= await Library.Songs.PopulateSong(Player.Queue.PreviousSong, default);
+						SongCurrent ??= await Library.Songs.PopulateSong(Player.Queue.CurrentSong, default);
+						SongNext ??= await Library.Songs.PopulateSong(Player.Queue.NextSong, default);
+					}
 
 					ViewRefresh();
 					break;

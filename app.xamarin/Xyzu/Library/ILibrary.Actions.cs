@@ -30,8 +30,6 @@ namespace Xyzu.Library
 		}
 		public interface IOnCreateActions : IActions
 		{
-			IDictionary<string, string>? Paths { get; set; }
-
 			Task<IAlbum?> Album(string id);
 			Task<IArtist?> Artist(string id);
 			Task<IGenre?> Genre(string id);
@@ -40,8 +38,6 @@ namespace Xyzu.Library
 
 			public new class Default: IActions.Default, IOnCreateActions
 			{
-				public IDictionary<string, string>? Paths { get; set; }
-
 				public virtual Task<IAlbum?> Album(string id) { return Task.FromResult<IAlbum?>(null); }
 				public virtual Task<IArtist?> Artist(string id) { return Task.FromResult<IArtist?>(null); }
 				public virtual Task<IGenre?> Genre(string id) { return Task.FromResult<IGenre?>(null); }

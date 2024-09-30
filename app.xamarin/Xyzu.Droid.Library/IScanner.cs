@@ -20,27 +20,24 @@ namespace Xyzu.Library
 	public partial interface IScanner
 	{
 		ServiceBinder? Binder { get; set; }
-		ILibraryDroid? Library { get; set; }
-		INotification? Notification { get; set; }
+		ServiceNotification? Notification { get; set; }
 		ComponentName? Componentname { get; set; }
 
 		int LatestStartId { get; set; }
 		Intent? LatestIntent { get; set; }
 
-		Task ScanSoft(CancellationToken cancellationtoken = default);
-		Task ScanHard(CancellationToken cancellationtoken = default);
+		void ScanSoft(CancellationToken cancellationtoken = default);
+		void ScanHard(CancellationToken cancellationtoken = default);
 
-		public static bool ShouldScan(IEnumerable<string> filepaths, IEnumerable<ISong> songs, out IEnumerable<string> filepathstoadd, out IEnumerable<string> filepathstodelete)
+		public static bool ShouldScan(
+			IEnumerable<string> dirfilepaths, IEnumerable<string> sqlitefilepaths, 
+			out IEnumerable<string> filepathstoadd, out IEnumerable<string> filepathstodelete)
 		{
 			filepathstoadd = Enumerable.Empty<string>();
 			filepathstodelete = Enumerable.Empty<string>();
 
-			IEnumerable<string> sqlitefilepaths = songs
-				.Select(songentity => songentity.Filepath)
-				.OfType<string>();
-
-			filepathstoadd = filepaths.Where(filepath => sqlitefilepaths.Contains(filepath) is false);
-			filepathstodelete = sqlitefilepaths.Where(filepath => filepaths.Contains(filepath) is false);
+			filepathstoadd = dirfilepaths.Where(filepath => sqlitefilepaths.Contains(filepath) is false);
+			filepathstodelete = sqlitefilepaths.Where(filepath => dirfilepaths.Contains(filepath) is false);
 
 			return filepathstoadd.Any() || filepathstodelete.Any();
 		}
@@ -78,8 +75,7 @@ namespace Xyzu.Library
 		{
 			public Action? OnBindAction { get; set; }
 			public ServiceBinder? Binder { get; set; }
-			public ILibraryDroid? Library { get; set; }
-			public INotification? Notification { get; set; }
+			public ServiceNotification? Notification { get; set; } 
 			public ComponentName? Componentname { get; set; }
 
 			public int LatestStartId { get; set; }
@@ -91,7 +87,7 @@ namespace Xyzu.Library
 				Cancellationtokensource?.Cancel();
 
 				Binder?.ServiceConnection?.OnServiceDisconnected(Componentname);
-				StopForeground(StopForegroundFlags.Detach);
+				StopForeground(StopForegroundFlags.Remove);
 				StopSelf(LatestStartId);
 
 				base.OnDestroy();
@@ -104,8 +100,6 @@ namespace Xyzu.Library
 			{
 				base.OnStartCommand(LatestIntent = intent, flags, LatestStartId = startId);
 
-				Notification ??= new INotification.Default(Notifications.Id, Notifications.ChannelId, Notifications.ChannelName);
-
 				switch (intent?.Action)
 				{
 					case IntentActions.Destroy:
@@ -113,20 +107,16 @@ namespace Xyzu.Library
 						break;
 
 					case IntentActions.ScanSoft when Binder is not null:
-						Task.Run(async () => await ScanSoft()); 
+						if (Notification?.Built is false) StartForeground(Notification.Id, Notification.Build());
+						ScanSoft();
 						break;
 
 					case IntentActions.ScanHard when Binder is not null:
-						Task.Run(async () => await ScanHard());
-						break;
-
-					case IntentActions.ScanSoft:
-					case IntentActions.ScanHard:
-						StartForeground(Notification.Id, Notification.CompatBuilder.Build());
+						if (Notification?.Built is false) StartForeground(Notification.Id, Notification.Build());
+						ScanHard();
 						break;
 
 					default: break;
-
 				}
 
 				return StartCommandResult.Sticky;
@@ -134,7 +124,7 @@ namespace Xyzu.Library
 
 			private async IAsyncEnumerable<AlbumEntity> CreateAlbums(IEnumerable<ISong> songs, ILibraryDroid.IParameters parameters, [EnumeratorCancellation] CancellationToken cancellationtoken = default)
 			{
-				if (Library is null || songs.Any() is false)
+				if (Binder?.Library is null || songs.Any() is false)
 					yield break;
 
 				IAlbum? album = null;
@@ -168,14 +158,14 @@ namespace Xyzu.Library
 								.Append(albumsong.Id);
 
 						parameters.RetrievedSongExtra = albumsong;
-						if (Binder is not null) await ILibraryDroid.OnRetrieve(album, Binder.Actions?.OnRetrieve, parameters);
+						if (Binder is not null) await ILibraryDroid.OnRetrieve(album, Binder.Library.Actions?.OnRetrieve, parameters);
 
 						if (album.Artwork?.Buffer is null && album.Artwork?.Uri is null)
 						{
 							parameters.Filepath = albumsong.Filepath;
 							parameters.Uri = albumsong.Uri;
 
-							if (Binder is not null) await ILibraryDroid.OnRetrieve(album.Artwork ??= new IImage.Default(), Binder.Actions?.OnRetrieve, parameters);
+							if (Binder is not null) await ILibraryDroid.OnRetrieve(album.Artwork ??= new IImage.Default(), Binder.Library.Actions?.OnRetrieve, parameters);
 						}
 					}
 
@@ -184,7 +174,7 @@ namespace Xyzu.Library
 			}
 			private async IAsyncEnumerable<ArtistEntity> CreateArtists(IEnumerable<ISong> songs, ILibraryDroid.IParameters parameters, [EnumeratorCancellation] CancellationToken cancellationtoken = default)
 			{
-				if (Library is null || songs.Any() is false)
+				if (Binder?.Library is null || songs.Any() is false)
 					yield break;
 
 				IArtist? artist = null;
@@ -214,14 +204,14 @@ namespace Xyzu.Library
 								.Append(artistsong.Id);
 
 						parameters.RetrievedSongExtra = artistsong;
-						if (Binder is not null) await ILibraryDroid.OnRetrieve(artist, Binder.Actions?.OnRetrieve, parameters);
+						if (Binder is not null) await ILibraryDroid.OnRetrieve(artist, Binder.Library.Actions?.OnRetrieve, parameters);
 
 						if (artist.Image?.Buffer is null && artist.Image?.Uri is null)
 						{
 							parameters.Filepath = artistsong.Filepath;
 							parameters.Uri = artistsong.Uri;
 
-							if (Binder is not null) await ILibraryDroid.OnRetrieve(artist.Image ??= new IImage.Default(), Binder.Actions?.OnRetrieve, parameters);
+							if (Binder is not null) await ILibraryDroid.OnRetrieve(artist.Image ??= new IImage.Default(), Binder.Library.Actions?.OnRetrieve, parameters);
 						}
 					}
 
@@ -230,7 +220,7 @@ namespace Xyzu.Library
 			}
 			private async IAsyncEnumerable<GenreEntity> CreateGenres(IEnumerable<ISong> songs, ILibraryDroid.IParameters parameters, [EnumeratorCancellation] CancellationToken cancellationtoken = default)
 			{
-				if (Library is null || songs.Any() is false)
+				if (Binder?.Library is null || songs.Any() is false)
 					yield break;
 
 				IGenre? genre = null;
@@ -259,7 +249,7 @@ namespace Xyzu.Library
 								.Append(genresong.Id);
 
 						parameters.RetrievedSongExtra = genresong;
-						if (Binder is not null) await ILibraryDroid.OnRetrieve(genre, Binder.Actions?.OnRetrieve, parameters);
+						if (Binder is not null) await ILibraryDroid.OnRetrieve(genre, Binder.Library.Actions?.OnRetrieve, parameters);
 					}
 
 				if (genre != null)
@@ -267,35 +257,35 @@ namespace Xyzu.Library
 			}
 			private async IAsyncEnumerable<SongEntity> CreateSongs(IEnumerable<string> songfilepaths, ILibraryDroid.IParameters parameters, [EnumeratorCancellation] CancellationToken cancellationtoken = default)
 			{
-				if (Library is null || songfilepaths.Any() is false)
+				if (Binder?.Library is null || songfilepaths.Any() is false)
 					yield break;
 
-				if (Binder?.Actions?.OnCreate is ILibraryDroid.IOnCreateActions actions)
+				if (Binder.Library.Actions?.OnCreate is ILibraryDroid.IOnCreateActions actions)
 					foreach (string songfilepath in songfilepaths)
 						if (await actions.Song(songfilepath) is ISong song)
 						{
 							Notification?.Update(Notification?.ContentTextsScanning?.TextSongs, song.Filepath);
 
-							await ILibraryDroid.OnRetrieve(song, Binder.Actions?.OnRetrieve, parameters);
+							await ILibraryDroid.OnRetrieve(song, Binder.Library.Actions?.OnRetrieve, parameters);
 
 							parameters.Filepath = song.Filepath;
 							parameters.Uri = song.Uri;
 
-							await ILibraryDroid.OnRetrieve(song.Artwork ??= new IImage.Default(), Binder.Actions?.OnRetrieve, parameters);
+							await ILibraryDroid.OnRetrieve(song.Artwork ??= new IImage.Default(), Binder.Library.Actions?.OnRetrieve, parameters);
 
 							yield return new SongEntity(song);
 						}
 			}
-
-			public async Task ScanHard(CancellationToken cancellationtoken = default)
+			
+			public async void ScanHard(CancellationToken cancellationtoken = default)
 			{
-				if (Library is null || Binder?.Filepaths is null)
+				if (Binder?.Library is null || Binder?.Filepaths is null)
 					return;
 
-				await Binder.SQLiteLibrary.AlbumsTableAsync.DeleteAsync(_ => true);
-				await Binder.SQLiteLibrary.ArtistsTableAsync.DeleteAsync(_ => true);
-				await Binder.SQLiteLibrary.GenresTableAsync.DeleteAsync(_ => true);
-				await Binder.SQLiteLibrary.SongsTableAsync.DeleteAsync(_ => true);
+				await Binder.Library.SQLiteLibrary.AlbumsTableAsync.DeleteAsync(_ => true);
+				await Binder.Library.SQLiteLibrary.ArtistsTableAsync.DeleteAsync(_ => true);
+				await Binder.Library.SQLiteLibrary.GenresTableAsync.DeleteAsync(_ => true);
+				await Binder.Library.SQLiteLibrary.SongsTableAsync.DeleteAsync(_ => true);
 
 				using ILibraryDroid.IParameters parameters = new ILibraryDroid.IParameters.Default
 				{
@@ -305,37 +295,37 @@ namespace Xyzu.Library
 						Uri = true,
 					},
 					CursorPositions = new Dictionary<string, int> { },
-					CursorLazy = parameters => Binder.CursorToActions(() => Binder.DefaultCursorBuilder?
+					CursorLazy = parameters => Binder.CursorToActions(() => Binder.Library.DefaultCursorBuilder?
 						.WithLibraryIdentifiers(parameters.Identifiers)
 						.Build()),
 				};
 
-				await foreach (SongEntity songentity in CreateSongs(Binder.Filepaths, parameters))
+				await foreach (SongEntity songentity in CreateSongs(Binder.Filepaths, parameters, cancellationtoken))
 				{
 					Notification?.Update(Notification.ContentTextsSaving?.TextSongs, songentity.Id);
 
-					await Binder.SQLiteLibrary.ConnectionAsync.InsertAsync(songentity);
+					await Binder.Library.SQLiteLibrary.ConnectionAsync.InsertAsync(songentity);
 				}
 
-				await foreach (AlbumEntity albumentity in CreateAlbums(Binder.SQLiteLibrary.SongsTable, parameters))
+				await foreach (AlbumEntity albumentity in CreateAlbums(Binder.Library.SQLiteLibrary.SongsTable, parameters, cancellationtoken))
 				{
 					Notification?.Update(Notification?.ContentTextsSaving?.TextAlbums, string.Format("{0} - {1}", albumentity.Title, albumentity.Artist));
 
-					await Binder.SQLiteLibrary.ConnectionAsync.InsertAsync(albumentity);
+					await Binder.Library.SQLiteLibrary.ConnectionAsync.InsertAsync(albumentity);
 				}
 
-				await foreach (ArtistEntity artistentity in CreateArtists(Binder.SQLiteLibrary.SongsTable, parameters))
+				await foreach (ArtistEntity artistentity in CreateArtists(Binder.Library.SQLiteLibrary.SongsTable, parameters, cancellationtoken))
 				{
 					Notification?.Update(Notification?.ContentTextsSaving?.TextArtists, artistentity.Name);
 
-					await Binder.SQLiteLibrary.ConnectionAsync.InsertAsync(artistentity);
+					await Binder.Library.SQLiteLibrary.ConnectionAsync.InsertAsync(artistentity);
 				}
 
-				await foreach (GenreEntity genreentity in CreateGenres(Binder.SQLiteLibrary.SongsTable, parameters))
+				await foreach (GenreEntity genreentity in CreateGenres(Binder.Library.SQLiteLibrary.SongsTable, parameters, cancellationtoken))
 				{
 					Notification?.Update(Notification?.ContentTextsSaving?.TextGenres, genreentity.Name);
 
-					await Binder.SQLiteLibrary.ConnectionAsync.InsertAsync(genreentity);
+					await Binder.Library.SQLiteLibrary.ConnectionAsync.InsertAsync(genreentity);
 				}
 
 				OnStartCommand(
@@ -343,12 +333,21 @@ namespace Xyzu.Library
 					flags: StartCommandFlags.Retry,
 					intent: new Intent(this, typeof(IScanner.ScannerService)).SetAction(IntentActions.Destroy));
 			}
-			public async Task ScanSoft(CancellationToken cancellationtoken = default)
+			public async void ScanSoft(CancellationToken cancellationtoken = default)
 			{
-				if (Library is null || Binder?.Filepaths is null)
+				if (Binder?.Library is null || Binder.Filepaths is null)
 					return;
 
-				ShouldScan(Binder.Filepaths, Binder.SQLiteLibrary.SongsTable, out IEnumerable<string> filepathstoadd, out IEnumerable<string> filepathstodelete);
+				if (ShouldScan(
+					Binder.Filepaths.ToList(), 
+					Binder.Library.SQLiteLibrary.SongsTable.Select(_ => _.Filepath).OfType<string>().ToList(),
+					out IEnumerable<string> filepathstoadd, out IEnumerable<string> filepathstodelete) is false)
+				{
+					OnStartCommand(
+						startId: 0,
+						flags: StartCommandFlags.Retry,
+						intent: new Intent(this, typeof(IScanner.ScannerService)).SetAction(IntentActions.Destroy)); return;
+				}
 
 				Notification?.Update(Notification.ContentTextsPreparing?.TextSongs, null);
 
@@ -360,7 +359,7 @@ namespace Xyzu.Library
 						Uri = true,
 					},
 					CursorPositions = new Dictionary<string, int> { },
-					CursorLazy = parameters => Binder.CursorToActions(() => Binder?.DefaultCursorBuilder?
+					CursorLazy = parameters => Binder.CursorToActions(() => Binder.Library.DefaultCursorBuilder?
 						.WithLibraryIdentifiers(parameters.Identifiers)
 						.Build()),
 				};
@@ -370,23 +369,23 @@ namespace Xyzu.Library
 
 				// Songs
 				#region
-				await foreach (SongEntity songentity in CreateSongs(filepathstoadd, parameters))
+				await foreach (SongEntity songentity in CreateSongs(filepathstoadd, parameters, cancellationtoken))
 				{
 					Notification?.Update(Notification.ContentTextsSaving?.TextSongs, songentity.Id);
 
 					songs_add.Add(songentity);
 
-					await Binder.SQLiteLibrary.ConnectionAsync.InsertAsync(songentity);
+					await Binder.Library.SQLiteLibrary.ConnectionAsync.InsertAsync(songentity);
 				}
 
-				foreach (SongEntity song_remove in Binder.SQLiteLibrary.SongsTable)
+				foreach (SongEntity song_remove in Binder.Library.SQLiteLibrary.SongsTable)
 					if (song_remove.Filepath != null && filepathstodelete.Contains(song_remove.Filepath))
 					{
 						Notification?.Update(Notification.ContentTextsRemoving?.TextSongs, song_remove.Id);
 
 						songs_remove.Add(song_remove);
 
-						await Binder.SQLiteLibrary.ConnectionAsync.DeleteAsync(song_remove);
+						await Binder.Library.SQLiteLibrary.ConnectionAsync.DeleteAsync(song_remove);
 					}
 				#endregion
 				// Songs
@@ -405,7 +404,7 @@ namespace Xyzu.Library
 					{
 						return
 							ILibraryDroid.IdFromAlbumTitle(song_add.Album, song_add.AlbumArtist) is string albumid &&
-							Binder.SQLiteLibrary.AlbumsTable.Any<AlbumEntity>(album => album.Id == albumid) is false;
+							Binder.Library.SQLiteLibrary.AlbumsTable.Any<AlbumEntity>(album => album.Id == albumid) is false;
 
 					}))))
 				{
@@ -413,10 +412,10 @@ namespace Xyzu.Library
 
 					albums_add.Add(albumentity);
 
-					await Binder.SQLiteLibrary.ConnectionAsync.InsertAsync(albumentity);
+					await Binder.Library.SQLiteLibrary.ConnectionAsync.InsertAsync(albumentity);
 				}
 
-				foreach (AlbumEntity albumentity in Binder.SQLiteLibrary.AlbumsTable)
+				foreach (AlbumEntity albumentity in Binder.Library.SQLiteLibrary.AlbumsTable)
 				{
 					IAlbum album = albumentity;
 
@@ -442,13 +441,13 @@ namespace Xyzu.Library
 
 						albums_remove.Add(albumentity);
 
-						await Binder.SQLiteLibrary.ConnectionAsync.DeleteAsync(albumentity);
+						await Binder.Library.SQLiteLibrary.ConnectionAsync.DeleteAsync(albumentity);
 					}
 					else
 					{
 						Notification?.Update(Notification.ContentTextsSaving?.TextAlbums, string.Format("{0} - {1}", albumentity.Title, albumentity.Artist));
 
-						await Binder.SQLiteLibrary.ConnectionAsync.InsertAsync(albumentity);
+						await Binder.Library.SQLiteLibrary.ConnectionAsync.UpdateAsync(albumentity);
 					}
 				}
 				#endregion
@@ -468,7 +467,7 @@ namespace Xyzu.Library
 					{
 						return
 							ILibraryDroid.IdFromArtistName(song_add.Artist ?? song_add.AlbumArtist) is string artistid &&
-							Binder.SQLiteLibrary.ArtistsTable.Any<ArtistEntity>(artist => artist.Id == artistid) is false;
+							Binder.Library.SQLiteLibrary.ArtistsTable.Any<ArtistEntity>(artist => artist.Id == artistid) is false;
 
 					}))))
 				{
@@ -476,10 +475,10 @@ namespace Xyzu.Library
 
 					artists_add.Add(artistentity);
 
-					await Binder.SQLiteLibrary.ConnectionAsync.InsertAsync(artistentity);
+					await Binder.Library.SQLiteLibrary.ConnectionAsync.InsertAsync(artistentity);
 				}
 
-				foreach (ArtistEntity artistentity in Binder.SQLiteLibrary.ArtistsTable)
+				foreach (ArtistEntity artistentity in Binder.Library.SQLiteLibrary.ArtistsTable)
 				{
 					IArtist artist = artistentity;
 
@@ -509,13 +508,13 @@ namespace Xyzu.Library
 
 						artists_remove.Add(artistentity);
 
-						await Binder.SQLiteLibrary.ConnectionAsync.DeleteAsync(artistentity);
+						await Binder.Library.SQLiteLibrary.ConnectionAsync.DeleteAsync(artistentity);
 					}
 					else
 					{
 						Notification?.Update(Notification.ContentTextsSaving?.TextArtists, artist.Name);
 
-						await Binder.SQLiteLibrary.ConnectionAsync.InsertAsync(artistentity);
+						await Binder.Library.SQLiteLibrary.ConnectionAsync.UpdateAsync(artistentity);
 					}
 				}
 				#endregion
@@ -535,7 +534,7 @@ namespace Xyzu.Library
 					{
 						return
 							ILibraryDroid.IdFromGenreName(song_add.Genre) is string genreid &&
-							Binder.SQLiteLibrary.GenresTable.Any<GenreEntity>(genre => genre.Id == genreid) is false;
+							Binder.Library.SQLiteLibrary.GenresTable.Any<GenreEntity>(genre => genre.Id == genreid) is false;
 
 					}))))
 				{
@@ -543,10 +542,10 @@ namespace Xyzu.Library
 
 					genres_add.Add(genreentity);
 
-					await Binder.SQLiteLibrary.ConnectionAsync.InsertAsync(genreentity);
+					await Binder.Library.SQLiteLibrary.ConnectionAsync.InsertAsync(genreentity);
 				}
 
-				foreach (GenreEntity genreentity in Binder.SQLiteLibrary.GenresTable)
+				foreach (GenreEntity genreentity in Binder.Library.SQLiteLibrary.GenresTable)
 				{
 					IGenre genre = genreentity;
 
@@ -572,13 +571,13 @@ namespace Xyzu.Library
 
 						genres_remove.Add(genreentity);
 
-						await Binder.SQLiteLibrary.ConnectionAsync.DeleteAsync(genreentity);
+						await Binder.Library.SQLiteLibrary.ConnectionAsync.DeleteAsync(genreentity);
 					}
 					else
 					{
 						Notification?.Update(Notification.ContentTextsSaving?.TextGenres, genreentity.Name);
 
-						await Binder.SQLiteLibrary.ConnectionAsync.InsertAsync(genreentity);
+						await Binder.Library.SQLiteLibrary.ConnectionAsync.UpdateAsync(genreentity);
 					}
 				}
 				#endregion
