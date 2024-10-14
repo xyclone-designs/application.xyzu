@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android;
+﻿using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -25,6 +23,7 @@ using Xyzu.Settings.System;
 using Xyzu.Settings.UserInterface.Library;
 
 using XyzuResource = Xyzu.Droid.Resource;
+using GlideInstance = Xyzu.Images.Glide.Instance;
 using ExoPlayerService = Xyzu.Player.Exoplayer.ExoPlayerService;
 
 namespace Xyzu.Activities
@@ -76,8 +75,8 @@ namespace Xyzu.Activities
 			XyzuBroadcast.Init(Application.Context, InitBroadcast);
 			XyzuSettings.Init(Application.Context, InitSettings);
 			XyzuLibrary.Init(Application.Context, InitLibrary);
-			XyzuImages.Init(Application.Context, InitImages);
 			XyzuPlayer.Init(Application.Context, typeof(ExoPlayerService), InitPlayer);
+			XyzuImages.Init(new GlideInstance(Application.Context), InitImages);
 
 			StartActivity(XyzuSettings.Utils.MainActivityIntent(this, null));
 		}
@@ -132,9 +131,9 @@ namespace Xyzu.Activities
 				} },
 			};
 		}
-		public void InitImages(XyzuImages xyzuimages)
+		public void InitImages(XyzuImages xyzuimages) 
 		{
-			xyzuimages.LibraryMisc = XyzuLibrary.Instance.Misc;
+			((IImagesDroid.Default)xyzuimages.Images).SetBuffer = async model => await XyzuLibrary.Instance.Misc.SetImage(model, default);
 		}
 		public void InitLibrary(XyzuLibrary xyzulibrary)
 		{
@@ -158,7 +157,7 @@ namespace Xyzu.Activities
 			};
 			xyzulibrary.Actions = new ILibrary.IActions.Container
 			{
-				OnCreate = new Library.TagLibSharp.TagLibSharpActions.OnCreate
+				OnCreate = new Library.FFProbe.FFProbeActions.OnCreate
 				{
 					OnPaths = () => FilesSettings.Files()
 						.ToDictionary(file => file.AbsolutePath, file => file.AbsolutePath),
@@ -205,19 +204,21 @@ namespace Xyzu.Activities
 							ChannelName = XyzuResource.String.playerserviceoptions_notificationoptions_channel_name,
 							ChannelDescription = XyzuResource.String.playerserviceoptions_notificationoptions_channel_description,
 							DefaultId = "",
-							DefaultAlbum = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unkownalbum),
-							DefaultArtist = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unkownartist),
-							DefaultTitle = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unkowntitle),
+							DefaultAlbum = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unknownalbum),
+							DefaultArtist = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unknownartist),
+							DefaultTitle = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unknowntitle),
 							OnBitmap = (bitmapfactoryoptions, song) =>
 							{
-								return XyzuImages.Instance.GetBitmap(
+								return Task.Run(async () => await XyzuImages.Instance.GetBitmap(
+									cancellationtoken: default,
 									options: bitmapfactoryoptions,
 									operations: IImages.DefaultOperations.Downsample,
 									sources: new object?[]
 									{
 										song,
 										XyzuResource.Drawable.icon_xyzu
-									});
+
+									})).GetAwaiter().GetResult();
 							},
 							ContentIntent = PendingIntent.GetActivity(
 								requestCode: 0,

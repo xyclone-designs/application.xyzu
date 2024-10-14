@@ -97,7 +97,9 @@ namespace Xyzu.Views.Info
 			{
 				await Images.SetToImageView(IImages.DefaultOperations.CirculariseDownsample, ArtistImage, null, default, Artist);
 
-				if (Context != null && Images.GetPalette(Artist)?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+				if (Context != null &&
+					await Images.GetPalette(default, Artist) is Palette palette &&
+					palette.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
 				{
 					Title?.SetTextColor(color);
 

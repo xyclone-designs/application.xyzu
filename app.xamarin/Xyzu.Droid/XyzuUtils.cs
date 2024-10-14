@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Views;
@@ -51,7 +49,7 @@ namespace Xyzu
 			}
 			public static BottomSheetDialog BottomSheet(Context context, Action<BottomSheetDialog>? bottomsheetdialogaction, int? style = null)
 			{
-				BottomSheetDialog bottomsheetdialog = new BottomSheetDialog(context, style ?? Resource.Style.Xyzu_Material_Dialog_Sheet_Bottom);
+				BottomSheetDialog bottomsheetdialog = new (context, style ?? Resource.Style.Xyzu_Material_Dialog_Sheet_Bottom);
 				
 				bottomsheetdialog.Behavior.State = BottomSheetBehavior.StateExpanded;
 				bottomsheetdialog.Behavior.MaxWidth = MenuOptionsUtils.DialogMaxWidth(context);
@@ -107,9 +105,7 @@ namespace Xyzu
 			public static Intent? App_Browser(Context? context, string? url)
 			{
 				AndroidUri? uri = AndroidUri.Parse(url);
-				Intent intent = new Intent(Intent.ActionView, uri);
-
-				Intent? intentchooser = Intent.CreateChooser(intent, null as string);
+				Intent intent = new (Intent.ActionView, uri);
 
 				return intent;
 			}
@@ -135,7 +131,7 @@ namespace Xyzu
 			{
 				AndroidUri? androiduri = context is null ? null : FileProvider.GetUriForFile(context, FilePrividerAuthority, file);
 
-				Intent intent = new Intent(Intent.ActionView);
+				Intent intent = new (Intent.ActionView);
 				intent.SetDataAndType(androiduri, "text/plain");
 
 				Intent? intentchooser = Intent.CreateChooser(intent, context?.GetString(Resource.String.intentchooser_view_errorlog));

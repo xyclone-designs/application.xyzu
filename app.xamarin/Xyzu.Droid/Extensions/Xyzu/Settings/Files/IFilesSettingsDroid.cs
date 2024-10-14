@@ -13,7 +13,7 @@ namespace Xyzu.Settings.Files
 	public interface IFilesSettingsDroid<T> : IFilesSettings<T> { } 
 	public interface IFilesSettingsDroid : IFilesSettings 
 	{
-		private static File _DirectoryStorage = new(IntenalStorage);
+		private readonly static File _FileIntenalStorage = new(IntenalStorage);
 
 		public const string IntenalStorage = "/storage";
 		public const string IntenalStorageSelf = IntenalStorage + "/self";
@@ -25,9 +25,9 @@ namespace Xyzu.Settings.Files
 		public readonly static string? DirectoryMusic = AndroidOSEnvironment.DirectoryMusic;
 		public readonly static string? DirectoryPodcasts = AndroidOSEnvironment.DirectoryPodcasts;
 
-		public static File? DirectoryStorage
+		public static File? FileIntenalStorage
 		{
-			get => _DirectoryStorage.Exists() ? _DirectoryStorage : null;
+			get => _FileIntenalStorage.Exists() ? _FileIntenalStorage : null;
 		}
 		
 		public new class Defaults : IFilesSettings.Defaults

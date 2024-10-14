@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Media;
+﻿using Android.Media;
 
 using System;
 
@@ -65,7 +63,7 @@ namespace Xyzu.Library.Models
 					metadatakey: MetadataKey.DiscNumber,
 					onconvertmetadata: discnumber =>
 					{
-						if (discnumber.Contains("/"))
+						if (discnumber.Contains('/'))
 							discnumber = discnumber.Split("/")[0];
 
 						if (int.TryParse(discnumber, out int outdiscnumber))
@@ -103,14 +101,13 @@ namespace Xyzu.Library.Models
 
 			return retrieved;
 		}
-		public static IImage Retrieve(this IImage retrieved, IImage<bool>? retriever, MediaMetadataRetriever? mediametadataretriever)
+		public static IImage Retrieve(this IImage retrieved, MediaMetadataRetriever? mediametadataretriever)
 		{
-			if (retriever is null || (retriever.Buffer && retrieved.Buffer is null) || (retriever.BufferHash && retrieved.BufferHash is null))
-				if (mediametadataretriever?.GetEmbeddedPicture() is byte[] buffer)
-				{
-					retrieved.Buffer = retriever?.Buffer ?? true ? buffer : null;
-					retrieved.BufferHash = retriever?.BufferHash ?? true ? IImage.Utils.BufferToHash(buffer) : null;
-				}
+			if (retrieved.Buffer is null && retrieved.BufferKey is null && mediametadataretriever?.GetEmbeddedPicture() is byte[] buffer)
+			{
+				retrieved.Buffer = buffer;
+				retrieved.BufferKey = IImage.Utils.BufferToHashString(buffer);
+			}
 
 			return retrieved;
 		}

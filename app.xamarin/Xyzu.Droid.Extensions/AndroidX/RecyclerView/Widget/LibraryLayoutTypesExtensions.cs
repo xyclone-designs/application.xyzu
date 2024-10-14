@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Content.Res;
 
 using Xyzu.Settings.Enums;

@@ -1,9 +1,11 @@
-﻿#nullable enable
-
+﻿using Android.Animation;
 using Android.Content;
 using Android.Content.Res;
+using Android.Hardware.Lights;
 using Android.OS;
 using Android.Views;
+using Android.Views.Animations;
+using AndroidX.AppCompat.Widget;
 using AndroidX.Fragment.App;
 using AndroidX.SwipeRefreshLayout.Widget;
 
@@ -15,8 +17,8 @@ using Google.Android.Material.FloatingActionButton;
 using System;
 using System.ComponentModel;
 
-using Xyzu.Droid;
 using Xyzu.Menus;
+using Xyzu.Views.Insets;
 using Xyzu.Views.NowPlaying;
 using Xyzu.Views.Toolbar;
 
@@ -33,6 +35,8 @@ namespace Xyzu.Activities
 			public const string IsFromNotification = "IntentKey_IsFromNotification";
 		}
 
+		protected StatusBarInsetView? _StatusBarPrimary;
+		protected StatusBarInsetView? _StatusBarSurface;
 		protected AppBarLayout? _Appbarlayout;
 		protected ToolbarSearchView? _ToolbarSearch;
 		protected FloatingActionButton? _Floatingactionbutton;
@@ -40,6 +44,40 @@ namespace Xyzu.Activities
 		protected virtual int AppbarlayoutResourceId { get; }
 		protected virtual int ToolbarSearchResourceId { get; }
 		protected virtual int FloatingactionbuttonResourceId { get; }
+
+		public StatusBarInsetView? StatusBarPrimary
+		{
+			get => _StatusBarPrimary;
+			set
+			{
+				_StatusBarPrimary = value;
+
+				StatusBarPrimaryAnimator ??= ValueAnimator.OfFloat(0F, 0.2F, 0.5F, 0.2F, 0F);
+
+				if (StatusBarPrimaryAnimator is not null)
+				{
+					StatusBarPrimaryAnimator.SetDuration(2_000);
+					StatusBarPrimaryAnimator.AddListener(new AnimatorListener
+					{
+						OnAnimationEndAction = animator => animator?.Start()
+					});
+					StatusBarPrimaryAnimator.AddUpdateListener(new AnimatorUpdateListener
+					{
+						OnAnimationUpdateAction = valueanimator =>
+						{
+							if (StatusBarPrimary is not null && valueanimator?.AnimatedValue is Java.Lang.Float alpha)
+								StatusBarPrimary.Alpha = alpha.FloatValue();
+						}
+					});
+				}
+			}
+		}
+		public StatusBarInsetView? StatusBarSurface
+		{
+			get => _StatusBarSurface;
+			set => _StatusBarSurface = value;
+		}
+		public ValueAnimator? StatusBarPrimaryAnimator { get; set; }
 
 		protected AppBarLayout Appbarlayout
 		{
@@ -118,6 +156,23 @@ namespace Xyzu.Activities
 		protected override void OnUiModeChanged(Configuration newConfig)
 		{
 			base.OnUiModeChanged(newConfig);
+		}
+		protected override void XyzuLibraryOnServiceConnectionChanged(object? sender, ServiceConnectionChangedEventArgs args)
+		{
+			base.XyzuLibraryOnServiceConnectionChanged(sender, args);
+
+			switch (XyzuLibrary.Instance.ScannerServiceConnectionState)
+			{
+				case ServiceConnectionChangedEventArgs.Events.Connected:
+					StatusBarPrimaryAnimator?.Start();
+					break;
+
+				case ServiceConnectionChangedEventArgs.Events.Disconnected:
+					StatusBarPrimaryAnimator?.End();
+					break;
+
+				default: break;
+			}
 		}
 		protected override void XyzuPlayerOnServiceConnectionChanged(object? sender, ServiceConnectionChangedEventArgs args)
 		{
@@ -200,6 +255,20 @@ namespace Xyzu.Activities
 			};
 		}
 
+		protected virtual void SetStatusBars(int? surface, int? primary)
+		{
+			if (primary.HasValue)
+				StatusBarPrimary =
+					FindViewById<StatusBarInsetView>(primary.Value) ??
+					throw new InflateException(string.Format("Could not find view '{0}'", primary.Value));
+
+			if (surface.HasValue)
+				StatusBarSurface =
+					FindViewById<StatusBarInsetView>(surface.Value) ??
+					throw new InflateException(string.Format("Could not find view '{0}'", surface.Value));
+
+			XyzuLibraryOnServiceConnectionChanged(this, new ServiceConnectionChangedEventArgs(XyzuLibrary.Instance.ScannerServiceConnectionState));
+		}
 		protected virtual void OnDialogRequested(DialogFragment? dialogfragment)
 		{
 			dialogfragment?.SetStyle(DialogFragment.StyleNoFrame, 0);

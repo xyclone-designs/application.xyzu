@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using System;
+﻿using System;
 
 namespace AndroidX.AppCompat.Widget
 {

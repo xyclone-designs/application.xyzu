@@ -14,32 +14,34 @@ namespace Xyzu.Library.ID3
 {
 	public partial class ID3Actions
 	{
+		public static async Task<Mp3?> GetMp3Async(string? filepath, Uri? uri)
+		{
+			Mp3? mp3 = null;
+
+			if (mp3 is null && filepath is not null)
+				await Task
+					.Run(() => { try { mp3 = new Mp3(filepath); } catch (Exception) { } })
+					.ConfigureAwait(false);
+
+			if (mp3 is null && uri is not null)
+				await Task
+					.Run(() => { try { mp3 = new Mp3(uri.AbsolutePath); } catch (Exception) { } })
+					.ConfigureAwait(false);
+
+			return mp3;
+		}
+
 		public class OnCreate : ILibrary.IOnCreateActions.Default { }
 		public class OnDelete : ILibrary.IOnDeleteActions.Default { }
 		public class OnRetrieve : ILibrary.IOnRetrieveActions.Default
 		{
-			static async Task<Mp3?> GetMp3(string? filepath, Uri? uri)
-			{
-				Mp3? mp3 = null;
-
-				if (mp3 is null && filepath is not null)
-					await Task
-						.Run(() => { try { mp3 = new Mp3(filepath); } catch (Exception) { } })
-						.ConfigureAwait(false);
-
-				if (mp3 is null && uri is not null)
-					await Task
-						.Run(() => { try { mp3 = new Mp3(uri.AbsolutePath); } catch (Exception) { } })
-						.ConfigureAwait(false);
-
-				return mp3;
-			}
-
 			public async override Task Album(IAlbum? retrieved, ISong? retrievedsong)
 			{
-				if (await GetMp3(retrievedsong?.Filepath, retrievedsong?.Uri) is Mp3 mp3)
+				if (retrieved is not null &&
+					retrievedsong is not null &&
+					await GetMp3Async(retrievedsong.Filepath, retrievedsong.Uri) is Mp3 mp3)
 				{
-					retrieved?.Retrieve(mp3);
+					retrieved.Retrieve(mp3);
 
 					mp3.Dispose();
 				}
@@ -48,9 +50,11 @@ namespace Xyzu.Library.ID3
 			}
 			public async override Task Artist(IArtist? retrieved, ISong? retrievedsong)
 			{
-				if (await GetMp3(retrievedsong?.Filepath, retrievedsong?.Uri) is Mp3 mp3)
+				if (retrieved is not null &&
+					retrievedsong is not null &&
+					await GetMp3Async(retrievedsong.Filepath, retrievedsong.Uri) is Mp3 mp3)
 				{
-					retrieved?.Retrieve(mp3);
+					retrieved.Retrieve(mp3);
 
 					mp3.Dispose();
 				}
@@ -59,9 +63,11 @@ namespace Xyzu.Library.ID3
 			}
 			public async override Task Genre(IGenre? retrieved, ISong? retrievedsong)
 			{
-				if (await GetMp3(retrievedsong?.Filepath, retrievedsong?.Uri) is Mp3 mp3)
+				if (retrieved is not null &&
+					retrievedsong is not null &&
+					await GetMp3Async(retrievedsong.Filepath, retrievedsong.Uri) is Mp3 mp3)
 				{
-					retrieved?.Retrieve(mp3);
+					retrieved.Retrieve(mp3);
 
 					mp3.Dispose();
 				}
@@ -70,9 +76,11 @@ namespace Xyzu.Library.ID3
 			}
 			public async override Task Playlist(IPlaylist? retrieved, ISong? retrievedsong)
 			{
-				if (await GetMp3(retrievedsong?.Filepath, retrievedsong?.Uri) is Mp3 mp3)
+				if (retrieved is not null && 
+					retrievedsong is not null &&
+					await GetMp3Async(retrievedsong.Filepath, retrievedsong.Uri) is Mp3 mp3)
 				{
-					retrieved?.Retrieve(mp3);
+					retrieved.Retrieve(mp3);
 
 					mp3.Dispose();
 				}
@@ -81,18 +89,18 @@ namespace Xyzu.Library.ID3
 			}
 			public async override Task Song(ISong? retrieved)
 			{
-				if (await GetMp3(retrieved?.Filepath, retrieved?.Uri) is Mp3 mp3)
+				if (retrieved is not null && await GetMp3Async(retrieved.Filepath, retrieved.Uri) is Mp3 mp3)
 				{
-					retrieved?.Retrieve(mp3);
+					retrieved.Retrieve(mp3);
 
 					mp3.Dispose();
 				}
 
 				await base.Song(retrieved);
 			}
-			public async override Task Image(IImage? retrieved, IImage<bool>? retriever, string? filepath, Uri? uri, IEnumerable<ModelTypes>? modeltypes)
+			public async override Task Image(IImage? retrieved, IEnumerable<ModelTypes>? modeltypes)
 			{
-				if (await GetMp3(filepath, uri) is Mp3 mp3)
+				if (retrieved?.Buffer is null && (retrieved?.IsCorrupt ?? false) && await GetMp3Async(retrieved.Filepath, retrieved.Uri) is Mp3 mp3)
 				{
 					PictureTypeComparer? picturetypecomparer = modeltypes?.Where(modeltype => modeltype switch
 					{
@@ -111,12 +119,12 @@ namespace Xyzu.Library.ID3
 						_ => null,
 					};
 
-					retrieved?.Retrieve(mp3, picturetypecomparer);
+					retrieved.Retrieve(mp3, picturetypecomparer);
 
 					mp3.Dispose();
 				}
 
-				await base.Image(retrieved, retriever, filepath, uri, modeltypes);
+				await base.Image(retrieved, modeltypes);
 			}
 		}
 		public class OnUpdate : ILibrary.IOnUpdateActions.Default

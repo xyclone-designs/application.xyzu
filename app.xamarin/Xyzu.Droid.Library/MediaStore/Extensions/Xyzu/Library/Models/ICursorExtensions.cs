@@ -1,8 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
-using Android.Database;
-using Android.Net;
+﻿using Android.Database;
 
 using System;
 using System.Collections.Generic;
@@ -11,12 +7,8 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Xyzu.Images;
 using Xyzu.Library.MediaStore;
-using Xyzu.Settings.Files;
 
-using AndroidUri = Android.Net.Uri;
-using AndroidEnvironment = Android.OS.Environment;
 using JavaFile = Java.IO.File;
 using SystemUri = System.Uri;
 

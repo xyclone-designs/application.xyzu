@@ -16641,13 +16641,13 @@ namespace Xyzu.Droid
 			public const int playerserviceoptions_notificationoptions_channel_name = 2131821172;
 			
 			// aapt resource value: 0x7F110275
-			public const int playerserviceoptions_notificationoptions_channel_unkownalbum = 2131821173;
+			public const int playerserviceoptions_notificationoptions_channel_unknownalbum = 2131821173;
 			
 			// aapt resource value: 0x7F110276
-			public const int playerserviceoptions_notificationoptions_channel_unkownartist = 2131821174;
+			public const int playerserviceoptions_notificationoptions_channel_unknownartist = 2131821174;
 			
 			// aapt resource value: 0x7F110277
-			public const int playerserviceoptions_notificationoptions_channel_unkowntitle = 2131821175;
+			public const int playerserviceoptions_notificationoptions_channel_unknowntitle = 2131821175;
 			
 			// aapt resource value: 0x7F110278
 			public const int playerserviceoptions_notificationoptions_id = 2131821176;

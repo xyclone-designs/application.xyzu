@@ -25,15 +25,20 @@ namespace Xyzu.Library.Models
 			get => base.Image;
 			set => base.Image = value;
 		}
+		public string? ImageFilepath
+		{
+			get => base.Image?.Filepath;
+			set => (base.Image ??= new IImage.Default()).Filepath = value;
+		}
 		public Uri? ImageUri
 		{
 			get => base.Image?.Uri;
 			set => (base.Image ??= new IImage.Default()).Uri = value;
 		}
-		public byte[]? ImageBufferHash
+		public string? ImageBufferKey
 		{
-			get => base.Image?.BufferHash;
-			set => (base.Image ??= new IImage.Default()).BufferHash = value;
+			get => base.Image?.BufferKey;
+			set => (base.Image ??= new IImage.Default()).BufferKey = value;
 		}
 
 		public new string AlbumIds

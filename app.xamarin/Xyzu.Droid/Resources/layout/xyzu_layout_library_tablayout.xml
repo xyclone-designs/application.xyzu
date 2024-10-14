@@ -56,10 +56,17 @@
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <xyzu.views.insets.StatusBarInsetView 
+        <xyzu.views.insets.StatusBarInsetView
+            android:id="@+id/xyzu_layout_library_tablayout_statusbarsurface_statusbarinsetview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/xyzu_view_inset_fadetopdown_colorsurface"/>
+        <xyzu.views.insets.StatusBarInsetView
+            android:id="@+id/xyzu_layout_library_tablayout_statusbarprimary_statusbarinsetview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="@drawable/xyzu_view_inset_fadetopdown_colorprimary"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             style="@style/Xyzu.Material.FloatingActionButton"

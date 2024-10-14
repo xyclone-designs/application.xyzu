@@ -1,7 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
-using Android.Runtime;
+﻿using Android.Content;
 using Android.Util;
 using Android.Views;
 using AndroidX.RecyclerView.Widget;
@@ -18,7 +15,6 @@ using Xyzu.Droid;
 using Xyzu.Images;
 using Xyzu.Library;
 using Xyzu.Library.Models;
-using Xyzu.Player;
 using Xyzu.Settings.Enums;
 using Xyzu.Views.LibraryItem;
 
@@ -34,7 +30,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 			AddItemDecoration(_LibraryItemsItemDecoration = new MarginItemDecoration
 			{
 				MarginRes = Resource.Dimension.dp4,
-			
+
 			}, 0);
 		}
 
@@ -45,7 +41,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 		{
 			set => SetLayoutManager(_LibraryItemsLayoutManager = value);
 			get => GetLayoutManager() as LayoutManager ?? _LibraryItemsLayoutManager;
-		}					  
+		}
 		public MarginItemDecoration LibraryItemsItemDecoration
 		{
 			set => AddItemDecoration(_LibraryItemsItemDecoration = value, 0);
@@ -152,7 +148,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 			{
 				return true switch
 				{
-					true when 
+					true when
 					ItemCount == 0
 						=> ItemViewType_Normal,
 
@@ -160,10 +156,10 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 					Header != null &&
 					position == 0
 						=> ItemViewType_Header,
-					
+
 					true when
 					Footer != null &&
-					position == ItemCount  - 1
+					position == ItemCount - 1
 						=> ItemViewType_Footer,
 
 					_ => ItemViewType_Normal,
@@ -174,7 +170,6 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 			{
 				if (RecyclerViewAdapterState != RecyclerViewAdapterStates.Select)
 					RecyclerViewAdapterState = RecyclerViewAdapterStates.Select;
-
 				foreach (int selectedposition in SelectedPositions)
 					if
 					(
@@ -258,7 +253,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 					default: break;
 				}
 
-				PropertyChangedEventArgs propertychangedeventargs = new PropertyChangedEventArgs(propertyname ?? string.Empty);
+				PropertyChangedEventArgs propertychangedeventargs = new (propertyname ?? string.Empty);
 
 				PropertyChanged?.Invoke(this, propertychangedeventargs);
 				PropertyChangedAction?.Invoke(this, propertychangedeventargs);
@@ -375,7 +370,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 				get
 				{
 					foreach (int position in SelectedPositions)
-						if (LibraryItems.ElementAtOrDefault(position) is TModel tmodel)
+						if (LibraryItems.ElementAtOrDefault(Header is null ? position : position - 1) is TModel tmodel)
 							yield return tmodel;
 				}
 			}
@@ -395,7 +390,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 			public void SetLibraryItems(IEnumerable<TModel> libraryitems, bool notifydatasetchanged = true)
 			{
 				LibraryItems = new ObservableList<TModel>(libraryitems);
-				
+
 				if (notifydatasetchanged)
 					NotifyDataSetChanged();
 			}
@@ -426,7 +421,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 			{
 				get
 				{
-					int itemcount = LibraryItems.Count();
+					int itemcount = LibraryItems.Count;
 
 					if (itemcount == 0)
 						return itemcount;
@@ -438,7 +433,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 						itemcount += 1;
 
 					return itemcount;
-				} 
+				}
 			}
 
 			public override void OnViewAttachedToWindow(Java.Lang.Object holder)
@@ -465,7 +460,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 			{
 				switch (true)
 				{
-					case true when Header != null && position == 0: 
+					case true when Header != null && position == 0:
 					case true when Footer != null && position == ItemCount - 1:
 						break;
 
@@ -479,7 +474,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 
 						break;
 
-					default:  break;
+					default: break;
 				}
 			}
 
@@ -653,7 +648,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 			public override void OnLayoutChildren(Recycler? recycler, State? state)
 			{
 				try { base.OnLayoutChildren(recycler, state); }
-				catch (Java.Lang.IndexOutOfBoundsException) 
+				catch (Java.Lang.IndexOutOfBoundsException)
 				{
 					// IndexOutOfBoundsException Exception on sucessive list refreshes 
 					// https://stackoverflow.com/questions/31759171/recyclerview-and-java-lang-indexoutofboundsexception-inconsistency-detected-in
@@ -695,9 +690,9 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 	}
 	public abstract class LibraryItemsRecyclerView<TModel> : LibraryItemsRecyclerView where TModel : class, IModel
 	{
-		public LibraryItemsRecyclerView(Context context) : this(context, null!) 
+		public LibraryItemsRecyclerView(Context context) : this(context, null!)
 		{ }
-		public LibraryItemsRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, Resource.Style.Xyzu_Widget_RecyclerView_LibraryItems) 
+		public LibraryItemsRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, Resource.Style.Xyzu_Widget_RecyclerView_LibraryItems)
 		{ }
 		public LibraryItemsRecyclerView(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr) { }
 

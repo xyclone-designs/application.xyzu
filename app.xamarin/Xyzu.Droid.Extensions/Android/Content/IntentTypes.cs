@@ -1,5 +1,4 @@
-﻿#nullable enable
-
+﻿
 namespace Android.Content
 {
 	public enum IntentTypes

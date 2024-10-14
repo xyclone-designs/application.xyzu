@@ -179,7 +179,9 @@ namespace Xyzu.Views.InfoEdit
 			{
 				await Images.SetToImageView(IImages.DefaultOperations.RoundedDownsample, SongArtwork, null, default, Song);
 
-				if (Context != null && Images.GetPalette(Song)?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+				if (Context != null && 
+					await Images.GetPalette(default, Song) is Palette palette && 
+					palette.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
 				{
 					Title?.SetTextColor(color);
 

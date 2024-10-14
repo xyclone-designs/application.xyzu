@@ -30,6 +30,8 @@ namespace Xyzu.Library
 		}
 		public interface IOnCreateActions : IActions
 		{
+			Func<IDictionary<string, string>>? OnPaths { get; set; }
+
 			Task<IAlbum?> Album(string id);
 			Task<IArtist?> Artist(string id);
 			Task<IGenre?> Genre(string id);
@@ -38,6 +40,9 @@ namespace Xyzu.Library
 
 			public new class Default: IActions.Default, IOnCreateActions
 			{
+				public IDictionary<string, string>? Paths { get; set; }
+				public Func<IDictionary<string, string>>? OnPaths { get; set; }
+
 				public virtual Task<IAlbum?> Album(string id) { return Task.FromResult<IAlbum?>(null); }
 				public virtual Task<IArtist?> Artist(string id) { return Task.FromResult<IArtist?>(null); }
 				public virtual Task<IGenre?> Genre(string id) { return Task.FromResult<IGenre?>(null); }
@@ -70,7 +75,7 @@ namespace Xyzu.Library
 			Task Genre(IGenre? retrieved, ISong? retrievedsong);
 			Task Playlist(IPlaylist? retrieved, ISong? retrievedsong);
 			Task Song(ISong? retrieved);
-			Task Image(IImage? retrieved, IImage<bool>? retriever, string? filepath, Uri? uri, IEnumerable<ModelTypes>? modeltypes);
+			Task Image(IImage? retrieved, IEnumerable<ModelTypes>? modeltypes);
 
 			public new class Default : IActions.Default, IOnRetrieveActions
 			{
@@ -80,7 +85,7 @@ namespace Xyzu.Library
 				public virtual Task Genre(IGenre? retrieved, ISong? retrievedsong) { return Task.CompletedTask; }
 				public virtual Task Playlist(IPlaylist? retrieved, ISong? retrievedsong) { return Task.CompletedTask; }
 				public virtual Task Song(ISong? retrieved) { return Task.CompletedTask; }
-				public virtual Task Image(IImage? retrieved, IImage<bool>? retriever, string? filepath, Uri? uri, IEnumerable<ModelTypes>? modeltypes) { return Task.CompletedTask; }
+				public virtual Task Image(IImage? retrieved, IEnumerable<ModelTypes>? modeltypes) { return Task.CompletedTask; }
 			}
 		}
 		public interface IOnUpdateActions : IActions

@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Xyzu.Library.Models;
+﻿using Xyzu.Library.Models;
 
 namespace Xyzu.Library.MediaMetadata
 {

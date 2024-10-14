@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <LangVersion>10.0</LangVersion>
     <ImplicitUsings>disable</ImplicitUsings>
+    <Platforms>AnyCPU;ARM32;ARM64;x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

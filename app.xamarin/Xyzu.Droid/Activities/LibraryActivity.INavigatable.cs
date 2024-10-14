@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Com.Sothree.Slidinguppanel;
+﻿using Com.Sothree.Slidinguppanel;
 
 using Xyzu.Library.Models;
 using Xyzu.Views.Library;

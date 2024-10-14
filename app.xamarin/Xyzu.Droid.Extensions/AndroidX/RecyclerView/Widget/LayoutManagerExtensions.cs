@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Views;
+﻿using Android.Views;
 
 namespace AndroidX.RecyclerView.Widget
 {

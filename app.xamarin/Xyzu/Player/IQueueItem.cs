@@ -9,6 +9,7 @@ namespace Xyzu.Player
 		Uri? Uri { get; set; }
 		string PrimaryId { get; set; }
 		string? SecondaryId { get; set; }
+		bool ShouldSkip { get; set; }
 		
 		public class Default : IQueueItem
 		{
@@ -20,13 +21,15 @@ namespace Xyzu.Player
 			public Uri? Uri { get; set; }
 			public string PrimaryId { get; set; }
 			public string? SecondaryId { get; set; }
+			public bool ShouldSkip { get; set; }
 		}
 
 		public static IQueueItem FromSong(ISong song, Action<IQueueItem>? oncreate = null)
 		{
 			IQueueItem queueitem = new Default(song.Id)
 			{
-				Uri = song.Uri
+				Uri = song.Uri,
+				ShouldSkip = song.IsCorrupt
 			};
 
 			oncreate?.Invoke(queueitem);

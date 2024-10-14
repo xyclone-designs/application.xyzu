@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Database;
+﻿using Android.Database;
 
 using System;
 using System.Collections.Generic;
@@ -23,7 +21,7 @@ namespace Xyzu.Library.Models
 			if (retriever.Album) projection = projection.Append(MediaStoreUtils.ColumnNames.Album);
 			if (retriever.AlbumArtist) projection = projection.Append(MediaStoreUtils.ColumnNames.AlbumArtist);
 			if (retriever.Artist) projection = projection.Append(MediaStoreUtils.ColumnNames.Artist);
-			if (retriever.Artwork != null && (retriever.Artwork.Buffer || retriever.Artwork.BufferHash || retriever.Artwork.Uri)) projection = projection.Append(MediaStoreUtils.ColumnNames.AlbumId);
+			if (retriever.Artwork != null && (retriever.Artwork.Buffer || retriever.Artwork.BufferKey || retriever.Artwork.Uri)) projection = projection.Append(MediaStoreUtils.ColumnNames.AlbumId);
 			if (retriever.DateAdded) projection = projection.Append(MediaStoreUtils.ColumnNames.DateAdded);
 			if (retriever.DateModified) projection = projection.Append(MediaStoreUtils.ColumnNames.DateModified);
 			if (retriever.Duration) projection = projection.Append(MediaStoreUtils.ColumnNames.Duration);
@@ -61,7 +59,7 @@ namespace Xyzu.Library.Models
 
 			if (cancellationToken.IsCancellationRequested is false &&
 				retrieved.Filepath is null &&
-				await cursor.GetFilepathAsync(directory) is string filepath)
+				await cursor.GetFilepathAsync(directory, cancellationToken) is string filepath)
 				retrieved.Filepath = filepath;
 			
 			if (cancellationToken.IsCancellationRequested is false && 

@@ -8,21 +8,27 @@ namespace Xyzu.Images
 	{
 		T Id { get; set; }
 		T Buffer { get; set; }
-		T BufferHash { get; set; }
+		T BufferKey { get; set; }
+		T Filepath { get; set; }
+		T IsCorrupt { get; set; }
 		T Uri { get; set; }
 	}
 	public interface IImage
 	{
 		string? Id { get; set; }
 		byte[]? Buffer { get; set; }
-		byte[]? BufferHash { get; set; }
+		string? BufferKey { get; set; }
+		string? Filepath { get; set; }
+		bool IsCorrupt { get; set; }
 		Uri? Uri { get; set; }
 
 		public class Default : IImage
 		{
 			public string? Id { get; set; }
 			public byte[]? Buffer { get; set; }
-			public byte[]? BufferHash { get; set; }
+			public string? BufferKey { get; set; }
+			public string? Filepath { get; set; }
+			public bool IsCorrupt { get; set; }
 			public Uri? Uri { get; set; }
 		}
 		public class Default<T> : IImage<T>
@@ -31,25 +37,26 @@ namespace Xyzu.Images
 			{
 				Id = defaultvalue;
 				Buffer = defaultvalue;
-				BufferHash = defaultvalue;
+				BufferKey = defaultvalue;
 				Uri = defaultvalue;
+				Filepath = defaultvalue;
+				IsCorrupt = defaultvalue;
 			}
 
 			public T Id { get; set; }
 			public T Buffer { get; set; }
-			public T BufferHash { get; set; }
+			public T BufferKey { get; set; }
 			public T Uri { get; set; }
+			public T IsCorrupt { get; set; }
+			public T Filepath { get; set; }
 		}
 		public static class Utils
 		{
-			private static MD5? _MD5;
-
 			public static byte[] BufferToHash(byte[] buffer)
 			{
-				byte[] hash = (_MD5 ??= MD5.Create())
-					.ComputeHash(buffer);
-
-				return hash;
+				//return SHA1.HashData(buffer);
+				//return SHA256.HashData(buffer);
+				return MD5.HashData(buffer);
 			}
 			public static string BufferToHashString(byte[] buffer)
 			{

@@ -1,8 +1,4 @@
-﻿
-#nullable enable
-
-using Android.Content;
-using Android.Runtime;
+﻿using Android.Runtime;
 
 using Java.IO;
 
@@ -11,10 +7,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-using Xyzu.Settings.Files;
-
-using AndroidEnvironment = Android.OS.Environment;
-using AndroidRuntimeEnvironment = Android.Runtime.AndroidEnvironment;
 using JavaNioFiles = Java.Nio.FileNio.Files;
 using IJavaNioPath = Java.Nio.FileNio.IPath;
 
@@ -28,8 +20,9 @@ namespace Xyzu.Settings.System
 	public interface ISystemSettingsDroid<T> : ISystemSettings<T> { }
 	public interface ISystemSettingsDroid : ISystemSettings
 	{
-		public static File? PackageDirectory = null;
 		public readonly static string DataDirectory_ErrorLog_PathName = "errorlogs";
+
+		public static File? PackageDirectory { get; set; }
 
 		public static Task ClearErrorLogs()
 		{
@@ -47,7 +40,7 @@ namespace Xyzu.Settings.System
 			string errorlogdirectorypath = string.Format("{0}/{1}", PackageDirectory.AbsolutePath, DataDirectory_ErrorLog_PathName);
 			File[] errorlogfiles = new File(errorlogdirectorypath).ListFiles() ?? Array.Empty<File>();
 
-			StringBuilder stringbuilder = new StringBuilder();
+			StringBuilder stringbuilder = new ();
 
 			foreach (File errorlogfile in errorlogfiles)
 				if (errorlogfile.IsFile)
@@ -84,7 +77,7 @@ namespace Xyzu.Settings.System
 				SystemIODirectory.CreateDirectory(errorlogdirectorypath);
 
 			using SystemIOFileStream systemiofilestream = SystemIOFile.Create(errorlogfilepath);
-			using SystemIOStreamWriter systemiostreamwriter = new SystemIOStreamWriter(systemiofilestream);
+			using SystemIOStreamWriter systemiostreamwriter = new (systemiofilestream);
 
 			systemiostreamwriter.Write(errorlog.AsText());
 

@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using Xyzu.Droid;
@@ -20,6 +18,7 @@ namespace Xyzu.Menus
 			{
 				Album = true,
 				AlbumArtist = true,
+				Filepath = true,
 				Uri = true,
 			};
 
@@ -29,10 +28,7 @@ namespace Xyzu.Menus
 					.GetSongs(identifiers = ILibrary.IIdentifiers.FromAlbum(album));
 
 				foreach (ISong song in songs)
-					yield return IQueueItem.FromSong(song, queueitem =>
-					{
-						queueitem.SecondaryId = album.Id;
-					});
+					yield return XyzuPlayer.QueueItemFrom(song, album.Id);
 			}
 		}
 		private static IEnumerable<IQueueItem> QueueItemsFrom(IEnumerable<IArtist> artists)
@@ -41,6 +37,7 @@ namespace Xyzu.Menus
 			ISong<bool> retriever = new ISong.Default<bool>(false)
 			{
 				Artist = true,
+				Filepath = true,
 				Uri = true,
 			};
 
@@ -50,10 +47,7 @@ namespace Xyzu.Menus
 					.GetSongs(identifiers = ILibrary.IIdentifiers.FromArtist(artist));
 
 				foreach (ISong song in songs)
-					yield return IQueueItem.FromSong(song, queueitem =>
-					{
-						queueitem.SecondaryId = artist.Id;
-					});
+					yield return XyzuPlayer.QueueItemFrom(song, artist.Id);
 			}
 		}
 		private static IEnumerable<IQueueItem> QueueItemsFrom(IEnumerable<IGenre> genres)
@@ -62,6 +56,7 @@ namespace Xyzu.Menus
 			ISong<bool> retriever = new ISong.Default<bool>(false)
 			{
 				Genre = true,
+				Filepath = true,
 				Uri = true,
 			};
 
@@ -71,10 +66,7 @@ namespace Xyzu.Menus
 					.GetSongs(identifiers = ILibrary.IIdentifiers.FromGenre(genre));
 
 				foreach (ISong song in songs)
-					yield return IQueueItem.FromSong(song, queueitem =>
-					{
-						queueitem.SecondaryId = genre.Id;
-					});
+					yield return XyzuPlayer.QueueItemFrom(song, genre.Id);
 			}
 		}
 		private static IEnumerable<IQueueItem> QueueItemsFrom(IEnumerable<IPlaylist> playlists)
@@ -83,6 +75,7 @@ namespace Xyzu.Menus
 			ISong<bool> retriever = new ISong.Default<bool>(false)
 			{
 				Uri = true,
+				Filepath = true,
 			};
 
 			foreach (IPlaylist playlist in playlists)
@@ -91,10 +84,7 @@ namespace Xyzu.Menus
 					.GetSongs(identifiers = ILibrary.IIdentifiers.FromPlaylist(playlist));
 
 				foreach (ISong song in songs)
-					yield return IQueueItem.FromSong(song, queueitem =>
-					{
-						queueitem.SecondaryId = playlist.Id;
-					});
+					yield return XyzuPlayer.QueueItemFrom(song, playlist.Id);
 			}
 		}
 		private static IEnumerable<IQueueItem> QueueItemsFrom(IEnumerable<ISong> songs)
@@ -102,7 +92,6 @@ namespace Xyzu.Menus
 			return songs
 				.Select(song => IQueueItem.FromSong(song));
 		}
-
 
 		public static void AddToQueue(VariableContainer variables)
 		{

@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using System;
+﻿using System;
 
 using AndroidUri = Android.Net.Uri;
 using JavaUri = Java.Net.URI;

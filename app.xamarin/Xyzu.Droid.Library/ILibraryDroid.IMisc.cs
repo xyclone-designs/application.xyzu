@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,7 +13,7 @@ namespace Xyzu.Library
 {
 	public partial interface ILibraryDroid
 	{
-		public partial class Default : ILibraryDroid.IMisc
+		public partial class Default : IMisc
 		{
 			private readonly static ISong<bool> RetrieverImageSong = new ISong.Default<bool>(false)
 			{
@@ -25,12 +23,12 @@ namespace Xyzu.Library
 				Uri = true,
 			};
 
-			void ILibraryDroid.IMisc.SetImage(IModel? model)
+			void IMisc.SetImage(IModel? model)
 			{
 				if (model is null)
 					return;
 
-				using ILibraryDroid.IParameters parameters = new ILibraryDroid.IParameters.Default ()
+				using IParameters parameters = new IParameters.Default ()
 				{
 					CursorPositions = new Dictionary<string, int> { },
 					CursorLazy = parameters => CursorToActions(() => DefaultCursorBuilder
@@ -41,12 +39,12 @@ namespace Xyzu.Library
 
 				SetImage(model, parameters);
 			}
-			async Task ILibraryDroid.IMisc.SetImage(IModel? model, CancellationToken cancellationToken)
+			async Task IMisc.SetImage(IModel? model, CancellationToken cancellationToken)
 			{
 				if (model is null)
 					return;
 
-				using ILibraryDroid.IParameters parameters = new ILibraryDroid.IParameters.Default ()
+				using IParameters parameters = new IParameters.Default ()
 				{
 					CursorPositions = new Dictionary<string, int> { },
 					CursorLazy = parameters => CursorToActions(() => DefaultCursorBuilder
@@ -60,9 +58,9 @@ namespace Xyzu.Library
 					await SetImage(model, parameters, cancellationToken);
 			}
 
-			void ILibraryDroid.IMisc.SetImages(IEnumerable<IModel> models)
+			void IMisc.SetImages(IEnumerable<IModel> models)
 			{
-				using ILibraryDroid.IParameters parameters = new ILibraryDroid.IParameters.Default ()
+				using IParameters parameters = new IParameters.Default ()
 				{
 					CursorPositions = new Dictionary<string, int> { },
 					CursorLazy = parameters => CursorToActions(() => DefaultCursorBuilder
@@ -74,9 +72,9 @@ namespace Xyzu.Library
 				foreach (IModel model in models)
 					SetImage(model, parameters);
 			}
-			async Task ILibraryDroid.IMisc.SetImages(IEnumerable<IModel> models, CancellationToken cancellationToken)
+			async Task IMisc.SetImages(IEnumerable<IModel> models, CancellationToken cancellationToken)
 			{
-				using ILibraryDroid.IParameters parameters = new ILibraryDroid.IParameters.Default ()
+				using IParameters parameters = new IParameters.Default ()
 				{
 					CursorPositions = new Dictionary<string, int> { },
 					CursorLazy = parameters => CursorToActions(() => DefaultCursorBuilder
@@ -92,9 +90,9 @@ namespace Xyzu.Library
 					await SetImage(modelsenumerator.Current, parameters, cancellationToken);
 			}
 
-			IImage? ILibraryDroid.IMisc.GetImage(ILibraryDroid.IIdentifiers? identifiers, params ModelTypes[] modeltypes)
+			IImage? IMisc.GetImage(IIdentifiers? identifiers, params ModelTypes[] modeltypes)
 			{
-				using ILibraryDroid.IParameters parameters = new ILibraryDroid.IParameters.Default ()
+				using IParameters.Default parameters = new ()
 				{
 					Identifiers = identifiers,
 					ImageModelTypes = modeltypes,
@@ -129,9 +127,9 @@ namespace Xyzu.Library
 
 				return null;
 			}
-			async Task<IImage?> ILibraryDroid.IMisc.GetImage(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken, params ModelTypes[] modeltypes)
+			async Task<IImage?> IMisc.GetImage(IIdentifiers? identifiers, CancellationToken cancellationToken, params ModelTypes[] modeltypes)
 			{
-				using ILibraryDroid.IParameters parameters = new ILibraryDroid.IParameters.Default ()
+				using IParameters parameters = new IParameters.Default ()
 				{
 					Identifiers = identifiers,
 					ImageModelTypes = modeltypes,
@@ -173,7 +171,7 @@ namespace Xyzu.Library
 				return null;
 			}
 
-			IEnumerable<ILibraryDroid.ISearchResult> ILibraryDroid.IMisc.Search(ILibraryDroid.ISearcher searcher)
+			IEnumerable<ISearchResult> IMisc.Search(ISearcher searcher)
 			{
 				if (searcher.String is null || string.IsNullOrWhiteSpace(searcher.String))
 					yield break;
@@ -181,10 +179,10 @@ namespace Xyzu.Library
 				IList<string>? alreadymatched = new List<string>();
 
 				foreach (ISong song in SQLiteLibrary.SongsTable)
-					foreach (ILibraryDroid.ISearchResult searchresult in SearchResults(searcher, song, alreadymatched))
+					foreach (ISearchResult searchresult in SearchResults(searcher, song, alreadymatched))
 						yield return searchresult;
 			}
-			async IAsyncEnumerable<ILibraryDroid.ISearchResult> ILibraryDroid.IMisc.SearchAsync(ILibraryDroid.ISearcher searcher, [EnumeratorCancellation] CancellationToken cancellationtoken)
+			async IAsyncEnumerable<ISearchResult> IMisc.SearchAsync(ISearcher searcher, [EnumeratorCancellation] CancellationToken cancellationtoken)
 			{
 				if (searcher.String is null || string.IsNullOrWhiteSpace(searcher.String))
 					yield break;
@@ -192,13 +190,13 @@ namespace Xyzu.Library
 				IList<string>? alreadymatched = new List<string>();
 
 				foreach (ISong song in SQLiteLibrary.SongsTable)
-					foreach (ILibraryDroid.ISearchResult searchresult in SearchResults(searcher, song, alreadymatched))
+					foreach (ISearchResult searchresult in SearchResults(searcher, song, alreadymatched))
 						yield return searchresult;
 
 				await Task.CompletedTask;
 			}
 
-			void SetImage(IModel model, ILibraryDroid.IParameters parameters)
+			void SetImage(IModel model, IParameters parameters)
 			{
 				switch (true)
 				{
@@ -219,7 +217,7 @@ namespace Xyzu.Library
 							while (album.Artwork.Buffer is null && albumsongsenumerator.MoveNext())
 							{
 								album.Artwork.Buffer ??= albumsongsenumerator.Current.Artwork?.Buffer;
-								album.Artwork.BufferHash ??= albumsongsenumerator.Current.Artwork?.BufferHash;
+								album.Artwork.BufferKey ??= albumsongsenumerator.Current.Artwork?.BufferKey;
 								album.Artwork.Uri ??= albumsongsenumerator.Current.Artwork?.Uri;
 
 								if (album.Artwork.Buffer is null)
@@ -257,7 +255,7 @@ namespace Xyzu.Library
 							while (artist.Image.Buffer is null && artistsongsenumerator.MoveNext())
 							{
 								artist.Image.Buffer ??= artistsongsenumerator.Current.Artwork?.Buffer;
-								artist.Image.BufferHash ??= artistsongsenumerator.Current.Artwork?.BufferHash;
+								artist.Image.BufferKey ??= artistsongsenumerator.Current.Artwork?.BufferKey;
 								artist.Image.Uri ??= artistsongsenumerator.Current.Artwork?.Uri;
 
 								if (artist.Image.Buffer is null)
@@ -299,7 +297,7 @@ namespace Xyzu.Library
 					default: break;
 				}
 			}
-			async Task SetImage(IModel model, ILibraryDroid.IParameters parameters, CancellationToken cancellationtoken)
+			async Task SetImage(IModel model, IParameters parameters, CancellationToken cancellationtoken)
 			{
 				switch (true)
 				{
@@ -320,7 +318,7 @@ namespace Xyzu.Library
 							while (cancellationtoken.IsCancellationRequested is false && album.Artwork.Buffer is null && albumsongsenumerator.MoveNext())
 							{
 								album.Artwork.Buffer ??= albumsongsenumerator.Current.Artwork?.Buffer;
-								album.Artwork.BufferHash ??= albumsongsenumerator.Current.Artwork?.BufferHash;
+								album.Artwork.BufferKey ??= albumsongsenumerator.Current.Artwork?.BufferKey;
 								album.Artwork.Uri ??= albumsongsenumerator.Current.Artwork?.Uri;
 
 								if (album.Artwork.Buffer is null)
@@ -358,7 +356,7 @@ namespace Xyzu.Library
 							while (cancellationtoken.IsCancellationRequested is false && artist.Image.Buffer is null && artistsongsenumerator.MoveNext())
 							{
 								artist.Image.Buffer ??= artistsongsenumerator.Current.Artwork?.Buffer;
-								artist.Image.BufferHash ??= artistsongsenumerator.Current.Artwork?.BufferHash;
+								artist.Image.BufferKey ??= artistsongsenumerator.Current.Artwork?.BufferKey;
 								artist.Image.Uri ??= artistsongsenumerator.Current.Artwork?.Uri;
 
 								if (artist.Image.Buffer is null)
@@ -401,7 +399,7 @@ namespace Xyzu.Library
 				}
 			}
 
-			IEnumerable<ILibraryDroid.ISearchResult> SearchResults(ILibraryDroid.ISearcher searcher, ISong song, IList<string>? alreadymatched)
+			IEnumerable<ISearchResult> SearchResults(ISearcher searcher, ISong song, IList<string>? alreadymatched)
 			{
 				if (searcher.String is null)
 					yield break;
@@ -426,28 +424,28 @@ namespace Xyzu.Library
 				{
 					alreadymatched?.Add(AlbumMatchText(albumid));
 
-					yield return new ILibraryDroid.ISearchResult.Default(albumid, ModelTypes.Album);
+					yield return new ISearchResult.Default(albumid, ModelTypes.Album);
 				}
 
 				if (searcher.SearchArtists && IdFromArtistName(song.Artist) is string artistid && ArtistAlreadyMatched(artistid) is false && (albumartistnamematches || artistnamematches))
 				{
 					alreadymatched?.Add(ArtistMatchText(artistid));
 
-					yield return new ILibraryDroid.ISearchResult.Default(artistid, ModelTypes.Artist);
+					yield return new ISearchResult.Default(artistid, ModelTypes.Artist);
 				}
 
 				if (searcher.SearchGenres && IdFromGenreName(song.Genre) is string genreid && GenreAlreadyMatched(genreid) is false && (genrenamematches))
 				{
 					alreadymatched?.Add(GenreMatchText(genreid!));
 
-					yield return new ILibraryDroid.ISearchResult.Default(genreid!, ModelTypes.Genre);
+					yield return new ISearchResult.Default(genreid!, ModelTypes.Genre);
 				}
 
 				if (searcher.SearchSongs && SongAlreadyMatched(song.Id) is false && (albumtitlematches || albumartistnamematches || artistnamematches || genrenamematches || songtitlematches))
 				{
 					alreadymatched?.Add(SongMatchText(song.Id));
 
-					yield return new ILibraryDroid.ISearchResult.Default(song.Id, ModelTypes.Song);
+					yield return new ISearchResult.Default(song.Id, ModelTypes.Song);
 				}
 			}
 		}

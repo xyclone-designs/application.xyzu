@@ -8,11 +8,11 @@ namespace Xyzu.Player
 		{
 			public static class Seek
 			{
-				public const string Millisecond_Long = "co.za.xyclonedesigns.xyzu.action.extra.SEEK_MILLISECOND_LONG";
+				public const string Millisecond_Long = "co.za.xyclonedesigns.xyzu.player.action.extra.SEEK_MILLISECOND_LONG";
 			}
 			public static class Skip
 			{
-				public const string QueueIndex_Int = "co.za.xyclonedesigns.xyzu.action.extra.SKIP_QUEUE_INDEX_INT";
+				public const string QueueIndex_Int = "co.za.xyclonedesigns.xyzu.player.action.extra.SKIP_QUEUE_INDEX_INT";
 			}
 		}
 	}

@@ -1,10 +1,7 @@
-﻿#nullable enable
-
-using Android.Views;
+﻿using Android.Views;
 using Android.Widget;
 
 using System;
-using System.Linq;
 
 namespace AndroidX.RecyclerView.Widget
 {
@@ -41,7 +38,7 @@ namespace AndroidX.RecyclerView.Widget
 				{
 					CheckedChange -= value;
 
-					if (CheckedChangeAttatched is true && (CheckedChange?.GetInvocationList().Any() ?? false) is true)
+					if (CheckedChangeAttatched is true && CheckedChange is not null && CheckedChange.GetInvocationList().Length is not 0)
 					{
 						itemviewcompoundbutton.CheckedChange -= ItemView_CheckedChange;
 						CheckedChangeAttatched = false;
@@ -65,7 +62,7 @@ namespace AndroidX.RecyclerView.Widget
 			{
 				Click -= value;
 
-				if (ClickAttatched is true && (Click?.GetInvocationList().Any() ?? false) is true)
+				if (ClickAttatched is true && Click is not null && Click.GetInvocationList().Length is not 0)
 				{
 					ItemView.Click -= ItemView_Click;
 					ClickAttatched = false;
@@ -88,7 +85,7 @@ namespace AndroidX.RecyclerView.Widget
 			{
 				LongClick -= value;
 
-				if (LongClickAttatched is true && (LongClick?.GetInvocationList().Any() ?? false) is true)
+				if (LongClickAttatched is true && LongClick is not null && LongClick.GetInvocationList().Length is not 0)
 				{
 					ItemView.LongClick -= ItemView_LongClick;
 					LongClickAttatched = false;
@@ -109,7 +106,7 @@ namespace AndroidX.RecyclerView.Widget
 			if (stop)
 				return;
 
-			ViewHolderEventArgs viewholdereventargs = new ViewHolderEventArgs(this)
+			ViewHolderEventArgs viewholdereventargs = new (this)
 			{
 				CheckedChangeEventArgs = args,
 			};
@@ -126,7 +123,7 @@ namespace AndroidX.RecyclerView.Widget
 			if (stop)
 				return;
 
-			ViewHolderEventArgs viewholdereventargs = new ViewHolderEventArgs(this)
+			ViewHolderEventArgs viewholdereventargs = new (this)
 			{
 				Gesture = Gestures.Click,
 				ClickEventArgs = args,
@@ -144,7 +141,7 @@ namespace AndroidX.RecyclerView.Widget
 			if (stop)
 				return;
 
-			ViewHolderEventArgs viewholdereventargs = new ViewHolderEventArgs(this)
+			ViewHolderEventArgs viewholdereventargs = new (this)
 			{
 				Gesture = Gestures.LongPress,
 				LongClickEventArgs = args,

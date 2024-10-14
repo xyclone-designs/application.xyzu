@@ -15,13 +15,12 @@ using System.Threading.Tasks;
 using Xyzu.Droid;
 using Xyzu.Menus;
 using Xyzu.Library.Models;
+using Xyzu.Player;
 using Xyzu.Settings.UserInterface.Library;
 using Xyzu.Widgets.RecyclerViews.LibraryItems;
 using Xyzu.Views.LibraryItem;
 
 using ILibraryIdentifiers = Xyzu.Library.ILibrary.IIdentifiers;
-using IXyzuPlayer = Xyzu.Player.IPlayer;
-using Xyzu.Player;
 
 namespace Xyzu.Views.Library
 {

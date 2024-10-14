@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using Xyzu.Droid;
 using Xyzu.Images;
 using Xyzu.Library.Models;
+using static Xyzu.Menus.LibraryItem;
 
 namespace Xyzu.Views.Info
 {
@@ -173,7 +174,9 @@ namespace Xyzu.Views.Info
 			{
 				await Images.SetToImageView(IImages.DefaultOperations.RoundedDownsample, SongArtwork, null, default, Song);
 
-				if (Context != null && Images.GetPalette(Song)?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+				if (Context != null &&
+					await Images.GetPalette(default, Song) is Palette palette &&
+					palette.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
 				{
 					Title?.SetTextColor(color);
 

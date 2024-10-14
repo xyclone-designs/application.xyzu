@@ -12,22 +12,32 @@
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <XamarinAndroidSupportSkipVerifyVersions>true</XamarinAndroidSupportSkipVerifyVersions>
+    <Platforms>AnyCPU;ARM32;ARM64;x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\executables\ffmpeg.exe" />
+    <None Remove="Assets\executables\ffprobe.exe" />
+    <None Remove="Assets\licenses\package_colorpicker.txt" />
+    <None Remove="Assets\licenses\package_exoplayer.txt" />
+    <None Remove="Assets\licenses\package_glide.txt" />
+    <None Remove="Assets\licenses\package_id3.txt" />
+    <None Remove="Assets\licenses\package_musicbar.txt" />
+    <None Remove="Assets\licenses\package_picasso.txt" />
+    <None Remove="Assets\licenses\package_sqlnetpcl.txt" />
+    <None Remove="Assets\licenses\package_taglibsharp.txt" />
+    <None Remove="Assets\sounds\silence.mp3" />
+    <None Remove="Resources\drawable\icon_application.xml" />
+    <None Remove="Resources\drawable\xyzu_view_inset_fadebottomup_colorprimary.xml" />
+    <None Remove="Resources\drawable\xyzu_view_inset_fadetopdown_colorprimary.xml" />
     <None Remove="Resources\values\strings_application.xml" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Karamunting.Android.EmadAbdalRahman.MusicBar" Version="1.0.2" />
     <PackageReference Include="Karamunting.Android.JaredRummler.ColorPicker" Version="1.1.0" />
-    <PackageReference Include="Karamunting.Android.Wasabeef.PicassoTransformations" Version="2.2.1" />
-    <PackageReference Include="Kdd.Glide.AppModuleInjector" Version="2.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
-    <PackageReference Include="Square.Picasso" Version="2.71828.0" />
     <PackageReference Include="Xam.Plugins.AndroidX.SlidingUpPanel" Version="1.0.0" />
-    <PackageReference Include="Xamarin.Android.Glide" Version="4.16.0.6" />
-    <PackageReference Include="Xamarin.Android.Glide.Transformations" Version="4.3.0.1" />
     <PackageReference Include="Xamarin.Android.Support.Annotations" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.AndroidX.Activity" Version="1.9.2" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.0.2" />
@@ -45,9 +55,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Xyzu.Droid.Library\Xyzu.Droid.Library.csproj" />
     <ProjectReference Include="..\Xyzu\Xyzu.csproj" />
     <ProjectReference Include="..\Xyzu.Droid.Extensions\Xyzu.Droid.Extensions.csproj" />
+    <ProjectReference Include="..\Xyzu.Droid.Images\Xyzu.Droid.Images.csproj" />
+    <ProjectReference Include="..\Xyzu.Droid.Library\Xyzu.Droid.Library.csproj" />
     <ProjectReference Include="..\Xyzu.Droid.Player\Xyzu.Droid.Player.csproj" />
   </ItemGroup>
   

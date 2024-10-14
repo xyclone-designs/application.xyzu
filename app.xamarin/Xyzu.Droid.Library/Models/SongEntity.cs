@@ -24,10 +24,15 @@ namespace Xyzu.Library.Models
 			get => base.Artwork?.Uri;
 			set => (base.Artwork ??= new IImage.Default()).Uri = value;
 		}
-		public byte[]? ArtworkBufferHash
+		public string? ArtworkFilepath
 		{
-			get => base.Artwork?.BufferHash;
-			set => (base.Artwork ??= new IImage.Default()).BufferHash = value;
+			get => base.Artwork?.Filepath;
+			set => (base.Artwork ??= new IImage.Default()).Filepath = value;
+		}
+		public string? ArtworkBufferKey
+		{
+			get => base.Artwork?.BufferKey;
+			set => (base.Artwork ??= new IImage.Default()).BufferKey = value;
 		}
 
 		[Ignore]

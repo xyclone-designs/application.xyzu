@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.OS;
+﻿using Android.OS;
 
 namespace System.Threading
 {

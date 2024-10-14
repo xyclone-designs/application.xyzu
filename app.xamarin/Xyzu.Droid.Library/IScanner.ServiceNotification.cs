@@ -58,7 +58,6 @@ namespace Xyzu.Library
 			{
 				set => _CompatBuilder = value;
 				get => _CompatBuilder ??= new NotificationCompat.Builder(Application.Context, ChannelId)
-					.AddAction(CompatActionCancel)
 					.SetChannelId(Channel.Id ?? ChannelId)
 					.SetPriority(NotificationCompat.PriorityDefault)
 					.SetSilent(true);
@@ -96,7 +95,10 @@ namespace Xyzu.Library
 			public Notification Build()
 			{
 				Built = true;
-				return CompatBuilder.Build();
+
+				return CompatBuilder
+					.AddAction(CompatActionCancel)
+					.Build();
 			}
 		}
 	}

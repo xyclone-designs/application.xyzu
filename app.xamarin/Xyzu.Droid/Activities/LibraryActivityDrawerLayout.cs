@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Content.PM;
 using Android.Content.Res;
 using Android.OS;
@@ -22,6 +20,7 @@ using Xyzu.Droid;
 using Xyzu.Fragments.Library;
 using Xyzu.Settings.Enums;
 using Xyzu.Settings.UserInterface.Library;
+using Xyzu.Views.Insets;
 using Xyzu.Views.Toolbar;
 
 using JavaRunnable = Java.Lang.Runnable;
@@ -175,7 +174,10 @@ namespace Xyzu.Activities
 			SupportActionBar?.SetHomeButtonEnabled(true);
 			SupportActionBar?.SetDisplayHomeAsUpEnabled(false);
 			SupportActionBar?.SetDisplayShowHomeEnabled(false);
-			SupportActionBar?.SetDisplayShowTitleEnabled(false);
+			SupportActionBar?.SetDisplayShowTitleEnabled(false); 
+			SetStatusBars(
+				Resource.Id.xyzu_layout_library_drawerlayout_statusbarsurface_statusbarinsetview,
+				Resource.Id.xyzu_layout_library_drawerlayout_statusbarprimary_statusbarinsetview);
 
 			InitSlidingPanelLayout(
 				FindViewById(Resource.Id.xyzu_layout_library_drawerlayout_root_slidinguppanellayout),
@@ -398,7 +400,7 @@ namespace Xyzu.Activities
 		{
 			base.XyzuLibraryOnServiceConnectionChanged(sender, args);
 
-			switch (XyzuLibrary.Instance.ServiceConnectionState)
+			switch (XyzuLibrary.Instance.ScannerServiceConnectionState)
 			{
 				case ServiceConnectionChangedEventArgs.Events.Disconnected:
 					RefreshDrawerLayout(null, true);

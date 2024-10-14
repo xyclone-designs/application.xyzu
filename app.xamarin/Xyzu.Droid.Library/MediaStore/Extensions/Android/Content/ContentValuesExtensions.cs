@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using System;
+﻿using System;
 
 using Xyzu.Library.Models;
 using Xyzu.Library.MediaStore;

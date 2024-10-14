@@ -1,10 +1,6 @@
-﻿#nullable enable
-
-using Android.Content;
-using Android.Text;
+﻿using Android.Content;
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 using Xyzu.Droid;

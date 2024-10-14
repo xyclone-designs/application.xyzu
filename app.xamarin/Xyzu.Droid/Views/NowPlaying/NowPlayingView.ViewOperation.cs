@@ -5,7 +5,7 @@ using AndroidX.ConstraintLayout.Motion.Widget;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Xyzu.Menus;
 using Xyzu.Player;
 using Xyzu.Player.Enums;
 
@@ -73,7 +73,7 @@ namespace Xyzu.Views.NowPlaying
 
 							IEnumerable<IQueueItem> songs = Library.Songs
 								.GetSongs(null)
-								.Select(song => IQueueItem.FromSong(song, null));
+								.Select(song => XyzuPlayer.QueueItemFrom(song, null));
 
 							Player.Queue.Clear();
 							Player.Queue.AddRange(songs);

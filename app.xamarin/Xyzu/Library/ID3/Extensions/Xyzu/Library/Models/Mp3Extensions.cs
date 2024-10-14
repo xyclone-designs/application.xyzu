@@ -103,7 +103,7 @@ namespace Xyzu.Library.Models
 				PictureFrame? pictureframe = mp3.GetAllTags()
 					.SelectMany(tag => tag.Pictures)
 					.OrderBy(pictureframe => pictureframe.PictureType, picturetypecomparer ?? new PictureTypeComparer())
-					.Where(frame => frame.IsAssigned && (frame.PictureData?.Any() ?? false))
+					.Where(frame => frame.IsAssigned && frame.PictureData is not null && frame.PictureData.Length is not 0)
 					.FirstOrDefault();
 
 				retrieved.Buffer = pictureframe?.PictureData;

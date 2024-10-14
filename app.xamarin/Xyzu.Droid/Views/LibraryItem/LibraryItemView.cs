@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics;
 using Android.Util;
 using Android.Views;
@@ -164,10 +162,10 @@ namespace Xyzu.Views.LibraryItem
 				IAsyncEnumerator<ISong> enumerator = Library.Songs.GetSongs(identifiers, default).GetAsyncEnumerator();
 
 				while (bitmaps.Count < 3 && await enumerator.MoveNextAsync())
-					if ((await Images.GetBitmapAsync(IImages.DefaultOperations.Downsample, null, enumerator.Current) ??
-						BitmapFactory.DecodeResource(Context?.Resources, Resource.Drawable.icon_xyzu)) is Bitmap bitmap) bitmaps.Add(bitmap);
+					if (await Images.GetBitmap(IImages.DefaultOperations.Downsample, null, default, enumerator.Current, Resource.Drawable.icon_xyzu) is Bitmap bitmap) 
+						bitmaps.Add(bitmap);
 
-				if (Images.MergeBitmaps(bitmaps[0], bitmaps[1], bitmaps[2], bitmaps[3]) is Bitmap mergedbitmap) await Images
+				if (Images.MergeBitmaps(bitmaps[0], bitmaps[1], bitmaps[2], bitmaps[3], new BitmapFactory.Options()) is Bitmap mergedbitmap) await Images
 					.SetToImageView(ImagesOperations ?? IImages.DefaultOperations.RoundedDownsample, Artwork, null, default, mergedbitmap);
 			}
 		}

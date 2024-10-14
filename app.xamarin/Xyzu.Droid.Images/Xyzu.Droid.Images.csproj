@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>26</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <LangVersion>10.0</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <SingleProject>true</SingleProject>
+    <ApplicationId>co.za.xyclonedesigns.xyzu.images</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <Platforms>AnyCPU;ARM32;ARM64;x64;x86</Platforms>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\arm32\debug\net8.0-android\android-arm\*.*" />
+    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\arm64\debug\net8.0-android\android-arm64\*.*" />
+    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\x64\debug\net8.0-android\android-x64\*.*" />
+    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\x86\debug\net8.0-android\android-x86\*.*" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Kdd.Glide.AppModuleInjector" Version="2.0.0" />
+    <PackageReference Include="Xam.Plugins.AndroidX.SlidingUpPanel" Version="1.0.0" />
+    <PackageReference Include="Xamarin.Android.Glide" Version="4.16.0.6" />
+    <PackageReference Include="Xamarin.Android.Glide.Transformations" Version="4.3.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Palette" Version="1.0.0.28" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Xyzu\Xyzu.csproj" />
+    <ProjectReference Include="..\Xyzu.Droid.Extensions\Xyzu.Droid.Extensions.csproj" />
+  </ItemGroup>
+
+</Project>

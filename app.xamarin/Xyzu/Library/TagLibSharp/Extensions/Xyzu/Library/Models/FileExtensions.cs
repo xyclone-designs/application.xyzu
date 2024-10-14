@@ -55,20 +55,11 @@ namespace Xyzu.Library.Models
 			if ((retrieved.Artist is null || overwrite) && string.IsNullOrWhiteSpace(file.Tag.JoinedPerformers) is false)
 				retrieved.Artist = file.Tag.JoinedPerformers.Trim();																		 
 			
-			if ((retrieved.Bitrate is null || overwrite) && file.Properties.AudioBitrate is not 0)
-				retrieved.Bitrate = file.Properties.AudioBitrate;
-			
-			if ((retrieved.Channels is null || overwrite) && file.Properties.AudioChannels is not 0)
-				retrieved.Channels = default(AudioChannels).FromChannelCount(file.Properties.AudioChannels);
-			
 			if ((retrieved.Copyright is null || overwrite) && string.IsNullOrWhiteSpace(file.Tag.Copyright) is false)
 				retrieved.Copyright = file.Tag.Copyright.Trim();
 			
 			if ((retrieved.DiscNumber is null || overwrite) && int.TryParse(file.Tag.Disc.ToString(), out int discnumber) && discnumber is not 0)
 				retrieved.DiscNumber = discnumber;
-			
-			if ((retrieved.Duration is null || overwrite) && file.Properties.Duration != TimeSpan.Zero)
-				retrieved.Duration = file.Properties.Duration;
 												
 			if ((retrieved.Genre is null || overwrite) && string.IsNullOrWhiteSpace(file.Tag.JoinedGenres) is false)
 				retrieved.Genre = file.Tag.JoinedGenres.Trim();
@@ -88,22 +79,32 @@ namespace Xyzu.Library.Models
 			if ((retrieved.Size is null || overwrite) && file.Length is not 0)
 				retrieved.Size = file.Length;
 
+			if (file.Properties is not null)
+			{
+				if ((retrieved.Bitrate is null || overwrite) && file.Properties.AudioBitrate is not 0)
+					retrieved.Bitrate = file.Properties.AudioBitrate;
+
+				if ((retrieved.Channels is null || overwrite) && file.Properties.AudioChannels is not 0)
+					retrieved.Channels = default(AudioChannels).FromChannelCount(file.Properties.AudioChannels);
+
+				if ((retrieved.Duration is null || overwrite) && file.Properties.Duration != TimeSpan.Zero)
+					retrieved.Duration = file.Properties.Duration;
+			}
+
 			return retrieved;
 		}
-		public static IImage Retrieve(this IImage retrieved, File file, IImage<bool>? retriever, PictureTypeComparer? picturetypecomparer)
+		public static IImage Retrieve(this IImage retrieved, File file, PictureTypeComparer? picturetypecomparer)
 		{
-			if (retriever is null || (retriever.Buffer && retrieved.Buffer is null) || (retriever.BufferHash && retrieved.BufferHash is null))
-			{
-				IPicture? picture = file.Tag.Pictures
-					.OrderBy(picture => picture.Type, picturetypecomparer ?? new PictureTypeComparer())
-					.FirstOrDefault();
+			IPicture? picture = file.Tag.Pictures
+				.OrderBy(picture => picture.Type, picturetypecomparer ?? new PictureTypeComparer())
+				.FirstOrDefault();
 
-				if (picture?.Data.Data is byte[] picturedata)
-				{
-					retrieved.Buffer = retriever?.Buffer ?? true ? picturedata : null;
-					retrieved.BufferHash = retriever?.BufferHash ?? true ? IImage.Utils.BufferToHash(picturedata) : null;
-				}
+			if (picture?.Data.Data is byte[] picturedata)
+			{
+				retrieved.Buffer = picturedata;
+				retrieved.BufferKey = IImage.Utils.BufferToHashString(picturedata);
 			}
+
 			return retrieved;
 		}
 	}

@@ -11,9 +11,9 @@ namespace Xyzu.Library
 {
 	public partial interface ILibraryDroid
 	{
-		public partial class Default : ILibraryDroid.ISongs
+		public partial class Default : ISongs
 		{
-			ISong? ILibraryDroid.ISongs.Random(ILibraryDroid.IIdentifiers? identifiers)
+			ISong? ISongs.Random(IIdentifiers? identifiers)
 			{
 				IEnumerable<ISong> songs = identifiers is null
 					? SQLiteLibrary.SongsTable
@@ -25,7 +25,7 @@ namespace Xyzu.Library
 
 				return song;
 			}
-			async Task<ISong?> ILibraryDroid.ISongs.Random(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
+			async Task<ISong?> ISongs.Random(IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
 				IEnumerable<ISong> songs = identifiers is null
 					? SQLiteLibrary.SongsTable
@@ -38,7 +38,7 @@ namespace Xyzu.Library
 				return song;
 			}
 
-			ISong? ILibraryDroid.ISongs.GetSong(ILibraryDroid.IIdentifiers? identifiers)
+			ISong? ISongs.GetSong(IIdentifiers? identifiers)
 			{
 				if (identifiers is null)
 					return null;
@@ -47,7 +47,7 @@ namespace Xyzu.Library
 
 				return song;
 			}
-			async Task<ISong?> ILibraryDroid.ISongs.GetSong(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
+			async Task<ISong?> ISongs.GetSong(IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
 				if (identifiers is null)
 					return null;
@@ -56,7 +56,7 @@ namespace Xyzu.Library
 
 				return await Task.FromResult(song);
 			}
-			IEnumerable<ISong> ILibraryDroid.ISongs.GetSongs(ILibraryDroid.IIdentifiers? identifiers)
+			IEnumerable<ISong> ISongs.GetSongs(IIdentifiers? identifiers)
 			{
 				IEnumerable<ISong> songs = identifiers is null
 					? SQLiteLibrary.SongsTable
@@ -65,7 +65,7 @@ namespace Xyzu.Library
 				foreach (ISong song in songs)
 					yield return song;
 			}
-			async IAsyncEnumerable<ISong> ILibraryDroid.ISongs.GetSongs(ILibraryDroid.IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
+			async IAsyncEnumerable<ISong> ISongs.GetSongs(IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
 			{
 				IEnumerable<ISong> songs = identifiers is null
 					? SQLiteLibrary.SongsTable
@@ -75,7 +75,7 @@ namespace Xyzu.Library
 					yield return await Task.FromResult(song);
 			}
 
-			ISong? ILibraryDroid.ISongs.PopulateSong(ISong? song)
+			ISong? ISongs.PopulateSong(ISong? song)
 			{
 				if (song is null)
 					return null;
@@ -85,7 +85,7 @@ namespace Xyzu.Library
 
 				return song;
 			}
-			async Task<ISong?> ILibraryDroid.ISongs.PopulateSong(ISong? song, CancellationToken cancellationToken)
+			async Task<ISong?> ISongs.PopulateSong(ISong? song, CancellationToken cancellationToken)
 			{
 				if (song is null)
 					return null;
@@ -95,31 +95,31 @@ namespace Xyzu.Library
 
 				return song;
 			}
-			IEnumerable<ISong>? ILibraryDroid.ISongs.PopulateSongs(IEnumerable<ISong>? songs)
+			IEnumerable<ISong>? ISongs.PopulateSongs(IEnumerable<ISong>? songs)
 			{
 				if (songs is null)
 					return null;
 
 				foreach (ISong song in songs)
-					(this as ILibraryDroid.ISongs).PopulateSong(song);
+					(this as ISongs).PopulateSong(song);
 
 				return songs;
 			}
-			async Task<IEnumerable<ISong>?> ILibraryDroid.ISongs.PopulateSongs(IEnumerable<ISong>? songs, CancellationToken cancellationToken)
+			async Task<IEnumerable<ISong>?> ISongs.PopulateSongs(IEnumerable<ISong>? songs, CancellationToken cancellationToken)
 			{
 				if (songs is null)
 					return null;
 
 				foreach (ISong song in songs)
-					await (this as ILibraryDroid.ISongs).PopulateSong(song, cancellationToken);
+					await (this as ISongs).PopulateSong(song, cancellationToken);
 
 				return songs;
 			}
 
-			bool ILibraryDroid.ISongs.DeleteSong(ISong song)
+			bool ISongs.DeleteSong(ISong song)
 			{
 				if (Actions?.OnDelete != null)
-					foreach (ILibraryDroid.IOnDeleteActions ondeleteaction in Actions.OnDelete)
+					foreach (IOnDeleteActions ondeleteaction in Actions.OnDelete)
 						ondeleteaction.Song(song);
 
 				SongEntity songentity = song as SongEntity ?? new SongEntity(song);
@@ -128,7 +128,7 @@ namespace Xyzu.Library
 
 				return true;
 			}
-			async Task<bool> ILibraryDroid.ISongs.DeleteSong(ISong song, CancellationToken cancellationToken)
+			async Task<bool> ISongs.DeleteSong(ISong song, CancellationToken cancellationToken)
 			{
 				if (Actions?.OnDelete != null)
 					await Task.WhenAll(Actions.OnDelete.Select(_ => _.Song(song)));
@@ -140,10 +140,10 @@ namespace Xyzu.Library
 				return true;
 			}
 
-			bool ILibraryDroid.ISongs.UpdateSong(ISong old, ISong updated)
+			bool ISongs.UpdateSong(ISong old, ISong updated)
 			{
 				if (Actions?.OnUpdate != null)
-					foreach (ILibraryDroid.IOnUpdateActions onupdateaction in Actions.OnUpdate)
+					foreach (IOnUpdateActions onupdateaction in Actions.OnUpdate)
 						onupdateaction.Song(old, updated);
 
 				SongEntity songentity = updated as SongEntity ?? new SongEntity(updated);
@@ -152,7 +152,7 @@ namespace Xyzu.Library
 
 				return true;
 			}
-			async Task<bool> ILibraryDroid.ISongs.UpdateSong(ISong old, ISong updated, CancellationToken cancellationToken)
+			async Task<bool> ISongs.UpdateSong(ISong old, ISong updated, CancellationToken cancellationToken)
 			{
 				if (Actions?.OnUpdate != null)
 					await Task.WhenAll(Actions.OnUpdate.Select(_ => _.Song(old, updated)));

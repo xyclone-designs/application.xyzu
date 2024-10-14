@@ -1,5 +1,4 @@
-﻿#nullable enable
-
+﻿
 namespace AndroidX.RecyclerView.Widget
 {
 	public static class RecyclerViewExtensions

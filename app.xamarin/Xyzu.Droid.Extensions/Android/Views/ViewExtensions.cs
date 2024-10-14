@@ -1,5 +1,4 @@
-﻿#nullable enable
-
+﻿
 namespace Android.Views
 {
 	public static class ViewExtensions

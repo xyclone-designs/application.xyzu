@@ -4,7 +4,7 @@
   <color name="ColorBackground">#111111</color>
   <color name="ColorOnBackground">#ffffff</color>
   
-  <color name="ColorPrimary">#e4006e</color>
+  <color name="ColorPrimary">#DD1B79</color>
   <color name="ColorPrimaryActive">@color/ColorPrimaryDark</color>
   <color name="ColorPrimaryDark">#65002e</color>
   <color name="ColorPrimaryLight">#ff6597</color>

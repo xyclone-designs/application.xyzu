@@ -1,26 +1,9 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Runtime;
 using Android.Util;
-using Android.Views;
-using AndroidX.RecyclerView.Widget;
-
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
-using Xyzu.Images;
-using Xyzu.Library;
 using Xyzu.Library.Models;
-using Xyzu.Player;
-using Xyzu.Settings.Enums;
-using Xyzu.Views.LibraryItem;
 
 namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 {

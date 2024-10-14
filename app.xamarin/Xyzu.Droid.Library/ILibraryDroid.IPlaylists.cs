@@ -1,6 +1,4 @@
-﻿using SQLite;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -13,9 +11,9 @@ namespace Xyzu.Library
 {
 	public partial interface ILibraryDroid
 	{
-		public partial class Default : ILibraryDroid.IPlaylists
+		public partial class Default : IPlaylists
 		{
-			IPlaylist? ILibraryDroid.IPlaylists.Random(ILibraryDroid.IIdentifiers? identifiers)
+			IPlaylist? IPlaylists.Random(IIdentifiers? identifiers)
 			{
 				IEnumerable<IPlaylist> playlists = identifiers is null
 					? SQLiteLibrary.PlaylistsTable
@@ -27,7 +25,7 @@ namespace Xyzu.Library
 
 				return playlist;
 			}
-			async Task<IPlaylist?> ILibraryDroid.IPlaylists.Random(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
+			async Task<IPlaylist?> IPlaylists.Random(IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
 				IEnumerable<IPlaylist> playlists = identifiers is null
 					? SQLiteLibrary.PlaylistsTable
@@ -40,7 +38,7 @@ namespace Xyzu.Library
 				return playlist;
 			}
 
-			IPlaylist? ILibraryDroid.IPlaylists.GetPlaylist(ILibraryDroid.IIdentifiers? identifiers)
+			IPlaylist? IPlaylists.GetPlaylist(IIdentifiers? identifiers)
 			{
 				if (identifiers is null)
 					return null;
@@ -49,7 +47,7 @@ namespace Xyzu.Library
 
 				return playlist;
 			}
-			async Task<IPlaylist?> ILibraryDroid.IPlaylists.GetPlaylist(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
+			async Task<IPlaylist?> IPlaylists.GetPlaylist(IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
 				if (identifiers is null)
 					return null;
@@ -58,7 +56,7 @@ namespace Xyzu.Library
 
 				return await Task.FromResult(playlist);
 			}
-			IEnumerable<IPlaylist> ILibraryDroid.IPlaylists.GetPlaylists(ILibraryDroid.IIdentifiers? identifiers)
+			IEnumerable<IPlaylist> IPlaylists.GetPlaylists(IIdentifiers? identifiers)
 			{
 				IEnumerable<IPlaylist> playlists = identifiers is null
 					? SQLiteLibrary.PlaylistsTable
@@ -67,7 +65,7 @@ namespace Xyzu.Library
 				foreach (IPlaylist playlist in playlists)
 					yield return playlist;
 			}
-			async IAsyncEnumerable<IPlaylist> ILibraryDroid.IPlaylists.GetPlaylists(ILibraryDroid.IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
+			async IAsyncEnumerable<IPlaylist> IPlaylists.GetPlaylists(IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
 			{
 				IEnumerable<IPlaylist> playlists = identifiers is null
 					? SQLiteLibrary.PlaylistsTable
@@ -77,7 +75,7 @@ namespace Xyzu.Library
 					yield return await Task.FromResult(playlist);
 			}
 
-			IPlaylist? ILibraryDroid.IPlaylists.PopulatePlaylist(IPlaylist? playlist)
+			IPlaylist? IPlaylists.PopulatePlaylist(IPlaylist? playlist)
 			{
 				if (playlist is null)
 					return null;
@@ -87,7 +85,7 @@ namespace Xyzu.Library
 
 				return playlist;
 			}
-			async Task<IPlaylist?> ILibraryDroid.IPlaylists.PopulatePlaylist(IPlaylist? playlist, CancellationToken cancellationToken)
+			async Task<IPlaylist?> IPlaylists.PopulatePlaylist(IPlaylist? playlist, CancellationToken cancellationToken)
 			{
 				if (playlist is null)
 					return null;
@@ -97,28 +95,28 @@ namespace Xyzu.Library
 
 				return playlist;
 			}
-			IEnumerable<IPlaylist>? ILibraryDroid.IPlaylists.PopulatePlaylists(IEnumerable<IPlaylist>? playlists)
+			IEnumerable<IPlaylist>? IPlaylists.PopulatePlaylists(IEnumerable<IPlaylist>? playlists)
 			{
 				if (playlists is null)
 					return null;
 
 				foreach (IPlaylist playlist in playlists)
-					(this as ILibraryDroid.IPlaylists).PopulatePlaylist(playlist);
+					(this as IPlaylists).PopulatePlaylist(playlist);
 
 				return playlists;
 			}
-			async Task<IEnumerable<IPlaylist>?> ILibraryDroid.IPlaylists.PopulatePlaylists(IEnumerable<IPlaylist>? playlists, CancellationToken cancellationToken)
+			async Task<IEnumerable<IPlaylist>?> IPlaylists.PopulatePlaylists(IEnumerable<IPlaylist>? playlists, CancellationToken cancellationToken)
 			{
 				if (playlists is null)
 					return null;
 
 				foreach (IPlaylist playlist in playlists)
-					await (this as ILibraryDroid.IPlaylists).PopulatePlaylist(playlist, cancellationToken);
+					await (this as IPlaylists).PopulatePlaylist(playlist, cancellationToken);
 
 				return playlists;
 			}
 
-			bool ILibraryDroid.IPlaylists.CreatePlaylist(IPlaylist playlist)
+			bool IPlaylists.CreatePlaylist(IPlaylist playlist)
 			{
 				PlaylistEntity playlistentity = new (playlist);
 
@@ -126,7 +124,7 @@ namespace Xyzu.Library
 
 				return true;
 			}
-			async Task<bool> ILibraryDroid.IPlaylists.CreatePlaylist(IPlaylist playlist, CancellationToken cancellationToken)
+			async Task<bool> IPlaylists.CreatePlaylist(IPlaylist playlist, CancellationToken cancellationToken)
 			{
 				PlaylistEntity playlistentity = new (playlist);
 
@@ -135,10 +133,10 @@ namespace Xyzu.Library
 				return true;
 			}
 
-			bool ILibraryDroid.IPlaylists.DeletePlaylist(IPlaylist playlist)
+			bool IPlaylists.DeletePlaylist(IPlaylist playlist)
 			{
 				if (Actions?.OnDelete != null)
-					foreach (ILibraryDroid.IOnDeleteActions ondeleteaction in Actions.OnDelete)
+					foreach (IOnDeleteActions ondeleteaction in Actions.OnDelete)
 						ondeleteaction.Playlist(playlist);
 
 				PlaylistEntity playlistentity = playlist as PlaylistEntity ?? new PlaylistEntity(playlist);
@@ -147,7 +145,7 @@ namespace Xyzu.Library
 
 				return true;
 			}
-			async Task<bool> ILibraryDroid.IPlaylists.DeletePlaylist(IPlaylist playlist, CancellationToken cancellationToken)
+			async Task<bool> IPlaylists.DeletePlaylist(IPlaylist playlist, CancellationToken cancellationToken)
 			{
 				if (Actions?.OnDelete != null)
 					await Task.WhenAll(Actions.OnDelete.Select(_ => _.Playlist(playlist)));
@@ -159,10 +157,10 @@ namespace Xyzu.Library
 				return true;
 			}
 
-			bool ILibraryDroid.IPlaylists.UpdatePlaylist(IPlaylist old, IPlaylist updated)
+			bool IPlaylists.UpdatePlaylist(IPlaylist old, IPlaylist updated)
 			{
 				if (Actions?.OnUpdate != null)
-					foreach (ILibraryDroid.IOnUpdateActions onupdateaction in Actions.OnUpdate)
+					foreach (IOnUpdateActions onupdateaction in Actions.OnUpdate)
 						onupdateaction.Playlist(old, updated);
 
 				PlaylistEntity playlistentity = updated as PlaylistEntity ?? new PlaylistEntity(updated);
@@ -171,7 +169,7 @@ namespace Xyzu.Library
 
 				return true;
 			}
-			async Task<bool> ILibraryDroid.IPlaylists.UpdatePlaylist(IPlaylist old, IPlaylist updated, CancellationToken cancellationToken)
+			async Task<bool> IPlaylists.UpdatePlaylist(IPlaylist old, IPlaylist updated, CancellationToken cancellationToken)
 			{
 				if (Actions?.OnUpdate != null)
 					await Task.WhenAll(Actions.OnUpdate.Select(_ => _.Playlist(old, updated)));

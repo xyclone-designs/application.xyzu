@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Content.Res;
 using Android.Views;
 using AndroidX.Activity.Result;
@@ -50,23 +48,23 @@ namespace Xyzu.Menus
 
 			public IAlbum? Album 
 			{
-				get => Albums.Count() == 1 ? Albums.FirstOrDefault() : null;
+				get => Albums.Count() == 1 ? Albums.First() : null;
 			} 
 			public IArtist? Artist 
 			{ 
-				get => Artists.Count() == 1 ? Artists.FirstOrDefault() : null;
+				get => Artists.Count() == 1 ? Artists.First() : null;
 			} 
 			public IGenre? Genre 
 			{ 
-				get => Genres.Count() == 1 ? Genres.FirstOrDefault() : null;
+				get => Genres.Count() == 1 ? Genres.First() : null;
 			} 
 			public IPlaylist? Playlist 
 			{ 
-				get => Playlists.Count() == 1 ? Playlists.FirstOrDefault() : null;
+				get => Playlists.Count() == 1 ? Playlists.First() : null;
 			} 
 			public ISong? Song 
 			{ 
-				get => Songs.Count() == 1 ? Songs.FirstOrDefault() : null;
+				get => Songs.Count() == 1 ? Songs.First() : null;
 			} 			
 			public IEnumerable<IAlbum> Albums { get; set; } = Enumerable.Empty<IAlbum>();
 			public IEnumerable<IArtist> Artists { get; set; } = Enumerable.Empty<IArtist>();
@@ -146,7 +144,7 @@ namespace Xyzu.Menus
 		{
 			return dialoginterfaceaction ?? (dialoginterface => dialoginterface?.Dismiss());
 		}
-		private static IDialogInterfaceOnClickListener CreateDialogInterfaceOnClickListener(Action<IDialogInterface?>? dialoginterfaceaction)
+		private static DialogInterfaceOnClickListener CreateDialogInterfaceOnClickListener(Action<IDialogInterface?>? dialoginterfaceaction)
 		{
 			return new DialogInterfaceOnClickListener
 			{
@@ -159,7 +157,7 @@ namespace Xyzu.Menus
 				}
 			};
 		}			 
-		private static IDialogInterfaceOnClickListener CreateDialogInterfaceOnClickListener(Action<IDialogInterface?>? dialoginterfaceaction, DialogInterfaceOnClickListener @default)
+		private static DialogInterfaceOnClickListener CreateDialogInterfaceOnClickListener(Action<IDialogInterface?>? dialoginterfaceaction, DialogInterfaceOnClickListener @default)
 		{
 			if (dialoginterfaceaction is null)
 				return @default;
@@ -174,8 +172,8 @@ namespace Xyzu.Menus
 			PopupMenu.IOnMenuItemClickListener? menuitemclicklistener = null,
 			PopupMenu.IOnDismissListener? ondismisslistener = null)
 		{
-			Context contextthemewrapper = new ContextThemeWrapper(context, Resource.Style.Xyzu_PopupMenu);
-			PopupMenu popupmenu = new PopupMenu(contextthemewrapper, anchor, (int)GravityFlags.NoGravity);
+			ContextThemeWrapper contextthemewrapper = new (context, Resource.Style.Xyzu_PopupMenu);
+			PopupMenu popupmenu = new (contextthemewrapper, anchor, (int)GravityFlags.NoGravity);
 
 			foreach (MenuOptions menuoption in menuoptions ?? Enumerable.Empty<MenuOptions>())
 				popupmenu.Menu.AddMenuOption(menuoption, context, out IMenuItem? _);

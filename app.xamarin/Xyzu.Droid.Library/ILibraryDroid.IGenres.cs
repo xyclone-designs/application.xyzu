@@ -1,8 +1,4 @@
-﻿#nullable enable
-
-using SQLite;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,9 +11,9 @@ namespace Xyzu.Library
 {
 	public partial interface ILibraryDroid
 	{
-		public partial class Default : ILibraryDroid.IGenres
+		public partial class Default : IGenres
 		{
-			IGenre? ILibraryDroid.IGenres.Random(ILibraryDroid.IIdentifiers? identifiers)
+			IGenre? IGenres.Random(IIdentifiers? identifiers)
 			{
 				IEnumerable<IGenre> genres = identifiers is null
 					? SQLiteLibrary.GenresTable
@@ -29,7 +25,7 @@ namespace Xyzu.Library
 
 				return genre;
 			}
-			async Task<IGenre?> ILibraryDroid.IGenres.Random(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
+			async Task<IGenre?> IGenres.Random(IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
 				IEnumerable<IGenre> genres = identifiers is null
 					? SQLiteLibrary.GenresTable
@@ -42,7 +38,7 @@ namespace Xyzu.Library
 				return genre;
 			}
 
-			IGenre? ILibraryDroid.IGenres.GetGenre(ILibraryDroid.IIdentifiers? identifiers)
+			IGenre? IGenres.GetGenre(IIdentifiers? identifiers)
 			{
 				if (identifiers is null)
 					return null;
@@ -51,7 +47,7 @@ namespace Xyzu.Library
 
 				return genre;
 			}
-			async Task<IGenre?> ILibraryDroid.IGenres.GetGenre(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
+			async Task<IGenre?> IGenres.GetGenre(IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
 				if (identifiers is null)
 					return null;
@@ -60,7 +56,7 @@ namespace Xyzu.Library
 
 				return await Task.FromResult(genre);
 			}
-			IEnumerable<IGenre> ILibraryDroid.IGenres.GetGenres(ILibraryDroid.IIdentifiers? identifiers)
+			IEnumerable<IGenre> IGenres.GetGenres(IIdentifiers? identifiers)
 			{
 				IEnumerable<IGenre> genres = identifiers is null
 					? SQLiteLibrary.GenresTable
@@ -69,7 +65,7 @@ namespace Xyzu.Library
 				foreach (IGenre genre in genres)
 					yield return genre;
 			}
-			async IAsyncEnumerable<IGenre> ILibraryDroid.IGenres.GetGenres(ILibraryDroid.IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
+			async IAsyncEnumerable<IGenre> IGenres.GetGenres(IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
 			{
 				IEnumerable<IGenre> genres = identifiers is null
 					? SQLiteLibrary.GenresTable
@@ -79,7 +75,7 @@ namespace Xyzu.Library
 					yield return await Task.FromResult(genre);
 			}
 
-			IGenre? ILibraryDroid.IGenres.PopulateGenre(IGenre? genre)
+			IGenre? IGenres.PopulateGenre(IGenre? genre)
 			{
 				if (genre is null)
 					return null;
@@ -89,7 +85,7 @@ namespace Xyzu.Library
 
 				return genre;
 			}
-			async Task<IGenre?> ILibraryDroid.IGenres.PopulateGenre(IGenre? genre, CancellationToken cancellationToken)
+			async Task<IGenre?> IGenres.PopulateGenre(IGenre? genre, CancellationToken cancellationToken)
 			{
 				if (genre is null)
 					return null;
@@ -99,31 +95,31 @@ namespace Xyzu.Library
 
 				return genre;
 			}
-			IEnumerable<IGenre>? ILibraryDroid.IGenres.PopulateGenres(IEnumerable<IGenre>? genres)
+			IEnumerable<IGenre>? IGenres.PopulateGenres(IEnumerable<IGenre>? genres)
 			{
 				if (genres is null)
 					return null;
 
 				foreach (IGenre genre in genres)
-					(this as ILibraryDroid.IGenres).PopulateGenre(genre);
+					(this as IGenres).PopulateGenre(genre);
 
 				return genres;
 			}
-			async Task<IEnumerable<IGenre>?> ILibraryDroid.IGenres.PopulateGenres(IEnumerable<IGenre>? genres, CancellationToken cancellationToken)
+			async Task<IEnumerable<IGenre>?> IGenres.PopulateGenres(IEnumerable<IGenre>? genres, CancellationToken cancellationToken)
 			{
 				if (genres is null)
 					return null;
 
 				foreach (IGenre genre in genres)
-					await (this as ILibraryDroid.IGenres).PopulateGenre(genre, cancellationToken);
+					await (this as IGenres).PopulateGenre(genre, cancellationToken);
 
 				return genres;
 			}
 
-			bool ILibraryDroid.IGenres.DeleteGenre(IGenre genre)
+			bool IGenres.DeleteGenre(IGenre genre)
 			{
 				if (Actions?.OnDelete != null)
-					foreach (ILibraryDroid.IOnDeleteActions ondeleteaction in Actions.OnDelete)
+					foreach (IOnDeleteActions ondeleteaction in Actions.OnDelete)
 						ondeleteaction.Genre(genre);
 
 				GenreEntity genreentity = genre as GenreEntity ?? new GenreEntity(genre);
@@ -132,7 +128,7 @@ namespace Xyzu.Library
 
 				return true;
 			}
-			async Task<bool> ILibraryDroid.IGenres.DeleteGenre(IGenre genre, CancellationToken cancellationToken)
+			async Task<bool> IGenres.DeleteGenre(IGenre genre, CancellationToken cancellationToken)
 			{
 				if (Actions?.OnDelete != null)
 					await Task.WhenAll(Actions.OnDelete.Select(_ => _.Genre(genre)));
@@ -144,10 +140,10 @@ namespace Xyzu.Library
 				return true;
 			}
 
-			bool ILibraryDroid.IGenres.UpdateGenre(IGenre old, IGenre updated)
+			bool IGenres.UpdateGenre(IGenre old, IGenre updated)
 			{
 				if (Actions?.OnUpdate != null)
-					foreach (ILibraryDroid.IOnUpdateActions onupdateaction in Actions.OnUpdate)
+					foreach (IOnUpdateActions onupdateaction in Actions.OnUpdate)
 						onupdateaction.Genre(old, updated);
 
 				GenreEntity genreentity = updated as GenreEntity ?? new GenreEntity(updated);
@@ -156,7 +152,7 @@ namespace Xyzu.Library
 
 				return true;
 			}
-			async Task<bool> ILibraryDroid.IGenres.UpdateGenre(IGenre old, IGenre updated, CancellationToken cancellationToken)
+			async Task<bool> IGenres.UpdateGenre(IGenre old, IGenre updated, CancellationToken cancellationToken)
 			{
 				if (Actions?.OnUpdate != null)
 					await Task.WhenAll(Actions.OnUpdate.Select(_ => _.Genre(old, updated)));

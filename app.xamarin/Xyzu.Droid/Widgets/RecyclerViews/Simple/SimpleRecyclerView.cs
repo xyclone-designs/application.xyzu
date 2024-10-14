@@ -1,7 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
-using Android.Runtime;
+﻿using Android.Content;
 using Android.Util;
 using Android.Views;
 using AndroidX.RecyclerView.Widget;

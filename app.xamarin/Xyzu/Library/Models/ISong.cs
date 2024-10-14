@@ -21,6 +21,7 @@ namespace Xyzu.Library.Models
 		T Duration { get; set; }
 		T Filepath { get; set; }
 		T Genre { get; set; }
+		T IsCorrupt { get; set; }
 		T Lyrics { get; set; }
 		T MimeType { get; set; }
 		T ReleaseDate { get; set; }
@@ -44,6 +45,7 @@ namespace Xyzu.Library.Models
 		TimeSpan? Duration { get; set; }
 		string? Filepath { get; set; }
 		string? Genre { get; set; }
+		bool IsCorrupt { get; set; }
 		string? Lyrics { get; set; }
 		MimeTypes? MimeType { get; set; }
 		DateTime? ReleaseDate { get; set; }
@@ -70,6 +72,7 @@ namespace Xyzu.Library.Models
 				Duration = song.Duration;
 				Filepath = song.Filepath;
 				Genre = song.Genre;
+				IsCorrupt = song.IsCorrupt;
 				Lyrics = song.Lyrics;
 				MimeType = song.MimeType;
 				ReleaseDate = song.ReleaseDate;
@@ -92,6 +95,7 @@ namespace Xyzu.Library.Models
 			public TimeSpan? Duration { get; set; }
 			public string? Filepath { get; set; }
 			public string? Genre { get; set; }
+			public bool IsCorrupt { get; set; }
 			public string? Lyrics { get; set; }
 			public MimeTypes? MimeType { get; set; }
 			public DateTime? ReleaseDate { get; set; }
@@ -121,6 +125,7 @@ namespace Xyzu.Library.Models
 					.AppendFormat("{0}: {1} \n", nameof(Duration), Duration)
 					.AppendFormat("{0}: {1} \n", nameof(Filepath), Filepath)
 					.AppendFormat("{0}: {1} \n", nameof(Genre), Genre)
+					.AppendFormat("{0}: {1} \n", nameof(IsCorrupt), IsCorrupt)
 					.AppendFormat("{0}: {1} \n", nameof(Lyrics), Lyrics)
 					.AppendFormat("{0}: {1} \n", nameof(MimeType), MimeType)
 					.AppendFormat("{0}: {1} \n", nameof(ReleaseDate), ReleaseDate)
@@ -147,6 +152,7 @@ namespace Xyzu.Library.Models
 				Duration = defaultvalue;
 				Filepath = defaultvalue;
 				Genre = defaultvalue;
+				IsCorrupt = defaultvalue;
 				Lyrics = defaultvalue;
 				MimeType = defaultvalue;
 				ReleaseDate = defaultvalue;
@@ -169,6 +175,7 @@ namespace Xyzu.Library.Models
 			public T Duration { get; set; }
 			public T Filepath { get; set; }
 			public T Genre { get; set; }
+			public T IsCorrupt { get; set; }
 			public T Lyrics { get; set; }
 			public T MimeType { get; set; }
 			public T ReleaseDate { get; set; }

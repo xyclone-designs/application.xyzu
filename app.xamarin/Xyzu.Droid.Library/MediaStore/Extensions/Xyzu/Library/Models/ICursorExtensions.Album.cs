@@ -21,7 +21,7 @@ namespace Xyzu.Library.Models
 
 			if (retriever.ArtistId) projection = projection.Append(MediaStoreUtils.ColumnNames.ArtistId);
 			if (retriever.Artist) projection = projection.Append(MediaStoreUtils.ColumnNames.AlbumArtist);
-			if (retriever.Artwork != null && (retriever.Artwork.Buffer || retriever.Artwork.BufferHash || retriever.Artwork.Uri)) projection = projection.Append(MediaStoreUtils.ColumnNames.AlbumId);
+			if (retriever.Artwork != null && (retriever.Artwork.Buffer || retriever.Artwork.BufferKey || retriever.Artwork.Uri)) projection = projection.Append(MediaStoreUtils.ColumnNames.AlbumId);
 			if (retriever.ReleaseDate) projection = projection.Append(MediaStoreUtils.ColumnNames.Year);
 			if (retriever.Title) projection = projection.Append(MediaStoreUtils.ColumnNames.Album);
 

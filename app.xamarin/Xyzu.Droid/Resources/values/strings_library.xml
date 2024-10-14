@@ -14,6 +14,7 @@
   <string name="library_search">Search</string>
   <string name="library_songs">Songs</string>
   
+  <string name="library_file_corrupted">File is corrupted and cannot be played</string>
   <string name="library_list_options">List Options</string>
   
   <string name="library_no_lyrics">No lyrics found...</string>

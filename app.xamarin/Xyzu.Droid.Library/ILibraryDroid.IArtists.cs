@@ -1,8 +1,4 @@
-﻿#nullable enable
-
-using SQLite;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,9 +11,9 @@ namespace Xyzu.Library
 {
 	public partial interface ILibraryDroid
 	{
-		public partial class Default : ILibraryDroid.IArtists
+		public partial class Default : IArtists
 		{
-			IArtist? ILibraryDroid.IArtists.Random(ILibraryDroid.IIdentifiers? identifiers)
+			IArtist? IArtists.Random(IIdentifiers? identifiers)
 			{
 				IEnumerable<IArtist> artists = identifiers is null
 					? SQLiteLibrary.ArtistsTable
@@ -29,7 +25,7 @@ namespace Xyzu.Library
 
 				return artist;
 			}
-			async Task<IArtist?> ILibraryDroid.IArtists.Random(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
+			async Task<IArtist?> IArtists.Random(IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
 				IEnumerable<IArtist> artists = identifiers is null
 					? SQLiteLibrary.ArtistsTable
@@ -42,7 +38,7 @@ namespace Xyzu.Library
 				return artist;
 			}
 
-			IArtist? ILibraryDroid.IArtists.GetArtist(ILibraryDroid.IIdentifiers? identifiers)
+			IArtist? IArtists.GetArtist(IIdentifiers? identifiers)
 			{
 				if (identifiers is null)
 					return null;
@@ -51,7 +47,7 @@ namespace Xyzu.Library
 
 				return artist;
 			}
-			async Task<IArtist?> ILibraryDroid.IArtists.GetArtist(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
+			async Task<IArtist?> IArtists.GetArtist(IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
 				if (identifiers is null)
 					return null;
@@ -60,7 +56,7 @@ namespace Xyzu.Library
 
 				return await Task.FromResult(artist);
 			}
-			IEnumerable<IArtist> ILibraryDroid.IArtists.GetArtists(ILibraryDroid.IIdentifiers? identifiers)
+			IEnumerable<IArtist> IArtists.GetArtists(IIdentifiers? identifiers)
 			{
 				IEnumerable<IArtist> artists = identifiers is null
 					? SQLiteLibrary.ArtistsTable
@@ -69,7 +65,7 @@ namespace Xyzu.Library
 				foreach (IArtist artist in artists)
 					yield return artist;
 			}
-			async IAsyncEnumerable<IArtist> ILibraryDroid.IArtists.GetArtists(ILibraryDroid.IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
+			async IAsyncEnumerable<IArtist> IArtists.GetArtists(IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
 			{
 				IEnumerable<IArtist> artists = identifiers is null
 					? SQLiteLibrary.ArtistsTable
@@ -79,7 +75,7 @@ namespace Xyzu.Library
 					yield return await Task.FromResult(artist);
 			}
 
-			IArtist? ILibraryDroid.IArtists.PopulateArtist(IArtist? artist)
+			IArtist? IArtists.PopulateArtist(IArtist? artist)
 			{
 				if (artist is null)
 					return null;
@@ -89,7 +85,7 @@ namespace Xyzu.Library
 
 				return artist;
 			}
-			async Task<IArtist?> ILibraryDroid.IArtists.PopulateArtist(IArtist? artist, CancellationToken cancellationToken)
+			async Task<IArtist?> IArtists.PopulateArtist(IArtist? artist, CancellationToken cancellationToken)
 			{
 				if (artist is null)
 					return null;
@@ -99,31 +95,31 @@ namespace Xyzu.Library
 
 				return artist;
 			}
-			IEnumerable<IArtist>? ILibraryDroid.IArtists.PopulateArtists(IEnumerable<IArtist>? artists)
+			IEnumerable<IArtist>? IArtists.PopulateArtists(IEnumerable<IArtist>? artists)
 			{
 				if (artists is null)
 					return null;
 
 				foreach (IArtist artist in artists)
-					(this as ILibraryDroid.IArtists).PopulateArtist(artist);
+					(this as IArtists).PopulateArtist(artist);
 
 				return artists;
 			}
-			async Task<IEnumerable<IArtist>?> ILibraryDroid.IArtists.PopulateArtists(IEnumerable<IArtist>? artists, CancellationToken cancellationToken)
+			async Task<IEnumerable<IArtist>?> IArtists.PopulateArtists(IEnumerable<IArtist>? artists, CancellationToken cancellationToken)
 			{
 				if (artists is null)
 					return null;
 
 				foreach (IArtist artist in artists)
-					await (this as ILibraryDroid.IArtists).PopulateArtist(artist, cancellationToken);
+					await (this as IArtists).PopulateArtist(artist, cancellationToken);
 
 				return artists;
 			}
 
-			bool ILibraryDroid.IArtists.DeleteArtist(IArtist artist)
+			bool IArtists.DeleteArtist(IArtist artist)
 			{
 				if (Actions?.OnDelete != null)
-					foreach (ILibraryDroid.IOnDeleteActions ondeleteaction in Actions.OnDelete)
+					foreach (IOnDeleteActions ondeleteaction in Actions.OnDelete)
 						ondeleteaction.Artist(artist);
 
 				ArtistEntity artistentity = artist as ArtistEntity ?? new ArtistEntity(artist);
@@ -132,7 +128,7 @@ namespace Xyzu.Library
 
 				return true;
 			}
-			async Task<bool> ILibraryDroid.IArtists.DeleteArtist(IArtist artist, CancellationToken cancellationToken)
+			async Task<bool> IArtists.DeleteArtist(IArtist artist, CancellationToken cancellationToken)
 			{
 				if (Actions?.OnDelete != null)
 					await Task.WhenAll(Actions.OnDelete.Select(_ => _.Artist(artist)));
@@ -144,10 +140,10 @@ namespace Xyzu.Library
 				return true;
 			}
 
-			bool ILibraryDroid.IArtists.UpdateArtist(IArtist old, IArtist updated)
+			bool IArtists.UpdateArtist(IArtist old, IArtist updated)
 			{
 				if (Actions?.OnUpdate != null)
-					foreach (ILibraryDroid.IOnUpdateActions onupdateaction in Actions.OnUpdate)
+					foreach (IOnUpdateActions onupdateaction in Actions.OnUpdate)
 						onupdateaction.Artist(old, updated);
 
 				ArtistEntity artistentity = updated as ArtistEntity ?? new ArtistEntity(updated);
@@ -156,7 +152,7 @@ namespace Xyzu.Library
 
 				return true;
 			}
-			async Task<bool> ILibraryDroid.IArtists.UpdateArtist(IArtist old, IArtist updated, CancellationToken cancellationToken)
+			async Task<bool> IArtists.UpdateArtist(IArtist old, IArtist updated, CancellationToken cancellationToken)
 			{
 				if (Actions?.OnUpdate != null)
 					await Task.WhenAll(Actions.OnUpdate.Select(_ => _.Artist(old, updated)));

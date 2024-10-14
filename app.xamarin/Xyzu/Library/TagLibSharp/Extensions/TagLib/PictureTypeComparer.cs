@@ -27,7 +27,7 @@ namespace TagLib
 					.Cast<PictureType>();
 
 				if (Order is not null)
-					picturetypes = picturetypes.Where(picturetype => !Order.Contains(picturetype));
+					picturetypes = picturetypes.Where(picturetype => Order.Contains(picturetype) is false);
 
 				picturetypesorder = picturetypesorder.Concat(picturetypes);
 			}

@@ -1,5 +1,4 @@
-﻿#nullable enable
-
+﻿
 namespace Android.Widget
 {
 	public static class CompoundButtonExtensions

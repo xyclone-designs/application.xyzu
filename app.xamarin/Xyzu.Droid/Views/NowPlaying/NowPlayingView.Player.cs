@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Animation;
+﻿using Android.Animation;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -214,6 +212,17 @@ namespace Xyzu.Views.NowPlaying
 			SetText(SongCurrent, null, null);
 			SetBlur(SongCurrent);
 			SetPosition(SongCurrent);
+
+			if ((SongCurrent?.IsCorrupt ?? false) && Context is not null)
+				XyzuUtils.Dialogs
+					.SnackBar(Context, Artwork, snackbar => 
+					{
+						snackbar.SetText(string.Format(
+							"{0} '.../{1}'", 
+							Context.GetString(Resource.String.player_error_couldnotplay), 
+							SongCurrent.Filepath?.Split('/').Last()));
+
+					}).Show();
 		}
 		public void ViewReset()
 		{
@@ -411,9 +420,9 @@ namespace Xyzu.Views.NowPlaying
 			Detail_One.SetText(detailone, null);
 			Detail_Two.SetText(detailtwo, null);
 		}
-		public void SetPalette(ISong? song)
+		public async void SetPalette(ISong? song)
 		{
-			ArtworkPalette = Images?.GetPalette(song);
+			ArtworkPalette = Images is null ? null : await Images.GetPalette(default, song);
 
 			if ((ArtworkPalette?.DominantSwatch?.Rgb ?? Context?.Resources?.GetColor(Resource.Color.ColorPrimary, Context.Theme)) is int color)
 				Position.SetLoadedBarColor(color);
@@ -429,20 +438,26 @@ namespace Xyzu.Views.NowPlaying
 		}
 		public void SetPosition(ISong? song)
 		{
-			if (song?.Filepath is null || song?.Duration is null || song.Duration.Value == TimeSpan.Zero)
+			TimeSpan? duration = (song?.IsCorrupt ?? false) ? TimeSpan.FromSeconds(3) : song?.Duration;
+
+			if (song?.Filepath is null || duration is null || duration == TimeSpan.Zero)
 				Position.Hide();
 			else
 			{
 				Position.Show();
-				Task.Run(() => Position.LoadFrom(song.Filepath, (int)song.Duration.Value.TotalMilliseconds));
+				Task.Run(() => Position.LoadFrom(song.Filepath, (int)duration.Value.TotalMilliseconds));
 			}
 			
-			SetPosition(TimeSpan.Zero, song?.Duration, true);
+			SetPosition(TimeSpan.Zero, duration, true);
 		}
 		public void SetPosition(TimeSpan? current, TimeSpan? duration, bool withprogress = true)
 		{
 			current ??= TimeSpan.FromMilliseconds(Player?.Position ?? 0);
-			duration ??= SongCurrent?.Duration ?? Player?.Queue.CurrentSong?.Duration ?? TimeSpan.Zero;
+			duration ??= (SongCurrent ?? Player?.Queue.CurrentSong) is ISong song 
+				? song.IsCorrupt  
+					? TimeSpan.FromSeconds(3) 
+					: song.Duration ?? TimeSpan.Zero
+				: TimeSpan.Zero;
 
 			if (current < TimeSpan.Zero) current = TimeSpan.Zero;
 			if (duration < TimeSpan.Zero) duration = TimeSpan.Zero;

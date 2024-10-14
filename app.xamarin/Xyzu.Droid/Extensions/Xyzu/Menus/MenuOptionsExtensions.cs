@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics.Drawables;
 using Android.Views;
 using AndroidX.AppCompat.Widget;

@@ -6,6 +6,7 @@ namespace Xyzu.Images.Enums
 		Blur,
 		Circularise,
 		Downsample,
+		Merge,
 		Rounded,
 		Tint,
 	}

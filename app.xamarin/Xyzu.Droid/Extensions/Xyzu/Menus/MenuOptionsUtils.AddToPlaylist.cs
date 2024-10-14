@@ -1,9 +1,5 @@
-﻿#nullable enable
-
-using Android.Text;
+﻿using Android.Text;
 using Android.Content;
-
-using Google.Android.Material.Snackbar;
 
 using System;
 using System.Collections.Generic;
@@ -172,7 +168,7 @@ namespace Xyzu.Menus
 
 				if (alertdialog != null)
 				{
-					OptionsCreateAndViewView optioncreateandviewview = new OptionsCreateAndViewView(variables.Context)
+					OptionsCreateAndViewView optioncreateandviewview = new (variables.Context)
 					{
 						OnCreateTextChanged = PlaylistOnCreateTextChanged(playlistnames),
 						OnCreate = (optioncreateandviewview, playlistname) =>
@@ -255,7 +251,7 @@ namespace Xyzu.Menus
 
 				if (alertdialog != null)
 				{
-					OptionsCreateAndViewView optioncreateandviewview = new OptionsCreateAndViewView(variables.Context)
+					OptionsCreateAndViewView optioncreateandviewview = new (variables.Context)
 					{
 						OnCreateTextChanged = PlaylistOnCreateTextChanged(playlistnames),
 						OnCreate = (optioncreateandviewview, playlistname) =>
@@ -334,7 +330,7 @@ namespace Xyzu.Menus
 
 				if (alertdialog != null)
 				{
-					OptionsCreateAndViewView optioncreateandviewview = new OptionsCreateAndViewView(variables.Context)
+					OptionsCreateAndViewView optioncreateandviewview = new (variables.Context)
 					{
 						OnCreateTextChanged = PlaylistOnCreateTextChanged(playlistnames),
 						OnCreate = (optioncreateandviewview, playlistname) =>
@@ -413,7 +409,7 @@ namespace Xyzu.Menus
 
 				if (alertdialog != null)
 				{
-					OptionsCreateAndViewView optioncreateandviewview = new OptionsCreateAndViewView(variables.Context)
+					OptionsCreateAndViewView optioncreateandviewview = new (variables.Context)
 					{
 						OnCreateTextChanged = PlaylistOnCreateTextChanged(playlistnames),
 						OnCreate = (optioncreateandviewview, playlistname) =>
@@ -492,7 +488,7 @@ namespace Xyzu.Menus
 
 				if (alertdialog != null)
 				{
-					OptionsCreateAndViewView optioncreateandviewview = new OptionsCreateAndViewView(variables.Context)
+					OptionsCreateAndViewView optioncreateandviewview = new (variables.Context)
 					{
 						OnCreateTextChanged = PlaylistOnCreateTextChanged(playlistnames),
 						OnCreate = (optioncreateandviewview, playlistname) =>

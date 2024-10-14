@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Graphics;
 using AndroidX.Core.App;

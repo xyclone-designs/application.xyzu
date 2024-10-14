@@ -1,5 +1,4 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.Database;
 
 using SQLite;
@@ -17,8 +16,6 @@ using Xyzu.Library.MediaStore;
 using Xyzu.Library.Models;
 using Xyzu.Library.TagLibSharp;
 
-using JavaFile = Java.IO.File;
-
 namespace Xyzu.Library
 {
 	public partial interface ILibraryDroid : ILibrary
@@ -27,12 +24,12 @@ namespace Xyzu.Library
 		CursorBuilder DefaultCursorBuilder { get; }
 		SQLiteLibraryConnection SQLiteLibrary { get; set; }
 
-		public static async Task OnRetrieve(IImage retrieved, IEnumerable<ILibraryDroid.IOnRetrieveActions>? actions, ILibraryDroid.IParameters? parameters) 
+		public static async Task OnRetrieve(IImage retrieved, IEnumerable<IOnRetrieveActions>? actions, IParameters? parameters) 
 		{
 			if (actions is null || actions.Any() is false)
 				return;
 
-			foreach (ILibraryDroid.IOnRetrieveActions onretrieveaction in actions)
+			foreach (IOnRetrieveActions onretrieveaction in actions)
 				switch (true)
 				{
 					case true when retrieved.Buffer != null:
@@ -42,27 +39,29 @@ namespace Xyzu.Library
 					case true when onretrieveaction is IOActions.OnRetrieve:
 					case true when onretrieveaction is MediaMetadataActions.OnRetrieve:
 					case true when onretrieveaction is TagLibSharpActions.OnRetrieve:
-						await onretrieveaction.Image(retrieved, parameters?.RetrieverImage, parameters?.Filepath, parameters?.Uri, parameters?.ImageModelTypes);
+						await onretrieveaction.Image(retrieved, parameters?.ImageModelTypes);
 						break;
 
-					case true when onretrieveaction is MediaStoreActions.OnRetrieve && parameters is not null:
-						(parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters))?.ToPosition(
+					case true when 
+						onretrieveaction is MediaStoreActions.OnRetrieve && 
+						parameters is not null && (parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters)) is not null &&
+						await parameters.Cursor.ToPosition(
 							directory: parameters?.Directory,
 							uri: parameters?.Uri,
 							filepath: parameters?.Filepath,
-							cursorpositions: parameters?.CursorPositions);
-						await onretrieveaction.Image(retrieved, parameters?.RetrieverImage, parameters?.Filepath, parameters?.Uri, parameters?.ImageModelTypes);
+							cursorpositions: parameters?.CursorPositions) is int:
+						await onretrieveaction.Image(retrieved, parameters?.ImageModelTypes);
 						break;
 
 					default: break;
 				}
 		}
-		public static async Task OnRetrieve<TModel>(TModel model, IEnumerable<ILibraryDroid.IOnRetrieveActions>? actions, ILibraryDroid.IParameters? parameters) where TModel : IModel
+		public static async Task OnRetrieve<TModel>(TModel model, IEnumerable<IOnRetrieveActions>? actions, IParameters? parameters) where TModel : IModel
 		{
 			if (actions is null || actions.Any() is false)
 				return;
 
-			foreach (ILibraryDroid.IOnRetrieveActions action in actions)
+			foreach (IOnRetrieveActions action in actions)
 				switch (true)
 				{
 					case true when model is IAlbum album:
@@ -75,12 +74,14 @@ namespace Xyzu.Library
 								await action.Album(album, parameters?.RetrievedSongExtra);
 								break;
 
-							case true when action is MediaStoreActions.OnRetrieve && parameters is not null:
-								(parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters))?.ToPosition(
+							case true when
+								action is MediaStoreActions.OnRetrieve &&
+								parameters is not null && (parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters)) is not null &&
+								await parameters.Cursor.ToPosition(
 									directory: parameters?.Directory,
 									cursorpositions: parameters?.CursorPositions,
 									uri: parameters?.RetrievedSongExtra?.Uri,
-									filepath: parameters?.RetrievedSongExtra?.Filepath);
+									filepath: parameters?.RetrievedSongExtra?.Filepath) is int:
 								await action.Album(album, parameters?.RetrievedSongExtra);
 								break;
 
@@ -98,13 +99,14 @@ namespace Xyzu.Library
 							case true when action is TagLibSharpActions.OnRetrieve && TagLibSharpUtils.WouldBenefit(artist):
 								await action.Artist(artist, parameters?.RetrievedSongExtra);
 								break;
-
-							case true when action is MediaStoreActions.OnRetrieve && parameters is not null:
-								(parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters))?.ToPosition(
+							case true when
+								action is MediaStoreActions.OnRetrieve &&
+								parameters is not null && (parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters)) is not null &&
+								await parameters.Cursor.ToPosition(
 									directory: parameters?.Directory,
 									cursorpositions: parameters?.CursorPositions,
 									uri: parameters?.RetrievedSongExtra?.Uri,
-									filepath: parameters?.RetrievedSongExtra?.Filepath);
+									filepath: parameters?.RetrievedSongExtra?.Filepath) is int:
 								await action.Artist(artist, parameters?.RetrievedSongExtra);
 								break;
 
@@ -123,12 +125,14 @@ namespace Xyzu.Library
 								await action.Genre(genre, parameters?.RetrievedSongExtra);
 								break;
 
-							case true when action is MediaStoreActions.OnRetrieve && parameters is not null:
-								(parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters))?.ToPosition(
+							case true when
+								action is MediaStoreActions.OnRetrieve &&
+								parameters is not null && (parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters)) is not null &&
+								await parameters.Cursor.ToPosition(
 									directory: parameters?.Directory,
 									cursorpositions: parameters?.CursorPositions,
 									uri: parameters?.RetrievedSongExtra?.Uri,
-									filepath: parameters?.RetrievedSongExtra?.Filepath);
+									filepath: parameters?.RetrievedSongExtra?.Filepath) is int:
 								await action.Genre(genre, parameters?.RetrievedSongExtra);
 								break;
 
@@ -147,12 +151,14 @@ namespace Xyzu.Library
 								await action.Playlist(playlist, parameters?.RetrievedSongExtra);
 								break;
 
-							case true when action is MediaStoreActions.OnRetrieve && parameters is not null:
-								(parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters))?.ToPosition(
+							case true when
+								action is MediaStoreActions.OnRetrieve &&
+								parameters is not null && (parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters)) is not null &&
+								await parameters.Cursor.ToPosition(
 									directory: parameters?.Directory,
 									cursorpositions: parameters?.CursorPositions,
 									uri: parameters?.RetrievedSongExtra?.Uri,
-									filepath: parameters?.RetrievedSongExtra?.Filepath);
+									filepath: parameters?.RetrievedSongExtra?.Filepath) is int:
 								await action.Playlist(playlist, parameters?.RetrievedSongExtra);
 								break;
 
@@ -171,12 +177,14 @@ namespace Xyzu.Library
 								await action.Song(song);
 								break;
 
-							case true when action is MediaStoreActions.OnRetrieve && parameters is not null:
-								(parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters))?.ToPosition(
+							case true when
+								action is MediaStoreActions.OnRetrieve &&
+								parameters is not null && (parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters)) is not null &&
+								await parameters.Cursor.ToPosition(
 									directory: parameters?.Directory,
-									uri: parameters?.Uri,
-									filepath: parameters?.Filepath,
-									cursorpositions: parameters?.CursorPositions);
+									cursorpositions: parameters?.CursorPositions,
+									uri: parameters?.RetrievedSongExtra?.Uri,
+									filepath: parameters?.RetrievedSongExtra?.Filepath) is int:
 								await action.Song(song);
 								break;
 

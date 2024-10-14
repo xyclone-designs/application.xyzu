@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,7 +22,7 @@ namespace Xyzu.Menus
 		private readonly static string Search = "Search";
 		private readonly static string Songs = "Songs";
 
-		private static bool SkippedAhead(VariableContainer variables)
+		private static bool Skipped(VariableContainer variables)
 		{
 			if
 			(
@@ -140,7 +138,7 @@ namespace Xyzu.Menus
 
 		public static void Play(VariableContainer variables)
 		{
-			if (SkippedAhead(variables))
+			if (Skipped(variables))
 				return;
 
 			IEnumerable<IQueueItem> queueitems = Enumerable.Empty<IQueueItem>()
@@ -161,7 +159,7 @@ namespace Xyzu.Menus
 		}
 		public static void PlayAlbums(VariableContainer variables, IAlbum? album)
 		{
-			if (SkippedAhead(variables))
+			if (Skipped(variables))
 				return;
 
 			IEnumerable<IQueueItem> queueitems = QueueItemsFrom(album is null
@@ -181,7 +179,7 @@ namespace Xyzu.Menus
 		}
 		public static void PlayArtists(VariableContainer variables, IArtist? artist)
 		{
-			if (SkippedAhead(variables))
+			if (Skipped(variables))
 				return;
 
 			IEnumerable<IQueueItem> queueitems = QueueItemsFrom(artist is null
@@ -201,7 +199,7 @@ namespace Xyzu.Menus
 		}
 		public static void PlayGenres(VariableContainer variables, IGenre? genre)
 		{
-			if (SkippedAhead(variables))
+			if (Skipped(variables))
 				return;
 
 			IEnumerable<IQueueItem> queueitems = QueueItemsFrom(genre is null
@@ -221,7 +219,7 @@ namespace Xyzu.Menus
 		}
 		public static void PlayPlaylists(VariableContainer variables, IPlaylist? playlist)
 		{
-			if (SkippedAhead(variables))
+			if (Skipped(variables))
 				return;
 
 			IEnumerable<IQueueItem> queueitems = QueueItemsFrom(playlist is null
@@ -241,7 +239,7 @@ namespace Xyzu.Menus
 		}
 		public static void PlaySongs(VariableContainer variables, ISong? song)
 		{
-			if (SkippedAhead(variables))
+			if (Skipped(variables))
 				return;
 
 			IEnumerable<IQueueItem> queueitems = QueueItemsFrom(song is null

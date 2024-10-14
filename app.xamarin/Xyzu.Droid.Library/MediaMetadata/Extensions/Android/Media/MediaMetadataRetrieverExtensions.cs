@@ -1,8 +1,4 @@
-﻿#nullable enable
-
-using System;
-
-using Xyzu.Library.Models;
+﻿using System;
 
 namespace Android.Media
 {
@@ -48,27 +44,6 @@ namespace Android.Media
 				return defaultvalue;
 
 			return (T)obj;
-		}
-
-		public static bool ShouldRetrieveAlbum(this MediaMetadataRetriever mediametadataretriever, IAlbum album)
-		{
-			return string.Equals(album?.Title, mediametadataretriever.ExtractMetadata(MetadataKey.Album));
-		}
-		public static bool ShouldRetrieveArtist(this MediaMetadataRetriever mediametadataretriever, IArtist artist)
-		{
-			return string.Equals(artist?.Name, mediametadataretriever.ExtractMetadata(MetadataKey.Artist));
-		}
-		public static bool ShouldRetrieveGenre(this MediaMetadataRetriever mediametadataretriever, IGenre genre)
-		{
-			return string.Equals(genre?.Name, mediametadataretriever.ExtractMetadata(MetadataKey.Genre));
-		}
-		public static bool ShouldRetrievePlaylist(this MediaMetadataRetriever mediametadataretriever, IPlaylist playlist)
-		{
-			return false;
-		}
-		public static bool ShouldRetrieveSong(this MediaMetadataRetriever mediametadataretriever, ISong song)
-		{
-			return string.Equals(song?.Title, mediametadataretriever.ExtractMetadata(MetadataKey.Title));
 		}
 	}
 }

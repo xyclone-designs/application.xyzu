@@ -1,5 +1,4 @@
-﻿#nullable enable
-
+﻿
 namespace Android.Content.Res
 {
 	public static class ResourceDefPackages

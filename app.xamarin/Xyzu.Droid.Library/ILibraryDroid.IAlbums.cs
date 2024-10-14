@@ -1,8 +1,4 @@
-﻿#nullable enable
-
-using SQLite;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,9 +11,9 @@ namespace Xyzu.Library
 {
 	public partial interface ILibraryDroid
 	{
-		public partial class Default : ILibraryDroid.IAlbums
+		public partial class Default : IAlbums
 		{
-			IAlbum? ILibraryDroid.IAlbums.Random(ILibraryDroid.IIdentifiers? identifiers)
+			IAlbum? IAlbums.Random(IIdentifiers? identifiers)
 			{
 				IEnumerable<IAlbum> albums = identifiers is null
 					? SQLiteLibrary.AlbumsTable
@@ -29,7 +25,7 @@ namespace Xyzu.Library
 
 				return album;
 			}
-			async Task<IAlbum?> ILibraryDroid.IAlbums.Random(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
+			async Task<IAlbum?> IAlbums.Random(IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
 				IEnumerable<IAlbum> albums = identifiers is null
 					? SQLiteLibrary.AlbumsTable
@@ -42,7 +38,7 @@ namespace Xyzu.Library
 				return album;
 			}
 
-			IAlbum? ILibraryDroid.IAlbums.GetAlbum(ILibraryDroid.IIdentifiers? identifiers)
+			IAlbum? IAlbums.GetAlbum(IIdentifiers? identifiers)
 			{
 				if (identifiers is null)
 					return null;
@@ -51,7 +47,7 @@ namespace Xyzu.Library
 
 				return album;
 			}
-			async Task<IAlbum?> ILibraryDroid.IAlbums.GetAlbum(ILibraryDroid.IIdentifiers? identifiers, CancellationToken cancellationToken)
+			async Task<IAlbum?> IAlbums.GetAlbum(IIdentifiers? identifiers, CancellationToken cancellationToken)
 			{
 				if (identifiers is null)
 					return null;
@@ -60,7 +56,7 @@ namespace Xyzu.Library
 
 				return await Task.FromResult(album);
 			}
-			IEnumerable<IAlbum> ILibraryDroid.IAlbums.GetAlbums(ILibraryDroid.IIdentifiers? identifiers)
+			IEnumerable<IAlbum> IAlbums.GetAlbums(IIdentifiers? identifiers)
 			{
 				IEnumerable<IAlbum> albums = identifiers is null
 					? SQLiteLibrary.AlbumsTable
@@ -69,7 +65,7 @@ namespace Xyzu.Library
 				foreach (IAlbum album in albums)
 					yield return album;
 			}
-			async IAsyncEnumerable<IAlbum> ILibraryDroid.IAlbums.GetAlbums(ILibraryDroid.IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
+			async IAsyncEnumerable<IAlbum> IAlbums.GetAlbums(IIdentifiers? identifiers, [EnumeratorCancellation] CancellationToken cancellationToken)
 			{
 				IEnumerable<IAlbum> albums = identifiers is null
 					? SQLiteLibrary.AlbumsTable
@@ -79,7 +75,7 @@ namespace Xyzu.Library
 					yield return await Task.FromResult(album);
 			}
 
-			IAlbum? ILibraryDroid.IAlbums.PopulateAlbum(IAlbum? album)
+			IAlbum? IAlbums.PopulateAlbum(IAlbum? album)
 			{
 				if (album is null)
 					return null;
@@ -89,7 +85,7 @@ namespace Xyzu.Library
 
 				return album;
 			}
-			async Task<IAlbum?> ILibraryDroid.IAlbums.PopulateAlbum(IAlbum? album, CancellationToken cancellationToken)
+			async Task<IAlbum?> IAlbums.PopulateAlbum(IAlbum? album, CancellationToken cancellationToken)
 			{
 				if (album is null)
 					return null;
@@ -99,31 +95,31 @@ namespace Xyzu.Library
 
 				return album;
 			}
-			IEnumerable<IAlbum>? ILibraryDroid.IAlbums.PopulateAlbums(IEnumerable<IAlbum>? albums)
+			IEnumerable<IAlbum>? IAlbums.PopulateAlbums(IEnumerable<IAlbum>? albums)
 			{
 				if (albums is null)
 					return null;
 
 				foreach (IAlbum album in albums)
-					(this as ILibraryDroid.IAlbums).PopulateAlbum(album);
+					(this as IAlbums).PopulateAlbum(album);
 
 				return albums;
 			}
-			async Task<IEnumerable<IAlbum>?> ILibraryDroid.IAlbums.PopulateAlbums(IEnumerable<IAlbum>? albums, CancellationToken cancellationToken)
+			async Task<IEnumerable<IAlbum>?> IAlbums.PopulateAlbums(IEnumerable<IAlbum>? albums, CancellationToken cancellationToken)
 			{
 				if (albums is null)
 					return null;
 
 				foreach (IAlbum album in albums)
-					await (this as ILibraryDroid.IAlbums).PopulateAlbum(album, cancellationToken);
+					await (this as IAlbums).PopulateAlbum(album, cancellationToken);
 
 				return albums;
 			}
 
-			bool ILibraryDroid.IAlbums.DeleteAlbum(IAlbum album)
+			bool IAlbums.DeleteAlbum(IAlbum album)
 			{
 				if (Actions?.OnDelete != null)
-					foreach (ILibraryDroid.IOnDeleteActions ondeleteaction in Actions.OnDelete)
+					foreach (IOnDeleteActions ondeleteaction in Actions.OnDelete)
 						ondeleteaction.Album(album);
 
 				AlbumEntity albumentity = album as AlbumEntity ?? new AlbumEntity(album);
@@ -132,7 +128,7 @@ namespace Xyzu.Library
 
 				return true;
 			}
-			async Task<bool> ILibraryDroid.IAlbums.DeleteAlbum(IAlbum album, CancellationToken cancellationToken)
+			async Task<bool> IAlbums.DeleteAlbum(IAlbum album, CancellationToken cancellationToken)
 			{
 				if (Actions?.OnDelete != null)
 					await Task.WhenAll(Actions.OnDelete.Select(_ => _.Album(album)));
@@ -144,10 +140,10 @@ namespace Xyzu.Library
 				return true;
 			}
 
-			bool ILibraryDroid.IAlbums.UpdateAlbum(IAlbum old, IAlbum updated)
+			bool IAlbums.UpdateAlbum(IAlbum old, IAlbum updated)
 			{
 				if (Actions?.OnUpdate != null)
-					foreach (ILibraryDroid.IOnUpdateActions onupdateaction in Actions.OnUpdate)
+					foreach (IOnUpdateActions onupdateaction in Actions.OnUpdate)
 						onupdateaction.Album(old, updated);
 
 				AlbumEntity albumentity = updated as AlbumEntity ?? new AlbumEntity(updated);
@@ -156,7 +152,7 @@ namespace Xyzu.Library
 
 				return true;
 			}
-			async Task<bool> ILibraryDroid.IAlbums.UpdateAlbum(IAlbum old, IAlbum updated, CancellationToken cancellationToken)
+			async Task<bool> IAlbums.UpdateAlbum(IAlbum old, IAlbum updated, CancellationToken cancellationToken)
 			{
 				if (Actions?.OnUpdate != null)
 					await Task.WhenAll(Actions.OnUpdate.Select(_ => _.Album(old, updated)));

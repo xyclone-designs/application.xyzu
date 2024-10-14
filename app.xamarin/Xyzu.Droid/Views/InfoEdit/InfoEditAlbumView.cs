@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics;
 using Android.Util;
 using AndroidX.AppCompat.Widget;
@@ -128,7 +126,9 @@ namespace Xyzu.Views.InfoEdit
 			{
 				await Images.SetToImageView(IImages.DefaultOperations.RoundedDownsample, AlbumArtwork, null, default, Album);
 
-				if (Context != null && Images.GetPalette(Album)?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+				if (Context != null &&
+					await Images.GetPalette(default, Album) is Palette palette &&
+					palette.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
 				{
 					Title?.SetTextColor(color);
 

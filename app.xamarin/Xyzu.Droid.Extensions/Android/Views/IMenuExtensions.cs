@@ -1,5 +1,4 @@
-﻿#nullable enable
-
+﻿
 namespace Android.Views
 {
 	public static class IMenuExtensions
@@ -19,7 +18,6 @@ namespace Android.Views
 			newmenuitem.SetContentDescription(menuitem.ContentDescription);
 			newmenuitem.SetEnabled(menuitem.IsEnabled);
 			newmenuitem.SetIcon(menuitem.Icon);
-			//newmenuitem.SetIconTintBlendMode(menuitem.IconTintBlendMode);
 			newmenuitem.SetIconTintList(menuitem.IconTintList);
 			newmenuitem.SetIconTintMode(menuitem.IconTintMode);
 			newmenuitem.SetIntent(menuitem.Intent);

@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Content.Res;
 using Android.Net;
 using Android.Views;
@@ -44,9 +42,9 @@ namespace Xyzu.Menus
 		private static DialogView EditInfoDialogView(VariableContainer variables, Action<DialogView>? oncreatedialogview)
 		{
 			if (variables.Context is null)
-				throw new ArgumentException();
+				throw new ArgumentException(string.Empty);
 
-			DialogView dialogview = new DialogView(variables.Context)
+			DialogView dialogview = new (variables.Context)
 			{
 				ContentViewMaxWidth = DialogMaxWidth(variables.Context),
 				ContentViewMaxHeight = DialogMaxHeight(variables.Context),
@@ -70,7 +68,7 @@ namespace Xyzu.Menus
 
 			return actionpickcontent;
 		}
-		private static Java.Lang.Object? ContractParseResultAction(int resultcode, Intent? intent)
+		private static Intent? ContractParseResultAction(int resultcode, Intent? intent)
 		{
 			return intent;
 		}
@@ -93,7 +91,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				DialogView view = EditInfoDialogView(variables, _dialogview =>
+				DialogView view = EditInfoDialogView(variables, async _dialogview =>
 				{
 					_dialogview.ContentView = new InfoEditAlbumView(variables.Context)
 					{
@@ -105,21 +103,19 @@ namespace Xyzu.Menus
 							{
 								contract.CreateIntentAction = CntractCreateIntentAction;
 								contract.ParseResultAction = ContractParseResultAction;
-								callback.OnActivityResultAction = result =>
+								callback.OnActivityResultAction = async result =>
 								{
-									Intent? intentresult = result as Intent;
-
-									if (intentresult is null || view.Album is null)
+									if (result is not Intent intentresult || view.Album is null)
 										return;
 
 									using Stream? stream = intentresult.Data is null ? null : view.Context?.ContentResolver?.OpenInputStream(intentresult.Data);
 
 									view.Album.Artwork ??= new IImage.Default();
 									view.Album.Artwork.Buffer = stream?.ToBytes();
-									view.Album.Artwork.BufferHash = null;
+									view.Album.Artwork.BufferKey = null;
 									view.Album.Artwork.Uri = intentresult?.Data?.ToSystemUri();
 
-									_dialogview.Palette = XyzuImages.Instance.GetPalette(view.Context, view.Album);
+									_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, view.Album);
 								};
 
 							}) is ActivityResultLauncher activityresultlauncher)
@@ -128,7 +124,7 @@ namespace Xyzu.Menus
 					};
 
 					_dialogview.Dialog = appcompatdialog;
-					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Album);
+					_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, variables.Album);
 					_dialogview.OnClickPositive = CreateSheetDialogBottomViewAction(variables.DialogInterfaceListenerSave ?? (dialoginterface =>
 					{
 						InfoEditAlbumView infoeditalbumview = (InfoEditAlbumView)_dialogview.ContentView;
@@ -167,7 +163,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				DialogView view = EditInfoDialogView(variables, _dialogview =>
+				DialogView view = EditInfoDialogView(variables, async _dialogview =>
 				{
 					_dialogview.ContentView = new InfoEditArtistView(variables.Context)
 					{
@@ -179,21 +175,19 @@ namespace Xyzu.Menus
 							{
 								contract.CreateIntentAction = CntractCreateIntentAction;
 								contract.ParseResultAction = ContractParseResultAction;
-								callback.OnActivityResultAction = result =>
+								callback.OnActivityResultAction = async result =>
 								{
-									Intent? intentresult = result as Intent;
-
-									if (intentresult is null || view.Artist is null)
+									if (result is not Intent intentresult || view.Artist is null)
 										return;
 
 									using Stream? stream = intentresult.Data is null ? null : view.Context?.ContentResolver?.OpenInputStream(intentresult.Data);
 
 									view.Artist.Image ??= new IImage.Default();
 									view.Artist.Image.Buffer = stream?.ToBytes();
-									view.Artist.Image.BufferHash = null;
+									view.Artist.Image.BufferKey = null;
 									view.Artist.Image.Uri = intentresult?.Data?.ToSystemUri();
 
-									_dialogview.Palette = XyzuImages.Instance.GetPalette(view.Context, view.Artist);
+									_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, view.Artist);
 								};
 
 							}) is ActivityResultLauncher activityresultlauncher)
@@ -202,7 +196,7 @@ namespace Xyzu.Menus
 					};
 
 					_dialogview.Dialog = appcompatdialog;
-					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Artist);
+					_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, variables.Artist);
 					_dialogview.OnClickPositive = CreateSheetDialogBottomViewAction(variables.DialogInterfaceListenerSave ?? (dialoginterface =>
 					{
 						InfoEditArtistView infoeditartistview = (InfoEditArtistView)_dialogview.ContentView;
@@ -241,7 +235,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				DialogView view = EditInfoDialogView(variables, _dialogview =>
+				DialogView view = EditInfoDialogView(variables, async _dialogview =>
 				{
 					_dialogview.ContentView = new InfoEditGenreView(variables.Context)
 					{
@@ -250,7 +244,7 @@ namespace Xyzu.Menus
 					};
 
 					_dialogview.Dialog = appcompatdialog;
-					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Genre);
+					_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, variables.Genre);
 					_dialogview.OnClickPositive = CreateSheetDialogBottomViewAction(variables.DialogInterfaceListenerSave ?? (dialoginterface =>
 					{
 						InfoEditGenreView infoeditgenreview = (InfoEditGenreView)_dialogview.ContentView;
@@ -289,7 +283,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				DialogView view = EditInfoDialogView(variables, _dialogview =>
+				DialogView view = EditInfoDialogView(variables, async _dialogview =>
 				{
 					_dialogview.ContentView = new InfoEditPlaylistView(variables.Context)
 					{
@@ -298,7 +292,7 @@ namespace Xyzu.Menus
 					};
 
 					_dialogview.Dialog = appcompatdialog;
-					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Playlist);
+					_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, variables.Playlist);
 					_dialogview.OnClickPositive = CreateSheetDialogBottomViewAction(variables.DialogInterfaceListenerSave ?? (dialoginterface =>
 					{
 						InfoEditPlaylistView infoeditplaylistview = (InfoEditPlaylistView)_dialogview.ContentView;
@@ -337,7 +331,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				DialogView view = EditInfoDialogView(variables, _dialogview =>
+				DialogView view = EditInfoDialogView(variables, async _dialogview =>
 				{
 					_dialogview.ContentView = new InfoEditSongView(variables.Context) 
 					{
@@ -349,23 +343,21 @@ namespace Xyzu.Menus
 							{
 								contract.CreateIntentAction = CntractCreateIntentAction;
 								contract.ParseResultAction = ContractParseResultAction;
-								callback.OnActivityResultAction = result =>
+								callback.OnActivityResultAction = async result =>
 								{
-									Intent? intentresult = result as Intent;
-
-									if (intentresult is null || view.Song is null)
+									if (result is not Intent intentresult || view.Song is null)
 										return;
 
 									using Stream? stream = intentresult.Data is null ? null : view.Context?.ContentResolver?.OpenInputStream(intentresult.Data);
 
 									view.Song.Artwork ??= new IImage.Default();
 									view.Song.Artwork.Buffer = stream?.ToBytes();
-									view.Song.Artwork.BufferHash = null;
+									view.Song.Artwork.BufferKey = null;
 									view.Song.Artwork.Uri = intentresult?.Data?.ToSystemUri();
 
 									view.ReloadImage();
 
-									_dialogview.Palette = XyzuImages.Instance.GetPalette(view.Context, view.Song);
+									_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, view.Song);
 								};
 
 							}) is ActivityResultLauncher activityresultlauncher)
@@ -374,7 +366,7 @@ namespace Xyzu.Menus
 					};
 
 					_dialogview.Dialog = appcompatdialog;
-					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Song);
+					_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, variables.Song);
 					_dialogview.OnClickPositive = CreateSheetDialogBottomViewAction(variables.DialogInterfaceListenerSave ?? (dialoginterface => 
 					{
 						InfoEditSongView infoeditsongview = (InfoEditSongView)_dialogview.ContentView;
@@ -412,7 +404,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				DialogView view = EditInfoDialogView(variables, _dialogview =>
+				DialogView view = EditInfoDialogView(variables, async _dialogview =>
 				{
 					_dialogview.ContentView = new InfoEditSongLyricsView(variables.Context)
 					{
@@ -421,7 +413,7 @@ namespace Xyzu.Menus
 					};
 
 					_dialogview.Dialog = appcompatdialog;
-					_dialogview.Palette = XyzuImages.Instance.GetPalette(variables.Song);
+					_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, variables.Song);
 					_dialogview.OnClickPositive = CreateSheetDialogBottomViewAction(variables.DialogInterfaceListenerSave ?? (dialoginterface =>
 					{
 						InfoEditSongLyricsView infoeditsonglyricsview = (InfoEditSongLyricsView)_dialogview.ContentView;

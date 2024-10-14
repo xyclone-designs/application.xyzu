@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content.Res;
+﻿using Android.Content.Res;
 using Android.Graphics;
 using Android.Views;
 
@@ -63,7 +61,7 @@ namespace AndroidX.RecyclerView.Widget
 			if (view.Visibility == ViewStates.Gone || adapter is null || layoutmanager is null)
 				return;
 
-		int orientation, spancount;
+			int orientation, spancount;
 
 			switch (true)
 			{

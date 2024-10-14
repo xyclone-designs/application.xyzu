@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
@@ -23,7 +21,6 @@ using Xyzu.Fragments.Library;
 using Xyzu.Library.Models;
 using Xyzu.Settings.Enums;
 using Xyzu.Settings.UserInterface.Library;
-using Xyzu.Views.Library;
 using Xyzu.Views.Toolbar;
 
 using JavaRunnable = Java.Lang.Runnable;
@@ -219,6 +216,9 @@ namespace Xyzu.Activities
 			ActivityToolbar.SetOnCreateContextMenuListener(this);
 			SetSupportActionBar(ActivityToolbar);
 			SupportActionBar?.SetHomeButtonEnabled(true);
+			SetStatusBars(
+				Resource.Id.xyzu_layout_library_tablayout_statusbarsurface_statusbarinsetview,
+				Resource.Id.xyzu_layout_library_tablayout_statusbarprimary_statusbarinsetview);
 
 			InitSlidingPanelLayout(
 				FindViewById(Resource.Id.xyzu_layout_library_tablayout_root_slidinguppanellayout),
@@ -393,9 +393,13 @@ namespace Xyzu.Activities
 		{
 			base.XyzuLibraryOnServiceConnectionChanged(sender, args);
 
-			switch (XyzuLibrary.Instance.ServiceConnectionState)
+			switch (XyzuLibrary.Instance.ScannerServiceConnectionState)
 			{
+				case ServiceConnectionChangedEventArgs.Events.Connected:
+					StatusBarPrimary.Visibility = ViewStates.Visible;
+					break;
 				case ServiceConnectionChangedEventArgs.Events.Disconnected:
+					StatusBarPrimary.Visibility = ViewStates.Invisible;
 					RefreshTabLayout(null, true);
 					break;
 

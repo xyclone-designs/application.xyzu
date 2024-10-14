@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Graphics.Drawables;
+﻿using Android.Graphics.Drawables;
 
 namespace Android.Widget
 {

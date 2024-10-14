@@ -166,7 +166,6 @@ namespace Xyzu.Player.Exoplayer
 			{
 				case NotifyListChangedAction.Add:
 				case NotifyListChangedAction.AddRange:
-
 					if (AsMediaSources(args.NewItems) is IEnumerable<IMediaSource> addmediasources)
 					{
 						if (args.NewStartingIndex == -1)

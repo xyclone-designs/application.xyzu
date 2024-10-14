@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using System;
+﻿using System;
 using Xyzu.Library;
 using Xyzu.Library.Models;
 
@@ -27,7 +25,7 @@ namespace Xyzu.Menus
 		}
 		public static void GoToAlbum(ISong? albumsong, Action<IAlbum?>? navigate = null)
 		{
-			string? albumid = ILibraryDroid.IdFromAlbumTitle(albumsong?.Album, albumsong?.AlbumArtist);
+			string? albumid = ILibrary.IdFromAlbumTitle(albumsong?.Album, albumsong?.AlbumArtist);
 			IAlbum? libraryalbum = albumid is null ? null : new IAlbum.Default(albumid)
 			{
 				Artist = albumsong?.AlbumArtist,

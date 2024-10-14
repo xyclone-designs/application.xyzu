@@ -1,22 +1,14 @@
-﻿#nullable enable
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Net;
-using Android.OS;
-using AndroidX.Core.Content;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
-using Xyzu.Droid;
 using Xyzu.Library;
 using Xyzu.Library.Models;
 
-using AndroidUri = Android.Net.Uri;
-using JavaFile = Java.IO.File;
 using JavaUri = Java.Net.URI;
 
 namespace Xyzu.Menus

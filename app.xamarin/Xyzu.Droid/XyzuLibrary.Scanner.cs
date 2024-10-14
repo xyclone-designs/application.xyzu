@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
 using AndroidX.Core.App;
@@ -16,7 +14,7 @@ namespace Xyzu
 	public sealed partial class XyzuLibrary : Java.Lang.Object, IServiceConnection
 	{
 		private ServiceConnectionChangedEventArgs.Events? _ServiceConnectionState;
-		public ServiceConnectionChangedEventArgs.Events ServiceConnectionState
+		public ServiceConnectionChangedEventArgs.Events ScannerServiceConnectionState
 		{
 			private set => _ServiceConnectionState = value;
 			get => _ServiceConnectionState ??= ServiceConnectionChangedEventArgs.Events.Disconnected;
@@ -32,12 +30,11 @@ namespace Xyzu
 			if (binder is null)
 				return;
 
-			ScanServiceBinder = binder as IScanner.ServiceBinder;
-
-			if (ScanServiceBinder != null)
+			if (binder is IScanner.ServiceBinder scannerbinder)
 			{
-				ServiceConnectionState = ServiceConnectionChangedEventArgs.Events.Connected;
+				ScannerServiceConnectionState = ServiceConnectionChangedEventArgs.Events.Connected;
 
+				ScanServiceBinder = scannerbinder;
 				ScanServiceBinder.Filepaths = XyzuSettings.Instance.GetFilesDroid().Files().Select(file => file.AbsolutePath);
 				ScanServiceBinder.Library = Library;
 				ScanServiceBinder.ServiceConnection = this;
@@ -101,9 +98,10 @@ namespace Xyzu
 					flags: StartCommandFlags.Redelivery,
 					intent: ScanServiceBinder.Service.LatestIntent,
 					startId: ScanServiceBinder.Service.LatestStartId);
+
 			}
 
-			ServiceConnectionChangedEventArgs args = new (ServiceConnectionState)
+			ServiceConnectionChangedEventArgs args = new (ScannerServiceConnectionState)
 			{
 				Binder = binder,
 				Name = name,
@@ -115,9 +113,9 @@ namespace Xyzu
 		public void OnServiceDisconnected(ComponentName? name)
 		{
 			ScanServiceBinder = null;
-			ServiceConnectionState = ServiceConnectionChangedEventArgs.Events.Disconnected;
+			ScannerServiceConnectionState = ServiceConnectionChangedEventArgs.Events.Disconnected;
 
-			ServiceConnectionChangedEventArgs args = new (ServiceConnectionState)
+			ServiceConnectionChangedEventArgs args = new (ScannerServiceConnectionState)
 			{
 				Name = name,
 			};

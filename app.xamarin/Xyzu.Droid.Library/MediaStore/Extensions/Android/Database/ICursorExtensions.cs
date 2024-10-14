@@ -80,13 +80,13 @@ namespace Android.Database
 				};
 			}
 			// TODO BUG: Get Index Out Of Bounds For Absolutely ''''''''No'''''''' Reason. Sometimes.
-			catch (CursorIndexOutOfBoundsException exception)
+			catch (CursorIndexOutOfBoundsException)
 			{
-				Util.Log.Error(
-					tr: exception,
-					tag: "Android.Database.ICursorExtensions",
-					format: "exception.Message: {0}, columnindex: {1}, defaultvalue: {2}",
-					args: new object[] { exception.Message ?? "No Message", columnindex, defaultvalue?.ToString() ?? "null" });
+				//Util.Log.Error(
+				//	tr: exception,
+				//	tag: "Android.Database.ICursorExtensions",
+				//	format: "exception.Message: {0}, columnindex: {1}, defaultvalue: {2}",
+				//	args: new object[] { exception.Message ?? "No Message", columnindex, defaultvalue?.ToString() ?? "null" });
 			}
 
 			if (value != null)
@@ -269,18 +269,19 @@ namespace Android.Database
 			return (null, null);
 		}
 
-		public static IImage Retrieve(this IImage retrieved, ICursor cursor, Context context, IImage<bool>? retriever)
+		public static IImage Retrieve(this IImage retrieved, ICursor cursor, Context context)
 		{
-			if (retriever is null || (retriever.Uri && retrieved.Uri is null))
-				if (long.TryParse(cursor.GetAlbumId(), out long albumid) && MediaStoreUtils.Uris.SongArtwork(albumid) is AndroidUri androiduri)
-					try
-					{
-						context.ContentResolver?.OpenFileDescriptor(androiduri, "r");
+			if (retrieved.Uri is null &&
+				long.TryParse(cursor.GetAlbumId(), out long albumid) && 
+				MediaStoreUtils.Uris.SongArtwork(albumid) is AndroidUri androiduri)
+				try
+				{
+					context.ContentResolver?.OpenFileDescriptor(androiduri, "r");
 
-						if (retrieved.Uri is null && androiduri.ToSystemUri() is SystemUri artworksystemuri)
-							retrieved.Uri = artworksystemuri;
-					}
-					catch (Exception) { }
+					if (retrieved.Uri is null && androiduri.ToSystemUri() is SystemUri artworksystemuri)
+						retrieved.Uri = artworksystemuri;
+				}
+				catch (Exception) { }
 
 			return retrieved;
 		}

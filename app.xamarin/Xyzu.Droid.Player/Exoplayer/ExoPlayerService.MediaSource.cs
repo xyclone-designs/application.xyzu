@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using AndroidX.Media3.Common.Util;
 using AndroidX.Media3.DataSource;
 using AndroidX.Media3.ExoPlayer.Source;
@@ -10,7 +8,7 @@ namespace Xyzu.Player.Exoplayer
 {
 	public partial class ExoPlayerService
 	{
-		public const long SilenceMediaSourceDurationMS = 1000;
+		public const long SilenceMediaSourceDurationMS = 1_000;
 	
 		private BasicDataSourceFactory? _DataSourceFactory;
 		private DefaultExtractorsFactory? _ExtractorsFactory;

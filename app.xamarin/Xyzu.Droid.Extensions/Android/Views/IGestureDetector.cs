@@ -31,7 +31,7 @@ namespace Android.Views
 				if (OnGesture is null && OnGestureAction is null)
 					return;
 
-				GestureEventArgs args = new GestureEventArgs
+				GestureEventArgs args = new ()
 				{
 					Gesture = Gestures.Click,
 					View = view ?? View,
@@ -53,7 +53,7 @@ namespace Android.Views
 							if (OnGesture is null && OnGestureAction is null)
 								return true;
 
-							GestureEventArgs args = new GestureEventArgs
+							GestureEventArgs args = new ()
 							{
 								Gesture = Gestures.Up,
 								MotionEvents = new MotionEvent?[] { motionevent },
@@ -74,7 +74,7 @@ namespace Android.Views
 				if (OnGesture is null && OnGestureAction is null)
 					return true;
 
-				GestureEventArgs args = new GestureEventArgs
+				GestureEventArgs args = new ()
 				{
 					Gesture = Gestures.ContextClick,
 					MotionEvents = new MotionEvent?[] { e },
@@ -91,7 +91,7 @@ namespace Android.Views
 				if (OnGesture is null && OnGestureAction is null)
 					return true;
 
-				GestureEventArgs args = new GestureEventArgs
+				GestureEventArgs args = new ()
 				{
 					Gesture = Gestures.DoubleTap,
 					MotionEvents = new MotionEvent?[] { e },
@@ -108,7 +108,7 @@ namespace Android.Views
 				if (OnGesture is null && OnGestureAction is null)
 					return true;
 
-				GestureEventArgs args = new GestureEventArgs
+				GestureEventArgs args = new ()
 				{
 					Gesture = Gestures.DoubleTapEvent,
 					MotionEvents = new MotionEvent?[] { e },
@@ -125,7 +125,7 @@ namespace Android.Views
 				if (OnGesture is null && OnGestureAction is null)
 					return true;
 
-				GestureEventArgs args = new GestureEventArgs
+				GestureEventArgs args = new ()
 				{
 					Gesture = Gestures.Down,
 					MotionEvents = new MotionEvent?[] { e },
@@ -142,7 +142,7 @@ namespace Android.Views
 				if (OnGesture is null && OnGestureAction is null)
 					return true;
 
-				GestureEventArgs args = new GestureEventArgs
+				GestureEventArgs args = new ()
 				{
 					Gesture = Gestures.Fling,
 					MotionEvents = new MotionEvent?[] { e1, e2 },
@@ -161,7 +161,7 @@ namespace Android.Views
 				if (OnGesture is null && OnGestureAction is null)
 					return;
 
-				GestureEventArgs args = new GestureEventArgs
+				GestureEventArgs args = new ()
 				{
 					Gesture = Gestures.LongPress,
 					MotionEvents = new MotionEvent?[] { e },
@@ -176,7 +176,7 @@ namespace Android.Views
 				if (OnGesture is null && OnGestureAction is null)
 					return true;
 
-				GestureEventArgs args = new GestureEventArgs
+				GestureEventArgs args = new ()
 				{
 					Gesture = Gestures.Scroll,
 					MotionEvents = new MotionEvent?[] { e1, e2 },
@@ -195,7 +195,7 @@ namespace Android.Views
 				if (OnGesture is null && OnGestureAction is null)
 					return;
 
-				GestureEventArgs args = new GestureEventArgs
+				GestureEventArgs args = new ()
 				{
 					Gesture = Gestures.ShowPress,
 					MotionEvents = new MotionEvent?[] { e },
@@ -210,7 +210,7 @@ namespace Android.Views
 				if (OnGesture is null && OnGestureAction is null)
 					return true;
 
-				GestureEventArgs args = new GestureEventArgs
+				GestureEventArgs args = new ()
 				{
 					Gesture = Gestures.SingleTapConfirmed,
 					MotionEvents = new MotionEvent?[] { e },
@@ -227,7 +227,7 @@ namespace Android.Views
 				if (OnGesture is null && OnGestureAction is null)
 					return true;
 
-				GestureEventArgs args = new GestureEventArgs
+				GestureEventArgs args = new ()
 				{
 					Gesture = Gestures.SingleTapUp,
 					MotionEvents = new MotionEvent?[] { e },

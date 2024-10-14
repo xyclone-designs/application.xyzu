@@ -1,5 +1,4 @@
-﻿#nullable enable
-
+﻿
 namespace AndroidX.ConstraintLayout.Motion.Widget
 {
 	public static class MotionLayoutExtensions

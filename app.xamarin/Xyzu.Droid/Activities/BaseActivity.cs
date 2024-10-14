@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Content.Res;
 using Android.OS;
 using Android.Views;
@@ -79,14 +77,6 @@ namespace Xyzu.Activities
 			base.OnStop();
 
 			XyzuPlayer.Instance.UnbindPlayer();
-		}
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
-
-			//AppDomain.CurrentDomain.UnhandledException -= ISystemSettingsDroid.OnUnhandledException;
-			//TaskScheduler.UnobservedTaskException -= ISystemSettingsDroid.OnUnobservedTaskException;
-			//AndroidRuntimeEnvironment.UnhandledExceptionRaiser -= ISystemSettingsDroid.UnhandledExceptionRaiser;
 		}
 
 		public override void OnConfigurationChanged(Configuration newConfig)

@@ -1,5 +1,4 @@
-﻿#nullable enable
-
+﻿
 namespace Xyzu.Library.Models
 {
 	public enum CursorRetrieveTypes

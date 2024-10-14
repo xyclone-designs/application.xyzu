@@ -1,9 +1,6 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Database;
 
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,8 +28,8 @@ namespace Xyzu.Library.MediaStore
 				ISong song = await base.Song(id) ?? new ISong.Default(id);
 
 				if (Cursor != null)
-					await Task
-						.Run(() => song.Retrieve(Cursor, Directory))
+					await song
+						.RetrieveAsync(Cursor, Directory)
 						.ConfigureAwait(false);
 
 				return song;
@@ -172,12 +169,12 @@ namespace Xyzu.Library.MediaStore
 
 				await base.Song(retrieved);
 			}
-			public async override Task Image(IImage? retrieved, IImage<bool>? retriever, string? filepath, Uri? uri, IEnumerable<ModelTypes>? modeltypes)
+			public async override Task Image(IImage? retrieved, IEnumerable<ModelTypes>? modeltypes)
 			{
-				if (Cursor != null && Context != null)
-					retrieved?.Retrieve(Cursor, Context, retriever);
+				if (retrieved is not null && Cursor != null && Context != null)
+					retrieved.Retrieve(Cursor, Context);
 
-				await base.Image(retrieved, retriever, filepath, uri, modeltypes);
+				await base.Image(retrieved, modeltypes);
 			}
 		}
 		public class OnUpdate : ILibraryDroid.IOnUpdateActions.Default
