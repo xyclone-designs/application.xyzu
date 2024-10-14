@@ -5,6 +5,8 @@ app.xamarin/Xyzu.Droid/bin
 app.xamarin/Xyzu.Droid/obj
 app.xamarin/Xyzu.Droid.Player/bin
 app.xamarin/Xyzu.Droid.Player/obj
+app.xamarin/Xyzu.Droid.Images/bin
+app.xamarin/Xyzu.Droid.Images/obj
 app.xamarin/Xyzu.Droid.Library/bin
 app.xamarin/Xyzu.Droid.Library/obj
 app.xamarin/Xyzu.Droid.Extensions/bin
