@@ -1,10 +1,13 @@
-﻿using System.Linq;
+﻿using Laerdal.FFmpeg.Android;
 
-using Xyzu.Library.Models;
-
-using Laerdal.FFmpeg.Android;
-using System.Threading.Tasks;
 using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using Xyzu.Images;
+using Xyzu.Library.Enums;
+using Xyzu.Library.Models;
 
 namespace Xyzu.Library.FFProbe
 {
@@ -32,7 +35,31 @@ namespace Xyzu.Library.FFProbe
 			}
 		}
 		public class OnDelete : ILibrary.IOnDeleteActions.Default { }
-		public class OnRetrieve : ILibrary.IOnRetrieveActions.Default { }
+		public class OnRetrieve : ILibrary.IOnRetrieveActions.Default 
+		{
+			public override Task Song(ISong? retrieved)
+			{
+				if (retrieved?.Filepath is not null)
+				{
+					MediaInformation mediainformation = FFprobe.GetMediaInformation(retrieved.Filepath);
+
+					retrieved.IsCorrupt = mediainformation.Format.Contains(retrieved.Filepath.Split('.').Last()) is false;
+				}
+
+				return base.Song(retrieved);
+			}
+			public override Task Image(IImage? retrieved, IEnumerable<ModelTypes>? modeltypes)
+			{
+				if (retrieved?.Filepath is not null)
+				{
+					MediaInformation mediainformation = FFprobe.GetMediaInformation(retrieved.Filepath);
+
+					retrieved.IsCorrupt = mediainformation.Format.Contains(retrieved.Filepath.Split('.').Last()) is false;
+				}
+
+				return base.Image(retrieved, modeltypes);
+			}
+		}
 		public class OnUpdate : ILibrary.IOnUpdateActions.Default { }
 	}
 }

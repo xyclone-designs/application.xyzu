@@ -13,7 +13,6 @@ using JP.Wasabeef.Glide.Transformations;
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -162,7 +161,7 @@ namespace Xyzu.Images.Glide
 				requestbuilder
 					.Override(width, height)
 					.RunOperations(operations, Operate)
-					.Into(new ImageResourceTarget(imageview)
+					.Into(new ImageBitmapTarget(imageview)
 					{
 						OnLoadFailedAction = drawable => oncomplete?.Invoke(false),
 						OnResourceReadyAction = (resource, transition) => oncomplete?.Invoke(true),

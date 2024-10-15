@@ -15,6 +15,10 @@
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-arm\*.*" />
+    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-arm64\*.*" />
+    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-x64\*.*" />
+    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-x86\*.*" />
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\arm32\debug\net8.0-android\android-arm\*.*" />
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\arm64\debug\net8.0-android\android-arm64\*.*" />
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\x64\debug\net8.0-android\android-x64\*.*" />

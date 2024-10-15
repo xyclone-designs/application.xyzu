@@ -422,7 +422,7 @@ namespace Xyzu.Views.NowPlaying
 		}
 		public async void SetPalette(ISong? song)
 		{
-			ArtworkPalette = Images is null ? null : await Images.GetPalette(default, song);
+			//ArtworkPalette = Images is null ? null : await Images.GetPalette(default, song);
 
 			if ((ArtworkPalette?.DominantSwatch?.Rgb ?? Context?.Resources?.GetColor(Resource.Color.ColorPrimary, Context.Theme)) is int color)
 				Position.SetLoadedBarColor(color);

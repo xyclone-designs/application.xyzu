@@ -161,18 +161,19 @@ namespace Xyzu.Activities
 		{
 			base.XyzuLibraryOnServiceConnectionChanged(sender, args);
 
-			switch (XyzuLibrary.Instance.ScannerServiceConnectionState)
-			{
-				case ServiceConnectionChangedEventArgs.Events.Connected:
-					StatusBarPrimaryAnimator?.Start();
-					break;
+			if (XyzuLibrary.Instance.ScanServiceBinder is not null)
+				switch (XyzuLibrary.Instance.ScannerServiceConnectionState)
+				{
+					case ServiceConnectionChangedEventArgs.Events.Connected:
+						StatusBarPrimaryAnimator?.Start();
+						break;
 
-				case ServiceConnectionChangedEventArgs.Events.Disconnected:
-					StatusBarPrimaryAnimator?.End();
-					break;
+					case ServiceConnectionChangedEventArgs.Events.Disconnected:
+						StatusBarPrimaryAnimator?.End();
+						break;
 
-				default: break;
-			}
+					default: break;
+				}
 		}
 		protected override void XyzuPlayerOnServiceConnectionChanged(object? sender, ServiceConnectionChangedEventArgs args)
 		{

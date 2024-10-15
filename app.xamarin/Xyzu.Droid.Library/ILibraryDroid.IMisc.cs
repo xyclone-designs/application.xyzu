@@ -332,7 +332,8 @@ namespace Xyzu.Library
 										actions: Actions?.OnRetrieve,
 										retrieved: album.Artwork ??= new IImage.Default
 										{
-											Id = album.Id
+											Id = album.Id,
+											IsCorrupt = albumsongsenumerator.Current.IsCorrupt,
 										});
 								}
 							}
@@ -370,7 +371,8 @@ namespace Xyzu.Library
 										actions: Actions?.OnRetrieve,
 										retrieved: artist.Image ??= new IImage.Default
 										{
-											Id = artist.Id
+											Id = artist.Id,
+											IsCorrupt = artistsongsenumerator.Current.IsCorrupt,
 										});
 								}
 							}
@@ -390,7 +392,8 @@ namespace Xyzu.Library
 								actions: Actions?.OnRetrieve,
 								retrieved: song.Artwork ??= new IImage.Default
 								{
-									Id = song.Id
+									Id = song.Id,
+									IsCorrupt = song.IsCorrupt,
 								});
 						}
 						break;

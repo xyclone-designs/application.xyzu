@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Xyzu.Images;
+using Xyzu.Library.FFProbe;
 using Xyzu.Library.ID3;
 using Xyzu.Library.IO;
 using Xyzu.Library.MediaMetadata;
@@ -35,6 +36,7 @@ namespace Xyzu.Library
 					case true when retrieved.Buffer != null:
 						break;
 
+					case true when onretrieveaction is FFProbeActions.OnRetrieve:
 					case true when onretrieveaction is ID3Actions.OnRetrieve:
 					case true when onretrieveaction is IOActions.OnRetrieve:
 					case true when onretrieveaction is MediaMetadataActions.OnRetrieve:
@@ -67,6 +69,7 @@ namespace Xyzu.Library
 					case true when model is IAlbum album:
 						switch (true)
 						{
+							case true when action is FFProbeActions.OnRetrieve:
 							case true when action is ID3Actions.OnRetrieve && ID3Utils.WouldBenefit(album):
 							case true when action is IOActions.OnRetrieve && IOUtils.WouldBenefit(album):
 							case true when action is MediaMetadataActions.OnRetrieve && MediaMetadataUtils.WouldBenefit(album):
@@ -93,6 +96,7 @@ namespace Xyzu.Library
 					case true when model is IArtist artist:
 						switch (true)
 						{
+							case true when action is FFProbeActions.OnRetrieve:
 							case true when action is ID3Actions.OnRetrieve && ID3Utils.WouldBenefit(artist):
 							case true when action is IOActions.OnRetrieve && IOUtils.WouldBenefit(artist):
 							case true when action is MediaMetadataActions.OnRetrieve && MediaMetadataUtils.WouldBenefit(artist):
@@ -118,6 +122,7 @@ namespace Xyzu.Library
 					case true when model is IGenre genre:
 						switch (true)
 						{
+							case true when action is FFProbeActions.OnRetrieve:
 							case true when action is ID3Actions.OnRetrieve && ID3Utils.WouldBenefit(genre):
 							case true when action is IOActions.OnRetrieve && IOUtils.WouldBenefit(genre):
 							case true when action is MediaMetadataActions.OnRetrieve && MediaMetadataUtils.WouldBenefit(genre):
@@ -144,6 +149,7 @@ namespace Xyzu.Library
 					case true when model is IPlaylist playlist:
 						switch (true)
 						{
+							case true when action is FFProbeActions.OnRetrieve:
 							case true when action is ID3Actions.OnRetrieve && ID3Utils.WouldBenefit(playlist):
 							case true when action is IOActions.OnRetrieve && IOUtils.WouldBenefit(playlist):
 							case true when action is MediaMetadataActions.OnRetrieve && MediaMetadataUtils.WouldBenefit(playlist):
@@ -170,6 +176,7 @@ namespace Xyzu.Library
 					case true when model is ISong song:
 						switch (true)
 						{
+							case true when action is FFProbeActions.OnRetrieve:
 							case true when action is ID3Actions.OnRetrieve && ID3Utils.WouldBenefit(song):
 							case true when action is IOActions.OnRetrieve && IOUtils.WouldBenefit(song):
 							case true when action is MediaMetadataActions.OnRetrieve && MediaMetadataUtils.WouldBenefit(song):

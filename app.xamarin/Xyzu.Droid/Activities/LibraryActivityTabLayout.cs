@@ -395,11 +395,7 @@ namespace Xyzu.Activities
 
 			switch (XyzuLibrary.Instance.ScannerServiceConnectionState)
 			{
-				case ServiceConnectionChangedEventArgs.Events.Connected:
-					StatusBarPrimary.Visibility = ViewStates.Visible;
-					break;
 				case ServiceConnectionChangedEventArgs.Events.Disconnected:
-					StatusBarPrimary.Visibility = ViewStates.Invisible;
 					RefreshTabLayout(null, true);
 					break;
 

@@ -59,7 +59,7 @@ namespace Xyzu.Activities
 			XyzuLibrary.Instance.OnServiceConnectionChanged += XyzuLibraryOnServiceConnectionChanged;
 			XyzuPlayer.Instance.OnServiceConnectionChanged += XyzuPlayerOnServiceConnectionChanged;
 
-			XyzuLibraryOnServiceConnectionChanged(this, new ServiceConnectionChangedEventArgs(XyzuPlayer.Instance.ServiceConnectionState));
+			XyzuLibraryOnServiceConnectionChanged(this, new ServiceConnectionChangedEventArgs(XyzuLibrary.Instance.ScannerServiceConnectionState));
 			XyzuPlayerOnServiceConnectionChanged(this, new ServiceConnectionChangedEventArgs(XyzuPlayer.Instance.ServiceConnectionState));
 		}
 		protected override void OnPause()

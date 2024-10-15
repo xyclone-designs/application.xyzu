@@ -172,10 +172,11 @@ namespace Xyzu.Activities
 				},
 				OnRetrieve = new List<ILibrary.IOnRetrieveActions>
 				{
+					new Library.FFProbe.FFProbeActions.OnRetrieve { },
 					new Library.TagLibSharp.TagLibSharpActions.OnRetrieve { },
+					new Library.ID3.ID3Actions.OnRetrieve { },
 					new Library.MediaStore.MediaStoreActions.OnRetrieve { Context = xyzulibrary.Context },
 					new Library.MediaMetadata.MediaMetadataActions.OnRetrieve { Context = xyzulibrary.Context },
-					new Library.ID3.ID3Actions.OnRetrieve { },
 					new Library.IO.IOActions.OnRetrieve { },
 				},
 				OnUpdate = new List<ILibrary.IOnUpdateActions>
