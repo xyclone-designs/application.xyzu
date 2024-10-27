@@ -31,6 +31,26 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         style="@style/Xyzu.View.LibraryItem.Grid.Image"
+        android:id="@+id/xyzu_view_libraryitem_grid_medium_corrupt_appcompatimageview"
+        android:background="@drawable/shape_cornered_all"
+        android:backgroundTint="@color/ColorSurface"
+        android:src="@drawable/icon_general_file_x"
+        android:visibility="gone"
+        
+        android:layout_width="@dimen/dp24"
+        android:layout_height="@dimen/dp24"
+        android:layout_marginTop="@dimen/dp4"
+        android:layout_marginEnd="@dimen/dp4"
+        android:layout_marginStart="@dimen/dp4"
+        android:layout_marginBottom="@dimen/dp4"
+        
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintEnd_toEndOf="@id/xyzu_view_libraryitem_grid_medium_artwork_appcompatimageview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_libraryitem_grid_medium_artwork_appcompatimageview"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/Xyzu.View.LibraryItem.Grid.Image"
         android:id="@+id/xyzu_view_libraryitem_grid_medium_equaliser_appcompatimageview"
         android:background="@null"
         android:src="@drawable/icon_general_nowplaying"

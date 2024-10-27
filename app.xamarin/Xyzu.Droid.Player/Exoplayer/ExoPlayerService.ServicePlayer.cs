@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using AndroidX.Media3.Common;
 using AndroidX.Media3.ExoPlayer.Source;
 

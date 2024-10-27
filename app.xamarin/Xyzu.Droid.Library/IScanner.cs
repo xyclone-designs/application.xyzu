@@ -6,8 +6,8 @@ using Android.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Threading.Tasks;
 
 using Xyzu.Images;
 using Xyzu.Library.Models;
@@ -25,6 +25,8 @@ namespace Xyzu.Library
 		int LatestStartId { get; set; }
 		Intent? LatestIntent { get; set; }
 
+		ScanTypes? ScanType { get; }
+
 		void ScanSoft(CancellationToken cancellationtoken = default);
 		void ScanHard(CancellationToken cancellationtoken = default);
 
@@ -41,6 +43,14 @@ namespace Xyzu.Library
 			return filepathstoadd.Any() || filepathstodelete.Any();
 		}
 
+		public enum ScanTypes
+		{
+			Album,
+			Artist,
+			Genre,
+			Playlist,
+			Song,
+		}
 		public class Notifications
 		{
 			public const int Id = 9;
@@ -80,6 +90,8 @@ namespace Xyzu.Library
 			public int LatestStartId { get; set; }
 			public Intent? LatestIntent { get; set; }
 			public CancellationTokenSource? Cancellationtokensource { get; set; }
+			
+			public ScanTypes? ScanType { get; set; }
 
 			public override void OnDestroy()
 			{
@@ -121,139 +133,109 @@ namespace Xyzu.Library
 				return StartCommandResult.Sticky;
 			}
 
-			private async IAsyncEnumerable<AlbumEntity> CreateAlbums(IEnumerable<ISong> songs, ILibraryDroid.IParameters parameters, [EnumeratorCancellation] CancellationToken cancellationtoken = default)
+			private IEnumerable<AlbumEntity> CreateAlbums(IEnumerable<ISong>? songs, ILibraryDroid.IParameters parameters)
 			{
-				if (Binder?.Library?.Actions is null || songs.Any() is false)
+				if (Binder?.Library?.Actions is null)
 					yield break;
 
-				IAlbum? album = null;
-				IEnumerable<ISong> albumsongs = songs
-					.OrderBy(songentity => songentity.Album)
-					.ThenBy(songentity => songentity.AlbumArtist)
-					.ThenBy(songentity => songentity.TrackNumber);
+				songs ??= Binder.Library.SQLiteLibrary.SongsTable;
 
-				foreach (ISong albumsong in albumsongs)
-					if (ILibrary.IdFromAlbumTitle(albumsong.Album, albumsong.AlbumArtist) is string albumid)
+				foreach (IGrouping<string?, ISong> albumgrouping in songs
+					.OrderBy(_ => _.TrackNumber)
+					.GroupBy(_ => ILibrary.IdFromAlbumTitle(_.Album, _.AlbumArtist))) 
+					if (albumgrouping.Key is not null && albumgrouping.FirstOrDefault() is ISong song)
 					{
-						if (album != null && albumid != album.Id)
-						{
-							yield return new AlbumEntity(album);
-
-							album = null;
-						}
-
 						Notification?.Update(
 							Notification?.ContentTextsScanning?.TextAlbums,
-							string.Format("{0} - {1}", albumsong.Album, albumsong.AlbumArtist));
+							string.Format("{0} - {1}", song.Album, song.AlbumArtist));
 
-						album ??= new IAlbum.Default(albumid);
-						album.ArtistId ??= ILibrary.IdFromArtistName(albumsong.AlbumArtist);
-						album.Duration += albumsong.Duration ?? TimeSpan.Zero;
-						album.SongIds = (album.SongIds ??= Enumerable.Empty<string>())
-							.Append(albumsong.Id)
-							.Distinct();
-
-						parameters.RetrievedSongExtra = albumsong;
-
-						await ILibraryDroid.OnRetrieve(album, Binder.Library.Actions.OnRetrieve, parameters);
-
-						if (album.Artwork?.BufferKey is null && (albumsong.Artwork?.IsCorrupt ?? false))
+						IAlbum.Default album = new (albumgrouping.Key)
 						{
-							album.Artwork ??= new IImage.Default();
-							album.Artwork.Buffer ??= albumsong.Artwork.Buffer;
-							album.Artwork.BufferKey ??= albumsong.Artwork.BufferKey;
-							album.Artwork.Uri ??= albumsong.Artwork.Uri;
-							album.Artwork.Filepath ??= albumsong.Artwork.Filepath;
+							Artist = song.AlbumArtist,
+							ArtistId = ILibrary.IdFromArtistName(song.AlbumArtist),
+							Artwork = albumgrouping.Select(_ =>
+							{
+								if (_.Artwork?.BufferKey is not null)
+									return _.Artwork;
 
-							if (album.Artwork.Buffer is null && album.Artwork.BufferKey is null)
-								await ILibraryDroid.OnRetrieve(album.Artwork, Binder.Library.Actions.OnRetrieve, parameters);
-						}						
+								return null;
+
+							}).OfType<IImage.Default>().FirstOrDefault(),
+							DiscCount = albumgrouping
+								.Select(_ => _.DiscNumber)
+								.Max(),
+							// TODO: Album Duration double add (Find Where Duration is coming from )?
+							Duration = albumgrouping.Select(_ => _.Duration).Sum(),
+							SongIds = albumgrouping.Select(_ => _.Id),
+							ReleaseDate = albumgrouping
+								.Select(_ => _.ReleaseDate)
+								.OfType<DateTime>()
+								.Order()
+								.FirstOrDefault(),
+							Title = song.Album,
+						};
+
+						yield return new AlbumEntity(album);
 					}
-
-				if (album != null)
-					yield return new AlbumEntity(album);
 			}
-			private async IAsyncEnumerable<ArtistEntity> CreateArtists(IEnumerable<ISong> songs, ILibraryDroid.IParameters parameters, [EnumeratorCancellation] CancellationToken cancellationtoken = default)
+			private IEnumerable<ArtistEntity> CreateArtists(IEnumerable<ISong>? songs, ILibraryDroid.IParameters parameters)
 			{
-				if (Binder?.Library?.Actions is null || songs.Any() is false)
+				if (Binder?.Library?.Actions is null)
 					yield break;
 
-				IArtist? artist = null;
-				IEnumerable<ISong> artistsongs = songs
-					.OrderBy(song => song.Artist);
+				songs ??= Binder.Library.SQLiteLibrary.SongsTable;
 
-				foreach (ISong artistsong in artistsongs)
-					if (ILibrary.IdFromArtistName(artistsong.Artist) is string artistid)
+				foreach (IGrouping<string?, ISong> artistgrouping in songs
+					.GroupBy(_ => ILibrary.IdFromArtistName(_.Artist)))
+					if (artistgrouping.Key is not null && artistgrouping.FirstOrDefault() is ISong song)
 					{
-						if (artist != null && artistid != artist.Id)
+						Notification?.Update(Notification?.ContentTextsScanning?.TextArtists, song.Artist);
+
+						IArtist.Default artist = new(artistgrouping.Key)
 						{
-							yield return new ArtistEntity(artist);
+							Name = song.Artist,
+							AlbumIds = ILibrary.IdFromAlbumTitle(song.Album, song.AlbumArtist) is not string albumid
+								? Enumerable.Empty<string>()
+								: Enumerable.Empty<string>()
+									.Append(albumid)
+									.Distinct(),
+							Image = artistgrouping.Select(_ =>
+							{
+								if (_.Artwork?.BufferKey is not null)
+									return _.Artwork;
 
-							artist = null;
-						}
+								return null;
 
-						Notification?.Update(Notification?.ContentTextsScanning?.TextArtists, artistsong.Artist);
+							}).OfType<IImage.Default>().FirstOrDefault(),
+							SongIds = Enumerable.Empty<string>()
+								.Append(song.Id)
+								.Distinct()
+						};
 
-						artist ??= new IArtist.Default(artistid);
-						artist.SongIds = (artist.SongIds ??= Enumerable.Empty<string>())
-							.Append(artistsong.Id)
-							.Distinct();
-
-						artist.Image ??= new IImage.Default();
-						artist.Image.Uri = artistsong.Uri;
-						artist.Image.Filepath = artistsong.Filepath;
-						artist.Image.IsCorrupt = artistsong.IsCorrupt;
-
-						if (ILibrary.IdFromAlbumTitle(artistsong.Album, artistsong.AlbumArtist) is string albumid)
-							artist.AlbumIds = (artist.AlbumIds ??= Enumerable.Empty<string>())
-								.Append(albumid)
-								.Distinct();
-
-						parameters.RetrievedSongExtra = artistsong;
-
-						await ILibraryDroid.OnRetrieve(artist, Binder.Library.Actions.OnRetrieve, parameters);
-						await ILibraryDroid.OnRetrieve(artist.Image, Binder.Library.Actions.OnRetrieve, parameters);
+						yield return new ArtistEntity(artist);
 					}
-
-				if (artist != null)
-					yield return new ArtistEntity(artist);
 			}
-			private async IAsyncEnumerable<GenreEntity> CreateGenres(IEnumerable<ISong> songs, ILibraryDroid.IParameters parameters, [EnumeratorCancellation] CancellationToken cancellationtoken = default)
+			private IEnumerable<GenreEntity> CreateGenres(IEnumerable<ISong>? songs, ILibraryDroid.IParameters parameters)
 			{
-				if (Binder?.Library?.Actions is null || songs.Any() is false)
+				if (Binder?.Library?.Actions is null)
 					yield break;
 
-				IGenre? genre = null;
-				IEnumerable<ISong> genresongs = songs
-					.OrderBy(song => song.Genre);
+				songs ??= Binder.Library.SQLiteLibrary.SongsTable;
 
-				foreach (ISong genresong in genresongs)
-					if (ILibrary.IdFromGenreName(genresong.Genre) is string genreid)
+				foreach (IGrouping<string?, ISong> genregrouping in songs.GroupBy(_ => ILibrary.IdFromGenreName(_.Genre)))
+					if (genregrouping.Key is not null)
 					{
-						if (genre != null && genreid != genre.Id)
+						Notification?.Update(Notification?.ContentTextsScanning?.TextGenres, genregrouping.Key);
+
+						yield return new GenreEntity(new IGenre.Default(genregrouping.Key)
 						{
-							yield return new GenreEntity(genre);
-
-							genre = null;
-						}
-
-						Notification?.Update(Notification?.ContentTextsScanning?.TextGenres, genresong.Genre);
-
-						genre ??= new IGenre.Default(genreid);
-						genre.Duration += genresong.Duration ?? TimeSpan.Zero;
-						genre.SongIds = (genre.SongIds ??= Enumerable.Empty<string>())
-							.Append(genresong.Id)
-							.Distinct();
-
-						parameters.RetrievedSongExtra = genresong;
-
-						await ILibraryDroid.OnRetrieve(genre, Binder.Library.Actions.OnRetrieve, parameters);
+							Name = genregrouping.FirstOrDefault(_ => _.Genre is not null)?.Genre,
+							Duration = TimeSpan.FromSeconds(genregrouping.Sum(_ => _.Duration?.TotalSeconds ?? 0)),
+							SongIds = genregrouping.Select(_ => _.Id)
+						});
 					}
-
-				if (genre != null)
-					yield return new GenreEntity(genre);
 			}
-			private async IAsyncEnumerable<SongEntity> CreateSongs(IEnumerable<string> songfilepaths, ILibraryDroid.IParameters parameters, [EnumeratorCancellation] CancellationToken cancellationtoken = default)
+			private async IAsyncEnumerable<SongEntity> CreateSongs(IEnumerable<string> songfilepaths, ILibraryDroid.IParameters parameters)
 			{
 				if (Binder?.Library?.Actions is null || songfilepaths.Any() is false)
 					yield break;
@@ -264,7 +246,7 @@ namespace Xyzu.Library
 						{
 							Notification?.Update(Notification?.ContentTextsScanning?.TextSongs, song.Filepath);
 
-							song.Artwork ??= new IImage.Default
+							song.Artwork = new IImage.Default
 							{
 								Uri = song.Uri,
 								Filepath = song.Filepath,
@@ -273,6 +255,7 @@ namespace Xyzu.Library
 							
 							await ILibraryDroid.OnRetrieve(song, Binder.Library.Actions.OnRetrieve, parameters);
 							await ILibraryDroid.OnRetrieve(song.Artwork, Binder.Library.Actions.OnRetrieve, parameters);
+							await Task.CompletedTask;
 
 							yield return new SongEntity(song);
 						}
@@ -290,44 +273,49 @@ namespace Xyzu.Library
 
 				using ILibraryDroid.IParameters parameters = new ILibraryDroid.IParameters.Default
 				{
-					RetrieverImage = new IImage.Default<bool>(false)
-					{
-						BufferKey = true,
-						Uri = true,
-					},
 					CursorPositions = new Dictionary<string, int> { },
 					CursorLazy = parameters => Binder.CursorToActions(() => Binder.Library.DefaultCursorBuilder?
 						.WithLibraryIdentifiers(parameters.Identifiers)
 						.Build()),
 				};
 
-				await foreach (SongEntity songentity in CreateSongs(Binder.Filepaths, parameters, cancellationtoken))
+				ScanType = ScanTypes.Song;
+
+				await foreach (SongEntity songentity in CreateSongs(Binder.Filepaths, parameters))
 				{
 					Notification?.Update(Notification.ContentTextsSaving?.TextSongs, songentity.Id);
 
 					await Binder.Library.SQLiteLibrary.ConnectionAsync.InsertAsync(songentity);
 				}
 
-				await foreach (AlbumEntity albumentity in CreateAlbums(Binder.Library.SQLiteLibrary.SongsTable, parameters, cancellationtoken))
+				ScanType = ScanTypes.Album;
+
+				foreach (AlbumEntity albumentity in CreateAlbums(null, parameters))
 				{
 					Notification?.Update(Notification?.ContentTextsSaving?.TextAlbums, string.Format("{0} - {1}", albumentity.Title, albumentity.Artist));
 
 					await Binder.Library.SQLiteLibrary.ConnectionAsync.InsertAsync(albumentity);
 				}
 
-				await foreach (ArtistEntity artistentity in CreateArtists(Binder.Library.SQLiteLibrary.SongsTable, parameters, cancellationtoken))
+				ScanType = ScanTypes.Artist;
+
+				foreach (ArtistEntity artistentity in CreateArtists(null, parameters))
 				{
 					Notification?.Update(Notification?.ContentTextsSaving?.TextArtists, artistentity.Name);
 
 					await Binder.Library.SQLiteLibrary.ConnectionAsync.InsertAsync(artistentity);
 				}
 
-				await foreach (GenreEntity genreentity in CreateGenres(Binder.Library.SQLiteLibrary.SongsTable, parameters, cancellationtoken))
+				ScanType = ScanTypes.Genre;
+
+				foreach (GenreEntity genreentity in CreateGenres(null, parameters))
 				{
 					Notification?.Update(Notification?.ContentTextsSaving?.TextGenres, genreentity.Name);
 
 					await Binder.Library.SQLiteLibrary.ConnectionAsync.InsertAsync(genreentity);
 				}
+
+				await Task.CompletedTask;
 
 				OnStartCommand(
 					startId: 0,
@@ -354,23 +342,19 @@ namespace Xyzu.Library
 
 				using ILibraryDroid.IParameters parameters = new ILibraryDroid.IParameters.Default()
 				{
-					RetrieverImage = new IImage.Default<bool>(false)
-					{
-						BufferKey = true,
-						Uri = true,
-					},
 					CursorPositions = new Dictionary<string, int> { },
 					CursorLazy = parameters => Binder.CursorToActions(() => Binder.Library.DefaultCursorBuilder?
 						.WithLibraryIdentifiers(parameters.Identifiers)
 						.Build()),
 				};
 
+				ScanType = ScanTypes.Song;
 				List<SongEntity> songs_add = new();
 				List<SongEntity> songs_remove = new();
 
 				// Songs
 				#region
-				await foreach (SongEntity songentity in CreateSongs(filepathstoadd, parameters, cancellationtoken))
+				await foreach (SongEntity songentity in CreateSongs(filepathstoadd, parameters))
 				{
 					Notification?.Update(Notification.ContentTextsSaving?.TextSongs, songentity.Id);
 
@@ -381,28 +365,26 @@ namespace Xyzu.Library
 
 				foreach (SongEntity song_remove in Binder.Library.SQLiteLibrary.SongsTable
 					.Where(_ => _.Filepath != null && filepathstodelete.Contains(_.Filepath)))
-				//foreach (SongEntity song_remove in Binder.Library.SQLiteLibrary.SongsTable)
-				//	if (song_remove.Filepath != null && filepathstodelete.Contains(song_remove.Filepath))
-					{
-						Notification?.Update(Notification.ContentTextsRemoving?.TextSongs, song_remove.Id);
+				{
+					Notification?.Update(Notification.ContentTextsRemoving?.TextSongs, song_remove.Id);
 
-						songs_remove.Add(song_remove);
+					songs_remove.Add(song_remove);
 
-						await Binder.Library.SQLiteLibrary.ConnectionAsync.DeleteAsync(song_remove);
-					}
+					await Binder.Library.SQLiteLibrary.ConnectionAsync.DeleteAsync(song_remove);
+				}
 				#endregion
 				// Songs
 
 				Notification?.Update(Notification.ContentTextsPreparing?.TextAlbums, null);
 
+				ScanType = ScanTypes.Album;
 				List<AlbumEntity> albums_add = new();
 				List<AlbumEntity> albums_remove = new();
 
 				// Albums
 				#region
-				await foreach (AlbumEntity albumentity in CreateAlbums(
+				foreach (AlbumEntity albumentity in CreateAlbums(
 					parameters: parameters,
-					cancellationtoken: cancellationtoken,
 					songs: songs_add.Where((Func<SongEntity, bool>)(song_add =>
 					{
 						return
@@ -458,14 +440,14 @@ namespace Xyzu.Library
 
 				Notification?.Update(Notification.ContentTextsPreparing?.TextArtists, null);
 
+				ScanType = ScanTypes.Artist;
 				List<ArtistEntity> artists_add = new();
 				List<ArtistEntity> artists_remove = new();
 
 				// Artists
 				#region
-				await foreach (ArtistEntity artistentity in CreateArtists(
+				foreach (ArtistEntity artistentity in CreateArtists(
 					parameters: parameters,
-					cancellationtoken: cancellationtoken,
 					songs: songs_add.Where((Func<SongEntity, bool>)(song_add =>
 					{
 						return
@@ -525,14 +507,14 @@ namespace Xyzu.Library
 
 				Notification?.Update(Notification.ContentTextsPreparing?.TextGenres, null);
 
+				ScanType = ScanTypes.Genre;
 				List<GenreEntity> genres_add = new();
 				List<GenreEntity> genres_remove = new();
 
 				// Genres
 				#region
-				await foreach (GenreEntity genreentity in CreateGenres(
+				foreach (GenreEntity genreentity in CreateGenres(
 					parameters: parameters,
-					cancellationtoken: cancellationtoken,
 					songs: songs_add.Where((Func<SongEntity, bool>)(song_add =>
 					{
 						return

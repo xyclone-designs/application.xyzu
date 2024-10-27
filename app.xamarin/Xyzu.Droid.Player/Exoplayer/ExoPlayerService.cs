@@ -44,7 +44,7 @@ namespace Xyzu.Player.Exoplayer
 			public const int RefreshPosition = -2; 
 			public const int RefreshNotification = -3; 
 			public const int RefreshQueue = -4; 
-			public const int PostBind = -4; 
+			public const int PostBind = -5; 
 		}
 
 		public ExoPlayerService() { }
@@ -230,6 +230,7 @@ namespace Xyzu.Player.Exoplayer
 		}			 
 		public override void OnDestroy()
 		{
+			MediaSession.Release();
 			Binder?.ServiceConnection?.OnServiceDisconnected(Componentname);
 			StopForeground(StopForegroundFlags.Remove);
 			StopSelf(_LatestStartId);
@@ -300,6 +301,7 @@ namespace Xyzu.Player.Exoplayer
 			_Exoplayer?.Dispose();
 			_ExtractorsFactory?.Dispose();
 			_MediaSession?.Dispose();
+			_MediaSessionCompat?.Dispose();
 			_NotificationActionDestroy?.Dispose();
 			_NotificationActionNext?.Dispose();
 			_NotificationActionPause?.Dispose();
@@ -318,6 +320,7 @@ namespace Xyzu.Player.Exoplayer
 			_Exoplayer = null;
 			_ExtractorsFactory = null;
 			_MediaSession = null;
+			_MediaSessionCompat = null;
 			_NotificationActionDestroy = null;
 			_NotificationActionNext = null;
 			_NotificationActionPause = null;

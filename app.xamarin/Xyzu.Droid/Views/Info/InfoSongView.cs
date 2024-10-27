@@ -1,8 +1,5 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics;
-using Android.Runtime;
 using Android.Util;
 using AndroidX.AppCompat.Widget;
 using AndroidX.Palette.Graphics;
@@ -12,7 +9,6 @@ using System.Runtime.CompilerServices;
 using Xyzu.Droid;
 using Xyzu.Images;
 using Xyzu.Library.Models;
-using static Xyzu.Menus.LibraryItem;
 
 namespace Xyzu.Views.Info
 {
@@ -171,31 +167,35 @@ namespace Xyzu.Views.Info
 		public async void ReloadImage()
 		{
 			if (Images != null)
-			{
-				await Images.SetToImageView(IImages.DefaultOperations.RoundedDownsample, SongArtwork, null, default, Song);
-
-				if (Context != null &&
-					await Images.GetPalette(default, Song) is Palette palette &&
-					palette.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+				await Images.SetToImageView(new IImagesDroid.Parameters(Song)
 				{
-					Title?.SetTextColor(color);
+					ImageView = SongArtwork,
+					Operations = IImages.DefaultOperations.RoundedDownsample,
+					OnPalette = palette =>
+					{
+						OnPalette?.Invoke(palette);
 
-					SongTitle_Title?.SetTextColor(color);
-					SongArtist_Title?.SetTextColor(color);
-					SongAlbum_Title?.SetTextColor(color);
-					SongAlbumArtist_Title?.SetTextColor(color);
-					SongGenre_Title?.SetTextColor(color);
-					SongReleaseDate_Title?.SetTextColor(color);
-					SongDuration_Title?.SetTextColor(color);
-					SongTrackNumber_Title?.SetTextColor(color);
-					SongDiscNumber_Title?.SetTextColor(color);
-					SongCopyright_Title?.SetTextColor(color);
-					SongBitrate_Title?.SetTextColor(color);
-					SongFilepath_Title?.SetTextColor(color);
-					SongMimeType_Title?.SetTextColor(color);
-					SongSize_Title?.SetTextColor(color);
-				}
-			}
+						if (Context is not null && palette?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+						{
+							Title?.SetTextColor(color);
+
+							SongTitle_Title?.SetTextColor(color);
+							SongArtist_Title?.SetTextColor(color);
+							SongAlbum_Title?.SetTextColor(color);
+							SongAlbumArtist_Title?.SetTextColor(color);
+							SongGenre_Title?.SetTextColor(color);
+							SongReleaseDate_Title?.SetTextColor(color);
+							SongDuration_Title?.SetTextColor(color);
+							SongTrackNumber_Title?.SetTextColor(color);
+							SongDiscNumber_Title?.SetTextColor(color);
+							SongCopyright_Title?.SetTextColor(color);
+							SongBitrate_Title?.SetTextColor(color);
+							SongFilepath_Title?.SetTextColor(color);
+							SongMimeType_Title?.SetTextColor(color);
+							SongSize_Title?.SetTextColor(color);
+						}
+					}
+				});
 		}
 	}
 }

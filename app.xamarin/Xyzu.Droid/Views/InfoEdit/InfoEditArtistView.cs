@@ -1,8 +1,5 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics;
-using Android.Runtime;
 using Android.Util;
 using AndroidX.AppCompat.Widget;
 using AndroidX.Palette.Graphics;
@@ -111,17 +108,22 @@ namespace Xyzu.Views.InfoEdit
 		public async void ReloadImage()
 		{
 			if (Images != null)
-			{
-				await Images.SetToImageView(IImages.DefaultOperations.CirculariseDownsample, ArtistImage, null, default, Artist);
-				if (Context != null &&
-					await Images.GetPalette(default, Artist) is Palette palette &&
-					palette.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+				await Images.SetToImageView(new IImagesDroid.Parameters(Artist)
 				{
-					Title?.SetTextColor(color);
+					ImageView = ArtistImage,
+					Operations = IImages.DefaultOperations.CirculariseDownsample,
+					OnPalette = palette =>
+					{
+						OnPalette?.Invoke(palette);
 
-					ArtistName_Title?.SetTextColor(color);
-				}
-			}
+						if (Context is not null && palette?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+						{
+							Title?.SetTextColor(color);
+
+							ArtistName_Title?.SetTextColor(color);
+						}
+					}
+				});
 		}
 	}
 }

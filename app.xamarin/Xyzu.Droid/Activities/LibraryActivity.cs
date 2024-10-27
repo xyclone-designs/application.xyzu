@@ -1,11 +1,8 @@
 ﻿using Android.Animation;
 using Android.Content;
 using Android.Content.Res;
-using Android.Hardware.Lights;
 using Android.OS;
 using Android.Views;
-using Android.Views.Animations;
-using AndroidX.AppCompat.Widget;
 using AndroidX.Fragment.App;
 using AndroidX.SwipeRefreshLayout.Widget;
 
@@ -16,7 +13,10 @@ using Google.Android.Material.FloatingActionButton;
 
 using System;
 using System.ComponentModel;
+using System.Linq;
 
+using Xyzu.Droid;
+using Xyzu.Library;
 using Xyzu.Menus;
 using Xyzu.Views.Insets;
 using Xyzu.Views.NowPlaying;
@@ -59,7 +59,11 @@ namespace Xyzu.Activities
 					StatusBarPrimaryAnimator.SetDuration(2_000);
 					StatusBarPrimaryAnimator.AddListener(new AnimatorListener
 					{
-						OnAnimationEndAction = animator => animator?.Start()
+						OnAnimationEndAction = animator => 
+						{
+							if (XyzuLibrary.Instance.ScannerServiceConnectionState == ServiceConnectionChangedEventArgs.Events.Connected)
+								StatusBarPrimaryAnimator?.Start();
+						}
 					});
 					StatusBarPrimaryAnimator.AddUpdateListener(new AnimatorUpdateListener
 					{
@@ -157,19 +161,43 @@ namespace Xyzu.Activities
 		{
 			base.OnUiModeChanged(newConfig);
 		}
+		protected override void XyzuLibraryScanServiceUpdate(object? sender, IScanner.ServiceNotification.UpdateEventArgs args)
+		{
+			if (SupportActionBar is null || XyzuLibrary.Instance.ScanServiceBinder is null)
+				return;
+
+			(SupportActionBar.Title, SupportActionBar.Subtitle) = args.SubText is null
+				? (GetString(Resource.String.application_label_short) , null)
+				: (GetString(Resource.String.scanning),
+					XyzuLibrary.Instance.ScanServiceBinder.Service.ScanType switch
+					{
+						IScanner.ScanTypes.Album => string.Format("{0} [{1}]", GetString(Resource.String.library_albums), args.SubText),
+						IScanner.ScanTypes.Artist => string.Format("{0} [{1}]", GetString(Resource.String.library_artists), args.SubText),
+						IScanner.ScanTypes.Genre => string.Format("{0} [{1}]", GetString(Resource.String.library_genres), args.SubText),
+						IScanner.ScanTypes.Playlist => string.Format("{0} [{1}]", GetString(Resource.String.library_playlists), args.SubText),
+						IScanner.ScanTypes.Song => string.Format("{0} [../{1}]", GetString(Resource.String.library_songs), args.SubText.Split('/').Last()),
+
+						_ => string.Format("{0} [{1}]", args.ContentText, args.SubText),
+					});
+		}
 		protected override void XyzuLibraryOnServiceConnectionChanged(object? sender, ServiceConnectionChangedEventArgs args)
 		{
 			base.XyzuLibraryOnServiceConnectionChanged(sender, args);
 
 			if (XyzuLibrary.Instance.ScanServiceBinder is not null)
-				switch (XyzuLibrary.Instance.ScannerServiceConnectionState)
+				switch (args.Event)
 				{
 					case ServiceConnectionChangedEventArgs.Events.Connected:
 						StatusBarPrimaryAnimator?.Start();
+						if (XyzuLibrary.Instance.ScanServiceBinder.Service.Notification is not null)
+							XyzuLibrary.Instance.ScanServiceBinder.Service.Notification.OnUpdate += XyzuLibraryScanServiceUpdate;
 						break;
 
 					case ServiceConnectionChangedEventArgs.Events.Disconnected:
 						StatusBarPrimaryAnimator?.End();
+						if (XyzuLibrary.Instance.ScanServiceBinder.Service.Notification is not null)
+							XyzuLibrary.Instance.ScanServiceBinder.Service.Notification.OnUpdate -= XyzuLibraryScanServiceUpdate;
+						XyzuLibraryScanServiceUpdate(this, new IScanner.ServiceNotification.UpdateEventArgs { });
 						break;
 
 					default: break;

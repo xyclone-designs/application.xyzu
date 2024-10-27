@@ -55,7 +55,8 @@ namespace Xyzu.Views.LibraryItem
 			}
 		}
 
-		private bool _Playing;
+		private bool _IsCorrupt;
+		private bool _IsPlaying;
 		private bool _Selected;
 		private string? _LibraryItemId;
 		private IEnumerable<string>? _Details;
@@ -66,6 +67,7 @@ namespace Xyzu.Views.LibraryItem
 
 		public AppCompatImageView? Artwork { get; protected set; }
 		public AppCompatImageView? Equaliser { get; protected set; }
+		public AppCompatImageView? Corrupt { get; protected set; }
 		public AppCompatTextView? LineOne { get; protected set; }
 		public AppCompatTextView? LineTwo { get; protected set; }
 		public AppCompatTextView? LineThree { get; protected set; }
@@ -77,12 +79,22 @@ namespace Xyzu.Views.LibraryItem
 			set => _Selected = base.Selected = value;
 		}
 
-		public bool Playing
+		public bool IsCorrupt
 		{
-			get => _Playing;
+			get => _IsCorrupt;
 			set
 			{
-				_Playing = value;
+				_IsCorrupt = value;
+
+				OnPropertyChanged();
+			}
+		}
+		public bool IsPlaying
+		{
+			get => _IsPlaying;
+			set
+			{
+				_IsPlaying = value;
 
 				OnPropertyChanged();
 			}
@@ -118,7 +130,7 @@ namespace Xyzu.Views.LibraryItem
 		public virtual void Reset()
 		{
 			LibraryItemId = null;
-			Playing = false;
+			IsPlaying = false;
 			Selected = false;
 			Details = null;
 
@@ -131,7 +143,12 @@ namespace Xyzu.Views.LibraryItem
 		public virtual void UpdateState()
 		{			
 			if (Equaliser != null)
-				Equaliser.Visibility = Playing
+				Equaliser.Visibility = IsPlaying
+					? ViewStates.Visible
+					: ViewStates.Gone;
+
+			if (Corrupt != null)
+				Corrupt.Visibility = IsCorrupt
 					? ViewStates.Visible
 					: ViewStates.Gone;
 		}
@@ -139,7 +156,11 @@ namespace Xyzu.Views.LibraryItem
 		public virtual async void SetArtwork(IImage? image)
 		{
 			if (Images != null)
-				await Images.SetToImageView(ImagesOperations ?? IImages.DefaultOperations.RoundedDownsample, Artwork, null, default, image);
+				await Images.SetToImageView(new IImagesDroid.Parameters(image)
+				{
+					ImageView = Artwork,
+					Operations = IImages.DefaultOperations.RoundedDownsample,
+				});
 		}									
 		public virtual async void SetArtwork(IModel? model)
 		{
@@ -155,19 +176,17 @@ namespace Xyzu.Views.LibraryItem
 			};
 
 			if (identifiers is null)
-				await Images.SetToImageView(ImagesOperations ?? IImages.DefaultOperations.RoundedDownsample, Artwork, null, default, model);
-			else if (Library != null && Bitmap.Config.Argb8888 != null)
-			{
-				List<Bitmap> bitmaps = new(); 
-				IAsyncEnumerator<ISong> enumerator = Library.Songs.GetSongs(identifiers, default).GetAsyncEnumerator();
-
-				while (bitmaps.Count < 3 && await enumerator.MoveNextAsync())
-					if (await Images.GetBitmap(IImages.DefaultOperations.Downsample, null, default, enumerator.Current, Resource.Drawable.icon_xyzu) is Bitmap bitmap) 
-						bitmaps.Add(bitmap);
-
-				if (Images.MergeBitmaps(bitmaps[0], bitmaps[1], bitmaps[2], bitmaps[3], new BitmapFactory.Options()) is Bitmap mergedbitmap) await Images
-					.SetToImageView(ImagesOperations ?? IImages.DefaultOperations.RoundedDownsample, Artwork, null, default, mergedbitmap);
-			}
+				await Images.SetToImageView(new IImagesDroid.Parameters(model)
+				{
+					ImageView = Artwork,
+					Operations = IImages.DefaultOperations.RoundedDownsample,
+				});
+			else if (Library?.Songs.GetSongs(identifiers, default) is IAsyncEnumerable<ISong> songs)
+				await Images.SetToImageView(new IImagesDroid.Parameters(songs)
+				{
+					ImageView = Artwork,
+					Operations = ImagesOperations ?? IImages.DefaultOperations.MergeRoundedDownsample,
+				});
 		}
 	}
 }

@@ -1,8 +1,9 @@
 ﻿using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.Widget;
+using Android.Hardware.Lights;
 using Android.Views;
+using AndroidX.Palette.Graphics;
 
 using Bumptech.Glide;
 using Bumptech.Glide.Load.Resource.Bitmap;
@@ -13,12 +14,10 @@ using JP.Wasabeef.Glide.Transformations;
 
 using System;
 using System.Collections;
-using System.Threading;
 using System.Threading.Tasks;
 
 using Xyzu.Images.Enums;
 using Xyzu.Library.Models;
-
 using AndroidUri = Android.Net.Uri;
 
 namespace Xyzu.Images.Glide
@@ -58,7 +57,7 @@ namespace Xyzu.Images.Glide
 				default: break;
 			}
 		}
-		private RequestBuilder? RequestBuilder(Func<RequestManager, RequestBuilder> requestbuilderaction, params object?[] sources)
+		private async Task<RequestBuilder?> RequestBuilder(Func<RequestManager, RequestBuilder> requestbuilderaction, params object?[] sources)
 		{
 			RequestManager requestmanager = _GlideModule.Glide.RequestManagerRetriever.Get(Context);
 			RequestBuilder? requestbuilder = null;
@@ -71,10 +70,13 @@ namespace Xyzu.Images.Glide
 					true when sourceenumerator.Current is IModel model =>
 						true switch
 						{
-							true when Buffer(model) is byte[] artworkbuffer =>
+							true when await Buffer(model) is byte[] artworkbuffer =>
 								requestbuilderaction.Invoke(requestmanager).Load(artworkbuffer),
 
-							true when Image(model) is IImage image && image.Uri?.ToAndroidUri() is AndroidUri imageuri =>
+							true when (
+								(model as IAlbum)?.Artwork ??
+								(model as IArtist)?.Image ??
+								(model as ISong)?.Artwork) is IImage image && image.Uri?.ToAndroidUri() is AndroidUri imageuri =>
 								requestbuilderaction.Invoke(requestmanager).Load(imageuri),
 
 							_ => null
@@ -98,12 +100,82 @@ namespace Xyzu.Images.Glide
 			return requestbuilder;
 		}
 
-		public async override Task<Bitmap?> GetBitmap(Operations[] operations, BitmapFactory.Options? options, CancellationToken cancellationtoken = default, params object?[] sources)
+		public async override Task SetToImageView(IImagesDroid.Parameters parameters)
+		{
+			await Task.CompletedTask;
+
+			if (parameters.ImageView is null || await RequestBuilder(
+				sources: parameters.Sources,
+				requestbuilderaction: requestmanager =>
+				{
+					if (parameters.ImageView.Width == 0 && parameters.ImageView.Height == 0 && parameters.ImageView.Parent is ViewGroup viewgroup)
+					{
+						int widthMeasureSpec = View.MeasureSpec.MakeMeasureSpec(viewgroup.Width, MeasureSpecMode.AtMost);
+						int heightMeasureSpec = View.MeasureSpec.MakeMeasureSpec(viewgroup.Height, MeasureSpecMode.AtMost);
+
+						parameters.ImageView.Measure(widthMeasureSpec, heightMeasureSpec);
+					}
+
+					parameters.ImageView.SetImageBitmap(null);
+					parameters.ImageView.SetImageDrawable(null);
+					requestmanager.Clear(parameters.ImageView);
+
+					return requestmanager.AsBitmap();
+
+				}) is not RequestBuilder requestbuilder) parameters.OnComplete?.Invoke(false);
+			else
+			{
+				int width = parameters.ImageView.Width == 0 ? parameters.ImageView.MeasuredWidth : -1;
+				int height = parameters.ImageView.Height == 0 ? parameters.ImageView.MeasuredHeight : -1;
+
+				requestbuilder
+					.Override(width, height)
+					.RunOperations(parameters.Operations, Operate)
+					.Into(new ImageBitmapTarget(parameters.ImageView)
+					{
+						OnLoadFailedAction = drawable => parameters.OnComplete?.Invoke(false),
+						OnResourceReadyAction = (resource, transition) =>
+						{
+							parameters.OnComplete?.Invoke(true);
+							parameters.OnPalette?.Invoke(new Palette.Builder((Bitmap)resource).Generate());
+						},
+					});
+			}
+		}
+		public async override Task SetToViewBackground(IImagesDroid.Parameters parameters)
+		{
+			await Task.CompletedTask;
+
+			if (parameters.View is null || await RequestBuilder(
+				sources: parameters.Sources,
+				requestbuilderaction: requestmanager =>
+				{
+					parameters.View.Background = null;
+
+					return requestmanager.AsDrawable();
+
+				}) is not RequestBuilder requestbuilder) parameters.OnComplete?.Invoke(false);
+			else
+			{
+				int width = parameters.View.Width == 0 ? parameters.View.MeasuredWidth : -1;
+				int height = parameters.View.Height == 0 ? parameters.View.MeasuredHeight : -1;
+
+				requestbuilder
+					//.Override(width, height)
+					.RunOperations(parameters.Operations, Operate)
+					.Into(new ViewBackgroundTarget(parameters.View)
+					{
+						OnLoadFailedAction = drawable => parameters.OnComplete?.Invoke(false),
+						OnResourceReadyAction = (resource, transition) => parameters.OnComplete?.Invoke(true),
+					});
+			}
+		}
+		public async override Task<Bitmap?> GetBitmap(IImagesDroid.Parameters parameters)
 		{
 			Bitmap? bitmap = null;
 
-			using RequestBuilder? requestbuilder = RequestBuilder(requestmanager => requestmanager.AsBitmap(), sources);
-			using IFutureTarget? futuretarget = requestbuilder?.RunOperations(operations, Operate).Submit();
+			using RequestBuilder? requestbuilder = await RequestBuilder(requestmanager => requestmanager.AsBitmap(), parameters.Sources);
+			using IFutureTarget? futuretarget = requestbuilder?.RunOperations(parameters.Operations, Operate).Submit();
 
 			try
 			{
@@ -112,14 +184,14 @@ namespace Xyzu.Images.Glide
 			catch (Java.Util.Concurrent.ExecutionException) { }
 			catch (Java.Lang.InterruptedException) { }
 
-			return bitmap ?? await base.GetBitmap(operations, options, cancellationtoken, sources);
+			return bitmap ?? await base.GetBitmap(parameters);
 		}
-		public async override Task<Drawable?> GetDrawable(Operations[] operations, CancellationToken cancellationtoken = default, params object?[] sources)
+		public async override Task<Drawable?> GetDrawable(IImagesDroid.Parameters parameters)
 		{
 			BitmapDrawable? bitmapdrawable = null;
 
-			using RequestBuilder? requestbuilder = RequestBuilder(requestmanager => requestmanager.AsDrawable(), sources);
-			using IFutureTarget? futuretarget = requestbuilder?.RunOperations(operations, Operate).Submit();
+			using RequestBuilder? requestbuilder = await RequestBuilder(requestmanager => requestmanager.AsDrawable(), parameters.Sources);
+			using IFutureTarget? futuretarget = requestbuilder?.RunOperations(parameters.Operations, Operate).Submit();
 
 			try
 			{
@@ -128,67 +200,7 @@ namespace Xyzu.Images.Glide
 			catch (Java.Util.Concurrent.ExecutionException) { }
 			catch (Java.Lang.InterruptedException) { }
 
-			return bitmapdrawable ?? await base.GetDrawable(operations, cancellationtoken, sources);
-		}
-		public async override Task SetToImageView(Operations[] operations, ImageView? imageview, Action<bool>? oncomplete, CancellationToken cancellationtoken = default, params object?[] sources)
-		{
-			await Task.CompletedTask;
-
-			if (imageview is null || RequestBuilder(
-				sources: sources,
-				requestbuilderaction: requestmanager =>
-				{
-					if (imageview.Width == 0 && imageview.Height == 0 && imageview.Parent is ViewGroup viewgroup)
-					{
-						int widthMeasureSpec = View.MeasureSpec.MakeMeasureSpec(viewgroup.Width, MeasureSpecMode.AtMost);
-						int heightMeasureSpec = View.MeasureSpec.MakeMeasureSpec(viewgroup.Height, MeasureSpecMode.AtMost);
-
-						imageview.Measure(widthMeasureSpec, heightMeasureSpec);
-					}
-
-					imageview.SetImageBitmap(null);
-					imageview.SetImageDrawable(null);
-					requestmanager.Clear(imageview);
-
-					return requestmanager.AsBitmap();
-
-				}) is not RequestBuilder requestbuilder) oncomplete?.Invoke(false);
-			else
-			{
-				int width = imageview.Width == 0 ? imageview.MeasuredWidth : -1;
-				int height = imageview.Height == 0 ? imageview.MeasuredHeight : -1;
-
-				requestbuilder
-					.Override(width, height)
-					.RunOperations(operations, Operate)
-					.Into(new ImageBitmapTarget(imageview)
-					{
-						OnLoadFailedAction = drawable => oncomplete?.Invoke(false),
-						OnResourceReadyAction = (resource, transition) => oncomplete?.Invoke(true),
-					});
-			}
-		}
-		public async override Task SetToViewBackground(Operations[] operations, View? view, Action<bool>? oncomplete, CancellationToken cancellationtoken = default, params object?[] sources)
-		{
-			await Task.CompletedTask;
-
-			if (view is null || RequestBuilder(
-				sources: sources,
-				requestbuilderaction: requestmanager =>
-				{
-					view.Background = null;
-
-					return requestmanager.AsDrawable();
-
-				}) is not RequestBuilder requestbuilder) oncomplete?.Invoke(false);
-
-			else requestbuilder
-					.RunOperations(operations, Operate)
-					.Into(new ViewBackgroundTarget(view)
-					{
-						OnLoadFailedAction = drawable => oncomplete?.Invoke(false),
-						OnResourceReadyAction = (resource, transition) => oncomplete?.Invoke(true),
-					});
+			return bitmapdrawable ?? await base.GetDrawable(parameters);
 		}
 	}
 }

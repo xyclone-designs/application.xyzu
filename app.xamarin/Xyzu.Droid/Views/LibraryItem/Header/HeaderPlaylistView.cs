@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Util;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
@@ -92,9 +90,6 @@ namespace Xyzu.Views.LibraryItem.Header
 			}
 
 			SetArtwork(playlist);
-
-			if (Images != null)
-				Images.SetToViewBackground(IImagesDroid.DefaultOperations.BlurDownsample, this, null, default, playlist);
 		}
 	}
 }

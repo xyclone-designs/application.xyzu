@@ -84,9 +84,6 @@ namespace Xyzu.Library.Models
 				if ((retrieved.Bitrate is null || overwrite) && file.Properties.AudioBitrate is not 0)
 					retrieved.Bitrate = file.Properties.AudioBitrate;
 
-				if ((retrieved.Channels is null || overwrite) && file.Properties.AudioChannels is not 0)
-					retrieved.Channels = default(AudioChannels).FromChannelCount(file.Properties.AudioChannels);
-
 				if ((retrieved.Duration is null || overwrite) && file.Properties.Duration != TimeSpan.Zero)
 					retrieved.Duration = file.Properties.Duration;
 			}

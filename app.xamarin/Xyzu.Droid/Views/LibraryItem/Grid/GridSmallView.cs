@@ -16,6 +16,7 @@ namespace Xyzu.Views.LibraryItem.Grid
 
 			public const int ArtworkAppCompatImageView = Resource.Id.xyzu_view_libraryitem_grid_small_artwork_appcompatimageview;
 			public const int EqualiserAppCompatImageView = Resource.Id.xyzu_view_libraryitem_grid_small_equaliser_appcompatimageview;
+			public const int CorruptAppCompatImageView = Resource.Id.xyzu_view_libraryitem_grid_small_corrupt_appcompatimageview;
 			public const int LineOneAppCompatTextView = Resource.Id.xyzu_view_libraryitem_grid_small_lineone_appcompattextview;
 			public const int LineTwoAppCompatTextView = Resource.Id.xyzu_view_libraryitem_grid_small_linetwo_appcompattextview;
 		}
@@ -32,6 +33,7 @@ namespace Xyzu.Views.LibraryItem.Grid
 
 			Artwork = FindViewById<AppCompatImageView>(Ids.ArtworkAppCompatImageView);
 			Equaliser = FindViewById<AppCompatImageView>(Ids.EqualiserAppCompatImageView);
+			Corrupt = FindViewById<AppCompatImageView>(Ids.CorruptAppCompatImageView);
 			LineOne = FindViewById<AppCompatTextView>(Ids.LineOneAppCompatTextView);
 			LineTwo = FindViewById<AppCompatTextView>(Ids.LineTwoAppCompatTextView);
 		}

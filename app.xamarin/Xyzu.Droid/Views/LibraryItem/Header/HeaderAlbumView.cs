@@ -76,7 +76,7 @@ namespace Xyzu.Views.LibraryItem.Header
 			set => AlbumSongs.PlayClick = value;
 		}
 
-		protected void SetAlbum(IAlbum? album, IAlbum? defaults = null)
+		protected async void SetAlbum(IAlbum? album, IAlbum? defaults = null)
 		{
 			string? lineone = album?.Title ?? defaults?.Title;
 			string? linetwo = album?.Artist ?? defaults?.Artist;
@@ -101,7 +101,11 @@ namespace Xyzu.Views.LibraryItem.Header
 			SetArtwork(album);
 
 			if (Images != null)
-				Images.SetToViewBackground(IImagesDroid.DefaultOperations.BlurDownsample, this, null, default, album);
+				await Images.SetToViewBackground(new IImagesDroid.Parameters(album)
+				{
+					View = this,
+					Operations = IImages.DefaultOperations.BlurDownsample,
+				});
 		}
 	}
 }

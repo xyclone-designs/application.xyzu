@@ -11,7 +11,8 @@
     <ApplicationId>co.za.xyclonedesigns.xyzu.images</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-    <Platforms>AnyCPU;ARM32;ARM64;x64;x86</Platforms>
+    <UseInterpreter>false</UseInterpreter>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
@@ -19,10 +20,6 @@
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-arm64\*.*" />
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-x64\*.*" />
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-x86\*.*" />
-    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\arm32\debug\net8.0-android\android-arm\*.*" />
-    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\arm64\debug\net8.0-android\android-arm64\*.*" />
-    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\x64\debug\net8.0-android\android-x64\*.*" />
-    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\x86\debug\net8.0-android\android-x86\*.*" />
   </Target>
 
   <ItemGroup>

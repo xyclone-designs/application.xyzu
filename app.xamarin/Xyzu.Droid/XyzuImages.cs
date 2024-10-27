@@ -1,15 +1,10 @@
 ﻿using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.Widget;
-using Android.Views;
-using AndroidX.Palette.Graphics;
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 using Xyzu.Images;
-using Xyzu.Images.Enums;
 
 namespace Xyzu
 {
@@ -37,25 +32,21 @@ namespace Xyzu
 
 		public IImagesDroid Images { get; }
 
-		public Task<Bitmap?> GetBitmap(Operations[] operations, BitmapFactory.Options? options, CancellationToken cancellationtoken = default, params object?[] sources)
+		public Task SetToImageView(IImagesDroid.Parameters parameters)
 		{
-			return Images.GetBitmap(operations, options, cancellationtoken, sources);
+			return Images.SetToImageView(parameters);
 		}
-		public Task<Drawable?> GetDrawable(Operations[] operations, CancellationToken cancellationtoken = default, params object?[] sources)
+		public Task SetToViewBackground(IImagesDroid.Parameters parameters)
 		{
-			return Images.GetDrawable(operations, cancellationtoken, sources);
+			return Images.SetToViewBackground(parameters);
 		}
-		public Task<Palette?> GetPalette(CancellationToken cancellationtoken = default, params object?[] sources)
+		public Task<Bitmap?> GetBitmap(IImagesDroid.Parameters parameters)
 		{
-			return Images.GetPalette(cancellationtoken, sources);
+			return Images.GetBitmap(parameters);
 		}
-		public Task SetToImageView(Operations[] operations, ImageView? imageview, Action<bool>? oncomplete, CancellationToken cancellationtoken = default, params object?[] sources)
+		public Task<Drawable?> GetDrawable(IImagesDroid.Parameters parameters)
 		{
-			return Images.SetToImageView(operations, imageview, oncomplete, cancellationtoken, sources);
-		}
-		public Task SetToViewBackground(Operations[] operations, View? view, Action<bool>? oncomplete, CancellationToken cancellationtoken = default, params object?[] sources)
-		{
-			return Images.SetToViewBackground(operations, view, oncomplete, cancellationtoken, sources);
+			return Images.GetDrawable(parameters);
 		}
 	}
 }

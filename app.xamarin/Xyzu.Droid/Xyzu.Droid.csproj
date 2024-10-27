@@ -13,7 +13,7 @@
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <XamarinAndroidSupportSkipVerifyVersions>true</XamarinAndroidSupportSkipVerifyVersions>
     <UseInterpreter>false</UseInterpreter>
-    <Platforms>AnyCPU;ARM32;ARM64;x64;x86</Platforms>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
@@ -21,10 +21,6 @@
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-arm64\*.*" />
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-x64\*.*" />
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-x86\*.*" />
-    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\arm32\debug\net8.0-android\android-arm\*.*" />
-    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\arm64\debug\net8.0-android\android-arm64\*.*" />
-    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\x64\debug\net8.0-android\android-x64\*.*" />
-    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\x86\debug\net8.0-android\android-x86\*.*" />
   </Target>
 
   <ItemGroup>
@@ -40,6 +36,7 @@
     <None Remove="Assets\licenses\package_taglibsharp.txt" />
     <None Remove="Assets\sounds\silence.mp3" />
     <None Remove="Resources\drawable\icon_application.xml" />
+    <None Remove="Resources\drawable\icon_general_file_x.xml" />
     <None Remove="Resources\drawable\xyzu_view_inset_fadebottomup_colorprimary.xml" />
     <None Remove="Resources\drawable\xyzu_view_inset_fadetopdown_colorprimary.xml" />
     <None Remove="Resources\values\strings_application.xml" />

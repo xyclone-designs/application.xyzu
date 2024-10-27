@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Util;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
@@ -89,8 +87,6 @@ namespace Xyzu.Views.LibraryItem.Header
 			}
 
 			SetArtwork(artist);
-
-			Images?.SetToViewBackground(IImagesDroid.DefaultOperations.BlurDownsample, this, null, default, artist);
 		}
 	}
 }

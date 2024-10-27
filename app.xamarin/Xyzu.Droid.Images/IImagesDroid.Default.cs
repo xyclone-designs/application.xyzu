@@ -2,13 +2,11 @@
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Views;
-using Android.Widget;
-using AndroidX.Palette.Graphics;
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Xyzu.Images.Enums;
@@ -30,12 +28,14 @@ namespace Xyzu.Images
 			public Context Context { get; set; }
 			public IDictionary<string, byte[]>? Buffers { get; set; }
 
-			public Action<IModel>? SetBuffer { get; set; }
+			public Func<IModel, Task>? SetBuffer { get; set; }
 
-			protected byte[]? Buffer(IModel model)
+			protected async Task<byte[]?> Buffer(IModel model)
 			{
-				if (Image(model) is not IImage image) 
-					return null;
+				if ((
+					(model as IAlbum)?.Artwork ??
+					(model as IArtist)?.Image ??
+					(model as ISong)?.Artwork) is not IImage image) return null;
 
 				Buffers ??= new Dictionary<string, byte[]>();
 
@@ -45,7 +45,7 @@ namespace Xyzu.Images
 				if (buffer is not null || bufferkey is null || SetBuffer is null)
 					return buffer;
 
-				SetBuffer.Invoke(model);
+				await SetBuffer.Invoke(model);
 
 				if (image.BufferKey is null)
 					return null;
@@ -54,46 +54,156 @@ namespace Xyzu.Images
 
 				return image.Buffer;
 			}
-			protected IImage? Image(IModel model)
+
+			public async virtual Task SetToImageView(Parameters parameters)
 			{
-				return true switch
+				if (parameters.ImageView is null)
+					return;
+
+				parameters.ImageView.SetImageBitmap(null);
+
+				if (parameters.ImageView.Width == 0 && parameters.ImageView.Height == 0 && parameters.ImageView.Parent is ViewGroup viewgroup)
 				{
-					true when model is IAlbum album => album.Artwork,
-					true when model is IArtist artist => artist.Image,
-					true when model is ISong song => song.Artwork,
+					int widthMeasureSpec = View.MeasureSpec.MakeMeasureSpec(viewgroup.Width, MeasureSpecMode.AtMost);
+					int heightMeasureSpec = View.MeasureSpec.MakeMeasureSpec(viewgroup.Height, MeasureSpecMode.AtMost);
 
-					_ => null,
+					parameters.ImageView.Measure(widthMeasureSpec, heightMeasureSpec);
+				}
+
+				int width = parameters.ImageView.Width == 0 ? parameters.ImageView.MeasuredWidth : -1;
+				int height = parameters.ImageView.Height == 0 ? parameters.ImageView.MeasuredHeight : -1;
+
+				BitmapFactory.Options options = new()
+				{
+					OutWidth = width,
+					OutHeight = height,
 				};
-			}
 
-			public virtual async Task<Bitmap?> GetBitmap(Operations[] operations, BitmapFactory.Options? options, CancellationToken cancellationtoken = default, params object?[] sources)
+				if (parameters.Operations.Contains(Operations.Merge) is false && await GetBitmap(parameters) is Bitmap a)
+					parameters.ImageView.SetImageBitmap(a);
+				else if (Bitmap.Config.Rgb565 is null) 
+					return;
+				else
+				{
+					List<Bitmap> bitmaps = new();
+
+					for (int index = 0; bitmaps.Count != 4 && index < parameters.Sources.Length; index++)
+						if (parameters.Sources[index] is IEnumerable enumerable && enumerable.GetEnumerator() is IEnumerator enumerator)
+						{
+							while (bitmaps.Count != 4 && enumerator.MoveNext() is object obj)
+								if (await GetBitmap(parameters) is Bitmap c)
+									bitmaps.Add(c);
+						}
+						else if (parameters.Sources[index] is IAsyncEnumerable<object> asyncenumerable && asyncenumerable.GetAsyncEnumerator() is IAsyncEnumerator<object> asyncenumerator)
+						{
+							while (bitmaps.Count != 4 && await asyncenumerator.MoveNextAsync() is object obj)
+								if (await GetBitmap(parameters) is Bitmap c)
+									bitmaps.Add(c);
+						}
+						else if (await GetBitmap(parameters) is Bitmap c)
+							bitmaps.Add(c);
+
+					int dimension = 0;
+
+					Bitmap? topleft = bitmaps.ElementAtOrDefault(0);
+					Bitmap? topright = bitmaps.ElementAtOrDefault(1);
+					Bitmap? bottomleft = bitmaps.ElementAtOrDefault(2);
+					Bitmap? bottomright = bitmaps.ElementAtOrDefault(3);
+
+					if (topleft != null && Math.Min(topleft.Width, topleft.Height) is int topleftmin)
+						dimension = dimension == 0
+							? topleftmin
+							: Math.Min(topleftmin, dimension);
+
+					if (topright != null && Math.Min(topright.Width, topright.Height) is int toprightmin)
+						dimension = dimension == 0
+							? toprightmin
+							: Math.Min(toprightmin, dimension);
+
+					if (bottomleft != null && Math.Min(bottomleft.Width, bottomleft.Height) is int bottomleftmin)
+						dimension = dimension == 0
+							? bottomleftmin
+							: Math.Min(bottomleftmin, dimension);
+
+					if (bottomright != null && Math.Min(bottomright.Width, bottomright.Height) is int bottomrightmin)
+						dimension = dimension == 0
+							? bottomrightmin
+							: Math.Min(bottomrightmin, dimension);
+
+					if (dimension is 0)
+						return;
+
+					Bitmap bitmap = Bitmap.CreateBitmap(dimension, dimension, Bitmap.Config.Rgb565);
+
+					int scaleddimension = dimension / 2;
+
+					int[]? pixels = null;
+					int[]? colors = Enumerable.Range(0, scaleddimension * scaleddimension)
+						.Select(_ => Color.Transparent.ToArgb())
+						.ToArray();
+
+					if (topleft != null && (topleft = Bitmap.CreateScaledBitmap(topleft, scaleddimension, scaleddimension, false)) != null)
+						topleft.GetPixels(pixels = new int[dimension * dimension], 0, scaleddimension, 0, 0, scaleddimension, scaleddimension);
+					bitmap.SetPixels(pixels ?? colors, 0, scaleddimension, 0, 0, scaleddimension, scaleddimension);
+					pixels = null;
+
+					if (topright != null && (topright = Bitmap.CreateScaledBitmap(topright, scaleddimension, scaleddimension, false)) != null)
+						topright.GetPixels(pixels = new int[dimension * dimension], 0, scaleddimension, 0, 0, scaleddimension, scaleddimension);
+					bitmap.SetPixels(pixels ?? colors, 0, scaleddimension, 0, scaleddimension, scaleddimension, scaleddimension);
+					pixels = null;
+
+					if (bottomleft != null && (bottomleft = Bitmap.CreateScaledBitmap(bottomleft, scaleddimension, scaleddimension, false)) != null)
+						bottomleft.GetPixels(pixels = new int[dimension * dimension], 0, scaleddimension, 0, 0, scaleddimension, scaleddimension);
+					bitmap.SetPixels(pixels ?? colors, 0, scaleddimension, scaleddimension, 0, scaleddimension, scaleddimension);
+					pixels = null;
+
+					if (bottomright != null && (bottomright = Bitmap.CreateScaledBitmap(bottomright, scaleddimension, scaleddimension, false)) != null)
+						bottomright.GetPixels(pixels = new int[dimension * dimension], 0, scaleddimension, 0, 0, scaleddimension, scaleddimension);
+					bitmap.SetPixels(pixels ?? colors, 0, scaleddimension, scaleddimension, scaleddimension, scaleddimension, scaleddimension);
+					pixels = null;
+
+					colors = null;
+
+					parameters.ImageView.SetImageBitmap(bitmap);
+				}
+			}
+			public async virtual Task SetToViewBackground(Parameters parameters)
 			{
+				if (parameters.View is null)
+					return;
+
+				parameters.View.Background = await GetDrawable(parameters);
+			}
+			public async virtual Task<Bitmap?> GetBitmap(Parameters parameters)
+			{
+				await Task.CompletedTask;
+
 				Bitmap? bitmap = null;
 
-				IEnumerator sourceenumerator = sources.GetEnumerator();
+				IEnumerator sourceenumerator = parameters.Sources.GetEnumerator();
 
 				while (sourceenumerator.MoveNext() && bitmap is null)
 					switch (true)
 					{
 						case true when
 						sourceenumerator.Current is IModel model &&
-						Buffer(model) is byte[] modelbuffer:
-							bitmap ??= await BitmapFactory.DecodeByteArrayAsync(modelbuffer, 0, modelbuffer.Length, options);
+						await Buffer(model) is byte[] modelbuffer:
+							bitmap ??= await BitmapFactory.DecodeByteArrayAsync(modelbuffer, 0, modelbuffer.Length, parameters.BitmapOptions);
 							break;
 
 						case true when sourceenumerator.Current is IImage image:
 							switch (true)
 							{
 								case true when image.Buffer != null:
-									bitmap ??= await BitmapFactory.DecodeByteArrayAsync(image.Buffer, 0, image.Buffer.Length, options);
+									bitmap ??= await BitmapFactory.DecodeByteArrayAsync(image.Buffer, 0, image.Buffer.Length, parameters.BitmapOptions);
 									break;
 
 								case true when image.Uri?.ToAndroidUri() is AndroidUri androiduri:
 									bitmap ??=
-										await BitmapFactory.DecodeFileAsync(androiduri.Path, options) ??
+										await BitmapFactory.DecodeFileAsync(androiduri.Path, parameters.BitmapOptions) ??
 										await BitmapFactory.DecodeFileDescriptorAsync(
-											opts: options,
 											outPadding: null,
+											opts: parameters.BitmapOptions,
 											fd: Context.ContentResolver?.OpenFileDescriptorSafe(androiduri, "r")?.FileDescriptor);
 									break;
 
@@ -106,11 +216,14 @@ namespace Xyzu.Images
 							break;
 
 						case true when sourceenumerator.Current is byte[] sourcebuffer:
-							bitmap ??= await BitmapFactory.DecodeByteArrayAsync(sourcebuffer, 0, sourcebuffer.Length, options);
+							bitmap ??= await BitmapFactory.DecodeByteArrayAsync(sourcebuffer, 0, sourcebuffer.Length, parameters.BitmapOptions);
 							break;
 
-						case true when sourceenumerator.Current is Java.Lang.Integer sourceresourceid:
-							bitmap ??= await BitmapFactory.DecodeResourceAsync(Context.Resources, sourceresourceid.IntValue(), options);
+						case true when sourceenumerator.Current is int sourceresourceid:
+							bitmap ??= await BitmapFactory.DecodeResourceAsync(Context.Resources, sourceresourceid, parameters.BitmapOptions);
+							break;
+						case true when sourceenumerator.Current is Java.Lang.Integer sourceresourceidjava:
+							bitmap ??= await BitmapFactory.DecodeResourceAsync(Context.Resources, sourceresourceidjava.IntValue(), parameters.BitmapOptions);
 							break;
 
 						case true when sourceenumerator.Current is Drawable:
@@ -118,10 +231,10 @@ namespace Xyzu.Images
 
 						case true when (sourceenumerator.Current as AndroidUri ?? (sourceenumerator.Current as Uri)?.ToAndroidUri()) is AndroidUri sourceandroiduri:
 							bitmap ??=
-								await BitmapFactory.DecodeFileAsync(sourceandroiduri.Path, options) ??
+								await BitmapFactory.DecodeFileAsync(sourceandroiduri.Path, parameters.BitmapOptions) ??
 								await BitmapFactory.DecodeFileDescriptorAsync(
-									opts: options,
 									outPadding: null,
+									opts: parameters.BitmapOptions,
 									fd: Context.ContentResolver?.OpenFileDescriptorSafe(sourceandroiduri, "r")?.FileDescriptor);
 							break;
 
@@ -130,54 +243,9 @@ namespace Xyzu.Images
 
 				return bitmap;
 			}
-			public virtual Task<Drawable?> GetDrawable(Operations[] operations, CancellationToken cancellationtoken = default, params object?[] sources)
+			public async virtual Task<Drawable?> GetDrawable(Parameters parameters)
 			{
-				return Task.FromResult<Drawable?>(null);
-			}
-			public virtual async Task<Palette?> GetPalette(CancellationToken cancellationtoken = default, params object?[] sources)
-			{
-				if (await GetBitmap(Array.Empty<Operations>(), null, cancellationtoken, sources) is Bitmap bitmap)
-					return Palette.From(bitmap).Generate();
-
-				return null;
-			}
-
-			public virtual async Task SetToImageView(Operations[] operations, ImageView? imageview, Action<bool>? oncomplete, CancellationToken cancellationtoken = default, params object?[] sources)
-			{
-				if (imageview is null)
-					return;
-
-				await Task.Run(() => imageview.SetImageBitmap(null));
-
-				if (imageview.Width == 0 && imageview.Height == 0 && imageview.Parent is ViewGroup viewgroup)
-				{
-					int widthMeasureSpec = View.MeasureSpec.MakeMeasureSpec(viewgroup.Width, MeasureSpecMode.AtMost);
-					int heightMeasureSpec = View.MeasureSpec.MakeMeasureSpec(viewgroup.Height, MeasureSpecMode.AtMost);
-
-					imageview.Measure(widthMeasureSpec, heightMeasureSpec);
-				}
-
-				int width = imageview.Width == 0 ? imageview.MeasuredWidth : -1;
-				int height = imageview.Height == 0 ? imageview.MeasuredHeight : -1;
-
-				BitmapFactory.Options options = new()
-				{
-					OutWidth = width,
-					OutHeight = height,
-				};
-
-				Bitmap? bitmap = await GetBitmap(operations, options, cancellationtoken, sources);
-
-				await Task.Run(() => imageview.SetImageBitmap(bitmap));
-			}
-			public virtual async Task SetToViewBackground(Operations[] operations, View? view, Action<bool>? oncomplete, CancellationToken cancellationtoken = default, params object?[] sources)
-			{
-				if (view is null)
-					return;
-
-				Drawable? drawable = await GetDrawable(operations, cancellationtoken, sources);
-
-				view.Background = drawable;
+				return await Task.FromResult<Drawable?>(null);
 			}
 		}
 	}

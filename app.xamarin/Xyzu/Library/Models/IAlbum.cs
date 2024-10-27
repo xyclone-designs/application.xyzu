@@ -24,7 +24,7 @@ namespace Xyzu.Library.Models
 		string? Artist { get; set; }
 		IImage? Artwork { get; set; }
 		int? DiscCount { get; set; }
-		TimeSpan Duration { get; set; }
+		TimeSpan? Duration { get; set; }
 		DateTime? ReleaseDate { get; set; }
 		IEnumerable<string> SongIds { get; set; }
 		string? Title { get; set; }
@@ -48,7 +48,7 @@ namespace Xyzu.Library.Models
 			public string? Artist { get; set; }
 			public IImage? Artwork { get; set; }
 			public int? DiscCount { get; set; }
-			public TimeSpan Duration { get; set; }
+			public TimeSpan? Duration { get; set; }
 			public DateTime? ReleaseDate { get; set; }
 			public IEnumerable<string> SongIds { get; set; } = Enumerable.Empty<string>();
 			public string? Title { get; set; }

@@ -269,8 +269,7 @@ namespace Xyzu.Activities
 			ToolbarTabLayout.Tablayout.TabReselected += TabReselected;
 			ToolbarTabLayout.Tablayout.TabUnselected += TabUnselected;
 
-			if (_SelectedPosition.HasValue && ToolbarTabLayout.Tablayout.GetTabAt(_SelectedPosition.Value) is TabLayout.Tab tab)
-				ToolbarTabLayout.Tablayout.SelectTab(tab, true);
+			EnsureTabPosition();
 		}
 		protected override void OnStop() 
 		{
@@ -403,6 +402,13 @@ namespace Xyzu.Activities
 			}
 		}
 
+		protected void EnsureTabPosition()
+		{
+			if (_SelectedPosition.HasValue &&
+				_SelectedPosition.Value != ToolbarTabLayout.Tablayout.SelectedTabPosition &&
+				ToolbarTabLayout.Tablayout.GetTabAt(_SelectedPosition.Value) is TabLayout.Tab tab)
+				ToolbarTabLayout.Tablayout.SelectTab(tab, true);
+		}
 		protected void TabSelected(object? sender, TabLayout.TabSelectedEventArgs args)
 		{
 			ActivityCancellationTokenSourceCancel();

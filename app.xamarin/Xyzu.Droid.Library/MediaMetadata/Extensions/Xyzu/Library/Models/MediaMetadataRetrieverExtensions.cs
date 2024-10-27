@@ -53,9 +53,6 @@ namespace Xyzu.Library.Models
 			
 			if ((retrieved.Bitrate is null || overwrite))
 				retrieved.Bitrate = mediametadataretriever.ExtractMetadata<int?>(MetadataKey.Bitrate, null) * 1024; // (bits/s => kbits/s)
-			
-			if ((retrieved.DateModified is null || overwrite))
-				retrieved.DateModified = mediametadataretriever.ExtractMetadata<DateTime?>(MetadataKey.Date, null);
 
 			if ((retrieved.DiscNumber is null || overwrite))
 				retrieved.DiscNumber = mediametadataretriever.ExtractMetadata(

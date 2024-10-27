@@ -10,7 +10,8 @@ namespace Xyzu.Views.LibraryItem
 {
 	public interface ILibraryItem
 	{
-		bool Playing { get; set; }
+		bool IsCorrupt { get; set; }
+		bool IsPlaying { get; set; }
 		string? LibraryItemId { get; set; }
 		IEnumerable<string>? Details { get; set; }
 
@@ -27,11 +28,11 @@ namespace Xyzu.Views.LibraryItem
 				case true when queueid != null && player.Queue.Id != queueid:
 				case true when LibraryItemId is null:
 				case true when LibraryItemId != player.Queue.Current.PrimaryId:
-					Playing = false;
+					IsPlaying = false;
 					break;		 
 
 				default: 
-					Playing = true;
+					IsPlaying = true;
 					break;
 			}					
 		}
@@ -68,6 +69,7 @@ namespace Xyzu.Views.LibraryItem
 		{
 			Reset();
 
+			IsCorrupt = false;
 			LibraryItemId = artist?.Id ?? defaults?.Id;
 			Details = DetailsArtist(artist, defaults);
 
@@ -87,6 +89,7 @@ namespace Xyzu.Views.LibraryItem
 			Reset();
 
 			LibraryItemId = artistsong?.Id ?? defaults?.Id;
+			IsCorrupt = artistsong?.IsCorrupt ?? defaults?.IsCorrupt ?? false;
 			Details = DetailsArtistSong(artistsong, defaults);
 
 			SetArtwork(artistsong ?? defaults);
@@ -105,6 +108,7 @@ namespace Xyzu.Views.LibraryItem
 			Reset();
 
 			LibraryItemId = albumsong?.Id ?? defaults?.Id;
+			IsCorrupt = albumsong?.IsCorrupt ?? defaults?.IsCorrupt ?? false;
 			Details = DetailsSong(albumsong, defaults);
 
 			SetArtwork(albumsong ?? defaults);
@@ -123,6 +127,7 @@ namespace Xyzu.Views.LibraryItem
 			Reset();
 
 			LibraryItemId = genresong?.Id ?? defaults?.Id;
+			IsCorrupt = genresong?.IsCorrupt ?? defaults?.IsCorrupt ?? false;
 			Details = DetailsGenreSong(genresong, defaults);
 
 			SetArtwork(genresong ?? defaults);
@@ -141,6 +146,7 @@ namespace Xyzu.Views.LibraryItem
 			Reset();
 
 			LibraryItemId = playlistsong?.Id ?? defaults?.Id;
+			IsCorrupt = playlistsong?.IsCorrupt ?? defaults?.IsCorrupt ?? false;
 			Details = DetailsPlaylistSong(playlistsong, defaults);
 
 			SetArtwork(playlistsong ?? defaults);
@@ -150,6 +156,7 @@ namespace Xyzu.Views.LibraryItem
 			Reset();
 
 			LibraryItemId = queuesong?.Id ?? defaults?.Id;
+			IsCorrupt = queuesong?.IsCorrupt ?? defaults?.IsCorrupt ?? false;
 			Details = DetailsQueueSong(queuesong, defaults);
 
 			SetArtwork(queuesong ?? defaults);
@@ -159,6 +166,7 @@ namespace Xyzu.Views.LibraryItem
 			Reset();
 
 			LibraryItemId = song?.Id ?? defaults?.Id;
+			IsCorrupt = song?.IsCorrupt ?? defaults?.IsCorrupt ?? false;
 			Details = DetailsSong(song, defaults);
 
 			SetArtwork(song ?? defaults);

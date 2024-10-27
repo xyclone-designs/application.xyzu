@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Util;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
@@ -9,7 +7,6 @@ using System;
 using System.Linq;
 
 using Xyzu.Droid;
-using Xyzu.Images;
 using Xyzu.Library.Models;
 
 namespace Xyzu.Views.LibraryItem.Header
@@ -93,9 +90,6 @@ namespace Xyzu.Views.LibraryItem.Header
 			}
 
 			SetArtwork(genre);
-
-			if (Images != null)
-				Images.SetToViewBackground(IImagesDroid.DefaultOperations.BlurDownsample, this, null, default, genre);
 		}
 	}
 }

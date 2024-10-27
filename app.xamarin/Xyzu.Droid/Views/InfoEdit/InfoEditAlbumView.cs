@@ -100,6 +100,7 @@ namespace Xyzu.Views.InfoEdit
 		public AppCompatTextView? AlbumReleaseDate_Title { get; protected set; }
 		public Action<InfoEditAlbumView, object?, EventArgs>? AlbumArtworkClick { get; set; }
 
+
 		protected override void OnAttachedToWindow()
 		{
 			base.OnAttachedToWindow();
@@ -123,20 +124,24 @@ namespace Xyzu.Views.InfoEdit
 		public async void ReloadImage()
 		{
 			if (Images != null)
-			{
-				await Images.SetToImageView(IImages.DefaultOperations.RoundedDownsample, AlbumArtwork, null, default, Album);
-
-				if (Context != null &&
-					await Images.GetPalette(default, Album) is Palette palette &&
-					palette.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+				await Images.SetToImageView(new IImagesDroid.Parameters(Album)
 				{
-					Title?.SetTextColor(color);
+					ImageView = AlbumArtwork,
+					Operations = IImages.DefaultOperations.RoundedDownsample,
+					OnPalette = palette =>
+					{
+						OnPalette?.Invoke(palette);
 
-					AlbumTitle_Title?.SetTextColor(color);
-					AlbumArtist_Title?.SetTextColor(color);
-					AlbumReleaseDate_Title?.SetTextColor(color);
-				}
-			}
+						if (Context is not null && palette?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+						{
+							Title?.SetTextColor(color);
+
+							AlbumTitle_Title?.SetTextColor(color);
+							AlbumArtist_Title?.SetTextColor(color);
+							AlbumReleaseDate_Title?.SetTextColor(color);
+						}
+					}
+				});
 		}
 	}
 }

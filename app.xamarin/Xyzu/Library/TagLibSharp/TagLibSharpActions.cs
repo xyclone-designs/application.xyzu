@@ -13,16 +13,24 @@ namespace Xyzu.Library.TagLibSharp
 {
 	public partial class TagLibSharpActions
 	{
-		static File? GetFile(string? filepath, Uri? uri, bool withcaution = false)
+		static async Task<File?> GetFile(string? filepath, Uri? uri, bool withcaution = false)
 		{
 			File? file = null;
 
 			if (file is null && filepath is not null)
-				try { file = File.Create(filepath, withcaution ? ReadStyle.PictureLazy : ReadStyle.Average); }
-				catch (Exception) { }
+				await Task.Run(() =>
+				{
+					try { file = File.Create(filepath, withcaution ? ReadStyle.PictureLazy : ReadStyle.Average); }
+					catch (Exception) { }
+
+				}).ConfigureAwait(false);
 			if (file is null && uri is not null)
-				try { file = File.Create(uri.AbsolutePath, withcaution ? ReadStyle.PictureLazy : ReadStyle.Average); }
-				catch (Exception) { }
+				await Task.Run(() =>
+				{
+					try { file = File.Create(uri.AbsolutePath, withcaution ? ReadStyle.PictureLazy : ReadStyle.Average); }
+					catch (Exception) { }
+
+				}).ConfigureAwait(false);
 
 			return file;
 		}
@@ -51,64 +59,64 @@ namespace Xyzu.Library.TagLibSharp
 		public class OnDelete : ILibrary.IOnDeleteActions.Default { }
 		public class OnRetrieve : ILibrary.IOnRetrieveActions.Default
 		{
-			public override Task Album(IAlbum? retrieved, ISong? retrievedsong)
+			public async override Task Album(IAlbum? retrieved, ISong? retrievedsong)
 			{
-				if (GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.IsCorrupt ?? false) is File file)
+				if (await GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.IsCorrupt ?? false) is File file)
 				{
 					retrieved?.Retrieve(file);
 
 					file.Dispose();
 				}
 
-				return base.Album(retrieved, retrievedsong);
+				await base.Album(retrieved, retrievedsong);
 			}
-			public override Task Artist(IArtist? retrieved, ISong? retrievedsong)
+			public async override Task Artist(IArtist? retrieved, ISong? retrievedsong)
 			{
-				if (GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.IsCorrupt ?? false) is File file)
+				if (await GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.IsCorrupt ?? false) is File file)
 				{
 					retrieved?.Retrieve(file);
 
 					file.Dispose();
 				}
 
-				return base.Artist(retrieved, retrievedsong);
+				await base.Artist(retrieved, retrievedsong);
 			}
-			public override Task Genre(IGenre? retrieved, ISong? retrievedsong)
+			public async override Task Genre(IGenre? retrieved, ISong? retrievedsong)
 			{
-				if (GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.IsCorrupt ?? false) is File file)
+				if (await GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.IsCorrupt ?? false) is File file)
 				{
 					retrieved?.Retrieve(file);
 
 					file.Dispose();
 				}
 
-				return base.Genre(retrieved, retrievedsong);
+				await base.Genre(retrieved, retrievedsong);
 			}
-			public override Task Playlist(IPlaylist? retrieved, ISong? retrievedsong) 
+			public async override Task Playlist(IPlaylist? retrieved, ISong? retrievedsong) 
 			{
-				if (GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.IsCorrupt ?? false) is File file)
+				if (await GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.IsCorrupt ?? false) is File file)
 				{
 					retrieved?.Retrieve(file);
 
 					file.Dispose();
 				}
 
-				return base.Playlist(retrieved, retrievedsong);
+				await base.Playlist(retrieved, retrievedsong);
 			}
-			public override Task Song(ISong? retrieved)
+			public async override Task Song(ISong? retrieved)
 			{
-				if (GetFile(retrieved?.Filepath, retrieved?.Uri, retrieved?.IsCorrupt ?? false) is File file)
+				if (await GetFile(retrieved?.Filepath, retrieved?.Uri, retrieved?.IsCorrupt ?? false) is File file)
 				{
 					retrieved?.Retrieve(file);
 
 					file.Dispose();
 				}
 
-				return base.Song(retrieved);
+				await base.Song(retrieved);
 			}
-			public override Task Image(IImage? retrieved, IEnumerable<ModelTypes>? modeltypes)
+			public async override Task Image(IImage? retrieved, IEnumerable<ModelTypes>? modeltypes)
 			{
-				if (GetFile(retrieved?.Filepath, retrieved?.Uri, retrieved?.IsCorrupt ?? false) is File file)
+				if (await GetFile(retrieved?.Filepath, retrieved?.Uri, retrieved?.IsCorrupt ?? false) is File file)
 				{
 					PictureTypeComparer? picturetypecomparer = modeltypes?.Where(modeltype => modeltype switch
 					{
@@ -132,7 +140,7 @@ namespace Xyzu.Library.TagLibSharp
 					file.Dispose();
 				}
 
-				return base.Image(retrieved, modeltypes);
+				await base.Image(retrieved, modeltypes);
 			}
 		}
 		public class OnUpdate : ILibrary.IOnUpdateActions.Default
@@ -157,9 +165,9 @@ namespace Xyzu.Library.TagLibSharp
 						old.SongIds
 							.Select(_ => OnGetSong.Invoke(_) is ISong song && string.IsNullOrWhiteSpace(song.Filepath) is false ? song : null)
 							.OfType<ISong>()
-							.Select(song => Task.Run(() =>
+							.Select(song => Task.Run(async () =>
 							{
-								if (GetFile(song.Filepath, song.Uri, song.IsCorrupt) is File file)
+								if (await GetFile(song.Filepath, song.Uri, song.IsCorrupt) is File file)
 									try
 									{									
 										if (distincts.ReleaseDate) file.Tag.Year = (uint?)updated.ReleaseDate?.Year ?? default;
@@ -192,9 +200,9 @@ namespace Xyzu.Library.TagLibSharp
 						old.SongIds
 							.Select(_ => OnGetSong.Invoke(_) is ISong song && string.IsNullOrWhiteSpace(song.Filepath) is false ? song : null)
 							.OfType<ISong>()
-							.Select(song => Task.Run(() =>
+							.Select(song => Task.Run(async () =>
 							{
-								if (GetFile(song.Filepath, song.Uri, song.IsCorrupt) is File file)
+								if (await GetFile(song.Filepath, song.Uri, song.IsCorrupt) is File file)
 									try
 									{
 										if (distincts.Name && updated.Name != null) file.Tag.Performers = new string[] { updated.Name };
@@ -226,9 +234,9 @@ namespace Xyzu.Library.TagLibSharp
 						old.SongIds
 							.Select(_ => OnGetSong.Invoke(_) is ISong song && string.IsNullOrWhiteSpace(song.Filepath) is false ? song : null)
 							.OfType<ISong>()
-							.Select(song => Task.Run(() =>
+							.Select(song => Task.Run(async () =>
 							{
-								if (GetFile(song.Filepath, song.Uri, song.IsCorrupt) is File file)
+								if (await GetFile(song.Filepath, song.Uri, song.IsCorrupt) is File file)
 									try
 									{
 										if (distincts.Name) file.Tag.Genres = updated.Name?.Split(';').ToArray() ?? Array.Empty<string>();
@@ -262,9 +270,9 @@ namespace Xyzu.Library.TagLibSharp
 					return;
 
 				if (old.Filepath is not null)
-					await Task.Run(() =>
+					await Task.Run(async () =>
 					{
-						if (GetFile(old.Filepath, old.Uri, old.IsCorrupt) is File file)
+						if (await GetFile(old.Filepath, old.Uri, old.IsCorrupt) is File file)
 							try
 							{
 								if (distincts.Album) file.Tag.Album = updated.Album;

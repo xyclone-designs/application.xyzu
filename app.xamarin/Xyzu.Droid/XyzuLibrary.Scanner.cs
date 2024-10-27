@@ -112,7 +112,6 @@ namespace Xyzu
 		}
 		public void OnServiceDisconnected(ComponentName? name)
 		{
-			ScanServiceBinder = null;
 			ScannerServiceConnectionState = ServiceConnectionChangedEventArgs.Events.Disconnected;
 
 			ServiceConnectionChangedEventArgs args = new (ScannerServiceConnectionState)
@@ -122,6 +121,8 @@ namespace Xyzu
 
 			OnServiceConnectionChanged?.Invoke(this, args);
 			ServiceConnectionChangedAction?.Invoke(args);
+
+			ScanServiceBinder = null;
 		}
 
 		public void ScannerServiceScan(bool hard)
@@ -133,7 +134,7 @@ namespace Xyzu
 						: IScanner.IntentActions.ScanSoft);
 
 			Context.StartService(service);
-			Context.BindService(service, this, Bind.AutoCreate | Bind.Important);
+			Context.BindService(service, this, Bind.AdjustWithActivity | Bind.AutoCreate | Bind.Important);
 		}
 	}
 }

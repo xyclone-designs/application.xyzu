@@ -24,12 +24,6 @@ namespace Xyzu.Library.Models
 		}
 		public static ISong Retrieve(this ISong retrieved, FileInfo fileinfo, bool overwrite = false)
 		{
-			if ((retrieved.DateAdded is null || overwrite)) 
-				retrieved.DateAdded = fileinfo.CreationTime;
-			
-			if ((retrieved.DateModified is null || overwrite)) 
-				retrieved.DateModified = fileinfo.LastWriteTime;
-			
 			if ((retrieved.Filepath is null || overwrite)) 
 				retrieved.Filepath = fileinfo.FullName;
 

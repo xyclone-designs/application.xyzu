@@ -1,10 +1,9 @@
 ﻿using Android.Content;
 
 using System;
+using System.IO;
 
 using Xyzu.Library;
-
-using Exception = System.Exception;
 
 namespace Xyzu
 {
@@ -13,7 +12,7 @@ namespace Xyzu
 		private XyzuLibrary(Context context)
 		{
 			Context = context;
-			Library = new ILibraryDroid.Default();
+			Library = new ILibraryDroid.Default(Paths.Databases.XyzuLibrary);
 		}
 
 		private static XyzuLibrary? _Instance;
@@ -33,5 +32,19 @@ namespace Xyzu
 
 		public Context Context { get; set; }
 		private ILibraryDroid Library { get; set; }
+
+		public static class Paths
+		{
+			public static readonly string _Directory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
+			public static class Databases
+			{
+				static Databases() { Directory.CreateDirectory(_Directory); }
+
+				public static readonly string _Directory = Path.Combine(Paths._Directory, "databases");
+
+				public static readonly string XyzuLibrary = Path.Combine(_Directory, "xyzu.library.db3");
+			}
+		}
 	}
 }

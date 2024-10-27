@@ -141,8 +141,6 @@ namespace Xyzu.Library.MediaStore
 				retrieved.AlbumArtist is null ||
 				retrieved.Artist is null ||
 				retrieved.Duration is null ||
-				retrieved.DateAdded is null ||
-				retrieved.DateModified is null ||
 				retrieved.MimeType is null ||
 				retrieved.Size is null ||
 				retrieved.ReleaseDate is null ||

@@ -62,9 +62,6 @@ namespace Xyzu.Library.Models
 			if ((retrieved.Bitrate is null || overwrite))
 				retrieved.Bitrate = mp3.Audio.Bitrate;
 			
-			if ((retrieved.Channels is null || overwrite))
-				retrieved.Channels = mp3.Audio.Mode.ToAudioChannel();
-			
 			if ((retrieved.Copyright is null || overwrite) && tags().Select(tag => tag.Copyright).FirstOrDefault(frame => frame.IsAssigned) is CopyrightFrame copyrightframe)
 				retrieved.Copyright = copyrightframe.Value;
 			

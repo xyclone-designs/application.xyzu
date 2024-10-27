@@ -1,10 +1,8 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using AndroidX.ConstraintLayout.Widget;
-
+using AndroidX.Palette.Graphics;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -37,5 +35,7 @@ namespace Xyzu.Views.Info
 				OnPropertyChanged();
 			}
 		}
+
+		public Action<Palette?>? OnPalette { get; set; }
 	}
 }

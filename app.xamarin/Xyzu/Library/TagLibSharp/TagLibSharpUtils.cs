@@ -52,7 +52,6 @@ namespace Xyzu.Library.TagLibSharp
 				retrieved.Genre is null ||
 				retrieved.Lyrics is null ||
 				retrieved.Bitrate is null ||
-				retrieved.Channels is null ||
 				retrieved.Size is null ||
 				retrieved.ReleaseDate is null ||
 				retrieved.Title is null ||

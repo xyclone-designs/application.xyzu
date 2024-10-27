@@ -1,11 +1,8 @@
-﻿#nullable enable
-
-using AndroidX.ConstraintLayout.Motion.Widget;
+﻿using AndroidX.ConstraintLayout.Motion.Widget;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xyzu.Menus;
 using Xyzu.Player;
 using Xyzu.Player.Enums;
 
@@ -58,7 +55,7 @@ namespace Xyzu.Views.NowPlaying
 					break;
 
 				case ViewOperations.PressPlayPause when Player is null:
-					ViewOperationEventArgs randomargs = new ViewOperationEventArgs(ViewOperations.PressPlayPauseRandom);
+					ViewOperationEventArgs randomargs = new (ViewOperations.PressPlayPauseRandom);
 					OnViewOperationAction?.Invoke(randomargs);
 					OnViewOperation?.Invoke(sender, randomargs);
 					break;

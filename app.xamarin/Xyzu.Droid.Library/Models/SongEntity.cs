@@ -19,6 +19,18 @@ namespace Xyzu.Library.Models
 			set => base.Id = value;
 		}
 
+		public new int IsCorrupt
+		{
+			get => base.IsCorrupt ? 1 : 0;
+			set => base.IsCorrupt = value is 1;
+		}
+		[Ignore]
+		public new IImage? Artwork
+		{
+			get => base.Artwork;
+			set => base.Artwork = value;
+		}
+
 		public Uri? ArtworkUri
 		{
 			get => base.Artwork?.Uri;
@@ -33,13 +45,6 @@ namespace Xyzu.Library.Models
 		{
 			get => base.Artwork?.BufferKey;
 			set => (base.Artwork ??= new IImage.Default()).BufferKey = value;
-		}
-
-		[Ignore]
-		public new IImage? Artwork
-		{
-			get => base.Artwork;
-			set => base.Artwork = value;
 		}
 	}
 }

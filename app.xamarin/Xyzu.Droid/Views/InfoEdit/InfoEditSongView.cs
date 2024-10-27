@@ -176,26 +176,30 @@ namespace Xyzu.Views.InfoEdit
 		public async void ReloadImage()
 		{
 			if (Images != null)
-			{
-				await Images.SetToImageView(IImages.DefaultOperations.RoundedDownsample, SongArtwork, null, default, Song);
-
-				if (Context != null && 
-					await Images.GetPalette(default, Song) is Palette palette && 
-					palette.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+				await Images.SetToImageView(new IImagesDroid.Parameters(Song)
 				{
-					Title?.SetTextColor(color);
+					ImageView = SongArtwork,
+					Operations = IImages.DefaultOperations.RoundedDownsample,
+					OnPalette = palette =>
+					{
+						OnPalette?.Invoke(palette);
 
-					SongTitle_Title?.SetTextColor(color);
-					SongArtist_Title?.SetTextColor(color);
-					SongAlbum_Title?.SetTextColor(color);
-					SongAlbumArtist_Title?.SetTextColor(color);
-					SongGenre_Title?.SetTextColor(color);
-					SongReleaseDate_Title?.SetTextColor(color);
-					SongCopyright_Title?.SetTextColor(color);
-					SongTrackNumber_Title?.SetTextColor(color);
-					SongDiscNumber_Title?.SetTextColor(color);
-				}
-			}
+						if (Context is not null && palette?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+						{
+							Title?.SetTextColor(color);
+
+							SongTitle_Title?.SetTextColor(color);
+							SongArtist_Title?.SetTextColor(color);
+							SongAlbum_Title?.SetTextColor(color);
+							SongAlbumArtist_Title?.SetTextColor(color);
+							SongGenre_Title?.SetTextColor(color);
+							SongReleaseDate_Title?.SetTextColor(color);
+							SongCopyright_Title?.SetTextColor(color);
+							SongTrackNumber_Title?.SetTextColor(color);
+							SongDiscNumber_Title?.SetTextColor(color);
+						}
+					}
+				});
 		}
 	}
 }

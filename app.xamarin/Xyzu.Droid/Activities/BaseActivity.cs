@@ -11,7 +11,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-
+using Xyzu.Library;
 using Xyzu.Settings.System;
 
 using AndroidRuntimeEnvironment = Android.Runtime.AndroidEnvironment;
@@ -160,5 +160,7 @@ namespace Xyzu.Activities
 		protected virtual void SupportFragmentManagerFragmentOnAttach(object? sender, FragmentOnAttachEventArgs args) { }
 		protected virtual void XyzuLibraryOnServiceConnectionChanged(object? sender, ServiceConnectionChangedEventArgs args) { }
 		protected virtual void XyzuPlayerOnServiceConnectionChanged(object? sender, ServiceConnectionChangedEventArgs args) { }
+		protected virtual void XyzuLibraryScanServiceUpdate(object? sender, IScanner.ServiceNotification.UpdateEventArgs args)
+		{ }
 	}
 }

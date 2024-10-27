@@ -11,6 +11,7 @@ using Java.IO;
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,6 +23,8 @@ using Xyzu.Settings.Files;
 using Xyzu.Settings.System;
 using Xyzu.Settings.UserInterface.Library;
 
+using JavaFile = Java.IO.File;
+using SystemFile = System.IO.File;
 using XyzuResource = Xyzu.Droid.Resource;
 using GlideInstance = Xyzu.Images.Glide.Instance;
 using ExoPlayerService = Xyzu.Player.Exoplayer.ExoPlayerService;
@@ -133,7 +136,7 @@ namespace Xyzu.Activities
 		}
 		public void InitImages(XyzuImages xyzuimages) 
 		{
-			((IImagesDroid.Default)xyzuimages.Images).SetBuffer = async model => await XyzuLibrary.Instance.Misc.SetImage(model, default);
+			((IImagesDroid.Default)xyzuimages.Images).SetBuffer = model => XyzuLibrary.Instance.Misc.SetImage(model, default);
 		}
 		public void InitLibrary(XyzuLibrary xyzulibrary)
 		{
@@ -172,12 +175,12 @@ namespace Xyzu.Activities
 				},
 				OnRetrieve = new List<ILibrary.IOnRetrieveActions>
 				{
-					new Library.FFProbe.FFProbeActions.OnRetrieve { },
+					//new Library.FFProbe.FFProbeActions.OnRetrieve { },
 					new Library.TagLibSharp.TagLibSharpActions.OnRetrieve { },
-					new Library.ID3.ID3Actions.OnRetrieve { },
-					new Library.MediaStore.MediaStoreActions.OnRetrieve { Context = xyzulibrary.Context },
-					new Library.MediaMetadata.MediaMetadataActions.OnRetrieve { Context = xyzulibrary.Context },
-					new Library.IO.IOActions.OnRetrieve { },
+					//new Library.ID3.ID3Actions.OnRetrieve { },
+					//new Library.MediaStore.MediaStoreActions.OnRetrieve { Context = xyzulibrary.Context },
+					//new Library.MediaMetadata.MediaMetadataActions.OnRetrieve { Context = xyzulibrary.Context },
+					//new Library.IO.IOActions.OnRetrieve { },
 				},
 				OnUpdate = new List<ILibrary.IOnUpdateActions>
 				{
@@ -210,16 +213,19 @@ namespace Xyzu.Activities
 							DefaultTitle = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unknowntitle),
 							OnBitmap = (bitmapfactoryoptions, song) =>
 							{
-								return Task.Run(async () => await XyzuImages.Instance.GetBitmap(
-									cancellationtoken: default,
-									options: bitmapfactoryoptions,
-									operations: IImages.DefaultOperations.Downsample,
-									sources: new object?[]
+								return Task.Run(async () => await XyzuImages.Instance.GetBitmap(new IImagesDroid.Parameters
+								{
+									CancellationToken = default,
+									BitmapOptions = bitmapfactoryoptions,
+									Operations = IImages.DefaultOperations.Downsample,
+									Sources = new object?[]
 									{
 										song,
 										XyzuResource.Drawable.icon_xyzu
 
-									})).GetAwaiter().GetResult();
+									}
+
+								})).GetAwaiter().GetResult();
 							},
 							ContentIntent = PendingIntent.GetActivity(
 								requestCode: 0,
@@ -273,11 +279,11 @@ namespace Xyzu.Activities
 		{
 			if (FilesSettings?.Directories.Any() is false)
 			{
-				foreach (File storage in IFilesSettingsDroid.Storages())
+				foreach (JavaFile storage in IFilesSettingsDroid.Storages())
 					foreach (string defaultdirectory in IFilesSettingsDroid.DefaultDirectories())
 					{
 						string defaultdirectorypath = string.Format("{0}/{1}", storage.AbsolutePath, defaultdirectory);
-						File file = new (defaultdirectorypath);
+						JavaFile file = new (defaultdirectorypath);
 
 						if (file.Exists() && file.IsDirectory)
 							FilesSettings.Directories = FilesSettings.Directories.Append(file.AbsolutePath);

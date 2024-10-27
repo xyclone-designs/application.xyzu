@@ -72,17 +72,30 @@ namespace Xyzu.Views.NowPlaying
 						break;
 
 					case true when index == Player.Queue.CurrentIndex.Value - 1:
-						await Images.SetToImageView(IImages.DefaultOperations.Rounded, viewholder.ItemView, null, default, _SongPreviousBitmap, SongPrevious);
+						await Images.SetToImageView(new IImagesDroid.Parameters(SongPrevious)
+						{
+							ImageView = viewholder.ItemView,
+							Operations = IImages.DefaultOperations.Rounded,
+						});
 						break;
 									
 					case true when index == Player.Queue.CurrentIndex.Value:
 						await Task.WhenAll(
 							SetBlur(SongCurrent),
-							Images.SetToImageView(IImages.DefaultOperations.Rounded, viewholder.ItemView, null, default, _SongCurrentBitmap, SongCurrent));						
+							Images.SetToImageView(new IImagesDroid.Parameters(SongCurrent)
+							{
+								ImageView = viewholder.ItemView,
+								Operations = IImages.DefaultOperations.Rounded,
+								OnPalette = palette => ArtworkPalette = palette,
+							}));						
 						break;										 
 																	
 					case true when index == Player.Queue.CurrentIndex.Value + 1:
-						await Images.SetToImageView(IImages.DefaultOperations.Rounded, viewholder.ItemView, null, default, _SongNextBitmap, SongNext);
+						await Images.SetToImageView(new IImagesDroid.Parameters(SongNext)
+						{
+							ImageView = viewholder.ItemView,
+							Operations = IImages.DefaultOperations.Rounded,
+						}); 
 						break;
 
 					default:
@@ -164,7 +177,22 @@ namespace Xyzu.Views.NowPlaying
 		public Palette? ArtworkPalette
 		{
 			get => _ArtworkPalette;
-			set => _ArtworkPalette = value;
+			set
+			{
+				_ArtworkPalette = value;
+
+				if ((_ArtworkPalette?.DominantSwatch?.Rgb ?? Context?.Resources?.GetColor(Resource.Color.ColorPrimary, Context.Theme)) is int color)
+					Position.SetLoadedBarColor(color);
+
+				ConfigureNowPlayingButton(Buttons_Player_Previous);
+				ConfigureNowPlayingButton(Buttons_Player_PlayPause);
+				ConfigureNowPlayingButton(Buttons_Player_Next);
+
+				ConfigureNowPlayingButton(Buttons_Menu_Queue);
+				ConfigureNowPlayingButton(Buttons_Menu_AudioEffects);
+				ConfigureNowPlayingButton(Buttons_Menu_PlayerSettings);
+				ConfigureNowPlayingButton(Buttons_Menu_Options);
+			}
 		}
 		public PagerSnapHelper ArtworkSnapHelper
 		{

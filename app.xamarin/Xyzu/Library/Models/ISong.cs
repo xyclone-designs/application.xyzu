@@ -13,10 +13,7 @@ namespace Xyzu.Library.Models
 		T Artist { get; set; }
 		IImage<T>? Artwork { get; set; }
 		T Bitrate { get; set; }
-		T Channels { get; set; }
 		T Copyright { get; set; }
-		T DateAdded { get; set; }
-		T DateModified { get; set; }
 		T DiscNumber { get; set; }
 		T Duration { get; set; }
 		T Filepath { get; set; }
@@ -37,10 +34,7 @@ namespace Xyzu.Library.Models
 		string? Artist { get; set; }
 		IImage? Artwork { get; set; }
 		int? Bitrate { get; set; }
-		AudioChannels? Channels { get; set; }
 		string? Copyright { get; set; }
-		DateTime? DateAdded { get; set; }
-		DateTime? DateModified { get; set; }
 		int? DiscNumber { get; set; }
 		TimeSpan? Duration { get; set; }
 		string? Filepath { get; set; }
@@ -53,7 +47,7 @@ namespace Xyzu.Library.Models
 		string? Title { get; set; }
 		int? TrackNumber { get; set; }
 		Uri? Uri { get; set; }
-
+		
 		public new class Default : IModel.Default, ISong 
 		{
 			public Default(string id) : base(id) { }
@@ -64,10 +58,7 @@ namespace Xyzu.Library.Models
 				Artist = song.Artist;
 				Artwork = song.Artwork;
 				Bitrate = song.Bitrate;
-				Channels = song.Channels;
 				Copyright = song.Copyright;
-				DateAdded = song.DateAdded;
-				DateModified = song.DateModified;
 				DiscNumber = song.DiscNumber;
 				Duration = song.Duration;
 				Filepath = song.Filepath;
@@ -87,10 +78,7 @@ namespace Xyzu.Library.Models
 			public string? Artist { get; set; }
 			public IImage? Artwork { get; set; }
 			public int? Bitrate { get; set; }
-			public AudioChannels? Channels { get; set; }
 			public string? Copyright { get; set; }
-			public DateTime? DateAdded { get; set; }
-			public DateTime? DateModified { get; set; }
 			public int? DiscNumber { get; set; }
 			public TimeSpan? Duration { get; set; }
 			public string? Filepath { get; set; }
@@ -117,10 +105,7 @@ namespace Xyzu.Library.Models
 					.AppendFormat("{0}: {1} \n", nameof(Artist), Artist)
 					.AppendFormat("{0}: {1} \n", nameof(Artwork), Artwork)
 					.AppendFormat("{0}: {1} \n", nameof(Bitrate), Bitrate)
-					.AppendFormat("{0}: {1} \n", nameof(Channels), Channels)
 					.AppendFormat("{0}: {1} \n", nameof(Copyright), Copyright)
-					.AppendFormat("{0}: {1} \n", nameof(DateAdded), DateAdded)
-					.AppendFormat("{0}: {1} \n", nameof(DateModified), DateModified)
 					.AppendFormat("{0}: {1} \n", nameof(DiscNumber), DiscNumber)
 					.AppendFormat("{0}: {1} \n", nameof(Duration), Duration)
 					.AppendFormat("{0}: {1} \n", nameof(Filepath), Filepath)
@@ -144,10 +129,7 @@ namespace Xyzu.Library.Models
 				AlbumArtist = defaultvalue;
 				Artist = defaultvalue;
 				Bitrate = defaultvalue;
-				Channels = defaultvalue;
 				Copyright = defaultvalue;
-				DateAdded = defaultvalue;
-				DateModified = defaultvalue;
 				DiscNumber = defaultvalue;
 				Duration = defaultvalue;
 				Filepath = defaultvalue;
@@ -167,10 +149,7 @@ namespace Xyzu.Library.Models
 			public T Artist { get; set; }
 			public IImage<T>? Artwork { get; set; }
 			public T Bitrate { get; set; }
-			public T Channels { get; set; }
 			public T Copyright { get; set; }
-			public T DateAdded { get; set; }
-			public T DateModified { get; set; }
 			public T DiscNumber { get; set; }
 			public T Duration { get; set; }
 			public T Filepath { get; set; }

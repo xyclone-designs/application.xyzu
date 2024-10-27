@@ -38,8 +38,6 @@ namespace Xyzu.Library.IO
 				return false;
 
 			return
-				retrieved.DateAdded is null ||
-				retrieved.DateModified is null ||
 				retrieved.Filepath is null ||
 				retrieved.MimeType is null ||
 				retrieved.Size is null;

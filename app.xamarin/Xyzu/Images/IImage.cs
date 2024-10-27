@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Cryptography;
+using Xyzu.Library.Models;
 
 namespace Xyzu.Images
 {
@@ -21,6 +22,31 @@ namespace Xyzu.Images
 		string? Filepath { get; set; }
 		bool IsCorrupt { get; set; }
 		Uri? Uri { get; set; }
+
+		public static IImage FromAlbum(IAlbum album)
+		{
+			return new IImage.Default
+			{
+				Id = album.Id,
+			};
+		}
+		public static IImage FromArtist(IArtist artist)
+		{
+			return new IImage.Default
+			{
+				Id = artist.Id,
+			};
+		}
+		public static IImage FromSong(ISong song)
+		{
+			return new IImage.Default
+			{
+				Id = song.Id,
+				Uri = song.Uri,
+				Filepath = song.Filepath,
+				IsCorrupt = song.IsCorrupt,
+			};
+		}
 
 		public class Default : IImage
 		{
@@ -50,6 +76,7 @@ namespace Xyzu.Images
 			public T IsCorrupt { get; set; }
 			public T Filepath { get; set; }
 		}
+
 		public static class Utils
 		{
 			public static byte[] BufferToHash(byte[] buffer)

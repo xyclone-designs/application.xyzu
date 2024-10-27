@@ -4,6 +4,7 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Views;
 using AndroidX.Fragment.App;
+using AndroidX.Palette.Graphics;
 using AndroidX.RecyclerView.Widget;
 
 using Oze.Music.MusicBarLib;
@@ -44,13 +45,6 @@ namespace Xyzu.Views.NowPlaying
 		protected ISong? _SongPrevious;
 		protected ISong? _SongCurrent;
 		protected ISong? _SongNext;
-
-		protected Bitmap? _SongPreviousBitmap;
-		protected Drawable? _SongPreviousBlurDrawable;
-		protected Bitmap? _SongCurrentBitmap;
-		protected Drawable? _SongCurrentBlurDrawable;
-		protected Bitmap? _SongNextBitmap; 
-		protected Drawable? _SongNextBlurDrawable;
 
 		protected Timer PositionTimer
 		{
@@ -160,7 +154,7 @@ namespace Xyzu.Views.NowPlaying
 
 		protected virtual void SettingsPropertyChanged(object? sender, PropertyChangedEventArgs args) 
 		{ }
-		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyname = null)
+		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyname = null) 
 		{
 			switch (propertyname)
 			{
@@ -169,26 +163,11 @@ namespace Xyzu.Views.NowPlaying
 					PlayerQueuePropertyChanged(this, new PropertyChangedEventArgs(nameof(IQueue.CurrentIndex)));
 					break;
 
-				case nameof(SongPrevious) when SongPrevious is null:
-					_SongPreviousBitmap = null;
-					_SongPreviousBlurDrawable = null;
-					break;			
-
-				case nameof(SongCurrent) when SongCurrent is null:
-					_SongCurrentBitmap = null;
-					_SongCurrentBlurDrawable = null;
-					break;			
-
-				case nameof(SongNext) when SongNext is null:
-					_SongNextBitmap = null;
-					_SongNextBlurDrawable = null;
-					break;
-
 				default: break;
 			}
 		}
 
-		public void ViewRefresh()
+		public async void ViewRefresh()
 		{
 			int? queueindex = Player?.Queue.CurrentIndex;
 			int? viewindex = Artwork.SimpleLayoutManager.GetPosition(ArtworkSnapHelper);
@@ -208,10 +187,11 @@ namespace Xyzu.Views.NowPlaying
 					break;
 			}
 
-			SetPalette(SongCurrent);
-			SetText(SongCurrent, null, null);
-			SetBlur(SongCurrent);
+			ArtworkPalette = _ArtworkPalette;
+
 			SetPosition(SongCurrent);
+			SetText(SongCurrent, null, null);
+			await SetBlur(SongCurrent);
 
 			if ((SongCurrent?.IsCorrupt ?? false) && Context is not null)
 				XyzuUtils.Dialogs
@@ -265,16 +245,8 @@ namespace Xyzu.Views.NowPlaying
 						case (PlayerStates.Uninitialised):
 
 							_SongNext = null;
-							_SongNextBitmap = null;
-							_SongNextBlurDrawable = null;
-
 							_SongCurrent = null;
-							_SongCurrentBitmap = null;
-							_SongCurrentBlurDrawable = null;
-
 							_SongPrevious = null;
-							_SongPreviousBitmap = null;
-							_SongPreviousBlurDrawable = null;
 
 							PositionTimer?.Change(PositionTimerDue, PositionTimerPeriodStop);
 							Buttons_Player_PlayPause.SetImageResource(Resource.Drawable.icon_player_play);
@@ -293,30 +265,14 @@ namespace Xyzu.Views.NowPlaying
 			{
 				case PlayerOperations.Previous:
 					_SongNext = _SongCurrent;
-					_SongNextBitmap = _SongCurrentBitmap;
-					_SongNextBlurDrawable = _SongCurrentBlurDrawable;
-
 					_SongCurrent = _SongPrevious;
-					_SongCurrentBitmap = _SongPreviousBitmap;
-					_SongCurrentBlurDrawable = _SongPreviousBlurDrawable;
-
-					_SongPrevious = Library?.Songs.PopulateSong(Player?.Queue.PreviousSong);
-					_SongPreviousBitmap = null;
-					_SongPreviousBlurDrawable = null;	
+					_SongPrevious = Library?.Songs.PopulateSong(Player?.Queue.PreviousSong);	
 					break;
 						  
 				case PlayerOperations.Next:
 					_SongPrevious = _SongCurrent;
-					_SongPreviousBitmap = _SongCurrentBitmap;
-					_SongPreviousBlurDrawable = _SongCurrentBlurDrawable;
-
 					_SongCurrent = _SongNext;
-					_SongCurrentBitmap = _SongNextBitmap;
-					_SongCurrentBlurDrawable = _SongNextBlurDrawable;
-
-					_SongNext = Library?.Songs.PopulateSong(Player?.Queue.NextSong);
-					_SongNextBitmap = null;
-					_SongNextBlurDrawable = null;						 
+					_SongNext = Library?.Songs.PopulateSong(Player?.Queue.NextSong);				 
 					break;
 
 				default: break;
@@ -329,25 +285,13 @@ namespace Xyzu.Views.NowPlaying
 				case nameof(IQueue.CurrentIndex):
 
 					if (Player?.Queue.PreviousSong is null || (SongPrevious?.Id is string songpreviousid && songpreviousid != Player.Queue.PreviousSong.Id))
-					{
-						_SongPreviousBitmap = null;
-						_SongPreviousBlurDrawable = null;
 						_SongPrevious = null;
-					}
-																																						  
+
 					if (Player?.Queue.CurrentSong is null || (SongCurrent?.Id is string songcurrentid && songcurrentid != Player.Queue.CurrentSong.Id))
-					{
-						_SongCurrentBitmap = null;
-						_SongCurrentBlurDrawable = null;
 						_SongCurrent = null;
-					}
-																																						  
+
 					if (Player?.Queue.NextSong is null || (SongNext?.Id is string nextsongid && nextsongid != Player.Queue.NextSong.Id))
-					{
-						_SongNextBitmap = null;
-						_SongNextBlurDrawable = null;
 						_SongNext = null;
-					}
 
 					if (Library is not null && Player is not null)
 					{
@@ -393,13 +337,15 @@ namespace Xyzu.Views.NowPlaying
 			if (song is null)
 				OnComplete(false);
 			else if (Images is not null)
-				return Images.SetToViewBackground(
-					view: BackgroundBlur,
-					oncomplete: OnComplete,
-					operations: IImages.DefaultOperations.Blur,
-					sources: song != SongCurrent
+				return Images.SetToViewBackground(new IImagesDroid.Parameters
+				{
+					View = BackgroundBlur,
+					OnComplete = OnComplete,
+					Operations = IImages.DefaultOperations.Blur,
+					Sources = song != SongCurrent
 						? new object?[] { song }
-						: new object?[] { _SongCurrentBitmap, SongCurrent });
+						: new object?[] { SongCurrent },
+				});
 
 			return Task.CompletedTask;
 		}
@@ -419,22 +365,6 @@ namespace Xyzu.Views.NowPlaying
 
 			Detail_One.SetText(detailone, null);
 			Detail_Two.SetText(detailtwo, null);
-		}
-		public async void SetPalette(ISong? song)
-		{
-			//ArtworkPalette = Images is null ? null : await Images.GetPalette(default, song);
-
-			if ((ArtworkPalette?.DominantSwatch?.Rgb ?? Context?.Resources?.GetColor(Resource.Color.ColorPrimary, Context.Theme)) is int color)
-				Position.SetLoadedBarColor(color);
-
-			ConfigureNowPlayingButton(Buttons_Player_Previous);
-			ConfigureNowPlayingButton(Buttons_Player_PlayPause);
-			ConfigureNowPlayingButton(Buttons_Player_Next);
-
-			ConfigureNowPlayingButton(Buttons_Menu_Queue);
-			ConfigureNowPlayingButton(Buttons_Menu_AudioEffects);
-			ConfigureNowPlayingButton(Buttons_Menu_PlayerSettings);
-			ConfigureNowPlayingButton(Buttons_Menu_Options);
 		}
 		public void SetPosition(ISong? song)
 		{

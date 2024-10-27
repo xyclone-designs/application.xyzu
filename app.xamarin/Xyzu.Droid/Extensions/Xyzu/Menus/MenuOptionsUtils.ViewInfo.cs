@@ -73,16 +73,16 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				DialogView view = ViewInfoDialogView(variables, async _dialogview =>
+				DialogView view = ViewInfoDialogView(variables, _dialogview =>
 				{
 					_dialogview.ContentView = new InfoAlbumView(variables.Context)
 					{
 						Album = variables.Album,
 						Images = XyzuImages.Instance,
+						OnPalette = palette => _dialogview.Palette = palette,
 					};
 
 					_dialogview.Dialog = appcompatdialog;
-					_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, variables.Album);
 				});
 
 				appcompatdialog.SetContentView(view, DialogLayoutParams(variables.Context));
@@ -108,16 +108,16 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				DialogView view = ViewInfoDialogView(variables, async _dialogview =>
+				DialogView view = ViewInfoDialogView(variables, _dialogview =>
 				{
 					_dialogview.ContentView = new InfoArtistView(variables.Context)
 					{
 						Artist = variables.Artist,
 						Images = XyzuImages.Instance,
+						OnPalette = palette => _dialogview.Palette = palette,
 					};
 
 					_dialogview.Dialog = appcompatdialog;
-					_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, variables.Artist);
 				});
 
 				appcompatdialog.SetContentView(view, DialogLayoutParams(variables.Context));
@@ -143,7 +143,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				DialogView view = ViewInfoDialogView(variables, async _dialogview =>
+				DialogView view = ViewInfoDialogView(variables, _dialogview =>
 				{
 					_dialogview.ContentView = new InfoGenreView(variables.Context)
 					{
@@ -152,7 +152,6 @@ namespace Xyzu.Menus
 					};
 
 					_dialogview.Dialog = appcompatdialog;
-					_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, variables.Genre);
 				});
 
 				appcompatdialog.SetContentView(view, DialogLayoutParams(variables.Context));
@@ -178,7 +177,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				DialogView view = ViewInfoDialogView(variables, async _dialogview =>
+				DialogView view = ViewInfoDialogView(variables, _dialogview =>
 				{
 					_dialogview.ContentView = new InfoPlaylistView(variables.Context)
 					{
@@ -187,7 +186,6 @@ namespace Xyzu.Menus
 					};
 
 					_dialogview.Dialog = appcompatdialog;
-					_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, variables.Playlist);
 				});
 
 				appcompatdialog.SetContentView(view, DialogLayoutParams(variables.Context));
@@ -213,18 +211,17 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				DialogView view = ViewInfoDialogView(variables, async _dialogview =>
+				DialogView view = ViewInfoDialogView(variables, _dialogview =>
 				{
 					_dialogview.SetVisibility(ViewStates.Visible);
-
 					_dialogview.ContentView = new InfoSongView(variables.Context)
 					{
 						Song = variables.Song,
 						Images = XyzuImages.Instance,
+						OnPalette = palette => _dialogview.Palette = palette,
 					};
 
 					_dialogview.Dialog = appcompatdialog;
-					_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, variables.Song);
 					_dialogview.ButtonsNeutralText = Resource.String.lyrics;
 					_dialogview.OnClickNeutral = CreateSheetDialogBottomViewAction(variables.DialogInterfaceListenerLyrics);
 				});
@@ -252,7 +249,7 @@ namespace Xyzu.Menus
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
-				DialogView view = ViewInfoDialogView(variables, async _dialogview =>
+				DialogView view = ViewInfoDialogView(variables, _dialogview =>
 				{
 					_dialogview.ContentView = new InfoSongLyricsView(variables.Context)
 					{
@@ -261,7 +258,6 @@ namespace Xyzu.Menus
 					};
 
 					_dialogview.Dialog = appcompatdialog;
-					_dialogview.Palette = await XyzuImages.Instance.GetPalette(default, variables.Song);
 				});
 
 				appcompatdialog.SetContentView(view, DialogLayoutParams(variables.Context));

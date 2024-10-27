@@ -1,16 +1,15 @@
-﻿using System;
-using System.IO;
-
-using Xyzu.Library.Models;
+﻿using Xyzu.Library.Models;
 
 namespace SQLite
 {
 	public class SQLiteLibraryConnection
 	{
-		public SQLiteLibraryConnection()
+		public SQLiteLibraryConnection(string path)
 		{
-			Connection ??= new SQLiteConnection(_Path);
-			ConnectionAsync ??= new SQLiteAsyncConnection(_Path);
+			Path = path;
+
+			Connection ??= new SQLiteConnection(Path);
+			ConnectionAsync ??= new SQLiteAsyncConnection(Path);
 
 			Connection.CreateTable<AlbumEntity>();
 			Connection.CreateTable<ArtistEntity>();
@@ -19,8 +18,7 @@ namespace SQLite
 			Connection.CreateTable<SongEntity>();
 		}
 
-		private readonly string _Path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Xyzu.db3");
-
+		public string Path { get; }
 		public SQLiteConnection Connection { get; }
 		public SQLiteAsyncConnection ConnectionAsync { get; }
 

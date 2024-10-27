@@ -1,12 +1,12 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Util;
 using AndroidX.AppCompat.Widget;
 
 using System;
 
 using Xyzu.Droid;
+using Xyzu.Images;
+using Xyzu.Library.Models;
 
 namespace Xyzu.Views.LibraryItem.Header
 {
@@ -21,6 +21,11 @@ namespace Xyzu.Views.LibraryItem.Header
 
 		public Action<object?, EventArgs>? OnBackClick { get; set; }
 
+		protected void BackOnClick(object? sender, EventArgs args)
+		{
+			OnBackClick?.Invoke(sender, args);
+		}
+
 		protected override void OnAttachedToWindow()
 		{
 			base.OnAttachedToWindow();
@@ -33,9 +38,28 @@ namespace Xyzu.Views.LibraryItem.Header
 
 			if (Back != null) Back.Click -= BackOnClick;
 		}
-		protected void BackOnClick(object? sender, EventArgs args)
+
+		public override async void SetArtwork(IImage? image)
 		{
-			OnBackClick?.Invoke(sender, args);
+			if (Images != null)
+				await Images.SetToViewBackground(new IImagesDroid.Parameters(image)
+				{
+					View = this,
+					Operations = IImages.DefaultOperations.BlurDownsample,
+				});
+
+			base.SetArtwork(image);
+		}
+		public override async void SetArtwork(IModel? model)
+		{
+			if (Images != null)
+				await Images.SetToViewBackground(new IImagesDroid.Parameters(model)
+				{
+					View = this,
+					Operations = IImages.DefaultOperations.BlurDownsample,
+				});
+
+			base.SetArtwork(model);
 		}
 	}
 }

@@ -48,9 +48,9 @@ namespace Xyzu.Library
 						onretrieveaction is MediaStoreActions.OnRetrieve && 
 						parameters is not null && (parameters.Cursor ??= parameters.CursorLazy?.Invoke(parameters)) is not null &&
 						await parameters.Cursor.ToPosition(
+							uri: retrieved.Uri,
+							filepath: retrieved.Filepath,
 							directory: parameters?.Directory,
-							uri: parameters?.Uri,
-							filepath: parameters?.Filepath,
 							cursorpositions: parameters?.CursorPositions) is int:
 						await onretrieveaction.Image(retrieved, parameters?.ImageModelTypes);
 						break;
@@ -206,9 +206,9 @@ namespace Xyzu.Library
 
 		public partial class Default : ILibraryDroid 
 		{
-			public Default()
+			public Default(string path)
 			{
-				SQLiteLibrary = new SQLiteLibraryConnection();
+				SQLiteLibrary = new SQLiteLibraryConnection(path);
 			}
 
 			public IAlbums Albums

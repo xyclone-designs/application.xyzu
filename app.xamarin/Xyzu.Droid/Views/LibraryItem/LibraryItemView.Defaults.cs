@@ -14,28 +14,11 @@ namespace Xyzu.Views.LibraryItem
 	{
 		public static class Defaults
 		{
-			public static IImage Image(Context? context)
-			{
-				string uristring = string.Format(
-					"{0}://{1}/{2}/{3}",
-					ContentResolver.SchemeAndroidResource,
-					context?.Resources?.GetResourcePackageName(Resource.Drawable.icon_xyzu),
-					context?.Resources?.GetResourceTypeName(Resource.Drawable.icon_xyzu),
-					context?.Resources?.GetResourceEntryName(Resource.Drawable.icon_xyzu));
-
-				Uri? uri = Uri.TryCreate(uristring, UriKind.RelativeOrAbsolute, out Uri? outuri) ? outuri : null;
-
-				return new IImage.Default
-				{
-					Uri = uri
-				};
-			}
 			public static IAlbum Album(Context? context)
 			{
 				return new IAlbum.Default(string.Empty)
 				{
 					Artist = context?.Resources?.GetString(Resource.String.library_unknown_albumartist),
-					// Artwork = Image(context),
 					Title = context?.Resources?.GetString(Resource.String.library_unknown_album),
 				};
 			}
@@ -43,7 +26,6 @@ namespace Xyzu.Views.LibraryItem
 			{
 				return new IArtist.Default(string.Empty)
 				{
-					// Image = Image(context),
 					Name = context?.Resources?.GetString(Resource.String.library_unknown_artist),
 				};
 			}
@@ -65,7 +47,6 @@ namespace Xyzu.Views.LibraryItem
 			{
 				return new ISong.Default(string.Empty)
 				{
-					// Artwork = Image(context),
 					Album = context?.Resources?.GetString(Resource.String.library_unknown_album),
 					AlbumArtist = context?.Resources?.GetString(Resource.String.library_unknown_albumartist),
 					Artist = context?.Resources?.GetString(Resource.String.library_unknown_artist),

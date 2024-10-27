@@ -37,7 +37,9 @@ namespace Xyzu.Library
 						.Build()),
 				};
 
-				SetImage(model, parameters);
+				SetImage(model, parameters, default)
+					.GetAwaiter()
+					.GetResult();
 			}
 			async Task IMisc.SetImage(IModel? model, CancellationToken cancellationToken)
 			{
@@ -70,7 +72,9 @@ namespace Xyzu.Library
 				};
 
 				foreach (IModel model in models)
-					SetImage(model, parameters);
+					SetImage(model, parameters, default)
+						.GetAwaiter()
+						.GetResult();
 			}
 			async Task IMisc.SetImages(IEnumerable<IModel> models, CancellationToken cancellationToken)
 			{
@@ -109,17 +113,10 @@ namespace Xyzu.Library
 
 					if (identifiers?.MatchesSong(song) ?? true)
 					{
-						IImage retrieved = new IImage.Default
-						{
-							Id = song.Id
-						};
+						IImage retrieved = IImage.FromSong(song);
 
-						if (retrieved.Buffer != null)
-						{
-							(parameters.Filepath, parameters.Uri) = (song.Filepath, song.Uri);
-
+						if (retrieved.Buffer is not null)
 							Task.WaitAny(OnRetrieve(retrieved, Actions?.OnRetrieve, parameters));
-						}
 
 						return retrieved;
 					}
@@ -152,17 +149,10 @@ namespace Xyzu.Library
 
 					if (identifiers?.MatchesSong(song) ?? true)
 					{
-						IImage retrieved = new IImage.Default
-						{
-							Id = song.Id
-						};
+						IImage retrieved = IImage.FromSong(song);
 
-						if (cancellationToken.IsCancellationRequested is false && retrieved.Buffer != null)
-						{
-							(parameters.Filepath, parameters.Uri) = (song.Filepath, song.Uri);
-
-							await OnRetrieve(retrieved, Actions?.OnRetrieve, parameters);
-						}
+						if (cancellationToken.IsCancellationRequested is false && retrieved.Buffer is not null)
+							Task.WaitAny(OnRetrieve(retrieved, Actions?.OnRetrieve, parameters));
 
 						return retrieved;
 					}
@@ -196,107 +186,6 @@ namespace Xyzu.Library
 				await Task.CompletedTask;
 			}
 
-			void SetImage(IModel model, IParameters parameters)
-			{
-				switch (true)
-				{
-					case true when
-					model is IAlbum album &&
-					album.Artwork?.Buffer is null &&
-					album.SongIds.Any():
-						{
-							album.Artwork ??= new IImage.Default
-							{
-								Id = album.Id
-							};
-
-							using IEnumerator<ISong> albumsongsenumerator = album.SongIds
-								.Select(_ => new ISong.Default(_))
-								.GetEnumerator();
-
-							while (album.Artwork.Buffer is null && albumsongsenumerator.MoveNext())
-							{
-								album.Artwork.Buffer ??= albumsongsenumerator.Current.Artwork?.Buffer;
-								album.Artwork.BufferKey ??= albumsongsenumerator.Current.Artwork?.BufferKey;
-								album.Artwork.Uri ??= albumsongsenumerator.Current.Artwork?.Uri;
-
-								if (album.Artwork.Buffer is null)
-								{
-									parameters.Uri = albumsongsenumerator.Current.Uri;
-									parameters.Filepath = albumsongsenumerator.Current.Filepath;
-									parameters.ImageModelTypes ??= new ModelTypes[] { ModelTypes.Album };
-
-									Task.WaitAny(OnRetrieve(
-										parameters: parameters,
-										actions: Actions?.OnRetrieve,
-										retrieved: album.Artwork ??= new IImage.Default
-										{
-											Id = album.Id
-										}));
-								}
-							}
-						}
-						break;
-
-					case true when
-					model is IArtist artist &&
-					artist.Image?.Buffer is null &&
-					artist.SongIds.Any():
-						{
-							artist.Image ??= new IImage.Default
-							{
-								Id = artist.Id
-							};
-
-							using IEnumerator<ISong> artistsongsenumerator = artist.SongIds
-								.Select(_ => new ISong.Default(_))
-								.GetEnumerator();
-
-							while (artist.Image.Buffer is null && artistsongsenumerator.MoveNext())
-							{
-								artist.Image.Buffer ??= artistsongsenumerator.Current.Artwork?.Buffer;
-								artist.Image.BufferKey ??= artistsongsenumerator.Current.Artwork?.BufferKey;
-								artist.Image.Uri ??= artistsongsenumerator.Current.Artwork?.Uri;
-
-								if (artist.Image.Buffer is null)
-								{
-									parameters.Uri = artistsongsenumerator.Current.Uri;
-									parameters.Filepath = artistsongsenumerator.Current.Filepath;
-									parameters.ImageModelTypes ??= new ModelTypes[] { ModelTypes.Artist };
-
-									Task.WaitAny(OnRetrieve(
-										parameters: parameters,
-										actions: Actions?.OnRetrieve,
-										retrieved: artist.Image ??= new IImage.Default
-										{
-											Id = artist.Id
-										}));
-								}
-							}
-						}
-						break;
-
-					case true when
-					model is ISong song &&
-					song.Artwork?.Buffer is null:
-						{
-							parameters.Uri = song.Uri;
-							parameters.Filepath = song.Filepath;
-							parameters.ImageModelTypes = new ModelTypes[] { ModelTypes.Song };
-
-							Task.WaitAny(OnRetrieve(
-								parameters: parameters,
-								actions: Actions?.OnRetrieve,
-								retrieved: song.Artwork ??= new IImage.Default
-								{
-									Id = song.Id
-								}));
-						}
-						break;
-
-					default: break;
-				}
-			}
 			async Task SetImage(IModel model, IParameters parameters, CancellationToken cancellationtoken)
 			{
 				switch (true)
@@ -306,10 +195,10 @@ namespace Xyzu.Library
 					album.Artwork?.Buffer is null &&
 					album.SongIds.Any():
 						{
-							album.Artwork ??= new IImage.Default
-							{
-								Id = album.Id
-							};
+							await OnRetrieve(album.Artwork ??= IImage.FromAlbum(album), Actions?.OnRetrieve, parameters);
+
+							if (album.Artwork.Buffer is not null)
+								break;
 
 							using IEnumerator<ISong> albumsongsenumerator = album.SongIds
 								.Select(_ => new ISong.Default(_))
@@ -317,24 +206,19 @@ namespace Xyzu.Library
 
 							while (cancellationtoken.IsCancellationRequested is false && album.Artwork.Buffer is null && albumsongsenumerator.MoveNext())
 							{
-								album.Artwork.Buffer ??= albumsongsenumerator.Current.Artwork?.Buffer;
-								album.Artwork.BufferKey ??= albumsongsenumerator.Current.Artwork?.BufferKey;
-								album.Artwork.Uri ??= albumsongsenumerator.Current.Artwork?.Uri;
+								album.Artwork.Buffer = albumsongsenumerator.Current.Artwork?.Buffer;
+								album.Artwork.BufferKey = albumsongsenumerator.Current.Artwork?.BufferKey;
 
 								if (album.Artwork.Buffer is null)
 								{
-									parameters.Uri = albumsongsenumerator.Current.Uri;
-									parameters.Filepath = albumsongsenumerator.Current.Filepath;
+									album.Artwork.Uri = albumsongsenumerator.Current.Uri;
+									album.Artwork.Filepath = albumsongsenumerator.Current.Filepath;
+									album.Artwork.IsCorrupt = albumsongsenumerator.Current.IsCorrupt;
+
+									parameters.RetrievedSongExtra = albumsongsenumerator.Current;
 									parameters.ImageModelTypes ??= new ModelTypes[] { ModelTypes.Album };
 
-									await OnRetrieve(
-										parameters: parameters,
-										actions: Actions?.OnRetrieve,
-										retrieved: album.Artwork ??= new IImage.Default
-										{
-											Id = album.Id,
-											IsCorrupt = albumsongsenumerator.Current.IsCorrupt,
-										});
+									await OnRetrieve(album.Artwork, Actions?.OnRetrieve, parameters);
 								}
 							}
 						}
@@ -345,10 +229,10 @@ namespace Xyzu.Library
 					artist.Image?.Buffer is null &&
 					artist.SongIds.Any():
 						{
-							artist.Image ??= new IImage.Default
-							{
-								Id = artist.Id
-							};
+							await OnRetrieve(artist.Image ??= IImage.FromArtist(artist), Actions?.OnRetrieve, parameters);
+
+							if (artist.Image.Buffer is not null)
+								break;
 
 							using IEnumerator<ISong> artistsongsenumerator = artist.SongIds
 								.Select(_ => new ISong.Default(_))
@@ -356,24 +240,19 @@ namespace Xyzu.Library
 
 							while (cancellationtoken.IsCancellationRequested is false && artist.Image.Buffer is null && artistsongsenumerator.MoveNext())
 							{
-								artist.Image.Buffer ??= artistsongsenumerator.Current.Artwork?.Buffer;
-								artist.Image.BufferKey ??= artistsongsenumerator.Current.Artwork?.BufferKey;
-								artist.Image.Uri ??= artistsongsenumerator.Current.Artwork?.Uri;
+								artist.Image.Buffer = artistsongsenumerator.Current.Artwork?.Buffer;
+								artist.Image.BufferKey = artistsongsenumerator.Current.Artwork?.BufferKey;
 
 								if (artist.Image.Buffer is null)
 								{
-									parameters.Uri = artistsongsenumerator.Current.Uri;
-									parameters.Filepath = artistsongsenumerator.Current.Filepath;
-									parameters.ImageModelTypes ??= new ModelTypes[] { ModelTypes.Artist };
+									artist.Image.Uri = artistsongsenumerator.Current.Uri;
+									artist.Image.Filepath = artistsongsenumerator.Current.Filepath;
+									artist.Image.IsCorrupt = artistsongsenumerator.Current.IsCorrupt;
 
-									await OnRetrieve(
-										parameters: parameters,
-										actions: Actions?.OnRetrieve,
-										retrieved: artist.Image ??= new IImage.Default
-										{
-											Id = artist.Id,
-											IsCorrupt = artistsongsenumerator.Current.IsCorrupt,
-										});
+									parameters.RetrievedSongExtra = artistsongsenumerator.Current;
+									parameters.ImageModelTypes ??= new ModelTypes[] { ModelTypes.Album };
+
+									await OnRetrieve(artist.Image, Actions?.OnRetrieve, parameters);
 								}
 							}
 						}
@@ -383,18 +262,11 @@ namespace Xyzu.Library
 					model is ISong song &&
 					song.Artwork?.Buffer is null:
 						{
-							parameters.Uri = song.Uri;
-							parameters.Filepath = song.Filepath;
+							song.Artwork ??= IImage.FromSong(song);
+
 							parameters.ImageModelTypes = new ModelTypes[] { ModelTypes.Song };
 
-							await OnRetrieve(
-								parameters: parameters,
-								actions: Actions?.OnRetrieve,
-								retrieved: song.Artwork ??= new IImage.Default
-								{
-									Id = song.Id,
-									IsCorrupt = song.IsCorrupt,
-								});
+							await OnRetrieve(song.Artwork, Actions?.OnRetrieve, parameters);
 						}
 						break;
 

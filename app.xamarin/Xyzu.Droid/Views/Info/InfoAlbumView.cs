@@ -1,8 +1,5 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics;
-using Android.Runtime;
 using Android.Util;
 using AndroidX.AppCompat.Widget;
 using AndroidX.Palette.Graphics;
@@ -90,13 +87,15 @@ namespace Xyzu.Views.Info
 				AlbumTitle?.SetText(_Album?.Title, null);
 				AlbumArtist?.SetText(_Album?.Artist, null);
 				AlbumReleaseDate?.SetText(_Album?.ReleaseDate?.ToString("dd/MM/yyyy"), null);
-				AlbumDuration?.SetText(_Album?.Duration.ToMicrowaveFormat(), null);
+				AlbumDuration?.SetText(_Album?.Duration?.ToMicrowaveFormat(), null);
 				AlbumSongCount?.SetText(_Album?.SongIds.Count().ToString(), null);
 				AlbumDiscCount?.SetText(_Album?.DiscCount?.ToString(), null);
 
 				ReloadImage();
 			}
 		}
+
+		public Action<Palette?>? AlbumPalette { get; set; }
 
 		public AppCompatTextView? Title { get; protected set; }
 		public AppCompatImageView? AlbumArtwork { get; protected set; }
@@ -117,23 +116,24 @@ namespace Xyzu.Views.Info
 		public async void ReloadImage()
 		{
 			if (Images != null)
-			{
-				await Images.SetToImageView(IImages.DefaultOperations.RoundedDownsample, AlbumArtwork, null, default, Album);
-
-				if (Context != null &&
-					await Images.GetPalette(default, Album) is Palette palette &&
-					palette.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+				await Images.SetToImageView(new IImagesDroid.Parameters(Album)
 				{
-					Title?.SetTextColor(color);
+					ImageView = AlbumArtwork,
+					Operations = IImages.DefaultOperations.RoundedDownsample,
+					OnPalette = palette =>
+					{
+						OnPalette?.Invoke(palette);
 
-					AlbumTitle_Title?.SetTextColor(color);
-					AlbumArtist_Title?.SetTextColor(color);
-					AlbumReleaseDate_Title?.SetTextColor(color);
-					AlbumDuration_Title?.SetTextColor(color);
-					AlbumSongCount_Title?.SetTextColor(color);
-					AlbumDiscCount_Title?.SetTextColor(color);
-				}
-			}
+						if (Context is not null && palette?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
+						{
+							Title?.SetTextColor(color);
+
+							AlbumTitle_Title?.SetTextColor(color);
+							AlbumArtist_Title?.SetTextColor(color);
+							AlbumReleaseDate_Title?.SetTextColor(color);
+						}
+					}
+				});
 		}
 	}
 }

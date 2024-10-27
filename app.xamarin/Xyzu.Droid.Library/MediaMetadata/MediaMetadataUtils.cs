@@ -50,7 +50,6 @@ namespace Xyzu.Library.MediaMetadata
 				retrieved.Duration is null ||
 				retrieved.Genre is null ||
 				retrieved.Bitrate is null ||
-				retrieved.DateModified is null ||
 				retrieved.MimeType is null ||
 				retrieved.ReleaseDate is null ||
 				retrieved.Title is null ||

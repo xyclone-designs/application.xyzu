@@ -12,9 +12,6 @@ namespace Xyzu.Library.Models
 			AlbumArtist ??= song.AlbumArtist;
 			Artist ??= song.Artist;
 			Bitrate ??= song.Bitrate;
-			Channels ??= song.Channels;
-			DateAdded ??= song.DateAdded;
-			DateModified ??= song.DateModified;
 			DiscNumber ??= song.DiscNumber;
 			Duration ??= song.Duration;
 			Filepath ??= song.Filepath;

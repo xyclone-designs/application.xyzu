@@ -153,9 +153,9 @@ namespace Xyzu.Library.Enums
 				ModelSortKeys.AlbumArtist => songs.All(song => string.IsNullOrWhiteSpace(song.AlbumArtist)) is false,
 				ModelSortKeys.Artist => songs.All(song => string.IsNullOrWhiteSpace(song.Artist)) is false,
 				ModelSortKeys.Bitrate => songs.All(song => song.Bitrate is null) is false,
-				ModelSortKeys.DateAdded => songs.All(song => song.DateAdded is null) is false,
+				ModelSortKeys.DateAdded => true,
 				ModelSortKeys.DateCreated => true,
-				ModelSortKeys.DateModified => songs.All(song => song.DateModified is null) is false,
+				ModelSortKeys.DateModified => true,
 				ModelSortKeys.DiscNumber => songs.All(song => song.DiscNumber is null) is false,
 				ModelSortKeys.Discs => true,
 				ModelSortKeys.Duration => songs.All(song => song.Duration is null) is false,
@@ -421,14 +421,8 @@ namespace Xyzu.Library.Enums
 					break;
 
 				case ModelSortKeys.DateAdded:
-					song.DateAdded = updated.DateAdded;
-					break;
-
 				case ModelSortKeys.DateCreated:
-					break;
-
 				case ModelSortKeys.DateModified:
-					song.DateModified = updated.DateModified;
 					break;
 
 				case ModelSortKeys.DiscNumber:

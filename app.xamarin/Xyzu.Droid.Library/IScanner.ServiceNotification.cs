@@ -2,6 +2,8 @@
 using Android.Content;
 using AndroidX.Core.App;
 
+using System;
+
 namespace Xyzu.Library
 {
 	public partial interface IScanner
@@ -20,16 +22,18 @@ namespace Xyzu.Library
 				ContentTextsScanning = new IContentTexts.Default();
 			}
 
-			public int Id { get; set; }
-			public string ChannelId { get; set; }
-			public string ChannelName { get; set; }
-			public bool Built { get; set; }
-
 			NotificationManager? _Manager;
 			NotificationChannel? _Channel;
 			NotificationCompat.Builder? _CompatBuilder;
 			NotificationCompat.Action? _CompatActionCancel;
 			NotificationCompat.BigTextStyle? _CompatBigTextStyle;
+
+			public int Id { get; set; }
+			public string ChannelId { get; set; }
+			public string ChannelName { get; set; }
+			public bool Built { get; set; }
+
+			public event EventHandler<UpdateEventArgs>? OnUpdate;
 
 			public NotificationChannel Channel
 			{
@@ -90,6 +94,12 @@ namespace Xyzu.Library
 					.SetStyle(CompatBigTextStyle);
 
 				Manager.Notify(Id, CompatBuilder.Build());
+
+				OnUpdate?.Invoke(this, new UpdateEventArgs
+				{
+					ContentText = contenttext,
+					SubText = subtext,
+				});
 			}
 
 			public Notification Build()
@@ -99,6 +109,12 @@ namespace Xyzu.Library
 				return CompatBuilder
 					.AddAction(CompatActionCancel)
 					.Build();
+			}
+
+			public class UpdateEventArgs : EventArgs
+			{
+				public string? ContentText { get; set; }
+				public string? SubText { get; set; }
 			}
 		}
 	}

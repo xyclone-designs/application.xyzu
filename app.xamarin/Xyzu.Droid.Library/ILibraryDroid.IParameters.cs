@@ -24,16 +24,7 @@ namespace Xyzu.Library
 
 			IScanner.ServiceNotification? Notification { get; set; }
 
-			string? Filepath { get; set; }
-			Uri? Uri { get; set; }
 			ModelTypes[]? ImageModelTypes { get; set; }
-
-			IImage<bool>? RetrieverImage { get; set; }
-
-			IAlbum? RetrievedAlbumExtra { get; set; }
-			IArtist? RetrievedArtistExtra { get; set; }
-			IGenre? RetrievedGenreExtra { get; set; }
-			IPlaylist? RetrievedPlaylistExtra { get; set; }
 			ISong? RetrievedSongExtra { get; set; }
 
 			IEnumerable<string> Filepaths();
@@ -48,16 +39,7 @@ namespace Xyzu.Library
 				public IScanner.ServiceNotification? Notification { get; set; }
 				public ILibrary.IOnCreateActions? OnCreateAction { get; set; }
 
-				public string? Filepath { get; set; }
-				public Uri? Uri { get; set; }
 				public ModelTypes[]? ImageModelTypes { get; set; }
-
-				public IImage<bool>? RetrieverImage { get; set; }
-
-				public IAlbum? RetrievedAlbumExtra { get; set; }
-				public IArtist? RetrievedArtistExtra { get; set; }
-				public IGenre? RetrievedGenreExtra { get; set; }
-				public IPlaylist? RetrievedPlaylistExtra { get; set; }
 				public ISong? RetrievedSongExtra { get; set; }
 
 				public IEnumerable<string> Filepaths()
@@ -102,12 +84,6 @@ namespace Xyzu.Library
 					CursorLazy = null;
 					CursorPositions = null;
 					Identifiers = null;
-					Filepath = null;
-					Uri = null;
-					RetrievedAlbumExtra = null;
-					RetrievedArtistExtra = null;
-					RetrievedGenreExtra = null;
-					RetrievedPlaylistExtra = null;
 					RetrievedSongExtra = null;
 				}
 			}
