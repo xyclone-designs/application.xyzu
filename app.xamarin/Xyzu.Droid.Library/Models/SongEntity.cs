@@ -19,10 +19,10 @@ namespace Xyzu.Library.Models
 			set => base.Id = value;
 		}
 
-		public new int IsCorrupt
+		public new int Malformed
 		{
-			get => base.IsCorrupt ? 1 : 0;
-			set => base.IsCorrupt = value is 1;
+			get => base.Malformed ? 1 : 0;
+			set => base.Malformed = value is 1;
 		}
 		[Ignore]
 		public new IImage? Artwork

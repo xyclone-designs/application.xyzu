@@ -15,18 +15,18 @@ namespace Bumptech.Glide.Request.Target
 
 		public new View View { get => (View)base.View; }
 
-		public Action<Drawable>? OnLoadFailedAction { get; set; }          
-		public Action<JavaObject, ITransition>? OnResourceReadyAction { get; set; }          
+		public Action<Drawable?>? OnLoadFailedAction { get; set; }          
+		public Action<JavaObject?, ITransition?>? OnResourceReadyAction { get; set; }          
 
-		public override void OnLoadFailed(Drawable p0)
+		public override void OnLoadFailed(Drawable? p0)
 		{
 			OnLoadFailedAction?.Invoke(p0);
 		}          
-		public override void OnResourceReady(JavaObject resource, ITransition transition) 
+		public override void OnResourceReady(JavaObject? resource, ITransition? transition) 
 		{
 			OnResourceReadyAction?.Invoke(resource, transition);
 		} 
-		protected override void OnResourceCleared(Drawable p0) 
+		protected override void OnResourceCleared(Drawable? p0) 
 		{ }
 	}
 }

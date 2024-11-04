@@ -14,6 +14,8 @@
     <XamarinAndroidSupportSkipVerifyVersions>true</XamarinAndroidSupportSkipVerifyVersions>
     <UseInterpreter>false</UseInterpreter>
     <Platforms>AnyCPU</Platforms>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
@@ -24,8 +26,6 @@
   </Target>
 
   <ItemGroup>
-    <None Remove="Assets\executables\ffmpeg.exe" />
-    <None Remove="Assets\executables\ffprobe.exe" />
     <None Remove="Assets\licenses\package_colorpicker.txt" />
     <None Remove="Assets\licenses\package_exoplayer.txt" />
     <None Remove="Assets\licenses\package_glide.txt" />
@@ -48,19 +48,18 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
     <PackageReference Include="Xam.Plugins.AndroidX.SlidingUpPanel" Version="1.0.0" />
     <PackageReference Include="Xamarin.Android.Support.Annotations" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.AndroidX.Activity" Version="1.9.2" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.0.2" />
-    <PackageReference Include="Xamarin.AndroidX.Collection.Jvm" Version="1.4.3" />
-    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.8.3" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core" Version="2.8.5" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime" Version="2.8.5" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel" Version="2.8.5" />
-    <PackageReference Include="Xamarin.AndroidX.Navigation.Fragment.Ktx" Version="2.7.7.1" />
+    <PackageReference Include="Xamarin.AndroidX.Activity" Version="1.9.3" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.Collection.Jvm" Version="1.4.4" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.8.4" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core" Version="2.8.6" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime" Version="2.8.6" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel" Version="2.8.6" />
     <PackageReference Include="Xamarin.AndroidX.Preference" Version="1.2.1.9" />
-    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.23" />
+    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.24" />
     <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.11.0.2" />
-    <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.0.10" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.12.0" />
+    <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.0.21" />
   </ItemGroup>
 
   <ItemGroup>

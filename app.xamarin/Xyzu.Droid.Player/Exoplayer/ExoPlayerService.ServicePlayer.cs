@@ -46,7 +46,7 @@ namespace Xyzu.Player.Exoplayer
 					.GetResult();
 			}
 
-			public void ProcessIntent(Intent? intent)
+			internal void ProcessIntent(Intent? intent)
 			{
 				switch (true)
 				{
@@ -59,6 +59,10 @@ namespace Xyzu.Player.Exoplayer
 						Init();
 						break;
 				}
+			}
+			internal void RaisePlayerError(PlayerErrors playererrors)
+			{
+				RaisePlayerError(new IPlayer.PlayerErrorsEventArgs(playererrors));
 			}
 
 			public override void Init()
@@ -135,6 +139,9 @@ namespace Xyzu.Player.Exoplayer
 		{
 			return queueItems?.Select(queueitem =>
 			{
+				if (queueitem.Malformed)
+					return SilenceMediaSource;
+
 				MediaItem? mediaitem = new MediaItem.Builder()
 					.SetUri(queueitem.Uri?.ToAndroidUri())?
 					.SetMediaId(queueitem.PrimaryId)?

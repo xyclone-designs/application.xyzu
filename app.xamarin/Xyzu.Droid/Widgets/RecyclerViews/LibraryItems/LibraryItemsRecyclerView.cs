@@ -144,6 +144,13 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 
 			public event EventHandler<PropertyChangedEventArgs>? PropertyChanged;
 
+			public new void NotifyItemChanged(int position)
+			{
+				if (Header is not null)
+					base.NotifyItemChanged(position + 1);
+				else base.NotifyItemChanged(position);
+			}
+
 			public override int GetItemViewType(int position)
 			{
 				return true switch
@@ -480,11 +487,26 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 
 			public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
 			{
+				if (viewType == ItemViewType_Header && Header is not null)
+				{
+					int index = Parent.IndexOfChild(Header);
+
+					if (index is not -1) Parent.DetachViewFromParent(Header);
+
+					return new ViewHolder(Header);
+				}
+				if (viewType == ItemViewType_Footer && Footer is not null)
+				{
+					int index = Parent.IndexOfChild(Footer);
+
+					if (index is not -1) Parent.DetachViewFromParent(Footer);
+
+					return new ViewHolder(Footer);
+				}
+				
 				RecyclerView.ViewHolder viewholder = true switch
 				{
 					true when parent.Context is null => throw new Exception("Could Not Create ViewHolder"),
-					true when viewType == ItemViewType_Header && Header != null => new ViewHolder(Header),
-					true when viewType == ItemViewType_Footer && Footer != null => new ViewHolder(Footer),
 					true when ViewHolderOnCreate?.Invoke(parent, viewType) is RecyclerView.ViewHolder viewholderoncreateviewholder => viewholderoncreateviewholder,
 					true when LibraryLayoutType switch
 					{

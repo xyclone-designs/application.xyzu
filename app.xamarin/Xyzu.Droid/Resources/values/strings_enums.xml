@@ -196,6 +196,15 @@
   <string name="enums_modelsortkeys_tracknumber_title">Track Number</string>
   <string name="enums_modelsortkeys_tracknumber_description">Sorts list by track number</string>
 
+  <string name="enums_playererrors_title">Player Error</string>
+  <string name="enums_playererrors_description">The error caused/encountered by the player</string> 
+  <string name="enums_playererrors_load_title">Load</string>
+  <string name="enums_playererrors_load_description">Load error</string> 
+  <string name="enums_playererrors_play_title">Play</string>
+  <string name="enums_playererrors_play_description">Playback error</string>
+  <string name="enums_playererrors_source_title">Source</string>
+  <string name="enums_playererrors_source_description">Source error</string>
+  
   <string name="enums_playerstates_title">Player State</string>
   <string name="enums_playerstates_description">The state of the player</string> 
   <string name="enums_playerstates_uninitialised_title">Uninitialised</string>

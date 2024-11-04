@@ -250,7 +250,7 @@ namespace Xyzu.Library
 							{
 								Uri = song.Uri,
 								Filepath = song.Filepath,
-								IsCorrupt = song.IsCorrupt,
+								IsCorrupt = song.Malformed,
 							};
 							
 							await ILibraryDroid.OnRetrieve(song, Binder.Library.Actions.OnRetrieve, parameters);

@@ -76,6 +76,7 @@ namespace Xyzu.Player
 			}
 
 			public event EventHandler<PropertyChangedEventArgs>? OnPropertyChanged;
+			public event EventHandler<PlayerErrorsEventArgs>? OnPlayerError;
 			public event EventHandler<PlayerOperationsEventArgs>? OnPlayerOperation;
 
 			public virtual void Init() { }
@@ -98,6 +99,10 @@ namespace Xyzu.Player
 				GC.SuppressFinalize(this);
 			}
 
+			protected virtual void RaisePlayerError(PlayerErrorsEventArgs args)
+			{
+				OnPlayerError?.Invoke(this, args);
+			}
 			protected virtual void RaisePlayerOperation(PlayerOperationsEventArgs args)
 			{
 				OnPlayerOperation?.Invoke(this, args);

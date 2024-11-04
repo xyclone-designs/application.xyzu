@@ -24,6 +24,7 @@ namespace Xyzu.Player
 		PlayerStates? PreviousState { get; }
 
 		event EventHandler<PropertyChangedEventArgs> OnPropertyChanged;
+		event EventHandler<PlayerErrorsEventArgs> OnPlayerError;
 		event EventHandler<PlayerOperationsEventArgs> OnPlayerOperation;
 
 		void Init();
@@ -36,6 +37,17 @@ namespace Xyzu.Player
 		void Seek(long position);  
 		void Skip(int queueindex);
 
+		public class PlayerErrorsEventArgs : EventArgs
+		{
+			public PlayerErrorsEventArgs(PlayerErrors playererror)
+			{
+				PlayerError = playererror;
+			}
+
+			public PlayerErrors PlayerError { get; }
+			
+			public int? QueueIndex { get; set; }
+		}
 		public class PlayerOperationsEventArgs : EventArgs
 		{
 			public PlayerOperationsEventArgs(PlayerOperations playeroperation)

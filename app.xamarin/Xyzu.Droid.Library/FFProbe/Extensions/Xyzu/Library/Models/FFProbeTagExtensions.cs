@@ -31,13 +31,13 @@ namespace Xyzu.Library.Models
 			if (overwrite)
 			{
 				retrieved.Duration = null;
-				retrieved.IsCorrupt = false;
+				retrieved.Malformed = false;
 				retrieved.MimeType = null;
 				retrieved.Size = null;
 			}
 
 			if (retrieved.Filepath is not null)
-				retrieved.IsCorrupt = mediainformation.Format.Contains(retrieved.Filepath.Split('.').Last()) is false;
+				retrieved.Malformed = mediainformation.Format.Contains(retrieved.Filepath.Split('.').Last()) is false;
 
 			if (mediainformation.Streams.FirstOrDefault(_ => _.Type == "audio") is StreamInformation audiostream)
 			{

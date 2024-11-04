@@ -213,7 +213,7 @@ namespace Xyzu.Library
 								{
 									album.Artwork.Uri = albumsongsenumerator.Current.Uri;
 									album.Artwork.Filepath = albumsongsenumerator.Current.Filepath;
-									album.Artwork.IsCorrupt = albumsongsenumerator.Current.IsCorrupt;
+									album.Artwork.IsCorrupt = albumsongsenumerator.Current.Malformed;
 
 									parameters.RetrievedSongExtra = albumsongsenumerator.Current;
 									parameters.ImageModelTypes ??= new ModelTypes[] { ModelTypes.Album };
@@ -247,7 +247,7 @@ namespace Xyzu.Library
 								{
 									artist.Image.Uri = artistsongsenumerator.Current.Uri;
 									artist.Image.Filepath = artistsongsenumerator.Current.Filepath;
-									artist.Image.IsCorrupt = artistsongsenumerator.Current.IsCorrupt;
+									artist.Image.IsCorrupt = artistsongsenumerator.Current.Malformed;
 
 									parameters.RetrievedSongExtra = artistsongsenumerator.Current;
 									parameters.ImageModelTypes ??= new ModelTypes[] { ModelTypes.Album };

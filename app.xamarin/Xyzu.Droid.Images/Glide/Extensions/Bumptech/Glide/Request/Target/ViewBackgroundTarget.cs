@@ -11,7 +11,7 @@ namespace Bumptech.Glide.Request.Target
 	{
 		public ViewBackgroundTarget(View view) : base(view) { }
 
-		public override void OnResourceReady(Object resource, ITransition transition)
+		public override void OnResourceReady(Object? resource, ITransition? transition)
 		{
 			View.Background = resource as BitmapDrawable;
 

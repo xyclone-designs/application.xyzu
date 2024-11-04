@@ -89,7 +89,7 @@ namespace Xyzu.Views.LibraryItem
 			Reset();
 
 			LibraryItemId = artistsong?.Id ?? defaults?.Id;
-			IsCorrupt = artistsong?.IsCorrupt ?? defaults?.IsCorrupt ?? false;
+			IsCorrupt = artistsong?.Malformed ?? defaults?.Malformed ?? false;
 			Details = DetailsArtistSong(artistsong, defaults);
 
 			SetArtwork(artistsong ?? defaults);
@@ -108,7 +108,7 @@ namespace Xyzu.Views.LibraryItem
 			Reset();
 
 			LibraryItemId = albumsong?.Id ?? defaults?.Id;
-			IsCorrupt = albumsong?.IsCorrupt ?? defaults?.IsCorrupt ?? false;
+			IsCorrupt = albumsong?.Malformed ?? defaults?.Malformed ?? false;
 			Details = DetailsSong(albumsong, defaults);
 
 			SetArtwork(albumsong ?? defaults);
@@ -127,7 +127,7 @@ namespace Xyzu.Views.LibraryItem
 			Reset();
 
 			LibraryItemId = genresong?.Id ?? defaults?.Id;
-			IsCorrupt = genresong?.IsCorrupt ?? defaults?.IsCorrupt ?? false;
+			IsCorrupt = genresong?.Malformed ?? defaults?.Malformed ?? false;
 			Details = DetailsGenreSong(genresong, defaults);
 
 			SetArtwork(genresong ?? defaults);
@@ -146,7 +146,7 @@ namespace Xyzu.Views.LibraryItem
 			Reset();
 
 			LibraryItemId = playlistsong?.Id ?? defaults?.Id;
-			IsCorrupt = playlistsong?.IsCorrupt ?? defaults?.IsCorrupt ?? false;
+			IsCorrupt = playlistsong?.Malformed ?? defaults?.Malformed ?? false;
 			Details = DetailsPlaylistSong(playlistsong, defaults);
 
 			SetArtwork(playlistsong ?? defaults);
@@ -156,7 +156,7 @@ namespace Xyzu.Views.LibraryItem
 			Reset();
 
 			LibraryItemId = queuesong?.Id ?? defaults?.Id;
-			IsCorrupt = queuesong?.IsCorrupt ?? defaults?.IsCorrupt ?? false;
+			IsCorrupt = queuesong?.Malformed ?? defaults?.Malformed ?? false;
 			Details = DetailsQueueSong(queuesong, defaults);
 
 			SetArtwork(queuesong ?? defaults);
@@ -166,7 +166,7 @@ namespace Xyzu.Views.LibraryItem
 			Reset();
 
 			LibraryItemId = song?.Id ?? defaults?.Id;
-			IsCorrupt = song?.IsCorrupt ?? defaults?.IsCorrupt ?? false;
+			IsCorrupt = song?.Malformed ?? defaults?.Malformed ?? false;
 			Details = DetailsSong(song, defaults);
 
 			SetArtwork(song ?? defaults);

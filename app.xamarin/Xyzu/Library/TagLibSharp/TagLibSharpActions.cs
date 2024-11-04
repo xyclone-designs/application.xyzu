@@ -61,7 +61,7 @@ namespace Xyzu.Library.TagLibSharp
 		{
 			public async override Task Album(IAlbum? retrieved, ISong? retrievedsong)
 			{
-				if (await GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.IsCorrupt ?? false) is File file)
+				if (await GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.Malformed ?? false) is File file)
 				{
 					retrieved?.Retrieve(file);
 
@@ -72,7 +72,7 @@ namespace Xyzu.Library.TagLibSharp
 			}
 			public async override Task Artist(IArtist? retrieved, ISong? retrievedsong)
 			{
-				if (await GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.IsCorrupt ?? false) is File file)
+				if (await GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.Malformed ?? false) is File file)
 				{
 					retrieved?.Retrieve(file);
 
@@ -83,7 +83,7 @@ namespace Xyzu.Library.TagLibSharp
 			}
 			public async override Task Genre(IGenre? retrieved, ISong? retrievedsong)
 			{
-				if (await GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.IsCorrupt ?? false) is File file)
+				if (await GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.Malformed ?? false) is File file)
 				{
 					retrieved?.Retrieve(file);
 
@@ -94,7 +94,7 @@ namespace Xyzu.Library.TagLibSharp
 			}
 			public async override Task Playlist(IPlaylist? retrieved, ISong? retrievedsong) 
 			{
-				if (await GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.IsCorrupt ?? false) is File file)
+				if (await GetFile(retrievedsong?.Filepath, retrievedsong?.Uri, retrievedsong?.Malformed ?? false) is File file)
 				{
 					retrieved?.Retrieve(file);
 
@@ -105,7 +105,7 @@ namespace Xyzu.Library.TagLibSharp
 			}
 			public async override Task Song(ISong? retrieved)
 			{
-				if (await GetFile(retrieved?.Filepath, retrieved?.Uri, retrieved?.IsCorrupt ?? false) is File file)
+				if (await GetFile(retrieved?.Filepath, retrieved?.Uri, retrieved?.Malformed ?? false) is File file)
 				{
 					retrieved?.Retrieve(file);
 
@@ -167,7 +167,7 @@ namespace Xyzu.Library.TagLibSharp
 							.OfType<ISong>()
 							.Select(song => Task.Run(async () =>
 							{
-								if (await GetFile(song.Filepath, song.Uri, song.IsCorrupt) is File file)
+								if (await GetFile(song.Filepath, song.Uri, song.Malformed) is File file)
 									try
 									{									
 										if (distincts.ReleaseDate) file.Tag.Year = (uint?)updated.ReleaseDate?.Year ?? default;
@@ -202,7 +202,7 @@ namespace Xyzu.Library.TagLibSharp
 							.OfType<ISong>()
 							.Select(song => Task.Run(async () =>
 							{
-								if (await GetFile(song.Filepath, song.Uri, song.IsCorrupt) is File file)
+								if (await GetFile(song.Filepath, song.Uri, song.Malformed) is File file)
 									try
 									{
 										if (distincts.Name && updated.Name != null) file.Tag.Performers = new string[] { updated.Name };
@@ -236,7 +236,7 @@ namespace Xyzu.Library.TagLibSharp
 							.OfType<ISong>()
 							.Select(song => Task.Run(async () =>
 							{
-								if (await GetFile(song.Filepath, song.Uri, song.IsCorrupt) is File file)
+								if (await GetFile(song.Filepath, song.Uri, song.Malformed) is File file)
 									try
 									{
 										if (distincts.Name) file.Tag.Genres = updated.Name?.Split(';').ToArray() ?? Array.Empty<string>();
@@ -272,7 +272,7 @@ namespace Xyzu.Library.TagLibSharp
 				if (old.Filepath is not null)
 					await Task.Run(async () =>
 					{
-						if (await GetFile(old.Filepath, old.Uri, old.IsCorrupt) is File file)
+						if (await GetFile(old.Filepath, old.Uri, old.Malformed) is File file)
 							try
 							{
 								if (distincts.Album) file.Tag.Album = updated.Album;

@@ -13,7 +13,7 @@ namespace Bumptech.Glide.Request.Target
 
 		public new ImageView View { get => (ImageView)base.View; }
 
-		public override void OnResourceReady(Object resource, ITransition transition)
+		public override void OnResourceReady(Object? resource, ITransition? transition)
 		{
 			View.SetImageBitmap(resource as Bitmap);
 

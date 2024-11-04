@@ -17,7 +17,7 @@ namespace Xyzu
 			{
 				queueitem.SecondaryId = secondaryId;
 
-				if (song.IsCorrupt)
+				if (song.Malformed)
 					queueitem.Uri = new Uri("file:///android_asset/sounds/silence.mp3");
 			});
 		}

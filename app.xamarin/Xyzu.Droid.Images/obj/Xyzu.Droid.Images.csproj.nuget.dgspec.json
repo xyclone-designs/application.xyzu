@@ -60,27 +60,23 @@
             },
             "Xamarin.AndroidX.AppCompat": {
               "target": "Package",
-              "version": "[1.7.0.2, )"
+              "version": "[1.7.0.3, )"
             },
             "Xamarin.AndroidX.ConstraintLayout": {
               "target": "Package",
-              "version": "[2.1.4.15, )"
+              "version": "[2.1.4.16, )"
             },
             "Xamarin.AndroidX.Palette": {
               "target": "Package",
-              "version": "[1.0.0.28, )"
+              "version": "[1.0.0.29, )"
             },
             "Xamarin.AndroidX.RecyclerView": {
               "target": "Package",
-              "version": "[1.3.2.7, )"
+              "version": "[1.3.2.8, )"
             },
             "Xamarin.Essentials": {
               "target": "Package",
               "version": "[1.8.1, )"
-            },
-            "Xamarin.Google.Android.Material": {
-              "target": "Package",
-              "version": "[1.11.0.2, )"
             }
           },
           "imports": [
@@ -187,7 +183,7 @@
             },
             "Xamarin.Android.Glide": {
               "target": "Package",
-              "version": "[4.16.0.6, )"
+              "version": "[4.16.0.9, )"
             },
             "Xamarin.Android.Glide.Transformations": {
               "target": "Package",
@@ -195,7 +191,7 @@
             },
             "Xamarin.AndroidX.Palette": {
               "target": "Package",
-              "version": "[1.0.0.28, )"
+              "version": "[1.0.0.29, )"
             },
             "Xamarin.Essentials": {
               "target": "Package",

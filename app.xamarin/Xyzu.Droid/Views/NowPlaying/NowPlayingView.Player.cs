@@ -4,7 +4,6 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Views;
 using AndroidX.Fragment.App;
-using AndroidX.Palette.Graphics;
 using AndroidX.RecyclerView.Widget;
 
 using Oze.Music.MusicBarLib;
@@ -59,8 +58,9 @@ namespace Xyzu.Views.NowPlaying
 			{
 				if (_Player != null)
 				{
-					_Player.OnPropertyChanged -= PlayerPropertyChanged;
+					_Player.OnPlayerError -= PlayerOnPlayerError;
 					_Player.OnPlayerOperation -= PlayerOnPlayerOperation;
+					_Player.OnPropertyChanged -= PlayerPropertyChanged;
 					_Player.Queue.PropertyChanged -= PlayerQueuePropertyChanged;
 				}
 
@@ -68,8 +68,9 @@ namespace Xyzu.Views.NowPlaying
 
 				if (_Player != null)
 				{
-					_Player.OnPropertyChanged += PlayerPropertyChanged;
+					_Player.OnPlayerError += PlayerOnPlayerError;
 					_Player.OnPlayerOperation += PlayerOnPlayerOperation;
+					_Player.OnPropertyChanged += PlayerPropertyChanged;
 					_Player.Queue.PropertyChanged += PlayerQueuePropertyChanged;
 				}
 
@@ -193,16 +194,8 @@ namespace Xyzu.Views.NowPlaying
 			SetText(SongCurrent, null, null);
 			await SetBlur(SongCurrent);
 
-			if ((SongCurrent?.IsCorrupt ?? false) && Context is not null)
-				XyzuUtils.Dialogs
-					.SnackBar(Context, Artwork, snackbar => 
-					{
-						snackbar.SetText(string.Format(
-							"{0} '.../{1}'", 
-							Context.GetString(Resource.String.player_error_couldnotplay), 
-							SongCurrent.Filepath?.Split('/').Last()));
-
-					}).Show();
+			if ((SongCurrent?.Malformed ?? false) && Context is not null)
+				PlayerOnPlayerError(this, new IPlayer.PlayerErrorsEventArgs(PlayerErrors.Load));
 		}
 		public void ViewReset()
 		{
@@ -258,6 +251,26 @@ namespace Xyzu.Views.NowPlaying
 
 				default: break;
 			}
+		}
+		public void PlayerOnPlayerError(object? sender, IPlayer.PlayerErrorsEventArgs args)
+		{
+			if (Context is null)
+				return;
+
+			string? filepath = args.QueueIndex.HasValue
+				? Player?.Queue.ElementAtOrDefault(args.QueueIndex.Value)?.Uri?.ToString().Split('/').Last()
+				: SongCurrent?.Filepath?.Split('/').Last();
+
+			XyzuUtils.Dialogs
+				.SnackBar(Context, Artwork, snackbar =>
+				{
+					if (filepath is null)
+						snackbar.SetText(args.PlayerError.AsResoureIdDescription());
+					else snackbar.SetText(string.Format(
+						"{0} '.../{1}'",
+						args.PlayerError.AsStringDescription(Context), filepath));
+
+				}).Show();
 		}
 		public void PlayerOnPlayerOperation(object? sender, IPlayer.PlayerOperationsEventArgs args)
 		{
@@ -368,23 +381,21 @@ namespace Xyzu.Views.NowPlaying
 		}
 		public void SetPosition(ISong? song)
 		{
-			TimeSpan? duration = (song?.IsCorrupt ?? false) ? TimeSpan.FromSeconds(3) : song?.Duration;
-
-			if (song?.Filepath is null || duration is null || duration == TimeSpan.Zero)
+			if (song?.Filepath is null || song.Malformed || song.Duration is null)
 				Position.Hide();
 			else
 			{
 				Position.Show();
-				Task.Run(() => Position.LoadFrom(song.Filepath, (int)duration.Value.TotalMilliseconds));
+				Task.Run(() => Position.LoadFrom(song.Filepath, (int)song.Duration.Value.TotalMilliseconds));
 			}
 			
-			SetPosition(TimeSpan.Zero, duration, true);
+			SetPosition(TimeSpan.Zero, song?.Duration ?? TimeSpan.Zero, true);
 		}
 		public void SetPosition(TimeSpan? current, TimeSpan? duration, bool withprogress = true)
 		{
 			current ??= TimeSpan.FromMilliseconds(Player?.Position ?? 0);
 			duration ??= (SongCurrent ?? Player?.Queue.CurrentSong) is ISong song 
-				? song.IsCorrupt  
+				? song.Malformed  
 					? TimeSpan.FromSeconds(3) 
 					: song.Duration ?? TimeSpan.Zero
 				: TimeSpan.Zero;

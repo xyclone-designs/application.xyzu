@@ -13,6 +13,8 @@
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <UseInterpreter>false</UseInterpreter>
     <Platforms>AnyCPU</Platforms>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
@@ -23,12 +25,11 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.0.2" />
-    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout" Version="2.1.4.15" />
-    <PackageReference Include="Xamarin.AndroidX.Palette" Version="1.0.0.28" />
-    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.3.2.7" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.11.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout" Version="2.1.4.16" /> 
+    <PackageReference Include="Xamarin.AndroidX.Palette" Version="1.0.0.29" /> 
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.3.2.8" /> 
+    <PackageReference Include="Xamarin.Essentials" Version="1.8.1" /> 
   </ItemGroup>
 
   <ItemGroup>

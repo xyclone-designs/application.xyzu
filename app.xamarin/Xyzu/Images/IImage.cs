@@ -44,7 +44,7 @@ namespace Xyzu.Images
 				Id = song.Id,
 				Uri = song.Uri,
 				Filepath = song.Filepath,
-				IsCorrupt = song.IsCorrupt,
+				IsCorrupt = song.Malformed,
 			};
 		}
 
