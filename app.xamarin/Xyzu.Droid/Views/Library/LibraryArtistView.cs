@@ -510,8 +510,6 @@ namespace Xyzu.Views.Library
 			if (force)
 				ArtistHeader.Artist = null;
 
-			await Library.Artists.PopulateArtist(Artist, Cancellationtoken);
-
 			(IAsyncEnumerable<IAlbum>? albums, IAsyncEnumerable<ISong>? songs) = Showing switch
 			{
 				ArtistItemType.Albums => (Library.Albums

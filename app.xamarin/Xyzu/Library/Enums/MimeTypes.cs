@@ -4,11 +4,11 @@ namespace Xyzu.Library.Enums
 {
 	public enum MimeTypes
 	{
-		AAC,
-		FLAC,
-		M4A,
-		MP3,
-		WAV,
+		aac,
+		flac,
+		m4a,
+		mp3,
+		wav,
 	}
 
 	public static class MimeTypesExtensions

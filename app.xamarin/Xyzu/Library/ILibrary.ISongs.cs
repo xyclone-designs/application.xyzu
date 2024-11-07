@@ -18,11 +18,6 @@ namespace Xyzu.Library
 			IEnumerable<ISong> GetSongs(IIdentifiers? identifiers = null);
 			IAsyncEnumerable<ISong> GetSongs(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
-			ISong? PopulateSong(ISong? song);
-			Task<ISong?> PopulateSong(ISong? song, CancellationToken cancellationToken = default);
-			IEnumerable<ISong>? PopulateSongs(IEnumerable<ISong>? songs);
-			Task<IEnumerable<ISong>?> PopulateSongs(IEnumerable<ISong>? songs, CancellationToken cancellationToken = default);
-
 			bool UpdateSong(ISong old, ISong updated);
 			Task<bool> UpdateSong(ISong old, ISong updated, CancellationToken cancellationToken = default);
 

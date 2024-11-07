@@ -12,9 +12,9 @@ namespace Id3.Frames
 				FileAudioType.Mpeg_1_2_Layer1 or
 				FileAudioType.Mpeg_1_2_Layer2 or
 				FileAudioType.Mpeg_1_2_Layer3 or
-				FileAudioType.Mpeg_2_5 => MimeTypes.MP3,
+				FileAudioType.Mpeg_2_5 => MimeTypes.mp3,
 
-				FileAudioType.Mpeg_Aac => MimeTypes.AAC,
+				FileAudioType.Mpeg_Aac => MimeTypes.aac,
 
 				_ => null
 			};

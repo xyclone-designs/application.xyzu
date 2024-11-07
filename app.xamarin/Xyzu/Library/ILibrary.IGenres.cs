@@ -18,11 +18,6 @@ namespace Xyzu.Library
 			IEnumerable<IGenre> GetGenres(IIdentifiers? identifiers = null);
 			IAsyncEnumerable<IGenre> GetGenres(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
-			IGenre? PopulateGenre(IGenre? genre);
-			Task<IGenre?> PopulateGenre(IGenre? genre, CancellationToken cancellationToken = default);
-			IEnumerable<IGenre>? PopulateGenres(IEnumerable<IGenre>? genres);
-			Task<IEnumerable<IGenre>?> PopulateGenres(IEnumerable<IGenre>? genres, CancellationToken cancellationToken = default);
-
 			bool UpdateGenre(IGenre old, IGenre updated);
 			Task<bool> UpdateGenre(IGenre old, IGenre updated, CancellationToken cancellationToken = default);
 

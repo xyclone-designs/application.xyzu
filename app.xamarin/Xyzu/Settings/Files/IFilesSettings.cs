@@ -45,20 +45,20 @@ namespace Xyzu.Settings.Files
 		{
 			public class Mimetypes
 			{
-				public const MimeTypes AAC = MimeTypes.AAC;
-				public const MimeTypes FLAC = MimeTypes.FLAC;
-				public const MimeTypes M4A = MimeTypes.M4A;
-				public const MimeTypes MP3 = MimeTypes.MP3;
-				public const MimeTypes WAV = MimeTypes.WAV;
+				public const MimeTypes aac = MimeTypes.aac;
+				public const MimeTypes flac = MimeTypes.flac;
+				public const MimeTypes m4a = MimeTypes.m4a;
+				public const MimeTypes mp3 = MimeTypes.mp3;
+				public const MimeTypes wav = MimeTypes.wav;
 
 				public static IEnumerable<MimeTypes> AsEnumerable()
 				{
 					return Enumerable.Empty<MimeTypes>()
-						.Append(AAC)
-						.Append(FLAC)
-						.Append(M4A)
-						.Append(MP3)
-						.Append(WAV);
+						.Append(aac)
+						.Append(flac)
+						.Append(m4a)
+						.Append(mp3)
+						.Append(wav);
 				}
 			}
 		}

@@ -1,7 +1,6 @@
 ﻿using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.Hardware.Lights;
 using Android.Views;
 using AndroidX.Palette.Graphics;
 
@@ -18,6 +17,7 @@ using System.Threading.Tasks;
 
 using Xyzu.Images.Enums;
 using Xyzu.Library.Models;
+
 using AndroidUri = Android.Net.Uri;
 
 namespace Xyzu.Images.Glide
@@ -100,6 +100,57 @@ namespace Xyzu.Images.Glide
 			return requestbuilder;
 		}
 
+		public async override Task Operate(IImagesDroid.Parameters parameters)
+		{
+			await Task.CompletedTask;
+
+			if ((parameters.OnBitmap is not null || (parameters.OnPalette is not null && parameters.OnDrawable is null)) && await RequestBuilder(
+				sources: parameters.Sources,
+				requestbuilderaction: requestmanager =>
+				{
+					return requestmanager
+						.AsBitmap()
+						.RunOperations(parameters.Operations, Operate);
+
+				}) is RequestBuilder requestbuilderbitmap) requestbuilderbitmap.Into(new GlideTarget()
+				{
+					OnLoadFailedAction = drawable => parameters.OnComplete?.Invoke(false),
+					OnResourceReadyAction = (resource, transition) =>
+					{
+						if (resource is Bitmap bitmap)
+						{
+							parameters.OnBitmap?.Invoke(bitmap);
+							parameters.OnPalette?.Invoke(new Palette.Builder(bitmap).Generate());
+						}
+
+						parameters.OnComplete?.Invoke(true);
+					},
+				});
+			
+			if (parameters.OnDrawable is not null && await RequestBuilder(
+				sources: parameters.Sources,
+				requestbuilderaction: requestmanager =>
+				{
+					return requestmanager
+						.AsDrawable()
+						.RunOperations(parameters.Operations, Operate);
+
+				}) is RequestBuilder requestbuilderdrawable) requestbuilderdrawable.Into(new GlideTarget()
+				{
+					OnLoadFailedAction = drawable => parameters.OnComplete?.Invoke(false),
+					OnResourceReadyAction = (resource, transition) =>
+					{
+						if (resource is BitmapDrawable bitmapdrawable)
+						{
+							parameters.OnDrawable?.Invoke(bitmapdrawable);
+							if (bitmapdrawable.Bitmap is not null)
+								parameters.OnPalette?.Invoke(new Palette.Builder(bitmapdrawable.Bitmap).Generate());
+						}
+
+						parameters.OnComplete?.Invoke(true);
+					},
+				});
+		}
 		public async override Task SetToImageView(IImagesDroid.Parameters parameters)
 		{
 			await Task.CompletedTask;
@@ -136,8 +187,14 @@ namespace Xyzu.Images.Glide
 						OnLoadFailedAction = drawable => parameters.OnComplete?.Invoke(false),
 						OnResourceReadyAction = (resource, transition) =>
 						{
+							if (resource is BitmapDrawable bitmapdrawable)
+							{
+								parameters.OnDrawable?.Invoke(bitmapdrawable);
+								if (bitmapdrawable.Bitmap is not null)
+									parameters.OnPalette?.Invoke(new Palette.Builder(bitmapdrawable.Bitmap).Generate());
+							}
+
 							parameters.OnComplete?.Invoke(true);
-							parameters.OnPalette?.Invoke(new Palette.Builder((Bitmap)resource).Generate());
 						},
 					});
 			}
@@ -161,7 +218,6 @@ namespace Xyzu.Images.Glide
 				int height = parameters.View.Height == 0 ? parameters.View.MeasuredHeight : -1;
 
 				requestbuilder
-					//.Override(width, height)
 					.RunOperations(parameters.Operations, Operate)
 					.Into(new ViewBackgroundTarget(parameters.View)
 					{

@@ -75,47 +75,6 @@ namespace Xyzu.Library
 					yield return await Task.FromResult(genre);
 			}
 
-			IGenre? IGenres.PopulateGenre(IGenre? genre)
-			{
-				if (genre is null)
-					return null;
-
-				if (SQLiteLibrary.GenresTable.FirstOrDefault(sqlgenre => sqlgenre.Id == genre.Id) is GenreEntity genreentity)
-					genre.Populate(genreentity);
-
-				return genre;
-			}
-			async Task<IGenre?> IGenres.PopulateGenre(IGenre? genre, CancellationToken cancellationToken)
-			{
-				if (genre is null)
-					return null;
-
-				if (await SQLiteLibrary.GenresTableAsync.FirstOrDefaultAsync(sqlgenre => sqlgenre.Id == genre.Id) is GenreEntity genreentity)
-					genre.Populate(genreentity);
-
-				return genre;
-			}
-			IEnumerable<IGenre>? IGenres.PopulateGenres(IEnumerable<IGenre>? genres)
-			{
-				if (genres is null)
-					return null;
-
-				foreach (IGenre genre in genres)
-					(this as IGenres).PopulateGenre(genre);
-
-				return genres;
-			}
-			async Task<IEnumerable<IGenre>?> IGenres.PopulateGenres(IEnumerable<IGenre>? genres, CancellationToken cancellationToken)
-			{
-				if (genres is null)
-					return null;
-
-				foreach (IGenre genre in genres)
-					await (this as IGenres).PopulateGenre(genre, cancellationToken);
-
-				return genres;
-			}
-
 			bool IGenres.DeleteGenre(IGenre genre)
 			{
 				if (Actions?.OnDelete != null)

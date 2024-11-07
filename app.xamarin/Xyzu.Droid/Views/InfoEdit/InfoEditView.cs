@@ -1,9 +1,13 @@
 ﻿using Android.Content;
+using Android.Graphics;
 using Android.Util;
+using AndroidX.AppCompat.Widget;
 using AndroidX.ConstraintLayout.Widget;
 using AndroidX.Palette.Graphics;
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
@@ -21,9 +25,23 @@ namespace Xyzu.Views.InfoEdit
 		}
 
 		protected virtual void Init(Context context, IAttributeSet? attrs) { }
-		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyname = null) { }
+		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyname = null)
+		{
+			switch (propertyname)
+			{
+				case nameof(Palette):
+					OnPalette?.Invoke(Palette);
+					break;
+
+				default: break;
+			}
+		}
 
 		private IImages? _Images;
+		private Palette? _Palette;
+		private Action<Palette?>? _OnPalette;
+
+		protected IDictionary<AppCompatTextView, Color>? PaletteTextViews { get; set; }
 
 		public IImages? Images
 		{
@@ -35,7 +53,34 @@ namespace Xyzu.Views.InfoEdit
 				OnPropertyChanged();
 			}
 		}
+		public Palette? Palette
+		{
+			get => _Palette;
+			set
+			{
+				_Palette = value;
 
-		public Action<Palette?>? OnPalette { get; set; }
+				OnPropertyChanged();
+			}
+		}
+		public Action<Palette?>? OnPalette
+		{
+			get => _OnPalette;
+			set
+			{
+				_OnPalette = value;
+
+				OnPropertyChanged();
+			}
+		}
+
+		public virtual void ReloadImage() { }
+		protected virtual void SetPaletteTextViews(params AppCompatTextView?[] palettetextviews)
+		{
+			PaletteTextViews ??= new Dictionary<AppCompatTextView, Color>();
+
+			foreach (AppCompatTextView palettetextview in palettetextviews.OfType<AppCompatTextView>())
+				PaletteTextViews.TryAdd(palettetextview, new Color(palettetextview.CurrentTextColor));
+		}
 	}
 }

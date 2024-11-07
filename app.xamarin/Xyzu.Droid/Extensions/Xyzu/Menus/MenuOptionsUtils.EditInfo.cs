@@ -47,7 +47,7 @@ namespace Xyzu.Menus
 			DialogView dialogview = new (variables.Context)
 			{
 				ContentViewMaxWidth = DialogMaxWidth(variables.Context),
-				ContentViewMaxHeight = DialogMaxHeight(variables.Context),
+				//ContentViewMaxHeight = DialogMaxHeight(variables.Context),
 
 				ButtonsPositiveText = Resource.String.save,
 				ButtonsNegativeText = Resource.String.cancel,
@@ -85,9 +85,6 @@ namespace Xyzu.Menus
 
 				return null;
 			}
-
-			XyzuLibrary.Instance.Albums.PopulateAlbum(variables.Album);
-			XyzuLibrary.Instance.Misc.SetImage(variables.Album);
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
@@ -158,9 +155,6 @@ namespace Xyzu.Menus
 				return null;
 			}
 
-			XyzuLibrary.Instance.Artists.PopulateArtist(variables.Artist);
-			XyzuLibrary.Instance.Misc.SetImage(variables.Artist);
-
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
 				DialogView view = EditInfoDialogView(variables, _dialogview =>
@@ -230,9 +224,6 @@ namespace Xyzu.Menus
 				return null;
 			}
 
-			XyzuLibrary.Instance.Genres.PopulateGenre(variables.Genre);
-			XyzuLibrary.Instance.Misc.SetImage(variables.Genre);
-
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
 				DialogView view = EditInfoDialogView(variables, _dialogview =>
@@ -241,6 +232,7 @@ namespace Xyzu.Menus
 					{
 						Genre = variables.Genre,
 						Images = XyzuImages.Instance,
+						OnPalette = palette => _dialogview.Palette = palette,
 					};
 
 					_dialogview.Dialog = appcompatdialog;
@@ -277,9 +269,6 @@ namespace Xyzu.Menus
 				return null;
 			}
 
-			XyzuLibrary.Instance.Playlists.PopulatePlaylist(variables.Playlist);
-			XyzuLibrary.Instance.Misc.SetImage(variables.Playlist);
-
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
 				DialogView view = EditInfoDialogView(variables, _dialogview =>
@@ -288,6 +277,7 @@ namespace Xyzu.Menus
 					{
 						Images = XyzuImages.Instance,
 						Playlist = variables.Playlist,
+						OnPalette = palette => _dialogview.Palette = palette,
 					};
 
 					_dialogview.Dialog = appcompatdialog;
@@ -323,9 +313,6 @@ namespace Xyzu.Menus
 
 				return null;
 			}
-
-			XyzuLibrary.Instance.Songs.PopulateSong(variables.Song);
-			XyzuLibrary.Instance.Misc.SetImage(variables.Song);
 
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
@@ -396,8 +383,6 @@ namespace Xyzu.Menus
 				return null;
 			}
 
-			XyzuLibrary.Instance.Songs.PopulateSong(variables.Song);
-
 			return XyzuUtils.Dialogs.BottomSheet(variables.Context, appcompatdialog =>
 			{
 				DialogView view = EditInfoDialogView(variables, _dialogview =>
@@ -405,6 +390,7 @@ namespace Xyzu.Menus
 					_dialogview.ContentView = new InfoEditSongLyricsView(variables.Context)
 					{
 						Images = XyzuImages.Instance,
+						OnPalette = palette => _dialogview.Palette = palette,
 						Song = variables.Song,
 					};
 

@@ -75,47 +75,6 @@ namespace Xyzu.Library
 					yield return await Task.FromResult(artist);
 			}
 
-			IArtist? IArtists.PopulateArtist(IArtist? artist)
-			{
-				if (artist is null)
-					return null;
-
-				if (SQLiteLibrary.ArtistsTable.FirstOrDefault(sqlartist => sqlartist.Id == artist.Id) is ArtistEntity artistentity)
-					artist.Populate(artistentity);
-
-				return artist;
-			}
-			async Task<IArtist?> IArtists.PopulateArtist(IArtist? artist, CancellationToken cancellationToken)
-			{
-				if (artist is null)
-					return null;
-
-				if (await SQLiteLibrary.ArtistsTableAsync.FirstOrDefaultAsync(sqlartist => sqlartist.Id == artist.Id) is ArtistEntity artistentity)
-					artist.Populate(artistentity);
-
-				return artist;
-			}
-			IEnumerable<IArtist>? IArtists.PopulateArtists(IEnumerable<IArtist>? artists)
-			{
-				if (artists is null)
-					return null;
-
-				foreach (IArtist artist in artists)
-					(this as IArtists).PopulateArtist(artist);
-
-				return artists;
-			}
-			async Task<IEnumerable<IArtist>?> IArtists.PopulateArtists(IEnumerable<IArtist>? artists, CancellationToken cancellationToken)
-			{
-				if (artists is null)
-					return null;
-
-				foreach (IArtist artist in artists)
-					await (this as IArtists).PopulateArtist(artist, cancellationToken);
-
-				return artists;
-			}
-
 			bool IArtists.DeleteArtist(IArtist artist)
 			{
 				if (Actions?.OnDelete != null)

@@ -365,8 +365,6 @@ namespace Xyzu.Views.Library
 			if (force)
 				GenreHeader.Genre = null;
 
-			await Library.Genres.PopulateGenre(Genre, Cancellationtoken);
-
 			IAsyncEnumerable<ISong> libraryitems = Library.Songs
 				.GetSongs(Identifiers, Cancellationtoken)
 				.Sort(Settings.SongsSortKey, Settings.SongsIsReversed);

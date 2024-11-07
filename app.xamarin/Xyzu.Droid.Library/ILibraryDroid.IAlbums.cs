@@ -75,47 +75,6 @@ namespace Xyzu.Library
 					yield return await Task.FromResult(album);
 			}
 
-			IAlbum? IAlbums.PopulateAlbum(IAlbum? album)
-			{
-				if (album is null)
-					return null;
-
-				if (SQLiteLibrary.AlbumsTable.FirstOrDefault(sqlalbum => sqlalbum.Id == album.Id) is AlbumEntity albumentity)
-					album.Populate(albumentity);
-
-				return album;
-			}
-			async Task<IAlbum?> IAlbums.PopulateAlbum(IAlbum? album, CancellationToken cancellationToken)
-			{
-				if (album is null)
-					return null;
-
-				if (await SQLiteLibrary.AlbumsTableAsync.FirstOrDefaultAsync(sqlalbum => sqlalbum.Id == album.Id) is AlbumEntity albumentity)
-					album.Populate(albumentity);
-
-				return album;
-			}
-			IEnumerable<IAlbum>? IAlbums.PopulateAlbums(IEnumerable<IAlbum>? albums)
-			{
-				if (albums is null)
-					return null;
-
-				foreach (IAlbum album in albums)
-					(this as IAlbums).PopulateAlbum(album);
-
-				return albums;
-			}
-			async Task<IEnumerable<IAlbum>?> IAlbums.PopulateAlbums(IEnumerable<IAlbum>? albums, CancellationToken cancellationToken)
-			{
-				if (albums is null)
-					return null;
-
-				foreach (IAlbum album in albums)
-					await (this as IAlbums).PopulateAlbum(album, cancellationToken);
-
-				return albums;
-			}
-
 			bool IAlbums.DeleteAlbum(IAlbum album)
 			{
 				if (Actions?.OnDelete != null)

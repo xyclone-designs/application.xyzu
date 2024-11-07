@@ -1,11 +1,14 @@
 ﻿using Android.Content;
 using Android.Util;
+using Android.Views;
 using AndroidX.AppCompat.Widget;
 
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
+using Xyzu.Images;
 using Xyzu.Library.Models;
 
 namespace Xyzu.Views.Info
@@ -37,22 +40,42 @@ namespace Xyzu.Views.Info
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{
 			Inflate(context, Ids.Layout, this);
+			SetPaletteTextViews(
+				FindViewById<AppCompatTextView>(Ids.Title),
+				FindViewById<AppCompatTextView>(Ids.PlaylistName_Title),
+				FindViewById<AppCompatTextView>(Ids.PlaylistDateCreated_Title),
+				FindViewById<AppCompatTextView>(Ids.PlaylistDateModified_Title),
+				FindViewById<AppCompatTextView>(Ids.PlaylistDuration_Title),
+				FindViewById<AppCompatTextView>(Ids.PlaylistSongCount_Title));
 
-			Title = FindViewById(Ids.Title) as AppCompatTextView;
-			PlaylistName = FindViewById(Ids.PlaylistName_Value) as AppCompatTextView;
-			PlaylistDateCreated = FindViewById(Ids.PlaylistDateCreated_Value) as AppCompatTextView;
-			PlaylistDateModified = FindViewById(Ids.PlaylistDateModified_Value) as AppCompatTextView;
-			PlaylistDuration = FindViewById(Ids.PlaylistDuration_Value) as AppCompatTextView;
-			PlaylistSongCount = FindViewById(Ids.PlaylistSongCount_Value) as AppCompatTextView;			 
-			PlaylistName_Title = FindViewById(Ids.PlaylistName_Title) as AppCompatTextView;
-			PlaylistDateCreated_Title = FindViewById(Ids.PlaylistDateCreated_Title) as AppCompatTextView;
-			PlaylistDateModified_Title = FindViewById(Ids.PlaylistDateModified_Title) as AppCompatTextView;
-			PlaylistDuration_Title = FindViewById(Ids.PlaylistDuration_Title) as AppCompatTextView;
-			PlaylistSongCount_Title = FindViewById(Ids.PlaylistSongCount_Title) as AppCompatTextView;
+			base.Init(context, attrs);
+		}
+		protected override void OnPropertyChanged([CallerMemberName] string? propertyname = null)
+		{
+			base.OnPropertyChanged(propertyname);
+
+			switch (propertyname)
+			{
+				case nameof(Playlist):
+					PlaylistName?.SetText(_Playlist?.Name, null);
+					PlaylistDateCreated?.SetText(_Playlist?.DateCreated.ToString("dd/MM/yyyy"), null);
+					PlaylistDateModified?.SetText(_Playlist?.DateModified?.ToString("dd/MM/yyyy"), null);
+					PlaylistDuration?.SetText(_Playlist?.Duration.ToMicrowaveFormat(), null);
+					PlaylistSongCount?.SetText(_Playlist?.SongIds.Count().ToString(), null);
+					break;
+
+				default: break;
+			}
 		}
 
-
 		private IPlaylist? _Playlist;
+		private AppCompatTextView? _PlaylistName;
+		private AppCompatTextView? _PlaylistDateCreated;
+		private AppCompatTextView? _PlaylistDateModified;
+		private AppCompatTextView? _PlaylistDuration;
+		private AppCompatTextView? _PlaylistSongCount;
+
+
 		public IPlaylist? Playlist
 		{
 			get => _Playlist;
@@ -60,24 +83,38 @@ namespace Xyzu.Views.Info
 			{
 				_Playlist = value;
 
-				PlaylistName?.SetText(_Playlist?.Name, null);
-				PlaylistDateCreated?.SetText(_Playlist?.DateCreated.ToString("dd/MM/yyyy"), null);
-				PlaylistDateModified?.SetText(_Playlist?.DateModified?.ToString("dd/MM/yyyy"), null);
-				PlaylistDuration?.SetText(_Playlist?.Duration.ToMicrowaveFormat(), null);
-				PlaylistSongCount?.SetText(_Playlist?.SongIds.Count().ToString(), null);
+				OnPropertyChanged();
 			}
 		}
-
-		public AppCompatTextView? Title { get; protected set; }
-		public AppCompatTextView? PlaylistName { get; protected set; }
-		public AppCompatTextView? PlaylistDateCreated { get; protected set; }
-		public AppCompatTextView? PlaylistDateModified { get; protected set; }
-		public AppCompatTextView? PlaylistDuration { get; protected set; }
-		public AppCompatTextView? PlaylistSongCount { get; protected set; }					
-		public AppCompatTextView? PlaylistName_Title { get; protected set; }
-		public AppCompatTextView? PlaylistDateCreated_Title { get; protected set; }
-		public AppCompatTextView? PlaylistDateModified_Title { get; protected set; }
-		public AppCompatTextView? PlaylistDuration_Title { get; protected set; }
-		public AppCompatTextView? PlaylistSongCount_Title { get; protected set; }
+		public AppCompatTextView PlaylistName
+		{
+			get => _PlaylistName
+				??= FindViewById<AppCompatTextView>(Ids.PlaylistName_Title) ??
+				throw new InflateException("PlaylistName");
+		}
+		public AppCompatTextView PlaylistDateCreated
+		{
+			get => _PlaylistDateCreated
+				??= FindViewById<AppCompatTextView>(Ids.PlaylistDateCreated_Title) ??
+				throw new InflateException("PlaylistDateCreated");
+		}
+		public AppCompatTextView PlaylistDateModified
+		{
+			get => _PlaylistDateModified
+				??= FindViewById<AppCompatTextView>(Ids.PlaylistDateModified_Title) ??
+				throw new InflateException("PlaylistDateModified");
+		}
+		public AppCompatTextView PlaylistDuration
+		{
+			get => _PlaylistDuration
+				??= FindViewById<AppCompatTextView>(Ids.PlaylistDuration_Title) ??
+				throw new InflateException("PlaylistDuration");
+		}
+		public AppCompatTextView PlaylistSongCount
+		{
+			get => _PlaylistSongCount
+				??= FindViewById<AppCompatTextView>(Ids.PlaylistSongCount_Title) ??
+				throw new InflateException("PlaylistSongCount");
+		}
 	}
 }

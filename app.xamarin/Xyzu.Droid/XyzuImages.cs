@@ -32,6 +32,10 @@ namespace Xyzu
 
 		public IImagesDroid Images { get; }
 
+		public Task Operate(IImagesDroid.Parameters parameters)
+		{
+			return Images.Operate(parameters);
+		}
 		public Task SetToImageView(IImagesDroid.Parameters parameters)
 		{
 			return Images.SetToImageView(parameters);

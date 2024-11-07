@@ -72,18 +72,28 @@ namespace System.Linq
 			return default;
 		}
 
-		public static TimeSpan? Sum(this IEnumerable<TimeSpan?> enumerable)
+		public static TimeSpan Sum(this IEnumerable<TimeSpan> enumerable)
 		{
-			IEnumerable<TimeSpan> nulless = enumerable.OfType<TimeSpan>();
+			double milliseconds = 0;
+			TimeSpan sum = TimeSpan.Zero;
 
-			if (nulless.Any() is false)
-				return null;
+			foreach (TimeSpan timespan in enumerable)
+				try { milliseconds += timespan.TotalMilliseconds; }
+				catch (Exception) 
+				{
+					sum += TimeSpan.FromMilliseconds(milliseconds);
+					milliseconds = timespan.TotalMilliseconds;
+				}
 
-			double sum = nulless
-				.Select(timespan => timespan.TotalMilliseconds)
+			sum += TimeSpan.FromMilliseconds(milliseconds);
+
+			return sum;
+		}
+		public static TimeSpan Sum<T>(this IEnumerable<T> enumerable, Func<T, TimeSpan> selector)
+		{
+			return enumerable
+				.Select(selector)
 				.Sum();
-
-			return TimeSpan.FromMilliseconds(sum);
 		}
 	}
 }

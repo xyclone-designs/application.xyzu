@@ -1,14 +1,15 @@
 ﻿using Android.Content;
-using Android.Graphics;
 using Android.Util;
+using Android.Views;
 using AndroidX.AppCompat.Widget;
-using AndroidX.Palette.Graphics;
 
 using System;
 using System.Runtime.CompilerServices;
+
 using Xyzu.Droid;
 using Xyzu.Images;
 using Xyzu.Library.Models;
+using static Xyzu.Menus.LibraryItem;
 
 namespace Xyzu.Views.Info
 {
@@ -58,38 +59,24 @@ namespace Xyzu.Views.Info
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{
 			Inflate(context, Ids.Layout, this);
+			SetPaletteTextViews(
+				FindViewById<AppCompatTextView>(Ids.Title),
+				FindViewById<AppCompatTextView>(Ids.SongTitle_Title),
+				FindViewById<AppCompatTextView>(Ids.SongArtist_Title),
+				FindViewById<AppCompatTextView>(Ids.SongAlbum_Title),
+				FindViewById<AppCompatTextView>(Ids.SongAlbumArtist_Title),
+				FindViewById<AppCompatTextView>(Ids.SongGenre_Title),
+				FindViewById<AppCompatTextView>(Ids.SongReleaseDate_Title),
+				FindViewById<AppCompatTextView>(Ids.SongDuration_Title),
+				FindViewById<AppCompatTextView>(Ids.SongTrackNumber_Title),
+				FindViewById<AppCompatTextView>(Ids.SongDiscNumber_Title),
+				FindViewById<AppCompatTextView>(Ids.SongCopyright_Title),
+				FindViewById<AppCompatTextView>(Ids.SongBitrate_Title),
+				FindViewById<AppCompatTextView>(Ids.SongFilepath_Title),
+				FindViewById<AppCompatTextView>(Ids.SongMimeType_Title),
+				FindViewById<AppCompatTextView>(Ids.SongSize_Title));
 
-			Title = FindViewById(Ids.Title) as AppCompatTextView;
-			SongArtwork = FindViewById(Ids.SongArtwork) as AppCompatImageView;
-
-			SongTitle = FindViewById(Ids.SongTitle_Value) as AppCompatTextView;
-			SongArtist = FindViewById(Ids.SongArtist_Value) as AppCompatTextView;
-			SongAlbum = FindViewById(Ids.SongAlbum_Value) as AppCompatTextView;
-			SongAlbumArtist = FindViewById(Ids.SongAlbumArtist_Value) as AppCompatTextView;
-			SongGenre = FindViewById(Ids.SongGenre_Value) as AppCompatTextView;
-			SongReleaseDate = FindViewById(Ids.SongReleaseDate_Value) as AppCompatTextView;
-			SongDuration = FindViewById(Ids.SongDuration_Value) as AppCompatTextView;
-			SongTrackNumber = FindViewById(Ids.SongTrackNumber_Value) as AppCompatTextView;
-			SongDiscNumber = FindViewById(Ids.SongDiscNumber_Value) as AppCompatTextView;
-			SongCopyright = FindViewById(Ids.SongCopyright_Value) as AppCompatTextView;
-			SongBitrate = FindViewById(Ids.SongBitrate_Value) as AppCompatTextView;
-			SongFilepath = FindViewById(Ids.SongFilepath_Value) as AppCompatTextView;
-			SongMimeType = FindViewById(Ids.SongMimeType_Value) as AppCompatTextView;
-			SongSize = FindViewById(Ids.SongSize_Value) as AppCompatTextView;					   
-			SongTitle_Title = FindViewById(Ids.SongTitle_Title) as AppCompatTextView;
-			SongArtist_Title = FindViewById(Ids.SongArtist_Title) as AppCompatTextView;
-			SongAlbum_Title = FindViewById(Ids.SongAlbum_Title) as AppCompatTextView;
-			SongAlbumArtist_Title = FindViewById(Ids.SongAlbumArtist_Title) as AppCompatTextView;
-			SongGenre_Title = FindViewById(Ids.SongGenre_Title) as AppCompatTextView;
-			SongReleaseDate_Title = FindViewById(Ids.SongReleaseDate_Title) as AppCompatTextView;
-			SongDuration_Title = FindViewById(Ids.SongDuration_Title) as AppCompatTextView;
-			SongTrackNumber_Title = FindViewById(Ids.SongTrackNumber_Title) as AppCompatTextView;
-			SongDiscNumber_Title = FindViewById(Ids.SongDiscNumber_Title) as AppCompatTextView;
-			SongCopyright_Title = FindViewById(Ids.SongCopyright_Title) as AppCompatTextView;
-			SongBitrate_Title = FindViewById(Ids.SongBitrate_Title) as AppCompatTextView;
-			SongFilepath_Title = FindViewById(Ids.SongFilepath_Title) as AppCompatTextView;
-			SongMimeType_Title = FindViewById(Ids.SongMimeType_Title) as AppCompatTextView;
-			SongSize_Title = FindViewById(Ids.SongSize_Title) as AppCompatTextView;
+			base.Init(context, attrs);
 		}
 		protected override void OnPropertyChanged([CallerMemberName] string? propertyname = null)
 		{
@@ -97,7 +84,21 @@ namespace Xyzu.Views.Info
 
 			switch(propertyname)
 			{
-				case nameof(Images):
+				case nameof(Song):
+					SongTitle?.SetText(_Song?.Title, null);
+					SongArtist?.SetText(_Song?.Artist, null);
+					SongAlbum?.SetText(_Song?.Album, null);
+					SongAlbumArtist?.SetText(_Song?.AlbumArtist, null);
+					SongGenre?.SetText(_Song?.Genre, null);
+					SongReleaseDate?.SetText(_Song?.ReleaseDate?.ToString("dd/MM/yyyy"), null);
+					SongDuration?.SetText(_Song?.Duration?.ToMicrowaveFormat(), null);
+					SongTrackNumber?.SetText(_Song?.TrackNumber?.ToString(), null);
+					SongDiscNumber?.SetText(_Song?.DiscNumber?.ToString(), null);
+					SongCopyright?.SetText(_Song?.Copyright, null);
+					SongBitrate?.SetText(_Song?.Bitrate?.ToString(), null);
+					SongFilepath?.SetText(_Song?.Filepath, null);
+					SongMimeType?.SetText(_Song?.MimeType?.ToString(), null);
+					SongSize?.SetText(string.Format("{0} MB", (_Song?.Size ?? 0) / 1024 / 1024), null);
 					ReloadImage();
 					break;
 
@@ -105,7 +106,33 @@ namespace Xyzu.Views.Info
 			}
 		}
 
+		public override async void ReloadImage()
+		{
+			if (Images is not null) await Images.SetToImageView(new IImagesDroid.Parameters(Song)
+			{
+				ImageView = SongArtwork,
+				Operations = IImages.DefaultOperations.RoundedDownsample,
+				OnPalette = palette => Palette = palette
+			});
+		}
+
 		private ISong? _Song;
+		protected AppCompatImageView? _SongArtwork;
+		protected AppCompatTextView? _SongTitle;
+		protected AppCompatTextView? _SongArtist;
+		protected AppCompatTextView? _SongAlbum;
+		protected AppCompatTextView? _SongAlbumArtist;
+		protected AppCompatTextView? _SongGenre;
+		protected AppCompatTextView? _SongReleaseDate;
+		protected AppCompatTextView? _SongDuration;
+		protected AppCompatTextView? _SongTrackNumber;
+		protected AppCompatTextView? _SongDiscNumber;
+		protected AppCompatTextView? _SongCopyright;
+		protected AppCompatTextView? _SongBitrate;
+		protected AppCompatTextView? _SongFilepath;
+		protected AppCompatTextView? _SongMimeType;
+		protected AppCompatTextView? _SongSize;
+
 
 		public ISong? Song
 		{
@@ -114,88 +141,98 @@ namespace Xyzu.Views.Info
 			{
 				_Song = value;
 
-				SongTitle?.SetText(_Song?.Title, null);
-				SongArtist?.SetText(_Song?.Artist, null);
-				SongAlbum?.SetText(_Song?.Album, null);
-				SongAlbumArtist?.SetText(_Song?.AlbumArtist, null);
-				SongGenre?.SetText(_Song?.Genre, null);
-				SongReleaseDate?.SetText(_Song?.ReleaseDate?.ToString("dd/MM/yyyy"), null);
-				SongDuration?.SetText(_Song?.Duration?.ToMicrowaveFormat(), null);
-				SongTrackNumber?.SetText(_Song?.TrackNumber?.ToString(), null);
-				SongDiscNumber?.SetText(_Song?.DiscNumber?.ToString(), null);
-				SongCopyright?.SetText(_Song?.Copyright, null);
-				SongBitrate?.SetText(_Song?.Bitrate?.ToString(), null);
-				SongFilepath?.SetText(_Song?.Filepath, null);
-				SongMimeType?.SetText(_Song?.MimeType?.ToString(), null);
-				SongSize?.SetText(string.Format("{0} MB", (_Song?.Size ?? 0) / 1024 / 1024), null);
-
-				ReloadImage();
+				OnPropertyChanged();
 			}
 		}
-
-		public AppCompatTextView? Title { get; protected set; }
-		public AppCompatImageView? SongArtwork { get; protected set; }
-		public AppCompatTextView? SongTitle { get; protected set; }
-		public AppCompatTextView? SongArtist { get; protected set; }
-		public AppCompatTextView? SongAlbum { get; protected set; }
-		public AppCompatTextView? SongAlbumArtist { get; protected set; }
-		public AppCompatTextView? SongGenre { get; protected set; }
-		public AppCompatTextView? SongReleaseDate { get; protected set; }
-		public AppCompatTextView? SongDuration { get; protected set; }
-		public AppCompatTextView? SongTrackNumber { get; protected set; }
-		public AppCompatTextView? SongDiscNumber { get; protected set; }
-		public AppCompatTextView? SongCopyright { get; protected set; }
-		public AppCompatTextView? SongBitrate { get; protected set; }
-		public AppCompatTextView? SongFilepath { get; protected set; }
-		public AppCompatTextView? SongMimeType { get; protected set; }
-		public AppCompatTextView? SongSize { get; protected set; }				  
-		public AppCompatTextView? SongTitle_Title { get; protected set; }
-		public AppCompatTextView? SongArtist_Title { get; protected set; }
-		public AppCompatTextView? SongAlbum_Title { get; protected set; }
-		public AppCompatTextView? SongAlbumArtist_Title { get; protected set; }
-		public AppCompatTextView? SongGenre_Title { get; protected set; }
-		public AppCompatTextView? SongReleaseDate_Title { get; protected set; }
-		public AppCompatTextView? SongDuration_Title { get; protected set; }
-		public AppCompatTextView? SongTrackNumber_Title { get; protected set; }
-		public AppCompatTextView? SongDiscNumber_Title { get; protected set; }
-		public AppCompatTextView? SongCopyright_Title { get; protected set; }
-		public AppCompatTextView? SongBitrate_Title { get; protected set; }
-		public AppCompatTextView? SongFilepath_Title { get; protected set; }
-		public AppCompatTextView? SongMimeType_Title { get; protected set; }
-		public AppCompatTextView? SongSize_Title { get; protected set; }
-
-		public async void ReloadImage()
+		public AppCompatImageView SongArtwork 
 		{
-			if (Images != null)
-				await Images.SetToImageView(new IImagesDroid.Parameters(Song)
-				{
-					ImageView = SongArtwork,
-					Operations = IImages.DefaultOperations.RoundedDownsample,
-					OnPalette = palette =>
-					{
-						OnPalette?.Invoke(palette);
-
-						if (Context is not null && palette?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
-						{
-							Title?.SetTextColor(color);
-
-							SongTitle_Title?.SetTextColor(color);
-							SongArtist_Title?.SetTextColor(color);
-							SongAlbum_Title?.SetTextColor(color);
-							SongAlbumArtist_Title?.SetTextColor(color);
-							SongGenre_Title?.SetTextColor(color);
-							SongReleaseDate_Title?.SetTextColor(color);
-							SongDuration_Title?.SetTextColor(color);
-							SongTrackNumber_Title?.SetTextColor(color);
-							SongDiscNumber_Title?.SetTextColor(color);
-							SongCopyright_Title?.SetTextColor(color);
-							SongBitrate_Title?.SetTextColor(color);
-							SongFilepath_Title?.SetTextColor(color);
-							SongMimeType_Title?.SetTextColor(color);
-							SongSize_Title?.SetTextColor(color);
-						}
-					}
-				});
+			get => _SongArtwork ??=
+				FindViewById(Ids.SongArtwork) as AppCompatImageView ??
+				throw new InflateException("SongArtwork");
+		}
+		public AppCompatTextView SongTitle 
+		{
+			get => _SongTitle ??=
+				FindViewById(Ids.SongTitle_Value) as AppCompatTextView ??
+				throw new InflateException("SongTitle");
+		}
+		public AppCompatTextView SongArtist 
+		{
+			get => _SongArtist ??=
+				FindViewById(Ids.SongArtist_Value) as AppCompatTextView ??
+				throw new InflateException("SongArtist");
+		}
+		public AppCompatTextView SongAlbum 
+		{
+			get => _SongAlbum ??=
+				FindViewById(Ids.SongAlbum_Value) as AppCompatTextView ??
+				throw new InflateException("SongAlbum");
+		}
+		public AppCompatTextView SongAlbumArtist 
+		{
+			get => _SongAlbumArtist ??=
+				FindViewById(Ids.SongAlbumArtist_Value) as AppCompatTextView ??
+				throw new InflateException("SongAlbumArtist");
+		}
+		public AppCompatTextView SongGenre 
+		{
+			get => _SongGenre ??=
+				FindViewById(Ids.SongGenre_Value) as AppCompatTextView ??
+				throw new InflateException("SongGenre");
+		}
+		public AppCompatTextView SongReleaseDate 
+		{
+			get => _SongReleaseDate ??=
+				FindViewById(Ids.SongReleaseDate_Value) as AppCompatTextView ??
+				throw new InflateException("SongReleaseDate");
+		}
+		public AppCompatTextView SongDuration 
+		{
+			get => _SongDuration ??=
+				FindViewById(Ids.SongDuration_Value) as AppCompatTextView ??
+				throw new InflateException("SongDuration");
+		}
+		public AppCompatTextView SongTrackNumber 
+		{
+			get => _SongTrackNumber ??=
+				FindViewById(Ids.SongTrackNumber_Value) as AppCompatTextView ??
+				throw new InflateException("SongTrackNumber");
+		}
+		public AppCompatTextView SongDiscNumber 
+		{
+			get => _SongDiscNumber ??=
+				FindViewById(Ids.SongDiscNumber_Value) as AppCompatTextView ??
+				throw new InflateException("SongDiscNumber");
+		}
+		public AppCompatTextView SongCopyright 
+		{
+			get => _SongCopyright ??=
+				FindViewById(Ids.SongCopyright_Value) as AppCompatTextView ??
+				throw new InflateException("SongCopyright");
+		}
+		public AppCompatTextView SongBitrate 
+		{
+			get => _SongBitrate ??=
+				FindViewById(Ids.SongBitrate_Value) as AppCompatTextView ??
+				throw new InflateException("SongBitrate");
+		}
+		public AppCompatTextView SongFilepath 
+		{
+			get => _SongFilepath ??=
+				FindViewById(Ids.SongFilepath_Value) as AppCompatTextView ??
+				throw new InflateException("SongFilepath");
+		}
+		public AppCompatTextView SongMimeType 
+		{
+			get => _SongMimeType ??=
+				FindViewById(Ids.SongMimeType_Value) as AppCompatTextView ??
+				throw new InflateException("SongMimeType");
+		}
+		public AppCompatTextView SongSize 
+		{
+			get => _SongSize ??=
+				FindViewById(Ids.SongSize_Value) as AppCompatTextView ??
+				throw new InflateException("SongSize");
 		}
 	}
 }

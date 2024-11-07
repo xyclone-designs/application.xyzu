@@ -18,11 +18,6 @@ namespace Xyzu.Library
 			IEnumerable<IAlbum> GetAlbums(IIdentifiers? identifiers = null);
 			IAsyncEnumerable<IAlbum> GetAlbums(IIdentifiers? identifiers = null, CancellationToken cancellationToken = default);
 
-			IAlbum? PopulateAlbum(IAlbum? album);
-			Task<IAlbum?> PopulateAlbum(IAlbum? album, CancellationToken cancellationToken = default);
-			IEnumerable<IAlbum>? PopulateAlbums(IEnumerable<IAlbum>? albums);
-			Task<IEnumerable<IAlbum>?> PopulateAlbums(IEnumerable<IAlbum>? albums, CancellationToken cancellationToken = default);
-
 			bool UpdateAlbum(IAlbum old, IAlbum updated);
 			Task<bool> UpdateAlbum(IAlbum old, IAlbum updated, CancellationToken cancellationToken = default);
 

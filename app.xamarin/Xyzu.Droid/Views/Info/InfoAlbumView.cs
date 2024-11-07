@@ -1,8 +1,7 @@
 ﻿using Android.Content;
-using Android.Graphics;
 using Android.Util;
+using Android.Views;
 using AndroidX.AppCompat.Widget;
-using AndroidX.Palette.Graphics;
 
 using System;
 using System.Linq;
@@ -44,22 +43,16 @@ namespace Xyzu.Views.Info
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{
 			Inflate(context, Ids.Layout, this);
+			SetPaletteTextViews(
+				FindViewById<AppCompatTextView>(Ids.Title),
+				FindViewById<AppCompatTextView>(Ids.AlbumTitle_Title),
+				FindViewById<AppCompatTextView>(Ids.AlbumArtist_Title),
+				FindViewById<AppCompatTextView>(Ids.AlbumReleaseDate_Title),
+				FindViewById<AppCompatTextView>(Ids.AlbumDuration_Title),
+				FindViewById<AppCompatTextView>(Ids.AlbumSongCount_Title),
+				FindViewById<AppCompatTextView>(Ids.AlbumDiscCount_Title));
 
-			Title = FindViewById(Ids.Title) as AppCompatTextView;
-			AlbumArtwork = FindViewById(Ids.AlbumArtwork) as AppCompatImageView;
-
-			AlbumTitle = FindViewById(Ids.AlbumTitle_Value) as AppCompatTextView;
-			AlbumArtist = FindViewById(Ids.AlbumArtist_Value) as AppCompatTextView;
-			AlbumReleaseDate = FindViewById(Ids.AlbumReleaseDate_Value) as AppCompatTextView;
-			AlbumDuration = FindViewById(Ids.AlbumDuration_Value) as AppCompatTextView;
-			AlbumSongCount = FindViewById(Ids.AlbumSongCount_Value) as AppCompatTextView;
-			AlbumDiscCount = FindViewById(Ids.AlbumDiscCount_Value) as AppCompatTextView;	   
-			AlbumTitle_Title = FindViewById(Ids.AlbumTitle_Title) as AppCompatTextView;
-			AlbumArtist_Title = FindViewById(Ids.AlbumArtist_Title) as AppCompatTextView;
-			AlbumReleaseDate_Title = FindViewById(Ids.AlbumReleaseDate_Title) as AppCompatTextView;
-			AlbumDuration_Title = FindViewById(Ids.AlbumDuration_Title) as AppCompatTextView;
-			AlbumSongCount_Title = FindViewById(Ids.AlbumSongCount_Title) as AppCompatTextView;
-			AlbumDiscCount_Title = FindViewById(Ids.AlbumDiscCount_Title) as AppCompatTextView;
+			base.Init(context, attrs);
 		}
 		protected override void OnPropertyChanged([CallerMemberName] string? propertyname = null)
 		{
@@ -67,7 +60,13 @@ namespace Xyzu.Views.Info
 
 			switch (propertyname)
 			{
-				case nameof(Images):
+				case nameof(Album):
+					AlbumTitle?.SetText(_Album?.Title, null);
+					AlbumArtist?.SetText(_Album?.Artist, null);
+					AlbumReleaseDate?.SetText(_Album?.ReleaseDate?.ToString("dd/MM/yyyy"), null);
+					AlbumDuration?.SetText(_Album?.Duration.ToMicrowaveFormat(), null);
+					AlbumSongCount?.SetText(_Album?.SongIds.Count().ToString(), null);
+					AlbumDiscCount?.SetText(_Album?.DiscCount?.ToString(), null);
 					ReloadImage();
 					break;
 
@@ -76,6 +75,14 @@ namespace Xyzu.Views.Info
 		}
 
 		private IAlbum? _Album;
+		private AppCompatImageView? _AlbumArtwork;
+		private AppCompatTextView? _AlbumTitle;
+		private AppCompatTextView? _AlbumArtist;
+		private AppCompatTextView? _AlbumReleaseDate;
+		private AppCompatTextView? _AlbumDuration;
+		private AppCompatTextView? _AlbumSongCount;
+		private AppCompatTextView? _AlbumDiscCount;
+
 
 		public IAlbum? Album
 		{
@@ -84,56 +91,60 @@ namespace Xyzu.Views.Info
 			{
 				_Album = value;
 
-				AlbumTitle?.SetText(_Album?.Title, null);
-				AlbumArtist?.SetText(_Album?.Artist, null);
-				AlbumReleaseDate?.SetText(_Album?.ReleaseDate?.ToString("dd/MM/yyyy"), null);
-				AlbumDuration?.SetText(_Album?.Duration?.ToMicrowaveFormat(), null);
-				AlbumSongCount?.SetText(_Album?.SongIds.Count().ToString(), null);
-				AlbumDiscCount?.SetText(_Album?.DiscCount?.ToString(), null);
-
-				ReloadImage();
+				OnPropertyChanged();
 			}
 		}
-
-		public Action<Palette?>? AlbumPalette { get; set; }
-
-		public AppCompatTextView? Title { get; protected set; }
-		public AppCompatImageView? AlbumArtwork { get; protected set; }
-		public AppCompatTextView? AlbumTitle { get; protected set; }
-		public AppCompatTextView? AlbumArtist { get; protected set; }
-		public AppCompatTextView? AlbumReleaseDate { get; protected set; }
-		public AppCompatTextView? AlbumDuration { get; protected set; }
-		public AppCompatTextView? AlbumSongCount { get; protected set; }
-		public AppCompatTextView? AlbumDiscCount { get; protected set; }
-
-		public AppCompatTextView? AlbumTitle_Title { get; protected set; }
-		public AppCompatTextView? AlbumArtist_Title { get; protected set; }
-		public AppCompatTextView? AlbumReleaseDate_Title { get; protected set; }
-		public AppCompatTextView? AlbumDuration_Title { get; protected set; }
-		public AppCompatTextView? AlbumSongCount_Title { get; protected set; }
-		public AppCompatTextView? AlbumDiscCount_Title { get; protected set; }
-
-		public async void ReloadImage()
+		public AppCompatImageView AlbumArtwork
 		{
-			if (Images != null)
-				await Images.SetToImageView(new IImagesDroid.Parameters(Album)
-				{
-					ImageView = AlbumArtwork,
-					Operations = IImages.DefaultOperations.RoundedDownsample,
-					OnPalette = palette =>
-					{
-						OnPalette?.Invoke(palette);
+			get => _AlbumArtwork
+				??= FindViewById<AppCompatImageView>(Ids.AlbumTitle_Value) ??
+				throw new InflateException("AlbumTitle_Value");
+		}
+		public AppCompatTextView AlbumTitle
+		{
+			get => _AlbumTitle
+				??= FindViewById<AppCompatTextView>(Ids.AlbumTitle_Value) as AppCompatTextView ??
+				throw new InflateException("AlbumTitle_Value");
+		}
+		public AppCompatTextView AlbumArtist
+		{
+			get => _AlbumArtist
+				??= FindViewById<AppCompatTextView>(Ids.AlbumArtist_Value) as AppCompatTextView ??
+				throw new InflateException("AlbumArtist_Value");
+		}
+		public AppCompatTextView AlbumReleaseDate
+		{
+			get => _AlbumReleaseDate
+				??= FindViewById<AppCompatTextView>(Ids.AlbumReleaseDate_Value) as AppCompatTextView ??
+				throw new InflateException("AlbumReleaseDate_Value");
+		}
+		public AppCompatTextView AlbumDuration
+		{
+			get => _AlbumDuration
+				??= FindViewById<AppCompatTextView>(Ids.AlbumDuration_Value) as AppCompatTextView ??
+				throw new InflateException("AlbumDuration_Value");
+		}
+		public AppCompatTextView AlbumSongCount
+		{
+			get => _AlbumSongCount
+				??= FindViewById<AppCompatTextView>(Ids.AlbumSongCount_Value) as AppCompatTextView ??
+				throw new InflateException("AlbumSongCount_Value");
+		}
+		public AppCompatTextView AlbumDiscCount
+		{
+			get => _AlbumDiscCount
+				??= FindViewById<AppCompatTextView>(Ids.AlbumDiscCount_Value) as AppCompatTextView ??
+				throw new InflateException("AlbumDiscCount_Value");
+		}
 
-						if (Context is not null && palette?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
-						{
-							Title?.SetTextColor(color);
-
-							AlbumTitle_Title?.SetTextColor(color);
-							AlbumArtist_Title?.SetTextColor(color);
-							AlbumReleaseDate_Title?.SetTextColor(color);
-						}
-					}
-				});
+		public override async void ReloadImage()
+		{
+			if (Images is not null) await Images.SetToImageView(new IImagesDroid.Parameters(Album)
+			{
+				ImageView = AlbumArtwork,
+				Operations = IImages.DefaultOperations.RoundedDownsample,
+				OnPalette = palette => Palette = palette
+			});
 		}
 	}
 }

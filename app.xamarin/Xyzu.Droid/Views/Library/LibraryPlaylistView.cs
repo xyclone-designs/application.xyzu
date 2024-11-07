@@ -355,8 +355,6 @@ namespace Xyzu.Views.Library
 			if (force)
 				PlaylistHeader.Playlist = null;
 
-			await Library.Playlists.PopulatePlaylist(Playlist, Cancellationtoken);
-
 			IAsyncEnumerable<ISong> playlistsongs = Library.Songs
 				.GetSongs(Identifiers, Cancellationtoken)
 				.Sort(Settings.SongsSortKey, Settings.SongsIsReversed);

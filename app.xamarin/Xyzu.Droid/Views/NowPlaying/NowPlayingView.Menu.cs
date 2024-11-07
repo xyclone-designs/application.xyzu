@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 
 using Xyzu.Droid;
+using Xyzu.Library.Models;
 using Xyzu.Menus;
 using Xyzu.Player.Enums;
 using Xyzu.Views.Option;
@@ -215,8 +216,9 @@ namespace Xyzu.Views.NowPlaying
 			MenuVariables.AnchorView ??= this;
 			MenuVariables.AnchorViewGroup ??= this;
 			MenuVariables.Context ??= Context;
-
-			MenuVariables.Songs = Songs;
+			MenuVariables.Songs = Enumerable.Empty<ISong?>()
+				.Append(Player?.Queue.CurrentSong)
+				.OfType<ISong>();
 
 			switch (menuoption)
 			{

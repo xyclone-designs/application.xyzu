@@ -1,13 +1,13 @@
-﻿#nullable enable
-
-using Android.Content;
-using Android.Runtime;
+﻿using Android.Content;
 using Android.Util;
+using Android.Views;
 using AndroidX.AppCompat.Widget;
 
 using System;
+using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
+using Xyzu.Images;
 using Xyzu.Library.Models;
 
 namespace Xyzu.Views.InfoEdit
@@ -27,14 +27,14 @@ namespace Xyzu.Views.InfoEdit
 
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{
+			Inflate(context, Ids.Layout, this);
+			//SetPaletteTextViews(FindViewById<AppCompatTextView>(Ids.Title));
+
 			base.Init(context, attrs);
-
-			Inflate(Context, Ids.Layout, this);
-
-			SongLyrics = FindViewById(Ids.SongLyrics) as AppCompatEditText;
 		}
 
 		private ISong? _Song;
+		private AppCompatTextView? _SongLyrics;
 
 		public ISong? Song
 		{
@@ -55,6 +55,20 @@ namespace Xyzu.Views.InfoEdit
 			}
 		}
 
-		public AppCompatEditText? SongLyrics { get; protected set; }
+		public AppCompatTextView SongLyrics
+		{
+			get => _SongLyrics ??=
+				FindViewById(Ids.SongLyrics) as AppCompatTextView ??
+				throw new InflateException("SongLyrics");
+		}
+
+		public override async void ReloadImage()
+		{
+			if (Images is not null) await Images.Operate(new IImagesDroid.Parameters(Song)
+			{
+				Operations = IImages.DefaultOperations.Downsample,
+				OnPalette = palette => Palette = palette
+			});
+		}
 	}
 }

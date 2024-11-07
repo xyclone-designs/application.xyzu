@@ -75,47 +75,6 @@ namespace Xyzu.Library
 					yield return await Task.FromResult(playlist);
 			}
 
-			IPlaylist? IPlaylists.PopulatePlaylist(IPlaylist? playlist)
-			{
-				if (playlist is null)
-					return null;
-
-				if (SQLiteLibrary.PlaylistsTable.FirstOrDefault(sqlplaylist => sqlplaylist.Id == playlist.Id) is PlaylistEntity playlistentity)
-					playlist.Populate(playlistentity);
-
-				return playlist;
-			}
-			async Task<IPlaylist?> IPlaylists.PopulatePlaylist(IPlaylist? playlist, CancellationToken cancellationToken)
-			{
-				if (playlist is null)
-					return null;
-
-				if (await SQLiteLibrary.PlaylistsTableAsync.FirstOrDefaultAsync(sqlplaylist => sqlplaylist.Id == playlist.Id) is PlaylistEntity playlistentity)
-					playlist.Populate(playlistentity);
-
-				return playlist;
-			}
-			IEnumerable<IPlaylist>? IPlaylists.PopulatePlaylists(IEnumerable<IPlaylist>? playlists)
-			{
-				if (playlists is null)
-					return null;
-
-				foreach (IPlaylist playlist in playlists)
-					(this as IPlaylists).PopulatePlaylist(playlist);
-
-				return playlists;
-			}
-			async Task<IEnumerable<IPlaylist>?> IPlaylists.PopulatePlaylists(IEnumerable<IPlaylist>? playlists, CancellationToken cancellationToken)
-			{
-				if (playlists is null)
-					return null;
-
-				foreach (IPlaylist playlist in playlists)
-					await (this as IPlaylists).PopulatePlaylist(playlist, cancellationToken);
-
-				return playlists;
-			}
-
 			bool IPlaylists.CreatePlaylist(IPlaylist playlist)
 			{
 				PlaylistEntity playlistentity = new (playlist);

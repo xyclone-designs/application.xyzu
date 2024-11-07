@@ -1,8 +1,7 @@
 ﻿using Android.Content;
-using Android.Graphics;
 using Android.Util;
+using Android.Views;
 using AndroidX.AppCompat.Widget;
-using AndroidX.Palette.Graphics;
 
 using System;
 using System.Runtime.CompilerServices;
@@ -35,35 +34,36 @@ namespace Xyzu.Views.InfoEdit
 
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{
+			Inflate(context, Ids.Layout, this);
+			SetPaletteTextViews(
+				FindViewById<AppCompatTextView>(Ids.Title),
+				FindViewById<AppCompatTextView>(Ids.AlbumTitle_Title),
+				FindViewById<AppCompatTextView>(Ids.AlbumArtist_Title),
+				FindViewById<AppCompatTextView>(Ids.AlbumReleaseDate_Title));
+
 			base.Init(context, attrs);
-
-			Inflate(Context, Ids.Layout, this);
-
-			Title = FindViewById(Ids.Title) as AppCompatTextView;
-			AlbumArtwork = FindViewById(Ids.AlbumArtwork) as AppCompatImageView;
-			AlbumTitle = FindViewById(Ids.AlbumTitle_Value) as AppCompatEditText;
-			AlbumArtist = FindViewById(Ids.AlbumArtist_Value) as AppCompatEditText;
-			AlbumReleaseDate = FindViewById(Ids.AlbumReleaseDate_Value) as AppCompatEditDate;			  
-			AlbumTitle_Title = FindViewById(Ids.AlbumTitle_Title) as AppCompatTextView;
-			AlbumArtist_Title = FindViewById(Ids.AlbumArtist_Title) as AppCompatTextView;
-			AlbumReleaseDate_Title = FindViewById(Ids.AlbumReleaseDate_Title) as AppCompatTextView;
 		}
-		protected override void OnPropertyChanged([CallerMemberName] string? propertyname = null)
+		protected override void OnAttachedToWindow()
 		{
-			base.OnPropertyChanged(propertyname);
+			base.OnAttachedToWindow();
 
-			switch (propertyname)
-			{
-				case nameof(Images):
-					ReloadImage();
-					break;
-
-				default: break;
-			}
+			if (AlbumArtwork != null)
+				AlbumArtwork.Click += OnAlbumArtworkClick;
 		}
+		protected override void OnDetachedFromWindow()
+		{
+			base.OnDetachedFromWindow();
 
+			if (AlbumArtwork != null)
+				AlbumArtwork.Click += OnAlbumArtworkClick;
+		}
 
 		private IAlbum? _Album;
+		private AppCompatImageView? _AlbumArtwork;
+		private AppCompatEditText? _AlbumTitle;
+		private AppCompatEditText? _AlbumArtist;
+		private AppCompatEditDate? _AlbumReleaseDate;
+
 
 		public IAlbum? Album
 		{
@@ -89,59 +89,46 @@ namespace Xyzu.Views.InfoEdit
 				ReloadImage();
 			}
 		}
+		public AppCompatImageView AlbumArtwork
+		{
+			get => _AlbumArtwork
+				??= FindViewById<AppCompatImageView>(Ids.AlbumTitle_Value) ??
+				throw new InflateException("AlbumTitle_Value");
+		}
+		public AppCompatEditText AlbumTitle
+		{
+			get => _AlbumTitle
+				??= FindViewById<AppCompatEditText>(Ids.AlbumTitle_Value) ??
+				throw new InflateException("AlbumTitle_Value");
+		}
+		public AppCompatEditText AlbumArtist
+		{
+			get => _AlbumArtist
+				??= FindViewById<AppCompatEditText>(Ids.AlbumArtist_Value) ??
+				throw new InflateException("AlbumArtist_Value");
+		}
+		public AppCompatEditDate AlbumReleaseDate
+		{
+			get => _AlbumReleaseDate
+				??= FindViewById<AppCompatEditDate>(Ids.AlbumReleaseDate_Value) ??
+				throw new InflateException("AlbumReleaseDate_Value");
+		}
 
-		public AppCompatTextView? Title { get; protected set; }
-		public AppCompatImageView? AlbumArtwork { get; protected set; }
-		public AppCompatEditText? AlbumTitle { get; protected set; }
-		public AppCompatEditText? AlbumArtist { get; protected set; }
-		public AppCompatEditDate? AlbumReleaseDate { get; protected set; }									  
-		public AppCompatTextView? AlbumTitle_Title { get; protected set; }
-		public AppCompatTextView? AlbumArtist_Title { get; protected set; }
-		public AppCompatTextView? AlbumReleaseDate_Title { get; protected set; }
 		public Action<InfoEditAlbumView, object?, EventArgs>? AlbumArtworkClick { get; set; }
 
-
-		protected override void OnAttachedToWindow()
+		public override async void ReloadImage()
 		{
-			base.OnAttachedToWindow();
-
-			if (AlbumArtwork != null)
-				AlbumArtwork.Click += OnAlbumArtworkClick;
-		}
-		protected override void OnDetachedFromWindow()
-		{
-			base.OnDetachedFromWindow();
-
-			if (AlbumArtwork != null)
-				AlbumArtwork.Click += OnAlbumArtworkClick;
+			if (Images is not null) await Images.SetToImageView(new IImagesDroid.Parameters(Album)
+			{
+				ImageView = AlbumArtwork,
+				Operations = IImages.DefaultOperations.RoundedDownsample,
+				OnPalette = palette => Palette = palette
+			});
 		}
 
 		protected void OnAlbumArtworkClick(object? sender, EventArgs args)
 		{
 			AlbumArtworkClick?.Invoke(this, sender, args);
-		}
-
-		public async void ReloadImage()
-		{
-			if (Images != null)
-				await Images.SetToImageView(new IImagesDroid.Parameters(Album)
-				{
-					ImageView = AlbumArtwork,
-					Operations = IImages.DefaultOperations.RoundedDownsample,
-					OnPalette = palette =>
-					{
-						OnPalette?.Invoke(palette);
-
-						if (Context is not null && palette?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
-						{
-							Title?.SetTextColor(color);
-
-							AlbumTitle_Title?.SetTextColor(color);
-							AlbumArtist_Title?.SetTextColor(color);
-							AlbumReleaseDate_Title?.SetTextColor(color);
-						}
-					}
-				});
 		}
 	}
 }

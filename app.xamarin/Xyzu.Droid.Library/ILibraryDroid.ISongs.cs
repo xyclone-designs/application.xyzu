@@ -75,47 +75,6 @@ namespace Xyzu.Library
 					yield return await Task.FromResult(song);
 			}
 
-			ISong? ISongs.PopulateSong(ISong? song)
-			{
-				if (song is null)
-					return null;
-
-				if (SQLiteLibrary.SongsTable.FirstOrDefault(sqlsong => sqlsong.Id == song.Id) is SongEntity songentity)
-					song.Populate(songentity);
-
-				return song;
-			}
-			async Task<ISong?> ISongs.PopulateSong(ISong? song, CancellationToken cancellationToken)
-			{
-				if (song is null)
-					return null;
-
-				if (await SQLiteLibrary.SongsTableAsync.FirstOrDefaultAsync(sqlsong => sqlsong.Id == song.Id) is SongEntity songentity)
-					song.Populate(songentity);
-
-				return song;
-			}
-			IEnumerable<ISong>? ISongs.PopulateSongs(IEnumerable<ISong>? songs)
-			{
-				if (songs is null)
-					return null;
-
-				foreach (ISong song in songs)
-					(this as ISongs).PopulateSong(song);
-
-				return songs;
-			}
-			async Task<IEnumerable<ISong>?> ISongs.PopulateSongs(IEnumerable<ISong>? songs, CancellationToken cancellationToken)
-			{
-				if (songs is null)
-					return null;
-
-				foreach (ISong song in songs)
-					await (this as ISongs).PopulateSong(song, cancellationToken);
-
-				return songs;
-			}
-
 			bool ISongs.DeleteSong(ISong song)
 			{
 				if (Actions?.OnDelete != null)

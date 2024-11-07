@@ -1,11 +1,14 @@
 ﻿using Android.Content;
 using Android.Util;
+using Android.Views;
 using AndroidX.AppCompat.Widget;
 
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
+using Xyzu.Images;
 using Xyzu.Library.Models;
 
 namespace Xyzu.Views.Info
@@ -31,15 +34,33 @@ namespace Xyzu.Views.Info
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{
 			Inflate(context, Ids.Layout, this);
+			SetPaletteTextViews(
+				FindViewById<AppCompatTextView>(Ids.Title),
+				FindViewById<AppCompatTextView>(Ids.GenreName_Title),
+				FindViewById<AppCompatTextView>(Ids.GenreSongCount_Title));
 
-			Title = FindViewById(Ids.Title) as AppCompatTextView;
-			GenreName = FindViewById(Ids.GenreName_Value) as AppCompatTextView;
-			GenreSongCount = FindViewById(Ids.GenreSongCount_Value) as AppCompatTextView;	 
-			GenreName_Title = FindViewById(Ids.GenreName_Title) as AppCompatTextView;
-			GenreSongCount_Title = FindViewById(Ids.GenreSongCount_Title) as AppCompatTextView;
+			base.Init(context, attrs);
+		}
+		protected override void OnPropertyChanged([CallerMemberName] string? propertyname = null)
+		{
+			base.OnPropertyChanged(propertyname);
+
+			switch (propertyname)
+			{
+				case nameof(Genre):
+					GenreName?.SetText(_Genre?.Name, null);
+					GenreSongCount?.SetText(_Genre?.SongIds.Count().ToString(), null);
+					ReloadImage();
+					break;
+
+				default: break;
+			}
 		}
 
 		private IGenre? _Genre;
+		private AppCompatTextView? _GenreName;
+		private AppCompatTextView? _GenreSongCount;
+
 
 		public IGenre? Genre
 		{
@@ -48,15 +69,20 @@ namespace Xyzu.Views.Info
 			{
 				_Genre = value;
 
-				GenreName?.SetText(_Genre?.Name, null);
-				GenreSongCount?.SetText(_Genre?.SongIds.Count().ToString(), null);
+				OnPropertyChanged();
 			}
 		}
-
-		public AppCompatTextView? Title { get; protected set; }
-		public AppCompatTextView? GenreName { get; protected set; }
-		public AppCompatTextView? GenreSongCount { get; protected set; }			
-		public AppCompatTextView? GenreName_Title { get; protected set; }
-		public AppCompatTextView? GenreSongCount_Title { get; protected set; }
+		public AppCompatTextView GenreName
+		{
+			get => _GenreName
+				??= FindViewById<AppCompatTextView>(Ids.GenreName_Title) ??
+				throw new InflateException("GenreName");
+		}
+		public AppCompatTextView GenreSongCount
+		{
+			get => _GenreSongCount
+				??= FindViewById<AppCompatTextView>(Ids.GenreSongCount_Title) ??
+				throw new InflateException("GenreSongCount");
+		}
 	}
 }

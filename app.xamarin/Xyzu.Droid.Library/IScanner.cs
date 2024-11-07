@@ -133,7 +133,7 @@ namespace Xyzu.Library
 				return StartCommandResult.Sticky;
 			}
 
-			private IEnumerable<AlbumEntity> CreateAlbums(IEnumerable<ISong>? songs, ILibraryDroid.IParameters parameters)
+			private async IAsyncEnumerable<AlbumEntity> CreateAlbums(IEnumerable<ISong>? songs, ILibraryDroid.IParameters parameters)
 			{
 				if (Binder?.Library?.Actions is null)
 					yield break;
@@ -164,8 +164,7 @@ namespace Xyzu.Library
 							DiscCount = albumgrouping
 								.Select(_ => _.DiscNumber)
 								.Max(),
-							// TODO: Album Duration double add (Find Where Duration is coming from )?
-							Duration = albumgrouping.Select(_ => _.Duration).Sum(),
+							Duration = albumgrouping.Sum(duration => duration.Duration ?? TimeSpan.Zero),
 							SongIds = albumgrouping.Select(_ => _.Id),
 							ReleaseDate = albumgrouping
 								.Select(_ => _.ReleaseDate)
@@ -175,10 +174,12 @@ namespace Xyzu.Library
 							Title = song.Album,
 						};
 
+						await Task.CompletedTask;
+
 						yield return new AlbumEntity(album);
 					}
 			}
-			private IEnumerable<ArtistEntity> CreateArtists(IEnumerable<ISong>? songs, ILibraryDroid.IParameters parameters)
+			private async IAsyncEnumerable<ArtistEntity> CreateArtists(IEnumerable<ISong>? songs, ILibraryDroid.IParameters parameters)
 			{
 				if (Binder?.Library?.Actions is null)
 					yield break;
@@ -212,10 +213,12 @@ namespace Xyzu.Library
 								.Distinct()
 						};
 
+						await Task.CompletedTask;
+
 						yield return new ArtistEntity(artist);
 					}
 			}
-			private IEnumerable<GenreEntity> CreateGenres(IEnumerable<ISong>? songs, ILibraryDroid.IParameters parameters)
+			private async IAsyncEnumerable<GenreEntity> CreateGenres(IEnumerable<ISong>? songs, ILibraryDroid.IParameters parameters)
 			{
 				if (Binder?.Library?.Actions is null)
 					yield break;
@@ -227,12 +230,16 @@ namespace Xyzu.Library
 					{
 						Notification?.Update(Notification?.ContentTextsScanning?.TextGenres, genregrouping.Key);
 
-						yield return new GenreEntity(new IGenre.Default(genregrouping.Key)
+						IGenre.Default genre = new (genregrouping.Key)
 						{
 							Name = genregrouping.FirstOrDefault(_ => _.Genre is not null)?.Genre,
-							Duration = TimeSpan.FromSeconds(genregrouping.Sum(_ => _.Duration?.TotalSeconds ?? 0)),
+							Duration = genregrouping.Sum(duration => duration.Duration ?? TimeSpan.Zero),
 							SongIds = genregrouping.Select(_ => _.Id)
-						});
+						};
+
+						await Task.CompletedTask;
+
+						yield return new GenreEntity(genre);
 					}
 			}
 			private async IAsyncEnumerable<SongEntity> CreateSongs(IEnumerable<string> songfilepaths, ILibraryDroid.IParameters parameters)
@@ -290,7 +297,7 @@ namespace Xyzu.Library
 
 				ScanType = ScanTypes.Album;
 
-				foreach (AlbumEntity albumentity in CreateAlbums(null, parameters))
+				await foreach (AlbumEntity albumentity in CreateAlbums(null, parameters))
 				{
 					Notification?.Update(Notification?.ContentTextsSaving?.TextAlbums, string.Format("{0} - {1}", albumentity.Title, albumentity.Artist));
 
@@ -299,7 +306,7 @@ namespace Xyzu.Library
 
 				ScanType = ScanTypes.Artist;
 
-				foreach (ArtistEntity artistentity in CreateArtists(null, parameters))
+				await foreach (ArtistEntity artistentity in CreateArtists(null, parameters))
 				{
 					Notification?.Update(Notification?.ContentTextsSaving?.TextArtists, artistentity.Name);
 
@@ -308,7 +315,7 @@ namespace Xyzu.Library
 
 				ScanType = ScanTypes.Genre;
 
-				foreach (GenreEntity genreentity in CreateGenres(null, parameters))
+				await foreach (GenreEntity genreentity in CreateGenres(null, parameters))
 				{
 					Notification?.Update(Notification?.ContentTextsSaving?.TextGenres, genreentity.Name);
 
@@ -383,7 +390,7 @@ namespace Xyzu.Library
 
 				// Albums
 				#region
-				foreach (AlbumEntity albumentity in CreateAlbums(
+				await foreach (AlbumEntity albumentity in CreateAlbums(
 					parameters: parameters,
 					songs: songs_add.Where((Func<SongEntity, bool>)(song_add =>
 					{
@@ -412,10 +419,10 @@ namespace Xyzu.Library
 
 					Notification?.Update(Notification.ContentTextsReading?.TextAlbums, string.Format("{0} - {1}", albumentity.Title, albumentity.Artist));
 
-					album.Duration += adds_songs.Select(add => add.Duration).Sum() ?? default;
+					album.Duration += removes_songs.Sum(remove => remove.Duration ?? TimeSpan.Zero);
 					album.SongIds = album.SongIds.Concat(adds_songs.Select(add => add.Id));
 
-					album.Duration -= removes_songs.Select(remove => remove.Duration).Sum() ?? default;
+					album.Duration -= removes_songs.Sum(remove => remove.Duration ?? TimeSpan.Zero);
 					album.SongIds = album.SongIds.Except(removes_songs.Select(remove => remove.Id));
 
 					album.SongIds = album.SongIds.Distinct();
@@ -446,7 +453,7 @@ namespace Xyzu.Library
 
 				// Artists
 				#region
-				foreach (ArtistEntity artistentity in CreateArtists(
+				await foreach (ArtistEntity artistentity in CreateArtists(
 					parameters: parameters,
 					songs: songs_add.Where((Func<SongEntity, bool>)(song_add =>
 					{
@@ -513,7 +520,7 @@ namespace Xyzu.Library
 
 				// Genres
 				#region
-				foreach (GenreEntity genreentity in CreateGenres(
+				await foreach (GenreEntity genreentity in CreateGenres(
 					parameters: parameters,
 					songs: songs_add.Where((Func<SongEntity, bool>)(song_add =>
 					{
@@ -542,10 +549,10 @@ namespace Xyzu.Library
 
 					Notification?.Update(Notification.ContentTextsReading?.TextGenres, genreentity.Name);
 
-					genre.Duration += adds_songs.Select(add => add.Duration).Sum() ?? default;
+					genre.Duration += adds_songs.Sum(remove => remove.Duration ?? TimeSpan.Zero);
 					genre.SongIds = genre.SongIds.Concat(adds_songs.Select(add => add.Id));
 
-					genre.Duration -= removes_songs.Select(remove => remove.Duration).Sum() ?? default;
+					genre.Duration -= removes_songs.Sum(remove => remove.Duration ?? TimeSpan.Zero);
 					genre.SongIds = genre.SongIds.Except(removes_songs.Select(remove => remove.Id));
 
 					genre.SongIds = genre.SongIds.Distinct();

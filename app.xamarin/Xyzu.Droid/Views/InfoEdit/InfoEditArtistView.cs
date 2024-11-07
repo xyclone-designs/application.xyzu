@@ -1,11 +1,9 @@
 ﻿using Android.Content;
-using Android.Graphics;
 using Android.Util;
+using Android.Views;
 using AndroidX.AppCompat.Widget;
-using AndroidX.Palette.Graphics;
 
 using System;
-using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
 using Xyzu.Images;
@@ -31,31 +29,31 @@ namespace Xyzu.Views.InfoEdit
 
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{
+			Inflate(context, Ids.Layout, this);
+			SetPaletteTextViews(
+				FindViewById<AppCompatTextView>(Ids.Title),
+				FindViewById<AppCompatTextView>(Ids.ArtistName_Title));
+
 			base.Init(context, attrs);
-
-			Inflate(Context, Ids.Layout, this);
-
-			Title = FindViewById(Ids.Title) as AppCompatTextView;
-			ArtistImage = FindViewById(Ids.ArtistImage) as AppCompatImageView;
-			ArtistName = FindViewById(Ids.ArtistName) as AppCompatEditText;
-			ArtistName_Title = FindViewById(Ids.ArtistName) as AppCompatTextView;
 		}
-		protected override void OnPropertyChanged([CallerMemberName] string? propertyname = null)
+		protected override void OnAttachedToWindow()
 		{
-			base.OnPropertyChanged(propertyname);
+			base.OnAttachedToWindow();
 
-			switch (propertyname)
-			{
-				case nameof(Images):
-					ReloadImage();
-					break;
-
-				default: break;
-			}
+			if (ArtistImage != null)
+				ArtistImage.Click += OnArtistImageClick;
 		}
+		protected override void OnDetachedFromWindow()
+		{
+			base.OnDetachedFromWindow();
 
+			if (ArtistImage != null)
+				ArtistImage.Click += OnArtistImageClick;
+		}
 
 		private IArtist? _Artist;
+		private AppCompatImageView? _ArtistImage;
+		private AppCompatEditText? _ArtistName;
 
 		public IArtist? Artist
 		{
@@ -77,53 +75,34 @@ namespace Xyzu.Views.InfoEdit
 				ReloadImage();
 			}
 		}
-
-		public AppCompatTextView? Title { get; protected set; }
-		public AppCompatImageView? ArtistImage { get; protected set; }
-		public AppCompatEditText? ArtistName { get; protected set; }
-		public AppCompatTextView? ArtistName_Title { get; protected set; }
+		public AppCompatImageView ArtistImage
+		{
+			get => _ArtistImage
+				??= FindViewById<AppCompatImageView>(Ids.ArtistImage) ??
+				throw new InflateException("ArtistName_Value");
+		}
+		public AppCompatEditText ArtistName
+		{
+			get => _ArtistName
+				??= FindViewById<AppCompatEditText>(Ids.ArtistName) ??
+				throw new InflateException("ArtistName_Value");
+		}
 
 		public Action<InfoEditArtistView, object?, EventArgs>? ArtistImageClick { get; set; }
 
-		protected override void OnAttachedToWindow()
+		public override async void ReloadImage()
 		{
-			base.OnAttachedToWindow();
-
-			if (ArtistImage != null)
-				ArtistImage.Click += OnArtistImageClick;
-		}
-		protected override void OnDetachedFromWindow()
-		{
-			base.OnDetachedFromWindow();
-
-			if (ArtistImage != null)
-				ArtistImage.Click -= OnArtistImageClick;
+			if (Images is not null) await Images.SetToImageView(new IImagesDroid.Parameters(Artist)
+			{
+				ImageView = ArtistImage,
+				Operations = IImages.DefaultOperations.CirculariseDownsample,
+				OnPalette = palette => Palette = palette
+			});
 		}
 
 		protected void OnArtistImageClick(object? sender, EventArgs args)
 		{
 			ArtistImageClick?.Invoke(this, sender, args);
-		}
-
-		public async void ReloadImage()
-		{
-			if (Images != null)
-				await Images.SetToImageView(new IImagesDroid.Parameters(Artist)
-				{
-					ImageView = ArtistImage,
-					Operations = IImages.DefaultOperations.CirculariseDownsample,
-					OnPalette = palette =>
-					{
-						OnPalette?.Invoke(palette);
-
-						if (Context is not null && palette?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
-						{
-							Title?.SetTextColor(color);
-
-							ArtistName_Title?.SetTextColor(color);
-						}
-					}
-				});
 		}
 	}
 }

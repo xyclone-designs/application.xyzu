@@ -55,6 +55,10 @@ namespace Xyzu.Images
 				return image.Buffer;
 			}
 
+			public async virtual Task Operate(Parameters parameters)
+			{
+				await Task.CompletedTask;
+			}
 			public async virtual Task SetToImageView(Parameters parameters)
 			{
 				if (parameters.ImageView is null)

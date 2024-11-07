@@ -1,10 +1,13 @@
 ﻿using Android.Content;
 using Android.Util;
+using Android.Views;
 using AndroidX.AppCompat.Widget;
 
 using System;
+using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
+using Xyzu.Images;
 using Xyzu.Library.Models;
 
 namespace Xyzu.Views.InfoEdit
@@ -25,15 +28,13 @@ namespace Xyzu.Views.InfoEdit
 
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{
+			Inflate(context, Ids.Layout, this);
+
 			base.Init(context, attrs);
-
-			Inflate(Context, Ids.Layout, this);
-
-			GenreName = FindViewById(Ids.GenreName_Value) as AppCompatEditText;
-			GenreName_Title = FindViewById(Ids.GenreName_Title) as AppCompatTextView;
 		}
 
 		private IGenre? _Genre;
+		private AppCompatEditText? _GenreName;
 
 		public IGenre? Genre
 		{
@@ -54,7 +55,11 @@ namespace Xyzu.Views.InfoEdit
 			}
 		}
 
-		public AppCompatEditText? GenreName { get; protected set; }
-		public AppCompatTextView? GenreName_Title { get; protected set; }
+		public AppCompatEditText GenreName
+		{
+			get => _GenreName
+				??= FindViewById<AppCompatEditText>(Ids.GenreName_Value) ??
+				throw new InflateException("GenreName_Value");
+		}
 	}
 }

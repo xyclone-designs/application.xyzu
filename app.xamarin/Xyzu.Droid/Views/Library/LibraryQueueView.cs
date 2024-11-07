@@ -218,9 +218,6 @@ namespace Xyzu.Views.Library
 
 			}).ToList();
 
-			await Library.Misc.SetImages(songs, Cancellationtoken);
-			await Library.Songs.PopulateSongs(songs, Cancellationtoken);
-
 			QueueSongs.LibraryItemsAdapter.LibraryItems.Clear();
 			QueueSongs.LibraryItemsAdapter.LibraryItems.AddRange(songs);
 

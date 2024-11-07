@@ -14,11 +14,11 @@ namespace Xyzu.Library.Enums
 		{
 			return mimetype switch
 			{
-				MimeTypes.AAC => Resource.String.enums_mimetypes_aac_title,
-				MimeTypes.FLAC => Resource.String.enums_mimetypes_flac_title,
-				MimeTypes.M4A => Resource.String.enums_mimetypes_m4a_title,
-				MimeTypes.MP3 => Resource.String.enums_mimetypes_mp3_title,
-				MimeTypes.WAV => Resource.String.enums_mimetypes_wav_title,
+				MimeTypes.aac => Resource.String.enums_mimetypes_aac_title,
+				MimeTypes.flac => Resource.String.enums_mimetypes_flac_title,
+				MimeTypes.m4a => Resource.String.enums_mimetypes_m4a_title,
+				MimeTypes.mp3 => Resource.String.enums_mimetypes_mp3_title,
+				MimeTypes.wav => Resource.String.enums_mimetypes_wav_title,
 
 				_ => throw new ArgumentException(string.Format("Invalid MimeTypes '{0}'", mimetype))
 			};
@@ -27,11 +27,11 @@ namespace Xyzu.Library.Enums
 		{
 			return mimetype switch
 			{
-				MimeTypes.AAC => Resource.String.enums_mimetypes_aac_description,
-				MimeTypes.FLAC => Resource.String.enums_mimetypes_flac_description,
-				MimeTypes.M4A => Resource.String.enums_mimetypes_m4a_description,
-				MimeTypes.MP3 => Resource.String.enums_mimetypes_mp3_description,
-				MimeTypes.WAV => Resource.String.enums_mimetypes_wav_description,
+				MimeTypes.aac => Resource.String.enums_mimetypes_aac_description,
+				MimeTypes.flac => Resource.String.enums_mimetypes_flac_description,
+				MimeTypes.m4a => Resource.String.enums_mimetypes_m4a_description,
+				MimeTypes.mp3 => Resource.String.enums_mimetypes_mp3_description,
+				MimeTypes.wav => Resource.String.enums_mimetypes_wav_description,
 
 				_ => throw new ArgumentException(string.Format("Invalid MimeTypes '{0}'", mimetype))
 			};

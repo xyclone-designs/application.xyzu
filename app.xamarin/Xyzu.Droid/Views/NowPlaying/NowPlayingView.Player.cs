@@ -110,49 +110,6 @@ namespace Xyzu.Views.NowPlaying
 		public ISharedPreferences? SharedPreferences { get; set; }
 		public FragmentActivity? FragmentActivity { get; set; }
 
-		public ISong? SongPrevious
-		{
-			get => _SongPrevious;
-			set
-			{ 
-				_SongPrevious = value;
-
-				OnPropertyChanged();
-			}
-		}
-		public ISong? SongCurrent
-		{
-			get => _SongCurrent;
-			set
-			{ 
-				_SongCurrent = value;
-
-				OnPropertyChanged();
-			}
-		}
-		public ISong? SongNext
-		{
-			get => _SongNext;
-			set
-			{
-				_SongNext = value;
-
-				OnPropertyChanged();
-			}
-		}
-		public IEnumerable<ISong> Songs
-		{
-			get
-			{
-				IEnumerable<ISong> songs = Enumerable.Empty<ISong>();
-
-				if (SongCurrent != null)
-					songs = songs.Append(SongCurrent);
-
-				return songs;
-			}
-		}
-
 		protected virtual void SettingsPropertyChanged(object? sender, PropertyChangedEventArgs args) 
 		{ }
 		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyname = null) 
@@ -168,44 +125,37 @@ namespace Xyzu.Views.NowPlaying
 			}
 		}
 
-		public async void ViewRefresh()
+		public void ViewRefresh()
 		{
-			int? queueindex = Player?.Queue.CurrentIndex;
-			int? viewindex = Artwork.SimpleLayoutManager.GetPosition(ArtworkSnapHelper);
+			if (Player?.Queue.CurrentIndex is not int queueindex || Artwork.SimpleLayoutManager.GetPosition(ArtworkSnapHelper) is not int viewindex)
+			{
+				SetBlur(null);
+				SetPosition(null);
+				SetText(null, null, null);
+
+				return;
+			}
 
 			switch (true)
 			{
-				case true when queueindex is null || viewindex is null:
-					break;
-
 				case true when queueindex == viewindex - 1 || queueindex == viewindex + 1:
-					Artwork.SmoothScrollToPosition(queueindex.Value);
+					Artwork.SmoothScrollToPosition(queueindex);
 					break;
 
 				default:
-					Artwork.ScrollToPosition(queueindex.Value);
-					Artwork.SimpleAdapter.NotifyItemChanged(queueindex.Value);
+					Artwork.ScrollToPosition(queueindex);
+					Artwork.SimpleAdapter.NotifyItemChanged(queueindex);
 					break;
 			}
 
 			ArtworkPalette = _ArtworkPalette;
 
-			SetPosition(SongCurrent);
-			SetText(SongCurrent, null, null);
-			await SetBlur(SongCurrent);
-
-			if ((SongCurrent?.Malformed ?? false) && Context is not null)
+			SetBlur(Player.Queue.CurrentSong);
+			SetPosition(Player.Queue.CurrentSong);
+			SetText(Player.Queue.CurrentSong, null, null);
+			
+			if ((Player.Queue.CurrentSong?.Malformed ?? false) && Context is not null)
 				PlayerOnPlayerError(this, new IPlayer.PlayerErrorsEventArgs(PlayerErrors.Load));
-		}
-		public void ViewReset()
-		{
-			SongCurrent = null;
-			SongPrevious = null;
-			SongNext = null;
-
-			Player = null;
-
-			ViewRefresh();
 		}
 		public void PlayerPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
@@ -244,7 +194,7 @@ namespace Xyzu.Views.NowPlaying
 							PositionTimer?.Change(PositionTimerDue, PositionTimerPeriodStop);
 							Buttons_Player_PlayPause.SetImageResource(Resource.Drawable.icon_player_play);
 
-							ViewReset();
+							ViewRefresh();
 							break;
 					}
 					break;
@@ -259,7 +209,7 @@ namespace Xyzu.Views.NowPlaying
 
 			string? filepath = args.QueueIndex.HasValue
 				? Player?.Queue.ElementAtOrDefault(args.QueueIndex.Value)?.Uri?.ToString().Split('/').Last()
-				: SongCurrent?.Filepath?.Split('/').Last();
+				: null;
 
 			XyzuUtils.Dialogs
 				.SnackBar(Context, Artwork, snackbar =>
@@ -273,46 +223,12 @@ namespace Xyzu.Views.NowPlaying
 				}).Show();
 		}
 		public void PlayerOnPlayerOperation(object? sender, IPlayer.PlayerOperationsEventArgs args)
-		{
-			switch (args.PlayerOperation)
-			{
-				case PlayerOperations.Previous:
-					_SongNext = _SongCurrent;
-					_SongCurrent = _SongPrevious;
-					_SongPrevious = Library?.Songs.PopulateSong(Player?.Queue.PreviousSong);	
-					break;
-						  
-				case PlayerOperations.Next:
-					_SongPrevious = _SongCurrent;
-					_SongCurrent = _SongNext;
-					_SongNext = Library?.Songs.PopulateSong(Player?.Queue.NextSong);				 
-					break;
-
-				default: break;
-			}
-		}
-		public async void PlayerQueuePropertyChanged(object? sender, PropertyChangedEventArgs args)
+		{ }
+		public void PlayerQueuePropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			switch (args.PropertyName)
 			{
 				case nameof(IQueue.CurrentIndex):
-
-					if (Player?.Queue.PreviousSong is null || (SongPrevious?.Id is string songpreviousid && songpreviousid != Player.Queue.PreviousSong.Id))
-						_SongPrevious = null;
-
-					if (Player?.Queue.CurrentSong is null || (SongCurrent?.Id is string songcurrentid && songcurrentid != Player.Queue.CurrentSong.Id))
-						_SongCurrent = null;
-
-					if (Player?.Queue.NextSong is null || (SongNext?.Id is string nextsongid && nextsongid != Player.Queue.NextSong.Id))
-						_SongNext = null;
-
-					if (Library is not null && Player is not null)
-					{
-						SongPrevious ??= await Library.Songs.PopulateSong(Player.Queue.PreviousSong, default);
-						SongCurrent ??= await Library.Songs.PopulateSong(Player.Queue.CurrentSong, default);
-						SongNext ??= await Library.Songs.PopulateSong(Player.Queue.NextSong, default);
-					}
-
 					ViewRefresh();
 					break;
 
@@ -320,7 +236,7 @@ namespace Xyzu.Views.NowPlaying
 			}
 		}
 
-		public Task SetBlur(ISong? song)
+		public async void SetBlur(ISong? song)
 		{
 			void OnComplete(bool completed)
 			{
@@ -350,17 +266,15 @@ namespace Xyzu.Views.NowPlaying
 			if (song is null)
 				OnComplete(false);
 			else if (Images is not null)
-				return Images.SetToViewBackground(new IImagesDroid.Parameters
+				await Images.SetToViewBackground(new IImagesDroid.Parameters
 				{
 					View = BackgroundBlur,
 					OnComplete = OnComplete,
 					Operations = IImages.DefaultOperations.Blur,
-					Sources = song != SongCurrent
+					Sources = song != Player?.Queue.CurrentSong
 						? new object?[] { song }
-						: new object?[] { SongCurrent },
+						: new object?[] { Player.Queue.CurrentSong },
 				});
-
-			return Task.CompletedTask;
 		}
 
 		public void SetText(ISong? song, string? detailone, string? detailtwo)
@@ -394,7 +308,7 @@ namespace Xyzu.Views.NowPlaying
 		public void SetPosition(TimeSpan? current, TimeSpan? duration, bool withprogress = true)
 		{
 			current ??= TimeSpan.FromMilliseconds(Player?.Position ?? 0);
-			duration ??= (SongCurrent ?? Player?.Queue.CurrentSong) is ISong song 
+			duration ??= (Player?.Queue.CurrentSong) is ISong song 
 				? song.Malformed  
 					? TimeSpan.FromSeconds(3) 
 					: song.Duration ?? TimeSpan.Zero

@@ -1,8 +1,12 @@
 ﻿using Android.Content;
 using Android.Util;
+using Android.Views;
 using AndroidX.AppCompat.Widget;
 
+using System.Runtime.CompilerServices;
+
 using Xyzu.Droid;
+using Xyzu.Images;
 using Xyzu.Library.Models;
 
 namespace Xyzu.Views.Info
@@ -24,14 +28,36 @@ namespace Xyzu.Views.Info
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{
 			Inflate(context, Ids.Layout, this);
+			SetPaletteTextViews(FindViewById<AppCompatTextView>(Ids.Title));
 
 			base.Init(context, attrs);
+		}
+		protected override void OnPropertyChanged([CallerMemberName] string? propertyname = null)
+		{
+			base.OnPropertyChanged(propertyname);
 
-			Title = FindViewById(Ids.Title) as AppCompatTextView;
-			SongLyrics = FindViewById(Ids.SongLyrics) as AppCompatTextView;
+			switch (propertyname)
+			{
+				case nameof(Song):
+					SongLyrics?.SetText(_Song?.Lyrics ?? Context?.Resources?.GetString(Resource.String.library_no_lyrics), null);
+					ReloadImage();
+					break;
+
+				default: break;
+			}
+		}
+
+		public override async void ReloadImage()
+		{
+			if (Images is not null) await Images.Operate(new IImagesDroid.Parameters
+			{
+				Sources = new object?[] { _Song },
+				OnPalette = palette => Palette = palette
+			});
 		}
 
 		private ISong? _Song;
+		private AppCompatTextView? _SongLyrics;
 
 		public ISong? Song
 		{
@@ -40,11 +66,14 @@ namespace Xyzu.Views.Info
 			{
 				_Song = value;
 
-				SongLyrics?.SetText(_Song?.Lyrics ?? Context?.Resources?.GetString(Resource.String.library_no_lyrics), null);
+				OnPropertyChanged();
 			}
 		}
-
-		public AppCompatTextView? Title { get; protected set; }
-		public AppCompatTextView? SongLyrics { get; protected set; }
+		public AppCompatTextView SongLyrics
+		{
+			get => _SongLyrics ??= 
+				FindViewById(Ids.SongLyrics) as AppCompatTextView ?? 
+				throw new InflateException("SongLyrics");
+		}
 	}
 }

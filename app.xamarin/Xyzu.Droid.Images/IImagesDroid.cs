@@ -33,6 +33,7 @@ namespace Xyzu.Images
 			public BitmapFactory.Options? BitmapOptions { get; set; }
 		}
 
+		Task Operate(Parameters parameters);
 		Task SetToImageView(Parameters parameters);
 		Task SetToViewBackground(Parameters parameters);
 		Task<Bitmap?> GetBitmap(Parameters parameters);
@@ -41,6 +42,10 @@ namespace Xyzu.Images
 
 	public static class IImagesDroidExtensions
 	{
+		public static Task Operate(this IImages images, IImagesDroid.Parameters parameters)
+		{
+			return (images as IImagesDroid)?.Operate(parameters) ?? Task.CompletedTask;
+		}
 		public static Task SetToImageView(this IImages images, IImagesDroid.Parameters parameters)
 		{
 			return (images as IImagesDroid)?.SetToImageView(parameters) ?? Task.CompletedTask;

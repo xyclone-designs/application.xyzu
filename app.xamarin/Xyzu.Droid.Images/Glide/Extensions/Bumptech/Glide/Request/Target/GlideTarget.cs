@@ -1,5 +1,4 @@
 ﻿using Android.Graphics.Drawables;
-using Android.Views;
 
 using Bumptech.Glide.Request.Transition;
 
@@ -9,15 +8,18 @@ using JavaObject = Java.Lang.Object;
 
 namespace Bumptech.Glide.Request.Target
 {
-	public class GlideViewTarget : CustomViewTarget
+	public class GlideTarget : CustomTarget
 	{
-		public GlideViewTarget(View view) : base(view) {  }
+		public GlideTarget() : base() {  }
 
-		public new View View { get => (View)base.View; }
-
+		public Action<Drawable?>? OnLoadClearedAction { get; set; }          
 		public Action<Drawable?>? OnLoadFailedAction { get; set; }          
-		public Action<JavaObject?, ITransition?>? OnResourceReadyAction { get; set; }          
+		public Action<JavaObject?, ITransition?>? OnResourceReadyAction { get; set; }
 
+		public override void OnLoadCleared(Drawable? p0)
+		{
+			OnLoadClearedAction?.Invoke(p0);
+		}
 		public override void OnLoadFailed(Drawable? p0)
 		{
 			OnLoadFailedAction?.Invoke(p0);
@@ -26,7 +28,5 @@ namespace Bumptech.Glide.Request.Target
 		{
 			OnResourceReadyAction?.Invoke(resource, transition);
 		} 
-		protected override void OnResourceCleared(Drawable? p0) 
-		{ }
 	}
 }

@@ -235,16 +235,13 @@ namespace Xyzu.Activities
 					break;
 
 				case ServiceConnectionChangedEventArgs.Events.Disconnected:
+					SlidingUpPanel?.SetPanelState(
+						p0: ViewNowPlaying.Settings.ForceShowNowPlaying
+							? SlidingUpPanelLayout.PanelState.Collapsed
+							: SlidingUpPanelLayout.PanelState.Hidden);
 
 					ViewNowPlaying.Player = null;
-
-					SlidingUpPanelLayout.PanelState disconnectedpanelstate = ViewNowPlaying.Settings.ForceShowNowPlaying
-						? SlidingUpPanelLayout.PanelState.Collapsed
-						: SlidingUpPanelLayout.PanelState.Hidden;
-
-					SlidingUpPanel?.SetPanelState(disconnectedpanelstate);
-
-					ViewNowPlaying.ViewReset();
+					ViewNowPlaying.ViewRefresh();
 
 					break;
 

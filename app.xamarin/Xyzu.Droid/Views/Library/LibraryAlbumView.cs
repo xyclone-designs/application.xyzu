@@ -365,8 +365,6 @@ namespace Xyzu.Views.Library
 			if (force)
 				AlbumHeader.Album = null;
 
-			Album = await Library.Albums.PopulateAlbum(Album, Cancellationtoken);
-
 			IAsyncEnumerable<ISong> libraryitems = Library.Songs
 				.GetSongs(Identifiers, Cancellationtoken)
 				.Sort(Settings.SongsSortKey, Settings.SongsIsReversed);

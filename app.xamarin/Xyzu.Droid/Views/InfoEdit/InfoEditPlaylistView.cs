@@ -1,11 +1,13 @@
 ﻿using Android.Content;
-using Android.Runtime;
 using Android.Util;
+using Android.Views;
 using AndroidX.AppCompat.Widget;
 
 using System;
+using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
+using Xyzu.Images;
 using Xyzu.Library.Models;
 
 namespace Xyzu.Views.InfoEdit
@@ -26,15 +28,14 @@ namespace Xyzu.Views.InfoEdit
 
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{
+			Inflate(context, Ids.Layout, this);
+			SetPaletteTextViews(FindViewById<AppCompatTextView>(Ids.PlaylistName_Title));
+
 			base.Init(context, attrs);
-
-			Inflate(Context, Ids.Layout, this);
-
-			PlaylistName = FindViewById(Ids.PlaylistName_Value) as AppCompatEditText;
-			PlaylistName_Title = FindViewById(Ids.PlaylistName_Title) as AppCompatTextView;
 		}
-		
+
 		private IPlaylist? _Playlist;
+		private AppCompatTextView? _PlaylistName;
 
 		public IPlaylist? Playlist
 		{
@@ -54,8 +55,11 @@ namespace Xyzu.Views.InfoEdit
 				PlaylistName?.SetText(_Playlist?.Name, null);
 			}
 		}
-
-		public AppCompatEditText? PlaylistName { get; protected set; }
-		public AppCompatTextView? PlaylistName_Title { get; protected set; }
+		public AppCompatTextView PlaylistName
+		{
+			get => _PlaylistName
+				??= FindViewById<AppCompatTextView>(Ids.PlaylistName_Title) ??
+				throw new InflateException("PlaylistName");
+		}
 	}
 }

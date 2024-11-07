@@ -72,7 +72,7 @@ namespace Xyzu.Views.NowPlaying
 						break;
 
 					case true when index == Player.Queue.CurrentIndex.Value - 1:
-						await Images.SetToImageView(new IImagesDroid.Parameters(SongPrevious)
+						await Images.SetToImageView(new IImagesDroid.Parameters(Player.Queue.PreviousSong)
 						{
 							ImageView = viewholder.ItemView,
 							Operations = IImages.DefaultOperations.Rounded,
@@ -80,18 +80,16 @@ namespace Xyzu.Views.NowPlaying
 						break;
 									
 					case true when index == Player.Queue.CurrentIndex.Value:
-						await Task.WhenAll(
-							SetBlur(SongCurrent),
-							Images.SetToImageView(new IImagesDroid.Parameters(SongCurrent)
-							{
-								ImageView = viewholder.ItemView,
-								Operations = IImages.DefaultOperations.Rounded,
-								OnPalette = palette => ArtworkPalette = palette,
-							}));						
+						await Images.SetToImageView(new IImagesDroid.Parameters(Player.Queue.CurrentSong)
+						{
+							ImageView = viewholder.ItemView,
+							Operations = IImages.DefaultOperations.Rounded,
+							OnPalette = palette => ArtworkPalette = palette,
+						});						
 						break;										 
 																	
 					case true when index == Player.Queue.CurrentIndex.Value + 1:
-						await Images.SetToImageView(new IImagesDroid.Parameters(SongNext)
+						await Images.SetToImageView(new IImagesDroid.Parameters(Player.Queue.NextSong)
 						{
 							ImageView = viewholder.ItemView,
 							Operations = IImages.DefaultOperations.Rounded,

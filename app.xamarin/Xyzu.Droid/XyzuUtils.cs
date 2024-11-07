@@ -53,7 +53,7 @@ namespace Xyzu
 				
 				bottomsheetdialog.Behavior.State = BottomSheetBehavior.StateExpanded;
 				bottomsheetdialog.Behavior.MaxWidth = MenuOptionsUtils.DialogMaxWidth(context);
-				bottomsheetdialog.Behavior.MaxHeight = MenuOptionsUtils.DialogMaxHeight(context);
+				//bottomsheetdialog.Behavior.MaxHeight = MenuOptionsUtils.DialogMaxHeight(context);
 
 				if (bottomsheetdialog.Window != null)
 				{

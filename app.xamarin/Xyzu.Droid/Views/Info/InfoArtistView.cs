@@ -1,8 +1,7 @@
 ﻿using Android.Content;
-using Android.Graphics;
 using Android.Util;
+using Android.Views;
 using AndroidX.AppCompat.Widget;
-using AndroidX.Palette.Graphics;
 
 using System;
 using System.Linq;
@@ -11,6 +10,7 @@ using System.Runtime.CompilerServices;
 using Xyzu.Droid;
 using Xyzu.Images;
 using Xyzu.Library.Models;
+using static Xyzu.Menus.LibraryItem;
 
 namespace Xyzu.Views.Info
 {
@@ -38,15 +38,13 @@ namespace Xyzu.Views.Info
 		protected override void Init(Context context, IAttributeSet? attrs)
 		{
 			Inflate(context, Ids.Layout, this);
+			SetPaletteTextViews(
+				FindViewById<AppCompatTextView>(Ids.Title),
+				FindViewById<AppCompatTextView>(Ids.ArtistName_Title),
+				FindViewById<AppCompatTextView>(Ids.ArtistSongCount_Title),
+				FindViewById<AppCompatTextView>(Ids.ArtistAlbumCount_Title));
 
-			Title = FindViewById(Ids.Title) as AppCompatTextView;
-			ArtistImage = FindViewById(Ids.ArtistImage) as AppCompatImageView;
-			ArtistName = FindViewById(Ids.ArtistName_Value) as AppCompatTextView;
-			ArtistSongCount = FindViewById(Ids.ArtistSongCount_Value) as AppCompatTextView;
-			ArtistAlbumCount = FindViewById(Ids.ArtistAlbumCount_Value) as AppCompatTextView;		 
-			ArtistName_Title = FindViewById(Ids.ArtistName_Title) as AppCompatTextView;
-			ArtistSongCount_Title = FindViewById(Ids.ArtistSongCount_Title) as AppCompatTextView;
-			ArtistAlbumCount_Title = FindViewById(Ids.ArtistAlbumCount_Title) as AppCompatTextView;
+			base.Init(context, attrs);
 		}
 		protected override void OnPropertyChanged([CallerMemberName] string? propertyname = null)
 		{
@@ -54,7 +52,10 @@ namespace Xyzu.Views.Info
 
 			switch (propertyname)
 			{
-				case nameof(Images):
+				case nameof(Artist):
+					ArtistName?.SetText(_Artist?.Name, null);
+					ArtistSongCount?.SetText(_Artist?.SongIds.Count().ToString(), null);
+					ArtistAlbumCount?.SetText(_Artist?.AlbumIds.Count().ToString(), null);
 					ReloadImage();
 					break;
 
@@ -62,7 +63,22 @@ namespace Xyzu.Views.Info
 			}
 		}
 
+		public override async void ReloadImage()
+		{
+			if (Images is not null) await Images.SetToImageView(new IImagesDroid.Parameters(Artist)
+			{
+				ImageView = ArtistImage,
+				Operations = IImages.DefaultOperations.CirculariseDownsample,
+				OnPalette = palette => Palette = palette
+			});
+		}
+
 		private IArtist? _Artist;
+		private AppCompatImageView? _ArtistImage;
+		private AppCompatTextView? _ArtistName;
+		private AppCompatTextView? _ArtistSongCount;
+		private AppCompatTextView? _ArtistAlbumCount;
+
 
 		public IArtist? Artist
 		{
@@ -71,44 +87,32 @@ namespace Xyzu.Views.Info
 			{
 				_Artist = value;
 				
-				ArtistName?.SetText(_Artist?.Name, null);
-				ArtistSongCount?.SetText(_Artist?.SongIds.Count().ToString(), null);
-				ArtistAlbumCount?.SetText(_Artist?.AlbumIds.Count().ToString(), null);
-
-				ReloadImage();
+				OnPropertyChanged();
 			}
 		}
-
-		public AppCompatTextView? Title { get; protected set; }
-		public AppCompatImageView? ArtistImage { get; protected set; }
-		public AppCompatTextView? ArtistName { get; protected set; }
-		public AppCompatTextView? ArtistSongCount { get; protected set; }
-		public AppCompatTextView? ArtistAlbumCount { get; protected set; }			 
-		public AppCompatTextView? ArtistName_Title { get; protected set; }
-		public AppCompatTextView? ArtistSongCount_Title { get; protected set; }
-		public AppCompatTextView? ArtistAlbumCount_Title { get; protected set; }
-
-		public async void ReloadImage()
+		public AppCompatImageView ArtistImage
 		{
-			if (Images != null)
-				await Images.SetToImageView(new IImagesDroid.Parameters(Artist)
-				{
-					ImageView = ArtistImage,
-					Operations = IImages.DefaultOperations.CirculariseDownsample,
-					OnPalette = palette =>
-					{
-						OnPalette?.Invoke(palette);
-
-						if (Context is not null && palette?.GetColorForBackground(Context, Resource.Color.ColorSurface) is Color color)
-						{
-							Title?.SetTextColor(color);
-
-							ArtistName_Title?.SetTextColor(color);
-							ArtistSongCount_Title?.SetTextColor(color);
-							ArtistAlbumCount_Title?.SetTextColor(color);
-						}
-					}
-				});
+			get => _ArtistImage
+				??= FindViewById<AppCompatImageView>(Ids.ArtistImage) ??
+				throw new InflateException("ArtistImage");
+		}
+		public AppCompatTextView ArtistName
+		{
+			get => _ArtistName
+				??= FindViewById<AppCompatTextView>(Ids.ArtistName_Title) ??
+				throw new InflateException("ArtistName");
+		}
+		public AppCompatTextView ArtistSongCount
+		{
+			get => _ArtistSongCount
+				??= FindViewById<AppCompatTextView>(Ids.ArtistSongCount_Title) ??
+				throw new InflateException("ArtistSongCount");
+		}
+		public AppCompatTextView ArtistAlbumCount
+		{
+			get => _ArtistAlbumCount
+				??= FindViewById<AppCompatTextView>(Ids.ArtistAlbumCount_Title) ??
+				throw new InflateException("ArtistAlbumCount");
 		}
 	}
 }

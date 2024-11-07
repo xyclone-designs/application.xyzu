@@ -42,7 +42,10 @@ namespace Xyzu.Library.Models
 			if (mediainformation.Streams.FirstOrDefault(_ => _.Type == "audio") is StreamInformation audiostream)
 			{
 				retrieved.Bitrate ??= int.TryParse(audiostream.Bitrate, out int _audiobitrate) ? _audiobitrate : new int?();
-				retrieved.MimeType ??= Enum.TryParse(audiostream.Codec, out MimeTypes _audiocodec) ? _audiocodec : new MimeTypes?();
+				retrieved.MimeType ??= 
+					Enum.TryParse(audiostream.Codec, true, out MimeTypes _codec) ? _codec : 
+					Enum.TryParse(retrieved.Filepath?.Split('.').Last(), true, out MimeTypes _extension) ? _extension : 
+					new MimeTypes?();
 			}
 
 			retrieved.Bitrate ??= int.TryParse(mediainformation.Bitrate, out int _bitrate) ? _bitrate : new int?();
