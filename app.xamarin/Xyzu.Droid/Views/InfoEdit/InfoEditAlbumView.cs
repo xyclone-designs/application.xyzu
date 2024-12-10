@@ -92,8 +92,8 @@ namespace Xyzu.Views.InfoEdit
 		public AppCompatImageView AlbumArtwork
 		{
 			get => _AlbumArtwork
-				??= FindViewById<AppCompatImageView>(Ids.AlbumTitle_Value) ??
-				throw new InflateException("AlbumTitle_Value");
+				??= FindViewById<AppCompatImageView>(Ids.AlbumArtwork) ??
+				throw new InflateException("AlbumArtwork");
 		}
 		public AppCompatEditText AlbumTitle
 		{

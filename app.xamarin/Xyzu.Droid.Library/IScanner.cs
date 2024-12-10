@@ -504,7 +504,7 @@ namespace Xyzu.Library
 					}
 					else
 					{
-						Notification?.Update(Notification.ContentTextsSaving?.TextArtists, artist.Name);
+						Notification?.Update(Notification.ContentTextsSaving?.TextArtists, artistentity.Name);
 
 						await Binder.Library.SQLiteLibrary.ConnectionAsync.UpdateAsync(artistentity);
 					}

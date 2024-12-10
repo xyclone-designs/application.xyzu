@@ -33,6 +33,7 @@ namespace Xyzu.Activities
 		public static class IntentKeys
 		{
 			public const string IsFromNotification = "IntentKey_IsFromNotification";
+			public const string IsFromWidget = "IntentKey_IsFromWidget";
 		}
 
 		protected StatusBarInsetView? _StatusBarPrimary;

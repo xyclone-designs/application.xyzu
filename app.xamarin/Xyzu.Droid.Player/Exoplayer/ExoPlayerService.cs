@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Appwidget;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
@@ -144,6 +145,15 @@ namespace Xyzu.Player.Exoplayer
 			PlayerQueueListChanged(this, NotifyListChangedEventArgs.FromRefresh());
 		}
 
+		public void BroadcastIntent()
+		{
+			foreach (Intent intent in Options.BroadcastTypes.Select(_ =>
+			{
+				return new Intent(this, _)
+					.SetAction(AppWidgetManager.ActionAppwidgetUpdate);
+
+			})) SendBroadcast(intent);
+		}
 		public void ProcessIntent(Intent? intent)
 		{
 			MediaButtonReceiver.OnReceive(this, intent);
@@ -165,17 +175,16 @@ namespace Xyzu.Player.Exoplayer
 					Exoplayer.Stop();
 					break;
 				case Intents.Actions.Play:
-					Exoplayer.PlayWhenReady = true;
-					Player.State = PlayerStates.Playing;
-					break;
 				case Intents.Actions.PlayPause when Exoplayer.IsPlaying is false:
 					Exoplayer.PlayWhenReady = true;
 					Player.State = PlayerStates.Playing;
+					BroadcastIntent();
 					break;
 				case Intents.Actions.Pause:
 				case Intents.Actions.PlayPause when Exoplayer.IsPlaying is true:
 					Exoplayer.PlayWhenReady = false;
 					Player.State = PlayerStates.Paused;
+					BroadcastIntent();
 					break;
 				case Intents.Actions.Next:
 					Exoplayer.SeekToNext();
@@ -227,6 +236,7 @@ namespace Xyzu.Player.Exoplayer
 			base.OnCreate();
 
 			NotificationManager.SetPlayer(Exoplayer);
+			BroadcastIntent();
 		}			 
 		public override void OnDestroy()
 		{
@@ -237,6 +247,7 @@ namespace Xyzu.Player.Exoplayer
 			NotificationManager.SetPlayer(null);
 
 			Player.Queue.Clear();
+			BroadcastIntent();
 
 			base.OnDestroy();
 		}

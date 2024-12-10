@@ -29,8 +29,11 @@ namespace Xyzu.Views.Info
 		{
 			switch (propertyname)
 			{
-				case nameof(Palette):
+				case nameof(Images):
+					ReloadImage();
+					break;
 
+				case nameof(Palette):
 					if (PaletteTextViews is not null)
 					{
 						Color? color = Context is null ? null : Palette?.GetColorForBackground(Context, Resource.Color.ColorSurface);

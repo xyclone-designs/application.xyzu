@@ -26,6 +26,10 @@
   </Target>
 
   <ItemGroup>
+    <Compile Remove="Resources\Resource - Copy.designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Assets\licenses\package_colorpicker.txt" />
     <None Remove="Assets\licenses\package_exoplayer.txt" />
     <None Remove="Assets\licenses\package_glide.txt" />
@@ -35,11 +39,26 @@
     <None Remove="Assets\licenses\package_sqlnetpcl.txt" />
     <None Remove="Assets\licenses\package_taglibsharp.txt" />
     <None Remove="Assets\sounds\silence.mp3" />
+    <None Remove="Resources\drawable-night\image_xyzu_widget_nowplaying_envelope.png" />
     <None Remove="Resources\drawable\icon_application.xml" />
     <None Remove="Resources\drawable\icon_general_file_x.xml" />
+    <None Remove="Resources\drawable\image_xyzu_widget_nowplaying_box.png" />
+    <None Remove="Resources\drawable\image_xyzu_widget_nowplaying_envelope.png" />
+    <None Remove="Resources\drawable\image_xyzu_widget_nowplaying_shelf.png" />
     <None Remove="Resources\drawable\xyzu_view_inset_fadebottomup_colorprimary.xml" />
     <None Remove="Resources\drawable\xyzu_view_inset_fadetopdown_colorprimary.xml" />
+    <None Remove="Resources\drawable\xyzu_widget_nowplaying_box_background.xml" />
+    <None Remove="Resources\drawable\xyzu_widget_nowplaying_envelope_background.xml" />
+    <None Remove="Resources\drawable\xyzu_widget_nowplaying_shelf_background.xml" />
+    <None Remove="Resources\layout\xyzu_layout_widgets.xml" />
+    <None Remove="Resources\layout\xyzu_widget_nowplaying_box.xml" />
+    <None Remove="Resources\layout\xyzu_widget_nowplaying_envelope.xml" />
+    <None Remove="Resources\layout\xyzu_widget_nowplaying_shelf.xml" />
     <None Remove="Resources\values\strings_application.xml" />
+    <None Remove="Resources\xml\provider_appwidget_nowplaying_box.xml" />
+    <None Remove="Resources\xml\provider_appwidget_nowplaying_envelope.xml" />
+    <None Remove="Resources\xml\provider_appwidget_nowplaying_shelf.xml" />
+    <None Remove="XyzuWidgets.Utils.cs~RF79ce01.TMP" />
   </ItemGroup>
 
   <ItemGroup>

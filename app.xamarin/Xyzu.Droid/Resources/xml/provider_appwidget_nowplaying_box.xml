@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:updatePeriodMillis="0"
+  android:widgetCategory="keyguard|home_screen"
+  android:widgetFeatures="reconfigurable|configuration_optional"
+  android:targetCellWidth="3"
+  android:targetCellHeight="2"
+  android:minWidth="@dimen/dp128"
+  android:minHeight="@dimen/dp128"
+  android:initialLayout="@layout/xyzu_widget_nowplaying_box"
+  android:previewLayout="@layout/xyzu_widget_nowplaying_box"
+  android:previewImage="@drawable/image_xyzu_widget_nowplaying_box"
+  android:description="@string/xyzu_widget_nowplaying_box_description" />

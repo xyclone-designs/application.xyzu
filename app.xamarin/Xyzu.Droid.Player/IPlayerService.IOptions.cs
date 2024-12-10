@@ -12,6 +12,7 @@ namespace Xyzu.Player
 	{
 		public interface IOptions
 		{
+			IList<Type> BroadcastTypes { get; set; }
 			INotificationOptions? Notification { get; set; }
 
 			public interface INotificationOptions
@@ -55,6 +56,12 @@ namespace Xyzu.Player
 
 			public class Default : IOptions
 			{
+				public Default()
+				{
+					BroadcastTypes = new List<Type> { };
+				}
+
+				public IList<Type> BroadcastTypes { get; set; }
 				public INotificationOptions? Notification { get; set; }
 			}
 		}

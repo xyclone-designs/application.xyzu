@@ -74,9 +74,9 @@ namespace Xyzu.Menus
 				{
 					_dialogview.ContentView = new InfoAlbumView(variables.Context)
 					{
-						Album = variables.Album,
 						Images = XyzuImages.Instance,
 						OnPalette = palette => _dialogview.Palette = palette,
+						Album = variables.Album,
 					};
 
 					_dialogview.Dialog = appcompatdialog;
@@ -106,9 +106,9 @@ namespace Xyzu.Menus
 				{
 					_dialogview.ContentView = new InfoArtistView(variables.Context)
 					{
-						Artist = variables.Artist,
 						Images = XyzuImages.Instance,
 						OnPalette = palette => _dialogview.Palette = palette,
+						Artist = variables.Artist,
 					};
 
 					_dialogview.Dialog = appcompatdialog;
@@ -138,9 +138,9 @@ namespace Xyzu.Menus
 				{
 					_dialogview.ContentView = new InfoGenreView(variables.Context)
 					{
-						Genre = variables.Genre,
 						Images = XyzuImages.Instance,
 						OnPalette = palette => _dialogview.Palette = palette,
+						Genre = variables.Genre,
 					};
 
 					_dialogview.Dialog = appcompatdialog;
@@ -170,9 +170,9 @@ namespace Xyzu.Menus
 				{
 					_dialogview.ContentView = new InfoPlaylistView(variables.Context)
 					{
-						Playlist = variables.Playlist,
 						Images = XyzuImages.Instance,
 						OnPalette = palette => _dialogview.Palette = palette,
+						Playlist = variables.Playlist,
 					};
 
 					_dialogview.Dialog = appcompatdialog;
@@ -203,9 +203,9 @@ namespace Xyzu.Menus
 					_dialogview.SetVisibility(ViewStates.Visible);
 					_dialogview.ContentView = new InfoSongView(variables.Context)
 					{
-						Song = variables.Song,
 						Images = XyzuImages.Instance,
 						OnPalette = palette => _dialogview.Palette = palette,
+						Song = variables.Song,
 					};
 
 					_dialogview.Dialog = appcompatdialog;
@@ -238,8 +238,8 @@ namespace Xyzu.Menus
 					_dialogview.ContentView = new InfoSongLyricsView(variables.Context)
 					{
 						Images = XyzuImages.Instance,
-						Song = variables.Song,
 						OnPalette = palette => _dialogview.Palette = palette,
+						Song = variables.Song,
 					};
 
 					_dialogview.Dialog = appcompatdialog;

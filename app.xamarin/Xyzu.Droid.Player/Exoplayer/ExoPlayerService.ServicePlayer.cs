@@ -1,4 +1,5 @@
-﻿using Android.Content;
+﻿using Android.Appwidget;
+using Android.Content;
 using AndroidX.Media3.Common;
 using AndroidX.Media3.ExoPlayer.Source;
 
@@ -224,6 +225,7 @@ namespace Xyzu.Player.Exoplayer
 			{
 				case nameof(IQueue.CurrentIndex):
 					PlayerCurrentIndexRefresh();
+					BroadcastIntent();
 					break;
 
 				default: break;

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?> 
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"> 
+  
+  <item>
+    <shape>
+      <solid android:color="@color/ColorSurface"/> 
+    </shape>
+  </item> 
+
+  <item>
+    <shape>
+      <gradient 
+        android:type="radial"
+        android:centerX="0.0"
+        android:centerY="0.1"
+        android:gradientRadius="@dimen/percent200"
+        android:startColor="@color/ColorOnSurface" 
+        android:centerColor="@color/ColorOnSurface" 
+        android:endColor="@android:color/transparent" /> 
+    </shape>
+  </item>
+  
+  <item>
+    <shape>
+      <gradient 
+        android:type="radial"
+        android:centerX="0.9"
+        android:centerY="0.2"
+        android:gradientRadius="@dimen/percent80"
+        android:startColor="@color/ColorPrimary" 
+        android:centerColor="@color/ColorPrimary" 
+        android:endColor="@android:color/transparent" /> 
+    </shape>
+  </item>
+  
+  <item>
+    <shape>
+      <gradient 
+        android:type="radial"
+        android:centerX="0.3"
+        android:centerY="0.6"
+        android:gradientRadius="@dimen/percent100"
+        android:startColor="@color/ColorPrimary" 
+        android:centerColor="@color/ColorPrimary" 
+        android:endColor="@android:color/transparent" /> 
+    </shape>
+  </item> 
+  
+  <item>
+    <shape>
+      <gradient 
+        android:type="radial"
+        android:centerX="1.0"
+        android:centerY="0.5"
+        android:gradientRadius="@dimen/percent80"
+        android:startColor="@color/ColorSurface" 
+        android:centerColor="@color/ColorSurface" 
+        android:endColor="@android:color/transparent" /> 
+    </shape>
+  </item>
+  
+  <item>
+    <shape>
+      <gradient 
+        android:type="radial"
+        android:centerX="0.4"
+        android:centerY="0.9"
+        android:gradientRadius="@dimen/percent120"
+        android:startColor="@color/ColorSurface" 
+        android:centerColor="@color/ColorSurface" 
+        android:endColor="@android:color/transparent" /> 
+    </shape>
+  </item>
+  
+  <item>
+    <shape>
+      <gradient 
+        android:type="radial"
+        android:centerX="0.1"
+        android:centerY="1.0"
+        android:gradientRadius="@dimen/percent110"
+        android:startColor="@color/ColorSurface" 
+        android:centerColor="@color/ColorSurface" 
+        android:endColor="@android:color/transparent" /> 
+    </shape>
+  </item>
+  
+
+</layer-list>

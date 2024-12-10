@@ -5,11 +5,14 @@ using System;
 using System.ComponentModel;
 
 using Xyzu.Player;
+using Xyzu.Player.Exoplayer;
 
 namespace Xyzu
 {
 	public sealed partial class XyzuPlayer : Java.Lang.Object, IServiceConnection
 	{
+		public static readonly Type ServiceType = typeof(ExoPlayerService);
+
 		private XyzuPlayer(Context context) 
 		{
 			Context = context;
@@ -23,11 +26,11 @@ namespace Xyzu
 		}
 		public static bool Inited => _Instance != null;
 
-		public static void Init(Context context, Type servietype, Action<XyzuPlayer>? oninit)
+		public static void Init(Context context, Action<XyzuPlayer>? oninit)
 		{
 			_Instance = new XyzuPlayer(context)
 			{
-				Intent = new Intent(context, servietype)
+				Intent = new Intent(context, ServiceType)
 			};
 
 			oninit?.Invoke(_Instance);

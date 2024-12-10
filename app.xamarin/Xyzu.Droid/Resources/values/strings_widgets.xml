@@ -1,0 +1,19 @@
+<resources>
+
+  <string name="xyzu_widget_nowplaying_box_label">Xyzu Box</string>
+  <string name="xyzu_widget_nowplaying_envelope_label">Xyzu Envelope</string>
+  <string name="xyzu_widget_nowplaying_shelf_label">Xyzu Shelf</string>
+
+  <string name="xyzu_widget_nowplaying_box_description">A 2x2 box configuration for the widget</string>
+  <string name="xyzu_widget_nowplaying_envelope_description">A large &amp; detailed rectangular 5x2 configuration for the widget</string>
+  <string name="xyzu_widget_nowplaying_shelf_description">An extendable 3x1 configuration for the widget</string>
+  
+  <string name="xyzu_widget_nowplaying_blur_imageview_contentdescription">Widget artwork blur</string>
+  <string name="xyzu_widget_nowplaying_artwork_imageview_contentdescription">Widget artwork image</string>
+  <string name="xyzu_widget_nowplaying_shuffle_imagebutton_contentdescription">Widget shuffle button</string>
+  <string name="xyzu_widget_nowplaying_previous_imagebutton_contentdescription">Widget previous button</string>
+  <string name="xyzu_widget_nowplaying_playpause_imagebutton_contentdescription">Widget play/pause button</string>
+  <string name="xyzu_widget_nowplaying_next_imagebutton_contentdescription">Widget next button</string>
+  <string name="xyzu_widget_nowplaying_repeat_imagebutton_contentdescription">Widget repeat button</string>
+  
+</resources>

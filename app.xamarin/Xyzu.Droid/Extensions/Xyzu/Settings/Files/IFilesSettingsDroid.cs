@@ -15,6 +15,7 @@ namespace Xyzu.Settings.Files
 	{
 		private readonly static File _FileIntenalStorage = new(IntenalStorage);
 
+		public const string NoMediaName = ".nomedia";
 		public const string IntenalStorage = "/storage";
 		public const string IntenalStorageSelf = IntenalStorage + "/self";
 		public const string IntenalStorageEmulated = IntenalStorage + "/emulated";
@@ -49,20 +50,33 @@ namespace Xyzu.Settings.Files
 		public IEnumerable<File> Files()
 		{
 			return FilesDirectories()
-				.SelectMany(directoryfile => directoryfile.ListFiles() ?? Array.Empty<File>())
-				.Where(PredicateFiles(this));
+				.SelectMany(directoryfile =>
+				{
+					if (directoryfile.ListFiles() is not File[] directoryfiles)
+						return Array.Empty<File>();
+
+					if (directoryfiles.Any(file => file.AbsolutePath.EndsWith(NoMediaName)))
+						return Array.Empty<File>();
+
+					return directoryfiles;
+				
+				}).Where(PredicateFiles(this));
 		}
 		public IEnumerable<File> FilesDirectories()
 		{
-			IEnumerable<File> directoriesfiles = Enumerable.Empty<File>();
+			IEnumerable<File> 
+				directoriesfiles = Enumerable.Empty<File>(),
+				filesnomedia = Enumerable.Empty<File>();
 
 			if (Directories != null)
 				directoriesfiles = Directories.SelectMany(dir =>
 				{
 					File file = new (dir);
-					if (file.Exists() && file.IsDirectory)
-						return file.ListAllFiles().Where(dirr => dirr.IsDirectory);
-					return Enumerable.Empty<File>();
+
+					if (file.Exists() is false || file.IsDirectory is false)
+						return Enumerable.Empty<File>();
+
+					return file.ListAllFiles().Where(dirr => dirr.IsDirectory);
 				});
 
 			if (DirectoriesExclude != null)
@@ -70,6 +84,25 @@ namespace Xyzu.Settings.Files
 				{
 					return DirectoriesExclude.Any(dirr => dir.AbsolutePath.StartsWith(dirr)) is false;
 				});
+
+			filesnomedia = directoriesfiles
+				.SelectMany(_ => _.ListAllParentFiles())
+				.DistinctBy(_ => _.AbsolutePath)
+				.Select(_ =>
+				{
+					File file = new(_, NoMediaName);
+
+					if (file.Exists() is false)
+						return null;
+
+					return file.ParentFile;
+
+				}).DistinctBy(_ => _?.AbsolutePath).OfType<File>();
+
+			directoriesfiles = directoriesfiles.Where(_ =>
+			{
+				return filesnomedia.Any(filenomedia => _.AbsolutePath.StartsWith(filenomedia.AbsolutePath)) is false;
+			});
 
 			return directoriesfiles;
 		}
@@ -86,20 +119,6 @@ namespace Xyzu.Settings.Files
 						yield return new File(IntenalStorageEmulated0);
 					else yield return file;
 		}
-		public static IEnumerable<File> StoragesDirectories()
-		{
-			foreach (File storage in Storages())
-				foreach (File storagefile in storage.ListAllFiles())
-					if (storagefile.AbsolutePath.StartsWith(storage.AbsolutePath + "/Android") is false)
-						yield return storagefile;
-		}
-		public static IEnumerable<File> StoragesFiles()
-		{
-			foreach (File storage in Storages())
-				foreach (File storagefile in storage.ListAllFiles())
-					if (storagefile.AbsolutePath.StartsWith(storage.AbsolutePath + "/Android") is false)
-						yield return storagefile;
-		}
 		public static IEnumerable<string> DefaultDirectories()
 		{
 			return Enumerable.Empty<string?>()
@@ -108,66 +127,6 @@ namespace Xyzu.Settings.Files
 				.Append(DirectoryMusic)
 				.Append(DirectoryPodcasts)
 				.OfType<string>();
-		}
-
-		public async IAsyncEnumerable<File> FilesAsync()
-		{
-			Func<File, bool> predicate = PredicateFiles(this);
-
-			await foreach (File directoryfile in FilesDirectoriesAsync())
-				if (await directoryfile.ListFilesAsync() is File[] files)
-					foreach (File file in files)
-						if (predicate.Invoke(file))
-							yield return file;
-		}
-		public IAsyncEnumerable<File> FilesDirectoriesAsync()
-		{
-			IAsyncEnumerable<File> directoriesfiles = AsyncEnumerable.Empty<File>();
-
-			if (Directories != null)
-				directoriesfiles = Directories
-					.ToAsyncEnumerable()
-					.SelectMany(dir =>
-					{
-						File file = new (dir);
-						if (file.Exists() && file.IsDirectory)
-							return file.ListAllFilesAsync().Where(dirr => dirr.IsDirectory);
-						return AsyncEnumerable.Empty<File>();
-					});
-
-			if (DirectoriesExclude != null)
-				directoriesfiles = directoriesfiles.Where(dir =>
-				{
-					return DirectoriesExclude.Any(dirr => dir.AbsolutePath.StartsWith(dirr)) is false;
-				});
-
-			return directoriesfiles;
-		}
-		public static async IAsyncEnumerable<File> StoragesAsync()
-		{
-			File intenalstorage = new(IntenalStorage);
-
-			if (intenalstorage.Exists() && await intenalstorage.ListFilesAsync() is File[] files)
-				foreach (File file in files)
-					if (file.AbsolutePath == IntenalStorageSelf)
-						continue;
-					else if (file.AbsolutePath == IntenalStorageEmulated)
-						yield return new File(IntenalStorageEmulated0);
-					else yield return file;
-		}
-		public static async IAsyncEnumerable<File> StoragesDirectoriesAsync()
-		{
-			await foreach (File storage in StoragesAsync())
-				await foreach (File storagefile in storage.ListAllFilesAsync())
-					if (storagefile.AbsolutePath.StartsWith(storage.AbsolutePath + "/Android") is false)
-						yield return storagefile;
-		}
-		public static async IAsyncEnumerable<File> StoragesFilesAsync()
-		{
-			await foreach (File storage in StoragesAsync())
-				await foreach (File storagefile in storage.ListAllFilesAsync())
-					if (storagefile.AbsolutePath.StartsWith(storage.AbsolutePath + "/Android") is false)
-						yield return storagefile;
 		}
 
 		public static Func<File, bool> Predicate(IFilesSettings filessettings)

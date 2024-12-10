@@ -5,6 +5,17 @@ namespace Java.IO
 {
 	public static class FileExtensions
 	{
+		public static IEnumerable<File> ListAllParentFiles(this File file)
+		{
+			File? parentfile = file.ParentFile;
+
+			while (parentfile is not null)
+			{
+				yield return parentfile;
+				parentfile = parentfile.ParentFile;
+			}
+		}
+
 		public static IEnumerable<File> ListAllFiles(this File file)
 		{
 			if (file.ListFiles() is File[] files)

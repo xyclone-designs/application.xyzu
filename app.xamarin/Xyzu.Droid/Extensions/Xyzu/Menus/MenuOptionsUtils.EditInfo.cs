@@ -162,8 +162,8 @@ namespace Xyzu.Menus
 					_dialogview.ContentView = new InfoEditArtistView(variables.Context)
 					{
 						Images = XyzuImages.Instance,
-						Artist = variables.Artist,
 						OnPalette = palette => _dialogview.Palette = palette,
+						Artist = variables.Artist,
 						ArtistImageClick = (view, sender, args) =>
 						{
 							if (variables.Activity?.RegisterForActivityResult((contract, callback) =>
@@ -230,9 +230,9 @@ namespace Xyzu.Menus
 				{
 					_dialogview.ContentView = new InfoEditGenreView(variables.Context)
 					{
-						Genre = variables.Genre,
 						Images = XyzuImages.Instance,
 						OnPalette = palette => _dialogview.Palette = palette,
+						Genre = variables.Genre,
 					};
 
 					_dialogview.Dialog = appcompatdialog;
@@ -276,8 +276,8 @@ namespace Xyzu.Menus
 					_dialogview.ContentView = new InfoEditPlaylistView(variables.Context)
 					{
 						Images = XyzuImages.Instance,
-						Playlist = variables.Playlist,
 						OnPalette = palette => _dialogview.Palette = palette,
+						Playlist = variables.Playlist,
 					};
 
 					_dialogview.Dialog = appcompatdialog;

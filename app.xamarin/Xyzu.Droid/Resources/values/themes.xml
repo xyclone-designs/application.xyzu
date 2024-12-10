@@ -44,5 +44,6 @@
 
     <item name="preferenceTheme">@style/Xyzu.Preference.Theme</item>
   </style>
+  <style name="WidgetsTheme" parent="XyzuTheme"></style>
 
 </resources>

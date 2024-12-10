@@ -11,7 +11,6 @@ using Java.IO;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,9 +21,9 @@ using Xyzu.Player;
 using Xyzu.Settings.Files;
 using Xyzu.Settings.System;
 using Xyzu.Settings.UserInterface.Library;
+using Xyzu.Widgets.HomeScreen.NowPlaying;
 
 using JavaFile = Java.IO.File;
-using SystemFile = System.IO.File;
 using XyzuResource = Xyzu.Droid.Resource;
 using GlideInstance = Xyzu.Images.Glide.Instance;
 using ExoPlayerService = Xyzu.Player.Exoplayer.ExoPlayerService;
@@ -78,7 +77,7 @@ namespace Xyzu.Activities
 			XyzuBroadcast.Init(Application.Context, InitBroadcast);
 			XyzuSettings.Init(Application.Context, InitSettings);
 			XyzuLibrary.Init(Application.Context, InitLibrary);
-			XyzuPlayer.Init(Application.Context, typeof(ExoPlayerService), InitPlayer);
+			XyzuPlayer.Init(Application.Context, InitPlayer);
 			XyzuImages.Init(new GlideInstance(Application.Context), InitImages);
 
 			StartActivity(XyzuSettings.Utils.MainActivityIntent(this, null));
@@ -113,7 +112,7 @@ namespace Xyzu.Activities
 				Start(true);
 		}
 
-		public void InitBroadcast(XyzuBroadcast xyzubroadcast)
+		public void InitBroadcast(XyzuBroadcast xyzubroadcast) 
 		{
 			xyzubroadcast.ReceiveActions = new Dictionary<string, Action<object, OnReceiveEventArgs>>
 			{
@@ -138,7 +137,7 @@ namespace Xyzu.Activities
 		{
 			((IImagesDroid.Default)xyzuimages.Images).SetBuffer = model => XyzuLibrary.Instance.Misc.SetImage(model, default);
 		}
-		public void InitLibrary(XyzuLibrary xyzulibrary)
+		public void InitLibrary(XyzuLibrary xyzulibrary) 
 		{
 			Task<ISong?> OnGetSong(string? songid)
 			{
@@ -194,54 +193,61 @@ namespace Xyzu.Activities
 
 			xyzulibrary.ScannerServiceScan(false);
 		}
-		public void InitPlayer(XyzuPlayer xyzuplayer)
+		public void InitPlayer(XyzuPlayer xyzuplayer) 
 		{
 			xyzuplayer.ServiceConnectionChangedAction = args =>
 			{
 				switch (args.Event)
 				{
 					case ServiceConnectionChangedEventArgs.Events.Connected when xyzuplayer.ServiceBinder != null:
-						xyzuplayer.ServiceBinder.PlayerService.Options ??= new IPlayerService.IOptions.Default();
-						xyzuplayer.ServiceBinder.PlayerService.Options.Notification = new IPlayerService.IOptions.INotificationOptions.Default
+						xyzuplayer.ServiceBinder.PlayerService.Options = new IPlayerService.IOptions.Default()
 						{
-							Id = XyzuResource.String.playerserviceoptions_notificationoptions_id,
-							ChannelName = XyzuResource.String.playerserviceoptions_notificationoptions_channel_name,
-							ChannelDescription = XyzuResource.String.playerserviceoptions_notificationoptions_channel_description,
-							DefaultId = "",
-							DefaultAlbum = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unknownalbum),
-							DefaultArtist = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unknownartist),
-							DefaultTitle = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unknowntitle),
-							OnBitmap = (bitmapfactoryoptions, song) =>
+							BroadcastTypes = new List<Type>
 							{
-								return Task.Run(async () => await XyzuImages.Instance.GetBitmap(new IImagesDroid.Parameters
+								typeof(NowPlayingBoxWidget),
+								typeof(NowPlayingEnvelopeWidget),
+								typeof(NowPlayingShelfWidget),
+							},
+							Notification = new IPlayerService.IOptions.INotificationOptions.Default
+							{
+								Id = XyzuResource.String.playerserviceoptions_notificationoptions_id,
+								ChannelName = XyzuResource.String.playerserviceoptions_notificationoptions_channel_name,
+								ChannelDescription = XyzuResource.String.playerserviceoptions_notificationoptions_channel_description,
+								DefaultId = "",
+								DefaultAlbum = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unknownalbum),
+								DefaultArtist = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unknownartist),
+								DefaultTitle = Resources?.GetString(XyzuResource.String.playerserviceoptions_notificationoptions_channel_unknowntitle),
+								OnBitmap = (bitmapfactoryoptions, song) =>
 								{
-									CancellationToken = default,
-									BitmapOptions = bitmapfactoryoptions,
-									Operations = IImages.DefaultOperations.Downsample,
-									Sources = new object?[]
+									return Task.Run(async () => await XyzuImages.Instance.GetBitmap(new IImagesDroid.Parameters
 									{
-										song,
-										XyzuResource.Drawable.icon_xyzu
+										CancellationToken = default,
+										BitmapOptions = bitmapfactoryoptions,
+										Operations = IImages.DefaultOperations.Downsample,
+										Sources = new object?[]
+										{
+											song,
+											XyzuResource.Drawable.icon_xyzu
+										}
 
-									}
-
-								})).GetAwaiter().GetResult();
-							},
-							ContentIntent = PendingIntent.GetActivity(
-								requestCode: 0,
-								context: xyzuplayer.Context,
-								flags: PendingIntentFlags.UpdateCurrent,
-								intent: XyzuSettings.Utils.MainActivityIntent(this, null).PutExtra(LibraryActivity.IntentKeys.IsFromNotification, true)),
-							Icons = new Dictionary<string, int>
-							{
-								{ IPlayerService.IOptions.INotificationOptions.IconKeys.SmallIcon, XyzuResource.Drawable.icon_xyzu },
-								{ IPlayerService.IOptions.INotificationOptions.IconKeys.Destroy, XyzuResource.Drawable.icon_general_x },
-								{ IPlayerService.IOptions.INotificationOptions.IconKeys.Next, XyzuResource.Drawable.icon_player_skip_foward },
-								{ IPlayerService.IOptions.INotificationOptions.IconKeys.Pause, XyzuResource.Drawable.icon_player_pause },
-								{ IPlayerService.IOptions.INotificationOptions.IconKeys.Play, XyzuResource.Drawable.icon_player_play },
-								{ IPlayerService.IOptions.INotificationOptions.IconKeys.Previous, XyzuResource.Drawable.icon_player_skip_backward },
-								{ IPlayerService.IOptions.INotificationOptions.IconKeys.Stop, XyzuResource.Drawable.icon_player_stop },
-							},
+									})).GetAwaiter().GetResult();
+								},
+								ContentIntent = PendingIntent.GetActivity(
+									requestCode: 0,
+									context: xyzuplayer.Context,
+									flags: PendingIntentFlags.UpdateCurrent,
+									intent: XyzuSettings.Utils.MainActivityIntent(this, null).PutExtra(LibraryActivity.IntentKeys.IsFromNotification, true)),
+								Icons = new Dictionary<string, int>
+								{
+									{ IPlayerService.IOptions.INotificationOptions.IconKeys.SmallIcon, XyzuResource.Drawable.icon_xyzu },
+									{ IPlayerService.IOptions.INotificationOptions.IconKeys.Destroy, XyzuResource.Drawable.icon_general_x },
+									{ IPlayerService.IOptions.INotificationOptions.IconKeys.Next, XyzuResource.Drawable.icon_player_skip_foward },
+									{ IPlayerService.IOptions.INotificationOptions.IconKeys.Pause, XyzuResource.Drawable.icon_player_pause },
+									{ IPlayerService.IOptions.INotificationOptions.IconKeys.Play, XyzuResource.Drawable.icon_player_play },
+									{ IPlayerService.IOptions.INotificationOptions.IconKeys.Previous, XyzuResource.Drawable.icon_player_skip_backward },
+									{ IPlayerService.IOptions.INotificationOptions.IconKeys.Stop, XyzuResource.Drawable.icon_player_stop },
+								},
+							}
 						};
 
 						ExoPlayerService exoplayerservice = (xyzuplayer.ServiceBinder.PlayerService as ExoPlayerService)!;
@@ -269,13 +275,14 @@ namespace Xyzu.Activities
 						}
 
 						exoplayerservice.OnStartCommand(xyzuplayer.Intent, StartCommandFlags.Redelivery, ExoPlayerService.StartIds.PostBind);
+
 						break;
 
 					default: break;
 				}
 			};
 		}
-		public void InitSettings(XyzuSettings xyzusettings)
+		public void InitSettings(XyzuSettings xyzusettings) 
 		{
 			if (FilesSettings?.Directories.Any() is false)
 			{

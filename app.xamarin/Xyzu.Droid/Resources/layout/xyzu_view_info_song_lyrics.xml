@@ -10,32 +10,57 @@
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/Xyzu.View.Info.Text.Title"
         android:id="@+id/xyzu_view_info_song_lyrics_title_appcompattextview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:singleLine="true"
         android:text="@string/xyzu_view_info_song_lyrics_header"
+        android:textSize="@dimen/abc_text_size_headline_material"
             
-        app:layout_constrainedHeight="true"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/xyzu_view_info_song_lyrics_title_barrier_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" 
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_info_song_lyrics_songartwork_appcompatimageview"/>
+  
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.Info.Text"                                 
+        android:id="@+id/xyzu_view_info_song_lyrics_songtitle_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginHorizontal="@dimen/dp32"
+    
+        app:layout_constraintWidth="wrap_content_constrained"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_info_song_lyrics_title_appcompattextview"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_info_song_lyrics_songartwork_appcompatimageview"/>
+  
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/Xyzu.View.Info.Image"
+        android:id="@+id/xyzu_view_info_song_lyrics_songartwork_appcompatimageview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_margin="@dimen/dp32"
         
-        app:barrierMargin="@dimen/dp16"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="xyzu_view_info_song_lyrics_title_appcompattextview"/> 
+        app:layout_constrainedWidth="true"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintWidth="@dimen/dp64"
+        app:layout_constraintHeight="@dimen/dp64"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/Xyzu.View.Info.Text.Value"
+        style="@style/Xyzu.View.Info.Text"
         android:id="@+id/xyzu_view_info_song_lyrics_songlyrics_appcompattextview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/dp32"
+        android:textColor="@color/ColorOnSurface"
         android:textAlignment="center"
         
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/xyzu_view_info_song_lyrics_title_barrier_bottom"/>
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_info_song_lyrics_songtitle_appcompattextview"/>
 
 </merge>

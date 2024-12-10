@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    
+    style="@style/Xyzu.Widget.HomeScreen.NowPlaying.Envelope"
+        
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/xyzu_widget_nowplaying_container_relativelayout">
+
+    <ImageView
+        style="@style/Xyzu.Widget.HomeScreen.NowPlaying.Image"
+        android:id="@+id/xyzu_widget_nowplaying_blur_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/xyzu_widget_nowplaying_blur_imageview_contentdescription"/>
+
+    <ImageView
+        style="@style/Xyzu.Widget.HomeScreen.NowPlaying.Image"
+        android:id="@+id/xyzu_widget_nowplaying_artwork_imageview"
+        android:layout_width="@dimen/dp112"
+        android:layout_height="@dimen/dp112"
+        android:layout_marginHorizontal="@dimen/dp8"
+        android:layout_centerVertical="true"
+        android:layout_above="@id/xyzu_widget_nowplaying_buttons_linearlayout"
+        android:contentDescription="@string/xyzu_widget_nowplaying_artwork_imageview_contentdescription"/>
+
+    <TextView
+        style="@style/Xyzu.Widget.HomeScreen.NowPlaying.Text"
+        android:id="@+id/xyzu_widget_nowplaying_detail_one_textview"
+        android:text="@string/player_default_detail_one_alt"
+        android:textAlignment="viewStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="@dimen/dp8"
+        android:layout_toEndOf="@id/xyzu_widget_nowplaying_artwork_imageview"
+        android:layout_above="@id/xyzu_widget_nowplaying_detail_two_textview" />
+
+    <TextView
+        style="@style/Xyzu.Widget.HomeScreen.NowPlaying.Text"
+        android:id="@+id/xyzu_widget_nowplaying_detail_two_textview"
+        android:text="@string/player_default_detail_two_alt"
+        android:textAlignment="viewStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="@dimen/dp8"
+        android:layout_toEndOf="@id/xyzu_widget_nowplaying_artwork_imageview"
+        android:layout_above="@id/xyzu_widget_nowplaying_detail_three_textview" />
+
+    <TextView
+        style="@style/Xyzu.Widget.HomeScreen.NowPlaying.Text"
+        android:id="@+id/xyzu_widget_nowplaying_detail_three_textview"
+        android:text="@string/player_default_detail_three_alt"
+        android:textAlignment="viewStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="@dimen/dp8"
+        android:layout_toEndOf="@id/xyzu_widget_nowplaying_artwork_imageview"
+        android:layout_above="@id/xyzu_widget_nowplaying_detail_four_textview" />
+
+    <TextView
+        style="@style/Xyzu.Widget.HomeScreen.NowPlaying.Text"
+        android:id="@+id/xyzu_widget_nowplaying_detail_four_textview"
+        android:text="@string/player_default_detail_four_alt"
+        android:textAlignment="viewStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="@dimen/dp8"
+        android:layout_marginHorizontal="@dimen/dp8"
+        android:layout_toEndOf="@id/xyzu_widget_nowplaying_artwork_imageview"
+        android:layout_above="@id/xyzu_widget_nowplaying_buttons_linearlayout" />
+
+    <LinearLayout
+        android:id="@+id/xyzu_widget_nowplaying_buttons_linearlayout"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/dp8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            style="@style/Xyzu.Widget.HomeScreen.NowPlaying.Button"
+            android:id="@+id/xyzu_widget_nowplaying_shuffle_imagebutton"
+            android:src="@drawable/icon_player_shufflemode_noshuffle"
+            android:layout_width="@dimen/dp32"
+            android:layout_height="@dimen/dp32" 
+            android:layout_marginVertical="@dimen/dp8"
+            android:contentDescription="@string/xyzu_widget_nowplaying_shuffle_imagebutton_contentdescription"/>
+
+        <ImageButton
+            style="@style/Xyzu.Widget.HomeScreen.NowPlaying.Button"
+            android:id="@+id/xyzu_widget_nowplaying_previous_imagebutton"
+            android:src="@drawable/icon_player_skip_backward"
+            android:layout_width="@dimen/dp32"
+            android:layout_height="@dimen/dp32" 
+            android:layout_marginStart="@dimen/dp16"
+            android:layout_marginVertical="@dimen/dp4"
+            android:contentDescription="@string/xyzu_widget_nowplaying_previous_imagebutton_contentdescription"/>
+
+        <ImageButton
+            style="@style/Xyzu.Widget.HomeScreen.NowPlaying.Button"
+            android:id="@+id/xyzu_widget_nowplaying_playpause_imagebutton"
+            android:src="@drawable/icon_player_play"
+            android:layout_width="@dimen/dp32"
+            android:layout_height="@dimen/dp32" 
+            android:layout_marginHorizontal="@dimen/dp8"
+            android:contentDescription="@string/xyzu_widget_nowplaying_playpause_imagebutton_contentdescription" />
+
+        <ImageButton
+            style="@style/Xyzu.Widget.HomeScreen.NowPlaying.Button"
+            android:id="@+id/xyzu_widget_nowplaying_next_imagebutton"
+            android:src="@drawable/icon_player_skip_foward"
+            android:layout_width="@dimen/dp32"
+            android:layout_height="@dimen/dp32" 
+            android:layout_marginVertical="@dimen/dp4"
+            android:contentDescription="@string/xyzu_widget_nowplaying_next_imagebutton_contentdescription"/>
+
+        <ImageButton
+            style="@style/Xyzu.Widget.HomeScreen.NowPlaying.Button"
+            android:id="@+id/xyzu_widget_nowplaying_repeat_imagebutton"
+            android:src="@drawable/icon_player_repeatmode_norepeat"
+            android:layout_width="@dimen/dp32"
+            android:layout_height="@dimen/dp32" 
+            android:layout_marginStart="@dimen/dp16"
+            android:layout_marginVertical="@dimen/dp8"
+            android:contentDescription="@string/xyzu_widget_nowplaying_repeat_imagebutton_contentdescription"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

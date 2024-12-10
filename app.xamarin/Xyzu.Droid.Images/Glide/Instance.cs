@@ -187,11 +187,10 @@ namespace Xyzu.Images.Glide
 						OnLoadFailedAction = drawable => parameters.OnComplete?.Invoke(false),
 						OnResourceReadyAction = (resource, transition) =>
 						{
-							if (resource is BitmapDrawable bitmapdrawable)
+							if (resource is Bitmap bitmap)
 							{
-								parameters.OnDrawable?.Invoke(bitmapdrawable);
-								if (bitmapdrawable.Bitmap is not null)
-									parameters.OnPalette?.Invoke(new Palette.Builder(bitmapdrawable.Bitmap).Generate());
+								parameters.OnBitmap?.Invoke(bitmap);
+								parameters.OnPalette?.Invoke(new Palette.Builder(bitmap).Generate());
 							}
 
 							parameters.OnComplete?.Invoke(true);

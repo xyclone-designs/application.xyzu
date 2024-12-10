@@ -23,9 +23,32 @@
   <dimen name="dp256">256dp</dimen>
   <dimen name="dp280">280dp</dimen>
   <dimen name="dp360">360dp</dimen>
+  <dimen name="dp480">480dp</dimen>
   <dimen name="dp540">540dp</dimen>
   <dimen name="dp600">6000dp</dimen>
   <dimen name="dp720">720dp</dimen>
+
+  <dimen name="sp12">12sp</dimen>
+  <dimen name="sp16">16sp</dimen>
+
+  <dimen name="cellheightportrait1">102dip</dimen>
+  <dimen name="cellheightportrait2">220dip</dimen>
+  <dimen name="cellheightportrait3">337dip</dimen>
+  <dimen name="cellheightportrait4">455dip</dimen>
+  <dimen name="cellwidthportrait1">57dip</dimen>
+  <dimen name="cellwidthportrait2">130dip</dimen>
+  <dimen name="cellwidthportrait3">203dip</dimen>
+  <dimen name="cellwidthportrait4">276dip</dimen>
+  <dimen name="cellwidthportrait5">349dip</dimen>
+  <dimen name="cellheightlandscape1">51dip</dimen>
+  <dimen name="cellheightlandscape2">117dip</dimen>
+  <dimen name="cellheightlandscape3">184dip</dimen>
+  <dimen name="cellheightlandscape4">250dip</dimen>
+  <dimen name="cellwidthlandscape1">127dip</dimen>
+  <dimen name="cellwidthlandscape2">269dip</dimen>
+  <dimen name="cellwidthlandscape3">412dip</dimen>
+  <dimen name="cellwidthlandscape4">544dip</dimen>
+  <dimen name="cellwidthlandscape5">697dip</dimen>
   
   <dimen name="percent10">10%</dimen>
   <dimen name="percent20">20%</dimen>

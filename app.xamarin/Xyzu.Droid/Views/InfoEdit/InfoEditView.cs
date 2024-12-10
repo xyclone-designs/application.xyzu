@@ -29,7 +29,19 @@ namespace Xyzu.Views.InfoEdit
 		{
 			switch (propertyname)
 			{
+				case nameof(Images):
+					ReloadImage();
+					break;
+
 				case nameof(Palette):
+					if (PaletteTextViews is not null)
+					{
+						Color? color = Context is null ? null : Palette?.GetColorForBackground(Context, Resource.Color.ColorSurface);
+
+						foreach (KeyValuePair<AppCompatTextView, Color> title in PaletteTextViews)
+							title.Key.SetTextColor(color ?? title.Value);
+					}
+
 					OnPalette?.Invoke(Palette);
 					break;
 

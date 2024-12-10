@@ -9,6 +9,36 @@
     <item name="android:clipToPadding">false</item>
   </style>
 
+
+  <!-- Xyzu.View.HomeScreen-->
+  <style name="Xyzu.Widget.HomeScreen" parent="Xyzu.Widget"/>  
+  <style name="Xyzu.Widget.HomeScreen.NowPlaying" parent="Xyzu.Widget.HomeScreen" />
+  <style name="Xyzu.Widget.HomeScreen.NowPlaying.Button" parent="Xyzu.View.NowPlaying.Button" />
+  <style name="Xyzu.Widget.HomeScreen.NowPlaying.Image" parent="Xyzu.AppCompat.Image" />
+  <style name="Xyzu.Widget.HomeScreen.NowPlaying.Text" parent="Xyzu.View.NowPlaying.Text">
+    <item name="android:lines">1</item>
+    <item name="android:padding">@dimen/dp0</item>
+    <item name="android:textAlignment">center</item>
+  </style>
+  <style name="Xyzu.Widget.HomeScreen.NowPlaying.Text.Title" parent="Xyzu.Widget.HomeScreen.NowPlaying.Text">
+    <item name="android:textSize">@dimen/sp16</item>
+  </style>
+  <style name="Xyzu.Widget.HomeScreen.NowPlaying.Text.Small" parent="Xyzu.Widget.HomeScreen.NowPlaying.Text">
+    <item name="android:textSize">@dimen/sp12</item>
+  </style>
+  
+  <style name="Xyzu.Widget.HomeScreen.NowPlaying.Shelf" parent="Xyzu.Widget.HomeScreen.NowPlaying">
+    <item name="android:background">@drawable/xyzu_widget_nowplaying_shelf_background</item>
+  </style>
+  <style name="Xyzu.Widget.HomeScreen.NowPlaying.Box" parent="Xyzu.Widget.HomeScreen.NowPlaying">
+    <item name="android:background">@drawable/xyzu_widget_nowplaying_box_background</item>
+  </style>
+  <style name="Xyzu.Widget.HomeScreen.NowPlaying.Envelope" parent="Xyzu.Widget.HomeScreen.NowPlaying">
+    <item name="android:background">@drawable/xyzu_widget_nowplaying_envelope_background</item>
+  </style>
+  <!-- Xyzu.View.HomeScreen-->
+  
+
   <!-- Xyzu.View.Widget.RecyclerView -->
   <style name="Xyzu.Widget.RecyclerView" parent="Xyzu.Widget">
     <item name="android:fadeScrollbars">true</item>
@@ -54,7 +84,7 @@
   <style name="Xyzu.Widget.RecyclerView.Simple.Vertical" parent="Xyzu.Widget.RecyclerView.Simple">
     <item name="android:orientation">vertical</item>
   </style>
-  <!-- Xyzu.View.Widget.RecyclerView.Simplw -->
+  <!-- Xyzu.View.Widget.RecyclerView.Simple -->
 
   <!-- Xyzu.View.Widget.RecyclerView -->
 
