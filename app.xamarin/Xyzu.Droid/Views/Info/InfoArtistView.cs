@@ -10,7 +10,6 @@ using System.Runtime.CompilerServices;
 using Xyzu.Droid;
 using Xyzu.Images;
 using Xyzu.Library.Models;
-using static Xyzu.Menus.LibraryItem;
 
 namespace Xyzu.Views.Info
 {
@@ -99,19 +98,19 @@ namespace Xyzu.Views.Info
 		public AppCompatTextView ArtistName
 		{
 			get => _ArtistName
-				??= FindViewById<AppCompatTextView>(Ids.ArtistName_Title) ??
+				??= FindViewById<AppCompatTextView>(Ids.ArtistName_Value) ??
 				throw new InflateException("ArtistName");
 		}
 		public AppCompatTextView ArtistSongCount
 		{
 			get => _ArtistSongCount
-				??= FindViewById<AppCompatTextView>(Ids.ArtistSongCount_Title) ??
+				??= FindViewById<AppCompatTextView>(Ids.ArtistSongCount_Value) ??
 				throw new InflateException("ArtistSongCount");
 		}
 		public AppCompatTextView ArtistAlbumCount
 		{
 			get => _ArtistAlbumCount
-				??= FindViewById<AppCompatTextView>(Ids.ArtistAlbumCount_Title) ??
+				??= FindViewById<AppCompatTextView>(Ids.ArtistAlbumCount_Value) ??
 				throw new InflateException("ArtistAlbumCount");
 		}
 	}

@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/xyzu_layout_library_drawerlayout_drawerlayout"
+    
+    style="@style/Xyzu.DrawerLayout"
   
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/ColorBackground">
+    android:layout_height="match_parent">
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout
         android:id="@+id/xyzu_layout_library_drawerlayout_root_slidinguppanellayout"

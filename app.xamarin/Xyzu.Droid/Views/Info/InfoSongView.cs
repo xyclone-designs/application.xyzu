@@ -9,7 +9,6 @@ using System.Runtime.CompilerServices;
 using Xyzu.Droid;
 using Xyzu.Images;
 using Xyzu.Library.Models;
-using static Xyzu.Menus.LibraryItem;
 
 namespace Xyzu.Views.Info
 {

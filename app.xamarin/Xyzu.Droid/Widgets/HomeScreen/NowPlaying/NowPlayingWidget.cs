@@ -53,9 +53,12 @@ namespace Xyzu.Widgets.HomeScreen
 					requestCode: 0,
 					context: context,
 					flags: PendingIntentFlags.UpdateCurrent,
-					intent: XyzuSettings.Utils
-						.MainActivityIntent(context, null)
-						.PutExtra(LibraryActivity.IntentKeys.IsFromWidget, true)));
+					intent: XyzuPlayer.Inited is false 
+						? new Intent(context, typeof(SplashScreenActivity))
+							.PutExtra(LibraryActivity.IntentKeys.IsFromWidget, true)
+						: XyzuSettings.Utils
+							.MainActivityIntent(context, null)
+							.PutExtra(LibraryActivity.IntentKeys.IsFromWidget, true)));
 
 			return remoteviews;
 		}

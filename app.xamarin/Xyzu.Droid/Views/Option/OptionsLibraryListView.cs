@@ -318,13 +318,13 @@ namespace Xyzu.Views.Option
 		{
 			private static AppCompatCheckBox ItemViewDefault(Context context)
 			{
-				ContextThemeWrapper contextthemewrapper = new ContextThemeWrapper(context, Resource.Style.Xyzu_View_Option_LibraryList_RecyclerView_ItemView);
-				AppCompatCheckBox itemview = new AppCompatCheckBox(contextthemewrapper);
+				ContextThemeWrapper contextthemewrapper = new (context, Resource.Style.Xyzu_View_Option_LibraryList_RecyclerView_ItemView);
+				AppCompatCheckBox itemview = new (contextthemewrapper, null, Resource.Style.Xyzu_View_Option_CheckBox);
 
 				itemview.SetMinimumWidth(0);
 				itemview.SetMinimumHeight(0);
 				itemview.SetBackgroundResource(Resource.Drawable.xyzu_view_option_button_background);
-				itemview.SetButtonDrawable(context.Resources?.GetDrawable(Resource.Drawable.xyzu_view_option_button_checkbox_drawable, context.Theme));
+				itemview.SetButtonDrawable(Resource.Drawable.xyzu_view_option_button_checkbox_drawable);
 
 				return itemview;
 			}

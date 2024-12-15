@@ -30,6 +30,7 @@ namespace Xyzu.Activities
 {
 	[Android.App.Activity(
 		Theme = "@style/LibraryTheme",
+		WindowSoftInputMode = SoftInput.StateVisible | SoftInput.AdjustResize,
 		ConfigurationChanges = ConfigChanges.Locale | ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
 	public partial class LibraryActivityDrawerLayout : LibraryActivity, NavigationView.IOnNavigationItemSelectedListener
 	{

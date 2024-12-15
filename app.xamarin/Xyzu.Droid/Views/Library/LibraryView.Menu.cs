@@ -31,11 +31,11 @@ namespace Xyzu.Views.Library
 		protected const int MenuOptionEnabledWhenSingle = 1;
 		protected const int MenuOptionEnabledWhenMultiple = 2;
 
-		protected static int[] MenuOptionEnabledArray_None = new int[] { MenuOptionEnabledWhenNone };
-		protected static int[] MenuOptionEnabledArray_Single = new int[] { MenuOptionEnabledWhenSingle };
-		protected static int[] MenuOptionEnabledArray_Multiple = new int[] { MenuOptionEnabledWhenMultiple };
-		protected static int[] MenuOptionEnabledArray_SingleMultiple = new int[] { MenuOptionEnabledWhenSingle, MenuOptionEnabledWhenMultiple };
-		protected static int[] MenuOptionEnabledArray_All = new int[] { MenuOptionEnabledWhenNone, MenuOptionEnabledWhenSingle, MenuOptionEnabledWhenMultiple };
+		protected readonly static int[] MenuOptionEnabledArray_None = new int[] { MenuOptionEnabledWhenNone };
+		protected readonly static int[] MenuOptionEnabledArray_Single = new int[] { MenuOptionEnabledWhenSingle };
+		protected readonly static int[] MenuOptionEnabledArray_Multiple = new int[] { MenuOptionEnabledWhenMultiple };
+		protected readonly static int[] MenuOptionEnabledArray_SingleMultiple = new int[] { MenuOptionEnabledWhenSingle, MenuOptionEnabledWhenMultiple };
+		protected readonly static int[] MenuOptionEnabledArray_All = new int[] { MenuOptionEnabledWhenNone, MenuOptionEnabledWhenSingle, MenuOptionEnabledWhenMultiple };
 
 		public BottomSheetDialog MenuOptionsDialog
 		{
@@ -180,6 +180,29 @@ namespace Xyzu.Views.Library
 			menuvariables.AnchorViewGroup ??= this;
 			menuvariables.LibraryNavigatable ??= Navigatable;
 
+			menuvariables.MenuOption = menuoption;
+			menuvariables.DialogInterfaceListenerOnDismiss = new DialogInterfaceOnDismissListener(async dialoginterface =>
+			{
+				switch (menuvariables.MenuOption)
+				{
+					case MenuOptions.AddToPlaylist:
+					case MenuOptions.AddToQueue:
+					case MenuOptions.EditInfo:
+					case MenuOptions.Play:
+					case MenuOptions.Share:
+					case MenuOptions.ViewInfo:
+						DismissMenuOptions();
+						break;
+
+					case MenuOptions.Delete:
+					case MenuOptions.Remove:
+						DismissMenuOptions();
+						await OnRefresh(true);
+						break;
+
+					default: break;
+				}
+			});
 			menuvariables.DialogInterfaceListenerCancel = dialoginterface =>
 			{
 				dialoginterface?.Dismiss();
@@ -209,7 +232,7 @@ namespace Xyzu.Views.Library
 
 		protected virtual AndroidXAlertDialog CreateOptionsMenuAlertDialog(Action<OptionsMenuView, AndroidXAlertDialog>? buildaction)
 		{
-			OptionsMenuView menuoptionsview = new OptionsMenuView(Context!)
+			OptionsMenuView menuoptionsview = new (Context!)
 			{
 				WithHeaderButtons = false,
 			};

@@ -74,6 +74,7 @@ namespace Xyzu.Menus
 
 			public int? Index { get; set; }
 			public string? QueueId { get; set; }
+			public MenuOptions? MenuOption { get; set; }
 
 			public Action<IDialogInterface?>? DialogInterfaceListenerCancel { get; set; }
 			public Action<IDialogInterface?>? DialogInterfaceListenerClose { get; set; }

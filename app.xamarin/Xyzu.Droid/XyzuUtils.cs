@@ -40,7 +40,7 @@ namespace Xyzu
 					alertdialog.Window.AddFlags(WindowManagerFlags.TranslucentStatus);
 					alertdialog.Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
 					alertdialog.Window.SetLayout(MenuOptionsUtils.DialogWidth(context), MenuOptionsUtils.DialogHeight(context));
-					alertdialog.Window.SetSoftInputMode(SoftInput.AdjustPan | SoftInput.AdjustResize | SoftInput.StateHidden);
+					alertdialog.Window.SetSoftInputMode(SoftInput.AdjustResize | SoftInput.StateAlwaysVisible);
 				}
 
 				action?.Invoke(null, alertdialog);
@@ -53,7 +53,7 @@ namespace Xyzu
 				
 				bottomsheetdialog.Behavior.State = BottomSheetBehavior.StateExpanded;
 				bottomsheetdialog.Behavior.MaxWidth = MenuOptionsUtils.DialogMaxWidth(context);
-				//bottomsheetdialog.Behavior.MaxHeight = MenuOptionsUtils.DialogMaxHeight(context);
+				bottomsheetdialog.Behavior.MaxHeight = MenuOptionsUtils.DialogMaxHeight(context);
 
 				if (bottomsheetdialog.Window != null)
 				{
@@ -62,7 +62,7 @@ namespace Xyzu
 					bottomsheetdialog.Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
 					bottomsheetdialog.Window.SetLayout(MenuOptionsUtils.DialogWidth(context), MenuOptionsUtils.DialogHeight(context));
 					bottomsheetdialog.Window.SetGravity(MenuOptionsUtils.DialogGravityFlags(context));
-					bottomsheetdialog.Window.SetSoftInputMode(SoftInput.AdjustPan | SoftInput.AdjustResize | SoftInput.StateHidden);
+					bottomsheetdialog.Window.SetSoftInputMode(SoftInput.AdjustResize | SoftInput.StateVisible);
 				}
 
 				bottomsheetdialogaction?.Invoke(bottomsheetdialog);

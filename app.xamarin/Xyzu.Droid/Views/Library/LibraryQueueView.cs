@@ -211,15 +211,22 @@ namespace Xyzu.Views.Library
 
 			Refreshing = true;
 
-			IList<ISong.Default> songs = Player.Queue.Select(queueitem => new ISong.Default(queueitem.PrimaryId)
+			IList<ISong> songs = await Library.Songs.GetSongs(new ILibraryIdentifiers.Default
 			{
-				Uri = queueitem.Uri,
-				Filepath = queueitem.PrimaryId,
+				SongIds = Player.Queue.Select(_ => _.PrimaryId)
 
-			}).ToList();
+			}, default).ToListAsync();
 
 			QueueSongs.LibraryItemsAdapter.LibraryItems.Clear();
-			QueueSongs.LibraryItemsAdapter.LibraryItems.AddRange(songs);
+			QueueSongs.LibraryItemsAdapter.LibraryItems.AddRange(
+				enumerable: Player.Queue.Select(queueitem =>
+				{
+					return songs.FirstOrDefault(_ => _.Id == queueitem.PrimaryId) ?? new ISong.Default(queueitem.PrimaryId)
+					{
+						Uri = queueitem.Uri,
+						Filepath = queueitem.PrimaryId,
+					};
+				}));
 
 			Refreshing = false;
 		}

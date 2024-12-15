@@ -30,7 +30,7 @@ namespace Xyzu.Activities
 {
 	[Android.App.Activity(
 		Theme = "@style/LibraryTheme",
-		WindowSoftInputMode = SoftInput.AdjustPan | SoftInput.AdjustResize,
+		WindowSoftInputMode = SoftInput.StateVisible | SoftInput.AdjustPan | SoftInput.AdjustResize,
 		ConfigurationChanges = ConfigChanges.Locale | ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
 	public partial class LibraryActivityTabLayout : LibraryActivity
 	{
@@ -285,6 +285,8 @@ namespace Xyzu.Activities
 			base.OnRestoreInstanceState(savedInstanceState);
 
 			_SelectedPosition = savedInstanceState?.GetInt(nameof(ToolbarTabLayout.Tablayout.SelectedTabPosition), -1);
+			
+			EnsureTabPosition();
 		}
 		protected override void OnSaveInstanceState(Bundle outstate)
 		{
@@ -292,7 +294,6 @@ namespace Xyzu.Activities
 
 			base.OnSaveInstanceState(outstate);
 		}
-
 		protected override void OnFloatingactionbuttonClick(object? sender, EventArgs args)
 		{
 			base.OnFloatingactionbuttonClick(sender, args);

@@ -10,6 +10,12 @@
     <item name="android:textColor">@color/ColorOnSurface</item>
   </style>
 
+  <style name="Xyzu.DrawerLayout" parent="Xyzu">
+    <item name="android:clipChildren">false</item>
+    <item name="android:clipToPadding">false</item>
+    <item name="android:background">@android:color/transparent</item>
+  </style>
+
   <!-- PopupMenu -->
   <style name="Xyzu.PopupMenu" parent="Widget.MaterialComponents.PopupMenu">
     <item name="android:clipToPadding">true</item>

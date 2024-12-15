@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 
 using System;
 using System.Threading;
@@ -40,7 +38,10 @@ namespace Xyzu.Activities
 		private LibrarySearchFragment? _FragmentLibrarySearch;
 		private LibrarySongsFragment? _FragmentLibrarySongs;
 
+		protected CancellationTokenSource? CancellationTokenSource { get; set; }
+
 		protected LibraryFragment? CurrentLibraryFragment { get; set; }
+
 		protected virtual LibraryAlbumFragment FragmentLibraryAlbum
 		{
 			set => _FragmentLibraryAlbum = value;
@@ -132,13 +133,22 @@ namespace Xyzu.Activities
 				{
 					if (libraryview is LibrarySearchView librarysearchview)
 					{
+						CancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(librarysearchview.Cancellationtoken);
+
 						ToolbarSearch.Searcher = librarysearchview.Searcher;
-						ToolbarSearch.OnSubmit = async () => await librarysearchview.OnRefresh(true);
+						ToolbarSearch.OnSubmit = async () =>
+						{
+							await CancellationTokenSource.CancelAsync();
+							await librarysearchview.OnRefresh(true);
+						};
 						ToolbarSearch.OnOptions = () => FragmentLibrarySearch.OnMenuOptionClick(Menus.Library.ListOptions);
 						ToolbarSearch.OnSearcherPropertyChanged = propertyname =>
 						{
 							switch(propertyname)
 							{
+								case nameof(ToolbarSearch.Searcher.String):
+									ToolbarSearch.OnSubmit.Invoke();
+									break;
 								case nameof(ToolbarSearch.Searcher.SearchAlbums):
 								case nameof(ToolbarSearch.Searcher.SearchArtists):
 								case nameof(ToolbarSearch.Searcher.SearchGenres):

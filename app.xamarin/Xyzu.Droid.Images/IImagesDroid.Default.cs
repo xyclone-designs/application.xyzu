@@ -92,19 +92,20 @@ namespace Xyzu.Images
 					List<Bitmap> bitmaps = new();
 
 					for (int index = 0; bitmaps.Count != 4 && index < parameters.Sources.Length; index++)
-						if (parameters.Sources[index] is IEnumerable enumerable && enumerable.GetEnumerator() is IEnumerator enumerator)
+						if ((parameters.Sources[index] as IEnumerable)?.GetEnumerator() is IEnumerator enumerator)
 						{
-							while (bitmaps.Count != 4 && enumerator.MoveNext() is object obj)
-								if (await GetBitmap(parameters) is Bitmap c)
+							while (bitmaps.Count != 4 && enumerator.MoveNext())
+								if (await GetBitmap(enumerator.Current, parameters.BitmapOptions) is Bitmap c)
 									bitmaps.Add(c);
 						}
-						else if (parameters.Sources[index] is IAsyncEnumerable<object> asyncenumerable && asyncenumerable.GetAsyncEnumerator() is IAsyncEnumerator<object> asyncenumerator)
-						{
-							while (bitmaps.Count != 4 && await asyncenumerator.MoveNextAsync() is object obj)
-								if (await GetBitmap(parameters) is Bitmap c)
-									bitmaps.Add(c);
-						}
-						else if (await GetBitmap(parameters) is Bitmap c)
+						else if (parameters.Sources[index] is IAsyncEnumerable<object> asyncenumerable && await asyncenumerable
+							.SelectAwait(async _ => await GetBitmap(_, parameters.BitmapOptions))
+							.OfType<Bitmap>()
+							.Take(4 - bitmaps.Count)
+							.ToListAsync()
+							.AsTask() is List<Bitmap> _bitmapsasync) bitmaps.AddRange(_bitmapsasync);
+
+						else if (parameters.Sources[index] is object obj && await GetBitmap(obj, parameters.BitmapOptions) is Bitmap c)
 							bitmaps.Add(c);
 
 					int dimension = 0;
@@ -187,69 +188,80 @@ namespace Xyzu.Images
 				IEnumerator sourceenumerator = parameters.Sources.GetEnumerator();
 
 				while (sourceenumerator.MoveNext() && bitmap is null)
-					switch (true)
-					{
-						case true when
-						sourceenumerator.Current is IModel model &&
-						await Buffer(model) is byte[] modelbuffer:
-							bitmap ??= await BitmapFactory.DecodeByteArrayAsync(modelbuffer, 0, modelbuffer.Length, parameters.BitmapOptions);
-							break;
-
-						case true when sourceenumerator.Current is IImage image:
-							switch (true)
-							{
-								case true when image.Buffer != null:
-									bitmap ??= await BitmapFactory.DecodeByteArrayAsync(image.Buffer, 0, image.Buffer.Length, parameters.BitmapOptions);
-									break;
-
-								case true when image.Uri?.ToAndroidUri() is AndroidUri androiduri:
-									bitmap ??=
-										await BitmapFactory.DecodeFileAsync(androiduri.Path, parameters.BitmapOptions) ??
-										await BitmapFactory.DecodeFileDescriptorAsync(
-											outPadding: null,
-											opts: parameters.BitmapOptions,
-											fd: Context.ContentResolver?.OpenFileDescriptorSafe(androiduri, "r")?.FileDescriptor);
-									break;
-
-								default: break;
-							}
-							break;
-
-						case true when sourceenumerator.Current is Bitmap sourcebitmap:
-							bitmap ??= sourcebitmap;
-							break;
-
-						case true when sourceenumerator.Current is byte[] sourcebuffer:
-							bitmap ??= await BitmapFactory.DecodeByteArrayAsync(sourcebuffer, 0, sourcebuffer.Length, parameters.BitmapOptions);
-							break;
-
-						case true when sourceenumerator.Current is int sourceresourceid:
-							bitmap ??= await BitmapFactory.DecodeResourceAsync(Context.Resources, sourceresourceid, parameters.BitmapOptions);
-							break;
-						case true when sourceenumerator.Current is Java.Lang.Integer sourceresourceidjava:
-							bitmap ??= await BitmapFactory.DecodeResourceAsync(Context.Resources, sourceresourceidjava.IntValue(), parameters.BitmapOptions);
-							break;
-
-						case true when sourceenumerator.Current is Drawable:
-							break;
-
-						case true when (sourceenumerator.Current as AndroidUri ?? (sourceenumerator.Current as Uri)?.ToAndroidUri()) is AndroidUri sourceandroiduri:
-							bitmap ??=
-								await BitmapFactory.DecodeFileAsync(sourceandroiduri.Path, parameters.BitmapOptions) ??
-								await BitmapFactory.DecodeFileDescriptorAsync(
-									outPadding: null,
-									opts: parameters.BitmapOptions,
-									fd: Context.ContentResolver?.OpenFileDescriptorSafe(sourceandroiduri, "r")?.FileDescriptor);
-							break;
-
-						default: break;
-					}
+					bitmap = await GetBitmap(sourceenumerator.Current, parameters.BitmapOptions);
 
 				return bitmap;
 			}
 			public async virtual Task<Drawable?> GetDrawable(Parameters parameters)
 			{
 				return await Task.FromResult<Drawable?>(null);
+			}
+
+			public async virtual Task<Bitmap?> GetBitmap(object source, BitmapFactory.Options? options)
+			{
+				await Task.CompletedTask;
+
+				Bitmap? bitmap = null;
+
+				switch (true)
+				{
+					case true when
+						source is IModel model &&
+						await Buffer(model) is byte[] modelbuffer:
+						bitmap ??= await BitmapFactory.DecodeByteArrayAsync(modelbuffer, 0, modelbuffer.Length, options);
+						break;
+
+					case true when source is IImage image:
+						switch (true)
+						{
+							case true when image.Buffer != null:
+								bitmap ??= await BitmapFactory.DecodeByteArrayAsync(image.Buffer, 0, image.Buffer.Length, options);
+								break;
+
+							case true when image.Uri?.ToAndroidUri() is AndroidUri androiduri:
+								bitmap ??=
+									await BitmapFactory.DecodeFileAsync(androiduri.Path, options) ??
+									await BitmapFactory.DecodeFileDescriptorAsync(
+										outPadding: null,
+										opts: options,
+										fd: Context.ContentResolver?.OpenFileDescriptorSafe(androiduri, "r")?.FileDescriptor);
+								break;
+
+							default: break;
+						}
+						break;
+
+					case true when source is Bitmap sourcebitmap:
+						bitmap ??= sourcebitmap;
+						break;
+
+					case true when source is byte[] sourcebuffer:
+						bitmap ??= await BitmapFactory.DecodeByteArrayAsync(sourcebuffer, 0, sourcebuffer.Length, options);
+						break;
+
+					case true when source is int sourceresourceid:
+						bitmap ??= await BitmapFactory.DecodeResourceAsync(Context.Resources, sourceresourceid, options);
+						break;
+					case true when source is Java.Lang.Integer sourceresourceidjava:
+						bitmap ??= await BitmapFactory.DecodeResourceAsync(Context.Resources, sourceresourceidjava.IntValue(), options);
+						break;
+
+					case true when source is Drawable:
+						break;
+
+					case true when (source as AndroidUri ?? (source as Uri)?.ToAndroidUri()) is AndroidUri sourceandroiduri:
+						bitmap ??=
+							await BitmapFactory.DecodeFileAsync(sourceandroiduri.Path, options) ??
+							await BitmapFactory.DecodeFileDescriptorAsync(
+								outPadding: null,
+								opts: options,
+								fd: Context.ContentResolver?.OpenFileDescriptorSafe(sourceandroiduri, "r")?.FileDescriptor);
+						break;
+
+					default: break;
+				}
+
+				return bitmap;
 			}
 		}
 	}

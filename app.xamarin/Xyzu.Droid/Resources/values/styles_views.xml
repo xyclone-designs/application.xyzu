@@ -353,7 +353,7 @@
     <item name="android:minWidth">@dimen/dp0</item>
     <item name="android:minHeight">@dimen/dp0</item>
     <item name="android:paddingVertical">@dimen/dp8</item>
-    <item name="android:paddingHorizontal">@dimen/dp16</item>
+    <item name="android:paddingHorizontal">@dimen/dp8</item>
   </style>
   <style name="Xyzu.View.Option.LibraryList.RecyclerView" parent="Xyzu.Widget.RecyclerView.Simple.Horizontal" />
   <style name="Xyzu.View.Option.LibraryList.RecyclerView.ItemView" parent="Xyzu.View.Option.LibraryList.CheckBox">

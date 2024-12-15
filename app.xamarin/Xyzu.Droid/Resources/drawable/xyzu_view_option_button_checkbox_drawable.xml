@@ -4,6 +4,7 @@
   <item android:state_checked="true">
     <layer-list>
       <item
+        android:start="8dp"
         android:width="22dp"
         android:height="22dp" 
         android:drawable="@drawable/btn_checkbox_checked_mtrl"/>
@@ -13,15 +14,17 @@
   <item android:state_selected="true">
     <layer-list>
       <item
+        android:start="8dp"
         android:width="22dp"
         android:height="22dp" 
         android:drawable="@drawable/btn_checkbox_checked_mtrl"/>
     </layer-list>
   </item>
   
-  <item >
+  <item>
     <layer-list>
       <item
+        android:start="8dp"
         android:width="22dp"
         android:height="22dp" 
         android:drawable="@drawable/btn_checkbox_unchecked_mtrl"/>

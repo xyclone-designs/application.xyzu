@@ -27,35 +27,30 @@ namespace Xyzu.Menus
 		}
 		private static bool UpdatePlaylist(string? playlistname, IEnumerable<IAlbum> albums)
 		{
-			IEnumerable<string> songids = XyzuLibrary.Instance.Songs
-				.GetSongs(ILibrary.IIdentifiers.FromAlbums(albums))
-				.Select(song => song.Id);
+			IEnumerable<ISong> songs = XyzuLibrary.Instance.Songs
+				.GetSongs(ILibrary.IIdentifiers.FromAlbums(albums));
 
-			return UpdatePlaylist(playlistname, songids);
+			return UpdatePlaylist(playlistname, songs.Select(song => song.Id), songs.Sum(_ => _.Duration ?? TimeSpan.Zero));
 		}
 		private static bool UpdatePlaylist(string? playlistname, IEnumerable<IArtist> artists)
 		{
-			IEnumerable<string> songids = XyzuLibrary.Instance.Songs
-				.GetSongs(ILibrary.IIdentifiers.FromArtists(artists))
-				.Select(song => song.Id);
+			IEnumerable<ISong> songs = XyzuLibrary.Instance.Songs
+				.GetSongs(ILibrary.IIdentifiers.FromArtists(artists));
 
-			return UpdatePlaylist(playlistname, songids);
+			return UpdatePlaylist(playlistname, songs.Select(song => song.Id), songs.Sum(_ => _.Duration ?? TimeSpan.Zero));
 		}
 		private static bool UpdatePlaylist(string? playlistname, IEnumerable<IGenre> genres)
 		{
-			IEnumerable<string> songids = XyzuLibrary.Instance.Songs
-				.GetSongs(ILibrary.IIdentifiers.FromGenres(genres))
-				.Select(song => song.Id);
+			IEnumerable<ISong> songs = XyzuLibrary.Instance.Songs
+				.GetSongs(ILibrary.IIdentifiers.FromGenres(genres));
 
-			return UpdatePlaylist(playlistname, songids);
+			return UpdatePlaylist(playlistname, songs.Select(song => song.Id), songs.Sum(_ => _.Duration ?? TimeSpan.Zero));
 		}
 		private static bool UpdatePlaylist(string? playlistname, IEnumerable<ISong> songs)
 		{
-			IEnumerable<string> songids = songs.Select(song => song.Id);
-
-			return UpdatePlaylist(playlistname, songids);
+			return UpdatePlaylist(playlistname, songs.Select(song => song.Id), songs.Sum(_ => _.Duration ?? TimeSpan.Zero));
 		}
-		private static bool UpdatePlaylist(string? playlistname, IEnumerable<string> songids)
+		private static bool UpdatePlaylist(string? playlistname, IEnumerable<string> songids, TimeSpan songsduration)
 		{
 			if (playlistname is null)
 				return false;
@@ -71,6 +66,7 @@ namespace Xyzu.Menus
 
 			IPlaylist editedplaylist = new IPlaylist.Default(playlist)
 			{
+				Duration = playlist.Duration + songsduration,
 				SongIds = songids
 					.Concat(playlist.SongIds ?? Enumerable.Empty<string>())
 					.ToList()
@@ -194,11 +190,15 @@ namespace Xyzu.Menus
 						},
 						ViewViewHolderOnClickAction = args =>
 						{
-							if (UpdatePlaylist(playlistnames.ElementAtOrDefault(args.ViewHolder.AbsoluteAdapterPosition), songs
+							songs = songs
 								.Concat(GetSongs(albums))
 								.Concat(GetSongs(artists))
-								.Concat(GetSongs(genres))
-								.Select(song => song.Id)) is false)
+								.Concat(GetSongs(genres));
+
+							if (UpdatePlaylist(
+								playlistnames.ElementAtOrDefault(args.ViewHolder.AbsoluteAdapterPosition), 
+								songs.Select(song => song.Id), 
+								songs.Sum(song => song.Duration ?? TimeSpan.Zero)) is false)
 								CreateSnackbar(variables, Resource.String.snackbars_items_could_not_be_added)?
 									.Show();
 							else

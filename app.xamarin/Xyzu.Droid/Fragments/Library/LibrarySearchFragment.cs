@@ -1,24 +1,18 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.OS;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
 using AndroidX.RecyclerView.Widget;
 
-using Google.Android.Material.AppBar;
 using Google.Android.Material.Tabs;
 
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Xyzu.Activities;
 using Xyzu.Droid;
 using Xyzu.Settings.Enums;
 using Xyzu.Settings.UserInterface.Library;
 using Xyzu.Views.Library;
 using Xyzu.Views.Option;
-using Xyzu.Views.Toolbar;
 
 namespace Xyzu.Fragments.Library
 {
@@ -35,7 +29,6 @@ namespace Xyzu.Fragments.Library
 		{
 			get => LibraryActivity.LibraryTypes.LibrarySearch;
 		}
-		public ToolbarSearchView? LibrarySearch { get;set; }
 
 		public override View? OnCreateView(LayoutInflater inflater, ViewGroup? container, Bundle? savedInstanceState)
 		{

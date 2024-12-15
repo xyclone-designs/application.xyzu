@@ -8,7 +8,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
-using Xyzu.Images;
 using Xyzu.Library.Models;
 
 namespace Xyzu.Views.Info
@@ -75,13 +74,13 @@ namespace Xyzu.Views.Info
 		public AppCompatTextView GenreName
 		{
 			get => _GenreName
-				??= FindViewById<AppCompatTextView>(Ids.GenreName_Title) ??
+				??= FindViewById<AppCompatTextView>(Ids.GenreName_Value) ??
 				throw new InflateException("GenreName");
 		}
 		public AppCompatTextView GenreSongCount
 		{
 			get => _GenreSongCount
-				??= FindViewById<AppCompatTextView>(Ids.GenreSongCount_Title) ??
+				??= FindViewById<AppCompatTextView>(Ids.GenreSongCount_Value) ??
 				throw new InflateException("GenreSongCount");
 		}
 	}

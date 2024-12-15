@@ -164,7 +164,7 @@ namespace Xyzu.Views.LibraryItem
 		}									
 		public virtual async void SetArtwork(IModel? model)
 		{
-			if (Images is null)
+			if (Images is null || Artwork is null)
 				return;
 
 			ILibrary.IIdentifiers? identifiers = true switch
@@ -180,12 +180,22 @@ namespace Xyzu.Views.LibraryItem
 				{
 					ImageView = Artwork,
 					Operations = IImages.DefaultOperations.RoundedDownsample,
+					BitmapOptions = new BitmapFactory.Options
+					{
+						OutWidth = Artwork.Width,
+						OutHeight = Artwork.Height,
+					},
 				});
 			else if (Library?.Songs.GetSongs(identifiers, default) is IAsyncEnumerable<ISong> songs)
 				await Images.SetToImageView(new IImagesDroid.Parameters(songs)
 				{
 					ImageView = Artwork,
 					Operations = ImagesOperations ?? IImages.DefaultOperations.MergeRoundedDownsample,
+					BitmapOptions = new BitmapFactory.Options
+					{
+						OutWidth = Artwork.Width,
+						OutHeight = Artwork.Height,
+					},
 				});
 		}
 	}

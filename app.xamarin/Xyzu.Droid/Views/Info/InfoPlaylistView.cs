@@ -8,7 +8,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
-using Xyzu.Images;
 using Xyzu.Library.Models;
 
 namespace Xyzu.Views.Info
@@ -89,31 +88,31 @@ namespace Xyzu.Views.Info
 		public AppCompatTextView PlaylistName
 		{
 			get => _PlaylistName
-				??= FindViewById<AppCompatTextView>(Ids.PlaylistName_Title) ??
+				??= FindViewById<AppCompatTextView>(Ids.PlaylistName_Value) ??
 				throw new InflateException("PlaylistName");
 		}
 		public AppCompatTextView PlaylistDateCreated
 		{
 			get => _PlaylistDateCreated
-				??= FindViewById<AppCompatTextView>(Ids.PlaylistDateCreated_Title) ??
+				??= FindViewById<AppCompatTextView>(Ids.PlaylistDateCreated_Value) ??
 				throw new InflateException("PlaylistDateCreated");
 		}
 		public AppCompatTextView PlaylistDateModified
 		{
 			get => _PlaylistDateModified
-				??= FindViewById<AppCompatTextView>(Ids.PlaylistDateModified_Title) ??
+				??= FindViewById<AppCompatTextView>(Ids.PlaylistDateModified_Value) ??
 				throw new InflateException("PlaylistDateModified");
 		}
 		public AppCompatTextView PlaylistDuration
 		{
 			get => _PlaylistDuration
-				??= FindViewById<AppCompatTextView>(Ids.PlaylistDuration_Title) ??
+				??= FindViewById<AppCompatTextView>(Ids.PlaylistDuration_Value) ??
 				throw new InflateException("PlaylistDuration");
 		}
 		public AppCompatTextView PlaylistSongCount
 		{
 			get => _PlaylistSongCount
-				??= FindViewById<AppCompatTextView>(Ids.PlaylistSongCount_Title) ??
+				??= FindViewById<AppCompatTextView>(Ids.PlaylistSongCount_Value) ??
 				throw new InflateException("PlaylistSongCount");
 		}
 	}

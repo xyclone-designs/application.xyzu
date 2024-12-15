@@ -13,6 +13,7 @@ using JP.Wasabeef.Glide.Transformations;
 
 using System;
 using System.Collections;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Xyzu.Images.Enums;
@@ -153,9 +154,13 @@ namespace Xyzu.Images.Glide
 		}
 		public async override Task SetToImageView(IImagesDroid.Parameters parameters)
 		{
-			await Task.CompletedTask;
+			if (parameters.ImageView is null) 
+				parameters.OnComplete?.Invoke(false);
+			
+			else if (parameters.Operations.Contains(Operations.Merge)) 
+				await base.SetToImageView(parameters); 
 
-			if (parameters.ImageView is null || await RequestBuilder(
+			else if (await RequestBuilder(
 				sources: parameters.Sources,
 				requestbuilderaction: requestmanager =>
 				{
@@ -173,7 +178,9 @@ namespace Xyzu.Images.Glide
 
 					return requestmanager.AsBitmap();
 
-				}) is not RequestBuilder requestbuilder) parameters.OnComplete?.Invoke(false);
+				}) is not RequestBuilder requestbuilder) 
+				parameters.OnComplete?.Invoke(false);
+
 			else
 			{
 				int width = parameters.ImageView.Width == 0 ? parameters.ImageView.MeasuredWidth : -1;
@@ -202,7 +209,13 @@ namespace Xyzu.Images.Glide
 		{
 			await Task.CompletedTask;
 
-			if (parameters.View is null || await RequestBuilder(
+			if (parameters.View is null)
+				parameters.OnComplete?.Invoke(false);
+			
+			else if (parameters.Operations.Contains(Operations.Merge))
+				await base.SetToImageView(parameters);
+
+			else if (await RequestBuilder(
 				sources: parameters.Sources,
 				requestbuilderaction: requestmanager =>
 				{
@@ -210,7 +223,9 @@ namespace Xyzu.Images.Glide
 
 					return requestmanager.AsDrawable();
 
-				}) is not RequestBuilder requestbuilder) parameters.OnComplete?.Invoke(false);
+				}) is not RequestBuilder requestbuilder) 
+				parameters.OnComplete?.Invoke(false);
+
 			else
 			{
 				int width = parameters.View.Width == 0 ? parameters.View.MeasuredWidth : -1;
