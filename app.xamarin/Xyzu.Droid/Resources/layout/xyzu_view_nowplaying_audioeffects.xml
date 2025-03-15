@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+        
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <View android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/ColorSurface" />
+  
+    <xyzu.views.insets.StatusBarInsetView
+        android:id="@+id/xyzu_view_nowplaying_audioeffects_statusbarinsetview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Xyzu.View.AudioEffects.Text.Title"
+        android:id="@+id/xyzu_view_nowplaying_audioeffects_title_appcompattextview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_margin="@dimen/dp16"
+        
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_audioeffects_statusbarinsetview"
+        app:layout_constraintEnd_toStartOf="@id/xyzu_view_nowplaying_audioeffects_enabled_switchcompat" />
+    <androidx.appcompat.widget.SwitchCompat
+        style="@style/Xyzu.View.AudioEffects.Switch"
+        android:id="@+id/xyzu_view_nowplaying_audioeffects_enabled_switchcompat"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:layout_marginEnd="@dimen/dp16"
+        
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/xyzu_view_nowplaying_audioeffects_title_appcompattextview"
+        app:layout_constraintBottom_toBottomOf="@id/xyzu_view_nowplaying_audioeffects_title_appcompattextview" />
+  
+    <xyzu.widgets.recyclerviews.simple.SimpleHorizontalRecyclerView
+        style="@style/Xyzu.View.NowPlaying.AudioEffects.SimpleHorizontalRecycler"
+        android:id="@+id/xyzu_view_nowplaying_audioeffects_presets_simplehorizontalrecyclerview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        android:paddingHorizontal="@dimen/dp16"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_audioeffects_title_appcompattextview"/>
+  
+    <HorizontalScrollView
+        android:id="@+id/xyzu_view_nowplaying_audioeffects_presets_horizontalscrollview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constraintWidth="wrap_content_constrained"
+        app:layout_constraintHeight="wrap_content_constrained"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_audioeffects_presets_simplehorizontalrecyclerview">
+      
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp8">
+          
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Xyzu.View.NowPlaying.AudioEffects.Button"
+                android:id="@+id/xyzu_view_nowplaying_audioeffects_buttoncancel_appcompatbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp32"
+                android:layout_marginHorizontal="@dimen/dp8"
+                android:text="@string/cancel"
+                android:drawableStart="@drawable/icon_menuoptions_cancel"/>
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Xyzu.View.NowPlaying.AudioEffects.Button"
+                android:id="@+id/xyzu_view_nowplaying_audioeffects_buttondelete_appcompatbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp32"
+                android:layout_marginEnd="@dimen/dp8"
+                android:text="@string/delete"
+                android:drawableStart="@drawable/icon_menuoptions_delete"/>
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Xyzu.View.NowPlaying.AudioEffects.Button"
+                android:id="@+id/xyzu_view_nowplaying_audioeffects_buttonsaveedited_appcompatbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp32"
+                android:layout_marginEnd="@dimen/dp8"
+                android:text="@string/save"
+                android:drawableStart="@drawable/icon_general_save"/>
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Xyzu.View.NowPlaying.AudioEffects.Button"
+                android:id="@+id/xyzu_view_nowplaying_audioeffects_buttonsavenew_appcompatbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp32"
+                android:layout_marginEnd="@dimen/dp8"
+                android:text="@string/save"
+                android:drawableStart="@drawable/icon_general_save"/>
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Xyzu.View.NowPlaying.AudioEffects.Button"
+                android:id="@+id/xyzu_view_nowplaying_audioeffects_buttonadd_appcompatbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp32"
+                android:layout_marginEnd="@dimen/dp8"
+                android:text="@string/new_"
+                android:drawableStart="@drawable/icon_general_plus"/>
+  
+        </androidx.appcompat.widget.LinearLayoutCompat>
+  
+    </HorizontalScrollView>
+  
+    <RelativeLayout
+        android:id="@+id/xyzu_view_nowplaying_audioeffects_effects_relativelayout"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constraintWidth="match_parent"
+        app:layout_constraintHeight="match_constraint"
+        app:layout_constraintHorizontal_weight="0"
+        app:layout_constraintHeight_default="spread"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_audioeffects_effects_tablayout"
+        app:layout_constraintTop_toBottomOf="@id/xyzu_view_nowplaying_audioeffects_presets_horizontalscrollview">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/xyzu_view_nowplaying_audioeffects_effects_volumecontrol_nestedscrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+          
+            <xyzu.views.audioeffects.VolumeControlView
+                style="@style/Xyzu.View.NowPlaying.AudioEffects.Volume"
+                android:id="@+id/xyzu_view_nowplaying_audioeffects_effects_volumecontrol_volumecontrolview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+          
+        </androidx.core.widget.NestedScrollView>
+      
+        <xyzu.views.audioeffects.EqualiserView
+            style="@style/Xyzu.View.NowPlaying.AudioEffects.Equaliser"
+            android:id="@+id/xyzu_view_nowplaying_audioeffects_effects_equaliser_equaliserview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+      
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/xyzu_view_nowplaying_audioeffects_effects_environmentalreverb_nestedscrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+          
+            <xyzu.views.audioeffects.EnvironmentalReverbView
+                style="@style/Xyzu.View.NowPlaying.AudioEffects.Reverb"
+                android:id="@+id/xyzu_view_nowplaying_audioeffects_effects_environmentalreverb_environmentalreverbview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+          
+        </androidx.core.widget.NestedScrollView>
+  
+    </RelativeLayout>
+  
+    <com.google.android.material.tabs.TabLayout
+        style="@style/Xyzu.View.NowPlaying.AudioEffects.TabLayout"
+        android:id="@+id/xyzu_view_nowplaying_audioeffects_effects_tablayout"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+     
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/xyzu_view_nowplaying_audioeffects_effects_navigationbarinsetview"/>
+  
+    <xyzu.views.insets.NavigationBarInsetView
+        android:id="@+id/xyzu_view_nowplaying_audioeffects_effects_navigationbarinsetview"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
+        
+        app:layout_constraintWidth="match_constraint"
+        app:layout_constraintHeight="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</merge>

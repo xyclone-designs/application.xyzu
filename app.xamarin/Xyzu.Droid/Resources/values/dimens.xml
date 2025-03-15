@@ -30,6 +30,7 @@
 
   <dimen name="sp12">12sp</dimen>
   <dimen name="sp16">16sp</dimen>
+  <dimen name="sp18">18sp</dimen>
 
   <dimen name="cellheightportrait1">102dip</dimen>
   <dimen name="cellheightportrait2">220dip</dimen>
@@ -70,5 +71,26 @@
   <dimen name="percent180">180%</dimen>
   <dimen name="percent190">190%</dimen>
   <dimen name="percent200">200%</dimen>
+  
+  <dimen name="point10">0.10</dimen>
+  <dimen name="point20">0.20</dimen>
+  <dimen name="point30">0.30</dimen>
+  <dimen name="point40">0.40</dimen>
+  <dimen name="point50">0.50</dimen>
+  <dimen name="point60">0.60</dimen>
+  <dimen name="point70">0.70</dimen>
+  <dimen name="point80">0.80</dimen>
+  <dimen name="point90">0.90</dimen>
+  <dimen name="point100">1.00</dimen>
+  <dimen name="point110">1.10</dimen>
+  <dimen name="point120">1.20</dimen>
+  <dimen name="point130">1.30</dimen>
+  <dimen name="point140">1.40</dimen>
+  <dimen name="point150">1.50</dimen>
+  <dimen name="point160">1.60</dimen>
+  <dimen name="point170">1.70</dimen>
+  <dimen name="point180">1.80</dimen>
+  <dimen name="point190">1.90</dimen>
+  <dimen name="point200">2.00</dimen>
 
 </resources>

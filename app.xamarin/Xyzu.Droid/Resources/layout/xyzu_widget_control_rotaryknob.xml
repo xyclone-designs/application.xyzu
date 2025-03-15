@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+        
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+  
+  <androidx.appcompat.widget.AppCompatTextView
+    style="@style/Xyzu.Widget.Controls.RotaryKnob.Text.Title"
+    android:id="@+id/xyzu_widget_control_rotaryknob_title_appcompattextview"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"   
+        
+    app:layout_constraintWidth="wrap_content"
+    app:layout_constraintHeight="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="@id/xyzu_widget_control_rotaryknob_changer_seekarcview"
+    app:layout_constraintStart_toStartOf="@id/xyzu_widget_control_rotaryknob_changer_seekarcview"
+    app:layout_constraintBottom_toTopOf="@id/xyzu_widget_control_rotaryknob_titlebold_appcompattextview"/>
+  
+  <androidx.appcompat.widget.AppCompatTextView
+    style="@style/Xyzu.Widget.Controls.RotaryKnob.Text.Title"
+    android:id="@+id/xyzu_widget_control_rotaryknob_titlebold_appcompattextview"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"   
+    android:textSize="@dimen/sp16"   
+        
+    app:layout_constraintWidth="wrap_content"
+    app:layout_constraintHeight="wrap_content"
+    app:layout_constraintEnd_toEndOf="@id/xyzu_widget_control_rotaryknob_changer_seekarcview"
+    app:layout_constraintBottom_toTopOf="@id/xyzu_widget_control_rotaryknob_changer_seekarcview"
+    app:layout_constraintStart_toStartOf="@id/xyzu_widget_control_rotaryknob_changer_seekarcview"
+    app:layout_constraintTop_toBottomOf="@id/xyzu_widget_control_rotaryknob_title_appcompattextview"/>
+  
+  <SeekArc.Droid.SeekArcView
+    style="@style/Xyzu.Widget.Controls.RotaryKnob.SeekArc"
+    android:id="@+id/xyzu_widget_control_rotaryknob_changer_seekarcview"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0" 
+    android:layout_margin="@dimen/dp8" 
+        
+    app:layout_constraintWidth="match_constraint"
+    app:layout_constraintHeight="match_constraint"
+    app:layout_constraintDimensionRatio="1:1"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/xyzu_widget_control_rotaryknob_value_appcompattextview"
+    app:layout_constraintTop_toBottomOf="@id/xyzu_widget_control_rotaryknob_title_appcompattextview"/>
+  
+  <androidx.appcompat.widget.AppCompatTextView
+    style="@style/Xyzu.Widget.Controls.RotaryKnob.Text.Value"
+    android:id="@+id/xyzu_widget_control_rotaryknob_valuestart_appcompattextview"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"   
+    android:layout_marginTop="@dimen/dp8"   
+        
+    app:layout_constraintWidth="wrap_content"
+    app:layout_constraintHeight="wrap_content"
+    app:layout_constraintHorizontal_weight="0"
+    app:layout_constraintTop_toBottomOf="@id/xyzu_widget_control_rotaryknob_changer_seekarcview"
+    app:layout_constraintStart_toStartOf="@id/xyzu_widget_control_rotaryknob_changer_seekarcview"
+    app:layout_constraintEnd_toStartOf="@id/xyzu_widget_control_rotaryknob_value_appcompattextview"
+    app:layout_constraintBottom_toBottomOf="@id/xyzu_widget_control_rotaryknob_value_appcompattextview"/>
+  <androidx.appcompat.widget.AppCompatTextView
+    style="@style/Xyzu.Widget.Controls.RotaryKnob.Text.Value"
+    android:id="@+id/xyzu_widget_control_rotaryknob_value_appcompattextview"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"   
+    android:layout_marginTop="@dimen/dp8"   
+        
+    app:layout_constraintWidth="wrap_content_constrained"
+    app:layout_constraintHeight="wrap_content_constrained"
+    app:layout_constraintHorizontal_weight="1"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/xyzu_widget_control_rotaryknob_changer_seekarcview"
+    app:layout_constraintEnd_toStartOf="@id/xyzu_widget_control_rotaryknob_valueend_appcompattextview"
+    app:layout_constraintStart_toEndOf="@id/xyzu_widget_control_rotaryknob_valuestart_appcompattextview"/>
+  <androidx.appcompat.widget.AppCompatTextView
+    style="@style/Xyzu.Widget.Controls.RotaryKnob.Text.Value"
+    android:id="@+id/xyzu_widget_control_rotaryknob_valueend_appcompattextview"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"  
+    android:layout_marginTop="@dimen/dp8"    
+        
+    app:layout_constraintWidth="wrap_content"
+    app:layout_constraintHeight="wrap_content"
+    app:layout_constraintHorizontal_weight="0"
+    app:layout_constraintEnd_toEndOf="@id/xyzu_widget_control_rotaryknob_changer_seekarcview"
+    app:layout_constraintTop_toBottomOf="@id/xyzu_widget_control_rotaryknob_changer_seekarcview"
+    app:layout_constraintStart_toEndOf="@id/xyzu_widget_control_rotaryknob_value_appcompattextview"
+    app:layout_constraintBottom_toBottomOf="@id/xyzu_widget_control_rotaryknob_value_appcompattextview"/>
+
+</merge>

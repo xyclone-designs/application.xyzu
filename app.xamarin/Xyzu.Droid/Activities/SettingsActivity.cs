@@ -50,12 +50,6 @@ namespace Xyzu.Activities
 				{
 					Fragments.Settings.About.AboutPreferenceFragment.FragmentName => new Fragments.Settings.About.AboutPreferenceFragment { },
 
-					Fragments.Settings.Audio.AudioPreferenceFragment.FragmentName => new Fragments.Settings.Audio.AudioPreferenceFragment { },
-					Fragments.Settings.Audio.BassBoostPreferenceFragment.FragmentName => new Fragments.Settings.Audio.BassBoostPreferenceFragment { },
-					Fragments.Settings.Audio.EnvironmentalReverbPreferenceFragment.FragmentName => new Fragments.Settings.Audio.EnvironmentalReverbPreferenceFragment { },
-					Fragments.Settings.Audio.EqualiserPreferenceFragment.FragmentName => new Fragments.Settings.Audio.EqualiserPreferenceFragment { },
-					Fragments.Settings.Audio.LoudnessEnhancerPreferenceFragment.FragmentName => new Fragments.Settings.Audio.LoudnessEnhancerPreferenceFragment { },
-
 					Fragments.Settings.Files.FilesPreferenceFragment.FragmentName => new Fragments.Settings.Files.FilesPreferenceFragment { },
 
 					Fragments.Settings.LockScreen.LockScreenPreferenceFragment.FragmentName => new Fragments.Settings.LockScreen.LockScreenPreferenceFragment { },

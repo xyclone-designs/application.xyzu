@@ -56,7 +56,7 @@ namespace Xyzu.Views.Option
 			OptionsRecyclerView.SimpleLayoutManager.SpanCount = 1;	 
 			OptionsRecyclerView.SimpleMarginItemDecoration.MarginResTop = Resource.Dimension.dp16;	 
 			OptionsRecyclerView.SimpleMarginItemDecoration.MarginResHorizontal = Resource.Dimension.dp8;
-			OptionsRecyclerView.SimpleAdapter.GetItemCount = OptionsGetItemCount;
+			OptionsRecyclerView.SimpleAdapter.FuncGetItemCount = OptionsGetItemCount;
 			OptionsRecyclerView.SimpleAdapter.ViewHolderOnCreate = OptionsViewHolderOnCreate;
 			OptionsRecyclerView.SimpleAdapter.ViewHolderOnBind = OptionsViewHolderOnBind;
 			OptionsRecyclerView.SimpleAdapter.ViewHolderOnCheckChange = OptionsViewHolderOnCheckChange;

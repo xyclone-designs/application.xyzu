@@ -18,7 +18,7 @@ namespace Xyzu.Player.Exoplayer
 		public const int NotificationId = 7;
 		public const string NotificationChannelId = "XyzuMusicPlaybackNotifiationChannel";
 		public const string NotificationChannelName = "Xyzu Music Playback Notifiation Channel";
-		public static readonly int[] NotificationChannelActionIndicesForCompactView = new int[] { 1, 3 };
+		public static readonly int[] NotificationChannelActionIndicesForCompactView = [1, 3];
 
 		private NotificationChannel? _NotificationChannel;
 		private ExoPlayerNotificationManager? _NotificationManager;

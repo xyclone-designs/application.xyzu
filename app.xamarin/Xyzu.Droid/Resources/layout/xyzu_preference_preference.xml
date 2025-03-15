@@ -9,9 +9,11 @@
 
     <android.widget.FrameLayout
         android:id="@android:id/icon_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="@dimen/dp0"
         
+        app:layout_constraintWidth="wrap_content"
+        app:layout_constraintHeight="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@android:id/title">

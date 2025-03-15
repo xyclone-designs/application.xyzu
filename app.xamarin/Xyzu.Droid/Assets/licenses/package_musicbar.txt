@@ -1,1 +1,1 @@
-licenses_package_musicbar
+This project uses code or content from the Github repository 'Musicbar' by emadabdalrahman ['https://github.com/emadabdalrahman/MusicBar'], which is not explicitly licensed. The code and content in this repository are copyrighted by the author. Please refer to the repository owner for permission if you wish to use, modify, or distribute the code.

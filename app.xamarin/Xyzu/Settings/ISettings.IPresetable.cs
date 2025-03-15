@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Xyzu.Settings
@@ -41,11 +42,23 @@ namespace Xyzu.Settings
 					get => _CurrentPreset;
 					set
 					{
+						if (_CurrentPreset is not null)
+							_CurrentPreset.PropertyChanged -= CurrentPresetPropertyChanged; 
+
 						_CurrentPreset = value;
+
+						if (_CurrentPreset is not null)
+							_CurrentPreset.PropertyChanged += CurrentPresetPropertyChanged;
 
 						OnPropertyChanged();
 					}
-				}	 
+				}
+
+				private void CurrentPresetPropertyChanged(object? sender, PropertyChangedEventArgs args)
+				{
+					OnPropertyChanged(args.PropertyName);
+				}
+
 				public IEnumerable<T> AllPresets
 				{
 					get => _AllPresets;

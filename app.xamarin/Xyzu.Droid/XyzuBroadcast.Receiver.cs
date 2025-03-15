@@ -1,8 +1,5 @@
-﻿#nullable enable
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
-using Android.Runtime;
 using System;
 
 namespace Xyzu
@@ -26,12 +23,10 @@ namespace Xyzu
 		 	Intents.Actions.MediaMounted,
 		 	Intents.Actions.MediaScannerFinished,
 		 	Intents.Actions.MediaScannerStarted,
+		 	Intents.Actions.VolumeChanged,
 		})]
 		public class Receiver : BroadcastReceiver
 		{
-			public Receiver() { }
-			public Receiver(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
-
 			public Action<Context?, Intent?>? OnReceiveAction { get; set; }
 
 			public event EventHandler<OnReceiveEventArgs>? Receive;
@@ -49,12 +44,13 @@ namespace Xyzu
 			{
 				get
 				{
-					IntentFilter intentfilter = new IntentFilter();
+					IntentFilter intentfilter = new ();
 
 					intentfilter.AddAction(Actions.MediaChecking);
 					intentfilter.AddAction(Actions.MediaMounted);
 					intentfilter.AddAction(Actions.MediaScannerFinished);
 					intentfilter.AddAction(Actions.MediaScannerStarted);
+					intentfilter.AddAction(Actions.VolumeChanged);
 
 					intentfilter.AddDataScheme(DataSchemes.File);
 
@@ -68,6 +64,7 @@ namespace Xyzu
 				public const string MediaMounted = Intent.ActionMediaMounted;
 				public const string MediaScannerFinished = Intent.ActionMediaScannerFinished;
 				public const string MediaScannerStarted = Intent.ActionMediaScannerStarted;
+				public const string VolumeChanged = "android.media.VOLUME_CHANGED_ACTION";
 			}
 			public static class DataSchemes
 			{

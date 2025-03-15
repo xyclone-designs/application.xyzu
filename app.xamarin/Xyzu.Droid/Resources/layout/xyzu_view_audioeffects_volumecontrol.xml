@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+        
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <xyzu.widgets.controls.RotaryKnob
+    style="@style/Xyzu.View.AudioEffects.RotaryKnob"
+    android:id="@+id/xyzu_view_audioeffects_volumecontrol_volume_value_rotaryknob"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"
+    app:size="@dimen/dp112"
+    app:title="@string/xyzu_view_audioeffects_volumecontrol_volume_title"
+    
+    app:layout_constraintWidth="wrap_content"
+    app:layout_constraintHeight="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/xyzu_view_audioeffects_volumecontrol_balance_value_rotaryknob" />
+
+  <xyzu.widgets.controls.RotaryKnob
+    style="@style/Xyzu.View.AudioEffects.RotaryKnob"
+    android:id="@+id/xyzu_view_audioeffects_volumecontrol_balance_value_rotaryknob"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"
+    android:layout_marginTop="@dimen/dp32"
+    app:seekArcProgressStart="0"
+    app:title="@string/xyzu_view_audioeffects_volumecontrol_balance_title"
+    app:valueEnd="@string/xyzu_view_audioeffects_volumecontrol_balance_right_title"
+    app:valueStart="@string/xyzu_view_audioeffects_volumecontrol_balance_left_title"
+    
+    app:layout_constraintWidth="wrap_content"
+    app:layout_constraintHeight="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/xyzu_view_audioeffects_volumecontrol_volume_value_rotaryknob"
+    app:layout_constraintBottom_toTopOf="@id/xyzu_view_audioeffects_volumecontrol_bassboost_strength_rotaryknob" />
+
+  <xyzu.widgets.controls.RotaryKnob
+    style="@style/Xyzu.View.AudioEffects.RotaryKnob"
+    android:id="@+id/xyzu_view_audioeffects_volumecontrol_bassboost_strength_rotaryknob"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"
+    android:layout_marginTop="@dimen/dp32"
+    app:title="@string/xyzu_view_audioeffects_volumecontrol_bassboost_title"
+    
+    app:layout_constraintHorizontal_weight="1"
+    app:layout_constraintWidth="wrap_content"
+    app:layout_constraintHeight="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/xyzu_view_audioeffects_volumecontrol_playbackpitch_rotaryknob"
+    app:layout_constraintTop_toBottomOf="@id/xyzu_view_audioeffects_volumecontrol_balance_value_rotaryknob"
+    app:layout_constraintEnd_toStartOf="@id/xyzu_view_audioeffects_volumecontrol_loudnessenhancer_targetgain_rotaryknob" />
+  <xyzu.widgets.controls.RotaryKnob
+    style="@style/Xyzu.View.AudioEffects.RotaryKnob"
+    android:id="@+id/xyzu_view_audioeffects_volumecontrol_loudnessenhancer_targetgain_rotaryknob"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"
+    app:title="@string/xyzu_view_audioeffects_volumecontrol_loudnessenhancer_title"
+    
+    app:layout_constraintHorizontal_weight="1"
+    app:layout_constraintWidth="wrap_content"
+    app:layout_constraintHeight="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@id/xyzu_view_audioeffects_volumecontrol_bassboost_strength_rotaryknob"
+    app:layout_constraintStart_toEndOf="@id/xyzu_view_audioeffects_volumecontrol_bassboost_strength_rotaryknob"
+    app:layout_constraintBottom_toBottomOf="@id/xyzu_view_audioeffects_volumecontrol_bassboost_strength_rotaryknob"/>
+
+  <xyzu.widgets.controls.RotaryKnob
+    style="@style/Xyzu.View.AudioEffects.RotaryKnob"
+    android:id="@+id/xyzu_view_audioeffects_volumecontrol_playbackpitch_rotaryknob"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"
+    android:layout_marginTop="@dimen/dp32"
+    app:seekArcWithThumb="true"
+    app:seekArcProgressStart="100"
+    app:title="@string/xyzu_view_audioeffects_volumecontrol_playbackpitch_title"
+    
+    app:layout_constraintHorizontal_weight="1"
+    app:layout_constraintWidth="wrap_content"
+    app:layout_constraintHeight="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/xyzu_view_audioeffects_volumecontrol_playbackspeed_rotaryknob"
+    app:layout_constraintTop_toBottomOf="@id/xyzu_view_audioeffects_volumecontrol_bassboost_strength_rotaryknob" />
+  <xyzu.widgets.controls.RotaryKnob
+    style="@style/Xyzu.View.AudioEffects.RotaryKnob"
+    android:id="@+id/xyzu_view_audioeffects_volumecontrol_playbackspeed_rotaryknob"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"
+    app:seekArcWithThumb="true"
+    app:seekArcProgressStart="100"
+    app:title="@string/xyzu_view_audioeffects_volumecontrol_playbackspeed_title"
+    
+    app:layout_constraintHorizontal_weight="1"
+    app:layout_constraintWidth="wrap_content"
+    app:layout_constraintHeight="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@id/xyzu_view_audioeffects_volumecontrol_playbackpitch_rotaryknob"
+    app:layout_constraintStart_toEndOf="@id/xyzu_view_audioeffects_volumecontrol_playbackpitch_rotaryknob"
+    app:layout_constraintBottom_toBottomOf="@id/xyzu_view_audioeffects_volumecontrol_playbackpitch_rotaryknob"/>
+
+</merge>

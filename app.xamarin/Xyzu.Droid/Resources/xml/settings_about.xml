@@ -36,63 +36,98 @@
       app:key="settings_about_information_website_github_preference_key"
       app:title="@string/settings_about_information_website_github_title"
       app:summary="@string/settings_about_information_website_github_description" />
-
-  <xyzu.preference.DropdownPreference
+  
+  <xyzu.preference.LicensePreference
       app:iconSpaceReserved="true"
-      app:key="settings_about_licenses_exoplayer_preference_key"
-      app:icon="@drawable/icon_settings_about_licenses_exoplayer"
-      app:title="@string/settings_about_licenses_exoplayer_title"
-      app:summary="@string/settings_about_licenses_exoplayer_description" />
+      app:key="settings_about_licenses_boxedverticalseekbar_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_boxedverticalseekbar"
+      app:title="@string/settings_about_licenses_boxedverticalseekbar_title"
+      app:summary="@string/settings_about_licenses_boxedverticalseekbar_description" />  
 
-  <xyzu.preference.DropdownPreference
+  <xyzu.preference.LicensePreference
       app:iconSpaceReserved="true"
-      app:key="settings_about_licenses_sqlnetpcl_preference_key"
-      app:icon="@drawable/icon_settings_about_licenses_sqlnetpcl"
-      app:title="@string/settings_about_licenses_sqlnetpcl_title"
-      app:summary="@string/settings_about_licenses_sqlnetpcl_description" />
+      app:key="settings_about_licenses_colorpicker_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_colorpicker"
+      app:title="@string/settings_about_licenses_colorpicker_title"
+      app:summary="@string/settings_about_licenses_colorpicker_description" />  
 
-  <xyzu.preference.DropdownPreference
-      app:iconSpaceReserved="true"
-      app:key="settings_about_licenses_id3_preference_key"
-      app:icon="@drawable/icon_settings_about_licenses_id3"
-      app:title="@string/settings_about_licenses_id3_title"
-      app:summary="@string/settings_about_licenses_id3_description" />
-
-  <xyzu.preference.DropdownPreference
-      app:iconSpaceReserved="true"
-      app:key="settings_about_licenses_taglibsharp_preference_key"
-      app:icon="@drawable/icon_settings_about_licenses_taglibsharp"
-      app:title="@string/settings_about_licenses_taglibsharp_title"
-      app:summary="@string/settings_about_licenses_taglibsharp_description" />
-
-  <xyzu.preference.DropdownPreference
-      app:iconSpaceReserved="true"
-      app:key="settings_about_licenses_musicbar_preference_key"
-      app:icon="@drawable/icon_settings_about_licenses_musicbar"
-      app:title="@string/settings_about_licenses_musicbar_title"
-      app:summary="@string/settings_about_licenses_musicbar_description" />
-
-  <xyzu.preference.DropdownPreference
+  <xyzu.preference.LicensePreference
       app:iconSpaceReserved="true"
       app:key="settings_about_licenses_glide_preference_key"
       app:icon="@drawable/icon_settings_about_licenses_glide"
       app:title="@string/settings_about_licenses_glide_title"
       app:summary="@string/settings_about_licenses_glide_description" />
 
-  <xyzu.preference.DropdownPreference
+  <xyzu.preference.LicensePreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_id3_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_id3"
+      app:title="@string/settings_about_licenses_id3_title"
+      app:summary="@string/settings_about_licenses_id3_description" />
+
+  <xyzu.preference.LicensePreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_laerdalffmpeg_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_laerdalffmpeg"
+      app:title="@string/settings_about_licenses_laerdalffmpeg_title"
+      app:summary="@string/settings_about_licenses_laerdalffmpeg_description" />
+
+  <xyzu.preference.LicensePreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_musicbar_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_musicbar"
+      app:title="@string/settings_about_licenses_musicbar_title"
+      app:summary="@string/settings_about_licenses_musicbar_description" />
+
+  <xyzu.preference.LicensePreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_newtonsoft_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_newtonsoft"
+      app:title="@string/settings_about_licenses_newtonsoft_title"
+      app:summary="@string/settings_about_licenses_newtonsoft_description" />
+
+  <xyzu.preference.LicensePreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_oxyplot_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_oxyplot"
+      app:title="@string/settings_about_licenses_oxyplot_title"
+      app:summary="@string/settings_about_licenses_oxyplot_description" />
+
+  <xyzu.preference.LicensePreference
       app:iconSpaceReserved="true"
       app:key="settings_about_licenses_picasso_preference_key"
       app:icon="@drawable/icon_settings_about_licenses_picasso"
       app:title="@string/settings_about_licenses_picasso_title"
       app:summary="@string/settings_about_licenses_picasso_description" />
-
-  <xyzu.preference.DropdownPreference
-      app:iconSpaceReserved="true"
-      app:key="settings_about_licenses_colorpicker_preference_key"
-      app:icon="@drawable/icon_settings_about_licenses_colorpicker"
-      app:title="@string/settings_about_licenses_colorpicker_title"
-      app:summary="@string/settings_about_licenses_colorpicker_description" />
   
+  <xyzu.preference.LicensePreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_seekarc_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_seekarc"
+      app:title="@string/settings_about_licenses_seekarc_title"
+      app:summary="@string/settings_about_licenses_seekarc_description" />
+
+  <xyzu.preference.LicensePreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_slidinguppanel_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_slidinguppanel"
+      app:title="@string/settings_about_licenses_slidinguppanel_title"
+      app:summary="@string/settings_about_licenses_slidinguppanel_description"/>
+        
+  <xyzu.preference.LicensePreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_sqlnetpcl_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_sqlnetpcl"
+      app:title="@string/settings_about_licenses_sqlnetpcl_title"
+      app:summary="@string/settings_about_licenses_sqlnetpcl_description" />
+
+  <xyzu.preference.LicensePreference
+      app:iconSpaceReserved="true"
+      app:key="settings_about_licenses_taglibsharp_preference_key"
+      app:icon="@drawable/icon_settings_about_licenses_taglibsharp"
+      app:title="@string/settings_about_licenses_taglibsharp_title"
+      app:summary="@string/settings_about_licenses_taglibsharp_description" />
+
   <xyzu.preference.NavigationBarInsetPreference />
 
 </androidx.preference.PreferenceScreen>

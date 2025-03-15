@@ -1,5 +1,4 @@
-﻿#nullable enable
-
+﻿using Android.Content;
 using Android.Media.Audiofx;
 using AndroidX.Core.App;
 
@@ -17,10 +16,9 @@ namespace Xyzu
 	{
 		private const string _AllPropertyName = "_all";
 
-		private IBassBoostSettings.IPresetable? _SettingsBassBoost;
+		private IVolumeControlSettings.IPresetable? _SettingsVolumeControl;
 		private IEnvironmentalReverbSettings.IPresetable? _SettingsEnvironmentalReverb;
 		private IEqualiserSettings.IPresetable? _SettingsEqualiser;
-		private ILoudnessEnhancerSettings.IPresetable? _SettingsLoudnessEnhancer;
 		private INotificationSettingsDroid? _SettingsNotification;
 
 		private BassBoost.Settings? _EffectsBassBoost;
@@ -28,25 +26,43 @@ namespace Xyzu
 		private Equalizer.Settings? _EffectsEqualizer;
 		private LoudnessEnhancerEffect.Settings? _EffectsLoudnessEnhancer;
 
-		public IBassBoostSettings.IPresetable? SettingsBassBoost
+		public IVolumeControlSettings.IPresetable SettingsVolumeControl
 		{
-			get => _SettingsBassBoost;
+			get
+			{
+				if (_SettingsVolumeControl is null)
+				{
+					_SettingsVolumeControl = XyzuSettings.Instance.GetAudioVolumeControl();
+					_SettingsVolumeControl.PropertyChanged += SettingsVolumeControlPropertyChanged;
+				}
+
+				return _SettingsVolumeControl;
+			}
 			set
 			{
-				if (_SettingsBassBoost != null)
-					_SettingsBassBoost.PropertyChanged -= SettingsBassBoostPropertyChanged;
+				if (_SettingsVolumeControl != null)
+					_SettingsVolumeControl.PropertyChanged -= SettingsVolumeControlPropertyChanged;
 
-				_SettingsBassBoost = value;
+				_SettingsVolumeControl = value;
 
-				if (_SettingsBassBoost != null)
-					_SettingsBassBoost.PropertyChanged += SettingsBassBoostPropertyChanged;
+				if (_SettingsVolumeControl != null)
+					_SettingsVolumeControl.PropertyChanged += SettingsVolumeControlPropertyChanged;
 
-				SettingsBassBoostPropertyChanged(this, new PropertyChangedEventArgs(_AllPropertyName));
+				SettingsVolumeControlPropertyChanged(this, new PropertyChangedEventArgs(_AllPropertyName));
 			}
 		}
-		public IEnvironmentalReverbSettings.IPresetable? SettingsEnvironmentalReverb
+		public IEnvironmentalReverbSettings.IPresetable SettingsEnvironmentalReverb
 		{
-			get => _SettingsEnvironmentalReverb;
+			get
+			{
+				if (_SettingsEnvironmentalReverb is null)
+				{
+					_SettingsEnvironmentalReverb = XyzuSettings.Instance.GetAudioEnvironmentalReverb();
+					_SettingsEnvironmentalReverb.PropertyChanged += SettingsEnvironmentalReverbPropertyChanged;
+				}
+
+				return _SettingsEnvironmentalReverb;
+			}
 			set
 			{
 				if (_SettingsEnvironmentalReverb != null)
@@ -60,9 +76,18 @@ namespace Xyzu
 				SettingsEnvironmentalReverbPropertyChanged(this, new PropertyChangedEventArgs(_AllPropertyName));
 			}
 		}
-		public IEqualiserSettings.IPresetable? SettingsEqualiser
+		public IEqualiserSettings.IPresetable SettingsEqualiser
 		{
-			get => _SettingsEqualiser;
+			get
+			{
+				if (_SettingsEqualiser is null)
+				{
+					_SettingsEqualiser = XyzuSettings.Instance.GetAudioEqualiser();
+					_SettingsEqualiser.PropertyChanged += SettingsEqualiserPropertyChanged;
+				}
+
+				return _SettingsEqualiser;
+			}
 			set
 			{
 				if (_SettingsEqualiser != null)
@@ -76,29 +101,13 @@ namespace Xyzu
 				SettingsEqualiserPropertyChanged(this, new PropertyChangedEventArgs(_AllPropertyName));
 			}
 		}
-		public ILoudnessEnhancerSettings.IPresetable? SettingsLoudnessEnhancer
-		{
-			get => _SettingsLoudnessEnhancer;
-			set
-			{
-				if (_SettingsLoudnessEnhancer != null)
-					_SettingsLoudnessEnhancer.PropertyChanged -= SettingsLoudnessEnhancerPropertyChanged;
-
-				_SettingsLoudnessEnhancer = value;
-
-				if (_SettingsLoudnessEnhancer != null)
-					_SettingsLoudnessEnhancer.PropertyChanged += SettingsLoudnessEnhancerPropertyChanged;
-
-				SettingsLoudnessEnhancerPropertyChanged(this, new PropertyChangedEventArgs(_AllPropertyName));
-			}
-		}		  
 		public INotificationSettingsDroid? SettingsNotification
 		{
 			get => _SettingsNotification;
 			set
 			{
 				if (_SettingsNotification != null)
-					_SettingsNotification.PropertyChanged -= SettingsNotificationPropertyChanged;
+					_SettingsNotification.PropertyChanged += SettingsNotificationPropertyChanged;
 
 				_SettingsNotification = value;
 
@@ -111,191 +120,193 @@ namespace Xyzu
 
 		public BassBoost.Settings EffectsBassBoost
 		{
-			get
+			get => _EffectsBassBoost ??= new BassBoost.Settings
 			{
-				if (_EffectsBassBoost is null)
-				{
-					_EffectsBassBoost = new BassBoost.Settings();
-
-					if (SettingsBassBoost?.CurrentPreset != null)
-					{
-						_EffectsBassBoost.Strength = SettingsBassBoost.CurrentPreset.Strength;
-					}
-				}	
-
-				return _EffectsBassBoost;
-			}
+				Strength = SettingsVolumeControl.CurrentPreset.BassBoostStrength
+			};
 		}		  
 		public EnvironmentalReverb.Settings EffectsEnvironmentalReverb
 		{
-			get
+			get => _EffectsEnvironmentalReverb ??= new EnvironmentalReverb.Settings
 			{
-				if (_EffectsEnvironmentalReverb is null)
-				{
-					_EffectsEnvironmentalReverb ??= new EnvironmentalReverb.Settings();
-
-					if (SettingsEnvironmentalReverb?.CurrentPreset != null)
-					{
-						_EffectsEnvironmentalReverb.DecayHFRatio = SettingsEnvironmentalReverb.CurrentPreset.DecayHFRatio;
-						_EffectsEnvironmentalReverb.DecayTime = SettingsEnvironmentalReverb.CurrentPreset.DecayTime;
-						_EffectsEnvironmentalReverb.Density = SettingsEnvironmentalReverb.CurrentPreset.Density;
-						_EffectsEnvironmentalReverb.Diffusion = SettingsEnvironmentalReverb.CurrentPreset.Diffusion;
-						_EffectsEnvironmentalReverb.ReflectionsDelay = SettingsEnvironmentalReverb.CurrentPreset.ReflectionsDelay;
-						_EffectsEnvironmentalReverb.ReflectionsLevel = SettingsEnvironmentalReverb.CurrentPreset.ReflectionsLevel;
-						_EffectsEnvironmentalReverb.ReverbDelay = SettingsEnvironmentalReverb.CurrentPreset.ReverbDelay;
-						_EffectsEnvironmentalReverb.ReverbLevel = SettingsEnvironmentalReverb.CurrentPreset.ReverbLevel;
-						_EffectsEnvironmentalReverb.RoomHFLevel = SettingsEnvironmentalReverb.CurrentPreset.RoomHFLevel;
-						_EffectsEnvironmentalReverb.RoomLevel = SettingsEnvironmentalReverb.CurrentPreset.RoomLevel;
-					}
-				}
-
-				return _EffectsEnvironmentalReverb;
-			}
+				DecayHFRatio = SettingsEnvironmentalReverb.CurrentPreset.DecayHFRatio,
+				DecayTime = SettingsEnvironmentalReverb.CurrentPreset.DecayTime,
+				Density = SettingsEnvironmentalReverb.CurrentPreset.Density,
+				Diffusion = SettingsEnvironmentalReverb.CurrentPreset.Diffusion,
+				ReflectionsDelay = SettingsEnvironmentalReverb.CurrentPreset.ReflectionsDelay,
+				ReflectionsLevel = SettingsEnvironmentalReverb.CurrentPreset.ReflectionsLevel,
+				ReverbDelay = SettingsEnvironmentalReverb.CurrentPreset.ReverbDelay,
+				ReverbLevel = SettingsEnvironmentalReverb.CurrentPreset.ReverbLevel,
+				RoomHFLevel = SettingsEnvironmentalReverb.CurrentPreset.RoomHFLevel,
+				RoomLevel = SettingsEnvironmentalReverb.CurrentPreset.RoomLevel,
+			};
 		}		  
 		public Equalizer.Settings EffectsEqualizer
 		{
-			get
+			get => _EffectsEqualizer ??= new Equalizer.Settings
 			{
-				if (_EffectsEqualizer is null)
-				{
-					_EffectsEqualizer ??= new Equalizer.Settings();
-
-					if (SettingsEqualiser?.CurrentPreset != null)
-					{
-						_EffectsEqualizer.NumBands = (short)SettingsEqualiser.CurrentPreset.FrequencyLevels.Length;
-						_EffectsEqualizer.BandLevels = new List<short>(SettingsEqualiser.CurrentPreset.FrequencyLevels);
-					}
-				}
-
-				return _EffectsEqualizer;
-			}
+				NumBands = (short)SettingsEqualiser.CurrentPreset.FrequencyLevels.Length,
+				BandLevels = new List<short>(SettingsEqualiser.CurrentPreset.FrequencyLevels),
+			};
 		}		  
 		public LoudnessEnhancerEffect.Settings EffectsLoudnessEnhancer
 		{
-			get
+			get => _EffectsLoudnessEnhancer ??= new LoudnessEnhancerEffect.Settings
 			{
-				if (_EffectsLoudnessEnhancer is null)
-				{
-					_EffectsLoudnessEnhancer ??= new LoudnessEnhancerEffect.Settings();
-
-					if (SettingsLoudnessEnhancer?.CurrentPreset != null)
-					{
-						_EffectsLoudnessEnhancer.TargetGain = SettingsLoudnessEnhancer.CurrentPreset.TargetGain;
-					}
-				}
-
-				return _EffectsLoudnessEnhancer;
-			}
+				TargetGain = SettingsVolumeControl.CurrentPreset.LoudnessEnhancerTargetGain
+			};
 		}
 
-		private void SettingsBassBoostPropertyChanged(object? sender, PropertyChangedEventArgs args)
+		private void SettingsVolumeControlPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
-			if (ServiceBinder?.PlayerService?.EffectsBassBoost != null && SettingsBassBoost?.CurrentPreset != null) switch (args.PropertyName)
+			if (ServiceBinder is null)
+				return;
+
+			switch (args.PropertyName)
 			{
 				case _AllPropertyName:
-				case nameof(IBassBoostSettings.IPresetable.CurrentPreset):
-				case nameof(IBassBoostSettings.IPreset.Name):
-					ServiceBinder.PlayerService.EffectsBassBoost.Properties = new BassBoost.Settings
-					{
-						Strength = SettingsBassBoost.CurrentPreset.Strength
-					};
-					break;
+				case nameof(IVolumeControlSettings.IPresetable.IsEnabled) when SettingsVolumeControl.IsEnabled:
+				case nameof(IVolumeControlSettings.IPresetable.CurrentPreset):
+				case nameof(IVolumeControlSettings.IPreset.Name):
+					ServiceBinder.PlayerService.EffectsPlaybackPitch = SettingsVolumeControl.CurrentPreset.PlaybackPitch;
+					ServiceBinder.PlayerService.EffectsPlaybackSpeed = SettingsVolumeControl.CurrentPreset.PlaybackSpeed;
+					ServiceBinder.PlayerService.EffectsPlaybackBalance = SettingsVolumeControl.CurrentPreset.BalancePosition;
 
-					case nameof(IBassBoostSettings.IPreset.Strength):
-					ServiceBinder.PlayerService.EffectsBassBoost.SetStrength(SettingsBassBoost.CurrentPreset.Strength);
-					break;
+					if (ServiceBinder.PlayerService.EffectsBassBoost is not null) ServiceBinder.PlayerService.EffectsBassBoost.Properties = EffectsBassBoost;
+					if (ServiceBinder.PlayerService.EffectsLoudnessEnhancer is not null) ServiceBinder.PlayerService.EffectsLoudnessEnhancer.Properties = EffectsLoudnessEnhancer;
+					return;
+
+				case nameof(IVolumeControlSettings.IPresetable.IsEnabled) when SettingsVolumeControl.IsEnabled is false:
+					ServiceBinder.PlayerService.EffectsPlaybackPitch = 1F;
+					ServiceBinder.PlayerService.EffectsPlaybackSpeed = 1F;
+					ServiceBinder.PlayerService.EffectsPlaybackBalance = 0F;
+					ServiceBinder.PlayerService.EffectsBassBoost = null;
+					ServiceBinder.PlayerService.EffectsLoudnessEnhancer = null;
+					return;
 
 				default: break;
 			}
+
+			if (SettingsVolumeControl.IsEnabled)
+				switch (args.PropertyName)
+				{
+					case nameof(IVolumeControlSettings.IPreset.LoudnessEnhancerTargetGain):
+						ServiceBinder.PlayerService.EffectsLoudnessEnhancer?.SetTargetGain(SettingsVolumeControl.CurrentPreset.LoudnessEnhancerTargetGain);
+						break;
+
+					case nameof(IVolumeControlSettings.IPreset.BassBoostStrength):
+						ServiceBinder.PlayerService.EffectsBassBoost?.SetStrength(SettingsVolumeControl.CurrentPreset.BassBoostStrength);
+						break;
+
+					case nameof(IVolumeControlSettings.IPreset.BalancePosition):
+						ServiceBinder.PlayerService.EffectsPlaybackBalance = SettingsVolumeControl.CurrentPreset.BalancePosition;
+						break;
+
+					case nameof(IVolumeControlSettings.IPreset.PlaybackSpeed):
+						ServiceBinder.PlayerService.EffectsPlaybackSpeed = SettingsVolumeControl.CurrentPreset.PlaybackSpeed;
+						break;
+
+					case nameof(IVolumeControlSettings.IPreset.PlaybackPitch):
+						ServiceBinder.PlayerService.EffectsPlaybackPitch = SettingsVolumeControl.CurrentPreset.PlaybackPitch;
+						break;
+
+					default: break;
+				}
 		}
 		private void SettingsEnvironmentalReverbPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
-			if (ServiceBinder?.PlayerService?.EffectsEnvironmentalReverb != null && SettingsEnvironmentalReverb?.CurrentPreset != null) switch (args.PropertyName)
+			if (ServiceBinder is null)
+				return;
+
+			switch (args.PropertyName)
 			{
 				case _AllPropertyName:
+				case nameof(IEnvironmentalReverbSettings.IPresetable.IsEnabled) when SettingsEnvironmentalReverb.IsEnabled:
 				case nameof(IEnvironmentalReverbSettings.IPresetable.CurrentPreset):
 				case nameof(IEnvironmentalReverbSettings.IPreset.Name):
-					ServiceBinder.PlayerService.EffectsEnvironmentalReverb.Properties = new EnvironmentalReverb.Settings
-					{
-						DecayHFRatio = SettingsEnvironmentalReverb.CurrentPreset.DecayHFRatio,
-						DecayTime = SettingsEnvironmentalReverb.CurrentPreset.DecayTime,
-						Density = SettingsEnvironmentalReverb.CurrentPreset.Density,
-						Diffusion = SettingsEnvironmentalReverb.CurrentPreset.Diffusion,
-						ReflectionsDelay = SettingsEnvironmentalReverb.CurrentPreset.ReflectionsDelay,
-						ReflectionsLevel = SettingsEnvironmentalReverb.CurrentPreset.ReflectionsLevel,
-						ReverbDelay = SettingsEnvironmentalReverb.CurrentPreset.ReverbDelay,
-						ReverbLevel = SettingsEnvironmentalReverb.CurrentPreset.ReverbLevel,
-						RoomHFLevel = SettingsEnvironmentalReverb.CurrentPreset.RoomHFLevel,
-						RoomLevel = SettingsEnvironmentalReverb.CurrentPreset.RoomLevel,
-					};
-					break;
+					if (ServiceBinder.PlayerService.EffectsEnvironmentalReverb is not null)
+						ServiceBinder.PlayerService.EffectsEnvironmentalReverb.Properties = EffectsEnvironmentalReverb;
+					return;
 
-				case nameof(IEnvironmentalReverbSettings.IPreset.DecayHFRatio):
-					ServiceBinder.PlayerService.EffectsEnvironmentalReverb.DecayHFRatio = SettingsEnvironmentalReverb.CurrentPreset.DecayHFRatio;
-					break;
-				case nameof(IEnvironmentalReverbSettings.IPreset.DecayTime):
-					ServiceBinder.PlayerService.EffectsEnvironmentalReverb.DecayTime = SettingsEnvironmentalReverb.CurrentPreset.DecayTime;
-					break;
-				case nameof(IEnvironmentalReverbSettings.IPreset.Density):
-					ServiceBinder.PlayerService.EffectsEnvironmentalReverb.Density = SettingsEnvironmentalReverb.CurrentPreset.Density;
-					break;
-				case nameof(IEnvironmentalReverbSettings.IPreset.Diffusion):
-					ServiceBinder.PlayerService.EffectsEnvironmentalReverb.Diffusion = SettingsEnvironmentalReverb.CurrentPreset.Diffusion;
-					break;
-				case nameof(IEnvironmentalReverbSettings.IPreset.ReflectionsDelay):
-					ServiceBinder.PlayerService.EffectsEnvironmentalReverb.ReflectionsDelay = SettingsEnvironmentalReverb.CurrentPreset.ReflectionsDelay;
-					break;
-				case nameof(IEnvironmentalReverbSettings.IPreset.ReflectionsLevel):
-					ServiceBinder.PlayerService.EffectsEnvironmentalReverb.ReflectionsLevel = SettingsEnvironmentalReverb.CurrentPreset.ReflectionsLevel;
-					break;
-				case nameof(IEnvironmentalReverbSettings.IPreset.ReverbDelay):
-					ServiceBinder.PlayerService.EffectsEnvironmentalReverb.ReverbDelay = SettingsEnvironmentalReverb.CurrentPreset.ReverbDelay;
-					break;
-				case nameof(IEnvironmentalReverbSettings.IPreset.ReverbLevel):
-					ServiceBinder.PlayerService.EffectsEnvironmentalReverb.ReverbLevel = SettingsEnvironmentalReverb.CurrentPreset.ReverbLevel;
-					break;
-				case nameof(IEnvironmentalReverbSettings.IPreset.RoomHFLevel):
-					ServiceBinder.PlayerService.EffectsEnvironmentalReverb.RoomHFLevel = SettingsEnvironmentalReverb.CurrentPreset.RoomHFLevel;
-					break;
-				case nameof(IEnvironmentalReverbSettings.IPreset.RoomLevel):
-					ServiceBinder.PlayerService.EffectsEnvironmentalReverb.RoomLevel = SettingsEnvironmentalReverb.CurrentPreset.RoomLevel;
-					break;
+				case nameof(IEnvironmentalReverbSettings.IPresetable.IsEnabled) when SettingsEnvironmentalReverb.IsEnabled is false:
+					ServiceBinder.PlayerService.EffectsEnvironmentalReverb = null;
+					return;
 
 				default: break;
 			}
+
+			if (SettingsEnvironmentalReverb.IsEnabled && ServiceBinder.PlayerService.EffectsEnvironmentalReverb is not null) 
+				switch (args.PropertyName)
+				{
+					case nameof(IEnvironmentalReverbSettings.IPreset.DecayHFRatio):
+						ServiceBinder.PlayerService.EffectsEnvironmentalReverb.DecayHFRatio = SettingsEnvironmentalReverb.CurrentPreset.DecayHFRatio;
+						break;
+					case nameof(IEnvironmentalReverbSettings.IPreset.DecayTime):
+						ServiceBinder.PlayerService.EffectsEnvironmentalReverb.DecayTime = SettingsEnvironmentalReverb.CurrentPreset.DecayTime;
+						break;
+					case nameof(IEnvironmentalReverbSettings.IPreset.Density):
+						ServiceBinder.PlayerService.EffectsEnvironmentalReverb.Density = SettingsEnvironmentalReverb.CurrentPreset.Density;
+						break;
+					case nameof(IEnvironmentalReverbSettings.IPreset.Diffusion):
+						ServiceBinder.PlayerService.EffectsEnvironmentalReverb.Diffusion = SettingsEnvironmentalReverb.CurrentPreset.Diffusion;
+						break;
+					case nameof(IEnvironmentalReverbSettings.IPreset.ReflectionsDelay):
+						ServiceBinder.PlayerService.EffectsEnvironmentalReverb.ReflectionsDelay = SettingsEnvironmentalReverb.CurrentPreset.ReflectionsDelay;
+						break;
+					case nameof(IEnvironmentalReverbSettings.IPreset.ReflectionsLevel):
+						ServiceBinder.PlayerService.EffectsEnvironmentalReverb.ReflectionsLevel = SettingsEnvironmentalReverb.CurrentPreset.ReflectionsLevel;
+						break;
+					case nameof(IEnvironmentalReverbSettings.IPreset.ReverbDelay):
+						ServiceBinder.PlayerService.EffectsEnvironmentalReverb.ReverbDelay = SettingsEnvironmentalReverb.CurrentPreset.ReverbDelay;
+						break;
+					case nameof(IEnvironmentalReverbSettings.IPreset.ReverbLevel):
+						ServiceBinder.PlayerService.EffectsEnvironmentalReverb.ReverbLevel = SettingsEnvironmentalReverb.CurrentPreset.ReverbLevel;
+						break;
+					case nameof(IEnvironmentalReverbSettings.IPreset.RoomHFLevel):
+						ServiceBinder.PlayerService.EffectsEnvironmentalReverb.RoomHFLevel = SettingsEnvironmentalReverb.CurrentPreset.RoomHFLevel;
+						break;
+					case nameof(IEnvironmentalReverbSettings.IPreset.RoomLevel):
+						ServiceBinder.PlayerService.EffectsEnvironmentalReverb.RoomLevel = SettingsEnvironmentalReverb.CurrentPreset.RoomLevel;
+						break;
+
+					default: break;
+				}
 		}
 		private void SettingsEqualiserPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
-			if (ServiceBinder?.PlayerService?.EffectsEqualizer != null && SettingsEqualiser?.CurrentPreset != null) switch (args.PropertyName)
+			if (ServiceBinder is null)
+				return;
+
+			switch (args.PropertyName)
 			{
 				case _AllPropertyName:
-				case nameof(IEqualiserSettings.IPresetable.CurrentPreset):
-				case nameof(IEqualiserSettings.IPreset.Name):
-				case nameof(IEqualiserSettings.IPreset.FrequencyLevels):
-					ServiceBinder.PlayerService.EffectsEqualizer.Properties = new Equalizer.Settings
-					{
-						NumBands = (short)SettingsEqualiser.CurrentPreset.FrequencyLevels.Length,
-						BandLevels = new List<short>(SettingsEqualiser.CurrentPreset.FrequencyLevels),
-					};
-					break;
+				case nameof(IVolumeControlSettings.IPresetable.IsEnabled) when SettingsEqualiser.IsEnabled:
+				case nameof(IVolumeControlSettings.IPresetable.CurrentPreset):
+				case nameof(IVolumeControlSettings.IPreset.Name):
+					if (ServiceBinder.PlayerService.EffectsEqualizer is not null) { }
+					//ServiceBinder.PlayerService.EffectsEqualizer.Properties = EffectsEqualizer;
+					return;
+
+				case nameof(IVolumeControlSettings.IPresetable.IsEnabled) when SettingsEqualiser.IsEnabled is false:
+					ServiceBinder.PlayerService.EffectsEqualizer = null;
+					return;
 
 				default: break;
 			}
-		}
-		private void SettingsLoudnessEnhancerPropertyChanged(object? sender, PropertyChangedEventArgs args)
-		{
-			if (ServiceBinder?.PlayerService?.EffectsLoudnessEnhancer != null && SettingsLoudnessEnhancer?.CurrentPreset != null) switch (args.PropertyName)
-			{
-				case _AllPropertyName:
-				case nameof(ILoudnessEnhancerSettings.IPresetable.CurrentPreset):
-				case nameof(ILoudnessEnhancerSettings.IPreset.Name):
-				case nameof(ILoudnessEnhancerSettings.IPreset.TargetGain):
-					ServiceBinder.PlayerService.EffectsLoudnessEnhancer.SetTargetGain(SettingsLoudnessEnhancer.CurrentPreset.TargetGain);
-					break;
 
-				default: break;
-			}
-		}									
+			if (SettingsEqualiser.IsEnabled && ServiceBinder.PlayerService.EffectsEqualizer is not null) 
+				switch (args.PropertyName)
+				{
+					case nameof(IEqualiserSettings.IPreset.FrequencyLevels):
+					//ServiceBinder.PlayerService.EffectsEqualizer.Properties = new Equalizer.Settings
+					//{
+					//	NumBands = (short)SettingsEqualiser.CurrentPreset.FrequencyLevels.Length,
+					//	BandLevels = new List<short>(SettingsEqualiser.CurrentPreset.FrequencyLevels),
+					//};
+
+					default: break;
+				}
+		}						
 		private void SettingsNotificationPropertyChanged(object? sender, PropertyChangedEventArgs args)
 		{
 			if (ServiceBinder?.PlayerService is ExoPlayerService exoplayerservice)

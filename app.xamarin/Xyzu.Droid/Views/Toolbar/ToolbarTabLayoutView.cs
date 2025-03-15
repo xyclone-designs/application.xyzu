@@ -16,7 +16,7 @@ namespace Xyzu.Views.Toolbar
 		{
 			public const int Layout = Resource.Layout.xyzu_view_toolbar_tablayout;
 
-			public const int StatusBarInset= Resource.Id.xyzu_view_toolbar_tablayout_statusbarinsetview;
+			public const int StatusBarInset = Resource.Id.xyzu_view_toolbar_tablayout_statusbarinsetview;
 			public const int Toolbar = Resource.Id.xyzu_view_toolbar_tablayout_toolbar;
 			public const int TabLayout = Resource.Id.xyzu_view_toolbar_tablayout_tablayout;
 		}

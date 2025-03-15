@@ -26,9 +26,9 @@ namespace Xyzu
 	{
 		public static class Dialogs
 		{
-			public static AlertDialog Alert(Context context, Action<AlertDialog.Builder?, AlertDialog?>? action, int? style = null)
+			public static AlertDialog Alert(Context context, Action<MaterialAlertDialogBuilder?, AlertDialog?>? action, int? style = null)
 			{
-				AlertDialog.Builder alertdialogbuilder = new MaterialAlertDialogBuilder(context, style ?? Resource.Style.Xyzu_Material_Dialog_Alert);
+				MaterialAlertDialogBuilder alertdialogbuilder = new (context, style ?? Resource.Style.Xyzu_Material_Dialog_Alert);
 
 				action?.Invoke(alertdialogbuilder, null);
 

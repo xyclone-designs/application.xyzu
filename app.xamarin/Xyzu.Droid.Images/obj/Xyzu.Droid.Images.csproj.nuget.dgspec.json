@@ -52,12 +52,6 @@
         "net8.0-android34.0": {
           "targetAlias": "net8.0-android",
           "dependencies": {
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.0, )",
-              "autoReferenced": true
-            },
             "Xamarin.AndroidX.AppCompat": {
               "target": "Package",
               "version": "[1.7.0.3, )"
@@ -99,20 +93,6 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "android-arm": {
-          "#import": []
-        },
-        "android-arm64": {
-          "#import": []
-        },
-        "android-x64": {
-          "#import": []
-        },
-        "android-x86": {
-          "#import": []
         }
       }
     },
@@ -171,12 +151,6 @@
               "target": "Package",
               "version": "[2.0.0, )"
             },
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.0, )",
-              "autoReferenced": true
-            },
             "Xam.Plugins.AndroidX.SlidingUpPanel": {
               "target": "Package",
               "version": "[1.0.0, )"
@@ -218,20 +192,6 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "android-arm": {
-          "#import": []
-        },
-        "android-arm64": {
-          "#import": []
-        },
-        "android-x64": {
-          "#import": []
-        },
-        "android-x86": {
-          "#import": []
         }
       }
     },

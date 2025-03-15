@@ -18,7 +18,7 @@ using Xyzu.Droid;
 using Xyzu.Library.Enums;
 using Xyzu.Settings.Enums;
 using Xyzu.Settings.Files;
-using Xyzu.Views.Setting;
+using Xyzu.Widgets.Controls;
 using Xyzu.Widgets.RecyclerViews;
 
 using AndroidNetUri = Android.Net.Uri;

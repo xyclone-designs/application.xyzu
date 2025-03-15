@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SeekArc.Droid</name>
+    </assembly>
+    <members>
+        <member name="T:SeekArc.Droid.SeekArcView">
+            
+            
+            This is a class that functions much like a SeekBar but
+            follows a circle path instead of a straight line.
+            
+            @author Neil Davies
+            
+            edited by Thando Ndlovu
+            
+        </member>
+    </members>
+</doc>

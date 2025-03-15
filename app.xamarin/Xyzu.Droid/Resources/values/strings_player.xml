@@ -6,6 +6,12 @@
   <string name="playerserviceoptions_notificationoptions_channel_unknownartist">Unknown Artist</string>
   <string name="playerserviceoptions_notificationoptions_channel_unknowntitle">Unknown Title</string>
 
+  <string name="player_audioeffects_equaliser_title">Equaliser</string>
+  <string name="player_audioeffects_environmentalreverb_title">Reverb</string>
+  <string name="player_audioeffects_volumecontrol_title">Volume</string>
+  <string name="player_audioeffects_presets_new_title">New Preset</string>
+  <string name="player_audioeffects_presets_new_description">A name for the new preset</string>
+
   <string name="player_default_detail_one">No Song Loaded</string>
   <string name="player_default_detail_onetwo">No Song Loaded - Press play for a random song</string>
   <string name="player_default_detail_two">Press play for a random song</string>
@@ -25,5 +31,21 @@
   <string name="player_unknown_artist">Unknown Artist</string>
   <string name="player_unknown_genre">Unknown Genre</string>
   <string name="player_unknown_title">Unknown Title</string>
+  
+  <string name="player_equaliser_preamp">PreAmp</string>
+  <string name="player_equaliser_cutoff_hz">hz</string>
+  <string name="player_equaliser_cutoff_max">100</string>
+  <string name="player_equaliser_cutoff_min">-100</string>
+  <string name="player_equaliser_cutoff_band01">032hz</string>
+  <string name="player_equaliser_cutoff_band02">128hz</string>
+  <string name="player_equaliser_cutoff_band03">256hz</string>
+  <string name="player_equaliser_cutoff_band04">512hz</string>
+  <string name="player_equaliser_cutoff_band05">01mhz</string>
+  <string name="player_equaliser_cutoff_band06">02mhz</string>
+  <string name="player_equaliser_cutoff_band07">04mhz</string>
+  <string name="player_equaliser_cutoff_band08">08mhz</string>
+  <string name="player_equaliser_cutoff_band09">16mhz</string>
+  <string name="player_equaliser_cutoff_band10">20mhz</string>
+  
   
 </resources>

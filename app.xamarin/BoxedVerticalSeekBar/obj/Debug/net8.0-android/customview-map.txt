@@ -1,0 +1,7 @@
+attr;obj\Debug\net8.0-android\res\values\attrs.xml
+color;obj\Debug\net8.0-android\res\values\colors.xml
+declare-styleable;obj\Debug\net8.0-android\res\values\attrs.xml
+resources;obj\Debug\net8.0-android\res\values\attrs.xml
+resources;obj\Debug\net8.0-android\res\values\colors.xml
+resources;obj\Debug\net8.0-android\res\values\strings.xml
+string;obj\Debug\net8.0-android\res\values\strings.xml

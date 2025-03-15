@@ -56,7 +56,7 @@ namespace Xyzu.Views.Preference
 
 		public static LicenseView ForDropdownPreference(Context context, string license, IOnClickListener listener)
 		{
-			LicenseView licenseview = new LicenseView(context, null, Resource.Style.Xyzu_Preference);
+			LicenseView licenseview = new (context, null, Resource.Style.Xyzu_Preference);
 			licenseview.ViewLicense.SetText(license, null);
 			licenseview.SetOnClickListener(listener);
 

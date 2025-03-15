@@ -1,6 +1,5 @@
-﻿#nullable enable
-
-using Android.Media.Audiofx;
+﻿using Android.Media.Audiofx;
+using AndroidX.Media3.Common;
 
 using System;
 
@@ -34,7 +33,7 @@ namespace Xyzu.Player.Exoplayer
 			{
 				try
 				{
-					_EffectsEnvironmentalReverb ??= new EnvironmentalReverb(0, Exoplayer.AudioSessionId);
+					_EffectsEnvironmentalReverb = new EnvironmentalReverb(0, Exoplayer.AudioSessionId);
 				}
 				catch (Exception) { }
 
@@ -67,6 +66,38 @@ namespace Xyzu.Player.Exoplayer
 				catch (Exception) { }
 
 				return _EffectsLoudnessEnhancer;
+			}
+		}
+		public float EffectsPlaybackBalance
+		{
+			get; set;
+		}
+		public float EffectsPlaybackPitch
+		{
+			get => Exoplayer.PlaybackParameters?.Pitch ?? 1F;
+			set
+			{
+				Exoplayer.PlaybackParameters ??= new PlaybackParameters(EffectsPlaybackSpeed, 1F);
+
+				if (Exoplayer.PlaybackParameters.Pitch != value)
+				{
+					Exoplayer.PlaybackParameters.Pitch = value;
+					Exoplayer.SeekTo(Exoplayer.CurrentMediaItemIndex, Exoplayer.CurrentPosition);
+				}
+			}
+		}
+		public float EffectsPlaybackSpeed
+		{
+			get => Exoplayer.PlaybackParameters?.Speed ?? 1F;
+			set
+			{
+				Exoplayer.PlaybackParameters ??= new PlaybackParameters(1F, EffectsPlaybackPitch);
+				
+				if (Exoplayer.PlaybackParameters.Speed != value)
+				{
+					Exoplayer.PlaybackParameters.Speed = value;
+					Exoplayer.SeekTo(Exoplayer.CurrentMediaItemIndex, Exoplayer.CurrentPosition);
+				}
 			}
 		}
 	}

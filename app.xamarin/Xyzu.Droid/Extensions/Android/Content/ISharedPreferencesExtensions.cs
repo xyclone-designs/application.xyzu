@@ -101,47 +101,45 @@ namespace Android.Content
 		{
 			return new IAudioSettings.Default { };
 		}											 
-		public static IBassBoostSettings.IPresetable GetAudioBassBoost(this ISharedPreferences sharedpreferences)
+		public static IVolumeControlSettings.IPresetable GetAudioVolumeControl(this ISharedPreferences sharedpreferences)
 		{
-			IBassBoostSettings.IPresetable presetable = IBassBoostSettings.IPresetable.Defaults.FromPreset(null, false);
+			IVolumeControlSettings.IPresetable presetable = IVolumeControlSettings.IPresetable.Defaults.FromPreset(null, false);
+			IEnumerable<IVolumeControlSettings.IPreset> allpresets = sharedpreferences.All?.Keys
+				.Where(key => key.StartsWith(IVolumeControlSettings.IPreset.Keys.Base, StringComparison.OrdinalIgnoreCase))
+				.Where(key => key.StartsWith(IVolumeControlSettings.IPresetable.Keys.Base, StringComparison.OrdinalIgnoreCase) is false)
+				.Select(key => IVolumeControlSettings.IPreset.Keys.GetNameFromKey(key))
+				.OfType<string>()
+				.Distinct()
+				.Select(presetname => sharedpreferences.GetAudioVolumeControl(presetname))
+				.OfType<IVolumeControlSettings.IPreset>()
+				.Distinct() ?? Enumerable.Empty<IVolumeControlSettings.IPreset>();
 
-			presetable.IsEnabled = sharedpreferences.GetBoolean(IBassBoostSettings.IPresetable.Keys.IsEnabled, IBassBoostSettings.IPresetable.Defaults.IsEnabled);
-			presetable.AllPresets = sharedpreferences.All is null
-				? IBassBoostSettings.IPresetable.Defaults.Presets.AsEnumerable()
-				: sharedpreferences.All.Keys
-					.Where(key => key.StartsWith(IBassBoostSettings.IPreset.Keys.Base, StringComparison.OrdinalIgnoreCase))
-					.Where(key => key.StartsWith(IBassBoostSettings.IPresetable.Keys.Base, StringComparison.OrdinalIgnoreCase) is false)
-					.Select(key => IBassBoostSettings.IPreset.Keys.GetNameFromKey(key))
-					.OfType<string>()
-					.Distinct()
-					.Select(presetname => sharedpreferences.GetAudioBassBoost(presetname))
-					.OfType<IBassBoostSettings.IPreset>()
-					.Concat(IBassBoostSettings.IPresetable.Defaults.Presets.AsEnumerable())
-					.Distinct();
+			presetable.IsEnabled = sharedpreferences.GetBoolean(IVolumeControlSettings.IPresetable.Keys.IsEnabled, IVolumeControlSettings.IPresetable.Defaults.IsEnabled);
+			presetable.AllPresets = allpresets.Concat(IVolumeControlSettings.IPresetable.Defaults.Presets.AsEnumerable());
 			presetable.CurrentPreset =
-				sharedpreferences.GetString(IBassBoostSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname && presetable.AllPresets
-				.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase)) is IBassBoostSettings.IPreset preset
+				sharedpreferences.GetString(IVolumeControlSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname && presetable.AllPresets
+				.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase)) is IVolumeControlSettings.IPreset preset
 					? preset
-					: IBassBoostSettings.IPresetable.Defaults.Presets.Default;
+					: IVolumeControlSettings.IPresetable.Defaults.Presets.Default;
 
 			return presetable;
 		}											 									 						 
-		public static IBassBoostSettings.IPreset? GetAudioBassBoost(this ISharedPreferences sharedpreferences, string presetname)
+		public static IVolumeControlSettings.IPreset? GetAudioVolumeControl(this ISharedPreferences sharedpreferences, string presetname)
 		{
 			if (sharedpreferences.All is null)
 				return null;
 
 			IEnumerable<string> keys = sharedpreferences.All.Keys
-				.Where(key => key.Contains(IBassBoostSettings.IPreset.Keys.PresetName(presetname), StringComparison.OrdinalIgnoreCase));
+				.Where(key => key.Contains(IVolumeControlSettings.IPreset.Keys.PresetName(presetname), StringComparison.OrdinalIgnoreCase));
 
 			if (keys.Any() is false)
 				return null;
 
-			IBassBoostSettings.IPreset preset = new IBassBoostSettings.IPreset.Default(presetname);
+			IVolumeControlSettings.IPreset preset = new IVolumeControlSettings.IPreset.Default(presetname);
 
 			foreach (string key in keys)
 				if (sharedpreferences.All.TryGetValue(key, out object? value))
-					(preset ??= new IBassBoostSettings.IPreset.Default(presetname))
+					(preset ??= new IVolumeControlSettings.IPreset.Default(presetname))
 						.SetFromKey(key, value);
 
 			return preset;
@@ -149,20 +147,18 @@ namespace Android.Content
 		public static IEnvironmentalReverbSettings.IPresetable GetAudioEnvironmentalReverb(this ISharedPreferences sharedpreferences)
 		{
 			IEnvironmentalReverbSettings.IPresetable presetable = IEnvironmentalReverbSettings.IPresetable.Defaults.FromPreset(null, false);
+			IEnumerable<IEnvironmentalReverbSettings.IPreset> allpresets = sharedpreferences.All?.Keys
+				.Where(key => key.StartsWith(IEnvironmentalReverbSettings.IPreset.Keys.Base, StringComparison.OrdinalIgnoreCase))
+				.Where(key => key.StartsWith(IEnvironmentalReverbSettings.IPresetable.Keys.Base, StringComparison.OrdinalIgnoreCase) is false)
+				.Select(key => IEnvironmentalReverbSettings.IPreset.Keys.GetNameFromKey(key))
+				.OfType<string>()
+				.Distinct()
+				.Select(presetname => sharedpreferences.GetAudioEnvironmentalReverb(presetname))
+				.OfType<IEnvironmentalReverbSettings.IPreset>()
+				.Distinct() ?? Enumerable.Empty<IEnvironmentalReverbSettings.IPreset>();
 
 			presetable.IsEnabled = sharedpreferences.GetBoolean(IEnvironmentalReverbSettings.IPresetable.Keys.IsEnabled, IEnvironmentalReverbSettings.IPresetable.Defaults.IsEnabled);
-			presetable.AllPresets = sharedpreferences.All is null
-				? IEnvironmentalReverbSettings.IPresetable.Defaults.Presets.AsEnumerable()
-				: sharedpreferences.All.Keys
-					.Where(key => key.StartsWith(IEnvironmentalReverbSettings.IPreset.Keys.Base, StringComparison.OrdinalIgnoreCase))
-					.Where(key => key.StartsWith(IEnvironmentalReverbSettings.IPresetable.Keys.Base, StringComparison.OrdinalIgnoreCase) is false)
-					.Select(key => IEnvironmentalReverbSettings.IPreset.Keys.GetNameFromKey(key))
-					.OfType<string>()
-					.Distinct()
-					.Select(presetname => sharedpreferences.GetAudioEnvironmentalReverb(presetname))
-					.OfType<IEnvironmentalReverbSettings.IPreset>()
-					.Concat(IEnvironmentalReverbSettings.IPresetable.Defaults.Presets.AsEnumerable())
-					.Distinct();
+			presetable.AllPresets = allpresets.Concat(IEnvironmentalReverbSettings.IPresetable.Defaults.Presets.AsEnumerable());
 			presetable.CurrentPreset =
 				sharedpreferences.GetString(IEnvironmentalReverbSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname && presetable.AllPresets
 				.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase)) is IEnvironmentalReverbSettings.IPreset preset
@@ -193,26 +189,24 @@ namespace Android.Content
 		}
 		public static IEqualiserSettings.IPresetable GetAudioEqualiser(this ISharedPreferences sharedpreferences)
 		{
-			IEqualiserSettings.IPresetable presetable = IEqualiserSettings.IPresetable.Defaults.FromPreset(null, IEqualiserSettings.BandType.Ten, false);
+			IEqualiserSettings.IPresetable presetable = IEqualiserSettings.IPresetable.Defaults.FromPreset(null, false);
+			IEnumerable<IEqualiserSettings.IPreset> allpresets = sharedpreferences.All?.Keys
+				.Where(key => key.StartsWith(IEqualiserSettings.IPreset.Keys.Base, StringComparison.OrdinalIgnoreCase))
+				.Where(key => key.StartsWith(IEqualiserSettings.IPresetable.Keys.Base, StringComparison.OrdinalIgnoreCase) is false)
+				.Select(key => IEqualiserSettings.IPreset.Keys.GetNameFromKey(key))
+				.OfType<string>()
+				.Distinct()
+				.Select(presetname => sharedpreferences.GetAudioEqualiser(presetname))
+				.OfType<IEqualiserSettings.IPreset>()
+				.Distinct() ?? Enumerable.Empty<IEqualiserSettings.IPreset>();
 
 			presetable.IsEnabled = sharedpreferences.GetBoolean(IEqualiserSettings.IPresetable.Keys.IsEnabled, IEqualiserSettings.IPresetable.Defaults.IsEnabled);
-			presetable.AllPresets = sharedpreferences.All is null
-				? IEqualiserSettings.IPresetable.Defaults.Presets.TenBand.AsEnumerable()
-				: sharedpreferences.All.Keys
-					.Where(key => key.StartsWith(IEqualiserSettings.IPreset.Keys.Base, StringComparison.OrdinalIgnoreCase))
-					.Where(key => key.StartsWith(IEqualiserSettings.IPresetable.Keys.Base, StringComparison.OrdinalIgnoreCase) is false)
-					.Select(key => IEqualiserSettings.IPreset.Keys.GetNameFromKey(key))
-					.OfType<string>()
-					.Distinct()
-					.Select(presetname => sharedpreferences.GetAudioEqualiser(presetname))
-					.OfType<IEqualiserSettings.IPreset>()
-					.Concat(IEqualiserSettings.IPresetable.Defaults.Presets.TenBand.AsEnumerable())
-					.Distinct();
+			presetable.AllPresets = allpresets.Concat(IEqualiserSettings.IPresetable.Defaults.Presets.AsEnumerable());
 			presetable.CurrentPreset =
 				sharedpreferences.GetString(IEqualiserSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname && presetable.AllPresets
 				.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase)) is IEqualiserSettings.IPreset preset
 					? preset
-					: IEqualiserSettings.IPresetable.Defaults.Presets.TenBand.Default;
+					: IEqualiserSettings.IPresetable.Defaults.Presets.Default;
 
 			return presetable;
 		}
@@ -235,52 +229,7 @@ namespace Android.Content
 						.SetFromKey(key, value);
 
 			return preset;
-		}
-		public static ILoudnessEnhancerSettings.IPresetable GetAudioLoudnessEnhancer(this ISharedPreferences sharedpreferences)
-		{
-			ILoudnessEnhancerSettings.IPresetable presetable = ILoudnessEnhancerSettings.IPresetable.Defaults.FromPreset(null, false);
-
-			presetable.IsEnabled = sharedpreferences.GetBoolean(ILoudnessEnhancerSettings.IPresetable.Keys.IsEnabled, ILoudnessEnhancerSettings.IPresetable.Defaults.IsEnabled);
-			presetable.AllPresets = sharedpreferences.All is null
-				? ILoudnessEnhancerSettings.IPresetable.Defaults.Presets.AsEnumerable()
-				: sharedpreferences.All.Keys
-					.Where(key => key.StartsWith(ILoudnessEnhancerSettings.IPreset.Keys.Base, StringComparison.OrdinalIgnoreCase))
-					.Where(key => key.StartsWith(ILoudnessEnhancerSettings.IPresetable.Keys.Base, StringComparison.OrdinalIgnoreCase) is false)
-					.Select(key => ILoudnessEnhancerSettings.IPreset.Keys.GetNameFromKey(key))
-					.OfType<string>()
-					.Distinct()
-					.Select(presetname => sharedpreferences.GetAudioLoudnessEnhancer(presetname))
-					.OfType<ILoudnessEnhancerSettings.IPreset>()
-					.Concat(ILoudnessEnhancerSettings.IPresetable.Defaults.Presets.AsEnumerable())
-					.Distinct();
-			presetable.CurrentPreset = 
-				sharedpreferences.GetString(ILoudnessEnhancerSettings.IPresetable.Keys.CurrentPreset, null) is string currentpresetname && presetable.AllPresets
-				.FirstOrDefault(preset => string.Equals(preset.Name, currentpresetname, StringComparison.OrdinalIgnoreCase)) is ILoudnessEnhancerSettings.IPreset preset
-					? preset
-					: ILoudnessEnhancerSettings.IPresetable.Defaults.Presets.Default;
-
-			return presetable;
-		}
-		public static ILoudnessEnhancerSettings.IPreset? GetAudioLoudnessEnhancer(this ISharedPreferences sharedpreferences, string presetname)
-		{
-			if (sharedpreferences.All is null)
-				return null;
-
-			IEnumerable<string> keys = sharedpreferences.All.Keys
-					.Where(key => key.Contains(ILoudnessEnhancerSettings.IPreset.Keys.PresetName(presetname), StringComparison.OrdinalIgnoreCase));
-
-			if (keys.Any() is false)
-				return null;
-
-			ILoudnessEnhancerSettings.IPreset preset = new ILoudnessEnhancerSettings.IPreset.Default(presetname);
-
-			foreach (string key in keys)
-				if (sharedpreferences.All.TryGetValue(key, out object? value))
-					(preset ??= new ILoudnessEnhancerSettings.IPreset.Default(presetname))
-						.SetFromKey(key, value);
-
-			return preset;
-		}
+		}   
 		public static IFilesSettings GetFiles(this ISharedPreferences sharedpreferences)
 		{
 			return new IFilesSettings.Default
@@ -488,6 +437,46 @@ namespace Android.Content
 			{
 				Mode = sharedpreferences.GetEnum(IThemesSettings.Keys.Mode, IThemesSettings.Defaults.Mode),
 			};
+		}
+
+		public static ISharedPreferences RemoveAudioVolumeControl(this ISharedPreferences sharedpreferences, string presetname)
+		{
+			if (sharedpreferences.All is null || sharedpreferences.Edit() is not ISharedPreferencesEditor sharedpreferenceseditor)
+				return sharedpreferences;
+
+			foreach (string key in sharedpreferences.All.Keys.Where(key =>
+			{
+				return key.Contains(IVolumeControlSettings.IPreset.Keys.PresetName(presetname), StringComparison.OrdinalIgnoreCase);
+
+			})) sharedpreferenceseditor.Remove(key); sharedpreferenceseditor.Commit();
+
+			return sharedpreferences;
+		}
+		public static ISharedPreferences RemoveAudioEnvironmentalReverb(this ISharedPreferences sharedpreferences, string presetname)
+		{
+			if (sharedpreferences.All is null || sharedpreferences.Edit() is not ISharedPreferencesEditor sharedpreferenceseditor)
+				return sharedpreferences;
+
+			foreach (string key in sharedpreferences.All.Keys.Where(key =>
+			{
+				return key.Contains(IEnvironmentalReverbSettings.IPreset.Keys.PresetName(presetname), StringComparison.OrdinalIgnoreCase);
+
+			})) sharedpreferenceseditor.Remove(key); sharedpreferenceseditor.Commit();
+
+			return sharedpreferences;
+		}
+		public static ISharedPreferences RemoveAudioEqualiser(this ISharedPreferences sharedpreferences, string presetname)
+		{
+			if (sharedpreferences.All is null || sharedpreferences.Edit() is not ISharedPreferencesEditor sharedpreferenceseditor)
+				return sharedpreferences;
+
+			foreach (string key in sharedpreferences.All.Keys.Where(key =>
+			{
+				return key.Contains(IEqualiserSettings.IPreset.Keys.PresetName(presetname), StringComparison.OrdinalIgnoreCase);
+
+			})) sharedpreferenceseditor.Remove(key); sharedpreferenceseditor.Commit();
+
+			return sharedpreferences;
 		}
 	}
 }

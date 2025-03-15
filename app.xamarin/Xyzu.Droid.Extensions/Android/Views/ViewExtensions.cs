@@ -28,6 +28,38 @@ namespace Android.Views
 				default: break;
 			}
 		}
+		public static void SetMarginVertical(this View view, int margin, bool addtoexisting = false)
+		{
+			if (view.LayoutParameters is not ViewGroup.MarginLayoutParams marginlayoutparams)
+				return;
+
+			if (addtoexisting)
+			{
+				marginlayoutparams.LeftMargin += margin;
+				marginlayoutparams.RightMargin += margin;
+			}
+			else
+			{
+				marginlayoutparams.LeftMargin = margin;
+				marginlayoutparams.RightMargin = margin;
+			}
+		}
+		public static void SetMarginHorizontal(this View view, int margin, bool addtoexisting = false)
+		{
+			if (view.LayoutParameters is not ViewGroup.MarginLayoutParams marginlayoutparams)
+				return;
+
+			if (addtoexisting)
+			{
+				marginlayoutparams.TopMargin += margin;
+				marginlayoutparams.BottomMargin += margin;
+			}
+			else
+			{
+				marginlayoutparams.TopMargin = margin;
+				marginlayoutparams.BottomMargin = margin;
+			}
+		}
 		public static void SetMarginBottom(this View view, int margin, bool addtoexisting = false)
 		{
 			switch (true)
@@ -126,7 +158,23 @@ namespace Android.Views
 				top: padding,
 				start: padding,
 				bottom: padding);
-		}		  
+		}
+		public static void SetPaddingVertical(this View view, int padding, bool addtoexisting = false)
+		{
+			view.SetPaddingRelative(
+				top: view.PaddingTop,
+				bottom: view.PaddingBottom,
+				end: addtoexisting ? view.PaddingEnd + padding : padding,
+				start: addtoexisting ? view.PaddingStart + padding : padding);
+		}
+		public static void SetPaddingHorizontal(this View view, int padding, bool addtoexisting = false)
+		{
+			view.SetPaddingRelative(
+				end: view.PaddingEnd,
+				start: view.PaddingStart,
+				top: addtoexisting ? view.PaddingTop + padding : padding,
+				bottom: addtoexisting ? view.PaddingBottom + padding : padding);
+		}
 		public static void SetPaddingBottom(this View view, int padding, bool addtoexisting = false)
 		{
 			view.SetPaddingRelative(
@@ -179,6 +227,23 @@ namespace Android.Views
 		public static void SetVisibility(this View view, ViewStates viewstate)
 		{
 			view.Visibility = viewstate;
+		}
+
+		private static bool AllZero(int top, int left, int right, int bottom)
+		{
+			return
+				top == 0 &&
+				left == 0 &&
+				right == 0 &&
+				bottom == 0;
+		}
+		public static bool AllZero(this View.LayoutChangeEventArgs layoutchangeeventargs)
+		{
+			return AllZero(layoutchangeeventargs.Top, layoutchangeeventargs.Left, layoutchangeeventargs.Right, layoutchangeeventargs.Bottom);
+		}
+		public static bool AllZeroOld(this View.LayoutChangeEventArgs layoutchangeeventargs)
+		{
+			return AllZero(layoutchangeeventargs.OldTop, layoutchangeeventargs.OldLeft, layoutchangeeventargs.OldRight, layoutchangeeventargs.OldBottom);
 		}
 	}
 }

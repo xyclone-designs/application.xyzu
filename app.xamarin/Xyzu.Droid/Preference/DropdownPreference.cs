@@ -18,6 +18,14 @@ namespace Xyzu.Preference
 		public DropdownPreference(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes) { }
 		public DropdownPreference(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
 
+		protected override void OnClick()
+		{
+			base.OnClick();
+
+			if (View is not null)
+				View.Expanded = !View.Expanded;
+		}
+
 		public override void OnBindViewHolder(PreferenceViewHolder holder)
 		{
 			base.OnBindViewHolder(holder);

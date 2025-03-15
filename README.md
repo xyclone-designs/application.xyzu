@@ -13,7 +13,7 @@
     <img src="assets/Screenshot_20230208-040602.png" height="360" />
 </p>
 
-#
+## Features
 
 - Browse and Search Songs, Albums, Artists & Genres
 - Playlists Support
@@ -21,16 +21,50 @@
 - Device Folder Control
 - Controlable UI, Light & Dark Theme
 - Notification Support
+- Audio Effects [Equaliser, Environmental Reverb, Bass Boost etc.]
 
-* Emad Abdalahman's [MusicBar](https://github.com/emadabdalrahman/MusicBar "Github Repository")
-    * Bindings by [Rofiq Setiawan](https://www.nuget.org/profiles/rofiqsetiawan "Nuget Profile")
-* Jared Rummler's [ColorPicker](https://github.com/jaredrummler/ColorPicker "Github Repository")
-    * Bindings by [Rofiq Setiawan](https://www.nuget.org/profiles/rofiqsetiawan "Nuget Profile")
-* Umano's [AndroidSlidingUpPanel](https://github.com/umano/AndroidSlidingUpPanel "Github Repository")
+## External Code Usage
+
+# Packages
+
+* [AndroidSlidingUpPanel](https://github.com/umano/AndroidSlidingUpPanel "Github Repository")
+    * Created by [Umano](https://github.com/umano "Github Repository")
     * Bindings by [Baseflow](https://github.com/Baseflow/AndroidSlidingUpPanelXamarin "Github Repository")
-* Frank A. Krueger's [SQLite PCL](https://github.com/praeclarum/sqlite-net)
-* Bumptech's [Glide](https://github.com/bumptech/glide)
-* KDD's [Glide AppModuleInjector](https://github.com/KDD-Digital-Healthcare-GmbH/Kdd.Glide.AppModuleInjector)
+* [ColorPicker](https://github.com/jaredrummler/ColorPicker "Github Repository")
+    * Created by [Jared Rummler](https://github.com/jaredrummler "Github Profile")
+    * Bindings by [Rofiq Setiawan](https://www.nuget.org/profiles/rofiqsetiawan "Nuget Profile")
+* [Glide](https://github.com/bumptech/glide "Github Repository")
+    * Created by [Bumptech](https://bumptech.com/ "Website")
+* [Glide AppModuleInjector](https://github.com/KDD-Digital-Healthcare-GmbH/Kdd.Glide.AppModuleInjector) by KDD
+* [ID3](https://github.com/JeevanJames/Id3 "Github Repository")
+    * Created by [ID3](https://https://jeevanjames.com "Website")
+* [LaerdalFFmpeg](https://github.com/emadabdalrahman/MusicBar "Github Repository")
+    * Created by [Taner Sener](https://github.com/tanersener/mobile-ffmpeg "Github Profile")
+    * Bindings by [Laerdal](https://laerdal.com "Website")
+* [MusicBar](https://github.com/emadabdalrahman/MusicBar "Github Repository")
+    * Created by [Emad Abdalahman](https://www.github.com/emadabdalrahman "Github Profile")
+    * Bindings by [Rofiq Setiawan](https://www.nuget.org/profiles/rofiqsetiawan "Nuget Profile")
+* [Newtonsoft.JSON](https://github.com/JamesNK/Newtonsoft.Json "Github Repository")
+    * Created by [James Newton-King](https://www.newtonsoft.com/json "Website")
+* [OxyPlot](https://github.com/oxyplot/oxyplot "Github Repository")
+    * Created by [OxyPlot](https://oxyplot.github.io/ "Website")
+* [Picasso](https://github.com/square/picasso "Github Repository")
+    * Created by [Square](https://square.github.io/ "Website")
+* [SQLNetPCL](https://github.com/praeclarum/sqlite-net "Github Repository")
+    * Created by [Frank A. Krueger](https://https://www.nuget.org/profiles/praeclarum "Nuget Profile")
+* [Taglib-Sharp](https://github.com/mono/taglib-sharp "Github Repository")
+    * Created by [Mono Project](https://www.mono-project.com/ "Website")
+
+# Projects
+
+* [BoxedVerticalSeekBar](https://github.com/alpbak/BoxedVerticalSeekBar "Github Repository")
+    * Created by [Alpaslan Bak](https://github.com/alpbak "Placeholder")
+    * Modified by [Nick Panagopoulos](https://github.com/npanagop "Github Profile")
+    * Modified & translated by [Thando Ndlovu](https://github.com/thando-ndlovu "Github Profile")
+
+* [SeekArc.Droid](https://github.com/neild001/SeekArc "Github Repository")
+    * Created by [Neil Davies](https://github.com/neild001 "Placeholder")
+    * Modified & translated by [Thando Ndlovu](https://github.com/thando-ndlovu "Github Profile")
 
 ## License
 

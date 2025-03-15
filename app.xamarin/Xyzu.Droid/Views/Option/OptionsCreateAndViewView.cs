@@ -43,7 +43,7 @@ namespace Xyzu.Views.Option
 
 			View.SimpleMarginItemDecoration.MarginResVertical = Resource.Dimension.dp0;
 			View.SimpleMarginItemDecoration.MarginResHorizontal = Resource.Dimension.dp16;
-			View.SimpleAdapter.GetItemCount = ViewGetItemCount;
+			View.SimpleAdapter.FuncGetItemCount = ViewGetItemCount;
 			View.SimpleAdapter.ViewHolderOnBind = ViewViewHolderOnBind;
 			View.SimpleAdapter.ViewHolderOnCreate = ViewViewHolderOnCreate;
 			View.SimpleAdapter.ViewHolderOnClick = ViewViewHolderOnClick;
@@ -195,8 +195,8 @@ namespace Xyzu.Views.Option
 		{
 			private static AppCompatButton ItemViewDefault(Context context)
 			{
-				ContextThemeWrapper contextthemewrapper = new ContextThemeWrapper(context, Resource.Style.Xyzu_View_Option_CreateAndView_RecyclerView_ItemView);
-				AppCompatButton itemview = new AppCompatButton(contextthemewrapper, null!, Resource.Style.Xyzu_View_Option_CreateAndView_RecyclerView_ItemView)
+				ContextThemeWrapper contextthemewrapper = new (context, Resource.Style.Xyzu_View_Option_CreateAndView_RecyclerView_ItemView);
+				AppCompatButton itemview = new (contextthemewrapper, null!, Resource.Style.Xyzu_View_Option_CreateAndView_RecyclerView_ItemView)
 				{
 					LayoutParameters = new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MatchParent, RecyclerView.LayoutParams.WrapContent)
 				};

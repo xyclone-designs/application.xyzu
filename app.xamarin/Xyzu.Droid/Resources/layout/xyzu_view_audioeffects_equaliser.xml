@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+        
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+  
+  <oxyplot.xamarin.android.PlotView 
+    style="@style/Xyzu.View.AudioEffects.PlotView"
+    android:id="@+id/xyzu_view_audioeffects_equaliser_audioplot_plotview"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"
+        
+    app:layout_constraintWidth="match_parent"
+    app:layout_constraintHeight="@dimen/dp128"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/xyzu_view_audioeffects_equaliser_audiobands_horizontalscrollview"/>
+
+  <HorizontalScrollView
+    style="@style/Xyzu.View.AudioEffects.ScrollView"
+    android:id="@+id/xyzu_view_audioeffects_equaliser_audiobands_horizontalscrollview"
+    android:layout_width="@dimen/dp0"
+    android:layout_height="@dimen/dp0"
+        
+    app:layout_constraintWidth="match_constraint"
+    app:layout_constraintHeight="match_constraint"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/xyzu_view_audioeffects_equaliser_audioplot_plotview">
+    
+    <androidx.appcompat.widget.LinearLayoutCompat
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:orientation="horizontal"
+      android:layout_marginBottom="@dimen/dp16">
+
+      <xyzu.widgets.controls.AudioBand
+        style="@style/Xyzu.View.AudioEffects.AudioBand"
+        android:id="@+id/xyzu_view_audioeffects_equaliser_preamp_audioband"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/dp32" 
+        android:layout_marginStart="@dimen/dp16"
+        app:title="@string/player_equaliser_preamp"/>
+      
+      <xyzu.widgets.controls.AudioBand
+        style="@style/Xyzu.View.AudioEffects.AudioBand"
+        android:id="@+id/xyzu_view_audioeffects_equaliser_bandone_audioband"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/dp16" 
+        app:title="@string/player_equaliser_cutoff_band01"/>
+      
+      <xyzu.widgets.controls.AudioBand
+        style="@style/Xyzu.View.AudioEffects.AudioBand"
+        android:id="@+id/xyzu_view_audioeffects_equaliser_bandtwo_audioband"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/dp16" 
+        app:title="@string/player_equaliser_cutoff_band02"/>
+      
+      <xyzu.widgets.controls.AudioBand
+        style="@style/Xyzu.View.AudioEffects.AudioBand"
+        android:id="@+id/xyzu_view_audioeffects_equaliser_bandthree_audioband"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/dp16" 
+        app:title="@string/player_equaliser_cutoff_band03"/>
+      
+      <xyzu.widgets.controls.AudioBand
+        style="@style/Xyzu.View.AudioEffects.AudioBand"
+        android:id="@+id/xyzu_view_audioeffects_equaliser_bandfour_audioband"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/dp16" 
+        app:title="@string/player_equaliser_cutoff_band04"/>
+      
+      <xyzu.widgets.controls.AudioBand
+        style="@style/Xyzu.View.AudioEffects.AudioBand"
+        android:id="@+id/xyzu_view_audioeffects_equaliser_bandfive_audioband"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/dp16" 
+        app:title="@string/player_equaliser_cutoff_band05"/>
+      
+      <xyzu.widgets.controls.AudioBand
+        style="@style/Xyzu.View.AudioEffects.AudioBand"
+        android:id="@+id/xyzu_view_audioeffects_equaliser_bandsix_audioband"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/dp16" 
+        app:title="@string/player_equaliser_cutoff_band06"/>
+      
+      <xyzu.widgets.controls.AudioBand
+        style="@style/Xyzu.View.AudioEffects.AudioBand"
+        android:id="@+id/xyzu_view_audioeffects_equaliser_bandseven_audioband"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/dp16" 
+        app:title="@string/player_equaliser_cutoff_band07"/>
+      
+      <xyzu.widgets.controls.AudioBand
+        style="@style/Xyzu.View.AudioEffects.AudioBand"
+        android:id="@+id/xyzu_view_audioeffects_equaliser_bandeight_audioband"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/dp16" 
+        app:title="@string/player_equaliser_cutoff_band08"/>
+      
+      <xyzu.widgets.controls.AudioBand
+        style="@style/Xyzu.View.AudioEffects.AudioBand"
+        android:id="@+id/xyzu_view_audioeffects_equaliser_bandnine_audioband"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/dp16" 
+        app:title="@string/player_equaliser_cutoff_band09"/>
+      
+      <xyzu.widgets.controls.AudioBand
+        style="@style/Xyzu.View.AudioEffects.AudioBand"
+        android:id="@+id/xyzu_view_audioeffects_equaliser_bandten_audioband"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/dp16" 
+        app:title="@string/player_equaliser_cutoff_band10"/>
+    
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    
+  </HorizontalScrollView>
+  
+</merge>

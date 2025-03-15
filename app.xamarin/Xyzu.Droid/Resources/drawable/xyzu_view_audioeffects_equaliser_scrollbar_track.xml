@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item>
+    <shape android:shape="line">
+
+      <padding
+          android:right="@dimen/dp4"
+          android:left="@dimen/dp4"
+          android:top="@dimen/dp4"
+          android:bottom="@dimen/dp4"/>
+        
+      <corners
+          android:topRightRadius="@dimen/dp32"
+          android:topLeftRadius="@dimen/dp32"
+          android:bottomRightRadius="@dimen/dp32"
+          android:bottomLeftRadius="@dimen/dp32"/>
+      
+      <solid android:color="@color/ColorOnSurface" />
+
+    </shape>
+  </item>
+
+</selector>

@@ -5,7 +5,6 @@ using Android.Widget;
 using AndroidX.AppCompat.Widget;
 using AndroidX.ConstraintLayout.Widget;
 using AndroidX.Preference;
-using AndroidX.Preference.Internal;
 
 using System;
 
@@ -97,12 +96,13 @@ namespace Xyzu.Views.Preference
 			set
 			{
 				_ViewAdditionalContent = value;
+				_ViewAdditionalContent?.RemoveAllViews();
 
-				if (_ViewAdditionalContent is null || ViewAdditionalContentView is null)
+				if (ViewAdditionalContentView is null)
 					return;
 
-				_ViewAdditionalContent.RemoveAllViews();
-				_ViewAdditionalContent.AddView(ViewAdditionalContentView);
+				_ViewAdditionalContent?.RemoveView(ViewAdditionalContentView);
+				_ViewAdditionalContent?.AddView(ViewAdditionalContentView);
 			}
 		}
 		public View? ViewAdditionalContentView
@@ -111,11 +111,12 @@ namespace Xyzu.Views.Preference
 			set
 			{
 				_ViewAdditionalContentView = value;
+				ViewAdditionalContent?.RemoveAllViews();
 
 				if (_ViewAdditionalContentView is null)
 					return;
 
-				ViewAdditionalContent?.RemoveAllViews();
+				ViewAdditionalContent?.RemoveView(_ViewAdditionalContentView);
 				ViewAdditionalContent?.AddView(_ViewAdditionalContentView);
 			}
 		}

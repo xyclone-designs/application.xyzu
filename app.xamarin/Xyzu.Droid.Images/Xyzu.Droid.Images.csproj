@@ -3,26 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net8.0-android</TargetFramework>
     <SupportedOSPlatformVersion>26</SupportedOSPlatformVersion>
-    <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
-    <LangVersion>10.0</LangVersion>
     <ImplicitUsings>disable</ImplicitUsings>
-    <SingleProject>true</SingleProject>
-    <ApplicationId>co.za.xyclonedesigns.xyzu.images</ApplicationId>
-    <ApplicationVersion>1</ApplicationVersion>
-    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-    <UseInterpreter>false</UseInterpreter>
-    <Platforms>AnyCPU</Platforms>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-arm\*.*" />
-    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-arm64\*.*" />
-    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-x64\*.*" />
-    <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-x86\*.*" />
-  </Target>
 
   <ItemGroup>
     <PackageReference Include="Kdd.Glide.AppModuleInjector" Version="2.0.0" />

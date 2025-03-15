@@ -58,31 +58,38 @@ namespace Android.Content
 		{
 			return sharedpreferenceseditor;
 		}
-		public static ISharedPreferencesEditor PutAudioBassBoost(this ISharedPreferencesEditor sharedpreferenceseditor, IBassBoostSettings.IPresetable bassboost)
+		public static ISharedPreferencesEditor PutAudioVolumeControl(this ISharedPreferencesEditor sharedpreferenceseditor, IVolumeControlSettings.IPresetable volumecontrol)
 		{
-			sharedpreferenceseditor.PutBoolean(IBassBoostSettings.IPresetable.Keys.IsEnabled, bassboost.IsEnabled);
-			sharedpreferenceseditor.PutString(IBassBoostSettings.IPresetable.Keys.CurrentPreset, bassboost.CurrentPreset?.Name);
+			sharedpreferenceseditor.PutBoolean(IVolumeControlSettings.IPresetable.Keys.IsEnabled, volumecontrol.IsEnabled);
+			sharedpreferenceseditor.PutString(IVolumeControlSettings.IPresetable.Keys.CurrentPreset, volumecontrol.CurrentPreset.Name);
 
-			foreach (IBassBoostSettings.IPreset preset in bassboost.AllPresets)
-				sharedpreferenceseditor.PutAudioBassBoost(preset);
+			foreach (IVolumeControlSettings.IPreset preset in volumecontrol.AllPresets)
+				sharedpreferenceseditor.PutAudioVolumeControl(preset);
 
 			return sharedpreferenceseditor;
-		}											 									 					  
-		public static ISharedPreferencesEditor PutAudioBassBoost(this ISharedPreferencesEditor sharedpreferenceseditor, params IBassBoostSettings.IPreset[] presets)
+		}
+		public static ISharedPreferencesEditor PutAudioVolumeControl(this ISharedPreferencesEditor sharedpreferenceseditor, params IVolumeControlSettings.IPreset[] presets)
 		{
-			foreach (IBassBoostSettings.IPreset preset in presets.Where(_ => IBassBoostSettings.IPresetable.Defaults.Presets
-				.AsEnumerable()
-				.Any(preset => string.Equals(preset.Name, preset.Name, StringComparison.OrdinalIgnoreCase)) is false))
-				{
-					sharedpreferenceseditor.PutShort(IBassBoostSettings.IPreset.Keys.Strength(preset.Name), preset.Strength);
-				}
+			foreach (IVolumeControlSettings.IPreset preset in presets.Where(_preset =>
+			{
+				return IVolumeControlSettings.IPresetable.Defaults.Presets
+					.AsEnumerable()
+					.Any(_presetdefault => string.Equals(_presetdefault.Name, _preset.Name, StringComparison.OrdinalIgnoreCase)) is false;
+			}))
+			{
+				sharedpreferenceseditor.PutShort(IVolumeControlSettings.IPreset.Keys.BalancePosition(preset.Name), preset.BalancePosition);
+				sharedpreferenceseditor.PutShort(IVolumeControlSettings.IPreset.Keys.BassBoostStrength(preset.Name), preset.BassBoostStrength);
+				sharedpreferenceseditor.PutShort(IVolumeControlSettings.IPreset.Keys.LoudnessEnhancerTargetGain(preset.Name), preset.LoudnessEnhancerTargetGain);
+				sharedpreferenceseditor.PutFloat(IVolumeControlSettings.IPreset.Keys.PlaybackPitch(preset.Name), preset.PlaybackPitch);
+				sharedpreferenceseditor.PutFloat(IVolumeControlSettings.IPreset.Keys.PlaybackSpeed(preset.Name), preset.PlaybackSpeed);
+			}
 
 			return sharedpreferenceseditor;
 		}											 									 
 		public static ISharedPreferencesEditor PutAudioEnvironmentalReverb(this ISharedPreferencesEditor sharedpreferenceseditor, IEnvironmentalReverbSettings.IPresetable environmentalreverb)
 		{
 			sharedpreferenceseditor.PutBoolean(IEnvironmentalReverbSettings.IPresetable.Keys.IsEnabled, environmentalreverb.IsEnabled);
-			sharedpreferenceseditor.PutString(IEnvironmentalReverbSettings.IPresetable.Keys.CurrentPreset, environmentalreverb.CurrentPreset?.Name);
+			sharedpreferenceseditor.PutString(IEnvironmentalReverbSettings.IPresetable.Keys.CurrentPreset, environmentalreverb.CurrentPreset.Name);
 
 			foreach (IEnvironmentalReverbSettings.IPreset preset in environmentalreverb.AllPresets)
 				sharedpreferenceseditor.PutAudioEnvironmentalReverb(preset);
@@ -91,9 +98,12 @@ namespace Android.Content
 		}	 
 		public static ISharedPreferencesEditor PutAudioEnvironmentalReverb(this ISharedPreferencesEditor sharedpreferenceseditor, params IEnvironmentalReverbSettings.IPreset[] presets)
 		{
-			foreach (IEnvironmentalReverbSettings.IPreset preset in presets.Where(_ => IEnvironmentalReverbSettings.IPresetable.Defaults.Presets
-				.AsEnumerable()
-				.Any(preset => string.Equals(preset.Name, preset.Name, StringComparison.OrdinalIgnoreCase)) is false))
+			foreach (IEnvironmentalReverbSettings.IPreset preset in presets.Where(_preset =>
+			{
+				return IEnvironmentalReverbSettings.IPresetable.Defaults.Presets
+					.AsEnumerable()
+					.Any(_presetdefault => string.Equals(_presetdefault.Name, _preset.Name, StringComparison.OrdinalIgnoreCase)) is false;
+			}))
 			{
 				sharedpreferenceseditor.PutShort(IEnvironmentalReverbSettings.IPreset.Keys.DecayHFRatio(preset.Name), preset.DecayHFRatio);
 				sharedpreferenceseditor.PutInt(IEnvironmentalReverbSettings.IPreset.Keys.DecayTime(preset.Name), preset.DecayTime);
@@ -112,7 +122,7 @@ namespace Android.Content
 		public static ISharedPreferencesEditor PutAudioEqualiser(this ISharedPreferencesEditor sharedpreferenceseditor, IEqualiserSettings.IPresetable equaliser)
 		{
 			sharedpreferenceseditor.PutBoolean(IEqualiserSettings.IPresetable.Keys.IsEnabled, equaliser.IsEnabled);
-			sharedpreferenceseditor.PutString(IEqualiserSettings.IPresetable.Keys.CurrentPreset, equaliser.CurrentPreset?.Name);
+			sharedpreferenceseditor.PutString(IEqualiserSettings.IPresetable.Keys.CurrentPreset, equaliser.CurrentPreset.Name);
 
 			foreach (IEqualiserSettings.IPreset preset in equaliser.AllPresets)
 				sharedpreferenceseditor.PutAudioEqualiser(preset);
@@ -121,32 +131,14 @@ namespace Android.Content
 		}									
 		public static ISharedPreferencesEditor PutAudioEqualiser(this ISharedPreferencesEditor sharedpreferenceseditor, params IEqualiserSettings.IPreset[] presets)
 		{
-			foreach (IEqualiserSettings.IPreset preset in presets.Where(_ => IEqualiserSettings.IPresetable.Defaults.Presets.TenBand
-				.AsEnumerable()
-				.Any(preset => string.Equals(preset.Name, preset.Name, StringComparison.OrdinalIgnoreCase)) is false))
+			foreach (IEqualiserSettings.IPreset preset in presets.Where(_preset =>
+			{
+				return IEqualiserSettings.IPresetable.Defaults.Presets
+					.AsEnumerable()
+					.Any(_presetdefault => string.Equals(_presetdefault.Name, _preset.Name, StringComparison.OrdinalIgnoreCase)) is false;
+			}))
 			{
 				sharedpreferenceseditor.PutShortArray(IEqualiserSettings.IPreset.Keys.FrequencyLevels(preset.Name), preset.FrequencyLevels);
-			}
-
-			return sharedpreferenceseditor;
-		}
-		public static ISharedPreferencesEditor PutAudioLoudnessEnhancer(this ISharedPreferencesEditor sharedpreferenceseditor, ILoudnessEnhancerSettings.IPresetable loudnessenhancer)
-		{
-			sharedpreferenceseditor.PutBoolean(ILoudnessEnhancerSettings.IPresetable.Keys.IsEnabled, loudnessenhancer.IsEnabled);
-			sharedpreferenceseditor.PutString(ILoudnessEnhancerSettings.IPresetable.Keys.CurrentPreset, loudnessenhancer.CurrentPreset?.Name);
-
-			foreach (ILoudnessEnhancerSettings.IPreset preset in loudnessenhancer.AllPresets)
-				sharedpreferenceseditor.PutAudioLoudnessEnhancer(preset);
-
-			return sharedpreferenceseditor;
-		}				
-		public static ISharedPreferencesEditor PutAudioLoudnessEnhancer(this ISharedPreferencesEditor sharedpreferenceseditor, params ILoudnessEnhancerSettings.IPreset[] presets)
-		{
-			foreach (ILoudnessEnhancerSettings.IPreset preset in presets.Where(_ => ILoudnessEnhancerSettings.IPresetable.Defaults.Presets
-				.AsEnumerable()
-				.Any(preset => string.Equals(preset.Name, preset.Name, StringComparison.OrdinalIgnoreCase)) is false))
-			{
-				sharedpreferenceseditor.PutShort(ILoudnessEnhancerSettings.IPreset.Keys.TargetGain(preset.Name), preset.TargetGain);
 			}
 
 			return sharedpreferenceseditor;

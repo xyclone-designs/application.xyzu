@@ -1,0 +1,12 @@
+attr;obj\Debug\net8.0-android\res\values\attrs.xml
+color;obj\Debug\net8.0-android\res\values\colors.xml
+declare-styleable;obj\Debug\net8.0-android\res\values\attrs.xml
+item;obj\Debug\net8.0-android\res\drawable\seek_arc_control_selector.xml
+item;obj\Debug\net8.0-android\res\values\styles.xml
+resources;obj\Debug\net8.0-android\res\values\attrs.xml
+resources;obj\Debug\net8.0-android\res\values\colors.xml
+resources;obj\Debug\net8.0-android\res\values\strings.xml
+resources;obj\Debug\net8.0-android\res\values\styles.xml
+selector;obj\Debug\net8.0-android\res\drawable\seek_arc_control_selector.xml
+string;obj\Debug\net8.0-android\res\values\strings.xml
+style;obj\Debug\net8.0-android\res\values\styles.xml

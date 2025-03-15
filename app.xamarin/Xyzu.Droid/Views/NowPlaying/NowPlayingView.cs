@@ -7,7 +7,6 @@ using AndroidX.Palette.Graphics;
 using AndroidX.RecyclerView.Widget;
 
 using System;
-using System.Threading.Tasks;
 
 using Xyzu.Droid;
 using Xyzu.Images;
@@ -57,7 +56,7 @@ namespace Xyzu.Views.NowPlaying
 			Position.SetProgressChangeListener(this);
 
 			Artwork.SimpleLayoutManager.SpanCount = 1;
-			Artwork.SimpleAdapter.GetItemCount = () => Math.Max(Player?.Queue.Count ?? 0, 1);
+			Artwork.SimpleAdapter.FuncGetItemCount = () => Math.Max(Player?.Queue.Count ?? 0, 1);
 			Artwork.SimpleAdapter.ViewHolderOnCreate = (viewgroup, type) => new ArtworkViewHolder(context);
 			Artwork.SimpleAdapter.ViewHolderOnBind = async (viewholderdefault, index) =>
 			{
@@ -134,7 +133,7 @@ namespace Xyzu.Views.NowPlaying
 			_Buttons_Menu_AudioEffects = FindViewById(Ids.Buttons_Menu_AudioEffects_AppCompatImageButton) as AppCompatImageButton;
 			_Buttons_Menu_PlayerSettings = FindViewById(Ids.Buttons_Menu_PlayerSettings_AppCompatImageButton) as AppCompatImageButton;
 			_Buttons_Menu_Options = FindViewById(Ids.Buttons_Menu_Options_AppCompatImageButton) as AppCompatImageButton;
-
+			
 			Configure(context);
 		}
 
@@ -301,19 +300,29 @@ namespace Xyzu.Views.NowPlaying
 
 		public void OnClick_Buttons_Menu_AudioEffects()
 		{
-			if (Context is null || MenuAudioEffectsView is null)
+			if (Context is null)
 				return;
 
-			ShowDialog(MenuAudioEffectsView, menudialog =>
+			XyzuUtils.Dialogs.Alert(Context, (alertdialogbuilder, alertdialog) =>
 			{
-				menudialog.SetOnDismissListener(new DialogInterfaceOnDismissListener
+				alertdialogbuilder?
+					.SetBackgroundInsetTop(0)
+					.SetBackgroundInsetEnd(0)
+					.SetBackgroundInsetStart(0)
+					.SetBackgroundInsetBottom(0);
+
+				if (alertdialog is not null)
 				{
-					OnDismissAction = dialoginterface =>
+					alertdialog.Window?.SetLayout(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+					alertdialog.SetCancelable(true);
+					alertdialog.SetCanceledOnTouchOutside(true);
+					alertdialog.SetView(new AudioEffectsView(Context)
 					{
-						_MenuAudioEffectsView = null;
-					}
-				});
-			});
+						LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent),
+					});
+				}
+
+			}, Resource.Style.Xyzu_View_NowPlaying_AudioEffects_Dialog_Alert).Show();
 		}
 		public void OnClick_Buttons_Menu_Options()
 		{

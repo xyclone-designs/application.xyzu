@@ -112,10 +112,9 @@ namespace Xyzu
 			ServiceBinder.PlayerService.Componentname = name;
 			ServiceBinder.PlayerService.OnIntent += OnServiceIntent;
 
-			SettingsBassBoostPropertyChanged(this, new PropertyChangedEventArgs(_AllPropertyName));
+			SettingsVolumeControlPropertyChanged(this, new PropertyChangedEventArgs(_AllPropertyName));
 			SettingsEnvironmentalReverbPropertyChanged(this, new PropertyChangedEventArgs(_AllPropertyName));
 			SettingsEqualiserPropertyChanged(this, new PropertyChangedEventArgs(_AllPropertyName));
-			SettingsLoudnessEnhancerPropertyChanged(this, new PropertyChangedEventArgs(_AllPropertyName));
 			SettingsNotificationPropertyChanged(this, new PropertyChangedEventArgs(_AllPropertyName));
 
 			ServiceConnectionChangedEventArgs serviceconnectionchangedeventargs =

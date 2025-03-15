@@ -37,8 +37,9 @@ namespace Xyzu.Settings.Audio
 			{
 				public new const string Base = IAudioSettings.Keys.Base + "." + nameof(IEnvironmentalReverbSettings) + "." + nameof(IPreset);
 
-				public static string PresetName(string name) => string.Format("{0}.{1}", Base, name);						   
+				public static string PresetName(string name) => string.Format("{0}.{1}", Base, name);
 
+				public static string IsDefault(string name) => string.Format("{0}.{1}", PresetName(name), nameof(IsDefault));
 				public static string RoomLevel(string name) => string.Format("{0}.{1}", PresetName(name), nameof(RoomLevel));
 				public static string RoomHFLevel(string name) => string.Format("{0}.{1}", PresetName(name), nameof(RoomHFLevel));
 				public static string DecayTime(string name) => string.Format("{0}.{1}", PresetName(name), nameof(DecayTime));
@@ -63,63 +64,56 @@ namespace Xyzu.Settings.Audio
 			}
 			public static class Ranges
 			{
-				public const short DiffusionLower = 0;
+				public const short DiffusionLower = 0_000;
 				public const short DiffusionUpper = 1_000;
-				public const int DecayTimeLower = 100;
+				public const int DecayTimeLower = 00_100;
 				public const int DecayTimeUpper = 20_000;
-				public const short DecayHFRatioLower = 100;
+				public const short DecayHFRatioLower = 0_100;
 				public const short DecayHFRatioUpper = 2_000;
-				public const short DensityLower = 0;
+				public const short DensityLower = 0_000;
 				public const short DensityUpper = 1_000;
 				public const short ReflectionsLevelLower = -9_000;
-				public const short ReflectionsLevelUpper = 1_000;
-				public const int ReflectionsDelayLower = 0;
+				public const short ReflectionsLevelUpper = +1_000;
+				public const int ReflectionsDelayLower = 000;
 				public const int ReflectionsDelayUpper = 300;
-				public const int ReverbDelayLower = 0;
+				public const int ReverbDelayLower = 000;
 				public const int ReverbDelayUpper = 100;
 				public const short ReverbLevelLower = -9_000;
 				public const short ReverbLevelUpper = -2_000;
 				public const short RoomHFLevelLower = -9_000;
-				public const short RoomHFLevelUpper = 0;
+				public const short RoomHFLevelUpper = +0_000;
 				public const short RoomLevelLower = -9_000;
-				public const short RoomLevelUpper = 0;
+				public const short RoomLevelUpper = +0_000;
 			}
 
 			public new class Default : IPreset.Default, IEnvironmentalReverbSettings.IPreset
 			{
 				public Default(string name) : base(name) { }
-
-				private short _RoomLevel;
-				private short _RoomHFLevel;
-				private int _DecayTime;
-				private short _DecayHFRatio;
-				private short _ReflectionsLevel;
-				private int _ReflectionsDelay;
-				private short _ReverbLevel;
-				private int _ReverbDelay;
-				private short _Diffusion;
-				private short _Density;
-
-				public short RoomLevel
+				public Default(string name, IEnvironmentalReverbSettings.IPreset preset) : base(name, preset)
 				{
-					get => _RoomLevel;
-					set
-					{
-						_RoomLevel = value;
-
-						OnPropertyChanged();
-					}
+					_RoomLevel = preset.RoomLevel;
+					_RoomHFLevel = preset.RoomHFLevel;
+					_DecayTime = preset.DecayTime;
+					_DecayHFRatio = preset.DecayHFRatio;
+					_ReflectionsLevel = preset.ReflectionsLevel;
+					_ReflectionsDelay = preset.ReflectionsDelay;
+					_ReverbLevel = preset.ReverbLevel;
+					_ReverbDelay = preset.ReverbDelay;
+					_Diffusion = preset.Diffusion;
+					_Density = preset.Density;
 				}
-				public short RoomHFLevel
-				{
-					get => _RoomHFLevel;
-					set
-					{
-						_RoomHFLevel = value;
 
-						OnPropertyChanged();
-					}
-				}
+				private short _RoomLevel = 0;
+				private short _RoomHFLevel = 0;
+				private int _DecayTime = 100;
+				private short _DecayHFRatio = 100;
+				private short _ReflectionsLevel = 0;
+				private int _ReflectionsDelay = 0;
+				private short _ReverbLevel = -2000;
+				private int _ReverbDelay = 0;
+				private short _Diffusion = 0;
+				private short _Density = 0;
+
 				public int DecayTime
 				{
 					get => _DecayTime;
@@ -180,6 +174,26 @@ namespace Xyzu.Settings.Audio
 						OnPropertyChanged();
 					}
 				}
+				public short RoomLevel
+				{
+					get => _RoomLevel;
+					set
+					{
+						_RoomLevel = value;
+
+						OnPropertyChanged();
+					}
+				}
+				public short RoomHFLevel
+				{
+					get => _RoomHFLevel;
+					set
+					{
+						_RoomHFLevel = value;
+
+						OnPropertyChanged();
+					}
+				}
 				public short ReverbLevel
 				{
 					get => _ReverbLevel;
@@ -207,6 +221,10 @@ namespace Xyzu.Settings.Audio
 
 					switch (true)
 					{
+						case true when key == Keys.IsDefault(Name) && value is bool isdefault:
+							IsDefault = isdefault;
+							break;
+
 						case true when key == Keys.RoomLevel(Name) && value is short roomlevel:
 							RoomLevel = roomlevel;
 							break;
@@ -266,9 +284,10 @@ namespace Xyzu.Settings.Audio
 				{
 					public static readonly IEnvironmentalReverbSettings.IPreset Basic = new IEnvironmentalReverbSettings.IPreset.Default(nameof(Basic))
 					{
+						IsDefault = true,
 						Diffusion = 750,
-						DecayTime = 50,
-						DecayHFRatio = 30,
+						DecayTime = 5_000,
+						DecayHFRatio = 300,
 						Density = 400,
 						ReflectionsLevel = -2_000,
 						ReflectionsDelay = 20,

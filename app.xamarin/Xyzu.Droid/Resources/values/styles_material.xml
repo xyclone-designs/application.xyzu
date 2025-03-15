@@ -121,7 +121,7 @@
     <item name="cornerSize">@dimen/dp16</item>
   </style>
 
-  <!-- Xyzu.Material.TabLayout -->
+  <!-- Xyzu.Material.Dialog -->
   <style name="Xyzu.Material.Dialog.Sheet" parent="">
     <item name="android:background">@android:color/transparent</item>
     <item name="android:backgroundDimAmount">0.5</item>
@@ -173,7 +173,7 @@
     <item name="app:cornerSizeTopRight">@dimen/dp0</item>
     <item name="app:cornerSizeTopLeft">@dimen/dp0</item>
   </style>
-  <!-- Xyzu.Material.TabLayout -->
+  <!-- Xyzu.Material.Dialog -->
   
   
   <!-- Xyzu.Material.FloatingActionButton -->

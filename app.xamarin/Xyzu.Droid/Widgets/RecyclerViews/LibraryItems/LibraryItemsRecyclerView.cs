@@ -675,10 +675,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 					// IndexOutOfBoundsException Exception on sucessive list refreshes 
 					// https://stackoverflow.com/questions/31759171/recyclerview-and-java-lang-indexoutofboundsexception-inconsistency-detected-in
 				}
-				catch (Exception)
-				{
-					// TODO: LibraryItemsRecyclerView.LayoutManager.OnLayoutChildren
-				}
+				catch (Exception) { }
 			}
 		}
 		public new class ViewHolder : RecyclerViewViewHolderDefault

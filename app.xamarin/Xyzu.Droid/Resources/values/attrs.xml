@@ -1,8 +1,38 @@
 <resources>
 
+  <declare-styleable name="AudioBand">
+    <attr name="footer" format="string" />
+    <attr name="max" format="string" />
+    <attr name="min" format="string" />
+    <attr name="value" format="string" />
+    <attr name="valueEnd" format="string" />
+    <attr name="valueStart" format="string" />
+    <attr name="valueToFooter" format="boolean" />
+    <attr name="valueToTitle" format="boolean" />
+    <attr name="title" format="string" />
+  </declare-styleable>
+
   <declare-styleable name="AppCompatEditDate">
     <attr name="dateFormat" format="string" />
     <attr name="dateDefaultText" format="string" />
+  </declare-styleable>
+
+  <declare-styleable name="RotaryKnob">
+    <attr name="seekArcAngleStart" format="integer" />
+    <attr name="seekArcAngleSweep" format="integer" />
+    <attr name="seekArcArcWidth" format="dimension" />
+    <attr name="seekArcClockwise" format="boolean" />
+    <attr name="seekArcProgress" format="integer" />
+    <attr name="seekArcProgressStart" format="integer" />
+    <attr name="seekArcProgressWidth" format="dimension" />
+    <attr name="seekArcRotation" format="float" />
+    <attr name="seekArcWithThumb" format="boolean" />
+    <attr name="size" format="dimension" />
+    <attr name="title" format="string" />
+    <attr name="titleBold" format="string" />
+    <attr name="titleTooltip" format="string" />
+    <attr name="valueStart" format="string" />
+    <attr name="valueEnd" format="string" />
   </declare-styleable>
 
 </resources>

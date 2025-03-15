@@ -11,7 +11,6 @@ namespace Xyzu.Fragments.Settings
 	{
 		public static class Keys
 		{
-			public const string Audio = "settings_audio_preferencescreen_key";
 			public const string Files = "settings_files_preferencescreen_key";
 			public const string Notification = "settings_notification_preferencescreen_key";
 			public const string UserInterface = "settings_userinterface_preferencescreen_key";
@@ -30,7 +29,6 @@ namespace Xyzu.Fragments.Settings
 		{
 			SetPreferencesFromResource(Resource.Xml.settings, rootKey);
 			InitPreferences(
-				FindPreference(Keys.Audio),
 				FindPreference(Keys.Files),
 				FindPreference(Keys.Notification),
 				FindPreference(Keys.UserInterface),

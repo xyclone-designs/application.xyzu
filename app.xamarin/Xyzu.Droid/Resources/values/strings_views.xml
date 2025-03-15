@@ -1,4 +1,34 @@
 <resources>
+  
+  <string name="xyzu_view_audioeffects_environmentalreverb_title">Environmental Reverb</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_decay_title">Decay</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_decay_hfratio_title">HF Ratio</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_decay_time_title">Time</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_density_title">Density</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_diffusion_title">Diffusion</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_reflections_title">Reflections</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_reflections_delay_title">Delay</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_reflections_level_title">Level</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_reverb_title">Reverb</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_reverb_delay_title">Delay</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_reverb_level_title">Level</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_room_title">Room</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_room_hflevel_title">HF Level</string>
+  <string name="xyzu_view_audioeffects_environmentalreverb_room_level_title">Level</string>
+
+  <string name="xyzu_view_audioeffects_equaliser_title">Equaliser</string>
+  
+  <string name="xyzu_view_audioeffects_volumecontrol_title">Volume Control</string>
+  <string name="xyzu_view_audioeffects_volumecontrol_volume_title">Volume</string>
+  <string name="xyzu_view_audioeffects_volumecontrol_balance_title">Balance</string>
+  <string name="xyzu_view_audioeffects_volumecontrol_balance_left_title">L</string>
+  <string name="xyzu_view_audioeffects_volumecontrol_balance_right_title">R</string>
+  <string name="xyzu_view_audioeffects_volumecontrol_bassboost_title">Bass Boost</string>
+  <string name="xyzu_view_audioeffects_volumecontrol_bassboost_strength_title">Strength</string>
+  <string name="xyzu_view_audioeffects_volumecontrol_loudnessenhancer_title">Loudness Enhancer</string>
+  <string name="xyzu_view_audioeffects_volumecontrol_loudnessenhancer_targetgain_title">Target Gain</string>
+  <string name="xyzu_view_audioeffects_volumecontrol_playbackpitch_title">Pitch</string>
+  <string name="xyzu_view_audioeffects_volumecontrol_playbackspeed_title">Speed</string>
 
   <string name="xyzu_view_info_album_header">Album Info</string>
   <string name="xyzu_view_info_artist_header">Artist Info</string>
@@ -6,6 +36,7 @@
   <string name="xyzu_view_info_playlist_header">Playlist Info</string>
   <string name="xyzu_view_info_song_header">Song Info</string>
   <string name="xyzu_view_info_song_lyrics_header">Song Lyrics</string>    
+  
   <string name="xyzu_view_infoedit_album_header">Edit Album Info</string>
   <string name="xyzu_view_infoedit_album_releasedate_defaulttext">Select Date</string>
   <string name="xyzu_view_infoedit_artist_header">Edit Artist Info</string>

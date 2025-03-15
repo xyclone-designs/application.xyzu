@@ -7,15 +7,9 @@ namespace Xyzu.Settings.Audio
 	public interface IEqualiserSettings<T> : IAudioSettings<T> { }
 	public interface IEqualiserSettings : IAudioSettings
 	{
-		public enum BandType
-		{
-			Six = 6,
-			Eight = 8,
-			Ten = 10,
-		}
-
 		public new interface IPreset<T> : ISettings.IPreset<T> 
 		{
+			T PreAmp { get; set; }
 			T FrequencyLevels { get; set; }
 		}
 		public new interface IPreset : ISettings.IPreset 
@@ -26,6 +20,8 @@ namespace Xyzu.Settings.Audio
 
 				public static string PresetName(string name) => string.Format("{0}.{1}", Base, name);
 
+				public static string IsDefault(string name) => string.Format("{0}.{1}", PresetName(name), nameof(IsDefault));
+				public static string PreAmp(string name) => string.Format("{0}.{1}", PresetName(name), nameof(PreAmp));
 				public static string FrequencyLevels(string name) => string.Format("{0}.{1}", PresetName(name), nameof(FrequencyLevels));
 
 				public static string? GetNameFromKey(string key)
@@ -41,93 +37,65 @@ namespace Xyzu.Settings.Audio
 			}
 			public class BandCuttoffs
 			{
-				public class SixBand
-				{
-					public const int Band_01 = 128;
-					public const int Band_02 = 512;
-					public const int Band_03 = 4_096;
-					public const int Band_04 = 8_192;
-					public const int Band_05 = 16_256;
-					public const int Band_06 = 24_000;
+				public const int Band_01 = 32;
+				public const int Band_02 = 128;
+				public const int Band_03 = 256;
+				public const int Band_04 = 512;
+				public const int Band_05 = 1_024;
+				public const int Band_06 = 2_048;
+				public const int Band_07 = 4_096;
+				public const int Band_08 = 8_192;
+				public const int Band_09 = 16_256;
+				public const int Band_10 = 24_000;
 
-					public static IEnumerable<int> AsEnumerable()
-					{
-						return Enumerable.Empty<int>()
-							.Append(Band_01)
-							.Append(Band_02)
-							.Append(Band_03)
-							.Append(Band_04)
-							.Append(Band_05)
-							.Append(Band_06);
-					}
-				}
-				public class EightBand
+				public static IEnumerable<int> AsEnumerable()
 				{
-					public const int Band_01 = 128;
-					public const int Band_02 = 512;
-					public const int Band_03 = 1_024;
-					public const int Band_04 = 2_048;
-					public const int Band_05 = 4_096;
-					public const int Band_06 = 8_192;
-					public const int Band_07 = 16_256;
-					public const int Band_08 = 24_000;
-
-					public static IEnumerable<int> AsEnumerable()
-					{
-						return Enumerable.Empty<int>()
-							.Append(Band_01)
-							.Append(Band_02)
-							.Append(Band_03)
-							.Append(Band_04)
-							.Append(Band_05)
-							.Append(Band_06)
-							.Append(Band_07)
-							.Append(Band_08);
-					}
-				}
-				public class TenBand
-				{
-					public const int Band_01 = 32;
-					public const int Band_02 = 128;
-					public const int Band_03 = 256;
-					public const int Band_04 = 512;
-					public const int Band_05 = 1_024;
-					public const int Band_06 = 2_048;
-					public const int Band_07 = 4_096;
-					public const int Band_08 = 8_192;
-					public const int Band_09 = 16_256;
-					public const int Band_10 = 24_000;
-
-					public static IEnumerable<int> AsEnumerable()
-					{
-						return Enumerable.Empty<int>()
-							.Append(Band_01)
-							.Append(Band_02)
-							.Append(Band_03)
-							.Append(Band_04)
-							.Append(Band_05)
-							.Append(Band_06)
-							.Append(Band_07)
-							.Append(Band_08)
-							.Append(Band_09)
-							.Append(Band_10);
-					}
+					return Enumerable.Empty<int>()
+						.Append(Band_01)
+						.Append(Band_02)
+						.Append(Band_03)
+						.Append(Band_04)
+						.Append(Band_05)
+						.Append(Band_06)
+						.Append(Band_07)
+						.Append(Band_08)
+						.Append(Band_09)
+						.Append(Band_10);
 				}
 			}
 			public class Ranges
 			{
-				public const int FrequencyLevelsLower = -100;
-				public const int FrequencyLevelsUpper = 100;
+				public const float PreAmpLower = -1;
+				public const float PreAmpUpper = 1;
+				public const short FrequencyLevelsLower = -100;
+				public const short FrequencyLevelsUpper = 100;
 			}
 
+			float PreAmp { get; set; }
 			short[] FrequencyLevels { get; set; }
 
 			public new class Default : IPreset.Default, IEqualiserSettings.IPreset
 			{
 				public Default(string name) : base(name) { }
+				public Default(string name, IEqualiserSettings.IPreset preset) : base(name, preset)
+				{
+					_PreAmp = preset.PreAmp;
+					_FrequencyLevels = preset.FrequencyLevels;
+				}
 
-				public short[] _FrequencyLevels = Array.Empty<short>();
+				private float _PreAmp = 0F;
+				private short[] _FrequencyLevels = new short[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
+				public float PreAmp
+				{
+					get => _PreAmp;
+					set
+					{
+						_PreAmp = value;
+
+						OnPropertyChanged();
+					}
+				}
 				public short[] FrequencyLevels
 				{
 					get => _FrequencyLevels;
@@ -145,6 +113,14 @@ namespace Xyzu.Settings.Audio
 
 					switch (true)
 					{
+						case true when key == Keys.IsDefault(Name) && value is bool isdefault:
+							IsDefault = isdefault;
+							break;
+							
+						case true when key == Keys.PreAmp(Name) && value is float preamp:
+							PreAmp = preamp;
+							break;
+
 						case true when key == Keys.FrequencyLevels(Name) && value is short[] frequencylevels:
 							FrequencyLevels = frequencylevels;
 							break;
@@ -171,93 +147,39 @@ namespace Xyzu.Settings.Audio
 
 				public static class Presets
 				{
-					public static class SixBand
+					public static readonly IEqualiserSettings.IPreset Bass = new IEqualiserSettings.IPreset.Default(nameof(Bass))
 					{
-						public static readonly IEqualiserSettings.IPreset Bass = new IEqualiserSettings.IPreset.Default(nameof(Bass))
-						{
-							FrequencyLevels = new short[] { 50, 20, 0, 0, 0, 0 },
-						};
-						public static readonly IEqualiserSettings.IPreset Flat = new IEqualiserSettings.IPreset.Default(nameof(Flat))
-						{
-							FrequencyLevels = new short[] { 0, 0, 0, 0, 0, 0 },
-						};
-						public static readonly IEqualiserSettings.IPreset Treble = new IEqualiserSettings.IPreset.Default(nameof(Treble))
-						{
-							FrequencyLevels = new short[] { 0, 0, 0, 0, 20, 50 },
-						};
-
-						public static readonly IEqualiserSettings.IPreset Default = Flat;
-
-						public static IEnumerable<IEqualiserSettings.IPreset> AsEnumerable()
-						{
-							return Enumerable.Empty<IEqualiserSettings.IPreset>()
-								.Append(Bass)
-								.Append(Flat)
-								.Append(Treble);
-						}
-					}	
-					public static class EightBand
+						IsDefault = true,
+						PreAmp = 0,
+						FrequencyLevels = new short[] { 50, 20, 10, 0, 0, 0, 0, 0, 0, 0 },
+					};
+					public static readonly IEqualiserSettings.IPreset Flat = new IEqualiserSettings.IPreset.Default(nameof(Flat))
 					{
-						public static readonly IEqualiserSettings.IPreset Bass = new IEqualiserSettings.IPreset.Default(nameof(Bass))
-						{
-							FrequencyLevels = new short[] { 50, 20, 10, 0, 0, 0, 0, 0 },
-						};
-						public static readonly IEqualiserSettings.IPreset Flat = new IEqualiserSettings.IPreset.Default(nameof(Flat))
-						{
-							FrequencyLevels = new short[] { 0, 0, 0, 0, 0, 0, 0, 0 },
-						};
-						public static readonly IEqualiserSettings.IPreset Treble = new IEqualiserSettings.IPreset.Default(nameof(Treble))
-						{
-							FrequencyLevels = new short[] { 0, 0, 0, 0, 0, 10, 20, 50 },
-						};
-
-						public static readonly IEqualiserSettings.IPreset Default = Flat;
-
-						public static IEnumerable<IEqualiserSettings.IPreset> AsEnumerable()
-						{
-							return Enumerable.Empty<IEqualiserSettings.IPreset>()
-								.Append(Bass)
-								.Append(Flat)
-								.Append(Treble);
-						}
-					}	
-					public static class TenBand
+						IsDefault = true,
+						PreAmp = 0,
+						FrequencyLevels = new short[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+					};
+					public static readonly IEqualiserSettings.IPreset Treble = new IEqualiserSettings.IPreset.Default(nameof(Treble))
 					{
-						public static readonly IEqualiserSettings.IPreset Bass = new IEqualiserSettings.IPreset.Default(nameof(Bass))
-						{
-							FrequencyLevels = new short[] { 50, 20, 10, 0, 0, 0, 0, 0, 0, 0 },
-						};
-						public static readonly IEqualiserSettings.IPreset Flat = new IEqualiserSettings.IPreset.Default(nameof(Flat))
-						{
-							FrequencyLevels = new short[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-						};
-						public static readonly IEqualiserSettings.IPreset Treble = new IEqualiserSettings.IPreset.Default(nameof(Treble))
-						{
-							FrequencyLevels = new short[] { 0, 0, 0, 0, 0, 0, 0, 10, 20, 50 },
-						};
+						IsDefault = true,
+						PreAmp = 0,
+						FrequencyLevels = new short[] { 0, 0, 0, 0, 0, 10, 20, 30, 40, 50 },
+					};
 
-						public static readonly IEqualiserSettings.IPreset Default = Flat;
+					public static readonly IEqualiserSettings.IPreset Default = Flat;
 
-						public static IEnumerable<IEqualiserSettings.IPreset> AsEnumerable()
-						{
-							return Enumerable.Empty<IEqualiserSettings.IPreset>()
-								.Append(Bass)
-								.Append(Flat)
-								.Append(Treble);
-						}
+					public static IEnumerable<IEqualiserSettings.IPreset> AsEnumerable()
+					{
+						return Enumerable.Empty<IEqualiserSettings.IPreset>()
+							.Append(Bass)
+							.Append(Flat)
+							.Append(Treble);
 					}
 				}
 
-				public static IEqualiserSettings.IPresetable FromPreset(IEqualiserSettings.IPreset? preset, BandType bandtype, bool withallpresets = false)
+				public static IEqualiserSettings.IPresetable FromPreset(IEqualiserSettings.IPreset? preset, bool withallpresets = false)
 				{
-					preset ??= bandtype switch
-					{
-						BandType.Six => Presets.SixBand.Default,
-						BandType.Eight => Presets.EightBand.Default,
-						BandType.Ten => Presets.TenBand.Default,
-
-						_ => throw new ArgumentException(string.Format("Invalid Band Type '{0}'", bandtype)),
-					};
+					preset ??= Presets.Default;
 
 					IEqualiserSettings.IPresetable presetable = new Default(preset, null)
 					{
@@ -267,15 +189,8 @@ namespace Xyzu.Settings.Audio
 					if (withallpresets)
 						presetable.AllPresets = presetable.AllPresets
 							.Append(presetable.CurrentPreset)
-							.Concat(bandtype switch
-							{
-								BandType.Six => Presets.SixBand.AsEnumerable(),
-								BandType.Eight => Presets.EightBand.AsEnumerable(),
-								BandType.Ten => Presets.TenBand.AsEnumerable(),
-
-								_ => throw new ArgumentException(string.Format("Invalid Band Type '{0}'", bandtype)),
-						
-							}).Distinct();
+							.Concat(Presets.AsEnumerable())
+							.Distinct();
 
 					return presetable;
 				}

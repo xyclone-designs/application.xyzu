@@ -1,6 +1,7 @@
 <!--- Light -->
 <resources>
 
+  <color name="ColorNeutral">#808080</color>
   <color name="ColorBackground">#f5f5f5</color>
   <color name="ColorOnBackground">#000000</color>
   

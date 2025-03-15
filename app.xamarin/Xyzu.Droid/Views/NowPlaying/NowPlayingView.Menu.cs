@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Views;
@@ -21,7 +19,6 @@ namespace Xyzu.Views.NowPlaying
 	public partial class NowPlayingView 
 	{
 		protected OptionsMenuView? _MenuOptionsView;
-		protected OptionsMenuView? _MenuAudioEffectsView;
 		protected OptionsMenuView? _MenuPlayerSettingsView;
 
 		public OptionsMenuView? MenuOptionsView 
@@ -52,72 +49,6 @@ namespace Xyzu.Views.NowPlaying
 				return _MenuOptionsView;
 			}
 		}
-		public OptionsMenuView? MenuAudioEffectsView 
-		{
-			get
-			{
-				if (_MenuAudioEffectsView != null || Context is null)
-					return _MenuAudioEffectsView;
-
-				_MenuAudioEffectsView = new OptionsMenuView(Context)
-				{
-					WithHeaderButtons = false,
-					MenuOptions = new MenuOptions[] { (MenuOptions)0, (MenuOptions)1, (MenuOptions)2, (MenuOptions)3 },
-					OnMenuOptionClicked = menuoption =>
-					{
-						Intent intent = (int)menuoption switch
-						{
-							0 => new Intent(Context, typeof(Activities.SettingsActivity))
-								.PutExtra(Activities.SettingsActivity.Intents.ExtraKeys.FragmentName, Fragments.Settings.Audio.BassBoostPreferenceFragment.FragmentName),
-
-							1 => new Intent(Context, typeof(Activities.SettingsActivity))
-								.PutExtra(Activities.SettingsActivity.Intents.ExtraKeys.FragmentName, Fragments.Settings.Audio.EnvironmentalReverbPreferenceFragment.FragmentName),
-
-							2 => new Intent(Context, typeof(Activities.SettingsActivity))
-								.PutExtra(Activities.SettingsActivity.Intents.ExtraKeys.FragmentName, Fragments.Settings.Audio.EqualiserPreferenceFragment.FragmentName),
-
-							3 => new Intent(Context, typeof(Activities.SettingsActivity))
-								.PutExtra(Activities.SettingsActivity.Intents.ExtraKeys.FragmentName, Fragments.Settings.Audio.LoudnessEnhancerPreferenceFragment.FragmentName),
-
-							_ => throw new ArgumentException("Invalid MenuOption"),
-						};
-
-						Context.StartActivity(intent);
-
-						return true;
-					}
-				};
-
-				if (ArtworkPalette?.DominantSwatch != null)
-					_MenuAudioEffectsView.Text.SetTextColor(new Color(ArtworkPalette.DominantSwatch.Rgb));
-
-				_MenuAudioEffectsView.Text.Text = MenuOptions.AudioEffects.AsStringTitle(Context);
-				_MenuAudioEffectsView.MenuOptionsRecyclerView.SimpleLayoutManager.SpanCount = 2;
-				_MenuAudioEffectsView.MenuOptionsRecyclerView.SimpleAdapter.ViewHolderOnBind = (recyclerviewviewholderdefault, position) =>
-				{
-					OptionsMenuView.ViewHolder viewholder = (OptionsMenuView.ViewHolder)recyclerviewviewholderdefault;
-
-					viewholder.MenuOption = _MenuAudioEffectsView.MenuOptions.ElementAt(position);
-
-					(int text, Drawable? drawable) = position switch
-					{
-						0 => (Resource.String.settings_audio_bassboost_title, Context.Resources?.GetDrawable(Resource.Drawable.icon_settings_audio_bassboost, Context.Theme)),
-						1 => (Resource.String.settings_audio_environmentalreverb_title, Context.Resources?.GetDrawable(Resource.Drawable.icon_settings_audio_environmentalreverb, Context.Theme)),
-						2 => (Resource.String.settings_audio_equaliser_title, Context.Resources?.GetDrawable(Resource.Drawable.icon_settings_audio_equaliser, Context.Theme)),
-						3 => (Resource.String.settings_audio_loudnessenhancer_title, Context.Resources?.GetDrawable(Resource.Drawable.icon_settings_audio_loudnessenhancer, Context.Theme)),
-
-						_ => throw new ArgumentException("Invalid MenuOption"),
-					};
-
-					viewholder.ItemView.SetText(text, null);
-					viewholder.ItemView.SetCompoundDrawablesRelativeWithIntrinsicBounds(null, drawable, null, null);
-
-					ConfigureMenuOptionButton(viewholder.ItemView);
-				};
-
-				return _MenuAudioEffectsView;
-			}
-		}			 
 		public OptionsMenuView? MenuPlayerSettingsView
 		{
 			get
@@ -222,16 +153,6 @@ namespace Xyzu.Views.NowPlaying
 
 			switch (menuoption)
 			{
-				case Menus.NowPlaying.AudioEffects when Context != null:
-					MenuDialog?.Dismiss();
-					Intent audioeffectsintent = new Intent(Context, typeof(Activities.SettingsActivity))
-						.PutExtra(
-							name: Activities.SettingsActivity.Intents.ExtraKeys.FragmentName,
-							value: Fragments.Settings.Audio.AudioPreferenceFragment.FragmentName);
-
-					Context.StartActivity(audioeffectsintent);
-					break;				  
-						  
 				case Menus.NowPlaying.Delete:
 					MenuOptionsUtils.DeleteSongs(MenuVariables)?
 						.Show();

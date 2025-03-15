@@ -10,6 +10,37 @@
   </style>
   
   
+  <!-- Xyzu.View.AudioEffects -->
+  <style name="Xyzu.View.AudioEffects" parent="Xyzu.View">
+    <item name="android:background">@color/ColorSurface</item>
+  </style>
+  <style name="Xyzu.View.AudioEffects.EnvironmentalReverb" parent="Xyzu.View.AudioEffects" />
+  <style name="Xyzu.View.AudioEffects.Equliser" parent="Xyzu.View.AudioEffects" />
+  <style name="Xyzu.View.AudioEffects.VolumeConstrol" parent="Xyzu.View.AudioEffects" />
+  <style name="Xyzu.View.AudioEffects.PlotView" parent="Xyzu.View.AudioEffects" />
+  <style name="Xyzu.View.AudioEffects.ScrollView" parent="Xyzu.View.AudioEffects">
+    <item name="android:fadeScrollbars">false</item>
+    <item name="android:scrollbars">horizontal</item>
+    <item name="android:scrollbarSize">@dimen/dp16</item>
+    <item name="android:scrollbarStyle">insideInset</item>
+    <item name="android:scrollIndicators">bottom</item>
+    <item name="android:scrollbarAlwaysDrawHorizontalTrack">true</item>
+    <item name="android:scrollbarTrackHorizontal">@drawable/xyzu_view_audioeffects_equaliser_scrollbar_track</item>
+    <item name="android:scrollbarThumbHorizontal">@drawable/xyzu_view_audioeffects_equaliser_scrollbar_thumb</item>
+  </style>
+
+  <style name="Xyzu.View.AudioEffects.AudioBand" parent="Xyzu.View" />
+  <style name="Xyzu.View.AudioEffects.RotaryKnob" parent="Xyzu.View.AudioEffects">
+    <item name="app:size">@dimen/dp96</item>
+  </style>
+  <style name="Xyzu.View.AudioEffects.Switch" parent="Xyzu.AppCompat.SwitchCompat" />
+  <style name="Xyzu.View.AudioEffects.Text" parent="Xyzu.AppCompat.Text" />
+  <style name="Xyzu.View.AudioEffects.Text.Title" parent="Xyzu.View.AudioEffects.Text">
+    <item name="android:textSize">@dimen/abc_text_size_medium_material</item>
+  </style>
+  <!-- Xyzu.View.AudioEffects -->
+  
+  
   <!-- Xyzu.View.Info -->
   <style name="Xyzu.View.Info" parent="Xyzu.View">
     <item name="android:background">@color/ColorSurface</item>
@@ -237,6 +268,41 @@
     <item name="android:layout_width">@dimen/dp80</item>
     <item name="android:layout_height">@dimen/dp80</item>
   </style>
+  <style name="Xyzu.View.NowPlaying.AudioEffects" parent="Xyzu.View">
+    <item name="android:background">@color/ColorSurface</item>
+  </style>
+  <style name="Xyzu.View.NowPlaying.AudioEffects.Dialog.Alert" parent="Xyzu.Material.Dialog.Alert">
+    <item name="android:windowBackground">@null</item>
+    <item name="android:layout_gravity">center</item>
+
+    <item name="alertDialogStyle">@style/Xyzu.View.NowPlaying.AudioEffects.Dialog.AlertDialog</item>
+  </style>
+  <style name="Xyzu.View.NowPlaying.AudioEffects.Dialog.AlertDialog" parent="Xyzu.Material.Dialog.AlertDialog">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:layout_gravity">center</item>
+  </style>
+  <style name="Xyzu.View.NowPlaying.AudioEffects.TabLayout" parent="Xyzu.Material.TabLayout">
+    <item name="app:tabGravity">fill</item>
+    <item name="app:tabIndicator">@null</item>
+    <item name="app:tabIndicatorHeight">@dimen/dp0</item>
+    <item name="app:tabIconTint">@color/selector_icon_view_nowplaying_audioeffects</item>
+    <item name="app:tabMode">fixed</item>
+    <item name="app:tabUnboundedRipple">false</item>
+  </style>
+  <style name="Xyzu.View.NowPlaying.AudioEffects.Button" parent="Xyzu.AppCompat.Button">
+    <item name="android:foreground">@null</item>
+    <item name="android:background">@drawable/xyzu_view_nowplayingaudioeffects_button_background</item>
+  </style>
+  <style name="Xyzu.View.NowPlaying.AudioEffects.NestedScroll" parent="Xyzu.View">
+    <item name="android:background">@color/ColorSurface</item>
+  </style>
+  <style name="Xyzu.View.NowPlaying.AudioEffects.SimpleHorizontalRecycler" parent="Xyzu.View">
+    <item name="android:background">@color/ColorSurface</item>
+  </style>
+  <style name="Xyzu.View.NowPlaying.AudioEffects.Equaliser" parent="Xyzu.View.NowPlaying.AudioEffects" />
+  <style name="Xyzu.View.NowPlaying.AudioEffects.Reverb" parent="Xyzu.View.NowPlaying.AudioEffects" />
+  <style name="Xyzu.View.NowPlaying.AudioEffects.Volume" parent="Xyzu.View.NowPlaying.AudioEffects" />
   <!-- Xyzu.View.NowPlaying -->
   
 
@@ -383,37 +449,6 @@
   <!-- Xyzu.View.Option.Menu -->
   
   <!-- Xyzu.View.Option -->
-  
-  
-  <!-- Xyzu.View.Setting -->
-  <style name="Xyzu.View.Setting" parent="Xyzu.View" />
-  <style name="Xyzu.View.Setting.AudioBand" parent="Xyzu.View.Setting" />
-  <style name="Xyzu.View.Setting.AudioBand.Value" parent="Xyzu.AppCompat.SeekBar" />
-  <style name="Xyzu.View.Setting.AudioBand.Text" parent="Xyzu.AppCompat.Text">
-    <item name="android:textAlignment">center</item>
-  </style>
-  <style name="Xyzu.View.Setting.AudioBand.Text.Title" parent="Xyzu.View.Setting.AudioBand.Text">
-    <item name="android:textStyle">bold</item>
-  </style>
-  <style name="Xyzu.View.Setting.AudioBand.Text.Max" parent="Xyzu.View.Setting.AudioBand.Text" />
-  <style name="Xyzu.View.Setting.AudioBand.Text.Min" parent="Xyzu.View.Setting.AudioBand.Text" />
-  <style name="Xyzu.View.Setting.AudioBand.Text.Footer" parent="Xyzu.View.Setting.AudioBand.Text" />
-  
-  <style name="Xyzu.View.Setting.DirectoryItem" parent="Xyzu.View.Setting" />
-  <style name="Xyzu.View.Setting.DirectoryItem.CheckBox" parent="Xyzu.AppCompat.CheckBox">
-    <item name="android:layout_marginStart">@dimen/dp8</item>
-  </style>
-  <style name="Xyzu.View.Setting.DirectoryItem.RecyclerView" parent="Xyzu.Widget.RecyclerView.RecursiveItems" />
-  <style name="Xyzu.View.Setting.DirectoryItem.Button" parent="Xyzu.AppCompat.Button">
-    <item name="android:drawablePadding">@dimen/dp8</item>
-    <item name="android:ellipsize">middle</item>
-    <item name="android:lines">1</item>
-    <item name="android:singleLine">true</item>
-    <item name="android:textAlignment">viewStart</item>
-    <item name="android:textStyle">bold</item>
-  </style>
-  <!-- Xyzu.View.Setting -->
-  
   
   <!-- Xyzu.View.Toolbar -->
   <style name="Xyzu.View.Toolbar" parent="Xyzu.View" />

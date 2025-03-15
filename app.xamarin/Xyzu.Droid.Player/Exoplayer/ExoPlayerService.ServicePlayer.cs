@@ -1,5 +1,4 @@
-﻿using Android.Appwidget;
-using Android.Content;
+﻿using Android.Content;
 using AndroidX.Media3.Common;
 using AndroidX.Media3.ExoPlayer.Source;
 
@@ -157,12 +156,8 @@ namespace Xyzu.Player.Exoplayer
 
 		public void PlayerCurrentIndexRefresh()
 		{
-			if
-			(
-				Player.Queue.CurrentIndex is null ||
-				Player.Queue.CurrentIndex == Exoplayer.CurrentWindowIndex
-
-			) return;
+			if (Player.Queue.CurrentIndex is null || Player.Queue.CurrentIndex == Exoplayer.CurrentWindowIndex) 
+				return;
 
 			Exoplayer.SeekTo(Player.Queue.CurrentIndex.Value, 0);
 		}

@@ -57,7 +57,7 @@ namespace Xyzu.Views.Option
 			MenuOptionsRecyclerView.SimpleLayoutManager.SpanCount = 2;
 			MenuOptionsRecyclerView.SimpleMarginItemDecoration.MarginResVertical = Resource.Dimension.dp8;
 			MenuOptionsRecyclerView.SimpleMarginItemDecoration.MarginResHorizontal = Resource.Dimension.dp16;
-			MenuOptionsRecyclerView.SimpleAdapter.GetItemCount = MenuOptionsGetItemCount;
+			MenuOptionsRecyclerView.SimpleAdapter.FuncGetItemCount = MenuOptionsGetItemCount;
 			MenuOptionsRecyclerView.SimpleAdapter.ViewHolderOnBind = MenuOptionsViewHolderOnBind;
 			MenuOptionsRecyclerView.SimpleAdapter.ViewHolderOnCreate = MenuOptionsViewHolderOnCreate;
 			MenuOptionsRecyclerView.SimpleAdapter.ViewHolderOnClick = MenuOptionsViewHolderOnClick;

@@ -27,30 +27,61 @@
 
   <ItemGroup>
     <Compile Remove="Resources\Resource - Copy.designer.cs" />
+    <Compile Remove="Views\NowPlaying\AudioEffectsView.VolumeControl - Copy.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\licenses\package_boxedverticalseekbar.txt" />
     <None Remove="Assets\licenses\package_colorpicker.txt" />
-    <None Remove="Assets\licenses\package_exoplayer.txt" />
     <None Remove="Assets\licenses\package_glide.txt" />
     <None Remove="Assets\licenses\package_id3.txt" />
+    <None Remove="Assets\licenses\package_laerdalffmpeg.txt" />
     <None Remove="Assets\licenses\package_musicbar.txt" />
+    <None Remove="Assets\licenses\package_newtonsoft.txt" />
+    <None Remove="Assets\licenses\package_oxyplot.txt" />
     <None Remove="Assets\licenses\package_picasso.txt" />
+    <None Remove="Assets\licenses\package_seekarc.txt" />
+    <None Remove="Assets\licenses\package_slidinguppanel.txt" />
     <None Remove="Assets\licenses\package_sqlnetpcl.txt" />
     <None Remove="Assets\licenses\package_taglibsharp.txt" />
     <None Remove="Assets\sounds\silence.mp3" />
+    <None Remove="Resources\color\selector_icon_view_nowplaying_audioeffects.xml" />
     <None Remove="Resources\drawable-night\image_xyzu_widget_nowplaying_envelope.png" />
     <None Remove="Resources\drawable\icon_application.xml" />
     <None Remove="Resources\drawable\icon_general_file_x.xml" />
+    <None Remove="Resources\drawable\icon_general_reset.xml" />
+    <None Remove="Resources\drawable\icon_general_save.xml" />
+    <None Remove="Resources\drawable\icon_player_audioeffects_environmentalreverb.xml" />
+    <None Remove="Resources\drawable\icon_player_audioeffects_equaliser.xml" />
+    <None Remove="Resources\drawable\icon_settings_about_licenses_boxedverticalseekbar.xml" />
+    <None Remove="Resources\drawable\icon_settings_about_licenses_colorpicker.png" />
+    <None Remove="Resources\drawable\icon_settings_about_licenses_laerdalffmpeg.xml" />
+    <None Remove="Resources\drawable\icon_settings_about_licenses_musicbar.png" />
+    <None Remove="Resources\drawable\icon_settings_about_licenses_newtonsoft.xml" />
+    <None Remove="Resources\drawable\icon_settings_about_licenses_oxyplot.xml" />
+    <None Remove="Resources\drawable\icon_settings_about_licenses_seekarc.xml" />
+    <None Remove="Resources\drawable\icon_settings_about_licenses_slidinguppanel.xml" />
     <None Remove="Resources\drawable\image_xyzu_widget_nowplaying_box.png" />
     <None Remove="Resources\drawable\image_xyzu_widget_nowplaying_envelope.png" />
     <None Remove="Resources\drawable\image_xyzu_widget_nowplaying_shelf.png" />
+    <None Remove="Resources\drawable\xyzu_view_audioeffects_equaliser_scrollbar_thumb.xml" />
+    <None Remove="Resources\drawable\xyzu_view_audioeffects_equaliser_scrollbar_track.xml" />
     <None Remove="Resources\drawable\xyzu_view_inset_fadebottomup_colorprimary.xml" />
     <None Remove="Resources\drawable\xyzu_view_inset_fadetopdown_colorprimary.xml" />
+    <None Remove="Resources\drawable\xyzu_view_nowplayingaudioeffects_button_background.xml" />
+    <None Remove="Resources\drawable\xyzu_widget_control_audioband_seekbar_thumb.xml" />
+    <None Remove="Resources\drawable\xyzu_widget_control_audioband_seekbar_track.xml" />
+    <None Remove="Resources\drawable\xyzu_widget_control_rotaryknob_seekarc_thumb.xml" />
+    <None Remove="Resources\drawable\xyzu_widget_control_rotaryknob_seekarc_track.xml" />
     <None Remove="Resources\drawable\xyzu_widget_nowplaying_box_background.xml" />
     <None Remove="Resources\drawable\xyzu_widget_nowplaying_envelope_background.xml" />
     <None Remove="Resources\drawable\xyzu_widget_nowplaying_shelf_background.xml" />
     <None Remove="Resources\layout\xyzu_layout_widgets.xml" />
+    <None Remove="Resources\layout\xyzu_view_audioeffects_environmentalreverb.xml" />
+    <None Remove="Resources\layout\xyzu_view_audioeffects_equaliser.xml" />
+    <None Remove="Resources\layout\xyzu_view_audioeffects_volumecontrol.xml" />
+    <None Remove="Resources\layout\xyzu_view_nowplaying_audioeffects.xml" />
+    <None Remove="Resources\layout\xyzu_widget_control_rotaryknob.xml" />
     <None Remove="Resources\layout\xyzu_widget_nowplaying_box.xml" />
     <None Remove="Resources\layout\xyzu_widget_nowplaying_envelope.xml" />
     <None Remove="Resources\layout\xyzu_widget_nowplaying_shelf.xml" />
@@ -58,12 +89,14 @@
     <None Remove="Resources\xml\provider_appwidget_nowplaying_box.xml" />
     <None Remove="Resources\xml\provider_appwidget_nowplaying_envelope.xml" />
     <None Remove="Resources\xml\provider_appwidget_nowplaying_shelf.xml" />
+    <None Remove="Views\AudioEffects\BassBoostView.cs~RF927132.TMP" />
     <None Remove="XyzuWidgets.Utils.cs~RF79ce01.TMP" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Karamunting.Android.EmadAbdalRahman.MusicBar" Version="1.0.2" />
     <PackageReference Include="Karamunting.Android.JaredRummler.ColorPicker" Version="1.1.0" />
+    <PackageReference Include="OxyPlot.Xamarin.Android" Version="1.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
     <PackageReference Include="Xam.Plugins.AndroidX.SlidingUpPanel" Version="1.0.0" />
     <PackageReference Include="Xamarin.Android.Support.Annotations" Version="28.0.0.3" />
@@ -82,6 +115,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BoxedVerticalSeekBar\BoxedVerticalSeekBar.csproj" />
+    <ProjectReference Include="..\SeekArc.Droid\SeekArc.Droid.csproj" />
     <ProjectReference Include="..\Xyzu\Xyzu.csproj" />
     <ProjectReference Include="..\Xyzu.Droid.Extensions\Xyzu.Droid.Extensions.csproj" />
     <ProjectReference Include="..\Xyzu.Droid.Images\Xyzu.Droid.Images.csproj" />

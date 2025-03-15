@@ -10,6 +10,83 @@
   </style>
 
 
+  <!-- Xyzu.Widget.Controls-->
+  <style name="Xyzu.Widget.Controls" parent="Xyzu.Widget" />
+
+  <style name="Xyzu.Widget.Controls.AudioBand" parent="Xyzu.Widget.Controls" />
+  <style name="Xyzu.Widget.Controls.AudioBand.Value" parent="Xyzu.AppCompat.SeekBar">
+    <item name="app:points">0</item>
+    <item name="app:max">100</item>
+    <item name="app:min">-100</item>
+    <item name="app:valueToFooter">true</item>
+    <item name="app:valueToTitle">false</item>
+    <item name="app:defaultValue">0</item>
+    <item name="app:textBottomPadding">@null</item>
+    <item name="app:libCornerRadius">@dimen/dp16</item>
+    <item name="app:step">5</item>
+    <item name="app:defaultImage">@null</item>
+    <item name="app:minImage">@null</item>
+    <item name="app:maxImage">@null</item>
+    <item name="app:progressColor">@color/ColorPrimary</item>
+    <item name="app:backgroundColor">@color/ColorOnSurface</item>
+    <item name="app:textColor">@color/ColorSurface</item>
+    <item name="app:textSize">@dimen/sp16</item>
+    <item name="app:clockwise">false</item>
+    <item name="app:enabled">true</item>
+    <item name="app:touchDisabled">false</item>
+    <item name="app:textEnabled">false</item>
+    <item name="app:imageEnabled">false</item>
+  </style>
+  <style name="Xyzu.Widget.Controls.AudioBand.Text" parent="Xyzu.AppCompat.Text">
+    <item name="android:textAlignment">center</item>
+  </style>
+  <style name="Xyzu.Widget.Controls.AudioBand.Text.Title" parent="Xyzu.Widget.Controls.AudioBand.Text">
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="Xyzu.Widget.Controls.AudioBand.Text.Max" parent="Xyzu.Widget.Controls.AudioBand.Text" />
+  <style name="Xyzu.Widget.Controls.AudioBand.Text.Min" parent="Xyzu.Widget.Controls.AudioBand.Text" />
+  <style name="Xyzu.Widget.Controls.AudioBand.Text.Footer" parent="Xyzu.Widget.Controls.AudioBand.Text.Title" />
+
+  <style name="Xyzu.Widget.Control.DirectoryItem" parent="Xyzu.Widget.Controls" />
+  <style name="Xyzu.Widget.Control.DirectoryItem.CheckBox" parent="Xyzu.AppCompat.CheckBox">
+    <item name="android:layout_marginStart">@dimen/dp8</item>
+  </style>
+  <style name="Xyzu.Widget.Control.DirectoryItem.RecyclerView" parent="Xyzu.Widget.RecyclerView.RecursiveItems" />
+  <style name="Xyzu.Widget.Control.DirectoryItem.Button" parent="Xyzu.AppCompat.Button">
+    <item name="android:drawablePadding">@dimen/dp8</item>
+    <item name="android:ellipsize">middle</item>
+    <item name="android:lines">1</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textAlignment">viewStart</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  
+  <style name="Xyzu.Widget.Controls.RotaryKnob" parent="Xyzu.Widget.Controls" />
+  <style name="Xyzu.Widget.Controls.RotaryKnob.SeekArc" parent="Xyzu.Widget.Controls.RotaryKnob">
+    <item name="android:layout_gravity">center</item>    
+    <item name="app:arcColor">@color/ColorOnSurface</item>
+    <item name="app:arcWidth">@dimen/dp4</item>
+    <item name="app:clockwise">true</item>
+    <item name="app:min">0</item>
+    <item name="app:max">100</item>
+    <item name="app:progressColor">@color/ColorPrimary</item>
+    <item name="app:progressWidth">@dimen/dp12</item>
+    <item name="app:rotation">180</item>
+    <item name="app:roundEdges">true</item>
+    <item name="app:startAngle">20</item>
+    <item name="app:sweepAngle">320</item>
+    <item name="app:thumb">@drawable/xyzu_widget_control_rotaryknob_seekarc_thumb</item>
+    <item name="app:thumbOffset">@dimen/dp0</item>
+    <item name="app:touchInside">true</item>
+  </style>
+  <style name="Xyzu.Widget.Controls.RotaryKnob.Text" parent="Xyzu.AppCompat.Text">
+    <item name="android:singleLine">true</item>
+  </style>
+  <style name="Xyzu.Widget.Controls.RotaryKnob.Text.Title" parent="Xyzu.Widget.Controls.RotaryKnob.Text" />
+  <style name="Xyzu.Widget.Controls.RotaryKnob.Text.Value" parent="Xyzu.Widget.Controls.RotaryKnob.Text" />
+  <!-- Xyzu.View.Controls -->
+  
+
   <!-- Xyzu.View.HomeScreen-->
   <style name="Xyzu.Widget.HomeScreen" parent="Xyzu.Widget"/>  
   <style name="Xyzu.Widget.HomeScreen.NowPlaying" parent="Xyzu.Widget.HomeScreen" />
@@ -48,7 +125,7 @@
     <item name="android:scrollbarDefaultDelayBeforeFade">@integer/m3_sys_motion_duration_long1</item>
     <item name="android:scrollbarFadeDuration">@integer/m3_sys_motion_duration_long1</item>
     <item name="android:scrollbarSize">@dimen/dp8</item>
-    <item name="android:scrollbarStyle">insideOverlay</item>
+    <item name="android:scrollbarStyle">insideInset</item>
     <item name="android:verticalScrollbarPosition">defaultPosition</item>
 
     <item name="app:fastScrollEnabled">true</item>

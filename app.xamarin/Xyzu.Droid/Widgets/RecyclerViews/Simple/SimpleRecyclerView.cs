@@ -41,12 +41,13 @@ namespace Xyzu.Widgets.RecyclerViews.Simple
 			public Adapter(Context context, Func<int> itemCount)
 			{
 				Context = context;
-				GetItemCount = itemCount;
+				FuncGetItemCount = itemCount;
 			}
 
 			public Context Context { get; set; }
 			public RecyclerView? Parent { get; set; }
-			public Func<int> GetItemCount { get; set; }
+			public Func<int> FuncGetItemCount { get; set; }
+			public Func<int, int>? FuncGetItemViewType { get; set; }
 			public Action<RecyclerViewViewHolderDefault, int>? ViewHolderOnBind { get; set; }
 			public Func<ViewGroup, int, RecyclerViewViewHolderDefault>? ViewHolderOnCreate { get; set; }
 			public Action<RecyclerViewViewHolderDefault.ViewHolderEventArgs>? ViewHolderOnCheckChange { get; set; }
@@ -55,7 +56,11 @@ namespace Xyzu.Widgets.RecyclerViews.Simple
 
 			public override int ItemCount
 			{
-				get => GetItemCount.Invoke();
+				get => FuncGetItemCount.Invoke();
+			}
+			public override int GetItemViewType(int position)
+			{
+				return FuncGetItemViewType?.Invoke(position) ?? base.GetItemViewType(position);
 			}
 			public override void OnViewAttachedToWindow(Java.Lang.Object holder)
 			{
