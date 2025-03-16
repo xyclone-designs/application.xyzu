@@ -42,11 +42,13 @@ Bindings by [Rofiq Setiawan](https://www.nuget.org/profiles/rofiqsetiawan "Nuget
 
 Created by [Bumptech](https://bumptech.com/ "Website")
 <br/>
+<br/>
 
 ### [Glide AppModuleInjector](https://github.com/KDD-Digital-Healthcare-GmbH/Kdd.Glide.AppModuleInjector "Github Repository")
 <img src="assets/icons/glide.png" align="left" height="48" /> 
 
 Created by [KDD Digital Healthcare](https://https://github.com/KDD-Digital-Healthcare-GmbH "Github Repository")
+<br/>
 <br/>
 
 ### [ID3](https://github.com/JeevanJames/Id3 "Github Repository")
