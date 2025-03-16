@@ -25,13 +25,11 @@
 
 ## Packages Used
 
+### [AndroidSlidingUpPanel](https://github.com/umano/AndroidSlidingUpPanel "Github Repository")
 <img src="assets/icons/slidinguppanel.png" align="left" height="48" />
-<p>
-    ### [AndroidSlidingUpPanel](https://github.com/umano/AndroidSlidingUpPanel "Github Repository")
-    Created by [Umano](https://github.com/umano "Github Repository") <br/>
-    Bindings by [Baseflow](https://github.com/Baseflow/AndroidSlidingUpPanelXamarin "Github Repository")
-</p>
 
+Created by [Umano](https://github.com/umano "Github Repository") <br/>
+Bindings by [Baseflow](https://github.com/Baseflow/AndroidSlidingUpPanelXamarin "Github Repository")
 
 ### [ColorPicker](https://github.com/jaredrummler/ColorPicker "Github Repository")
 <img src="assets/icons/colorpicker.png" align="left" height="48" /> 
