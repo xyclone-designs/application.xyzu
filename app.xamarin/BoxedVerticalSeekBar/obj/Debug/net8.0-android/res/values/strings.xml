@@ -1,1 +1,3 @@
-<resources><string name="app_name">Boxed Vertical SeekBar</string></resources>
+<resources>
+    <string name="app_name">Boxed Vertical SeekBar</string>
+</resources>

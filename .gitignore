@@ -1,5 +1,8 @@
 .vs
-New Folder
+app.xamarin/BoxedVerticalSeekBar/bin
+app.xamarin/BoxedVerticalSeekBar/obj
+app.xamarin/SeekArc.Droid/bin
+app.xamarin/SeekArc.Droid/obj
 app.xamarin/Xyzu/bin
 app.xamarin/Xyzu/obj
 app.xamarin/Xyzu.Droid/bin
@@ -12,3 +15,4 @@ app.xamarin/Xyzu.Droid.Library/bin
 app.xamarin/Xyzu.Droid.Library/obj
 app.xamarin/Xyzu.Droid.Extensions/bin
 app.xamarin/Xyzu.Droid.Extensions/obj
+assets/New Folder

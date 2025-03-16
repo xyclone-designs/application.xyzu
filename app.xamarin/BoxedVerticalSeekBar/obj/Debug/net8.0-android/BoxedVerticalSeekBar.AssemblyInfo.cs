@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BoxedVerticalSeekBar")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+971ecd03146839e9bfed03b8f862ffd4334291e7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("BoxedVerticalSeekBar")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BoxedVerticalSeekBar")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

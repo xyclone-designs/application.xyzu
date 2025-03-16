@@ -5,6 +5,7 @@
     <SelectedPlatformGroup>PhysicalDevice</SelectedPlatformGroup>
     <ActiveDebugProfile>TECNO MOBILE LIMITED TECNO KD7S (Android 10.0 - API 29)</ActiveDebugProfile>
     <DefaultDevice>pixel_2_pie_9_0_-_api_28</DefaultDevice>
+    <_LastSelectedProfileId>C:\Users\Thando Ndlovu\Desktop\xyclone-designs\application.xyzu\app.xamarin\Xyzu.Droid\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
