@@ -28,13 +28,13 @@
 ### [AndroidSlidingUpPanel](https://github.com/umano/AndroidSlidingUpPanel "Github Repository")
 <img src="assets/icons/slidinguppanel.png" align="left" height="48" />
 
-Created by [Umano](https://github.com/umano "Github Repository")
+Created by [Umano](https://github.com/umano "Github Repository") <br/>
 Bindings by [Baseflow](https://github.com/Baseflow/AndroidSlidingUpPanelXamarin "Github Repository")
 
 ### [ColorPicker](https://github.com/jaredrummler/ColorPicker "Github Repository")
 <img src="assets/icons/colorpicker.png" align="left" height="48" /> 
 
-Created by [Jared Rummler](https://github.com/jaredrummler "Github Profile")
+Created by [Jared Rummler](https://github.com/jaredrummler "Github Profile") <br/>
 Bindings by [Rofiq Setiawan](https://www.nuget.org/profiles/rofiqsetiawan "Nuget Profile")
 
 ### [Glide](https://github.com/bumptech/glide "Github Repository")
@@ -54,17 +54,18 @@ Created by [KDD Digital Healthcare](https://https://github.com/KDD-Digital-Healt
 
 Created by [Jeevan James](https://https://jeevanjames.com "Website")
 <br/>
+<br/>
 
 ### [LaerdalFFmpeg](https://github.com/emadabdalrahman/MusicBar "Github Repository")
 <img src="assets/icons/laerdalffmpeg.png" align="left" height="48" /> 
 
-Created by [Taner Sener](https://github.com/tanersener/mobile-ffmpeg "Github Profile")
+Created by [Taner Sener](https://github.com/tanersener/mobile-ffmpeg "Github Profile") <br/>
 Bindings by [Laerdal](https://laerdal.com "Website")
 
 ### [MusicBar](https://github.com/emadabdalrahman/MusicBar "Github Repository")
 <img src="assets/icons/musicbar.png" align="left" height="48" /> 
 
-Created by [Emad Abdalahman](https://www.github.com/emadabdalrahman "Github Profile")
+Created by [Emad Abdalahman](https://www.github.com/emadabdalrahman "Github Profile") <br/>
 Bindings by [Rofiq Setiawan](https://www.nuget.org/profiles/rofiqsetiawan "Nuget Profile")
 
 ### [Newtonsoft.JSON](https://github.com/JamesNK/Newtonsoft.Json "Github Repository")
@@ -72,11 +73,13 @@ Bindings by [Rofiq Setiawan](https://www.nuget.org/profiles/rofiqsetiawan "Nuget
 
 Created by [James Newton-King](https://www.newtonsoft.com/json "Website")
 <br/>
+<br/>
 
 ### [OxyPlot](https://github.com/oxyplot/oxyplot "Github Repository")
 <img src="assets/icons/oxyplot.png" align="left" height="48" /> 
 
 Created by [OxyPlot](https://oxyplot.github.io/ "Website")
+<br/>
 <br/>
 
 ### [Picasso](https://github.com/square/picasso "Github Repository")
@@ -84,17 +87,20 @@ Created by [OxyPlot](https://oxyplot.github.io/ "Website")
 
 Created by [Square](https://square.github.io/ "Website")
 <br/>
+<br/>
 
 ### [SQLNetPCL](https://github.com/praeclarum/sqlite-net "Github Repository")
 <img src="assets/icons/sqlnetpcl.png" align="left" height="48" /> 
 
 Created by [Frank A. Krueger](https://https://www.nuget.org/profiles/praeclarum "Nuget Profile")
 <br/>
+<br/>
 
 ### [Taglib-Sharp](https://github.com/mono/taglib-sharp "Github Repository")
 <img src="assets/icons/taglibsharp.png" align="left" height="48" /> 
 
 Created by [Mono Project](https://www.mono-project.com/ "Website")
+<br/>
 <br/>
 
 # Projects
