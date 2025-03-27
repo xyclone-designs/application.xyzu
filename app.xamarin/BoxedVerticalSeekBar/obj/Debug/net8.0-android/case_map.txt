@@ -1,4 +1,0 @@
-drawable\indicator;drawable\indicator
-values\attrs;values\attrs
-values\colors;values\colors
-values\strings;values\strings

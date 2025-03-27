@@ -9,26 +9,34 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <SingleProject>true</SingleProject>
     <ApplicationId>co.za.xyclonedesigns.xyzu</ApplicationId>
-    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationVersion>1.0</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <XamarinAndroidSupportSkipVerifyVersions>true</XamarinAndroidSupportSkipVerifyVersions>
     <UseInterpreter>false</UseInterpreter>
     <Platforms>AnyCPU</Platforms>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AndroidKeyStore>False</AndroidKeyStore>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidSigningKeyAlias>[HIDDEN]</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>[HIDDEN]</AndroidSigningKeyPass>
+    <AndroidSigningKeyStore>[HIDDEN]</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>[HIDDEN]</AndroidSigningStorePass>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" Condition="ENV==Debug" AfterTargets="PostBuildEvent">
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-arm\*.*" />
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-arm64\*.*" />
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-x64\*.*" />
     <Exec Command="%systemroot%\System32\xcopy /y bin\debug\net8.0-android\*.* bin\debug\net8.0-android\android-x86\*.*" />
   </Target>
-
-  <ItemGroup>
-    <Compile Remove="Resources\Resource - Copy.designer.cs" />
-    <Compile Remove="Views\NowPlaying\AudioEffectsView.VolumeControl - Copy.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Assets\licenses\package_boxedverticalseekbar.txt" />
@@ -89,8 +97,6 @@
     <None Remove="Resources\xml\provider_appwidget_nowplaying_box.xml" />
     <None Remove="Resources\xml\provider_appwidget_nowplaying_envelope.xml" />
     <None Remove="Resources\xml\provider_appwidget_nowplaying_shelf.xml" />
-    <None Remove="Views\AudioEffects\BassBoostView.cs~RF927132.TMP" />
-    <None Remove="XyzuWidgets.Utils.cs~RF79ce01.TMP" />
   </ItemGroup>
 
   <ItemGroup>
@@ -123,5 +129,5 @@
     <ProjectReference Include="..\Xyzu.Droid.Library\Xyzu.Droid.Library.csproj" />
     <ProjectReference Include="..\Xyzu.Droid.Player\Xyzu.Droid.Player.csproj" />
   </ItemGroup>
-  
+
 </Project>

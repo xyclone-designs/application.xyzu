@@ -1,10 +1,12 @@
 .vs
+internal
 app.xamarin/BoxedVerticalSeekBar/bin
 app.xamarin/BoxedVerticalSeekBar/obj
 app.xamarin/SeekArc.Droid/bin
 app.xamarin/SeekArc.Droid/obj
 app.xamarin/Xyzu/bin
 app.xamarin/Xyzu/obj
+app.xamarin/Xyzu.Droid/Xyzu.Droid.csproj
 app.xamarin/Xyzu.Droid/bin
 app.xamarin/Xyzu.Droid/obj
 app.xamarin/Xyzu.Droid.Player/bin

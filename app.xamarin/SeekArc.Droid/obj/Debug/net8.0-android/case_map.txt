@@ -1,9 +1,0 @@
-drawable\scrubber_control_disabled_holo;drawable\scrubber_control_disabled_holo
-drawable\scrubber_control_focused_holo;drawable\scrubber_control_focused_holo
-drawable\scrubber_control_normal_holo;drawable\scrubber_control_normal_holo
-drawable\scrubber_control_pressed_holo;drawable\scrubber_control_pressed_holo
-drawable\seek_arc_control_selector;drawable\seek_arc_control_selector
-values\attrs;values\attrs
-values\colors;values\colors
-values\strings;values\strings
-values\styles;values\styles
