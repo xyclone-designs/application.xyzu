@@ -16,7 +16,7 @@ namespace Xyzu.Player
 		BassBoost? EffectsBassBoost { get; set; }
 		EnvironmentalReverb? EffectsEnvironmentalReverb { get; set; }
 		Equalizer? EffectsEqualizer { get; set; }
-		LoudnessEnhancerEffect? EffectsLoudnessEnhancer { get; set; }
+		LoudnessEnhancerFX? EffectsLoudnessEnhancer { get; set; }
 		float EffectsPlaybackBalance { get; set; }
 		float EffectsPlaybackPitch { get; set; }
 		float EffectsPlaybackSpeed { get; set; }

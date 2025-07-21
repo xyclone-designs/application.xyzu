@@ -9,12 +9,13 @@
 
   <ItemGroup>
     <PackageReference Include="Laerdal.FFmpeg.Android.Full" Version="4.4.28" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+    <PackageReference Include="XycloneDesigns.Extensions.Android" Version="1.0.2" />
+    <PackageReference Include="XycloneDesigns.Extensions.AndroidX.AppCompat" Version="1.0.1" />
+    <PackageReference Include="XycloneDesigns.Extensions.SQLite" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Xyzu\Xyzu.csproj" />
-    <ProjectReference Include="..\Xyzu.Droid.Extensions\Xyzu.Droid.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

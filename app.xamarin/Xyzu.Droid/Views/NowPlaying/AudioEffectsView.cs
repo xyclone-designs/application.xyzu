@@ -101,8 +101,8 @@ namespace Xyzu.Views.NowPlaying
 			};
 
 			PresetsRecyclerView.SimpleLayoutManager.SpanCount = 1;
-			PresetsRecyclerView.SimpleMarginItemDecoration.MarginResTop = Resource.Dimension.dp16;
-			PresetsRecyclerView.SimpleMarginItemDecoration.MarginResHorizontal = Resource.Dimension.dp8;
+			PresetsRecyclerView.SimpleItemDecorationMargin.MarginResTop = Resource.Dimension.dp16;
+			PresetsRecyclerView.SimpleItemDecorationMargin.MarginResHorizontal = Resource.Dimension.dp8;
 
 			EffectsRelativeLayout.LayoutChange += EffectsRelativeLayoutLayoutChange;
 			EffectsVolumeControlView.OnPresetPropertyChanged = _Effects[0].OnPresetPropertyChanged;

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xyzu.Droid.Extensions", "Xyzu.Droid.Extensions\Xyzu.Droid.Extensions.csproj", "{E7DBE12A-7944-493F-BC5C-0D4A663609A2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xyzu.Droid.Player", "Xyzu.Droid.Player\Xyzu.Droid.Player.csproj", "{A0EF8FF8-2016-4229-81DD-FE40022DBA6C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xyzu", "Xyzu\Xyzu.csproj", "{2354AD85-82D1-4471-814C-C4350C8E91F5}"
@@ -17,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xyzu.Droid.Images", "Xyzu.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeekArc.Droid", "SeekArc.Droid\SeekArc.Droid.csproj", "{BA74F417-06FB-4A96-9A25-2FC4AC18A4F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoxedVerticalSeekBar", "BoxedVerticalSeekBar\BoxedVerticalSeekBar.csproj", "{69F86E9D-843F-48BB-AFB8-37F89B6A98C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoxedVerticalSeekBar", "BoxedVerticalSeekBar\BoxedVerticalSeekBar.csproj", "{69F86E9D-843F-48BB-AFB8-37F89B6A98C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,33 +31,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|ARM32.ActiveCfg = Debug|ARM32
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|ARM32.Build.0 = Debug|ARM32
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|ARM64.Build.0 = Debug|ARM64
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|ARM64.Deploy.0 = Debug|ARM64
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|x64.ActiveCfg = Debug|x64
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|x64.Build.0 = Debug|x64
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|x64.Deploy.0 = Debug|x64
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|x86.ActiveCfg = Debug|x86
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|x86.Build.0 = Debug|x86
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Debug|x86.Deploy.0 = Debug|x86
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|ARM32.ActiveCfg = Release|ARM32
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|ARM32.Build.0 = Release|ARM32
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|ARM32.Deploy.0 = Release|ARM32
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|ARM64.ActiveCfg = Release|ARM64
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|ARM64.Build.0 = Release|ARM64
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|ARM64.Deploy.0 = Release|ARM64
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|x64.ActiveCfg = Release|x64
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|x64.Build.0 = Release|x64
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|x64.Deploy.0 = Release|x64
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|x86.ActiveCfg = Release|x86
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|x86.Build.0 = Release|x86
-		{E7DBE12A-7944-493F-BC5C-0D4A663609A2}.Release|x86.Deploy.0 = Release|x86
 		{A0EF8FF8-2016-4229-81DD-FE40022DBA6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A0EF8FF8-2016-4229-81DD-FE40022DBA6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0EF8FF8-2016-4229-81DD-FE40022DBA6C}.Debug|ARM32.ActiveCfg = Debug|ARM32

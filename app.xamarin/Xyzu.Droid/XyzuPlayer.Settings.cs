@@ -24,7 +24,7 @@ namespace Xyzu
 		private BassBoost.Settings? _EffectsBassBoost;
 		private EnvironmentalReverb.Settings? _EffectsEnvironmentalReverb;
 		private Equalizer.Settings? _EffectsEqualizer;
-		private LoudnessEnhancerEffect.Settings? _EffectsLoudnessEnhancer;
+		private LoudnessEnhancerFX.Settings? _EffectsLoudnessEnhancer;
 
 		public IVolumeControlSettings.IPresetable SettingsVolumeControl
 		{
@@ -149,9 +149,9 @@ namespace Xyzu
 				BandLevels = new List<short>(SettingsEqualiser.CurrentPreset.FrequencyLevels),
 			};
 		}		  
-		public LoudnessEnhancerEffect.Settings EffectsLoudnessEnhancer
+		public LoudnessEnhancerFX.Settings EffectsLoudnessEnhancer
 		{
-			get => _EffectsLoudnessEnhancer ??= new LoudnessEnhancerEffect.Settings
+			get => _EffectsLoudnessEnhancer ??= new LoudnessEnhancerFX.Settings
 			{
 				TargetGain = SettingsVolumeControl.CurrentPreset.LoudnessEnhancerTargetGain
 			};

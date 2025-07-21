@@ -1,9 +1,5 @@
-﻿
-#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics.Drawables;
-using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
@@ -17,7 +13,6 @@ using Xyzu.Droid;
 using Xyzu.Library.Enums;
 using Xyzu.Menus;
 using Xyzu.Settings.Enums;
-using Xyzu.Widgets.RecyclerViews.LibraryItems;
 using Xyzu.Widgets.RecyclerViews.Simple;
 
 namespace Xyzu.Views.Option
@@ -55,8 +50,8 @@ namespace Xyzu.Views.Option
 			_MenuOptionsRecyclerView = FindViewById(Ids.MenuOptions_SimpleHorizontalRecyclerView) as SimpleHorizontalRecyclerView;
 
 			MenuOptionsRecyclerView.SimpleLayoutManager.SpanCount = 2;
-			MenuOptionsRecyclerView.SimpleMarginItemDecoration.MarginResVertical = Resource.Dimension.dp8;
-			MenuOptionsRecyclerView.SimpleMarginItemDecoration.MarginResHorizontal = Resource.Dimension.dp16;
+			MenuOptionsRecyclerView.SimpleItemDecorationMargin.MarginResVertical = Resource.Dimension.dp8;
+			MenuOptionsRecyclerView.SimpleItemDecorationMargin.MarginResHorizontal = Resource.Dimension.dp16;
 			MenuOptionsRecyclerView.SimpleAdapter.FuncGetItemCount = MenuOptionsGetItemCount;
 			MenuOptionsRecyclerView.SimpleAdapter.ViewHolderOnBind = MenuOptionsViewHolderOnBind;
 			MenuOptionsRecyclerView.SimpleAdapter.ViewHolderOnCreate = MenuOptionsViewHolderOnCreate;
@@ -190,8 +185,8 @@ namespace Xyzu.Views.Option
 		{
 			private static AppCompatTextView ItemViewDefault(Context context)
 			{
-				ContextThemeWrapper contextthemewrapper = new ContextThemeWrapper(context, Resource.Style.Xyzu_View_Option_Menu_RecyclerView_ItemView);
-				AppCompatTextView itemview = new AppCompatTextView(contextthemewrapper, null!, Resource.Style.Xyzu_View_Option_Menu_RecyclerView_ItemView);
+				ContextThemeWrapper contextthemewrapper = new (context, Resource.Style.Xyzu_View_Option_Menu_RecyclerView_ItemView);
+				AppCompatTextView itemview = new (contextthemewrapper, null!, Resource.Style.Xyzu_View_Option_Menu_RecyclerView_ItemView);
 
 				itemview.SetMaxLines(1);
 				itemview.SetSingleLine(true);

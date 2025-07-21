@@ -63,11 +63,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Xyzu\Xyzu.csproj" />
-    <ProjectReference Include="..\Xyzu.Droid.Extensions\Xyzu.Droid.Extensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.0.3" />
     <PackageReference Include="Xamarin.AndroidX.Media" Version="1.7.0.7" />
     <PackageReference Include="Xamarin.AndroidX.Media3.Common" Version="1.4.1" />
     <PackageReference Include="Xamarin.AndroidX.Media3.Database" Version="1.4.1" />
@@ -78,6 +76,8 @@
     <PackageReference Include="Xamarin.AndroidX.Media3.Extractor" Version="1.4.1" />
     <PackageReference Include="Xamarin.AndroidX.Media3.Session" Version="1.4.1" />
     <PackageReference Include="Xamarin.AndroidX.Media3.Ui" Version="1.4.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
+    <PackageReference Include="XycloneDesigns.Extensions.Android" Version="1.0.2" />
   </ItemGroup>
 
 </Project>

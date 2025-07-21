@@ -16,24 +16,24 @@ namespace Xyzu.Widgets.RecyclerViews.Simple
 		public SimpleRecyclerView(Context context, IAttributeSet attrs, int defStyleRef) : base(context, attrs, defStyleRef)
 		{
 			SetAdapter(_SimpleAdapter = new Adapter(context, () => -1));
-			AddItemDecoration(_SimpleMarginItemDecoration = new MarginItemDecoration
+			AddItemDecoration(_SimpleItemDecorationMargin = new ItemDecorationMargin
 			{
 				MarginRes = Resource.Dimension.dp4
 			});
 		}
 
 		private Adapter _SimpleAdapter;
-		public MarginItemDecoration _SimpleMarginItemDecoration;
+		public ItemDecorationMargin _SimpleItemDecorationMargin;
 
 		public Adapter SimpleAdapter
 		{
 			set => SetAdapter(_SimpleAdapter = value);
 			get => GetAdapter() as Adapter ?? _SimpleAdapter;
 		}
-		public MarginItemDecoration SimpleMarginItemDecoration
+		public ItemDecorationMargin SimpleItemDecorationMargin
 		{
-			get => _SimpleMarginItemDecoration;
-			protected set => _SimpleMarginItemDecoration = value; 
+			get => _SimpleItemDecorationMargin;
+			protected set => _SimpleItemDecorationMargin = value; 
 		}
 
 		public new class Adapter : RecyclerView.Adapter

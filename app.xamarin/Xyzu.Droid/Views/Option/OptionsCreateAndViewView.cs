@@ -41,8 +41,8 @@ namespace Xyzu.Views.Option
 
 			Inflate(context, Ids.Layout, this);
 
-			View.SimpleMarginItemDecoration.MarginResVertical = Resource.Dimension.dp0;
-			View.SimpleMarginItemDecoration.MarginResHorizontal = Resource.Dimension.dp16;
+			View.SimpleItemDecorationMargin.MarginResVertical = Resource.Dimension.dp0;
+			View.SimpleItemDecorationMargin.MarginResHorizontal = Resource.Dimension.dp16;
 			View.SimpleAdapter.FuncGetItemCount = ViewGetItemCount;
 			View.SimpleAdapter.ViewHolderOnBind = ViewViewHolderOnBind;
 			View.SimpleAdapter.ViewHolderOnCreate = ViewViewHolderOnCreate;

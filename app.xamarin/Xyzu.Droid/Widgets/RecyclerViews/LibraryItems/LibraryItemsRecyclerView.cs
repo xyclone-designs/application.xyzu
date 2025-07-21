@@ -27,7 +27,7 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 		public LibraryItemsRecyclerView(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
 		{
 			SetLayoutManager(_LibraryItemsLayoutManager = new LayoutManager(context, LibraryLayoutTypes.ListMedium));
-			AddItemDecoration(_LibraryItemsItemDecoration = new MarginItemDecoration
+			AddItemDecoration(_LibraryItemsItemDecoration = new ItemDecorationMargin
 			{
 				MarginRes = Resource.Dimension.dp4,
 
@@ -35,17 +35,17 @@ namespace Xyzu.Widgets.RecyclerViews.LibraryItems
 		}
 
 		private LayoutManager _LibraryItemsLayoutManager;
-		private MarginItemDecoration _LibraryItemsItemDecoration;
+		private ItemDecorationMargin _LibraryItemsItemDecoration;
 
 		public LayoutManager LibraryItemsLayoutManager
 		{
 			set => SetLayoutManager(_LibraryItemsLayoutManager = value);
 			get => GetLayoutManager() as LayoutManager ?? _LibraryItemsLayoutManager;
 		}
-		public MarginItemDecoration LibraryItemsItemDecoration
+		public ItemDecorationMargin LibraryItemsItemDecoration
 		{
 			set => AddItemDecoration(_LibraryItemsItemDecoration = value, 0);
-			get => GetItemDecorationAt(0) as MarginItemDecoration ?? _LibraryItemsItemDecoration;
+			get => GetItemDecorationAt(0) as ItemDecorationMargin ?? _LibraryItemsItemDecoration;
 		}
 
 		public IEnumerable<ViewHolder> FindViewHolders(int itemcount)

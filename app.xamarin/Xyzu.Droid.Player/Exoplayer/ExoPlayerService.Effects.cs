@@ -10,7 +10,7 @@ namespace Xyzu.Player.Exoplayer
 		private BassBoost? _EffectsBassBoost;
 		private EnvironmentalReverb? _EffectsEnvironmentalReverb;
 		private Equalizer? _EffectsEqualizer;
-		private LoudnessEnhancerEffect? _EffectsLoudnessEnhancer;
+		private LoudnessEnhancerFX? _EffectsLoudnessEnhancer;
 
 		public BassBoost? EffectsBassBoost
 		{
@@ -54,14 +54,14 @@ namespace Xyzu.Player.Exoplayer
 				return _EffectsEqualizer;
 			}
 		}
-		public LoudnessEnhancerEffect? EffectsLoudnessEnhancer
+		public LoudnessEnhancerFX? EffectsLoudnessEnhancer
 		{
 			set => _EffectsLoudnessEnhancer = value;
 			get
 			{
 				try
 				{
-					_EffectsLoudnessEnhancer ??= new LoudnessEnhancerEffect(Exoplayer.AudioSessionId);
+					_EffectsLoudnessEnhancer ??= new LoudnessEnhancerFX(Exoplayer.AudioSessionId);
 				}
 				catch (Exception) { }
 
