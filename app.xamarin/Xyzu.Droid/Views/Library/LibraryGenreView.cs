@@ -264,7 +264,7 @@ namespace Xyzu.Views.Library
 			if (Settings != null)
 				SharedPreferences?
 					.Edit()?
-					.PutUserInterfaceLibraryGenre(Settings)?
+					.PutUserInterfaceGenre(Settings)?
 					.Apply();
 		}
 
@@ -315,7 +315,7 @@ namespace Xyzu.Views.Library
 			{
 				if (_Settings is null)
 				{
-					_Settings = SharedPreferences?.GetUserInterfaceLibraryGenre();
+					_Settings = SharedPreferences?.GetUserInterfaceGenre();
 
 					if (_Settings != null)
 						_Settings.PropertyChanged += PropertyChangedSettings;

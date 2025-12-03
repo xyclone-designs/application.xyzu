@@ -27,6 +27,7 @@ using JavaFile = Java.IO.File;
 using XyzuResource = Xyzu.Droid.Resource;
 using GlideInstance = Xyzu.Images.Glide.Instance;
 using ExoPlayerService = Xyzu.Player.Exoplayer.ExoPlayerService;
+using Xyzu.Settings.UserInterface;
 
 namespace Xyzu.Activities
 {
@@ -42,15 +43,15 @@ namespace Xyzu.Activities
 	public class SplashScreenActivity : AppCompatActivity
 	{
 		private IFilesSettingsDroid? _FilesSettings;
-		private ILibrarySettingsDroid? _LibrarySettings;
+		private IUserInterfaceSettingsDroid? _UserInterfaceSettings;
 
 		public IFilesSettingsDroid FilesSettings
 		{
 			get => _FilesSettings ??= XyzuSettings.Instance.GetFilesDroid();
 		}
-		public ILibrarySettingsDroid LibrarySettings
+		public IUserInterfaceSettingsDroid UserInterfaceSettings
 		{
-			get => _LibrarySettings ??= XyzuSettings.Instance.GetUserInterfaceLibraryDroid();
+			get => _UserInterfaceSettings ??= XyzuSettings.Instance.GetUserInterfaceDroid();
 		}
 
 		private async void Start(bool permissionchecked)

@@ -58,23 +58,7 @@ namespace Xyzu.Activities
 
 					Fragments.Settings.System.SystemPreferenceFragment.FragmentName => new Fragments.Settings.System.SystemPreferenceFragment{ },
 
-					Fragments.Settings.UserInterface.LanguagesPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.LanguagesPreferenceFragment { },
-					Fragments.Settings.UserInterface.NowPlayingPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.NowPlayingPreferenceFragment { },
-					Fragments.Settings.UserInterface.ThemesPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.ThemesPreferenceFragment { },
 					Fragments.Settings.UserInterface.UserInterfacePreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.UserInterfacePreferenceFragment { },
-
-					Fragments.Settings.UserInterface.Library.AlbumPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.Library.AlbumPreferenceFragment { },
-					Fragments.Settings.UserInterface.Library.AlbumsPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.Library.AlbumsPreferenceFragment { },
-					Fragments.Settings.UserInterface.Library.ArtistPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.Library.ArtistPreferenceFragment { },
-					Fragments.Settings.UserInterface.Library.ArtistsPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.Library.ArtistsPreferenceFragment { },
-					Fragments.Settings.UserInterface.Library.GenrePreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.Library.GenrePreferenceFragment { },
-					Fragments.Settings.UserInterface.Library.GenresPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.Library.GenresPreferenceFragment { },
-					Fragments.Settings.UserInterface.Library.LibraryPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.Library.LibraryPreferenceFragment { },
-					Fragments.Settings.UserInterface.Library.PlaylistPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.Library.PlaylistPreferenceFragment { },
-					Fragments.Settings.UserInterface.Library.PlaylistsPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.Library.PlaylistsPreferenceFragment { },
-					Fragments.Settings.UserInterface.Library.QueuePreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.Library.QueuePreferenceFragment { },
-					Fragments.Settings.UserInterface.Library.SearchPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.Library.SearchPreferenceFragment { },
-					Fragments.Settings.UserInterface.Library.SongsPreferenceFragment.FragmentName => new Fragments.Settings.UserInterface.Library.SongsPreferenceFragment { },
 
 					_ => new Fragments.Settings.SettingsPreferenceFragment { }
 

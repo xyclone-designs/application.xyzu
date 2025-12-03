@@ -3,12 +3,12 @@
 
   <xyzu.preference.ListPreference
       app:iconSpaceReserved="false"
-      app:key="settings_userinterface_library_search_layouttype_listpreference_key"
-      app:title="@string/settings_userinterface_library_search_layouttype_title"
-      app:summary="@string/settings_userinterface_library_search_layouttype_description"
-      app:dialogTitle="@string/settings_userinterface_library_search_layouttype_dialog_title"
-      app:negativeButtonText="@string/settings_userinterface_library_search_layouttype_dialog_negativebutton"
-      app:positiveButtonText="@string/settings_userinterface_library_search_layouttype_dialog_positivebutton"/>
+      app:key="settings_userinterface_search_layouttype_listpreference_key"
+      app:title="@string/settings_userinterface_search_layouttype_title"
+      app:summary="@string/settings_userinterface_search_layouttype_description"
+      app:dialogTitle="@string/settings_userinterface_search_layouttype_dialog_title"
+      app:negativeButtonText="@string/settings_userinterface_search_layouttype_dialog_negativebutton"
+      app:positiveButtonText="@string/settings_userinterface_search_layouttype_dialog_positivebutton"/>
     
   <xyzu.preference.NavigationBarInsetPreference />
     

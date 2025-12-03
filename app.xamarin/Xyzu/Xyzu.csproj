@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>10.0</LangVersion>
     <ImplicitUsings>disable</ImplicitUsings>
@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="ID3" Version="0.6.0" />
     <PackageReference Include="TagLibSharp" Version="2.3.0" />
-    <PackageReference Include="XycloneDesigns.Extensions.CSharp" Version="1.0.4" />
+    <PackageReference Include="XycloneDesigns.Extensions.CSharp" Version="1.1.0" />
   </ItemGroup>
 
 </Project>

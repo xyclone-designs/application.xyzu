@@ -5,16 +5,19 @@ using Android.OS;
 using Android.Runtime;
 using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
-
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-
+using System.Runtime.CompilerServices;
 using Xyzu.Droid;
+using Xyzu.Settings.Enums;
 using Xyzu.Settings.System;
 
+using AndroidXPreference = AndroidX.Preference.Preference;
 using JavaFile = Java.IO.File;
 using XyzuDialogPreference = Xyzu.Preference.DialogPreference;
+using XyzuListPreference = Xyzu.Preference.ListPreference;
 
 namespace Xyzu.Fragments.Settings.System
 {
@@ -25,11 +28,62 @@ namespace Xyzu.Fragments.Settings.System
 
 		public static class Keys
 		{
+			public const string LanguageCurrent = "settings_system_languagecurrent_listpreference_key";
+			public const string LanguageMode = "settings_system_languagemode_listpreference_key";
+			public const string ThemeMode = "settings_system_thememode_listpreference_key";
 			public const string ErrorLogs = "settings_system_errorlogs_dialogpreference_key";
 		}
 
+		private ThemeModes _ThemeMode;
+		private LanguageModes _LanguageMode;
+		private CultureInfo? _LanguageCurrent;
 		private IEnumerable<ISystemSettings.IErrorLog>? _ErrorLogs;
 
+		public ThemeModes ThemeMode
+		{
+			get => _ThemeMode;
+			set
+			{
+				_ThemeMode = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(ISystemSettingsDroid.Keys.ThemeMode, value)?
+					.Apply();
+
+				OnPropertyChanged();
+			}
+		}
+		public LanguageModes LanguageMode
+		{
+			get => _LanguageMode;
+			set
+			{
+				_LanguageMode = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutEnum(ISystemSettingsDroid.Keys.LanguageMode, value)?
+					.Apply();
+
+				OnPropertyChanged();
+			}
+		}
+		public CultureInfo LanguageCurrent
+		{
+			get => _LanguageCurrent ?? ISystemSettingsDroid.Defaults.LanguageCurrent;
+			set
+			{
+				_LanguageCurrent = value;
+
+				XyzuSettings.Instance
+					.Edit()?
+					.PutCultureInfo(ISystemSettingsDroid.Keys.LanguageCurrent, value)?
+					.Apply();
+
+				OnPropertyChanged();
+			}
+		}
 		public IEnumerable<ISystemSettings.IErrorLog> ErrorLogs
 		{
 			get => _ErrorLogs ?? Enumerable.Empty<ISystemSettings.IErrorLog>();
@@ -41,6 +95,9 @@ namespace Xyzu.Fragments.Settings.System
 			}
 		}
 
+		public XyzuListPreference? ThemeModePreference { get; set; }
+		public XyzuListPreference? LanguageCurrentPreference { get; set; }
+		public XyzuListPreference? LanguageModePreference { get; set; }
 		public XyzuDialogPreference? ErrorLogsPreference { get; set; }
 
 		AlertDialog? ErrorLogDialog { get; set; }
@@ -52,18 +109,25 @@ namespace Xyzu.Fragments.Settings.System
 			AppCompatActivity?.SetTitle(Resource.String.settings_system_title);
 
 			AddPreferenceChangeHandler(
+				LanguageCurrentPreference,
+				LanguageModePreference,
 				ErrorLogsPreference);
 
 			ISystemSettingsDroid settings = XyzuSettings.Instance.GetSystemDroid();
-			settings.ErrorLogs = ISystemSettingsDroid.GetErrorLogs();
 
-			ErrorLogs = settings.ErrorLogs;
+			_LanguageMode = settings.LanguageMode; OnPropertyChanged(nameof(LanguageMode));
+			_LanguageCurrent = settings.LanguageCurrent; OnPropertyChanged(nameof(LanguageCurrent));
+			_ThemeMode = settings.ThemeMode; OnPropertyChanged(nameof(ThemeMode));
+			ErrorLogs = settings.ErrorLogs = ISystemSettingsDroid.GetErrorLogs();
 		}
 		public override void OnPause()
 		{
 			base.OnPause();
 
 			RemovePreferenceChangeHandler(
+				LanguageCurrentPreference,
+				LanguageModePreference,
+				ThemeModePreference,
 				ErrorLogsPreference);
 
 			XyzuSettings.Instance
@@ -75,7 +139,37 @@ namespace Xyzu.Fragments.Settings.System
 		{
 			SetPreferencesFromResource(Resource.Xml.settings_system, rootKey);
 			InitPreferences(
+				LanguageCurrentPreference = FindPreference(Keys.LanguageCurrent) as XyzuListPreference,
+				LanguageModePreference = FindPreference(Keys.LanguageMode) as XyzuListPreference,
+				ThemeModePreference = FindPreference(Keys.ThemeMode) as XyzuListPreference,
 				ErrorLogsPreference = FindPreference(Keys.ErrorLogs) as XyzuDialogPreference);
+
+			LanguageCurrentPreference?.SetEntries(
+				entries: ISystemSettingsDroid.Options.LanguageCurrent.AsEnumerable()
+					.Select(language => language.ThreeLetterISOLanguageName)
+					.ToArray());
+			LanguageCurrentPreference?.SetEntryValues(
+				entryValues: ISystemSettingsDroid.Options.LanguageCurrent.AsEnumerable()
+					.Select(language => language.DisplayName)
+					.ToArray());
+
+			LanguageModePreference?.SetEntries(
+				entries: ISystemSettingsDroid.Options.LanguageMode.AsEnumerable()
+					.Select(mode => mode.ToString())
+					.ToArray());
+			LanguageModePreference?.SetEntryValues(
+				entryValues: ISystemSettingsDroid.Options.LanguageMode.AsEnumerable()
+					.Select(mode => mode.AsStringTitle(Context) ?? mode.ToString())
+					.ToArray());
+
+			ThemeModePreference?.SetEntries(
+				entries: ISystemSettingsDroid.Options.ThemeMode.AsEnumerable()
+					.Select(mode => mode.ToString())
+					.ToArray());
+			ThemeModePreference?.SetEntryValues(
+				entryValues: ISystemSettingsDroid.Options.ThemeMode.AsEnumerable()
+					.Select(mode => mode.AsStringTitle(Context) ?? mode.ToString())
+					.ToArray());
 
 			if (ErrorLogsPreference != null)
 				ErrorLogsPreference.DialogOnBuild = dialogbuilder =>
@@ -126,6 +220,65 @@ namespace Xyzu.Fragments.Settings.System
 						Activity?.StartActivityForResult(intentchooser, -1);
 					});
 				};			
+		}
+		public override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+		{
+			base.OnPropertyChanged(propertyName);
+
+			switch (propertyName)
+			{
+				case nameof(LanguageCurrent) when
+				LanguageCurrentPreference != null:
+					if (ISystemSettingsDroid.Options.LanguageCurrent.AsEnumerable().Index(LanguageCurrent) is int languagecurrentindex)
+						LanguageCurrentPreference.SetValueIndex(languagecurrentindex);
+					break;
+
+				case nameof(LanguageMode) when
+				LanguageModePreference != null:
+					if (ISystemSettingsDroid.Options.LanguageMode.AsEnumerable().Index(LanguageMode) is int languagemodeindex)
+						LanguageModePreference.SetValueIndex(languagemodeindex);
+					break;
+
+				case nameof(ThemeMode) when
+				ThemeModePreference != null:
+					if (ISystemSettingsDroid.Options.ThemeMode.AsEnumerable().Index(ThemeMode) is int thememodeindex)
+						ThemeModePreference.SetValueIndex(thememodeindex);
+					break;
+
+				default: break;
+			}
+		}
+		public override bool OnPreferenceChange(AndroidXPreference preference, Java.Lang.Object? newvalue)
+		{
+			bool result = base.OnPreferenceChange(preference, newvalue);
+
+			switch (true)
+			{
+				case true when
+				preference == LanguageCurrentPreference &&
+				LanguageCurrentPreference.Value is not null &&
+				LanguageCurrentPreference.Value != LanguageCurrent?.IetfLanguageTag:
+					LanguageCurrent = CultureInfo.GetCultureInfoByIetfLanguageTag(LanguageCurrentPreference.Value);
+					return true;
+
+				case true when
+				preference == LanguageModePreference &&
+				newvalue?.ToString() is string newvaluestring &&
+				Enum.TryParse(newvaluestring, out LanguageModes mode) &&
+				LanguageMode != mode:
+					LanguageMode = mode;
+					return true;
+
+				case true when
+				preference == ThemeModePreference &&
+				newvalue?.ToString() is string newvaluestring &&
+				Enum.TryParse(newvaluestring, out ThemeModes mode) &&
+				ThemeMode != mode:
+					ThemeMode = mode;
+					return true;
+
+				default: return result;
+			}
 		}
 	}
 }

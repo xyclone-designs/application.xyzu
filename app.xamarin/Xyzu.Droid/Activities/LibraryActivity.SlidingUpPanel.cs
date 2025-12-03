@@ -16,6 +16,9 @@ using Xyzu.Library.Models;
 using Xyzu.Menus;
 
 using ILibraryIIdentifiers = Xyzu.Library.ILibrary.IIdentifiers;
+using Xyzu.Settings.System;
+using Xyzu.Settings.UserInterface;
+using Xyzu.Settings.UserInterface.Library;
 
 namespace Xyzu.Activities
 {
@@ -55,6 +58,7 @@ namespace Xyzu.Activities
 		protected ViewTreeObserverOnGlobalLayoutListener? ViewNowPlayingGlobalLayoutListener { get; set; }
 		protected SlidingUpPanelLayout? SlidingUpPanel { get; set; }
 		protected SlidingUpPanelLayout.IPanelSlideListener? SlidingUpPanelSlideListener { get; set; }
+		//protected IUserInterfaceSettings UserInterfaceSettings { get; set; }
 
 		private void ConfigurePanelInsets(LibraryView? libraryview)
 		{
@@ -229,7 +233,7 @@ namespace Xyzu.Activities
 						case LibraryTypes.LibraryAlbums when FragmentLibraryAlbums.View != null:
 							variables.Albums = XyzuLibrary.Instance.Albums
 								.GetAlbums(null)
-								.Sort(FragmentLibraryAlbums.View.Settings.SortKey, FragmentLibraryAlbums.View.Settings.IsReversed);
+								.Sort(FragmentLibraryAlbums.View.Settings.AlbumsSortKey, FragmentLibraryAlbums.View.Settings.AlbumsIsReversed);
 							break;
 						case LibraryTypes.LibraryAlbum when FragmentLibraryAlbum.View != null:
 							variables.Songs = XyzuLibrary.Instance.Songs
@@ -240,7 +244,7 @@ namespace Xyzu.Activities
 						case LibraryTypes.LibraryArtists when FragmentLibraryArtists.View != null:
 							variables.Artists = XyzuLibrary.Instance.Artists
 								.GetArtists(null)
-								.Sort(FragmentLibraryArtists.View.Settings.SortKey, FragmentLibraryArtists.View.Settings.IsReversed);
+								.Sort(FragmentLibraryArtists.View.Settings.ArtistsSortKey, FragmentLibraryArtists.View.Settings.ArtistsIsReversed);
 							break;
 						case LibraryTypes.LibraryArtist when FragmentLibraryArtist.View != null:
 							variables.Songs = XyzuLibrary.Instance.Songs
@@ -251,7 +255,7 @@ namespace Xyzu.Activities
 						case LibraryTypes.LibraryGenres when FragmentLibraryGenres.View != null:
 							variables.Genres = XyzuLibrary.Instance.Genres
 								.GetGenres(null)
-								.Sort(FragmentLibraryGenres.View.Settings.SortKey, FragmentLibraryGenres.View.Settings.IsReversed);
+								.Sort(FragmentLibraryGenres.View.Settings.GenresSortKey, FragmentLibraryGenres.View.Settings.GenresIsReversed);
 							break;
 						case LibraryTypes.LibraryGenre when FragmentLibraryGenre.View != null:
 							variables.Songs = XyzuLibrary.Instance.Songs
@@ -262,7 +266,7 @@ namespace Xyzu.Activities
 						case LibraryTypes.LibraryPlaylists when FragmentLibraryPlaylists.View != null:
 							variables.Playlists = XyzuLibrary.Instance.Playlists
 								.GetPlaylists(null)
-								.Sort(FragmentLibraryPlaylists.View.Settings.SortKey, FragmentLibraryPlaylists.View.Settings.IsReversed);
+								.Sort(FragmentLibraryPlaylists.View.Settings.PlaylistsSortKey, FragmentLibraryPlaylists.View.Settings.PlaylistsIsReversed);
 							break;
 						case LibraryTypes.LibraryPlaylist when FragmentLibraryPlaylist.View != null:
 							variables.Songs = XyzuLibrary.Instance.Songs
@@ -273,7 +277,7 @@ namespace Xyzu.Activities
 						case LibraryTypes.LibrarySongs when FragmentLibrarySongs.View != null:
 							variables.Songs = XyzuLibrary.Instance.Songs
 								.GetSongs(null)
-								.Sort(FragmentLibrarySongs.View.Settings.SortKey, FragmentLibrarySongs.View.Settings.IsReversed);
+								.Sort(FragmentLibrarySongs.View.Settings.SongsSortKey, FragmentLibrarySongs.View.Settings.SongsIsReversed);
 							break;
 
 						case LibraryTypes.LibrarySearch when FragmentLibrarySearch.View != null:

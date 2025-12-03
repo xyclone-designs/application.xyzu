@@ -100,13 +100,13 @@ namespace Xyzu.Fragments.Library
 			listoptions.OptionsIsReversed.Visibility = ViewStates.Gone;
 			listoptions.OptionsSortKey.Visibility = ViewStates.Gone;
 			listoptions.LayoutTypes = ISearchSettings.Options.LayoutTypes.AsEnumerable().NeatlyOrdered();
-			listoptions.LayoutTypeSelected = View?.Settings.LayoutType ?? ISongsSettings.Defaults.LayoutType;
+			listoptions.LayoutTypeSelected = View?.Settings.SearchLayoutType ?? ISongsSettings.Defaults.LayoutType;
 			listoptions.OnOptionsLayoutTypeItemSelected = layouttype =>
 			{
 				if (View is null)
 					return;
 
-				View.Settings.LayoutType = layouttype;
+				View.Settings.SearchLayoutType = layouttype;
 			};
 		}
 	}

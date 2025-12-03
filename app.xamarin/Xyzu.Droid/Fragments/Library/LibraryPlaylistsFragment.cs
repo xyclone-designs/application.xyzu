@@ -101,31 +101,31 @@ namespace Xyzu.Fragments.Library
 		{
 			base.ConfigureListOptions(listoptions);
 
-			listoptions.IsReversed = View?.Settings.IsReversed ?? IPlaylistsSettings.Defaults.IsReversed;
+			listoptions.IsReversed = View?.Settings.PlaylistsIsReversed ?? IPlaylistsSettings.Defaults.IsReversed;
 			listoptions.LayoutTypes = IPlaylistsSettings.Options.LayoutTypes.AsEnumerable().NeatlyOrdered();
-			listoptions.LayoutTypeSelected = View?.Settings.LayoutType ?? IPlaylistsSettings.Defaults.LayoutType;
+			listoptions.LayoutTypeSelected = View?.Settings.PlaylistsLayoutType ?? IPlaylistsSettings.Defaults.LayoutType;
 			listoptions.SortKeys = IPlaylistsSettings.Options.SortKeys.AsEnumerable().OrderBy(_ => _);
-			listoptions.SortKeySelected = View?.Settings.SortKey ?? IPlaylistsSettings.Defaults.SortKey;
+			listoptions.SortKeySelected = View?.Settings.PlaylistsSortKey ?? IPlaylistsSettings.Defaults.SortKey;
 			listoptions.OnOptionsIsReversedClicked = isreversed =>
 			{
 				if (View is null)
 					return;
 
-				View.Settings.IsReversed = isreversed;
+				View.Settings.PlaylistsIsReversed = isreversed;
 			};
 			listoptions.OnOptionsLayoutTypeItemSelected = layouttype =>
 			{
 				if (View is null)
 					return;
 
-				View.Settings.LayoutType = layouttype;
+				View.Settings.PlaylistsLayoutType = layouttype;
 			};
 			listoptions.OnOptionsSortKeyItemSelected = sortkey =>
 			{
 				if (View is null)
 					return;
 
-				View.Settings.SortKey = sortkey;
+				View.Settings.PlaylistsSortKey = sortkey;
 			};
 		}
 	}

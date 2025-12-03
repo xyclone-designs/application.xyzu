@@ -1,55 +1,50 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using AndroidX.Preference;
 
 using System;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
 using Xyzu.Droid;
 using Xyzu.Library.Enums;
 using Xyzu.Settings.Enums;
-using Xyzu.Settings.UserInterface;
 using Xyzu.Settings.UserInterface.Library;
 
 using AndroidXPreference = AndroidX.Preference.Preference;
-using XyzuDialogPreference = Xyzu.Preference.DialogPreference;
 using XyzuListPreference = Xyzu.Preference.ListPreference;
-using XyzuSeekBarPreference = Xyzu.Preference.SeekBarPreference;
 using XyzuSwitchPreference = Xyzu.Preference.SwitchPreference;
 
-namespace Xyzu.Fragments.Settings.UserInterface.Library
+namespace Xyzu.Fragments.Settings.UserInterface
 {
-	[Register(FragmentName)]
-	public class AlbumPreferenceFragment : BasePreferenceFragment, IAlbumSettings
+	public partial class UserInterfacePreferenceFragment
 	{
-		public const string FragmentName = "Xyzu.Fragments.Settings.UserInterface.Library.AlbumPreferenceFragment";
-
-		public static class Keys										
+		public static partial class Keys
 		{
-			public const string SongsIsReversed = "settings_userinterface_library_album_songs_isreversed_switchpreference_key";
-			public const string SongsLayoutType = "settings_userinterface_library_album_songs_layouttype_listpreference_key";
-			public const string SongsSortKey = "settings_userinterface_library_album_songs_sortkey_listpreference_key";
+			public const string Songs = "settings_userinterface_songs_dropdownpreference_key";
+			public const string SongsIsReversed = "settings_userinterface_songs_isreversed_switchpreference_key";
+			public const string SongsLayoutType = "settings_userinterface_songs_layouttype_listpreference_key";
+			public const string SongsSortKey = "settings_userinterface_songs_sortkey_listpreference_key";
 		}
 
-		private bool _SongsIsReversed;
-		private LibraryLayoutTypes _SongsLayoutType;
-		private ModelSortKeys _SongsSortKey;
+		public ISongsSettings? _Songs;
 
+		public ISongsSettings Songs
+		{
+			get => _Songs ??= XyzuSettings.Instance.GetUserInterfaceSongs();
+			set => XyzuSettings.Instance
+				.Edit()?
+				.PutUserInterfaceSongs(_Songs = value)?
+				.Apply();
+		}
 		public bool SongsIsReversed
 		{
-			get => _SongsIsReversed;
+			get => Songs.SongsIsReversed;
 			set
 			{
-				_SongsIsReversed = value;
-
 				XyzuSettings.Instance
 					.Edit()?
-					.PutBoolean(IAlbumSettings.Keys.SongsIsReversed, value)?
+					.PutBoolean(ISongsSettings.Keys.IsReversed, Songs.SongsIsReversed = value)?
 					.Apply();
 
 				OnPropertyChanged();
@@ -57,14 +52,12 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 		}
 		public LibraryLayoutTypes SongsLayoutType
 		{
-			get => _SongsLayoutType;
+			get => Songs.SongsLayoutType;
 			set
 			{
-				_SongsLayoutType = value;
-
 				XyzuSettings.Instance
 					.Edit()?
-					.PutEnum(IAlbumSettings.Keys.SongsLayoutType, value)?
+					.PutEnum(ISongsSettings.Keys.LayoutType, Songs.SongsLayoutType = value)?
 					.Apply();
 
 				OnPropertyChanged();
@@ -72,14 +65,12 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 		}
 		public ModelSortKeys SongsSortKey
 		{
-			get => _SongsSortKey;
+			get => Songs.SongsSortKey;
 			set
 			{
-				_SongsSortKey = value;
-
 				XyzuSettings.Instance
 					.Edit()?
-					.PutEnum(IAlbumSettings.Keys.SongsSortKey, value)?
+					.PutEnum(ISongsSettings.Keys.SortKey, Songs.SongsSortKey = value)?
 					.Apply();
 
 				OnPropertyChanged();
@@ -90,24 +81,22 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 		public XyzuListPreference? SongsLayoutTypePreference { get; set; }
 		public XyzuListPreference? SongsSortKeyPreference { get; set; }
 
-		public override void OnResume()
+		public void SongsOnResume()
 		{
 			base.OnResume();
 
-			AppCompatActivity?.SetTitle(Resource.String.settings_userinterface_library_album_title);
+			AppCompatActivity?.SetTitle(Resource.String.settings_userinterface_songs_title);
 
 			AddPreferenceChangeHandler(
 				SongsIsReversedPreference,
 				SongsLayoutTypePreference,
 				SongsSortKeyPreference);
 
-			IAlbumSettings settings = XyzuSettings.Instance.GetUserInterfaceLibraryAlbum();
-
-			_SongsIsReversed = settings.SongsIsReversed; OnPropertyChanged(nameof(SongsIsReversed));
-			_SongsLayoutType = settings.SongsLayoutType; OnPropertyChanged(nameof(SongsLayoutType));
-			_SongsSortKey = settings.SongsSortKey; OnPropertyChanged(nameof(SongsSortKey));
+			OnPropertyChanged(nameof(SongsIsReversed));
+			OnPropertyChanged(nameof(SongsLayoutType));
+			OnPropertyChanged(nameof(SongsSortKey));
 		}
-		public override void OnPause()
+		public void SongsOnPause()
 		{
 			base.OnPause();
 
@@ -116,33 +105,32 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 				SongsLayoutTypePreference,
 				SongsSortKeyPreference);
 		}
-		public override void OnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
+		public void SongsOnCreatePreferences(Bundle? savedInstanceState, string? rootKey)
 		{
-			SetPreferencesFromResource(Resource.Xml.settings_userinterface_library_album, rootKey);
 			InitPreferences(
 				SongsIsReversedPreference = FindPreference(Keys.SongsIsReversed) as XyzuSwitchPreference,
 				SongsLayoutTypePreference = FindPreference(Keys.SongsLayoutType) as XyzuListPreference,
 				SongsSortKeyPreference = FindPreference(Keys.SongsSortKey) as XyzuListPreference);
 
 			SongsLayoutTypePreference?.SetEntries(
-				entries: IAlbumSettings.Options.SongsLayoutTypes.AsEnumerable().NeatlyOrdered()
+				entries: ISongsSettings.Options.LayoutTypes.AsEnumerable().NeatlyOrdered()
 					.Select(layouttype => layouttype.ToString())
 					.ToArray());
 			SongsLayoutTypePreference?.SetEntryValues(
-				entryValues: IAlbumSettings.Options.SongsLayoutTypes.AsEnumerable().NeatlyOrdered()
+				entryValues: ISongsSettings.Options.LayoutTypes.AsEnumerable().NeatlyOrdered()
 					.Select(layouttype => layouttype.AsStringTitle(Context) ?? layouttype.ToString())
 					.ToArray());
-;
+
 			SongsSortKeyPreference?.SetEntryValues(
-				entryValues: IAlbumSettings.Options.SongsSortKeys.AsEnumerable()
+				entryValues: ISongsSettings.Options.SortKeys.AsEnumerable()
 					.Select(sortkey => sortkey.AsStringTitle(Context) ?? sortkey.ToString())
 					.ToArray());
 			SongsSortKeyPreference?.SetEntries(
-				entries: IAlbumSettings.Options.SongsSortKeys.AsEnumerable()
+				entries: ISongsSettings.Options.SortKeys.AsEnumerable()
 					.Select(sortkey => sortkey.ToString())
 					.ToArray());
 		}
-		public override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+		public void SongsOnPropertyChanged([CallerMemberName] string? propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);
 
@@ -156,20 +144,20 @@ namespace Xyzu.Fragments.Settings.UserInterface.Library
 
 				case nameof(SongsLayoutType) when
 				SongsLayoutTypePreference != null:
-					if (IAlbumSettings.Options.SongsLayoutTypes.AsEnumerable().NeatlyOrdered().Index(SongsLayoutType) is int layouttypeindex)
+					if (ISongsSettings.Options.LayoutTypes.AsEnumerable().NeatlyOrdered().Index(SongsLayoutType) is int layouttypeindex)
 						SongsLayoutTypePreference.SetValueIndex(layouttypeindex);
 					break;
 
 				case nameof(SongsSortKey) when
 				SongsSortKeyPreference != null:
-					if (IAlbumSettings.Options.SongsSortKeys.AsEnumerable().Index(SongsSortKey) is int sortkeyindex)
+					if (ISongsSettings.Options.SortKeys.AsEnumerable().Index(SongsSortKey) is int sortkeyindex)
 						SongsSortKeyPreference.SetValueIndex(sortkeyindex);
 					break;
 
 				default: break;
 			}
 		}
-		public override bool OnPreferenceChange(AndroidXPreference preference, Java.Lang.Object? newvalue)
+		public bool SongsOnPreferenceChange(AndroidXPreference preference, Java.Lang.Object? newvalue)
 		{
 			bool result = base.OnPreferenceChange(preference, newvalue);
 

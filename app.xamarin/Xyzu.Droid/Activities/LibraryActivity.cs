@@ -18,6 +18,7 @@ using System.Linq;
 using Xyzu.Droid;
 using Xyzu.Library;
 using Xyzu.Menus;
+using Xyzu.Settings.UserInterface;
 using Xyzu.Views.Insets;
 using Xyzu.Views.NowPlaying;
 using Xyzu.Views.Toolbar;
@@ -41,10 +42,15 @@ namespace Xyzu.Activities
 		protected AppBarLayout? _Appbarlayout;
 		protected ToolbarSearchView? _ToolbarSearch;
 		protected FloatingActionButton? _Floatingactionbutton;
+		protected IUserInterfaceSettingsDroid? _UserInterfaceSettings;
 
 		protected virtual int AppbarlayoutResourceId { get; }
 		protected virtual int ToolbarSearchResourceId { get; }
 		protected virtual int FloatingactionbuttonResourceId { get; }
+		public IUserInterfaceSettingsDroid UserInterfaceSettings
+		{
+			get => _UserInterfaceSettings ??= XyzuSettings.Instance.GetUserInterfaceDroid();
+		}
 
 		public StatusBarInsetView? StatusBarPrimary
 		{
@@ -237,7 +243,7 @@ namespace Xyzu.Activities
 
 				case ServiceConnectionChangedEventArgs.Events.Disconnected:
 					SlidingUpPanel?.SetPanelState(
-						p0: ViewNowPlaying.Settings.ForceShowNowPlaying
+						p0: UserInterfaceSettings.NowPlayingForceShow
 							? SlidingUpPanelLayout.PanelState.Collapsed
 							: SlidingUpPanelLayout.PanelState.Hidden);
 

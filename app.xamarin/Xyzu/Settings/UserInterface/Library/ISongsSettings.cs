@@ -4,19 +4,19 @@ using Xyzu.Settings.Enums;
 
 namespace Xyzu.Settings.UserInterface.Library
 {
-	public interface ISongsSettings<T> : IUserInterfaceSettings<T>
+	public interface ISongsSettings<T> : ISettings<T>
 	{
 		T IsReversed { get; set; }
 		T LayoutType { get; set; }
 		T SortKey { get; set; }
 	}
-	public interface ISongsSettings : IUserInterfaceSettings
+	public interface ISongsSettings : ISettings
 	{
-		bool IsReversed { get; set; }
-		LibraryLayoutTypes LayoutType { get; set; }
-		ModelSortKeys SortKey { get; set; }
+		bool SongsIsReversed { get; set; }
+		LibraryLayoutTypes SongsLayoutType { get; set; }
+		ModelSortKeys SongsSortKey { get; set; }
 
-		public new class Defaults : IUserInterfaceSettings.Defaults
+		public new class Defaults : ISettings.Defaults
 		{
 			public static readonly bool IsReversed = false;
 			public static readonly LibraryLayoutTypes LayoutType = LibraryLayoutTypes.ListMedium;
@@ -24,39 +24,39 @@ namespace Xyzu.Settings.UserInterface.Library
 
 			public static readonly ISongsSettings SongsSettings = new Default
 			{
-				IsReversed = IsReversed,
-				LayoutType = LayoutType,
-				SortKey = SortKey,
+				SongsIsReversed = IsReversed,
+				SongsLayoutType = LayoutType,
+				SongsSortKey = SortKey,
 			};
 		}
-		public new class Keys : IUserInterfaceSettings.Keys
+		public new class Keys : ISettings.Keys
 		{
-			public new const string Base = ILibrarySettings.Keys.Base + "." + nameof(ISongsSettings);
+			public new const string Base = IUserInterfaceSettings.Keys.Base + "." + nameof(ISongsSettings);
 
 			public const string IsReversed = Base + "." + nameof(IsReversed);
 			public const string LayoutType = Base + "." + nameof(LayoutType);
 			public const string SortKey = Base + "." + nameof(SortKey);
 		}
-		public new class Options : IUserInterfaceSettings.Options
+		public new class Options : ISettings.Options
 		{
 			public class LayoutTypes : LibraryDefaultSettings.Options.LayoutTypes { }
 			public class SortKeys : ISong.SortKeys { }
 		}
 
-		public new class Default : IUserInterfaceSettings.Default, ISongsSettings
+		public new class Default : ISettings.Default, ISongsSettings
 		{
 			public Default()
 			{
-				IsReversed = Defaults.IsReversed;
-				LayoutType = Defaults.LayoutType;
-				SortKey = Defaults.SortKey;
+				SongsIsReversed = Defaults.IsReversed;
+				SongsLayoutType = Defaults.LayoutType;
+				SongsSortKey = Defaults.SortKey;
 			}
 
 			protected bool _IsReversed;
 			protected LibraryLayoutTypes _LayoutType;
 			protected ModelSortKeys _SortKey;
 
-			public bool IsReversed
+			public bool SongsIsReversed
 			{
 				get => _IsReversed;
 				set
@@ -66,7 +66,7 @@ namespace Xyzu.Settings.UserInterface.Library
 					OnPropertyChanged();
 				}
 			}
-			public LibraryLayoutTypes LayoutType
+			public LibraryLayoutTypes SongsLayoutType
 			{
 				get => _LayoutType;
 				set
@@ -76,7 +76,7 @@ namespace Xyzu.Settings.UserInterface.Library
 					OnPropertyChanged();
 				}
 			}
-			public ModelSortKeys SortKey
+			public ModelSortKeys SongsSortKey
 			{
 				get => _SortKey;
 				set
@@ -94,22 +94,22 @@ namespace Xyzu.Settings.UserInterface.Library
 				switch (key)
 				{
 					case Keys.IsReversed when value is bool isreversed:
-						IsReversed = isreversed;
+						SongsIsReversed = isreversed;
 						break;
 								  
 					case Keys.LayoutType when value is LibraryLayoutTypes layouttype:
-						LayoutType = layouttype;
+						SongsLayoutType = layouttype;
 						break;
 								  
 					case Keys.SortKey when value is ModelSortKeys sortkey:
-						SortKey = sortkey;
+						SongsSortKey = sortkey;
 						break;
 
 					default: break;
 				}
 			}
 		}
-		public new class Default<T> : IUserInterfaceSettings.Default<T>, ISongsSettings<T>
+		public new class Default<T> : ISettings.Default<T>, ISongsSettings<T>
 		{
 			public Default(T defaultvalue) : base(defaultvalue)
 			{

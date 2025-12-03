@@ -14,12 +14,12 @@ namespace Xyzu.Settings.UserInterface.Library
 			
 			public static readonly ISearchSettings SearchSettings = new Default
 			{
-				LayoutType = LayoutType,
+				SearchLayoutType = LayoutType,
 			};
 		}
 		public new class Keys : ISettings.Keys
 		{
-			public new const string Base = ILibrarySettings.Keys.Base + "." + nameof(ISearchSettings);
+			public new const string Base = IUserInterfaceSettings.Keys.Base + "." + nameof(ISearchSettings);
 
 			public const string LayoutType = Base + "." + nameof(LayoutType);
 		}
@@ -28,7 +28,7 @@ namespace Xyzu.Settings.UserInterface.Library
 			public class LayoutTypes : LibraryDefaultSettings.Options.LayoutTypes { }
 		}
 
-		LibraryLayoutTypes LayoutType { get; set; }
+		LibraryLayoutTypes SearchLayoutType { get; set; }
 
 		public new class Default : ISettings.Default, ISearchSettings
 		{
@@ -39,7 +39,7 @@ namespace Xyzu.Settings.UserInterface.Library
 
 			private LibraryLayoutTypes _LayoutType;
 
-			public LibraryLayoutTypes LayoutType
+			public LibraryLayoutTypes SearchLayoutType
 			{
 				get => _LayoutType;
 				set
@@ -57,7 +57,7 @@ namespace Xyzu.Settings.UserInterface.Library
 				switch (key)
 				{
 					case Keys.LayoutType when value is LibraryLayoutTypes layouttype:
-						LayoutType = layouttype;
+						SearchLayoutType = layouttype;
 						break; 
 
 					default: break;

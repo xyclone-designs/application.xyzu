@@ -105,13 +105,13 @@ namespace Xyzu.Fragments.Library
 			base.ConfigureListOptions(listoptions);
 
 			listoptions.LayoutTypes = IQueueSettings.Options.LayoutTypes.AsEnumerable().NeatlyOrdered();
-			listoptions.LayoutTypeSelected = View?.Settings.LayoutType ?? IQueueSettings.Defaults.LayoutType;
+			listoptions.LayoutTypeSelected = View?.Settings.QueueLayoutType ?? IQueueSettings.Defaults.LayoutType;
 			listoptions.OnOptionsLayoutTypeItemSelected = layouttype =>
 			{
 				if (View is null)
 					return;
 
-				View.Settings.LayoutType = layouttype;
+				View.Settings.QueueLayoutType = layouttype;
 			};
 		}
 	}

@@ -6,10 +6,9 @@ using Android.Views;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
 
-using Oze.Music.MusicBarLib;
+//using Oze.Music.MusicBarLib;
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -26,20 +25,13 @@ using Xyzu.Settings.UserInterface;
 
 namespace Xyzu.Views.NowPlaying
 {
-	public partial class NowPlayingView : INowPlayingDroid, MusicBar.IOnMusicBarProgressChangeListener
+	public partial class NowPlayingView : INowPlaying//, MusicBar.IOnMusicBarProgressChangeListener
 	{
-		INowPlayingSettings INowPlaying.Settings 
-		{ 
-			get => throw new NotImplementedException(); 
-			set => throw new NotImplementedException(); 
-		}
-
 		protected int PositionTimerDue = 0;
 		protected int PositionTimerPeriodStop = -1;
 		protected int PositionTimerPeriodStart = 1_000;
 
 		protected IPlayer? _Player;
-		protected INowPlayingSettingsDroid? _Settings;
 		protected Timer? _PositionTimer;
 		protected ISong? _SongPrevious;
 		protected ISong? _SongCurrent;
@@ -73,33 +65,6 @@ namespace Xyzu.Views.NowPlaying
 					_Player.OnPropertyChanged += PlayerPropertyChanged;
 					_Player.Queue.PropertyChanged += PlayerQueuePropertyChanged;
 				}
-
-				OnPropertyChanged();
-			}
-		}
-		public INowPlayingSettingsDroid Settings
-		{
-			get
-			{
-				if (_Settings is null)
-				{
-					_Settings = SharedPreferences?.GetUserInterfaceNowPlayingDroid();
-
-					if (_Settings != null)
-						_Settings.PropertyChanged += SettingsPropertyChanged;
-				}
-
-				return _Settings ?? INowPlayingSettingsDroid.Defaults.NowPlayingSettingsDroid;
-			}
-			set
-			{
-				if (_Settings != null)
-					_Settings.PropertyChanged -= SettingsPropertyChanged;
-
-				_Settings = value;
-
-				if (_Settings != null)
-					_Settings.PropertyChanged += SettingsPropertyChanged;
 
 				OnPropertyChanged();
 			}
@@ -371,22 +336,22 @@ namespace Xyzu.Views.NowPlaying
 			}
 		}
 
-		void MusicBar.IOnMusicBarProgressChangeListener.OnProgressChanged(MusicBar musicBarView, int progress, bool fromUser)
-		{
-			if (fromUser is false)
-				return;
+		//void MusicBar.IOnMusicBarProgressChangeListener.OnProgressChanged(MusicBar musicBarView, int progress, bool fromUser)
+		//{
+		//	if (fromUser is false)
+		//		return;
 
-			SetPosition(TimeSpan.FromMilliseconds(musicBarView.Position), null, false);
-		}
-		void MusicBar.IOnMusicBarProgressChangeListener.OnStartTrackingTouch(MusicBar musicBarView)
-		{ }
-		void MusicBar.IOnMusicBarProgressChangeListener.OnStopTrackingTouch(MusicBar musicBarView)
-		{
-			InvokeOnViewOperation(this, new ViewOperationEventArgs(ViewOperations.Seek)
-			{
-				SeekValue = musicBarView.Position
-			});
-		}
+		//	SetPosition(TimeSpan.FromMilliseconds(musicBarView.Position), null, false);
+		//}
+		//void MusicBar.IOnMusicBarProgressChangeListener.OnStartTrackingTouch(MusicBar musicBarView)
+		//{ }
+		//void MusicBar.IOnMusicBarProgressChangeListener.OnStopTrackingTouch(MusicBar musicBarView)
+		//{
+		//	InvokeOnViewOperation(this, new ViewOperationEventArgs(ViewOperations.Seek)
+		//	{
+		//		SeekValue = musicBarView.Position
+		//	});
+		//}
 
 		class ArtworkOnScrollListener : RecyclerView.OnScrollListener
 		{

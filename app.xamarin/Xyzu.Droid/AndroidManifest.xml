@@ -2,8 +2,8 @@
 <manifest 
   xmlns:android="http://schemas.android.com/apk/res/android" 
   xmlns:tools="http://schemas.android.com/tools" 
-  android:versionCode="1" 
-  android:versionName="0.7-alpha_001" 
+  android:versionCode="2" 
+  android:versionName="0.7-alpha_002" 
   android:installLocation="auto" 
 	package="co.za.xyclonedesigns.xyzu">
   
@@ -35,7 +35,7 @@
     android:largeScreens="true" 
     android:xlargeScreens="false" />
   
-	<uses-sdk android:minSdkVersion="26" android:targetSdkVersion="34" />
+	<uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35" />
 	<uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />

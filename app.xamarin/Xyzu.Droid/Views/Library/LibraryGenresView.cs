@@ -58,11 +58,11 @@ namespace Xyzu.Views.Library
 		{
 			base.Configure();
 
-			Genres.LibraryItemsLayoutManager.LibraryLayoutType = Settings.LayoutType;
+			Genres.LibraryItemsLayoutManager.LibraryLayoutType = Settings.GenresLayoutType;
 
 			Genres.LibraryItemsAdapter.Images = Images;
 			Genres.LibraryItemsAdapter.Library = Library;
-			Genres.LibraryItemsAdapter.LibraryLayoutType = Settings.LayoutType;
+			Genres.LibraryItemsAdapter.LibraryLayoutType = Settings.GenresLayoutType;
 			Genres.LibraryItemsAdapter.PropertyChangedAction = PropertyChangedLibraryItemsAdapter;
 			Genres.LibraryItemsAdapter.ViewHolderOnBind = (viewholder, position) =>
 			{
@@ -130,14 +130,14 @@ namespace Xyzu.Views.Library
 
 			switch (args.PropertyName)
 			{
-				case nameof(IGenresSettings.LayoutType):
-					Genres.ReloadLayout(Settings.LayoutType);
+				case nameof(IGenresSettings.GenresLayoutType):
+					Genres.ReloadLayout(Settings.GenresLayoutType);
 					break;
-				case nameof(IGenresSettings.IsReversed):
+				case nameof(IGenresSettings.GenresIsReversed):
 					Genres.LibraryItemsAdapter.LibraryItems.Reverse();
 					break;
-				case nameof(IGenresSettings.SortKey):
-					Genres.LibraryItemsAdapter.SetLibraryItems(Genres.LibraryItemsAdapter.LibraryItems.Sort(Settings.SortKey, Settings.IsReversed));
+				case nameof(IGenresSettings.GenresSortKey):
+					Genres.LibraryItemsAdapter.SetLibraryItems(Genres.LibraryItemsAdapter.LibraryItems.Sort(Settings.GenresSortKey, Settings.GenresIsReversed));
 					break;
 
 				default: break;
@@ -146,7 +146,7 @@ namespace Xyzu.Views.Library
 			if (Settings != null)
 				SharedPreferences?
 					.Edit()?
-					.PutUserInterfaceLibraryGenres(Settings)?
+					.PutUserInterfaceGenres(Settings)?
 					.Apply();
 		}
 
@@ -172,7 +172,7 @@ namespace Xyzu.Views.Library
 			{
 				if (_Settings is null)
 				{
-					_Settings = SharedPreferences?.GetUserInterfaceLibraryGenres();
+					_Settings = SharedPreferences?.GetUserInterfaceGenres();
 
 					if (_Settings != null)
 						_Settings.PropertyChanged += PropertyChangedSettings;
@@ -209,7 +209,7 @@ namespace Xyzu.Views.Library
 
 			IAsyncEnumerable<IGenre> genres = Library.Genres
 				.GetGenres(null, Cancellationtoken)
-				.Sort(Settings.SortKey, Settings.IsReversed);
+				.Sort(Settings.GenresSortKey, Settings.GenresIsReversed);
 
 			Genres.LibraryItemsAdapter.LibraryItems.Clear();
 

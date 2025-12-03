@@ -1,5 +1,5 @@
 .vs
-internal
+.internal
 app.xamarin/BoxedVerticalSeekBar/bin
 app.xamarin/BoxedVerticalSeekBar/obj
 app.xamarin/SeekArc.Droid/bin
@@ -19,3 +19,7 @@ app.xamarin/Xyzu.Droid.Library/obj
 app.xamarin/Xyzu.Droid.Extensions/bin
 app.xamarin/Xyzu.Droid.Extensions/obj
 assets/New Folder
+app.maui
+app.java
+app.flutter
+app.react-native

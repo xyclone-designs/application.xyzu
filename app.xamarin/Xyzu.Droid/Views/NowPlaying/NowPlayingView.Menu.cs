@@ -82,7 +82,7 @@ namespace Xyzu.Views.NowPlaying
 				if (ArtworkPalette?.DominantSwatch != null)
 					_MenuPlayerSettingsView.Text.SetTextColor(new Color(ArtworkPalette.DominantSwatch.Rgb));
 
-				_MenuPlayerSettingsView.Text.SetText(Resource.String.settings_userinterface_nowplaying_title);
+				_MenuPlayerSettingsView.Text.SetText(Resource.String.settings_userinterface_title);
 				_MenuPlayerSettingsView.MenuOptionsRecyclerView.SimpleLayoutManager.SpanCount = 1;
 				_MenuPlayerSettingsView.MenuOptionsRecyclerView.SimpleAdapter.ViewHolderOnBind = (recyclerviewviewholderdefault, position) =>
 				{
@@ -188,7 +188,7 @@ namespace Xyzu.Views.NowPlaying
 					Intent settingsintent = new Intent(Context, typeof(Activities.SettingsActivity))
 						.PutExtra(
 							name: Activities.SettingsActivity.Intents.ExtraKeys.FragmentName,
-							value: Fragments.Settings.UserInterface.NowPlayingPreferenceFragment.FragmentName);
+							value: Fragments.Settings.UserInterface.UserInterfacePreferenceFragment.FragmentName);
 
 					Context.StartActivity(settingsintent);
 					return true;

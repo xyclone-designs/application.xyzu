@@ -4,34 +4,37 @@ using System.Linq;
 
 using Xyzu.Settings.Enums;
 
-namespace Xyzu.Settings.UserInterface.Library
+namespace Xyzu.Settings.UserInterface
 {
-	public interface ILibrarySettingsDroid<T> : ILibrarySettings<T>
+	public interface IUserInterfaceSettingsDroid<T> : IUserInterfaceSettings<T>
 	{
 		T HeaderScrollType { get; set; }
 		T NavigationType { get; set; }
+		T NowPlayingForceShow { get; set; }
 	}
-	public interface ILibrarySettingsDroid : ILibrarySettings
+	public interface IUserInterfaceSettingsDroid : IUserInterfaceSettings
 	{
-		public new class Defaults : ILibrarySettings.Defaults
+		public new class Defaults : IUserInterfaceSettings.Defaults
 		{
 			public const LibraryHeaderScrollTypes HeaderScrollType = LibraryHeaderScrollTypes.Scroll;
 			public const LibraryNavigationTypes NavigationType = LibraryNavigationTypes.Tabs;
+			public const bool NowPlayingForceShow = false;
 
-			public static readonly ILibrarySettingsDroid LibrarySettingsDroid = new Default
+			public static readonly IUserInterfaceSettingsDroid LibrarySettingsDroid = new Default
 			{
 				HeaderScrollType = HeaderScrollType,
 				NavigationType = NavigationType,
-				PageDefault = LibrarySettings.PageDefault,
-				PagesOrdered = LibrarySettings.PagesOrdered,
+				PageDefault = PageDefault,
+				PagesOrdered = PagesOrdered(),
 			};
 		}
-		public new class Keys : ILibrarySettings.Keys
+		public new class Keys : IUserInterfaceSettings.Keys
 		{
 			public const string HeaderScrollType = Base + "." + nameof(HeaderScrollType);
 			public const string NavigationType = Base + "." + nameof(NavigationType);
+			public const string NowPlayingForceShow = Base + "." + nameof(NowPlayingForceShow);
 		}
-		public new class Options : ILibrarySettings.Options
+		public new class Options : IUserInterfaceSettings.Options
 		{
 			public class HeaderScrollTypes
 			{
@@ -62,22 +65,26 @@ namespace Xyzu.Settings.UserInterface.Library
 
 		LibraryHeaderScrollTypes HeaderScrollType { get; set; }
 		LibraryNavigationTypes NavigationType { get; set; }
+		bool NowPlayingForceShow { get; set; }
 
-		public new class Default : ILibrarySettings.Default, ILibrarySettingsDroid
+		public new class Default : IUserInterfaceSettings.Default, IUserInterfaceSettingsDroid
 		{
 			public LibraryHeaderScrollTypes HeaderScrollType { get; set; }
 			public LibraryNavigationTypes NavigationType { get; set; }
+			public bool NowPlayingForceShow { get; set; }
 		}
-		public new class Default<T> : ILibrarySettings.Default<T>, ILibrarySettingsDroid<T>
+		public new class Default<T> : IUserInterfaceSettings.Default<T>, IUserInterfaceSettingsDroid<T>
 		{
 			public Default(T defaultvalue) : base(defaultvalue)
 			{
 				HeaderScrollType = defaultvalue;
 				NavigationType = defaultvalue;
+				NowPlayingForceShow = defaultvalue;
 			}
 
 			public T HeaderScrollType { get; set; }
 			public T NavigationType { get; set; }
+			public T NowPlayingForceShow { get; set; }
 		}
 	}
 }

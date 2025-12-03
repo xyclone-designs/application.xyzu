@@ -25,6 +25,7 @@ using Xyzu.Views.Toolbar;
 
 using JavaRunnable = Java.Lang.Runnable;
 using FrameLayout = Android.Widget.FrameLayout;
+using Xyzu.Settings.UserInterface;
 
 namespace Xyzu.Activities
 {
@@ -50,12 +51,12 @@ namespace Xyzu.Activities
 			get => _DrawerLayoutables ??= Settings.PagesOrdered
 				.Select<LibraryPages, IDrawerLayoutable>(pageordered => pageordered switch
 				{
-					ILibrarySettingsDroid.Options.Pages.Albums => FragmentLibraryAlbums,
-					ILibrarySettingsDroid.Options.Pages.Artists => FragmentLibraryArtists,
-					ILibrarySettingsDroid.Options.Pages.Genres => FragmentLibraryGenres,
-					ILibrarySettingsDroid.Options.Pages.Playlists => FragmentLibraryPlaylists,
-					ILibrarySettingsDroid.Options.Pages.Queue => FragmentLibraryQueue,
-					ILibrarySettingsDroid.Options.Pages.Songs => FragmentLibrarySongs,
+					IUserInterfaceSettingsDroid.Options.Pages.Albums => FragmentLibraryAlbums,
+					IUserInterfaceSettingsDroid.Options.Pages.Artists => FragmentLibraryArtists,
+					IUserInterfaceSettingsDroid.Options.Pages.Genres => FragmentLibraryGenres,
+					IUserInterfaceSettingsDroid.Options.Pages.Playlists => FragmentLibraryPlaylists,
+					IUserInterfaceSettingsDroid.Options.Pages.Queue => FragmentLibraryQueue,
+					IUserInterfaceSettingsDroid.Options.Pages.Songs => FragmentLibrarySongs,
 
 					_ => throw new ArgumentException(string.Format("Invalid LibraryPages '{0}' in LibraryActivityDrawerLayout.DrawerLayoutables.Get", pageordered))
 
@@ -138,12 +139,12 @@ namespace Xyzu.Activities
 		{
 			drawerlayoutable ??= CurrentDrawerLayoutable ?? Settings.PageDefault switch
 			{
-				ILibrarySettingsDroid.Options.Pages.Albums => FragmentLibraryAlbums,
-				ILibrarySettingsDroid.Options.Pages.Artists => FragmentLibraryArtists,
-				ILibrarySettingsDroid.Options.Pages.Genres => FragmentLibraryGenres,
-				ILibrarySettingsDroid.Options.Pages.Playlists => FragmentLibraryPlaylists,
-				ILibrarySettingsDroid.Options.Pages.Queue => FragmentLibraryQueue,
-				ILibrarySettingsDroid.Options.Pages.Songs => FragmentLibrarySongs,
+				IUserInterfaceSettingsDroid.Options.Pages.Albums => FragmentLibraryAlbums,
+				IUserInterfaceSettingsDroid.Options.Pages.Artists => FragmentLibraryArtists,
+				IUserInterfaceSettingsDroid.Options.Pages.Genres => FragmentLibraryGenres,
+				IUserInterfaceSettingsDroid.Options.Pages.Playlists => FragmentLibraryPlaylists,
+				IUserInterfaceSettingsDroid.Options.Pages.Queue => FragmentLibraryQueue,
+				IUserInterfaceSettingsDroid.Options.Pages.Songs => FragmentLibrarySongs,
 
 				_ => null
 			};

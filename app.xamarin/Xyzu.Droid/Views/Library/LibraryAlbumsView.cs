@@ -57,11 +57,11 @@ namespace Xyzu.Views.Library
 		{
 			base.Configure();
 
-			Albums.LibraryItemsLayoutManager.LibraryLayoutType = Settings.LayoutType;
+			Albums.LibraryItemsLayoutManager.LibraryLayoutType = Settings.AlbumsLayoutType;
 
 			Albums.LibraryItemsAdapter.Images = Images;
 			Albums.LibraryItemsAdapter.Library = Library;
-			Albums.LibraryItemsAdapter.LibraryLayoutType = Settings.LayoutType;
+			Albums.LibraryItemsAdapter.LibraryLayoutType = Settings.AlbumsLayoutType;
 			Albums.LibraryItemsAdapter.PropertyChangedAction = PropertyChangedLibraryItemsAdapter;
 			Albums.LibraryItemsAdapter.ViewHolderOnBind = (viewholder, position) =>
 			{
@@ -129,14 +129,14 @@ namespace Xyzu.Views.Library
 
 			switch (args.PropertyName)
 			{
-				case nameof(IAlbumsSettings.LayoutType):
-					Albums.ReloadLayout(Settings.LayoutType);
+				case nameof(IAlbumsSettings.AlbumsLayoutType):
+					Albums.ReloadLayout(Settings.AlbumsLayoutType);
 					break;
-				case nameof(IAlbumsSettings.IsReversed):
+				case nameof(IAlbumsSettings.AlbumsIsReversed):
 					Albums.LibraryItemsAdapter.LibraryItems.Reverse();
 					break;
-				case nameof(IAlbumsSettings.SortKey):
-					Albums.LibraryItemsAdapter.SetLibraryItems(Albums.LibraryItemsAdapter.LibraryItems.Sort(Settings.SortKey, Settings.IsReversed));
+				case nameof(IAlbumsSettings.AlbumsSortKey):
+					Albums.LibraryItemsAdapter.SetLibraryItems(Albums.LibraryItemsAdapter.LibraryItems.Sort(Settings.AlbumsSortKey, Settings.AlbumsIsReversed));
 					break;
 
 				default: break;
@@ -145,7 +145,7 @@ namespace Xyzu.Views.Library
 			if (Settings != null)
 				SharedPreferences?
 					.Edit()?
-					.PutUserInterfaceLibraryAlbums(Settings)?
+					.PutUserInterfaceAlbums(Settings)?
 					.Apply();
 		}
 
@@ -171,7 +171,7 @@ namespace Xyzu.Views.Library
 			{
 				if (_Settings is null)
 				{
-					_Settings = SharedPreferences?.GetUserInterfaceLibraryAlbums();
+					_Settings = SharedPreferences?.GetUserInterfaceAlbums();
 
 					if (_Settings != null)
 						_Settings.PropertyChanged += PropertyChangedSettings;
@@ -208,7 +208,7 @@ namespace Xyzu.Views.Library
 
 			IAsyncEnumerable<IAlbum> albums = Library.Albums
 				.GetAlbums(null, Cancellationtoken)
-				.Sort(Settings.SortKey, Settings.IsReversed);
+				.Sort(Settings.AlbumsSortKey, Settings.AlbumsIsReversed);
 
 			Albums.LibraryItemsAdapter.LibraryItems.Clear();
 

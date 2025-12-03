@@ -58,11 +58,11 @@ namespace Xyzu.Views.Library
 		{
 			base.Configure();
 
-			Playlists.LibraryItemsLayoutManager.LibraryLayoutType = Settings.LayoutType;
+			Playlists.LibraryItemsLayoutManager.LibraryLayoutType = Settings.PlaylistsLayoutType;
 
 			Playlists.LibraryItemsAdapter.Images = Images;
 			Playlists.LibraryItemsAdapter.Library = Library;
-			Playlists.LibraryItemsAdapter.LibraryLayoutType = Settings.LayoutType;
+			Playlists.LibraryItemsAdapter.LibraryLayoutType = Settings.PlaylistsLayoutType;
 			Playlists.LibraryItemsAdapter.PropertyChangedAction = PropertyChangedLibraryItemsAdapter;
 			Playlists.LibraryItemsAdapter.ViewHolderOnBind = (viewholder, position) =>
 			{
@@ -130,14 +130,14 @@ namespace Xyzu.Views.Library
 
 			switch (args.PropertyName)
 			{
-				case nameof(IPlaylistsSettings.LayoutType):
-					Playlists.ReloadLayout(Settings.LayoutType);
+				case nameof(IPlaylistsSettings.PlaylistsLayoutType):
+					Playlists.ReloadLayout(Settings.PlaylistsLayoutType);
 					break;
-				case nameof(IPlaylistsSettings.IsReversed):
+				case nameof(IPlaylistsSettings.PlaylistsIsReversed):
 					Playlists.LibraryItemsAdapter.LibraryItems.Reverse();
 					break;
-				case nameof(IPlaylistsSettings.SortKey):
-					Playlists.LibraryItemsAdapter.SetLibraryItems(Playlists.LibraryItemsAdapter.LibraryItems.Sort(Settings.SortKey, Settings.IsReversed));
+				case nameof(IPlaylistsSettings.PlaylistsSortKey):
+					Playlists.LibraryItemsAdapter.SetLibraryItems(Playlists.LibraryItemsAdapter.LibraryItems.Sort(Settings.PlaylistsSortKey, Settings.PlaylistsIsReversed));
 					break;
 
 				default: break;
@@ -146,7 +146,7 @@ namespace Xyzu.Views.Library
 			if (Settings != null)
 				SharedPreferences?
 					.Edit()?
-					.PutUserInterfaceLibraryPlaylists(Settings)?
+					.PutUserInterfacePlaylists(Settings)?
 					.Apply();
 		}
 
@@ -176,7 +176,7 @@ namespace Xyzu.Views.Library
 			{
 				if (_Settings is null)
 				{
-					_Settings = SharedPreferences?.GetUserInterfaceLibraryPlaylists();
+					_Settings = SharedPreferences?.GetUserInterfacePlaylists();
 
 					if (_Settings != null)
 						_Settings.PropertyChanged += PropertyChangedSettings;
@@ -268,7 +268,7 @@ namespace Xyzu.Views.Library
 
 			IAsyncEnumerable<IPlaylist> playlists = Library.Playlists
 				.GetPlaylists(null, Cancellationtoken)
-				.Sort(Settings.SortKey, Settings.IsReversed);
+				.Sort(Settings.PlaylistsSortKey, Settings.PlaylistsIsReversed);
 
 			Playlists.LibraryItemsAdapter.LibraryItems.Clear();
 

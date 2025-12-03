@@ -68,11 +68,11 @@ namespace Xyzu.Views.Library
 		{
 			base.Configure();
 
-			QueueSongs.LibraryItemsLayoutManager.LibraryLayoutType = Settings.LayoutType;
+			QueueSongs.LibraryItemsLayoutManager.LibraryLayoutType = Settings.QueueLayoutType;
 
 			QueueSongs.LibraryItemsAdapter.Images = Images;
 			QueueSongs.LibraryItemsAdapter.Library = Library;
-			QueueSongs.LibraryItemsAdapter.LibraryLayoutType = Settings.LayoutType;
+			QueueSongs.LibraryItemsAdapter.LibraryLayoutType = Settings.QueueLayoutType;
 			QueueSongs.LibraryItemsAdapter.PropertyChangedAction = PropertyChangedLibraryItemsAdapter;
 			QueueSongs.LibraryItemsAdapter.ViewHolderOnBind = (viewholder, position) =>
 			{
@@ -140,8 +140,8 @@ namespace Xyzu.Views.Library
 
 			switch (args.PropertyName)
 			{
-				case nameof(IQueueSettings.LayoutType):
-					QueueSongs.ReloadLayout(Settings.LayoutType);
+				case nameof(IQueueSettings.QueueLayoutType):
+					QueueSongs.ReloadLayout(Settings.QueueLayoutType);
 					break;
 
 				default: break;
@@ -150,7 +150,7 @@ namespace Xyzu.Views.Library
 			if (Settings != null)
 				SharedPreferences?
 					.Edit()?
-					.PutUserInterfaceLibraryQueue(Settings)?
+					.PutUserInterfaceQueue(Settings)?
 					.Apply();
 		}
 
@@ -173,7 +173,7 @@ namespace Xyzu.Views.Library
 			{
 				if (_Settings is null)
 				{
-					_Settings = SharedPreferences?.GetUserInterfaceLibraryQueue();
+					_Settings = SharedPreferences?.GetUserInterfaceQueue();
 
 					if (_Settings != null)
 						_Settings.PropertyChanged += PropertyChangedSettings;

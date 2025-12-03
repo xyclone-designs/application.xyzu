@@ -73,11 +73,11 @@ namespace Xyzu.Views.Library
 		{
 			base.Configure();
 
-			SearchResults.LibraryItemsLayoutManager.LibraryLayoutType = Settings.LayoutType;
+			SearchResults.LibraryItemsLayoutManager.LibraryLayoutType = Settings.SearchLayoutType;
 
 			SearchResults.LibraryItemsAdapter.Images = Images;
 			SearchResults.LibraryItemsAdapter.Library = Library;
-			SearchResults.LibraryItemsAdapter.LibraryLayoutType = Settings.LayoutType;
+			SearchResults.LibraryItemsAdapter.LibraryLayoutType = Settings.SearchLayoutType;
 			SearchResults.LibraryItemsAdapter.PropertyChangedAction = PropertyChangedLibraryItemsAdapter;
 			SearchResults.LibraryItemsAdapter.ViewHolderOnBind = (viewholder, position) =>
 			{
@@ -165,8 +165,8 @@ namespace Xyzu.Views.Library
 
 			switch (args.PropertyName)
 			{
-				case nameof(ISongsSettings.LayoutType):
-					SearchResults.ReloadLayout(Settings.LayoutType);
+				case nameof(ISongsSettings.SongsLayoutType):
+					SearchResults.ReloadLayout(Settings.SearchLayoutType);
 					break;
 
 				default: break;
@@ -175,7 +175,7 @@ namespace Xyzu.Views.Library
 			if (Settings != null)
 				SharedPreferences?
 					.Edit()?
-					.PutUserInterfaceLibrarySearch(Settings)
+					.PutUserInterfaceSearch(Settings)
 					.Apply();
 		}
 
@@ -202,7 +202,7 @@ namespace Xyzu.Views.Library
 			{
 				if (_Settings is null)
 				{
-					_Settings = SharedPreferences?.GetUserInterfaceLibrarySearch();
+					_Settings = SharedPreferences?.GetUserInterfaceSearch();
 
 					if (_Settings != null)
 						_Settings.PropertyChanged += PropertyChangedSettings;

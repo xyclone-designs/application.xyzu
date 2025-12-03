@@ -1,8 +1,10 @@
 ﻿using Android.Content;
 using Android.Graphics;
 using Android.Util;
+using Android.Views;
 
-using Oze.Music.MusicBarLib;
+
+//using Oze.Music.MusicBarLib;
 
 using System;
 using System.IO;
@@ -10,7 +12,24 @@ using Xyzu.Droid;
 
 namespace Xyzu.Views.NowPlaying
 {
-	public class ProgressBarFixed : FixedMusicBar
+	public class Bar : Android.Views.View
+	{
+		public Bar(Context context) : base(context) { }
+		public Bar(Context context, IAttributeSet? attrs) : base(context, attrs) { }
+		public Bar(Context context, IAttributeSet? attrs, int defStyleAttr) : base(context, attrs, defStyleAttr) { }
+
+		public void Hide() { }
+		public void Show() { }
+
+		public virtual void LoadFrom(Stream stream, int duration) { }
+		public virtual void LoadFrom(string pathname, int duration) { }
+		public virtual void SetProgress(int position) { }
+		public virtual void SetBarWidth(int barwidth) { }
+		public virtual void SetSpaceBetweenBar(int spacebetweenbar) { }
+		public virtual void SetProgressChangeListener(View view) { }
+		public virtual void SetLoadedBarColor(int loadedbarcolor) { }
+	}
+	public class ProgressBarFixed : Bar// FixedMusicBar
 	{
 		public ProgressBarFixed(Context context) : this(context, null) { }
 		public ProgressBarFixed(Context context, IAttributeSet? attrs) : this(context, attrs, Resource.Style.Xyzu_View_NowPlaying_ProgressBar_Fixed) { }
@@ -39,7 +58,7 @@ namespace Xyzu.Views.NowPlaying
 			catch (Exception) { }
 		}
 	}
-	public class ProgressBarScrollable : ScrollableMusicBar
+	public class ProgressBarScrollable : Bar// ScrollableMusicBar
 	{
 		public ProgressBarScrollable(Context context) : this(context, null) { }
 		public ProgressBarScrollable(Context context, IAttributeSet? attrs) : this(context, attrs, Resource.Style.Xyzu_View_NowPlaying_ProgressBar_Scrollable) { }

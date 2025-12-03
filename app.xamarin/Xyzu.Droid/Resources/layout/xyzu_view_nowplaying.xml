@@ -88,7 +88,7 @@
     <androidx.appcompat.widget.AppCompatImageButton
         style="@style/Xyzu.View.NowPlaying.Button.Menu"
         android:id="@+id/xyzu_view_nowplaying_buttons_menu_playersettings_appcompatimagebutton"
-        android:src="@drawable/icon_settings_userinterface_nowplaying"/>
+        android:src="@drawable/icon_settings_userinterface"/>
 
     <androidx.appcompat.widget.AppCompatImageButton
         style="@style/Xyzu.View.NowPlaying.Button.Menu"

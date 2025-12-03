@@ -4,19 +4,19 @@ using Xyzu.Settings.Enums;
 
 namespace Xyzu.Settings.UserInterface.Library
 {
-	public interface IGenresSettings<T> : IUserInterfaceSettings<T>
+	public interface IGenresSettings<T> : ISettings<T>
 	{
 		T IsReversed { get; set; }
 		T LayoutType { get; set; }
 		T SortKey { get; set; }
 	}
-	public interface IGenresSettings : IUserInterfaceSettings
+	public interface IGenresSettings : ISettings
 	{
-		bool IsReversed { get; set; }
-		LibraryLayoutTypes LayoutType { get; set; }
-		ModelSortKeys SortKey { get; set; }
+		bool GenresIsReversed { get; set; }
+		LibraryLayoutTypes GenresLayoutType { get; set; }
+		ModelSortKeys GenresSortKey { get; set; }
 
-		public new class Defaults : IUserInterfaceSettings.Defaults
+		public new class Defaults : ISettings.Defaults
 		{
 			public static readonly bool IsReversed = false;
 			public static readonly LibraryLayoutTypes LayoutType = LibraryLayoutTypes.ListMedium;
@@ -24,12 +24,12 @@ namespace Xyzu.Settings.UserInterface.Library
 
 			public static readonly IGenresSettings GenresSettings = new Default
 			{
-				IsReversed = IsReversed,
-				LayoutType = LayoutType,
-				SortKey = SortKey,
+				GenresIsReversed = IsReversed,
+				GenresLayoutType = LayoutType,
+				GenresSortKey = SortKey,
 			};
 		}
-		public new class Keys : IUserInterfaceSettings.Keys
+		public new class Keys : ISettings.Keys
 		{
 			public new const string Base = IUserInterfaceSettings.Keys.Base + "." + nameof(IGenresSettings);
 
@@ -37,13 +37,13 @@ namespace Xyzu.Settings.UserInterface.Library
 			public const string LayoutType = Base + "." + nameof(LayoutType);
 			public const string SortKey = Base + "." + nameof(SortKey);
 		}
-		public new class Options : IUserInterfaceSettings.Options
+		public new class Options : ISettings.Options
 		{
 			public class LayoutTypes : LibraryDefaultSettings.Options.LayoutTypes { }
 			public class SortKeys : IGenre.SortKeys { }
 		}
 
-		public new class Default : IUserInterfaceSettings.Default, IGenresSettings
+		public new class Default : ISettings.Default, IGenresSettings
 		{
 			public Default()
 			{
@@ -56,7 +56,7 @@ namespace Xyzu.Settings.UserInterface.Library
 			protected LibraryLayoutTypes _LayoutType;
 			protected ModelSortKeys _SortKey;
 
-			public bool IsReversed
+			public bool GenresIsReversed
 			{
 				get => _IsReversed;
 				set
@@ -66,7 +66,7 @@ namespace Xyzu.Settings.UserInterface.Library
 					OnPropertyChanged();
 				}
 			}
-			public LibraryLayoutTypes LayoutType
+			public LibraryLayoutTypes GenresLayoutType
 			{
 				get => _LayoutType;
 				set
@@ -76,7 +76,7 @@ namespace Xyzu.Settings.UserInterface.Library
 					OnPropertyChanged();
 				}
 			}
-			public ModelSortKeys SortKey
+			public ModelSortKeys GenresSortKey
 			{
 				get => _SortKey;
 				set
@@ -94,22 +94,22 @@ namespace Xyzu.Settings.UserInterface.Library
 				switch (key)
 				{
 					case Keys.IsReversed when value is bool isreversed:
-						IsReversed = isreversed;
+						GenresIsReversed = isreversed;
 						break;
 
 					case Keys.LayoutType when value is LibraryLayoutTypes layouttype:
-						LayoutType = layouttype;
+						GenresLayoutType = layouttype;
 						break;
 
 					case Keys.SortKey when value is ModelSortKeys sortkey:
-						SortKey = sortkey;
+						GenresSortKey = sortkey;
 						break;
 
 					default: break;
 				}
 			}
 		}
-		public new class Default<T> : IUserInterfaceSettings.Default<T>, IGenresSettings<T>
+		public new class Default<T> : ISettings.Default<T>, IGenresSettings<T>
 		{
 			public Default(T defaultvalue) : base(defaultvalue)
 			{

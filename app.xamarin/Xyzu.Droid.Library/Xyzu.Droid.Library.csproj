@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0-android</TargetFramework>
+    <TargetFramework>net9.0-android</TargetFramework>
     <SupportedOSPlatformVersion>26</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
@@ -9,9 +9,9 @@
 
   <ItemGroup>
     <PackageReference Include="Laerdal.FFmpeg.Android.Full" Version="4.4.28" />
-    <PackageReference Include="XycloneDesigns.Extensions.Android" Version="1.0.2" />
-    <PackageReference Include="XycloneDesigns.Extensions.AndroidX.AppCompat" Version="1.0.1" />
-    <PackageReference Include="XycloneDesigns.Extensions.SQLite" Version="1.0.0" />
+    <PackageReference Include="XycloneDesigns.Extensions.Android" Version="1.1.0" />
+    <PackageReference Include="XycloneDesigns.Extensions.AndroidX.AppCompat" Version="1.1.0" />
+    <PackageReference Include="XycloneDesigns.Extensions.SQLite" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>

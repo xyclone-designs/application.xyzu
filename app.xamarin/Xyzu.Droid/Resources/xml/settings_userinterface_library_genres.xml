@@ -3,29 +3,29 @@
 
   <xyzu.preference.SwitchPreference
       app:iconSpaceReserved="false"
-      app:key="settings_userinterface_library_genres_isreversed_switchpreference_key"
-      app:title="@string/settings_userinterface_library_genres_isreversed_title"
-      app:summary="@string/settings_userinterface_library_genres_isreversed_description"
-      app:summaryOn="@string/settings_userinterface_library_genres_isreversed_description_on"
-      app:summaryOff="@string/settings_userinterface_library_genres_isreversed_description_off"/>
+      app:key="settings_userinterface_genres_isreversed_switchpreference_key"
+      app:title="@string/settings_userinterface_genres_isreversed_title"
+      app:summary="@string/settings_userinterface_genres_isreversed_description"
+      app:summaryOn="@string/settings_userinterface_genres_isreversed_description_on"
+      app:summaryOff="@string/settings_userinterface_genres_isreversed_description_off"/>
 
   <xyzu.preference.ListPreference
       app:iconSpaceReserved="false"
-      app:key="settings_userinterface_library_genres_layouttype_listpreference_key"
-      app:title="@string/settings_userinterface_library_genres_layouttype_title"
-      app:summary="@string/settings_userinterface_library_genres_layouttype_description"
-      app:dialogTitle="@string/settings_userinterface_library_genres_layouttype_dialog_title"
-      app:negativeButtonText="@string/settings_userinterface_library_genres_layouttype_dialog_negativebutton"
-      app:positiveButtonText="@string/settings_userinterface_library_genres_layouttype_dialog_positivebutton"/>
+      app:key="settings_userinterface_genres_layouttype_listpreference_key"
+      app:title="@string/settings_userinterface_genres_layouttype_title"
+      app:summary="@string/settings_userinterface_genres_layouttype_description"
+      app:dialogTitle="@string/settings_userinterface_genres_layouttype_dialog_title"
+      app:negativeButtonText="@string/settings_userinterface_genres_layouttype_dialog_negativebutton"
+      app:positiveButtonText="@string/settings_userinterface_genres_layouttype_dialog_positivebutton"/>
 
   <xyzu.preference.ListPreference
       app:iconSpaceReserved="false"
-      app:key="settings_userinterface_library_genres_sortkey_listpreference_key"
-      app:title="@string/settings_userinterface_library_genres_sortkey_title"
-      app:summary="@string/settings_userinterface_library_genres_sortkey_description"
-      app:dialogTitle="@string/settings_userinterface_library_genres_sortkey_dialog_title"
-      app:negativeButtonText="@string/settings_userinterface_library_genres_sortkey_dialog_negativebutton"
-      app:positiveButtonText="@string/settings_userinterface_library_genres_sortkey_dialog_positivebutton"/>
+      app:key="settings_userinterface_genres_sortkey_listpreference_key"
+      app:title="@string/settings_userinterface_genres_sortkey_title"
+      app:summary="@string/settings_userinterface_genres_sortkey_description"
+      app:dialogTitle="@string/settings_userinterface_genres_sortkey_dialog_title"
+      app:negativeButtonText="@string/settings_userinterface_genres_sortkey_dialog_negativebutton"
+      app:positiveButtonText="@string/settings_userinterface_genres_sortkey_dialog_positivebutton"/>
 
   <xyzu.preference.NavigationBarInsetPreference />
 

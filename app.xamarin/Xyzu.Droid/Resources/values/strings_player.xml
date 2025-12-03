@@ -1,4 +1,5 @@
 <resources>
+  
   <string name="playerserviceoptions_notificationoptions_id">Notification_ID</string>
   <string name="playerserviceoptions_notificationoptions_channel_name">NotificationChannel_Name</string>
   <string name="playerserviceoptions_notificationoptions_channel_description">NotificationChannel_Description</string>
@@ -46,6 +47,5 @@
   <string name="player_equaliser_cutoff_band08">08mhz</string>
   <string name="player_equaliser_cutoff_band09">16mhz</string>
   <string name="player_equaliser_cutoff_band10">20mhz</string>
-  
   
 </resources>

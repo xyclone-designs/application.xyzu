@@ -61,11 +61,11 @@ namespace Xyzu.Views.Library
 		{
 			base.Configure();
 
-			Songs.LibraryItemsLayoutManager.LibraryLayoutType = Settings.LayoutType;
+			Songs.LibraryItemsLayoutManager.LibraryLayoutType = Settings.SongsLayoutType;
 
 			Songs.LibraryItemsAdapter.Images = Images;
 			Songs.LibraryItemsAdapter.Library = Library;
-			Songs.LibraryItemsAdapter.LibraryLayoutType = Settings.LayoutType;
+			Songs.LibraryItemsAdapter.LibraryLayoutType = Settings.SongsLayoutType;
 			Songs.LibraryItemsAdapter.PropertyChangedAction = PropertyChangedLibraryItemsAdapter;
 			Songs.LibraryItemsAdapter.ViewHolderOnBind = (viewholder, position) =>
 			{
@@ -132,14 +132,14 @@ namespace Xyzu.Views.Library
 
 			switch (args.PropertyName)
 			{
-				case nameof(ISongsSettings.LayoutType):
-					Songs.ReloadLayout(Settings.LayoutType);
+				case nameof(ISongsSettings.SongsLayoutType):
+					Songs.ReloadLayout(Settings.SongsLayoutType);
 					break;
-				case nameof(ISongsSettings.IsReversed):
+				case nameof(ISongsSettings.SongsIsReversed):
 					Songs.LibraryItemsAdapter.LibraryItems.Reverse();
 					break;
-				case nameof(ISongsSettings.SortKey):
-					Songs.LibraryItemsAdapter.SetLibraryItems(Songs.LibraryItemsAdapter.LibraryItems.Sort(Settings.SortKey, Settings.IsReversed));
+				case nameof(ISongsSettings.SongsSortKey):
+					Songs.LibraryItemsAdapter.SetLibraryItems(Songs.LibraryItemsAdapter.LibraryItems.Sort(Settings.SongsSortKey, Settings.SongsIsReversed));
 					break;
 
 				default: break;
@@ -148,7 +148,7 @@ namespace Xyzu.Views.Library
 			if (Settings != null)
 				SharedPreferences?
 					.Edit()?
-					.PutUserInterfaceLibrarySongs(Settings)?
+					.PutUserInterfaceSongs(Settings)?
 					.Apply();
 		}
 
@@ -174,7 +174,7 @@ namespace Xyzu.Views.Library
 			{
 				if (_Settings is null)
 				{
-					_Settings = SharedPreferences?.GetUserInterfaceLibrarySongs();
+					_Settings = SharedPreferences?.GetUserInterfaceSongs();
 
 					if (_Settings != null)
 						_Settings.PropertyChanged += PropertyChangedSettings;
@@ -211,7 +211,7 @@ namespace Xyzu.Views.Library
 
 			IAsyncEnumerable<ISong> songs = Library.Songs
 				.GetSongs(null, Cancellationtoken)
-				.Sort(Settings.SortKey, Settings.IsReversed);
+				.Sort(Settings.SongsSortKey, Settings.SongsIsReversed);
 
 			Songs.LibraryItemsAdapter.LibraryItems.Clear();
 			

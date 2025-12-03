@@ -122,7 +122,7 @@ namespace Xyzu.Player.Exoplayer
 
 					if (notificationmanager is not null)
 					{
-						notificationmanager.SetMediaSessionToken(MediaSession.SessionCompatToken);
+						notificationmanager.SetMediaSessionToken(MediaSession.PlatformToken);
 						notificationmanager.ActionIndicesForCompactView = NotificationChannelActionIndicesForCompactView;
 						notificationmanager.OnUpdate = (player, builder, ongoing, largeIcon) =>
 						{

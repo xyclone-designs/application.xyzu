@@ -43,8 +43,8 @@ namespace Xyzu.Menus
 			return string.Format(
 				"{0}.{1}.{2}", 
 				Albums, 
-				settings?.SortKey ?? IAlbumsSettings.Defaults.SortKey, 
-				settings?.IsReversed ?? IAlbumsSettings.Defaults.IsReversed);
+				settings?.AlbumsSortKey ?? IAlbumsSettings.Defaults.SortKey, 
+				settings?.AlbumsIsReversed ?? IAlbumsSettings.Defaults.IsReversed);
 		}														  
 		public static string QueueIdAlbum(string? albumid, IAlbumSettings? settings)
 		{
@@ -60,8 +60,8 @@ namespace Xyzu.Menus
 			return string.Format(
 				"{0}.{1}.{2}", 
 				Artists, 
-				settings?.SortKey ?? IArtistsSettings.Defaults.SortKey, 
-				settings?.IsReversed ?? IArtistsSettings.Defaults.IsReversed);
+				settings?.ArtistsSortKey ?? IArtistsSettings.Defaults.SortKey, 
+				settings?.ArtistsIsReversed ?? IArtistsSettings.Defaults.IsReversed);
 		}														  
 		public static string QueueIdArtistAlbums(string? artistid, IArtistSettings? settings)
 		{
@@ -86,8 +86,8 @@ namespace Xyzu.Menus
 			return string.Format(
 				"{0}.{1}.{2}", 
 				Genres, 
-				settings?.SortKey ?? IGenresSettings.Defaults.SortKey, 
-				settings?.IsReversed ?? IGenresSettings.Defaults.IsReversed);
+				settings?.GenresSortKey ?? IGenresSettings.Defaults.SortKey, 
+				settings?.GenresIsReversed ?? IGenresSettings.Defaults.IsReversed);
 		}														  
 		public static string QueueIdGenre(string? genreid, IGenreSettings? settings)
 		{
@@ -103,8 +103,8 @@ namespace Xyzu.Menus
 			return string.Format(
 				"{0}.{1}.{2}", 
 				Playlists, 
-				settings?.SortKey ?? IPlaylistsSettings.Defaults.SortKey, 
-				settings?.IsReversed ?? IPlaylistsSettings.Defaults.IsReversed);
+				settings?.PlaylistsSortKey ?? IPlaylistsSettings.Defaults.SortKey, 
+				settings?.PlaylistsIsReversed ?? IPlaylistsSettings.Defaults.IsReversed);
 		}														  
 		public static string QueueIdPlaylist(string? playlistid, IPlaylistSettings? settings)
 		{
@@ -132,8 +132,8 @@ namespace Xyzu.Menus
 			return string.Format(
 				"{0}.{1}.{2}",
 				Songs,
-				settings?.SortKey ?? IPlaylistsSettings.Defaults.SortKey,
-				settings?.IsReversed ?? IPlaylistsSettings.Defaults.IsReversed);
+				settings?.SongsSortKey ?? IPlaylistsSettings.Defaults.SortKey,
+				settings?.SongsIsReversed ?? IPlaylistsSettings.Defaults.IsReversed);
 		}
 
 		public static void Play(VariableContainer variables)

@@ -1,9 +1,7 @@
-﻿#nullable enable
-
-using Android.Content;
+﻿using Android.Content;
 
 using Xyzu.Settings.Enums;
-using Xyzu.Settings.UserInterface.Library;
+using Xyzu.Settings.UserInterface;
 
 namespace Xyzu
 {
@@ -15,9 +13,9 @@ namespace Xyzu
 			{
 				if (librarynavigationtype is null)
 				{
-					ILibrarySettingsDroid? librarynavigationsettingsdroid = Instance.SharedPreferences?.GetUserInterfaceLibraryDroid();
+					IUserInterfaceSettingsDroid? librarynavigationsettingsdroid = Instance.SharedPreferences?.GetUserInterfaceDroid();
 
-					librarynavigationtype = librarynavigationsettingsdroid?.NavigationType ?? ILibrarySettingsDroid.Defaults.NavigationType;
+					librarynavigationtype = librarynavigationsettingsdroid?.NavigationType ?? IUserInterfaceSettingsDroid.Defaults.NavigationType;
 				}
 
 				return librarynavigationtype switch

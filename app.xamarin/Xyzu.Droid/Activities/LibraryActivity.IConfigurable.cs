@@ -13,21 +13,22 @@ using System.Threading.Tasks;
 
 using Xyzu.Menus;
 using Xyzu.Settings.Enums;
+using Xyzu.Settings.UserInterface;
 using Xyzu.Settings.UserInterface.Library;
 
 namespace Xyzu.Activities
 {
 	public partial class LibraryActivity 
 	{
-		private ILibrarySettingsDroid? _Settings;
+		private IUserInterfaceSettingsDroid? _Settings;
 
-		protected ILibrarySettingsDroid Settings
+		protected IUserInterfaceSettingsDroid Settings
 		{
 			get
 			{
 				if (_Settings is null)
 				{
-					_Settings = XyzuSettings.Instance.GetUserInterfaceLibraryDroid();
+					_Settings = XyzuSettings.Instance.GetUserInterfaceDroid();
 					_Settings.PropertyChanged += OnSettingsPropertyChanged;
 				}
 

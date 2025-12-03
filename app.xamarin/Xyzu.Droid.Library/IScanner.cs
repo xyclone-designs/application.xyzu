@@ -397,7 +397,6 @@ namespace Xyzu.Library
 						return
 							ILibraryDroid.IdFromAlbumTitle(song_add.Album, song_add.AlbumArtist) is string albumid &&
 							Binder.Library.SQLiteLibrary.AlbumsTable.Any<AlbumEntity>(album => album.Id == albumid) is false;
-
 					}))))
 				{
 					Notification?.Update(Notification.ContentTextsSaving?.TextAlbums, string.Format("{0} - {1}", albumentity.Title, albumentity.Artist));
@@ -419,7 +418,7 @@ namespace Xyzu.Library
 
 					Notification?.Update(Notification.ContentTextsReading?.TextAlbums, string.Format("{0} - {1}", albumentity.Title, albumentity.Artist));
 
-					album.Duration += removes_songs.Sum(remove => remove.Duration ?? TimeSpan.Zero);
+					album.Duration += adds_songs.Sum(add => add.Duration ?? TimeSpan.Zero);
 					album.SongIds = album.SongIds.Concat(adds_songs.Select(add => add.Id));
 
 					album.Duration -= removes_songs.Sum(remove => remove.Duration ?? TimeSpan.Zero);
@@ -549,7 +548,7 @@ namespace Xyzu.Library
 
 					Notification?.Update(Notification.ContentTextsReading?.TextGenres, genreentity.Name);
 
-					genre.Duration += adds_songs.Sum(remove => remove.Duration ?? TimeSpan.Zero);
+					genre.Duration += adds_songs.Sum(add => add.Duration ?? TimeSpan.Zero);
 					genre.SongIds = genre.SongIds.Concat(adds_songs.Select(add => add.Id));
 
 					genre.Duration -= removes_songs.Sum(remove => remove.Duration ?? TimeSpan.Zero);

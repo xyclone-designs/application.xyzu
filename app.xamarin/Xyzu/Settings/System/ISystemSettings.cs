@@ -1,117 +1,128 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Text;
+
+using Xyzu.Settings.Enums;
 
 namespace Xyzu.Settings.System
 {
 	public interface ISystemSettings<T> : ISettings<T>
 	{
 		T ErrorLogs { get; set; }
+		T LanguageCurrent { get; set; }
+		T LanguageMode { get; set; }
+		T ThemeMode { get; set; }
 	}
-	public interface ISystemSettings : ISettings
+	public partial interface ISystemSettings : ISettings
 	{
 		IEnumerable<IErrorLog> ErrorLogs { get; set; }
+		CultureInfo LanguageCurrent { get; set; }
+		LanguageModes LanguageMode { get; set; }
+		ThemeModes ThemeMode { get; set; }
 
+		public new class Defaults : ISettings.Defaults
+		{
+			public static readonly IEnumerable<IErrorLog> ErrorLogs = Enumerable.Empty<IErrorLog>();
+			public static readonly CultureInfo LanguageCurrent = Options.LanguageCurrent.English;
+			public static readonly LanguageModes LanguageMode = Options.LanguageMode.FollowSystem;
+			public static readonly ThemeModes ThemeMode = Options.ThemeMode.FollowSystem;
+		}
 		public new class Keys : ISettings.Keys
 		{
 			public new const string Base = ISettings.Keys.Base + "." + nameof(ISystemSettings);
+
+			public const string ThemeMode = Base + "." + nameof(ThemeMode);
+			public const string LanguageCurrent = Base + "." + nameof(LanguageCurrent);
+			public const string LanguageMode = Base + "." + nameof(LanguageMode);
+		}
+		public new class Options : ISettings.Options
+		{
+			public class LanguageCurrent
+			{
+				public static readonly CultureInfo English = CultureInfo.GetCultureInfo("en");
+
+				public static IEnumerable<CultureInfo> AsEnumerable()
+				{
+					yield return English;
+				}
+			}
+			public class LanguageMode
+			{
+				public const LanguageModes FollowSystem = LanguageModes.FollowSystem;
+				public const LanguageModes ForceChosen = LanguageModes.ForceChosen;
+
+				public static IEnumerable<LanguageModes> AsEnumerable()
+				{
+					yield return FollowSystem;
+					yield return ForceChosen;
+				}
+			}
+			public class ThemeMode
+			{
+				public const ThemeModes FollowSystem = ThemeModes.FollowSystem;
+				public const ThemeModes ForceDark = ThemeModes.ForceDark;
+				public const ThemeModes ForceLight = ThemeModes.ForceLight;
+
+				public static IEnumerable<ThemeModes> AsEnumerable()
+				{
+					yield return FollowSystem;
+					yield return ForceDark;
+					yield return ForceLight;
+				}
+			}
 		}
 
 		public new class Default : ISettings.Default, ISystemSettings
 		{
 			public Default() : base()
 			{
-				ErrorLogs = Enumerable.Empty<IErrorLog>();
+				ErrorLogs = Defaults.ErrorLogs;
+				LanguageCurrent = Defaults.LanguageCurrent;
+				LanguageMode = Defaults.LanguageMode;
+				ThemeMode = Defaults.ThemeMode;
 			}
 
 			public IEnumerable<IErrorLog> ErrorLogs { get; set; }
+			public CultureInfo LanguageCurrent { get; set; }
+			public LanguageModes LanguageMode { get; set; }
+			public ThemeModes ThemeMode { get; set; }
+
+			public override void SetFromKey(string key, object? value)
+			{
+				base.SetFromKey(key, value);
+
+				switch (key)
+				{
+					case Keys.LanguageCurrent when value is CultureInfo languagecurrent:
+						LanguageCurrent = languagecurrent;
+						break;
+
+					case Keys.LanguageMode when value is LanguageModes languagemode:
+						LanguageMode = languagemode;
+						break;
+
+					case Keys.ThemeMode when value is ThemeModes thememode:
+						ThemeMode = thememode;
+						break;
+
+					default: break;
+				}
+			}
 		}
 		public new class Default<T> : ISettings.Default<T>, ISystemSettings<T>
 		{
 			public Default(T defaultvalue) : base(defaultvalue)
 			{
 				ErrorLogs = defaultvalue;
+				LanguageCurrent = defaultvalue;
+				LanguageMode = defaultvalue;
+				ThemeMode = defaultvalue;
 			}
 
 			public T ErrorLogs { get; set; }
-		}
-
-		public interface IErrorLog
-		{
-			private const string IdPrefix = "Id: ";
-			private const string DatePrefix = "Date: ";
-
-			string Id { get; }
-			DateTime Date { get; }
-			string? Path { get; set; }
-			Exception? Exception { get; set; }
-
-			string FileName
-			{
-				get => string.Format("{0}, {1}.txt", Date.ToString("yyyy-MM-dd, HH-mm"), Id);
-			}
-
-			public string AsText()
-			{
-				StringBuilder stringbuilder = new StringBuilder()
-					.AppendFormat("{0}{1}", IdPrefix, Id).AppendLine()
-					.AppendFormat("{0}{1}", DatePrefix, Date).AppendLine();
-
-				if (Exception is null)
-					return stringbuilder.AppendLine("Exception: null").ToString();
-
-				Exception? exception = Exception;
-
-				while (exception is not null)
-				{
-					stringbuilder
-						.AppendFormat("Exception.Message: {0}", Exception.Message).AppendLine()
-						.AppendFormat("Exception.Source: {0}", Exception.Source).AppendLine()
-						.AppendFormat("Exception.StackTrace: {0}", Exception.StackTrace).AppendLine()
-						.AppendFormat("Exception.TargetSite: {0}", Exception.TargetSite?.Name).AppendLine()
-						.AppendLine("---------------------");
-
-					exception = exception.InnerException;
-				}
-
-				return stringbuilder.ToString();
-			}
-
-			public class Default : IErrorLog
-			{
-				public Default(string id) : this(id, DateTime.Now) { }
-				public Default(string id, DateTime date)
-				{
-					Id = id;
-					Date = date;
-				}
-				
-				public string Id { get; }
-				public DateTime Date { get; }
-
-				public string? Path { get; set; }
-				public Exception? Exception { get; set; }
-			}
-
-			public static Default FromText(string text)
-			{
-				using StringReader stringreader = new (text);
-
-				string id = stringreader.ReadLine()?[(IdPrefix.Length - 1) ..] ?? string.Empty;
-				string date = stringreader.ReadLine()?[(DatePrefix.Length - 1) ..] ?? string.Empty;
-				DateTime datetime = DateTime.TryParse(date, out DateTime _datetime) ? _datetime : DateTime.Now;
-
-				return new Default(id, datetime);
-			}
-			public static Default FromException(Exception exception)
-			{
-				return new Default(Guid.NewGuid().ToString())
-				{
-					Exception = exception
-				};
-			}
+			public T LanguageCurrent { get; set; }
+			public T LanguageMode { get; set; }
+			public T ThemeMode { get; set; }
 		}
 	}
 }

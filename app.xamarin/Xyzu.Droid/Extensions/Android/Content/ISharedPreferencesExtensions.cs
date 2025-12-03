@@ -274,55 +274,73 @@ namespace Android.Content
 		}												 
 		public static ISystemSettingsDroid GetSystemDroid(this ISharedPreferences sharedpreferences)
 		{
-			return new ISystemSettingsDroid.Default { };
+			return new ISystemSettingsDroid.Default 
+			{
+				LanguageMode = sharedpreferences.GetEnum(ISystemSettings.Keys.LanguageMode, ISystemSettings.Defaults.LanguageMode),
+				LanguageCurrent = sharedpreferences.GetCultureInfo(ISystemSettings.Keys.LanguageCurrent, ISystemSettings.Defaults.LanguageCurrent),
+				ThemeMode = sharedpreferences.GetEnum(ISystemSettings.Keys.ThemeMode, ISystemSettings.Defaults.ThemeMode),
+			};
 		}				
 		public static IUserInterfaceSettings GetUserInterface(this ISharedPreferences sharedpreferences)
 		{
-			return new IUserInterfaceSettings.Default { };
-		}	 
-		public static ILanguagesSettings GetUserInterfaceLanguages(this ISharedPreferences sharedpreferences)
-		{
-			return new ILanguagesSettings.Default 
-			{
-				Mode = sharedpreferences.GetEnum(ILanguagesSettings.Keys.Mode, ILanguagesSettings.Defaults.Mode),
-				CurrentLanguage = sharedpreferences.GetCultureInfo(ILanguagesSettings.Keys.CurrentLanguage, ILanguagesSettings.Defaults.CurrentLanguage),
-			};
-		}
-		public static ILibrarySettings GetUserInterfaceLibrary(this ISharedPreferences sharedpreferences)
-		{
 			IDictionary<LibraryPages, int> pagesordered = new Dictionary<LibraryPages, int>
 			{
-				{ ILibrarySettings.Options.Pages.Albums, sharedpreferences.GetInt(ILibrarySettings.Keys.PagesOrderedAlbums, ILibrarySettings.Defaults.PagesOrderedAlbums) },
-				{ ILibrarySettings.Options.Pages.Artists, sharedpreferences.GetInt(ILibrarySettings.Keys.PagesOrderedArtists, ILibrarySettings.Defaults.PagesOrderedArtists) },
-				{ ILibrarySettings.Options.Pages.Genres, sharedpreferences.GetInt(ILibrarySettings.Keys.PagesOrderedGenres, ILibrarySettings.Defaults.PagesOrderedGenres) },
-				{ ILibrarySettings.Options.Pages.Playlists, sharedpreferences.GetInt(ILibrarySettings.Keys.PagesOrderedPlaylists, ILibrarySettings.Defaults.PagesOrderedPlaylists) },
-				{ ILibrarySettings.Options.Pages.Queue, sharedpreferences.GetInt(ILibrarySettings.Keys.PagesOrderedQueue, ILibrarySettings.Defaults.PagesOrderedQueue) },
-				{ ILibrarySettings.Options.Pages.Songs, sharedpreferences.GetInt(ILibrarySettings.Keys.PagesOrderedSongs, ILibrarySettings.Defaults.PagesOrderedSongs) },
+				{ IUserInterfaceSettings.Options.Pages.Albums, sharedpreferences.GetInt(IUserInterfaceSettings.Keys.PagesOrderedAlbums, IUserInterfaceSettings.Defaults.PagesOrderedAlbums) },
+				{ IUserInterfaceSettings.Options.Pages.Artists, sharedpreferences.GetInt(IUserInterfaceSettings.Keys.PagesOrderedArtists, IUserInterfaceSettings.Defaults.PagesOrderedArtists) },
+				{ IUserInterfaceSettings.Options.Pages.Genres, sharedpreferences.GetInt(IUserInterfaceSettings.Keys.PagesOrderedGenres, IUserInterfaceSettings.Defaults.PagesOrderedGenres) },
+				{ IUserInterfaceSettings.Options.Pages.Playlists, sharedpreferences.GetInt(IUserInterfaceSettings.Keys.PagesOrderedPlaylists, IUserInterfaceSettings.Defaults.PagesOrderedPlaylists) },
+				{ IUserInterfaceSettings.Options.Pages.Queue, sharedpreferences.GetInt(IUserInterfaceSettings.Keys.PagesOrderedQueue, IUserInterfaceSettings.Defaults.PagesOrderedQueue) },
+				{ IUserInterfaceSettings.Options.Pages.Songs, sharedpreferences.GetInt(IUserInterfaceSettings.Keys.PagesOrderedSongs, IUserInterfaceSettings.Defaults.PagesOrderedSongs) },
 			};
 
-			return new ILibrarySettings.Default
+			return new IUserInterfaceSettings.Default
 			{
-				PageDefault = sharedpreferences.GetEnum(ILibrarySettings.Keys.PageDefault, ILibrarySettings.Defaults.PageDefault),
+				PageDefault = sharedpreferences.GetEnum(IUserInterfaceSettings.Keys.PageDefault, IUserInterfaceSettings.Defaults.PageDefault),
 				PagesOrdered = pagesordered
 					.Where(pageordered => pageordered.Value != -1)
 					.OrderBy(pageordered => pageordered.Value)
 					.Select(pageordered => pageordered.Key),
+
+				Album = sharedpreferences.GetUserInterfaceAlbum(),
+				Albums = sharedpreferences.GetUserInterfaceAlbums(),
+				Artist = sharedpreferences.GetUserInterfaceArtist(),
+				Artists = sharedpreferences.GetUserInterfaceArtists(),
+				Genre = sharedpreferences.GetUserInterfaceGenre(),
+				Genres = sharedpreferences.GetUserInterfaceGenres(),
+				Playlist = sharedpreferences.GetUserInterfacePlaylist(),
+				Playlists = sharedpreferences.GetUserInterfacePlaylists(),
+				Queue = sharedpreferences.GetUserInterfaceQueue(),
+				Search = sharedpreferences.GetUserInterfaceSearch(),
+				Songs = sharedpreferences.GetUserInterfaceSongs(),
 			};
 		}
-		public static ILibrarySettingsDroid GetUserInterfaceLibraryDroid(this ISharedPreferences sharedpreferences)
+		public static IUserInterfaceSettingsDroid GetUserInterfaceDroid(this ISharedPreferences sharedpreferences)
 		{
-			ILibrarySettings librarynavigationsettings = sharedpreferences.GetUserInterfaceLibrary();
+			IUserInterfaceSettings librarynavigationsettings = sharedpreferences.GetUserInterface();
 
-			return new ILibrarySettingsDroid.Default
+			return new IUserInterfaceSettingsDroid.Default
 			{
-				HeaderScrollType = sharedpreferences.GetEnum(ILibrarySettingsDroid.Keys.HeaderScrollType, ILibrarySettingsDroid.Defaults.HeaderScrollType),
-				NavigationType = sharedpreferences.GetEnum(ILibrarySettingsDroid.Keys.NavigationType, ILibrarySettingsDroid.Defaults.NavigationType),
+				HeaderScrollType = sharedpreferences.GetEnum(IUserInterfaceSettingsDroid.Keys.HeaderScrollType, IUserInterfaceSettingsDroid.Defaults.HeaderScrollType),
+				NavigationType = sharedpreferences.GetEnum(IUserInterfaceSettingsDroid.Keys.NavigationType, IUserInterfaceSettingsDroid.Defaults.NavigationType),
+				NowPlayingForceShow = sharedpreferences.GetBoolean(IUserInterfaceSettingsDroid.Keys.NowPlayingForceShow, IUserInterfaceSettingsDroid.Defaults.NowPlayingForceShow),
 
 				PageDefault = librarynavigationsettings.PageDefault,
 				PagesOrdered = librarynavigationsettings.PagesOrdered,
+
+				Album = librarynavigationsettings.Album,
+				Albums = librarynavigationsettings.Albums,
+				Artist = librarynavigationsettings.Artist,
+				Artists = librarynavigationsettings.Artists,
+				Genre = librarynavigationsettings.Genre,
+				Genres = librarynavigationsettings.Genres,
+				Playlist = librarynavigationsettings.Playlist,
+				Playlists = librarynavigationsettings.Playlists,
+				Queue = librarynavigationsettings.Queue,
+				Search = librarynavigationsettings.Search,
+				Songs = librarynavigationsettings.Songs,
 			};
 		}  
-		public static IAlbumSettings GetUserInterfaceLibraryAlbum(this ISharedPreferences sharedpreferences)
+		public static IAlbumSettings GetUserInterfaceAlbum(this ISharedPreferences sharedpreferences)
 		{
 			return new IAlbumSettings.Default
 			{
@@ -331,16 +349,16 @@ namespace Android.Content
 				SongsSortKey = sharedpreferences.GetEnum(IAlbumSettings.Keys.SongsSortKey, IAlbumSettings.Defaults.SongsSortKey),
 			};
 		}
-		public static IAlbumsSettings GetUserInterfaceLibraryAlbums(this ISharedPreferences sharedpreferences)
+		public static IAlbumsSettings GetUserInterfaceAlbums(this ISharedPreferences sharedpreferences)
 		{
 			return new IAlbumsSettings.Default
 			{
-				IsReversed = sharedpreferences.GetBoolean(IAlbumsSettings.Keys.IsReversed, IAlbumsSettings.Defaults.IsReversed),
-				LayoutType = sharedpreferences.GetEnum(IAlbumsSettings.Keys.LayoutType, IAlbumsSettings.Defaults.LayoutType),
-				SortKey = sharedpreferences.GetEnum(IAlbumsSettings.Keys.SortKey, IAlbumsSettings.Defaults.SortKey),
+				AlbumsIsReversed = sharedpreferences.GetBoolean(IAlbumsSettings.Keys.IsReversed, IAlbumsSettings.Defaults.IsReversed),
+				AlbumsLayoutType = sharedpreferences.GetEnum(IAlbumsSettings.Keys.LayoutType, IAlbumsSettings.Defaults.LayoutType),
+				AlbumsSortKey = sharedpreferences.GetEnum(IAlbumsSettings.Keys.SortKey, IAlbumsSettings.Defaults.SortKey),
 			};
 		}
-		public static IArtistSettings GetUserInterfaceLibraryArtist(this ISharedPreferences sharedpreferences)
+		public static IArtistSettings GetUserInterfaceArtist(this ISharedPreferences sharedpreferences)
 		{
 			return new IArtistSettings.Default
 			{
@@ -352,16 +370,16 @@ namespace Android.Content
 				SongsSortKey = sharedpreferences.GetEnum(IArtistSettings.Keys.SongsSortKey, IArtistSettings.Defaults.SongsSortKey),
 			};
 		}
-		public static IArtistsSettings GetUserInterfaceLibraryArtists(this ISharedPreferences sharedpreferences)
+		public static IArtistsSettings GetUserInterfaceArtists(this ISharedPreferences sharedpreferences)
 		{
 			return new IArtistsSettings.Default
 			{
-				IsReversed = sharedpreferences.GetBoolean(IArtistsSettings.Keys.IsReversed, IArtistsSettings.Defaults.IsReversed),
-				LayoutType = sharedpreferences.GetEnum(IArtistsSettings.Keys.LayoutType, IArtistsSettings.Defaults.LayoutType),
-				SortKey = sharedpreferences.GetEnum(IArtistsSettings.Keys.SortKey, IArtistsSettings.Defaults.SortKey),
+				ArtistsIsReversed = sharedpreferences.GetBoolean(IArtistsSettings.Keys.IsReversed, IArtistsSettings.Defaults.IsReversed),
+				ArtistsLayoutType = sharedpreferences.GetEnum(IArtistsSettings.Keys.LayoutType, IArtistsSettings.Defaults.LayoutType),
+				ArtistsSortKey = sharedpreferences.GetEnum(IArtistsSettings.Keys.SortKey, IArtistsSettings.Defaults.SortKey),
 			};
 		}
-		public static IGenreSettings GetUserInterfaceLibraryGenre(this ISharedPreferences sharedpreferences)
+		public static IGenreSettings GetUserInterfaceGenre(this ISharedPreferences sharedpreferences)
 		{
 			return new IGenreSettings.Default
 			{
@@ -370,16 +388,16 @@ namespace Android.Content
 				SongsSortKey = sharedpreferences.GetEnum(IGenreSettings.Keys.SongsSortKey, IGenreSettings.Defaults.SongsSortKey),
 			};
 		}
-		public static IGenresSettings GetUserInterfaceLibraryGenres(this ISharedPreferences sharedpreferences)
+		public static IGenresSettings GetUserInterfaceGenres(this ISharedPreferences sharedpreferences)
 		{
 			return new IGenresSettings.Default
 			{
-				IsReversed = sharedpreferences.GetBoolean(IGenresSettings.Keys.IsReversed, IGenresSettings.Defaults.IsReversed),
-				LayoutType = sharedpreferences.GetEnum(IGenresSettings.Keys.LayoutType, IGenresSettings.Defaults.LayoutType),
-				SortKey = sharedpreferences.GetEnum(IGenresSettings.Keys.SortKey, IGenresSettings.Defaults.SortKey),
+				GenresIsReversed = sharedpreferences.GetBoolean(IGenresSettings.Keys.IsReversed, IGenresSettings.Defaults.IsReversed),
+				GenresLayoutType = sharedpreferences.GetEnum(IGenresSettings.Keys.LayoutType, IGenresSettings.Defaults.LayoutType),
+				GenresSortKey = sharedpreferences.GetEnum(IGenresSettings.Keys.SortKey, IGenresSettings.Defaults.SortKey),
 			};
 		}
-		public static IPlaylistSettings GetUserInterfaceLibraryPlaylist(this ISharedPreferences sharedpreferences)
+		public static IPlaylistSettings GetUserInterfacePlaylist(this ISharedPreferences sharedpreferences)
 		{
 			return new IPlaylistSettings.Default
 			{
@@ -388,57 +406,38 @@ namespace Android.Content
 				SongsSortKey = sharedpreferences.GetEnum(IPlaylistSettings.Keys.SongsSortKey, IPlaylistSettings.Defaults.SongsSortKey),
 			};
 		}
-		public static IPlaylistsSettings GetUserInterfaceLibraryPlaylists(this ISharedPreferences sharedpreferences)
+		public static IPlaylistsSettings GetUserInterfacePlaylists(this ISharedPreferences sharedpreferences)
 		{
 			return new IPlaylistsSettings.Default
 			{
-				IsReversed = sharedpreferences.GetBoolean(IPlaylistsSettings.Keys.IsReversed, IPlaylistsSettings.Defaults.IsReversed),
-				LayoutType = sharedpreferences.GetEnum(IPlaylistsSettings.Keys.LayoutType, IPlaylistsSettings.Defaults.LayoutType),
-				SortKey = sharedpreferences.GetEnum(IPlaylistsSettings.Keys.SortKey, IPlaylistsSettings.Defaults.SortKey),
+				PlaylistsIsReversed = sharedpreferences.GetBoolean(IPlaylistsSettings.Keys.IsReversed, IPlaylistsSettings.Defaults.IsReversed),
+				PlaylistsLayoutType = sharedpreferences.GetEnum(IPlaylistsSettings.Keys.LayoutType, IPlaylistsSettings.Defaults.LayoutType),
+				PlaylistsSortKey = sharedpreferences.GetEnum(IPlaylistsSettings.Keys.SortKey, IPlaylistsSettings.Defaults.SortKey),
 			};
 		}
-		public static IQueueSettings GetUserInterfaceLibraryQueue(this ISharedPreferences sharedpreferences)
+		public static IQueueSettings GetUserInterfaceQueue(this ISharedPreferences sharedpreferences)
 		{
 			return new IQueueSettings.Default
 			{
-				LayoutType = sharedpreferences.GetEnum(IQueueSettings.Keys.LayoutType, IQueueSettings.Defaults.LayoutType),
+				QueueLayoutType = sharedpreferences.GetEnum(IQueueSettings.Keys.LayoutType, IQueueSettings.Defaults.LayoutType),
 			};
 		}
-		public static ISearchSettings GetUserInterfaceLibrarySearch(this ISharedPreferences sharedpreferences)
+		public static ISearchSettings GetUserInterfaceSearch(this ISharedPreferences sharedpreferences)
 		{
 			return new ISearchSettings.Default
 			{
-				LayoutType = sharedpreferences.GetEnum(ISearchSettings.Keys.LayoutType, ISearchSettings.Defaults.LayoutType),
+				SearchLayoutType = sharedpreferences.GetEnum(ISearchSettings.Keys.LayoutType, ISearchSettings.Defaults.LayoutType),
 			};
 		}
-		public static ISongsSettings GetUserInterfaceLibrarySongs(this ISharedPreferences sharedpreferences)
+		public static ISongsSettings GetUserInterfaceSongs(this ISharedPreferences sharedpreferences)
 		{
 			return new ISongsSettings.Default
 			{
-				IsReversed = sharedpreferences.GetBoolean(ISongsSettings.Keys.IsReversed, ISongsSettings.Defaults.IsReversed),
-				LayoutType = sharedpreferences.GetEnum(ISongsSettings.Keys.LayoutType, ISongsSettings.Defaults.LayoutType),
-				SortKey = sharedpreferences.GetEnum(ISongsSettings.Keys.SortKey, ISongsSettings.Defaults.SortKey),
+				SongsIsReversed = sharedpreferences.GetBoolean(ISongsSettings.Keys.IsReversed, ISongsSettings.Defaults.IsReversed),
+				SongsLayoutType = sharedpreferences.GetEnum(ISongsSettings.Keys.LayoutType, ISongsSettings.Defaults.LayoutType),
+				SongsSortKey = sharedpreferences.GetEnum(ISongsSettings.Keys.SortKey, ISongsSettings.Defaults.SortKey),
 			};
 		}
-		public static INowPlayingSettings GetUserInterfaceNowPlaying(this ISharedPreferences sharedpreferences)
-		{
-			return new INowPlayingSettings.Default { };
-		}	 				
-		public static INowPlayingSettingsDroid GetUserInterfaceNowPlayingDroid(this ISharedPreferences sharedpreferences)
-		{
-			return new INowPlayingSettingsDroid.Default 
-			{
-				ForceShowNowPlaying = sharedpreferences.GetBoolean(INowPlayingSettingsDroid.Keys.ForceShowNowPlaying, INowPlayingSettingsDroid.Defaults.ForceShowNowPlaying),
-			};
-		}	 
-		public static IThemesSettings GetUserInterfaceThemes(this ISharedPreferences sharedpreferences)
-		{
-			return new IThemesSettings.Default 
-			{
-				Mode = sharedpreferences.GetEnum(IThemesSettings.Keys.Mode, IThemesSettings.Defaults.Mode),
-			};
-		}
-
 		public static ISharedPreferences RemoveAudioVolumeControl(this ISharedPreferences sharedpreferences, string presetname)
 		{
 			if (sharedpreferences.All is null || sharedpreferences.Edit() is not ISharedPreferencesEditor sharedpreferenceseditor)

@@ -1,11 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net8.0-android34.0": {}
+    "net9.0-android35.0": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    "net8.0-android34.0": []
+    "net9.0-android35.0": []
   },
   "packageFolders": {
     "C:\\Users\\Thando Ndlovu\\.nuget\\packages\\": {},
@@ -31,7 +31,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net8.0-android"
+        "net9.0-android"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -40,11 +40,12 @@
         "C:\\Users\\Thando Ndlovu\\.nuget\\packages": {},
         "C:\\Users\\Thando Ndlovu\\Desktop\\xyclone-designs\\packages.apis": {},
         "C:\\Users\\Thando Ndlovu\\Desktop\\xyclone-designs\\packages.extensions": {},
-        "C:\\Users\\Thando Ndlovu\\Programming\\Packages\\Nuget": {}
+        "C:\\Users\\Thando Ndlovu\\Programming\\Packages\\Nuget": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0-android34.0": {
-          "targetAlias": "net8.0-android",
+        "net9.0-android35.0": {
+          "targetAlias": "net9.0-android",
           "projectReferences": {}
         }
       },
@@ -52,11 +53,17 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
-      "net8.0-android34.0": {
-        "targetAlias": "net8.0-android",
+      "net9.0-android35.0": {
+        "targetAlias": "net9.0-android",
         "imports": [
           "net461",
           "net462",
@@ -76,7 +83,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
